@@ -1,4 +1,4 @@
-#Cv-frontend
+# cv-frontend
 
 1.Clone this repo:
 
@@ -14,8 +14,9 @@ npm install -g pnpm
 
 3.Set the GraphQL URL in `.env`:
 
-````sh
+```sh
 VITE_GRAPHQL_URL="http://localhost:3001/api/graphql"
+```
 
 4. Install dependencies:
 
