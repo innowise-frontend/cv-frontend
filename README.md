@@ -12,7 +12,7 @@ git clone https://github.com/innowise-frontend/cv-frontend.git
 npm install -g pnpm
 ```
 
-3.Set the GraphQL URL in `.env`:
+3. Set the GraphQL URL in `.env`:
 
 ```sh
 VITE_GRAPHQL_URL="http://localhost:3001/api/graphql"
@@ -22,7 +22,7 @@ VITE_GRAPHQL_URL="http://localhost:3001/api/graphql"
 
 ```sh
 pnpm i
-````
+```
 
 5. Run app:
 
