@@ -1,5 +1,5 @@
 import path from "path";
-import { defineConfig } from "vite";
+import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
 import { tanstackRouter } from "@tanstack/router-plugin/vite";
 import tailwindcss from "@tailwindcss/vite";
@@ -26,5 +26,10 @@ export default defineConfig({
       "@styles": path.resolve(__dirname, "src/styles"),
       "@hooks": path.resolve(__dirname, "src/hooks"),
     },
+  },
+  test: {
+    environment: "jsdom",
+    setupFiles: ["./vitest.setup.ts"],
+    globals: true,
   },
 });
