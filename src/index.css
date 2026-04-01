@@ -3,7 +3,7 @@
 @import "./shadcn/tailwind.css";
 
 :root {
-  font: 18px var(--font-family);
+  font: 16px var(--font-family);
   color-scheme: light;
   font-synthesis: none;
   text-rendering: optimizeLegibility;

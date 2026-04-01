@@ -41,6 +41,9 @@ export default {
           25: "var(--color-gray-25)",
           26: "var(--color-gray-26)",
           27: "var(--color-gray-27)",
+          28: "var(--color-gray-28)",
+          29: "var(--color-gray-29)",
+          30: "var(--color-gray-30)",
         },
         red: {
           DEFAULT: "var(--color-red)",
