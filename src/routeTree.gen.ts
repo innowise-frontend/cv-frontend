@@ -12,7 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as VerificationRouteImport } from './routes/verification'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as LoginRouteImport } from './routes/login'
-import { Route as Forgot_passwordRouteImport } from './routes/forgot_password'
+import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as AppIndexRouteImport } from './routes/_app.index'
 import { Route as AppSkillsRouteImport } from './routes/_app.skills'
@@ -39,9 +39,9 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
-const Forgot_passwordRoute = Forgot_passwordRouteImport.update({
-  id: '/forgot_password',
-  path: '/forgot_password',
+const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
+  id: '/forgot-password',
+  path: '/forgot-password',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AppRoute = AppRouteImport.update({
@@ -96,7 +96,7 @@ const AppCvsRoute = AppCvsRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof AppIndexRoute
-  '/forgot_password': typeof Forgot_passwordRoute
+  '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
   '/verification': typeof VerificationRoute
@@ -110,7 +110,7 @@ export interface FileRoutesByFullPath {
   '/skills': typeof AppSkillsRoute
 }
 export interface FileRoutesByTo {
-  '/forgot_password': typeof Forgot_passwordRoute
+  '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
   '/verification': typeof VerificationRoute
@@ -127,7 +127,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_app': typeof AppRouteWithChildren
-  '/forgot_password': typeof Forgot_passwordRoute
+  '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
   '/verification': typeof VerificationRoute
@@ -145,7 +145,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/forgot_password'
+    | '/forgot-password'
     | '/login'
     | '/signup'
     | '/verification'
@@ -159,7 +159,7 @@ export interface FileRouteTypes {
     | '/skills'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/forgot_password'
+    | '/forgot-password'
     | '/login'
     | '/signup'
     | '/verification'
@@ -175,7 +175,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/_app'
-    | '/forgot_password'
+    | '/forgot-password'
     | '/login'
     | '/signup'
     | '/verification'
@@ -192,7 +192,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   AppRoute: typeof AppRouteWithChildren
-  Forgot_passwordRoute: typeof Forgot_passwordRoute
+  ForgotPasswordRoute: typeof ForgotPasswordRoute
   LoginRoute: typeof LoginRoute
   SignupRoute: typeof SignupRoute
   VerificationRoute: typeof VerificationRoute
@@ -221,11 +221,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/forgot_password': {
-      id: '/forgot_password'
-      path: '/forgot_password'
-      fullPath: '/forgot_password'
-      preLoaderRoute: typeof Forgot_passwordRouteImport
+    '/forgot-password': {
+      id: '/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/forgot-password'
+      preLoaderRoute: typeof ForgotPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_app': {
@@ -329,7 +329,7 @@ const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   AppRoute: AppRouteWithChildren,
-  Forgot_passwordRoute: Forgot_passwordRoute,
+  ForgotPasswordRoute: ForgotPasswordRoute,
   LoginRoute: LoginRoute,
   SignupRoute: SignupRoute,
   VerificationRoute: VerificationRoute,
