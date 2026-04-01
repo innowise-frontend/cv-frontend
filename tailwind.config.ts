@@ -6,6 +6,9 @@ export default {
       fontFamily: {
         sans: ["var(--font-family)"],
       },
+      boxShadow: {
+        button: "0px 1px 5px 0px #0000001F, 0px 2px 2px 0px #00000024, 0px 3px 1px -2px #00000033",
+      },
       colors: {
         white: {
           DEFAULT: "var(--color-white)",
@@ -41,6 +44,9 @@ export default {
           25: "var(--color-gray-25)",
           26: "var(--color-gray-26)",
           27: "var(--color-gray-27)",
+          28: "var(--color-gray-28)",
+          29: "var(--color-gray-29)",
+          30: "var(--color-gray-30)",
         },
         red: {
           DEFAULT: "var(--color-red)",
@@ -68,6 +74,9 @@ export default {
           4: "var(--color-yellow-4)",
         },
       },
+    },
+    borderRadius: {
+      "40": "40px",
     },
   },
 };
