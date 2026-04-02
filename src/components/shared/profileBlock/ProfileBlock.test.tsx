@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
-import ProfileBlock from "./ProfileBlock";
 import { renderWithFileRoutes } from "@root/lib/testUtils";
+import { ProfileBlock } from "./ProfileBlock";
 
 describe("ProfileBlock", () => {
   it("should render", async () => {

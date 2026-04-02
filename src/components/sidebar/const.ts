@@ -1,38 +1,39 @@
-import UsersIcon from "@assets/icon/UsersIcon.svg?react";
-import TrendingUpIcon from "@assets/icon/TrendingUpIcon.svg?react";
-import LanguagesIcon from "@assets/icon/LanguagesIcon.svg?react";
-import FileUserIcon from "@assets/icon/FileUserIcon.svg?react";
-import BuildingIcon from "@assets/icon/BuildingIcon.svg?react";
 import BriefcaseIcon from "@assets/icon/BriefcaseIcon.svg?react";
+import BuildingIcon from "@assets/icon/BuildingIcon.svg?react";
+import FileUserIcon from "@assets/icon/FileUserIcon.svg?react";
 import FoldersIcon from "@assets/icon/FoldersIcon.svg?react";
+import LanguagesIcon from "@assets/icon/LanguagesIcon.svg?react";
 import SettingsIcon from "@assets/icon/SettingsIcon.svg?react";
+import TrendingUpIcon from "@assets/icon/TrendingUpIcon.svg?react";
+import UsersIcon from "@assets/icon/UsersIcon.svg?react";
+import { ROUTES } from "@root/constants/routes";
 
-interface Props {
+interface GetSidebarItemsProps {
   isAdmin?: boolean;
 }
 
-const getSidebarItems = ({ isAdmin }: Props) => [
+const getSidebarItems = ({ isAdmin }: GetSidebarItemsProps) => [
   {
     title: "Employees",
-    to: "/",
+    to: ROUTES.ROOT,
     icon: UsersIcon,
     visible: true,
   },
   {
     title: "Skills",
-    to: "/skills",
+    to: ROUTES.SKILLS,
     icon: TrendingUpIcon,
     visible: true,
   },
   {
     title: "Languages",
-    to: "/languages",
+    to: ROUTES.LANGUAGES,
     icon: LanguagesIcon,
     visible: true,
   },
   {
     title: "CVs",
-    to: "/cvs",
+    to: ROUTES.CVS,
     icon: FileUserIcon,
     visible: true,
     withDivider: isAdmin,
@@ -40,25 +41,25 @@ const getSidebarItems = ({ isAdmin }: Props) => [
 
   {
     title: "Departments",
-    to: "/departments",
+    to: ROUTES.DEPARTMENTS,
     icon: BuildingIcon,
     visible: isAdmin,
   },
   {
     title: "Positions",
-    to: "/positions",
+    to: ROUTES.POSITIONS,
     icon: BriefcaseIcon,
     visible: isAdmin,
   },
   {
     title: "Projects",
-    to: "/projects",
+    to: ROUTES.PROJECTS,
     icon: FoldersIcon,
     visible: isAdmin,
   },
   {
     title: "Settings",
-    to: "/settings",
+    to: ROUTES.SETTINGS,
     icon: SettingsIcon,
     visible: true,
   },

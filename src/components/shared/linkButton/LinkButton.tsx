@@ -1,11 +1,12 @@
 import { Link } from "@tanstack/react-router";
 
-interface Props {
+interface LinkButtonProps {
   title: string;
   to: string;
   icon: React.ElementType;
 }
-const LinkButton = ({ title, to, icon: Icon }: Props) => {
+
+export const LinkButton = ({ title, to, icon: Icon }: LinkButtonProps) => {
   return (
     <Link
       to={to}
@@ -18,5 +19,3 @@ const LinkButton = ({ title, to, icon: Icon }: Props) => {
     </Link>
   );
 };
-
-export default LinkButton;

@@ -1,10 +1,10 @@
 import { describe, it, expect, vi } from "vitest";
-import Sidebar from "./Sidebar";
 import { renderWithFileRoutes } from "@root/lib/testUtils";
+import { Sidebar } from "./Sidebar";
 
 const PROFILE_BLOCK_MOCK = "ProfileBlock";
 
-vi.mock("@components/ProfileBlock", () => ({
+vi.mock("@components/shared/profileBlock", () => ({
   ProfileBlock: () => <div>{PROFILE_BLOCK_MOCK}</div>,
 }));
 
