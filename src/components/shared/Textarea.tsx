@@ -1,7 +1,8 @@
 import React, { useState, useId, forwardRef } from "react";
 import { Textarea } from "@components/ui/textarea";
+import { cn } from "@root/lib/utils";
 
-export interface TextareaWithLabelProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+interface TextareaWithLabelProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
 }
 
@@ -15,6 +16,7 @@ export const TextareaWithLabel = forwardRef<HTMLTextAreaElement, TextareaWithLab
       if (controlledValue === undefined) {
         setValue(e.target.value);
       }
+
       onChange?.(e);
     };
 
@@ -34,7 +36,10 @@ export const TextareaWithLabel = forwardRef<HTMLTextAreaElement, TextareaWithLab
           ref={ref}
           value={controlledValue}
           onChange={handleChange}
-          className={className}
+          className={cn(
+            "px-3 py-5 text-base leading-6 text-gray-14 placeholder:text-gray-7 border-gray-11 shadow-none outline-none focus:outline-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:shadow-none dark:border-gray-22 dark:text-white dark:placeholder:text-gray-24",
+            className,
+          )}
           {...props}
         />
       </div>

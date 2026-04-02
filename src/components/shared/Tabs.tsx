@@ -1,12 +1,12 @@
 import React from "react";
 import { Tabs as TabsRoot, TabsList, TabsTrigger, TabsContent } from "@components/ui/tabs";
 
-export interface Tab {
+interface Tab {
   value: string;
   label: string;
 }
 
-export interface PageTabsProps {
+interface PageTabsProps {
   tabs: Tab[];
   defaultValue?: string;
   value?: string;
@@ -30,7 +30,7 @@ export const PageTabs: React.FC<PageTabsProps> = ({
         value={value}
         onValueChange={onValueChange}
         orientation="horizontal"
-        className="flex flex-col w-full h-full"
+        className="flex flex-col w-full h-full gap-0"
       >
         <TabsList
           variant="line"
@@ -40,7 +40,7 @@ export const PageTabs: React.FC<PageTabsProps> = ({
             <TabsTrigger
               key={tab.value}
               value={tab.value}
-              className="h-12 w-[150px] shrink-0 rounded-none border-b-2 border-transparent px-0 text-sm font-medium uppercase text-gray-14 hover:text-gray-14 data-active:border-red-4 data-active:bg-transparent data-active:text-red-4 dark:text-gray-26 dark:hover:text-gray-26 dark:data-active:border-red-4 dark:data-active:text-red-4"
+              className="h-12 w-[150px] shrink-0 rounded-none border-b-2 border-transparent px-0 py-0 text-sm font-medium uppercase text-gray-14 group-data-[variant=line]/tabs-list:data-active:border-b-red-4 data-active:bg-transparent data-active:font-semibold data-active:text-red-4 dark:text-white-3 dark:hover:text-gray-26 dark:group-data-[variant=line]/tabs-list:data-active:border-b-2 dark:group-data-[variant=line]/tabs-list:data-active:border-b-red-4 dark:data-active:text-red-4"
             >
               {tab.label}
             </TabsTrigger>

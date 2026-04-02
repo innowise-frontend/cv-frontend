@@ -1,4 +1,5 @@
 import React from "react";
+import RightArrowIcon from "@assets/icon/RightArrowIcon.svg?react";
 import {
   Breadcrumb,
   BreadcrumbList,
@@ -6,13 +7,13 @@ import {
   BreadcrumbLink,
   BreadcrumbSeparator,
 } from "@components/ui/breadcrumb";
-import RightArrowIcon from "@assets/icon/RightArrowIcon.svg?react";
-export interface BreadcrumbItem {
+
+interface BreadcrumbItem {
   label: string;
   href?: string;
 }
 
-export interface BreadcrumbsProps {
+interface BreadcrumbsProps {
   items: BreadcrumbItem[];
   className?: string;
 }
@@ -25,7 +26,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className }) =>
           const isLast = index === items.length - 1;
 
           return (
-            <React.Fragment key={index}>
+            <>
               <BreadcrumbItem>
                 {isLast ? (
                   <BreadcrumbLink
@@ -42,11 +43,11 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className }) =>
               </BreadcrumbItem>
 
               {!isLast && (
-                <BreadcrumbSeparator className="text-gray-6 dark:text-gray-29">
-                  <RightArrowIcon />
+                <BreadcrumbSeparator className="inline-flex items-center justify-center leading-none text-gray-6 dark:text-gray-29 [&>svg]:h-[10px] [&>svg]:w-[7px]">
+                  <RightArrowIcon className="block shrink-0" />
                 </BreadcrumbSeparator>
               )}
-            </React.Fragment>
+            </>
           );
         })}
       </BreadcrumbList>
