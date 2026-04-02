@@ -34,7 +34,7 @@ function BreadcrumbLink({ className, render, ...props }: useRender.ComponentProp
     defaultTagName: "a",
     props: mergeProps<"a">(
       {
-        className: cn("transition-colors hover:text-foreground", className),
+        className: cn("transition-colors", className),
       },
       props,
     ),
@@ -63,10 +63,7 @@ function BreadcrumbSeparator({ children, className, ...props }: React.ComponentP
     <li
       data-slot="breadcrumb-separator"
       aria-hidden="true"
-      className={cn(
-        "inline-flex items-center justify-center",
-        className,
-      )}
+      className={cn("inline-flex items-center justify-center", className)}
       {...props}
     >
       {children}

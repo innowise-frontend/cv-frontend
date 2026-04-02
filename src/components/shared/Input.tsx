@@ -1,7 +1,7 @@
 import React, { useState, useId, forwardRef } from "react";
 import { Input } from "@components/ui/input";
-import { OpenEyeIcon } from "@root/assets/icon/OpenEyeIcon";
-import { CloseEyeIcon } from "@root/assets/icon/CloseEyeIcon";
+import OpenEyeIcon from "@assets/icon/OpenEyeIcon.svg?react";
+import CloseEyeIcon from "@assets/icon/CloseEyeIcon.svg?react";
 import { cn } from "@root/lib/utils";
 
 export interface InputWithLabelProps extends React.InputHTMLAttributes<HTMLInputElement> {

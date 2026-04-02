@@ -6,8 +6,7 @@ import {
   BreadcrumbLink,
   BreadcrumbSeparator,
 } from "@components/ui/breadcrumb";
-import { RightArrowIcon } from "@root/assets/icon/RightArrowIcon";
-
+import RightArrowIcon from "@assets/icon/RightArrowIcon.svg?react";
 export interface BreadcrumbItem {
   label: string;
   href?: string;
@@ -29,19 +28,22 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className }) =>
             <React.Fragment key={index}>
               <BreadcrumbItem>
                 {isLast ? (
-                  <BreadcrumbLink href={item.href || ""} className="text-red-4">
+                  <BreadcrumbLink
+                    href={item.href || ""}
+                    className="text-red-4 opacity-60 dark:text-red-4"
+                  >
                     {item.label}
                   </BreadcrumbLink>
                 ) : (
-                  <BreadcrumbLink href={item.href || ""} className="text-gray-3 dark:text-gray-30">
+                  <BreadcrumbLink href={item.href || ""} className="text-gray-9 dark:text-gray-30">
                     {item.label}
                   </BreadcrumbLink>
                 )}
               </BreadcrumbItem>
 
               {!isLast && (
-                <BreadcrumbSeparator>
-                  <RightArrowIcon className="text-gray-6 dark:text-gray-29" />
+                <BreadcrumbSeparator className="text-gray-6 dark:text-gray-29">
+                  <RightArrowIcon />
                 </BreadcrumbSeparator>
               )}
             </React.Fragment>

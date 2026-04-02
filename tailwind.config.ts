@@ -53,6 +53,7 @@ export default {
           2: "var(--color-red-2)",
           3: "var(--color-red-3)",
           4: "var(--color-red-4)",
+          5: "var(--color-red-5)",
         },
         pink: "var(--color-pink)",
         blue: {
