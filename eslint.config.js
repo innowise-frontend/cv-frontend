@@ -23,6 +23,13 @@ export default defineConfig([
     },
     plugins: { import: importPlugin, prettier: prettierPlugin },
     rules: {
+      "react-refresh/only-export-components": [
+        "error",
+        {
+          allowConstantExport: true,
+          allowExportNames: ["buttonVariants"],
+        },
+      ],
       "prettier/prettier": "error",
       "import/order": [
         "error",
