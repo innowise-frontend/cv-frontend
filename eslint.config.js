@@ -26,6 +26,13 @@ export default defineConfig([
     },
     plugins: { import: importPlugin, prettier: prettierPlugin },
     rules: {
+      "react-refresh/only-export-components": [
+        "error",
+        {
+          allowConstantExport: true,
+          allowExportNames: ["buttonVariants"],
+        },
+      ],
       "prettier/prettier": "error",
       "import/order": [
         "error",
@@ -57,12 +64,13 @@ export default defineConfig([
       ],
       "padding-line-between-statements": [
         "error",
-        { blankLine: "always", prev: "import", next: "*" },
+        { blankLine: "any", prev: "import", next: "export" },
+        { blankLine: "any", prev: "import", next: "*" },
         { blankLine: "any", prev: "import", next: "import" },
         { blankLine: "always", prev: "*", next: "return" },
         { blankLine: "always", prev: "*", next: "block-like" },
         { blankLine: "always", prev: "block-like", next: "*" },
-        { blankLine: "always", prev: "*", next: "export" },
+        { blankLine: "any", prev: "*", next: "export" },
       ],
     },
   },

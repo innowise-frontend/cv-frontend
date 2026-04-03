@@ -28,6 +28,11 @@
   box-sizing: border-box;
 }
 
+:root.dark #root {
+  background: var(--color-gray-15);
+  color: var(--color-white);
+}
+
 body {
   margin: 0;
 }
