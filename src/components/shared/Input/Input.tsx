@@ -3,11 +3,7 @@ import CloseEyeIcon from "@assets/icon/CloseEyeIcon.svg?react";
 import OpenEyeIcon from "@assets/icon/OpenEyeIcon.svg?react";
 import { Input } from "@components/ui/input";
 import { cn } from "@root/lib/utils";
-
-interface InputWithLabelProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  label?: string;
-  error?: string;
-}
+import type { InputWithLabelProps } from "./types";
 
 export const InputWithLabel = forwardRef<HTMLInputElement, InputWithLabelProps>(
   ({ label, className, value: controlledValue, onChange, type, error, ...props }, ref) => {

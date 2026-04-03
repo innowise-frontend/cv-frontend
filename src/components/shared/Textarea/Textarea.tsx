@@ -1,10 +1,7 @@
 import React, { useState, useId, forwardRef } from "react";
 import { Textarea } from "@components/ui/textarea";
 import { cn } from "@root/lib/utils";
-
-interface TextareaWithLabelProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
-  label?: string;
-}
+import type { TextareaWithLabelProps } from "./types";
 
 export const TextareaWithLabel = forwardRef<HTMLTextAreaElement, TextareaWithLabelProps>(
   ({ label, className, value: controlledValue, onChange, ...props }, ref) => {

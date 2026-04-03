@@ -1,19 +1,6 @@
 import React from "react";
 import { Tabs as TabsRoot, TabsList, TabsTrigger, TabsContent } from "@components/ui/tabs";
-
-interface Tab {
-  value: string;
-  label: string;
-}
-
-interface PageTabsProps {
-  tabs: Tab[];
-  defaultValue?: string;
-  value?: string;
-  onValueChange?: (value: string) => void;
-  children?: React.ReactNode;
-  className?: string;
-}
+import type { PageTabsProps } from "./types";
 
 export const PageTabs: React.FC<PageTabsProps> = ({
   tabs,
