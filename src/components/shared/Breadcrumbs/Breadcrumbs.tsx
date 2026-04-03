@@ -7,16 +7,7 @@ import {
   BreadcrumbLink,
   BreadcrumbSeparator,
 } from "@components/ui/breadcrumb";
-
-interface BreadcrumbItem {
-  label: string;
-  href?: string;
-}
-
-interface BreadcrumbsProps {
-  items: BreadcrumbItem[];
-  className?: string;
-}
+import type { BreadcrumbsProps } from "./types";
 
 export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className }) => {
   return (
