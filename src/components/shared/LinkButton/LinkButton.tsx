@@ -10,9 +10,9 @@ export const LinkButton = ({ title, to, icon: Icon }: LinkButtonProps) => {
   return (
     <Link
       to={to}
-      className="flex items-center gap-4 p-4 rounded-r-[30px] font-normal cursor-pointer"
-      activeProps={{ className: "text-black opacity-100 bg-gray-3" }}
-      inactiveProps={{ className: "text-gray-9" }}
+      className="flex items-center gap-4 p-4 rounded-r-3xl cursor-pointer"
+      activeProps={{ className: "opacity-100 bg-gray-6 dark:bg-gray-3" }}
+      inactiveProps={{ className: "text-gray-2 dark:text-gray-4" }}
     >
       <Icon alt={title} width={24} height={24} />
       {title}

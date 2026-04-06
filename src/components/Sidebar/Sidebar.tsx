@@ -1,7 +1,7 @@
 import React from "react";
-import { Divider } from "@components/shared/divider";
-import { LinkButton } from "@components/shared/linkButton";
-import { ProfileBlock } from "@components/shared/profileBlock";
+import { Divider } from "@root/components/shared/Divider";
+import { LinkButton } from "@root/components/shared/LinkButton";
+import { ProfileBlock } from "@root/components/shared/ProfileBlock";
 import getSidebarItems from "./const";
 
 export const Sidebar = () => {

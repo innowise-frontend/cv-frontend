@@ -4,7 +4,7 @@ import { Sidebar } from "./Sidebar";
 
 const PROFILE_BLOCK_MOCK = "ProfileBlock";
 
-vi.mock("@components/shared/profileBlock", () => ({
+vi.mock("@components/shared/ProfileBlock", () => ({
   ProfileBlock: () => <div>{PROFILE_BLOCK_MOCK}</div>,
 }));
 

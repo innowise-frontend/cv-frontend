@@ -33,8 +33,8 @@ export const Input = forwardRef<HTMLInputElement, InputWithLabelProps>(
           <label
             htmlFor={generatedId}
             className={cn(
-              "absolute z-10 left-2.5 -top-2 bg-white px-1 text-xs text-gray-9 dark:bg-gray-15 dark:text-gray-26",
-              error && "text-red dark:text-red",
+              "absolute z-10 left-2.5 -top-5 px-1 text-xs text-gray-2 dark:text-gray-4",
+              error && "text-red",
             )}
           >
             {label}
@@ -48,7 +48,7 @@ export const Input = forwardRef<HTMLInputElement, InputWithLabelProps>(
             value={controlledValue}
             onChange={handleChange}
             className={cn(
-              "h-12 px-3 py-3 text-gray-14 text-base leading-6 placeholder:text-gray-7 border-gray-11 border-b shadow-none outline-none focus:outline-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:shadow-none dark:border-gray-22 dark:text-white dark:placeholder:text-gray-24",
+              "h-12 px-3 py-3 text-base leading-6 placeholder:text-gray-5 border-gray-4 shadow-none outline-none focus:outline-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:shadow-none dark:text-white dark:placeholder:text-gray-2",
               className,
               error &&
                 "border-red focus-visible:border-red dark:border-red dark:focus-visible:border-red",
@@ -60,7 +60,7 @@ export const Input = forwardRef<HTMLInputElement, InputWithLabelProps>(
               type="button"
               aria-label="Toggle password visibility"
               onClick={togglePasswordVisibility}
-              className="absolute right-5 top-1/2 -translate-y-1/2 text-gray-8 cursor-pointer focus:outline-none dark:text-white dark:hover:text-white"
+              className="absolute right-5 top-1/2 -translate-y-1/2 text-gray-2 focus:outline-none dark:text-white dark:hover:text-white"
             >
               {showPassword ? <OpenEyeIcon /> : <CloseEyeIcon />}
             </button>

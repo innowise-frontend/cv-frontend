@@ -11,14 +11,16 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-:root.dark {
-  color-scheme: dark;
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+  }
 }
 
 #root {
   width: 1440px;
   max-width: 100%;
-  color: var(--color-gray-13);
+  color: var(--color-black);
   background: var(--color-white);
   margin: 0 auto;
   text-align: center;
@@ -28,9 +30,11 @@
   box-sizing: border-box;
 }
 
-:root.dark #root {
-  background: var(--color-gray-15);
-  color: var(--color-white);
+@media (prefers-color-scheme: dark) {
+  #root {
+    background: var(--color-black);
+    color: var(--color-white);
+  }
 }
 
 body {

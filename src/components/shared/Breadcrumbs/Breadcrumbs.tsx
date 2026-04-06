@@ -20,21 +20,18 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className }) =>
             <React.Fragment key={item.label}>
               <BreadcrumbItem>
                 {isLast ? (
-                  <BreadcrumbLink
-                    href={item.href || ""}
-                    className="text-red-4 opacity-60 dark:text-red-4"
-                  >
+                  <BreadcrumbLink href={item.href || ""} className="text-red">
                     {item.label}
                   </BreadcrumbLink>
                 ) : (
-                  <BreadcrumbLink href={item.href || ""} className="text-gray-9 dark:text-gray-30">
+                  <BreadcrumbLink href={item.href || ""} className="text-gray-2 dark:text-gray-4">
                     {item.label}
                   </BreadcrumbLink>
                 )}
               </BreadcrumbItem>
 
               {!isLast && (
-                <BreadcrumbSeparator className="inline-flex items-center justify-center leading-none text-gray-6 dark:text-gray-29 [&>svg]:h-[10px] [&>svg]:w-[7px]">
+                <BreadcrumbSeparator className="inline-flex items-center justify-center leading-none text-gray-4 [&>svg]:h-[10px] [&>svg]:w-[7px]">
                   <RightArrowIcon className="block shrink-0" />
                 </BreadcrumbSeparator>
               )}

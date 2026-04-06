@@ -22,7 +22,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaWithLabelProps>(
         {label && (value || controlledValue) && (
           <label
             htmlFor={generatedId}
-            className="absolute left-2.5 -top-2 bg-white px-1 text-xs text-gray-9 dark:bg-gray-15 dark:text-gray-26"
+            className="absolute left-2.5 -top-5 px-1 text-xs text-gray-2 dark:text-gray-4"
           >
             {label}
           </label>
@@ -35,7 +35,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaWithLabelProps>(
           value={controlledValue}
           onChange={handleChange}
           className={cn(
-            "px-3 py-5 text-base leading-6 text-gray-14 placeholder:text-gray-7 border-gray-11 shadow-none outline-none focus:outline-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:shadow-none dark:border-gray-22 dark:text-white dark:placeholder:text-gray-24",
+            "px-3 py-5 text-base leading-6 placeholder:text-gray-5 border-gray-4 shadow-none outline-none resize-none focus:outline-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:shadow-none dark:placeholder:text-gray-2",
             className,
           )}
           {...props}
