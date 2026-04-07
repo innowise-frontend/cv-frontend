@@ -1,6 +1,6 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
-  darkMode: "class",
+  darkMode: "media",
   theme: {
     extend: {
       fontFamily: {
@@ -10,12 +10,6 @@ export default {
         button: "0px 1px 5px 0px #0000001F, 0px 2px 2px 0px #00000024, 0px 3px 1px -2px #00000033",
       },
       colors: {
-        white: {
-          DEFAULT: "var(--color-white)",
-          2: "var(--color-white-2)",
-          3: "var(--color-white-3)",
-        },
-        black: "var(--color-black)",
         gray: {
           DEFAULT: "var(--color-gray)",
           2: "var(--color-gray-2)",
@@ -25,35 +19,10 @@ export default {
           6: "var(--color-gray-6)",
           7: "var(--color-gray-7)",
           8: "var(--color-gray-8)",
-          9: "var(--color-gray-9)",
-          10: "var(--color-gray-10)",
-          11: "var(--color-gray-11)",
-          12: "var(--color-gray-12)",
-          13: "var(--color-gray-13)",
-          14: "var(--color-gray-14)",
-          15: "var(--color-gray-15)",
-          16: "var(--color-gray-16)",
-          17: "var(--color-gray-17)",
-          18: "var(--color-gray-18)",
-          19: "var(--color-gray-19)",
-          20: "var(--color-gray-20)",
-          21: "var(--color-gray-21)",
-          22: "var(--color-gray-22)",
-          23: "var(--color-gray-23)",
-          24: "var(--color-gray-24)",
-          25: "var(--color-gray-25)",
-          26: "var(--color-gray-26)",
-          27: "var(--color-gray-27)",
-          28: "var(--color-gray-28)",
-          29: "var(--color-gray-29)",
-          30: "var(--color-gray-30)",
         },
         red: {
           DEFAULT: "var(--color-red)",
           2: "var(--color-red-2)",
-          3: "var(--color-red-3)",
-          4: "var(--color-red-4)",
-          5: "var(--color-red-5)",
         },
         pink: "var(--color-pink)",
         blue: {
@@ -72,12 +41,11 @@ export default {
           DEFAULT: "var(--color-yellow)",
           2: "var(--color-yellow-2)",
           3: "var(--color-yellow-3)",
-          4: "var(--color-yellow-4)",
         },
       },
-    },
-    borderRadius: {
-      "40": "40px",
+      borderRadius: {
+        "40": "40px",
+      },
     },
   },
 };
