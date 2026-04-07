@@ -10,10 +10,6 @@ export default {
         button: "0px 1px 5px 0px #0000001F, 0px 2px 2px 0px #00000024, 0px 3px 1px -2px #00000033",
       },
       colors: {
-        white: {
-          DEFAULT: "var(--color-white)",
-        },
-        black: "var(--color-black)",
         gray: {
           DEFAULT: "var(--color-gray)",
           2: "var(--color-gray-2)",
@@ -21,6 +17,8 @@ export default {
           4: "var(--color-gray-4)",
           5: "var(--color-gray-5)",
           6: "var(--color-gray-6)",
+          7: "var(--color-gray-7)",
+          8: "var(--color-gray-8)",
         },
         red: {
           DEFAULT: "var(--color-red)",
@@ -45,9 +43,9 @@ export default {
           3: "var(--color-yellow-3)",
         },
       },
-    },
-    borderRadius: {
-      "40": "40px",
+      borderRadius: {
+        "40": "40px",
+      },
     },
   },
 };

@@ -33,7 +33,7 @@ export const Input = forwardRef<HTMLInputElement, InputWithLabelProps>(
           <label
             htmlFor={generatedId}
             className={cn(
-              "absolute z-10 left-2.5 -top-5 px-1 text-xs text-gray-2 dark:text-gray-4",
+              "absolute z-10 left-2.5 -top-5 px-1 text-xs text-gray-3 dark:text-gray-5",
               error && "text-red",
             )}
           >
@@ -48,7 +48,7 @@ export const Input = forwardRef<HTMLInputElement, InputWithLabelProps>(
             value={controlledValue}
             onChange={handleChange}
             className={cn(
-              "h-12 px-3 py-3 text-base leading-6 placeholder:text-gray-5 border-gray-4 shadow-none outline-none focus:outline-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:shadow-none dark:text-white dark:placeholder:text-gray-2",
+              "h-12 px-3 py-3 text-base leading-6 placeholder:text-gray-6 border-gray-5 shadow-none outline-none focus:outline-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:shadow-none dark:text-white dark:placeholder:text-gray-2",
               className,
               error &&
                 "border-red focus-visible:border-red dark:border-red dark:focus-visible:border-red",
@@ -60,7 +60,7 @@ export const Input = forwardRef<HTMLInputElement, InputWithLabelProps>(
               type="button"
               aria-label="Toggle password visibility"
               onClick={togglePasswordVisibility}
-              className="absolute right-5 top-1/2 -translate-y-1/2 text-gray-2 focus:outline-none dark:text-white dark:hover:text-white"
+              className="absolute right-5 top-1/2 -translate-y-1/2 text-gray-3 focus:outline-none dark:text-gray-8 dark:hover:text-gray-8"
             >
               {showPassword ? <OpenEyeIcon /> : <CloseEyeIcon />}
             </button>

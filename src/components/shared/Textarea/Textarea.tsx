@@ -35,7 +35,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaWithLabelProps>(
           value={controlledValue}
           onChange={handleChange}
           className={cn(
-            "px-3 py-5 text-base leading-6 placeholder:text-gray-5 border-gray-4 shadow-none outline-none resize-none focus:outline-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:shadow-none dark:placeholder:text-gray-2",
+            "px-3 py-5 text-base leading-6 placeholder:text-gray-6 border-gray-5 shadow-none outline-none resize-none focus:outline-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:shadow-none dark:placeholder:text-gray-3",
             className,
           )}
           {...props}

@@ -24,14 +24,14 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className }) =>
                     {item.label}
                   </BreadcrumbLink>
                 ) : (
-                  <BreadcrumbLink href={item.href || ""} className="text-gray-2 dark:text-gray-4">
+                  <BreadcrumbLink href={item.href || ""} className="text-gray-3 dark:text-gray-5">
                     {item.label}
                   </BreadcrumbLink>
                 )}
               </BreadcrumbItem>
 
               {!isLast && (
-                <BreadcrumbSeparator className="inline-flex items-center justify-center leading-none text-gray-4 [&>svg]:h-[10px] [&>svg]:w-[7px]">
+                <BreadcrumbSeparator className="inline-flex items-center justify-center leading-none text-gray-5 [&>svg]:h-[10px] [&>svg]:w-[7px]">
                   <RightArrowIcon className="block shrink-0" />
                 </BreadcrumbSeparator>
               )}

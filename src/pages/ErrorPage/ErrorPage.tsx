@@ -15,7 +15,7 @@ export const ErrorPage = ({ error }: ErrorPageProps) => {
 
   return (
     <div className="w-full h-screen flex items-center justify-center ">
-      <div className="flex w-140 flex-col items-center justify-center gap-6 text-black dark:text-white">
+      <div className="flex w-140 flex-col items-center justify-center gap-6 text-gray dark:text-gray-8">
         <ErrorIcon />
         <p className="text-4xl">Oops</p>
         <p className="whitespace-pre-line">{error}</p>
