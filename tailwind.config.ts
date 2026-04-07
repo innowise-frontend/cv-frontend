@@ -79,5 +79,8 @@ export default {
     borderRadius: {
       "40": "40px",
     },
+    fontSize: {
+      "34": "34px",
+    },
   },
 };

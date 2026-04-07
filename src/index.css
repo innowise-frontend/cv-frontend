@@ -18,7 +18,7 @@
 #root {
   width: 1440px;
   max-width: 100%;
-  color: var(--color-gray-13);
+  color: var(--color-gray-14);
   background: var(--color-white);
   margin: 0 auto;
   text-align: center;
@@ -29,10 +29,18 @@
 }
 
 :root.dark #root {
-  background: var(--color-gray-15);
+  background: var(--color-gray-14);
   color: var(--color-white);
 }
 
 body {
   margin: 0;
+  color: var(--color-gray-14);
+  background: var(--color-white);
+}
+
+:root.dark body {
+  margin: 0;
+  color: var(--color-white);
+  background: var(--color-gray-14);
 }
