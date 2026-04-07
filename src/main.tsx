@@ -1,7 +1,7 @@
 import { RouterProvider, createRouter } from "@tanstack/react-router";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { ErrorPage } from "@pages/errorPage";
+import { ErrorPage } from "@root/pages/ErrorPage";
 import { routeTree } from "./routeTree.gen";
 import "./index.css";
 

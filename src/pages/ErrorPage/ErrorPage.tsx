@@ -19,7 +19,7 @@ export const ErrorPage = ({ error }: ErrorPageProps) => {
         <ErrorIcon />
         <p className="text-4xl">Oops</p>
         <p className="whitespace-pre-line">{error}</p>
-        <Button variant="filled" onClick={handleGoBack}>
+        <Button variant="filled" className="w-55" onClick={handleGoBack}>
           GO BACK
         </Button>
       </div>
