@@ -1,5 +1,5 @@
-export { InputWithLabel } from "./Input/Input";
-export { TextareaWithLabel } from "./Textarea/Textarea";
+export { Input } from "./Input/Input";
+export { Textarea } from "./Textarea/Textarea";
 export { Breadcrumbs } from "./Breadcrumbs/Breadcrumbs";
 export { PageTabs, TabsContent } from "./Tabs/Tabs";
 export { Button } from "./Button/Button";
