@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { Link, useNavigate, useSearch } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
-import { Button, InputWithLabel } from "@components/shared";
+import { Button, Input } from "@components/shared";
 import { resetPassword } from "@services/auth/password";
 
 export function ResetPassword() {
@@ -34,7 +34,7 @@ export function ResetPassword() {
       <p className="mb-10 leading-6 dark:text-white">Enter a new password and confirm it below.</p>
       <form onSubmit={handleSubmit} className="flex flex-col">
         <div className="flex flex-col gap-4">
-          <InputWithLabel
+          <Input
             label="New password"
             type="password"
             name="newPassword"
@@ -45,7 +45,7 @@ export function ResetPassword() {
               setNewPassword(e.target.value);
             }}
           />
-          <InputWithLabel
+          <Input
             label="Confirm password"
             type="password"
             name="confirmPassword"

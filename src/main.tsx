@@ -2,12 +2,30 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { RouterProvider, createRouter } from "@tanstack/react-router";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { ErrorPage } from "@root/pages/ErrorPage";
 import { routeTree } from "./routeTree.gen";
 import "./index.css";
 
 const queryClient = new QueryClient();
 
-const router = createRouter({ routeTree });
+const router = createRouter({
+  routeTree,
+  notFoundMode: "root",
+  defaultErrorComponent: () => (
+    <ErrorPage
+      error={
+        "Something went wrong. We’re already working on fixing it. \n Please try again or go back."
+      }
+    />
+  ),
+  defaultNotFoundComponent: () => (
+    <ErrorPage
+      error={
+        "Hmm… this doesn’t seem to be the page you were looking for. \n Let’s get you back on track."
+      }
+    />
+  ),
+});
 
 declare module "@tanstack/react-router" {
   interface Register {

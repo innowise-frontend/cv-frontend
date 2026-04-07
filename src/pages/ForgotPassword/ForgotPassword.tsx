@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
 import React, { useState } from "react";
-import { Button, InputWithLabel } from "@components/shared";
+import { Button, Input } from "@components/shared";
 import { forgotPassword } from "@services/auth/password";
 
 export function ForgotPassword() {
@@ -28,7 +28,7 @@ export function ForgotPassword() {
         We will sent you an email with further instructions
       </p>
       <form onSubmit={handleSubmit} className="flex flex-col">
-        <InputWithLabel
+        <Input
           label="Email"
           type="email"
           name="email"

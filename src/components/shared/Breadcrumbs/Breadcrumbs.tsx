@@ -17,7 +17,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className }) =>
           const isLast = index === items.length - 1;
 
           return (
-            <>
+            <React.Fragment key={item.label}>
               <BreadcrumbItem>
                 {isLast ? (
                   <BreadcrumbLink
@@ -38,7 +38,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className }) =>
                   <RightArrowIcon className="block shrink-0" />
                 </BreadcrumbSeparator>
               )}
-            </>
+            </React.Fragment>
           );
         })}
       </BreadcrumbList>

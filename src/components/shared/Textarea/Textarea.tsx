@@ -1,10 +1,10 @@
 import React, { useState, useId, forwardRef } from "react";
-import { Textarea } from "@components/ui/textarea";
+import { Textarea as UiTextarea } from "@components/ui/textarea";
 import { cn } from "@root/lib/utils";
 import type { TextareaWithLabelProps } from "./types";
 
-export const TextareaWithLabel = forwardRef<HTMLTextAreaElement, TextareaWithLabelProps>(
-  ({ label, className, value: controlledValue, onChange, ...props }, ref) => {
+export const Textarea = forwardRef<HTMLTextAreaElement, TextareaWithLabelProps>(
+  ({ label, className, value: controlledValue, onChange, placeholder, ...props }, ref) => {
     const generatedId = useId();
 
     const [value, setValue] = useState("");
@@ -28,8 +28,9 @@ export const TextareaWithLabel = forwardRef<HTMLTextAreaElement, TextareaWithLab
           </label>
         )}
 
-        <Textarea
+        <UiTextarea
           id={generatedId}
+          placeholder={placeholder}
           ref={ref}
           value={controlledValue}
           onChange={handleChange}
@@ -44,4 +45,4 @@ export const TextareaWithLabel = forwardRef<HTMLTextAreaElement, TextareaWithLab
   },
 );
 
-TextareaWithLabel.displayName = "TextareaWithLabel";
+Textarea.displayName = "Textarea";

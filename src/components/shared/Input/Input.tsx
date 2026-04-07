@@ -1,11 +1,11 @@
 import React, { useState, useId, forwardRef } from "react";
 import CloseEyeIcon from "@assets/icon/CloseEyeIcon.svg?react";
 import OpenEyeIcon from "@assets/icon/OpenEyeIcon.svg?react";
-import { Input } from "@components/ui/input";
+import { Input as UiInput } from "@components/ui/input";
 import { cn } from "@root/lib/utils";
 import type { InputWithLabelProps } from "./types";
 
-export const InputWithLabel = forwardRef<HTMLInputElement, InputWithLabelProps>(
+export const Input = forwardRef<HTMLInputElement, InputWithLabelProps>(
   ({ label, className, value: controlledValue, onChange, type, error, ...props }, ref) => {
     const generatedId = useId();
 
@@ -41,7 +41,7 @@ export const InputWithLabel = forwardRef<HTMLInputElement, InputWithLabelProps>(
           </label>
         )}
         <div className="relative">
-          <Input
+          <UiInput
             id={generatedId}
             ref={ref}
             type={inputType}
@@ -58,8 +58,9 @@ export const InputWithLabel = forwardRef<HTMLInputElement, InputWithLabelProps>(
           {isPasswordField && (
             <button
               type="button"
+              aria-label="Toggle password visibility"
               onClick={togglePasswordVisibility}
-              className="absolute right-5 top-1/2 -translate-y-1/2 text-gray-8 focus:outline-none dark:text-white dark:hover:text-white"
+              className="absolute right-5 top-1/2 -translate-y-1/2 text-gray-8 cursor-pointer focus:outline-none dark:text-white dark:hover:text-white"
             >
               {showPassword ? <OpenEyeIcon /> : <CloseEyeIcon />}
             </button>
