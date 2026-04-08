@@ -1,72 +1,77 @@
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { Link, useNavigate, useSearch } from "@tanstack/react-router";
-import { useState, type FormEvent } from "react";
+import { useForm } from "react-hook-form";
 import { Button, Input } from "@components/shared";
 import { resetPassword } from "@services/auth/password";
+import { resetPasswordSchema, ResetPasswordFormValues } from "./validation";
 
-export function ResetPassword() {
+export function ResetPasswordPage() {
   const { token } = useSearch({ from: "/reset-password" });
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
 
-  const passwordError =
-    confirmPassword && newPassword !== confirmPassword ? "Passwords do not match" : undefined;
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+    clearErrors,
+  } = useForm<ResetPasswordFormValues>({
+    resolver: zodResolver(resetPasswordSchema),
+    mode: "onChange",
+    defaultValues: {
+      newPassword: "",
+      confirmPassword: "",
+    },
+  });
 
   const { mutate } = useMutation({
-    mutationFn: () => resetPassword(token, newPassword),
+    mutationFn: (data: ResetPasswordFormValues) => resetPassword(token, data.newPassword),
     onSuccess: () => navigate({ to: "/login" }),
   });
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    if (!newPassword.trim() || !confirmPassword.trim()) return;
-
-    if (passwordError) return;
-
-    mutate();
+  const onSubmit = (data: ResetPasswordFormValues) => {
+    mutate(data);
   };
 
   return (
     <div className="m-auto flex w-[560px] flex-col">
       <h1 className="mb-6 text-34 font-normal leading-11 dark:text-white">Reset password</h1>
       <p className="mb-10 leading-6 dark:text-white">Enter a new password and confirm it below.</p>
-      <form onSubmit={handleSubmit} className="flex flex-col">
+
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
         <div className="flex flex-col gap-4">
           <Input
             label="New password"
             type="password"
-            name="newPassword"
-            autoComplete="new-password"
             placeholder="New password"
-            value={newPassword}
+            autoComplete="new-password"
+            {...register("newPassword")}
+            error={errors.newPassword?.message}
             onChange={(e) => {
-              setNewPassword(e.target.value);
+              clearErrors("newPassword");
+              register("newPassword").onChange(e);
             }}
           />
+
           <Input
             label="Confirm password"
             type="password"
-            name="confirmPassword"
-            autoComplete="new-password"
             placeholder="Confirm password"
-            value={confirmPassword}
-            error={passwordError}
+            autoComplete="new-password"
+            {...register("confirmPassword")}
+            error={errors.confirmPassword?.message}
             onChange={(e) => {
-              setConfirmPassword(e.target.value);
+              clearErrors("confirmPassword");
+              register("confirmPassword").onChange(e);
             }}
           />
         </div>
+
         <div className="mt-16 flex flex-col items-center gap-0">
-          <Button
-            className="w-30"
-            variant="filled"
-            type="submit"
-            disabled={!newPassword.trim() || !confirmPassword.trim() || Boolean(passwordError)}
-          >
+          <Button className="w-30" variant="filled" type="submit" disabled={!isValid}>
             Submit
           </Button>
+
           <Link to="/login">
             <Button variant="default" type="button">
               Go sign in
