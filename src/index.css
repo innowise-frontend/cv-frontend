@@ -20,7 +20,7 @@
 #root {
   width: 1440px;
   max-width: 100%;
-  color: var(--color-gray);
+  color: var(--color-gray-2);
   background: var(--color-gray-8);
   margin: 0 auto;
   text-align: center;
@@ -32,7 +32,7 @@
 
 @media (prefers-color-scheme: dark) {
   #root {
-    background: var(--color-gray);
+    background: var(--color-gray-2);
     color: var(--color-gray-8);
   }
 }
