@@ -10,33 +10,22 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VerificationRouteImport } from './routes/verification'
-import { Route as SignupRouteImport } from './routes/signup'
-import { Route as LoginRouteImport } from './routes/login'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
-import { Route as AppRouteImport } from './routes/_app'
-import { Route as AppIndexRouteImport } from './routes/_app.index'
-import { Route as AppSkillsRouteImport } from './routes/_app.skills'
-import { Route as AppSettingsRouteImport } from './routes/_app.settings'
-import { Route as AppProjectsRouteImport } from './routes/_app.projects'
-import { Route as AppProfileRouteImport } from './routes/_app.profile'
-import { Route as AppPositionsRouteImport } from './routes/_app.positions'
-import { Route as AppLanguagesRouteImport } from './routes/_app.languages'
-import { Route as AppDepartmentsRouteImport } from './routes/_app.departments'
-import { Route as AppCvsRouteImport } from './routes/_app.cvs'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AppRouteRouteImport } from './routes/_app/route'
+import { Route as AppIndexRouteImport } from './routes/_app/index'
+import { Route as AppSkillsRouteImport } from './routes/_app/skills'
+import { Route as AppSettingsRouteImport } from './routes/_app/settings'
+import { Route as AppProjectsRouteImport } from './routes/_app/projects'
+import { Route as AppProfileRouteImport } from './routes/_app/profile'
+import { Route as AppPositionsRouteImport } from './routes/_app/positions'
+import { Route as AppLanguagesRouteImport } from './routes/_app/languages'
+import { Route as AppDepartmentsRouteImport } from './routes/_app/departments'
+import { Route as AppCvsRouteImport } from './routes/_app/cvs'
 
 const VerificationRoute = VerificationRouteImport.update({
   id: '/verification',
   path: '/verification',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SignupRoute = SignupRouteImport.update({
-  id: '/signup',
-  path: '/signup',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LoginRoute = LoginRouteImport.update({
-  id: '/login',
-  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
@@ -44,61 +33,65 @@ const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
   path: '/forgot-password',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AppRoute = AppRouteImport.update({
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppRouteRoute = AppRouteRouteImport.update({
   id: '/_app',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AppIndexRoute = AppIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => AppRoute,
+  getParentRoute: () => AppRouteRoute,
 } as any)
 const AppSkillsRoute = AppSkillsRouteImport.update({
   id: '/skills',
   path: '/skills',
-  getParentRoute: () => AppRoute,
+  getParentRoute: () => AppRouteRoute,
 } as any)
 const AppSettingsRoute = AppSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
-  getParentRoute: () => AppRoute,
+  getParentRoute: () => AppRouteRoute,
 } as any)
 const AppProjectsRoute = AppProjectsRouteImport.update({
   id: '/projects',
   path: '/projects',
-  getParentRoute: () => AppRoute,
+  getParentRoute: () => AppRouteRoute,
 } as any)
 const AppProfileRoute = AppProfileRouteImport.update({
   id: '/profile',
   path: '/profile',
-  getParentRoute: () => AppRoute,
+  getParentRoute: () => AppRouteRoute,
 } as any)
 const AppPositionsRoute = AppPositionsRouteImport.update({
   id: '/positions',
   path: '/positions',
-  getParentRoute: () => AppRoute,
+  getParentRoute: () => AppRouteRoute,
 } as any)
 const AppLanguagesRoute = AppLanguagesRouteImport.update({
   id: '/languages',
   path: '/languages',
-  getParentRoute: () => AppRoute,
+  getParentRoute: () => AppRouteRoute,
 } as any)
 const AppDepartmentsRoute = AppDepartmentsRouteImport.update({
   id: '/departments',
   path: '/departments',
-  getParentRoute: () => AppRoute,
+  getParentRoute: () => AppRouteRoute,
 } as any)
 const AppCvsRoute = AppCvsRouteImport.update({
   id: '/cvs',
   path: '/cvs',
-  getParentRoute: () => AppRoute,
+  getParentRoute: () => AppRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof AppIndexRoute
+  '/auth': typeof AuthRoute
   '/forgot-password': typeof ForgotPasswordRoute
-  '/login': typeof LoginRoute
-  '/signup': typeof SignupRoute
   '/verification': typeof VerificationRoute
   '/cvs': typeof AppCvsRoute
   '/departments': typeof AppDepartmentsRoute
@@ -110,9 +103,8 @@ export interface FileRoutesByFullPath {
   '/skills': typeof AppSkillsRoute
 }
 export interface FileRoutesByTo {
+  '/auth': typeof AuthRoute
   '/forgot-password': typeof ForgotPasswordRoute
-  '/login': typeof LoginRoute
-  '/signup': typeof SignupRoute
   '/verification': typeof VerificationRoute
   '/cvs': typeof AppCvsRoute
   '/departments': typeof AppDepartmentsRoute
@@ -126,10 +118,9 @@ export interface FileRoutesByTo {
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/_app': typeof AppRouteWithChildren
+  '/_app': typeof AppRouteRouteWithChildren
+  '/auth': typeof AuthRoute
   '/forgot-password': typeof ForgotPasswordRoute
-  '/login': typeof LoginRoute
-  '/signup': typeof SignupRoute
   '/verification': typeof VerificationRoute
   '/_app/cvs': typeof AppCvsRoute
   '/_app/departments': typeof AppDepartmentsRoute
@@ -145,9 +136,8 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/auth'
     | '/forgot-password'
-    | '/login'
-    | '/signup'
     | '/verification'
     | '/cvs'
     | '/departments'
@@ -159,9 +149,8 @@ export interface FileRouteTypes {
     | '/skills'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/auth'
     | '/forgot-password'
-    | '/login'
-    | '/signup'
     | '/verification'
     | '/cvs'
     | '/departments'
@@ -175,9 +164,8 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/_app'
+    | '/auth'
     | '/forgot-password'
-    | '/login'
-    | '/signup'
     | '/verification'
     | '/_app/cvs'
     | '/_app/departments'
@@ -191,10 +179,9 @@ export interface FileRouteTypes {
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  AppRoute: typeof AppRouteWithChildren
+  AppRouteRoute: typeof AppRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
   ForgotPasswordRoute: typeof ForgotPasswordRoute
-  LoginRoute: typeof LoginRoute
-  SignupRoute: typeof SignupRoute
   VerificationRoute: typeof VerificationRoute
 }
 
@@ -207,20 +194,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VerificationRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/signup': {
-      id: '/signup'
-      path: '/signup'
-      fullPath: '/signup'
-      preLoaderRoute: typeof SignupRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/forgot-password': {
       id: '/forgot-password'
       path: '/forgot-password'
@@ -228,11 +201,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ForgotPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_app': {
       id: '/_app'
       path: ''
       fullPath: '/'
-      preLoaderRoute: typeof AppRouteImport
+      preLoaderRoute: typeof AppRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_app/': {
@@ -240,68 +220,68 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof AppIndexRouteImport
-      parentRoute: typeof AppRoute
+      parentRoute: typeof AppRouteRoute
     }
     '/_app/skills': {
       id: '/_app/skills'
       path: '/skills'
       fullPath: '/skills'
       preLoaderRoute: typeof AppSkillsRouteImport
-      parentRoute: typeof AppRoute
+      parentRoute: typeof AppRouteRoute
     }
     '/_app/settings': {
       id: '/_app/settings'
       path: '/settings'
       fullPath: '/settings'
       preLoaderRoute: typeof AppSettingsRouteImport
-      parentRoute: typeof AppRoute
+      parentRoute: typeof AppRouteRoute
     }
     '/_app/projects': {
       id: '/_app/projects'
       path: '/projects'
       fullPath: '/projects'
       preLoaderRoute: typeof AppProjectsRouteImport
-      parentRoute: typeof AppRoute
+      parentRoute: typeof AppRouteRoute
     }
     '/_app/profile': {
       id: '/_app/profile'
       path: '/profile'
       fullPath: '/profile'
       preLoaderRoute: typeof AppProfileRouteImport
-      parentRoute: typeof AppRoute
+      parentRoute: typeof AppRouteRoute
     }
     '/_app/positions': {
       id: '/_app/positions'
       path: '/positions'
       fullPath: '/positions'
       preLoaderRoute: typeof AppPositionsRouteImport
-      parentRoute: typeof AppRoute
+      parentRoute: typeof AppRouteRoute
     }
     '/_app/languages': {
       id: '/_app/languages'
       path: '/languages'
       fullPath: '/languages'
       preLoaderRoute: typeof AppLanguagesRouteImport
-      parentRoute: typeof AppRoute
+      parentRoute: typeof AppRouteRoute
     }
     '/_app/departments': {
       id: '/_app/departments'
       path: '/departments'
       fullPath: '/departments'
       preLoaderRoute: typeof AppDepartmentsRouteImport
-      parentRoute: typeof AppRoute
+      parentRoute: typeof AppRouteRoute
     }
     '/_app/cvs': {
       id: '/_app/cvs'
       path: '/cvs'
       fullPath: '/cvs'
       preLoaderRoute: typeof AppCvsRouteImport
-      parentRoute: typeof AppRoute
+      parentRoute: typeof AppRouteRoute
     }
   }
 }
 
-interface AppRouteChildren {
+interface AppRouteRouteChildren {
   AppCvsRoute: typeof AppCvsRoute
   AppDepartmentsRoute: typeof AppDepartmentsRoute
   AppLanguagesRoute: typeof AppLanguagesRoute
@@ -313,7 +293,7 @@ interface AppRouteChildren {
   AppIndexRoute: typeof AppIndexRoute
 }
 
-const AppRouteChildren: AppRouteChildren = {
+const AppRouteRouteChildren: AppRouteRouteChildren = {
   AppCvsRoute: AppCvsRoute,
   AppDepartmentsRoute: AppDepartmentsRoute,
   AppLanguagesRoute: AppLanguagesRoute,
@@ -325,13 +305,14 @@ const AppRouteChildren: AppRouteChildren = {
   AppIndexRoute: AppIndexRoute,
 }
 
-const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(
+  AppRouteRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
-  AppRoute: AppRouteWithChildren,
+  AppRouteRoute: AppRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,
-  LoginRoute: LoginRoute,
-  SignupRoute: SignupRoute,
   VerificationRoute: VerificationRoute,
 }
 export const routeTree = rootRouteImport

@@ -7,8 +7,7 @@
     "skipLibCheck": true,
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
-    "verbatimModuleSyntax": true,
+    "resolveJsonModule": true,  
     "noEmit": true,
     "jsx": "react-jsx",
     "strict": true,
@@ -31,5 +30,6 @@
       "@hooks/*": ["src/hooks/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src"],
+  "types": ["node"]
 }
