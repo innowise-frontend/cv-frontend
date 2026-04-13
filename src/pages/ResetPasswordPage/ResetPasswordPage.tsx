@@ -40,7 +40,7 @@ export function ResetPasswordPage() {
       <p className="mb-10 leading-6 dark:text-white">Enter a new password and confirm it below.</p>
 
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-6">
           <Input
             label="New password"
             type="password"

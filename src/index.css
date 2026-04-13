@@ -2,6 +2,11 @@
 @config "../tailwind.config.ts";
 @import "./shadcn/tailwind.css";
 
+body {
+  color: var(--color-gray-2);
+  background: var(--color-gray-8);
+}
+
 :root {
   font: 16px var(--font-family);
   color-scheme: light;
@@ -11,15 +16,17 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-:root.dark {
-  color-scheme: dark;
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+  }
 }
 
 #root {
   width: 1440px;
   max-width: 100%;
-  color: var(--color-gray-14);
-  background: var(--color-white);
+  color: var(--color-gray-2);
+  background: var(--color-gray-8);
   margin: 0 auto;
   text-align: center;
   min-height: 100svh;
@@ -28,19 +35,13 @@
   box-sizing: border-box;
 }
 
-:root.dark #root {
-  background: var(--color-gray-14);
-  color: var(--color-white);
-}
-
-body {
-  margin: 0;
-  color: var(--color-gray-14);
-  background: var(--color-white);
-}
-
-:root.dark body {
-  margin: 0;
-  color: var(--color-white);
-  background: var(--color-gray-14);
+@media (prefers-color-scheme: dark) {
+  body {
+    color: var(--color-gray-8);
+    background: var(--color-gray-2);
+  }
+  #root {
+    background: var(--color-gray-2);
+    color: var(--color-gray-8);
+  }
 }
