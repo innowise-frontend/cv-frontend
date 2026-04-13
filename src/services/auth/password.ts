@@ -10,10 +10,14 @@ export async function forgotPassword(email: string): Promise<void> {
   });
 }
 
-export async function resetPassword(token: string, newPassword: string): Promise<void> {
+export async function resetPassword(
+  token: string,
+  newPassword: string,
+  confirmPassword: string,
+): Promise<void> {
   await graphqlClient.request(
     ResetPasswordDocument,
-    { auth: { newPassword } },
+    { auth: { newPassword, confirmPassword } },
     { Authorization: `Bearer ${token}` },
   );
 }

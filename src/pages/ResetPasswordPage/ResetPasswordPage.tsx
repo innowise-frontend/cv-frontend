@@ -25,7 +25,8 @@ export function ResetPasswordPage() {
   });
 
   const { mutate } = useMutation({
-    mutationFn: (data: ResetPasswordFormValues) => resetPassword(token, data.newPassword),
+    mutationFn: async (data: ResetPasswordFormValues) =>
+      await resetPassword(token, data.newPassword, data.confirmPassword),
     onSuccess: () => navigate({ to: "/login" }),
   });
 
@@ -67,7 +68,7 @@ export function ResetPasswordPage() {
           />
         </div>
 
-        <div className="mt-16 flex flex-col items-center gap-0">
+        <div className="mt-13 flex flex-col items-center gap-0">
           <Button className="w-30" variant="filled" type="submit" disabled={!isValid}>
             Submit
           </Button>

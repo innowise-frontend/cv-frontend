@@ -63,6 +63,12 @@ export type AuthResult = {
   user: User;
 };
 
+export type ChangePasswordInput = {
+  confirmPassword: Scalars["String"]["input"];
+  newPassword: Scalars["String"]["input"];
+  oldPassword: Scalars["String"]["input"];
+};
+
 export type CreateCvInput = {
   description: Scalars["String"]["input"];
   education?: InputMaybe<Scalars["String"]["input"]>;
@@ -257,6 +263,7 @@ export type Mutation = {
   addCvSkill: Cv;
   addProfileLanguage: Profile;
   addProfileSkill: Profile;
+  changePassword: User;
   createCv: Cv;
   createDepartment: Department;
   createLanguage: Language;
@@ -311,6 +318,10 @@ export type MutationAddProfileLanguageArgs = {
 
 export type MutationAddProfileSkillArgs = {
   skill: AddProfileSkillInput;
+};
+
+export type MutationChangePasswordArgs = {
+  args: ChangePasswordInput;
 };
 
 export type MutationCreateCvArgs = {
@@ -551,6 +562,7 @@ export type RemoveCvProjectInput = {
 };
 
 export type ResetPasswordInput = {
+  confirmPassword: Scalars["String"]["input"];
   newPassword: Scalars["String"]["input"];
 };
 

@@ -75,12 +75,12 @@ export default {
           4: "var(--color-yellow-4)",
         },
       },
+      fontSize: {
+        "34": "34px",
+      },
     },
     borderRadius: {
       "40": "40px",
-    },
-    fontSize: {
-      "34": "34px",
     },
   },
 };
