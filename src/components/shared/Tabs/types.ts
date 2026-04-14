@@ -10,5 +10,5 @@ export interface PageTabsProps {
   onValueChange?: (value: string) => void;
   children?: React.ReactNode;
   className?: string;
-  centered?: boolean;
+  isCentered?: boolean;
 }

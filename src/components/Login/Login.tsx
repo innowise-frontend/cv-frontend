@@ -3,19 +3,23 @@ import { Link, useNavigate } from "@tanstack/react-router";
 import { ClientError } from "graphql-request";
 import { toast } from "sonner";
 import { Button } from "@components/shared";
+import { useLocalStorage } from "@hooks/useLocalStorage";
+import { LOCAL_STORAGE_KEYS } from "@root/constants";
 import { login } from "@services/auth/login";
 import { AuthForm } from "../AuthForm";
 
 export const Login = () => {
   const navigate = useNavigate();
+  const [, setAccessToken] = useLocalStorage(LOCAL_STORAGE_KEYS.ACCESS_TOKEN, "");
+  const [, setRefreshToken] = useLocalStorage(LOCAL_STORAGE_KEYS.REFRESH_TOKEN, "");
 
   const { mutate } = useMutation({
     mutationFn: (data: { email: string; password: string }) => {
       return login({ email: data.email, password: data.password });
     },
     onSuccess: (response) => {
-      localStorage.setItem("access_token", response.access_token);
-      localStorage.setItem("role", response.user.role);
+      setAccessToken(() => response.access_token);
+      setRefreshToken(() => response.refresh_token);
       navigate({ to: "/" });
     },
     onError: (error) => {
@@ -30,12 +34,7 @@ export const Login = () => {
       <div className="flex flex-col w-full">
         <h2 className="text-34 mb-6">Welcome back</h2>
         <p className="mb-10">Hello again! Sign in to continue</p>
-        <AuthForm
-          onSubmit={(data) => {
-            mutate(data);
-          }}
-          label="Sign in"
-        />
+        <AuthForm onSubmit={mutate} label="Sign in" />
         <Button type="button" variant="default" className="w-40 mx-auto">
           <Link to={"/forgot-password"}>Forgot password</Link>
         </Button>

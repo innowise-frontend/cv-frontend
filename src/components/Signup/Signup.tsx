@@ -33,12 +33,7 @@ export const Signup = () => {
       <div className="flex flex-col w-full">
         <h2 className="text-34 mb-6">Sign up now</h2>
         <p className="mb-10">Welcome! Sign up to continue</p>
-        <AuthForm
-          onSubmit={(data) => {
-            mutate(data);
-          }}
-          label="Create account"
-        />
+        <AuthForm onSubmit={mutate} label="Create account" />
         <Button
           type="button"
           variant="default"

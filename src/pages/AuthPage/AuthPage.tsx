@@ -3,6 +3,17 @@ import { Login } from "@components/Login";
 import { PageTabs, TabsContent } from "@components/shared";
 import { Signup } from "@components/Signup";
 
+const TABS_ITEMS = [
+  {
+    label: "Sign in",
+    value: "login",
+  },
+  {
+    label: "Sign up",
+    value: "signup",
+  },
+];
+
 export const AuthPage = () => {
   const navigate = useNavigate();
 
@@ -14,17 +25,8 @@ export const AuthPage = () => {
     <div className="mx-auto">
       <PageTabs
         className="w-[560px]"
-        centered
-        tabs={[
-          {
-            label: "Sign in",
-            value: "login",
-          },
-          {
-            label: "Sign up",
-            value: "signup",
-          },
-        ]}
+        isCentered
+        tabs={TABS_ITEMS}
         value={mode}
         defaultValue="login"
         onValueChange={(value) => {
@@ -35,10 +37,10 @@ export const AuthPage = () => {
         }}
       >
         <div className="w-[560px]">
-          <TabsContent value="login">
+          <TabsContent value={TABS_ITEMS[0].value}>
             <Login />
           </TabsContent>
-          <TabsContent value="signup">
+          <TabsContent value={TABS_ITEMS[1].value}>
             <Signup />
           </TabsContent>
         </div>

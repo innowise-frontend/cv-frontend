@@ -8,7 +8,6 @@ import getSidebarItems from "./const";
 
 export const Sidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const isAdmin = localStorage.getItem("role") === "Admin";
 
   return (
     <div
@@ -24,7 +23,7 @@ export const Sidebar = () => {
 
       <div className="flex flex-col gap-3.5">
         <Logo collapsed={isCollapsed} />
-        {getSidebarItems({ isAdmin }).map(
+        {getSidebarItems({ isAdmin: false }).map(
           (item) =>
             item.visible && (
               <React.Fragment key={item.title}>

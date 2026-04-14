@@ -9,7 +9,7 @@ export const PageTabs: React.FC<PageTabsProps> = ({
   onValueChange,
   children,
   className,
-  centered = false,
+  isCentered = false,
 }) => {
   return (
     <div className={`w-full flex flex-col h-full ${className || ""}`}>
@@ -22,7 +22,7 @@ export const PageTabs: React.FC<PageTabsProps> = ({
       >
         <TabsList
           variant="line"
-          className={`h-12 gap-0 bg-transparent px-0 shrink-0 ${centered && "mx-auto"}`}
+          className={`h-12 gap-0 bg-transparent px-0 shrink-0 ${isCentered && "mx-auto"}`}
         >
           {tabs.map((tab) => (
             <TabsTrigger

@@ -53,35 +53,32 @@ describe("Login", () => {
     expect(forgot).toHaveAttribute("href", "/forgot-password");
   });
 
-  it.each([{ role: "admin" as const }, { role: "user" as const }])(
-    "should store token, persist role $role, and navigate home on successful login",
-    async ({ role }) => {
-      const user = userEvent.setup();
-      loginMock.mockResolvedValue({
-        access_token: "jwt-token",
-        user: { role },
+  it("should store auth tokens and navigate home on successful login", async () => {
+    const user = userEvent.setup();
+    loginMock.mockResolvedValue({
+      access_token: "jwt-token",
+      refresh_token: "jwt-refresh-token",
+    });
+
+    renderLogin();
+
+    await user.type(screen.getByPlaceholderText("Email"), "user@example.com");
+    await user.type(screen.getByPlaceholderText("Password"), "secret12");
+    await user.click(screen.getByRole("button", { name: "Sign in" }));
+
+    await waitFor(() => {
+      expect(loginMock).toHaveBeenCalledWith({
+        email: "user@example.com",
+        password: "secret12",
       });
+    });
 
-      renderLogin();
-
-      await user.type(screen.getByPlaceholderText("Email"), "user@example.com");
-      await user.type(screen.getByPlaceholderText("Password"), "secret12");
-      await user.click(screen.getByRole("button", { name: "Sign in" }));
-
-      await waitFor(() => {
-        expect(loginMock).toHaveBeenCalledWith({
-          email: "user@example.com",
-          password: "secret12",
-        });
-      });
-
-      await waitFor(() => {
-        expect(localStorage.getItem("access_token")).toBe("jwt-token");
-        expect(localStorage.getItem("role")).toBe(role);
-        expect(mockNavigate).toHaveBeenCalledWith({ to: "/" });
-      });
-    },
-  );
+    await waitFor(() => {
+      expect(JSON.parse(localStorage.getItem("access_token") ?? "null")).toBe("jwt-token");
+      expect(JSON.parse(localStorage.getItem("refresh_token") ?? "null")).toBe("jwt-refresh-token");
+      expect(mockNavigate).toHaveBeenCalledWith({ to: "/" });
+    });
+  });
 
   it("should show a toast with the first GraphQL error message on ClientError", async () => {
     const user = userEvent.setup();

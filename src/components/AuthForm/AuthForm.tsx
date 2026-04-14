@@ -16,12 +16,13 @@ export const AuthForm = ({ onSubmit, label }: AuthFormProps) => {
 
   return (
     <form
-      className="flex flex-col justify-center items-center gap-5"
+      className="flex flex-col justify-center items-center gap-6"
       onSubmit={handleSubmit(onSubmit)}
     >
       <Input
         type="email"
         placeholder="Email"
+        label="Email"
         {...register("email")}
         autoComplete="email"
         error={errors.email?.message}
@@ -30,6 +31,7 @@ export const AuthForm = ({ onSubmit, label }: AuthFormProps) => {
       <Input
         type="password"
         placeholder="Password"
+        label="Password"
         autoComplete="current-password"
         {...register("password")}
         error={errors.password?.message}

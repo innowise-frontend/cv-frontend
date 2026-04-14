@@ -43,23 +43,6 @@ describe("Sidebar", () => {
     expect(queryByText("Projects")).not.toBeInTheDocument();
   });
 
-  it("should render admin links when role is admin", async () => {
-    localStorage.setItem("role", "Admin");
-
-    const { getByText } = await renderWithFileRoutes(<Sidebar />, {
-      initialLocation: "/",
-    });
-
-    expect(getByText("Departments")).toBeVisible();
-    expect(getByText("Departments")).toHaveAttribute("href", "/departments");
-
-    expect(getByText("Positions")).toBeVisible();
-    expect(getByText("Positions")).toHaveAttribute("href", "/positions");
-
-    expect(getByText("Projects")).toBeVisible();
-    expect(getByText("Projects")).toHaveAttribute("href", "/projects");
-  });
-
   it("should render profile block", async () => {
     const { getByText } = await renderWithFileRoutes(<Sidebar />, {
       initialLocation: "/",
