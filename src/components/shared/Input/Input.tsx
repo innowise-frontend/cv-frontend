@@ -66,11 +66,12 @@ export const Input = forwardRef<HTMLInputElement, InputWithLabelProps>(
             </button>
           )}
         </div>
-        {error && (
-          <p id={`${generatedId}-error`} className="pl-2 mt-1.5 text-left text-sm text-red">
-            {error}
-          </p>
-        )}
+        <p
+          id={`${generatedId}-error`}
+          className={cn("pl-2 mt-1 text-left text-xs text-red h-3", !error && "invisible")}
+        >
+          {error || " "}
+        </p>
       </div>
     );
   },

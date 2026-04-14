@@ -13,6 +13,7 @@ import { Route as PublicRouteRouteImport } from './routes/_public/route'
 import { Route as AppRouteRouteImport } from './routes/_app/route'
 import { Route as AppIndexRouteImport } from './routes/_app/index'
 import { Route as PublicVerificationRouteImport } from './routes/_public/verification'
+import { Route as PublicResetPasswordRouteImport } from './routes/_public/reset-password'
 import { Route as PublicForgotPasswordRouteImport } from './routes/_public/forgot-password'
 import { Route as PublicAuthRouteImport } from './routes/_public/auth'
 import { Route as AppSkillsRouteImport } from './routes/_app/skills'
@@ -40,6 +41,11 @@ const AppIndexRoute = AppIndexRouteImport.update({
 const PublicVerificationRoute = PublicVerificationRouteImport.update({
   id: '/verification',
   path: '/verification',
+  getParentRoute: () => PublicRouteRoute,
+} as any)
+const PublicResetPasswordRoute = PublicResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
   getParentRoute: () => PublicRouteRoute,
 } as any)
 const PublicForgotPasswordRoute = PublicForgotPasswordRouteImport.update({
@@ -105,6 +111,7 @@ export interface FileRoutesByFullPath {
   '/skills': typeof AppSkillsRoute
   '/auth': typeof PublicAuthRoute
   '/forgot-password': typeof PublicForgotPasswordRoute
+  '/reset-password': typeof PublicResetPasswordRoute
   '/verification': typeof PublicVerificationRoute
 }
 export interface FileRoutesByTo {
@@ -119,6 +126,7 @@ export interface FileRoutesByTo {
   '/skills': typeof AppSkillsRoute
   '/auth': typeof PublicAuthRoute
   '/forgot-password': typeof PublicForgotPasswordRoute
+  '/reset-password': typeof PublicResetPasswordRoute
   '/verification': typeof PublicVerificationRoute
 }
 export interface FileRoutesById {
@@ -135,6 +143,7 @@ export interface FileRoutesById {
   '/_app/skills': typeof AppSkillsRoute
   '/_public/auth': typeof PublicAuthRoute
   '/_public/forgot-password': typeof PublicForgotPasswordRoute
+  '/_public/reset-password': typeof PublicResetPasswordRoute
   '/_public/verification': typeof PublicVerificationRoute
   '/_app/': typeof AppIndexRoute
 }
@@ -152,6 +161,7 @@ export interface FileRouteTypes {
     | '/skills'
     | '/auth'
     | '/forgot-password'
+    | '/reset-password'
     | '/verification'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -166,6 +176,7 @@ export interface FileRouteTypes {
     | '/skills'
     | '/auth'
     | '/forgot-password'
+    | '/reset-password'
     | '/verification'
   id:
     | '__root__'
@@ -181,6 +192,7 @@ export interface FileRouteTypes {
     | '/_app/skills'
     | '/_public/auth'
     | '/_public/forgot-password'
+    | '/_public/reset-password'
     | '/_public/verification'
     | '/_app/'
   fileRoutesById: FileRoutesById
@@ -218,6 +230,13 @@ declare module '@tanstack/react-router' {
       path: '/verification'
       fullPath: '/verification'
       preLoaderRoute: typeof PublicVerificationRouteImport
+      parentRoute: typeof PublicRouteRoute
+    }
+    '/_public/reset-password': {
+      id: '/_public/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof PublicResetPasswordRouteImport
       parentRoute: typeof PublicRouteRoute
     }
     '/_public/forgot-password': {
@@ -324,12 +343,14 @@ const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(
 interface PublicRouteRouteChildren {
   PublicAuthRoute: typeof PublicAuthRoute
   PublicForgotPasswordRoute: typeof PublicForgotPasswordRoute
+  PublicResetPasswordRoute: typeof PublicResetPasswordRoute
   PublicVerificationRoute: typeof PublicVerificationRoute
 }
 
 const PublicRouteRouteChildren: PublicRouteRouteChildren = {
   PublicAuthRoute: PublicAuthRoute,
   PublicForgotPasswordRoute: PublicForgotPasswordRoute,
+  PublicResetPasswordRoute: PublicResetPasswordRoute,
   PublicVerificationRoute: PublicVerificationRoute,
 }
 

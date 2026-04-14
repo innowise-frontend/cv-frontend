@@ -41,6 +41,7 @@ export default {
           DEFAULT: "var(--color-yellow)",
           2: "var(--color-yellow-2)",
           3: "var(--color-yellow-3)",
+          4: "var(--color-yellow-4)",
         },
       },
       fontSize: {

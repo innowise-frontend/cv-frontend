@@ -1,0 +1,7 @@
+mutation ForgotPassword($auth: ForgotPasswordInput!) {
+  forgotPassword(auth: $auth)
+}
+
+mutation ResetPassword($auth: ResetPasswordInput!) {
+  resetPassword(auth: $auth)
+}

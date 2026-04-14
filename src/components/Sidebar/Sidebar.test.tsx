@@ -44,7 +44,7 @@ describe("Sidebar", () => {
   });
 
   it("should render admin links when role is admin", async () => {
-    localStorage.setItem("role", "admin");
+    localStorage.setItem("role", "Admin");
 
     const { getByText } = await renderWithFileRoutes(<Sidebar />, {
       initialLocation: "/",

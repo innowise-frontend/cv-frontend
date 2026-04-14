@@ -706,6 +706,18 @@ export type VerifyMailInput = {
   otp: Scalars["String"]["input"];
 };
 
+export type ForgotPasswordMutationVariables = Exact<{
+  auth: ForgotPasswordInput;
+}>;
+
+export type ForgotPasswordMutation = { __typename?: "Mutation"; forgotPassword?: any | null };
+
+export type ResetPasswordMutationVariables = Exact<{
+  auth: ResetPasswordInput;
+}>;
+
+export type ResetPasswordMutation = { __typename?: "Mutation"; resetPassword?: any | null };
+
 export type SignupMutationVariables = Exact<{
   auth: AuthInput;
 }>;
@@ -734,6 +746,78 @@ export type LoginQuery = {
   };
 };
 
+export const ForgotPasswordDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "ForgotPassword" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "auth" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "ForgotPasswordInput" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "forgotPassword" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "auth" },
+                value: { kind: "Variable", name: { kind: "Name", value: "auth" } },
+              },
+            ],
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<ForgotPasswordMutation, ForgotPasswordMutationVariables>;
+export const ResetPasswordDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "ResetPassword" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "auth" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "ResetPasswordInput" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "resetPassword" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "auth" },
+                value: { kind: "Variable", name: { kind: "Name", value: "auth" } },
+              },
+            ],
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<ResetPasswordMutation, ResetPasswordMutationVariables>;
 export const SignupDocument = {
   kind: "Document",
   definitions: [
