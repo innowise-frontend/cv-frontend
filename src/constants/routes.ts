@@ -2,7 +2,7 @@ export const ROUTES = {
   ROOT: "/",
   LOGIN: "/login",
   SIGNUP: "/signup",
-  VERIFICATION: "/verification",
+  VERIFICATION: "/verify-email",
   FORGOT_PASSWORD: "/forgot-password",
   CVS: "/cvs",
   DEPARTMENTS: "/departments",

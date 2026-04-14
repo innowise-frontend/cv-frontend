@@ -730,6 +730,12 @@ export type ResetPasswordMutationVariables = Exact<{
 
 export type ResetPasswordMutation = { __typename?: "Mutation"; resetPassword?: any | null };
 
+export type VerifyMailMutationVariables = Exact<{
+  otp: Scalars["String"]["input"];
+}>;
+
+export type VerifyMailMutation = { __typename?: "Mutation"; verifyMail?: any | null };
+
 export const ForgotPasswordDocument = {
   kind: "Document",
   definitions: [
@@ -802,3 +808,48 @@ export const ResetPasswordDocument = {
     },
   ],
 } as unknown as DocumentNode<ResetPasswordMutation, ResetPasswordMutationVariables>;
+export const VerifyMailDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "verifyMail" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "otp" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "String" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "verifyMail" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "mail" },
+                value: {
+                  kind: "ObjectValue",
+                  fields: [
+                    {
+                      kind: "ObjectField",
+                      name: { kind: "Name", value: "otp" },
+                      value: { kind: "Variable", name: { kind: "Name", value: "otp" } },
+                    },
+                  ],
+                },
+              },
+            ],
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<VerifyMailMutation, VerifyMailMutationVariables>;

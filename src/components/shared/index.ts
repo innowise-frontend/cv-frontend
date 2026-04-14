@@ -6,3 +6,4 @@ export { Button } from "./Button/Button";
 export { ROUTES } from "../../constants/routes";
 export { Divider } from "./Divider";
 export { LinkButton } from "./LinkButton";
+export { CodeInput } from "./CodeInput/CodeInput";

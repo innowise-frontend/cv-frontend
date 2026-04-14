@@ -9,7 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as VerificationRouteImport } from './routes/verification'
+import { Route as VerifyEmailRouteImport } from './routes/verify-email'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as LoginRouteImport } from './routes/login'
@@ -25,9 +25,9 @@ import { Route as AppLanguagesRouteImport } from './routes/_app.languages'
 import { Route as AppDepartmentsRouteImport } from './routes/_app.departments'
 import { Route as AppCvsRouteImport } from './routes/_app.cvs'
 
-const VerificationRoute = VerificationRouteImport.update({
-  id: '/verification',
-  path: '/verification',
+const VerifyEmailRoute = VerifyEmailRouteImport.update({
+  id: '/verify-email',
+  path: '/verify-email',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SignupRoute = SignupRouteImport.update({
@@ -106,7 +106,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
-  '/verification': typeof VerificationRoute
+  '/verify-email': typeof VerifyEmailRoute
   '/cvs': typeof AppCvsRoute
   '/departments': typeof AppDepartmentsRoute
   '/languages': typeof AppLanguagesRoute
@@ -121,7 +121,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
-  '/verification': typeof VerificationRoute
+  '/verify-email': typeof VerifyEmailRoute
   '/cvs': typeof AppCvsRoute
   '/departments': typeof AppDepartmentsRoute
   '/languages': typeof AppLanguagesRoute
@@ -139,7 +139,7 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
-  '/verification': typeof VerificationRoute
+  '/verify-email': typeof VerifyEmailRoute
   '/_app/cvs': typeof AppCvsRoute
   '/_app/departments': typeof AppDepartmentsRoute
   '/_app/languages': typeof AppLanguagesRoute
@@ -158,7 +158,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/reset-password'
     | '/signup'
-    | '/verification'
+    | '/verify-email'
     | '/cvs'
     | '/departments'
     | '/languages'
@@ -173,7 +173,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/reset-password'
     | '/signup'
-    | '/verification'
+    | '/verify-email'
     | '/cvs'
     | '/departments'
     | '/languages'
@@ -190,7 +190,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/reset-password'
     | '/signup'
-    | '/verification'
+    | '/verify-email'
     | '/_app/cvs'
     | '/_app/departments'
     | '/_app/languages'
@@ -208,16 +208,16 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   SignupRoute: typeof SignupRoute
-  VerificationRoute: typeof VerificationRoute
+  VerifyEmailRoute: typeof VerifyEmailRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/verification': {
-      id: '/verification'
-      path: '/verification'
-      fullPath: '/verification'
-      preLoaderRoute: typeof VerificationRouteImport
+    '/verify-email': {
+      id: '/verify-email'
+      path: '/verify-email'
+      fullPath: '/verify-email'
+      preLoaderRoute: typeof VerifyEmailRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/signup': {
@@ -353,7 +353,7 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   SignupRoute: SignupRoute,
-  VerificationRoute: VerificationRoute,
+  VerifyEmailRoute: VerifyEmailRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
