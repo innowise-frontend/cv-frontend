@@ -41,11 +41,15 @@ export default {
           DEFAULT: "var(--color-yellow)",
           2: "var(--color-yellow-2)",
           3: "var(--color-yellow-3)",
+          4: "var(--color-yellow-4)",
         },
       },
-      borderRadius: {
-        "40": "40px",
+      fontSize: {
+        "34": "34px",
       },
+    },
+    borderRadius: {
+      "40": "40px",
     },
   },
 };
