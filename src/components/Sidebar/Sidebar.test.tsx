@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { renderWithFileRoutes } from "@root/lib/testUtils";
 import { Sidebar } from "./Sidebar";
 
@@ -9,8 +9,17 @@ vi.mock("@components/shared/ProfileBlock", () => ({
 }));
 
 describe("Sidebar", () => {
-  it("should render public links", async () => {
-    const { getByText } = await renderWithFileRoutes(<Sidebar />, {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it.each([
+    { case: "role is user", setRole: () => localStorage.setItem("role", "user") },
+    { case: "role is unset", setRole: () => {} },
+  ])("should render public links and hide admin-only nav when $case", async ({ setRole }) => {
+    setRole();
+
+    const { getByText, queryByText } = await renderWithFileRoutes(<Sidebar />, {
       initialLocation: "/",
     });
 
@@ -28,9 +37,15 @@ describe("Sidebar", () => {
 
     expect(getByText("Settings")).toBeVisible();
     expect(getByText("Settings")).toHaveAttribute("href", "/settings");
+
+    expect(queryByText("Departments")).not.toBeInTheDocument();
+    expect(queryByText("Positions")).not.toBeInTheDocument();
+    expect(queryByText("Projects")).not.toBeInTheDocument();
   });
 
-  it("should render admin links", async () => {
+  it("should render admin links when role is admin", async () => {
+    localStorage.setItem("role", "admin");
+
     const { getByText } = await renderWithFileRoutes(<Sidebar />, {
       initialLocation: "/",
     });

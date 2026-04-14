@@ -2,6 +2,11 @@
 @config "../tailwind.config.ts";
 @import "./shadcn/tailwind.css";
 
+body {
+  color: var(--color-gray-2);
+  background: var(--color-gray-8);
+}
+
 :root {
   font: 16px var(--font-family);
   color-scheme: light;
@@ -31,6 +36,10 @@
 }
 
 @media (prefers-color-scheme: dark) {
+  body {
+    color: var(--color-gray-8);
+    background: var(--color-gray-2);
+  }
   #root {
     background: var(--color-gray-2);
     color: var(--color-gray-8);

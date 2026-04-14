@@ -9,7 +9,7 @@ export const formSchema = z.object({
   password: z
     .string()
     .min(1, { message: "Please enter a password" })
-    .min(8, { message: "Password must be at least 8 characters long" })
+    .min(6, { message: "Password must be at least 6 characters long" })
     .transform((val) => val.trim()),
 });
 

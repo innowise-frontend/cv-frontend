@@ -14,13 +14,13 @@ import { TypedDocumentNode as DocumentNode } from "@graphql-typed-document-node/
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 type Documents = {
-  "mutation Signup($auth: AuthInput!) {\n  signup(auth: $auth) {\n    user {\n      id\n    }\n    access_token\n    refresh_token\n  }\n}": typeof types.SignupDocument;
-  "query Login($auth: AuthInput!) {\n  login(auth: $auth) {\n    user {\n      id\n    }\n    access_token\n    refresh_token\n  }\n}": typeof types.LoginDocument;
+  "mutation Signup($auth: AuthInput!) {\n  signup(auth: $auth) {\n    user {\n      id\n      role\n    }\n    access_token\n    refresh_token\n  }\n}": typeof types.SignupDocument;
+  "query Login($auth: AuthInput!) {\n  login(auth: $auth) {\n    user {\n      id\n      role\n    }\n    access_token\n    refresh_token\n  }\n}": typeof types.LoginDocument;
 };
 const documents: Documents = {
-  "mutation Signup($auth: AuthInput!) {\n  signup(auth: $auth) {\n    user {\n      id\n    }\n    access_token\n    refresh_token\n  }\n}":
+  "mutation Signup($auth: AuthInput!) {\n  signup(auth: $auth) {\n    user {\n      id\n      role\n    }\n    access_token\n    refresh_token\n  }\n}":
     types.SignupDocument,
-  "query Login($auth: AuthInput!) {\n  login(auth: $auth) {\n    user {\n      id\n    }\n    access_token\n    refresh_token\n  }\n}":
+  "query Login($auth: AuthInput!) {\n  login(auth: $auth) {\n    user {\n      id\n      role\n    }\n    access_token\n    refresh_token\n  }\n}":
     types.LoginDocument,
 };
 
@@ -42,14 +42,14 @@ export function gql(source: string): unknown;
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
-  source: "mutation Signup($auth: AuthInput!) {\n  signup(auth: $auth) {\n    user {\n      id\n    }\n    access_token\n    refresh_token\n  }\n}",
-): (typeof documents)["mutation Signup($auth: AuthInput!) {\n  signup(auth: $auth) {\n    user {\n      id\n    }\n    access_token\n    refresh_token\n  }\n}"];
+  source: "mutation Signup($auth: AuthInput!) {\n  signup(auth: $auth) {\n    user {\n      id\n      role\n    }\n    access_token\n    refresh_token\n  }\n}",
+): (typeof documents)["mutation Signup($auth: AuthInput!) {\n  signup(auth: $auth) {\n    user {\n      id\n      role\n    }\n    access_token\n    refresh_token\n  }\n}"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
-  source: "query Login($auth: AuthInput!) {\n  login(auth: $auth) {\n    user {\n      id\n    }\n    access_token\n    refresh_token\n  }\n}",
-): (typeof documents)["query Login($auth: AuthInput!) {\n  login(auth: $auth) {\n    user {\n      id\n    }\n    access_token\n    refresh_token\n  }\n}"];
+  source: "query Login($auth: AuthInput!) {\n  login(auth: $auth) {\n    user {\n      id\n      role\n    }\n    access_token\n    refresh_token\n  }\n}",
+): (typeof documents)["query Login($auth: AuthInput!) {\n  login(auth: $auth) {\n    user {\n      id\n      role\n    }\n    access_token\n    refresh_token\n  }\n}"];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};

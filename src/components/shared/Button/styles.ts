@@ -1,7 +1,7 @@
 import { tv } from "tailwind-variants";
 
 export const buttonStyles = tv({
-  base: "h-12 inline-flex items-center justify-center rounded-40! px-6 py-4 text-sm font-medium uppercase outline-none focus-visible:outline-none cursor-pointer disabled:cursor-not-allowed",
+  base: "h-12 inline-flex items-center justify-center px-6 py-4 text-sm font-medium uppercase outline-none focus-visible:outline-none cursor-pointer disabled:cursor-not-allowed",
   variants: {
     variant: {
       default: "bg-transparent text-gray-3 hover:bg-transparent dark:text-gray-6",

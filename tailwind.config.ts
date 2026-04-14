@@ -43,6 +43,9 @@ export default {
           3: "var(--color-yellow-3)",
         },
       },
+      fontSize: {
+        "34": "34px",
+      },
       borderRadius: {
         "40": "40px",
       },

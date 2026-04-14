@@ -1,12 +1,12 @@
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
+import { ClientError } from "graphql-request";
+import { toast } from "sonner";
+import { AuthForm } from "@components/AuthForm";
 import { Button } from "@components/shared";
-import { AuthForm } from "@root/components/AuthForm";
-import { signup } from "@root/services/auth/signup";
+import { signup } from "@services/auth/signup";
 
-export const SignupComponent = () => {
-  const [errorMessage, setErrorMessage] = useState("");
+export const Signup = () => {
   const navigate = useNavigate();
 
   const { mutate } = useMutation({
@@ -16,20 +16,22 @@ export const SignupComponent = () => {
         password: data.password,
       });
     },
-    onSuccess: () => {
-      setErrorMessage("");
+    onSuccess: (response) => {
+      localStorage.setItem("access_token", response.access_token);
+      localStorage.setItem("role", response.user.role);
       navigate({ to: "/" });
     },
     onError: (error) => {
-      setErrorMessage(error instanceof Error ? error.message : "Failed to create account");
-      console.log(errorMessage);
+      const message =
+        error instanceof ClientError ? error.response.errors?.[0].message : error.message;
+      toast.error(message);
     },
   });
 
   return (
     <div className="flex items-center h-screen justify-center">
       <div className="flex flex-col w-full">
-        <h2 className="text-[34px] mb-6">Sign up now</h2>
+        <h2 className="text-34 mb-6">Sign up now</h2>
         <p className="mb-10">Welcome! Sign up to continue</p>
         <AuthForm
           onSubmit={(data) => {

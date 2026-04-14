@@ -1,13 +1,13 @@
 import { useNavigate, useSearch } from "@tanstack/react-router";
-import { LoginComponent } from "@components/LoginComponent";
+import { Login } from "@components/Login";
 import { PageTabs, TabsContent } from "@components/shared";
-import { SignupComponent } from "@components/SignupComponent";
+import { Signup } from "@components/Signup";
 
 export const AuthPage = () => {
   const navigate = useNavigate();
 
   const { mode } = useSearch({
-    from: "/auth",
+    from: "/_public/auth",
   });
 
   return (
@@ -36,10 +36,10 @@ export const AuthPage = () => {
       >
         <div className="w-[560px]">
           <TabsContent value="login">
-            <LoginComponent />
+            <Login />
           </TabsContent>
           <TabsContent value="signup">
-            <SignupComponent />
+            <Signup />
           </TabsContent>
         </div>
       </PageTabs>

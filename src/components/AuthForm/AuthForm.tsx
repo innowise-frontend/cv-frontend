@@ -1,8 +1,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Button, Input } from "@root/components/shared";
+import { Button, Input } from "@components/shared";
 import { AuthFormProps } from "./types";
-import { formSchema, FormSchema } from "./validation";
+import { formSchema, type FormSchema } from "./validation";
 
 export const AuthForm = ({ onSubmit, label }: AuthFormProps) => {
   const {
@@ -23,21 +23,19 @@ export const AuthForm = ({ onSubmit, label }: AuthFormProps) => {
         type="email"
         placeholder="Email"
         {...register("email")}
+        autoComplete="email"
         error={errors.email?.message}
-        onChange={(e) => {
-          register("email").onChange(e);
-        }}
+        className="rounded-none"
       />
       <Input
         type="password"
         placeholder="Password"
+        autoComplete="current-password"
         {...register("password")}
         error={errors.password?.message}
-        onChange={(e) => {
-          register("password").onChange(e);
-        }}
+        className="rounded-none"
       />
-      <Button type="submit" variant="filled" className="w-40 mb-2">
+      <Button type="submit" variant="filled" className="w-40 mb-2 rounded-40!">
         {label}
       </Button>
     </form>

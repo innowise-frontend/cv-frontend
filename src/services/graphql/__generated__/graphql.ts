@@ -716,7 +716,7 @@ export type SignupMutation = {
     __typename?: "AuthResult";
     access_token: string;
     refresh_token: string;
-    user: { __typename?: "User"; id: string };
+    user: { __typename?: "User"; id: string; role: UserRole };
   };
 };
 
@@ -730,7 +730,7 @@ export type LoginQuery = {
     __typename?: "AuthResult";
     access_token: string;
     refresh_token: string;
-    user: { __typename?: "User"; id: string };
+    user: { __typename?: "User"; id: string; role: UserRole };
   };
 };
 
@@ -772,7 +772,10 @@ export const SignupDocument = {
                   name: { kind: "Name", value: "user" },
                   selectionSet: {
                     kind: "SelectionSet",
-                    selections: [{ kind: "Field", name: { kind: "Name", value: "id" } }],
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      { kind: "Field", name: { kind: "Name", value: "role" } },
+                    ],
                   },
                 },
                 { kind: "Field", name: { kind: "Name", value: "access_token" } },
@@ -823,7 +826,10 @@ export const LoginDocument = {
                   name: { kind: "Name", value: "user" },
                   selectionSet: {
                     kind: "SelectionSet",
-                    selections: [{ kind: "Field", name: { kind: "Name", value: "id" } }],
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      { kind: "Field", name: { kind: "Name", value: "role" } },
+                    ],
                   },
                 },
                 { kind: "Field", name: { kind: "Name", value: "access_token" } },

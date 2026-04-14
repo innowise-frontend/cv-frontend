@@ -2,6 +2,7 @@ query Login($auth: AuthInput!) {
   login(auth: $auth) {
     user {
       id
+      role
     }
     access_token
     refresh_token

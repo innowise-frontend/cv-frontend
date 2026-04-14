@@ -48,7 +48,7 @@ export const Input = forwardRef<HTMLInputElement, InputWithLabelProps>(
             value={controlledValue}
             onChange={handleChange}
             className={cn(
-              "h-12 px-3 py-3 text-base rounded-none leading-6 placeholder:text-gray-6 border-gray-5 shadow-none outline-none focus:outline-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:shadow-none dark:text-white dark:placeholder:text-gray-3",
+              "h-12 px-3 py-3 text-base leading-6 placeholder:text-gray-6 border-gray-5 shadow-none outline-none focus:outline-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:shadow-none dark:text-white dark:placeholder:text-gray-3",
               className,
               error &&
                 "border-red focus-visible:border-red dark:border-red dark:focus-visible:border-red",

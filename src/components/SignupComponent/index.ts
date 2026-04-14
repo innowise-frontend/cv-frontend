@@ -1,1 +1,0 @@
-export { SignupComponent } from "./SignupComponent";

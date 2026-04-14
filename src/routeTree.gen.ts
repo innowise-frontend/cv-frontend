@@ -9,11 +9,12 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as VerificationRouteImport } from './routes/verification'
-import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
-import { Route as AuthRouteImport } from './routes/auth'
+import { Route as PublicRouteRouteImport } from './routes/_public/route'
 import { Route as AppRouteRouteImport } from './routes/_app/route'
 import { Route as AppIndexRouteImport } from './routes/_app/index'
+import { Route as PublicVerificationRouteImport } from './routes/_public/verification'
+import { Route as PublicForgotPasswordRouteImport } from './routes/_public/forgot-password'
+import { Route as PublicAuthRouteImport } from './routes/_public/auth'
 import { Route as AppSkillsRouteImport } from './routes/_app/skills'
 import { Route as AppSettingsRouteImport } from './routes/_app/settings'
 import { Route as AppProjectsRouteImport } from './routes/_app/projects'
@@ -23,19 +24,8 @@ import { Route as AppLanguagesRouteImport } from './routes/_app/languages'
 import { Route as AppDepartmentsRouteImport } from './routes/_app/departments'
 import { Route as AppCvsRouteImport } from './routes/_app/cvs'
 
-const VerificationRoute = VerificationRouteImport.update({
-  id: '/verification',
-  path: '/verification',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
-  id: '/forgot-password',
-  path: '/forgot-password',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthRoute = AuthRouteImport.update({
-  id: '/auth',
-  path: '/auth',
+const PublicRouteRoute = PublicRouteRouteImport.update({
+  id: '/_public',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AppRouteRoute = AppRouteRouteImport.update({
@@ -46,6 +36,21 @@ const AppIndexRoute = AppIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AppRouteRoute,
+} as any)
+const PublicVerificationRoute = PublicVerificationRouteImport.update({
+  id: '/verification',
+  path: '/verification',
+  getParentRoute: () => PublicRouteRoute,
+} as any)
+const PublicForgotPasswordRoute = PublicForgotPasswordRouteImport.update({
+  id: '/forgot-password',
+  path: '/forgot-password',
+  getParentRoute: () => PublicRouteRoute,
+} as any)
+const PublicAuthRoute = PublicAuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => PublicRouteRoute,
 } as any)
 const AppSkillsRoute = AppSkillsRouteImport.update({
   id: '/skills',
@@ -90,9 +95,6 @@ const AppCvsRoute = AppCvsRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof AppIndexRoute
-  '/auth': typeof AuthRoute
-  '/forgot-password': typeof ForgotPasswordRoute
-  '/verification': typeof VerificationRoute
   '/cvs': typeof AppCvsRoute
   '/departments': typeof AppDepartmentsRoute
   '/languages': typeof AppLanguagesRoute
@@ -101,11 +103,12 @@ export interface FileRoutesByFullPath {
   '/projects': typeof AppProjectsRoute
   '/settings': typeof AppSettingsRoute
   '/skills': typeof AppSkillsRoute
+  '/auth': typeof PublicAuthRoute
+  '/forgot-password': typeof PublicForgotPasswordRoute
+  '/verification': typeof PublicVerificationRoute
 }
 export interface FileRoutesByTo {
-  '/auth': typeof AuthRoute
-  '/forgot-password': typeof ForgotPasswordRoute
-  '/verification': typeof VerificationRoute
+  '/': typeof AppIndexRoute
   '/cvs': typeof AppCvsRoute
   '/departments': typeof AppDepartmentsRoute
   '/languages': typeof AppLanguagesRoute
@@ -114,14 +117,14 @@ export interface FileRoutesByTo {
   '/projects': typeof AppProjectsRoute
   '/settings': typeof AppSettingsRoute
   '/skills': typeof AppSkillsRoute
-  '/': typeof AppIndexRoute
+  '/auth': typeof PublicAuthRoute
+  '/forgot-password': typeof PublicForgotPasswordRoute
+  '/verification': typeof PublicVerificationRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_app': typeof AppRouteRouteWithChildren
-  '/auth': typeof AuthRoute
-  '/forgot-password': typeof ForgotPasswordRoute
-  '/verification': typeof VerificationRoute
+  '/_public': typeof PublicRouteRouteWithChildren
   '/_app/cvs': typeof AppCvsRoute
   '/_app/departments': typeof AppDepartmentsRoute
   '/_app/languages': typeof AppLanguagesRoute
@@ -130,15 +133,15 @@ export interface FileRoutesById {
   '/_app/projects': typeof AppProjectsRoute
   '/_app/settings': typeof AppSettingsRoute
   '/_app/skills': typeof AppSkillsRoute
+  '/_public/auth': typeof PublicAuthRoute
+  '/_public/forgot-password': typeof PublicForgotPasswordRoute
+  '/_public/verification': typeof PublicVerificationRoute
   '/_app/': typeof AppIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/auth'
-    | '/forgot-password'
-    | '/verification'
     | '/cvs'
     | '/departments'
     | '/languages'
@@ -147,11 +150,12 @@ export interface FileRouteTypes {
     | '/projects'
     | '/settings'
     | '/skills'
+    | '/auth'
+    | '/forgot-password'
+    | '/verification'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/auth'
-    | '/forgot-password'
-    | '/verification'
+    | '/'
     | '/cvs'
     | '/departments'
     | '/languages'
@@ -160,13 +164,13 @@ export interface FileRouteTypes {
     | '/projects'
     | '/settings'
     | '/skills'
-    | '/'
+    | '/auth'
+    | '/forgot-password'
+    | '/verification'
   id:
     | '__root__'
     | '/_app'
-    | '/auth'
-    | '/forgot-password'
-    | '/verification'
+    | '/_public'
     | '/_app/cvs'
     | '/_app/departments'
     | '/_app/languages'
@@ -175,37 +179,24 @@ export interface FileRouteTypes {
     | '/_app/projects'
     | '/_app/settings'
     | '/_app/skills'
+    | '/_public/auth'
+    | '/_public/forgot-password'
+    | '/_public/verification'
     | '/_app/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   AppRouteRoute: typeof AppRouteRouteWithChildren
-  AuthRoute: typeof AuthRoute
-  ForgotPasswordRoute: typeof ForgotPasswordRoute
-  VerificationRoute: typeof VerificationRoute
+  PublicRouteRoute: typeof PublicRouteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/verification': {
-      id: '/verification'
-      path: '/verification'
-      fullPath: '/verification'
-      preLoaderRoute: typeof VerificationRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/forgot-password': {
-      id: '/forgot-password'
-      path: '/forgot-password'
-      fullPath: '/forgot-password'
-      preLoaderRoute: typeof ForgotPasswordRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth': {
-      id: '/auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthRouteImport
+    '/_public': {
+      id: '/_public'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof PublicRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_app': {
@@ -221,6 +212,27 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof AppIndexRouteImport
       parentRoute: typeof AppRouteRoute
+    }
+    '/_public/verification': {
+      id: '/_public/verification'
+      path: '/verification'
+      fullPath: '/verification'
+      preLoaderRoute: typeof PublicVerificationRouteImport
+      parentRoute: typeof PublicRouteRoute
+    }
+    '/_public/forgot-password': {
+      id: '/_public/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/forgot-password'
+      preLoaderRoute: typeof PublicForgotPasswordRouteImport
+      parentRoute: typeof PublicRouteRoute
+    }
+    '/_public/auth': {
+      id: '/_public/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof PublicAuthRouteImport
+      parentRoute: typeof PublicRouteRoute
     }
     '/_app/skills': {
       id: '/_app/skills'
@@ -309,11 +321,25 @@ const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(
   AppRouteRouteChildren,
 )
 
+interface PublicRouteRouteChildren {
+  PublicAuthRoute: typeof PublicAuthRoute
+  PublicForgotPasswordRoute: typeof PublicForgotPasswordRoute
+  PublicVerificationRoute: typeof PublicVerificationRoute
+}
+
+const PublicRouteRouteChildren: PublicRouteRouteChildren = {
+  PublicAuthRoute: PublicAuthRoute,
+  PublicForgotPasswordRoute: PublicForgotPasswordRoute,
+  PublicVerificationRoute: PublicVerificationRoute,
+}
+
+const PublicRouteRouteWithChildren = PublicRouteRoute._addFileChildren(
+  PublicRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   AppRouteRoute: AppRouteRouteWithChildren,
-  AuthRoute: AuthRoute,
-  ForgotPasswordRoute: ForgotPasswordRoute,
-  VerificationRoute: VerificationRoute,
+  PublicRouteRoute: PublicRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -2,6 +2,7 @@ mutation Signup($auth: AuthInput!) {
   signup(auth: $auth) {
     user {
       id
+      role
     }
     access_token
     refresh_token
