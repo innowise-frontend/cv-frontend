@@ -9,6 +9,8 @@ export const buttonStyles = tv({
         "bg-red text-gray-8 border-none shadow-button disabled:bg-gray-5 disabled:text-gray-7 disabled:shadow-none dark:disabled:bg-gray-3 dark:disabled:text-gray-6",
       outline:
         "border border-gray-3 bg-transparent text-gray-3 hover:bg-transparent dark:border-gray-7 dark:text-gray-7",
+      ghost:
+        "capitalize hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-muted/50 px-0",
     },
   },
   defaultVariants: {
