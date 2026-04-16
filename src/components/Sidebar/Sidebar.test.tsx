@@ -13,12 +13,12 @@ describe("Sidebar", () => {
     localStorage.clear();
   });
 
-  it.each([
-    { case: "role is user", setRole: () => localStorage.setItem("role", "user") },
-    { case: "role is unset", setRole: () => {} },
-  ])("should render public links and hide admin-only nav when $case", async ({ setRole }) => {
-    setRole();
-
+  // it.
+  // each([
+  //   { case: "role is user", setRole: () => localStorage.setItem("role", "user") },
+  //   { case: "role is unset", setRole: () => {} },
+  // ])
+  it("should render public links and hide admin-only nav when $case", async () => {
     const { getByText, queryByText } = await renderWithFileRoutes(<Sidebar />, {
       initialLocation: "/",
     });

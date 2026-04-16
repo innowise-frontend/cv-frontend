@@ -87,7 +87,6 @@ describe("Signup", () => {
 
       await waitFor(() => {
         expect(localStorage.getItem("access_token")).toBe("jwt-token");
-        expect(localStorage.getItem("role")).toBe(role);
         expect(mockNavigate).toHaveBeenCalledWith({ to: "/" });
       });
     },

@@ -18,7 +18,6 @@ export const Signup = () => {
     },
     onSuccess: (response) => {
       localStorage.setItem("access_token", response.access_token);
-      localStorage.setItem("role", response.user.role);
       navigate({ to: "/" });
     },
     onError: (error) => {

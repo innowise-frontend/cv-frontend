@@ -1,10 +1,8 @@
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_public")({
-  beforeLoad: () => {
-    const accessToken = localStorage.getItem("access_token");
-
-    if (accessToken) {
+  beforeLoad: ({ context }) => {
+    if (context.auth.isAuthenticated && !context.auth.isFirstLoad) {
       throw redirect({ to: "/" });
     }
   },
