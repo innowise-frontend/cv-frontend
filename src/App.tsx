@@ -1,5 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createRouter, RouterProvider } from "@tanstack/react-router";
+import { useEffect } from "react";
 import { AuthProvider } from "./context/AuthContext";
 import { useAuth } from "./hooks/useAuth";
 import { ErrorPage } from "./pages/ErrorPage";
@@ -37,6 +38,10 @@ declare module "@tanstack/react-router" {
 
 function InnerApp() {
   const auth = useAuth();
+
+  useEffect(() => {
+    router.invalidate();
+  }, [auth.isAuthenticated, auth.isFirstLoad]);
 
   return <RouterProvider router={router} context={{ auth }} />;
 }

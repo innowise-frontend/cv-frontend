@@ -21,9 +21,9 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     enabled: hasAccessToken,
     retry: false,
   });
-  console.log("DATAd", data);
+
   const isAdmin = data?.role === UserRole.Admin;
-  const isAuthenticated = !!data;
+  const isAuthenticated = hasAccessToken && (isFirstLoad || !!data);
 
   return (
     <AuthContext.Provider value={{ isAdmin, isAuthenticated, isFirstLoad }}>

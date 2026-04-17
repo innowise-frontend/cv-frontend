@@ -9,6 +9,7 @@ import type { GraphQLError } from "graphql";
 const mockNavigate = vi.hoisted(() => vi.fn());
 const loginMock = vi.hoisted(() => vi.fn());
 const toastError = vi.hoisted(() => vi.fn());
+const getMeMock = vi.hoisted(() => vi.fn());
 
 vi.mock("@tanstack/react-router", () => ({
   Link: ({ children, to }: { children: React.ReactNode; to: string }) => (
@@ -27,6 +28,10 @@ vi.mock("@services/auth/login", () => ({
   login: (...args: unknown[]) => loginMock(...args),
 }));
 
+vi.mock("@root/services/auth/me", () => ({
+  getMe: (...args: unknown[]) => getMeMock(...args),
+}));
+
 function renderLogin() {
   return render(
     <RenderWithQueryClient>
@@ -35,14 +40,25 @@ function renderLogin() {
   );
 }
 
+async function submitLoginForm() {
+  const user = userEvent.setup();
+  await user.type(screen.getByPlaceholderText("Email"), "user@example.com");
+  await user.type(screen.getByPlaceholderText("Password"), "secret12");
+  await user.click(screen.getByRole("button", { name: "Sign in" }));
+}
+
+const readStored = (key: string) => JSON.parse(localStorage.getItem(key) ?? "null");
+
 describe("Login", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     loginMock.mockReset();
+    getMeMock.mockReset();
+    getMeMock.mockResolvedValue({ id: "user-id", role: "USER" });
     localStorage.clear();
   });
 
-  it("should render welcome copy, the auth form, and forgot password link", () => {
+  it("renders title, form controls, and forgot-password link", () => {
     renderLogin();
 
     expect(screen.getByRole("heading", { name: "Welcome back" })).toBeInTheDocument();
@@ -53,18 +69,14 @@ describe("Login", () => {
     expect(forgot).toHaveAttribute("href", "/forgot-password");
   });
 
-  it("should store auth tokens and navigate home on successful login", async () => {
-    const user = userEvent.setup();
+  it("submits credentials, stores tokens, prefetches me, and navigates home", async () => {
     loginMock.mockResolvedValue({
       access_token: "jwt-token",
       refresh_token: "jwt-refresh-token",
     });
 
     renderLogin();
-
-    await user.type(screen.getByPlaceholderText("Email"), "user@example.com");
-    await user.type(screen.getByPlaceholderText("Password"), "secret12");
-    await user.click(screen.getByRole("button", { name: "Sign in" }));
+    await submitLoginForm();
 
     await waitFor(() => {
       expect(loginMock).toHaveBeenCalledWith({
@@ -74,14 +86,14 @@ describe("Login", () => {
     });
 
     await waitFor(() => {
-      expect(JSON.parse(localStorage.getItem("access_token") ?? "null")).toBe("jwt-token");
-      expect(JSON.parse(localStorage.getItem("refresh_token") ?? "null")).toBe("jwt-refresh-token");
+      expect(readStored("access_token")).toBe("jwt-token");
+      expect(readStored("refresh_token")).toBe("jwt-refresh-token");
+      expect(getMeMock).toHaveBeenCalledTimes(1);
       expect(mockNavigate).toHaveBeenCalledWith({ to: "/" });
     });
   });
 
-  it("should show a toast with the first GraphQL error message on ClientError", async () => {
-    const user = userEvent.setup();
+  it("shows GraphQL error message from ClientError", async () => {
     const clientError = new ClientError(
       {
         status: 400,
@@ -94,10 +106,7 @@ describe("Login", () => {
     loginMock.mockRejectedValue(clientError);
 
     renderLogin();
-
-    await user.type(screen.getByPlaceholderText("Email"), "user@example.com");
-    await user.type(screen.getByPlaceholderText("Password"), "secret12");
-    await user.click(screen.getByRole("button", { name: "Sign in" }));
+    await submitLoginForm();
 
     await waitFor(() => {
       expect(toastError).toHaveBeenCalledWith("Invalid credentials");
@@ -106,15 +115,11 @@ describe("Login", () => {
     expect(mockNavigate).not.toHaveBeenCalled();
   });
 
-  it("should show a toast with Error.message for non-GraphQL failures", async () => {
-    const user = userEvent.setup();
+  it("shows fallback error message for non-GraphQL failures", async () => {
     loginMock.mockRejectedValue(new Error("Network down"));
 
     renderLogin();
-
-    await user.type(screen.getByPlaceholderText("Email"), "user@example.com");
-    await user.type(screen.getByPlaceholderText("Password"), "secret12");
-    await user.click(screen.getByRole("button", { name: "Sign in" }));
+    await submitLoginForm();
 
     await waitFor(() => {
       expect(toastError).toHaveBeenCalledWith("Network down");

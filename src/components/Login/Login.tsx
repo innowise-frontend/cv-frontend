@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { ClientError } from "graphql-request";
 import { toast } from "sonner";
@@ -6,10 +6,12 @@ import { Button } from "@components/shared";
 import { useLocalStorage } from "@hooks/useLocalStorage";
 import { LOCAL_STORAGE_KEYS } from "@root/constants";
 import { login } from "@services/auth/login";
+import { getMe } from "@services/auth/me";
 import { AuthForm } from "../AuthForm";
 
 export const Login = () => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const [, setAccessToken] = useLocalStorage(LOCAL_STORAGE_KEYS.ACCESS_TOKEN, "");
   const [, setRefreshToken] = useLocalStorage(LOCAL_STORAGE_KEYS.REFRESH_TOKEN, "");
 
@@ -17,10 +19,16 @@ export const Login = () => {
     mutationFn: (data: { email: string; password: string }) => {
       return login({ email: data.email, password: data.password });
     },
-    onSuccess: (response) => {
+    onSuccess: async (response) => {
       setAccessToken(() => response.access_token);
       setRefreshToken(() => response.refresh_token);
-      navigate({ to: "/" });
+
+      await queryClient.fetchQuery({
+        queryKey: ["me"],
+        queryFn: getMe,
+      });
+
+      await navigate({ to: "/" });
     },
     onError: (error) => {
       const message =

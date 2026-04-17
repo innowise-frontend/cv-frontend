@@ -16,6 +16,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "allowUnreachableCode": false,
+    "types": ["node"],
     "baseUrl": "./",
     "paths": {
       "@root/*": ["src/*"],
@@ -30,6 +31,5 @@
       "@hooks/*": ["src/hooks/*"]
     }
   },
-  "include": ["src"],
-  "types": ["node"]
+  "include": ["src"]
 }

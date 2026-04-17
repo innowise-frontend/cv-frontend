@@ -3,6 +3,10 @@ import { Sidebar } from "@components/Sidebar";
 
 export const Route = createFileRoute("/_app")({
   beforeLoad: ({ context }) => {
+    if (context.auth.isFirstLoad) {
+      return;
+    }
+
     if (!context.auth.isAuthenticated) {
       throw redirect({ to: "/auth", search: { mode: "login" } });
     }

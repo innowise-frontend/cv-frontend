@@ -9,6 +9,7 @@ import type { GraphQLError } from "graphql";
 const mockNavigate = vi.hoisted(() => vi.fn());
 const signupMock = vi.hoisted(() => vi.fn());
 const toastError = vi.hoisted(() => vi.fn());
+const getMeMock = vi.hoisted(() => vi.fn());
 
 vi.mock("@tanstack/react-router", () => ({
   Link: ({ children, to }: { children: React.ReactNode; to: string }) => (
@@ -27,6 +28,10 @@ vi.mock("@services/auth/signup", () => ({
   signup: (...args: unknown[]) => signupMock(...args),
 }));
 
+vi.mock("@root/services/auth/me", () => ({
+  getMe: (...args: unknown[]) => getMeMock(...args),
+}));
+
 function renderSignup() {
   return render(
     <RenderWithQueryClient>
@@ -35,14 +40,25 @@ function renderSignup() {
   );
 }
 
+async function submitSignupForm() {
+  const user = userEvent.setup();
+  await user.type(screen.getByPlaceholderText("Email"), "new@example.com");
+  await user.type(screen.getByPlaceholderText("Password"), "secret12");
+  await user.click(screen.getByRole("button", { name: "Create account" }));
+}
+
+const readStored = (key: string) => JSON.parse(localStorage.getItem(key) ?? "null");
+
 describe("Signup", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     signupMock.mockReset();
+    getMeMock.mockReset();
+    getMeMock.mockResolvedValue({ id: "user-id", role: "USER" });
     localStorage.clear();
   });
 
-  it("should render welcome copy, the auth form, and link to login", () => {
+  it("renders title, form controls, and login switch button", () => {
     renderSignup();
 
     expect(screen.getByRole("heading", { name: "Sign up now" })).toBeInTheDocument();
@@ -51,7 +67,7 @@ describe("Signup", () => {
     expect(screen.getByRole("button", { name: "I have an account" })).toBeInTheDocument();
   });
 
-  it("should navigate to login when I have an account is clicked", async () => {
+  it("navigates to login mode when account switch button is clicked", async () => {
     const user = userEvent.setup();
     renderSignup();
 
@@ -64,19 +80,16 @@ describe("Signup", () => {
   });
 
   it.each([{ role: "admin" as const }, { role: "user" as const }])(
-    "should store token, persist role $role, and navigate home on successful signup",
+    "submits signup, stores tokens, prefetches me, and navigates home ($role)",
     async ({ role }) => {
-      const user = userEvent.setup();
       signupMock.mockResolvedValue({
         access_token: "jwt-token",
+        refresh_token: "jwt-refresh-token",
         user: { role },
       });
 
       renderSignup();
-
-      await user.type(screen.getByPlaceholderText("Email"), "new@example.com");
-      await user.type(screen.getByPlaceholderText("Password"), "secret12");
-      await user.click(screen.getByRole("button", { name: "Create account" }));
+      await submitSignupForm();
 
       await waitFor(() => {
         expect(signupMock).toHaveBeenCalledWith({
@@ -86,13 +99,15 @@ describe("Signup", () => {
       });
 
       await waitFor(() => {
-        expect(localStorage.getItem("access_token")).toBe("jwt-token");
+        expect(readStored("access_token")).toBe("jwt-token");
+        expect(readStored("refresh_token")).toBe("jwt-refresh-token");
+        expect(getMeMock).toHaveBeenCalledTimes(1);
         expect(mockNavigate).toHaveBeenCalledWith({ to: "/" });
       });
     },
   );
 
-  it("should show a toast with the first GraphQL error message on ClientError", async () => {
+  it("shows GraphQL error message from ClientError", async () => {
     const user = userEvent.setup();
     const clientError = new ClientError(
       {
@@ -107,7 +122,7 @@ describe("Signup", () => {
 
     renderSignup();
 
-    await user.type(screen.getByPlaceholderText("Email"), "taken@example.com");
+    await user.type(screen.getByPlaceholderText("Email"), "new@example.com");
     await user.type(screen.getByPlaceholderText("Password"), "secret12");
     await user.click(screen.getByRole("button", { name: "Create account" }));
 
@@ -118,15 +133,11 @@ describe("Signup", () => {
     expect(mockNavigate).not.toHaveBeenCalled();
   });
 
-  it("should show a toast with Error.message for non-GraphQL failures", async () => {
-    const user = userEvent.setup();
+  it("shows fallback error message for non-GraphQL failures", async () => {
     signupMock.mockRejectedValue(new Error("Network down"));
 
     renderSignup();
-
-    await user.type(screen.getByPlaceholderText("Email"), "new@example.com");
-    await user.type(screen.getByPlaceholderText("Password"), "secret12");
-    await user.click(screen.getByRole("button", { name: "Create account" }));
+    await submitSignupForm();
 
     await waitFor(() => {
       expect(toastError).toHaveBeenCalledWith("Network down");
