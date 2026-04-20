@@ -1,12 +1,6 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect } from "vitest";
 import { renderWithFileRoutes } from "@root/lib/testUtils";
 import { Sidebar } from "./Sidebar";
-
-const PROFILE_BLOCK_MOCK = "ProfileBlock";
-
-vi.mock("@components/shared/ProfileBlock", () => ({
-  ProfileBlock: () => <div>{PROFILE_BLOCK_MOCK}</div>,
-}));
 
 describe("Sidebar", () => {
   it("should render public links", async () => {
@@ -50,6 +44,6 @@ describe("Sidebar", () => {
       initialLocation: "/",
     });
 
-    expect(getByText(PROFILE_BLOCK_MOCK)).toBeVisible();
+    expect(getByText("Rostislav Harlanov")).toBeVisible();
   });
 });

@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 import VerticalDotsIcon from "@assets/icon/VerticalDotsIcon.svg?react";
 import {
   DropdownMenu,
@@ -6,16 +5,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@components/ui/dropdown-menu";
-
-interface DropdownItem {
-  label: string;
-  onClick: () => void;
-  icon?: ReactNode;
-}
-
-interface DropdownProps {
-  options: DropdownItem[] | [];
-}
+import { DropdownProps } from "./types";
 
 export const Dropdown = ({ options }: DropdownProps) => {
   return (

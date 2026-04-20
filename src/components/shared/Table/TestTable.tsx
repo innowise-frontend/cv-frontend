@@ -1,86 +1,13 @@
 import { Link } from "@tanstack/react-router";
 import { createColumnHelper } from "@tanstack/react-table";
 import ChevronRightIcon from "@assets/icon/ChevronRightIcon.svg?react";
+import PlusIcon from "@assets/icon/PlusIcon.svg?react";
 import { Table, TableColumnHeader } from "./Table";
+import { defaultData, Person } from "./users";
+import { Avatar } from "../Avatar/Avatar";
 import { Button } from "../Button/Button";
 import { Dropdown } from "../Dropdown/Dropdown";
-
-interface Person {
-  id: number;
-  avatar?: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  department: string;
-  position: string;
-  actions?: {
-    label: string;
-    onClick: () => void;
-  }[];
-  link: string;
-}
-
-const defaultData: Person[] = [
-  {
-    id: 1,
-    avatar: "https://picsum.photos/200/700",
-    firstName: "tanner",
-    lastName: "linsley",
-    email: "tanner@example.com",
-    department: "Engineering",
-    position: "Software Engineer",
-    actions: [
-      {
-        label: "Edit",
-        onClick: () => console.log("Edit"),
-      },
-      {
-        label: "Delete",
-        onClick: () => console.log("Delete"),
-      },
-    ],
-    link: "/people/1",
-  },
-  {
-    id: 2,
-    avatar: "https://picsum.photos/200/350",
-    firstName: "tandy",
-    lastName: "miller",
-    email: "tandy@example.com",
-    department: "Marketing",
-    position: "Marketing Manager",
-    actions: [
-      {
-        label: "Edit",
-        onClick: () => console.log("Edit"),
-      },
-      {
-        label: "Delete",
-        onClick: () => console.log("Delete"),
-      },
-    ],
-    link: "/people/2",
-  },
-  {
-    id: 3,
-    firstName: "joe",
-    lastName: "dirte",
-    email: "joe@example.com",
-    department: "Sales",
-    position: "Sales Manager",
-    actions: [
-      {
-        label: "Edit",
-        onClick: () => console.log("Edit"),
-      },
-      {
-        label: "Delete",
-        onClick: () => console.log("Delete"),
-      },
-    ],
-    link: "/people/3",
-  },
-];
+import { TableSearch } from "../TableSearch/TableSearch";
 
 const columnHelper = createColumnHelper<Person>();
 
@@ -90,14 +17,12 @@ const columns = [
   columnHelper.accessor("avatar", {
     header: () => null,
     cell: ({ row }) => {
-      return row.original.avatar ? (
-        <img
-          src={row.original.avatar}
-          alt={row.original.firstName}
-          className="w-10 h-10 rounded-full"
+      return (
+        <Avatar
+          name={row.original.firstName}
+          link={row.original.avatar}
+          className="bg-gray-5 dark:bg-gray-4"
         />
-      ) : (
-        <div className="w-10 h-10 rounded-full bg-gray-5"></div>
       );
     },
   }),
@@ -153,7 +78,17 @@ const columns = [
 export const TestTable = () => {
   return (
     <div>
-      <Table data={defaultData} columns={columns} />
+      <TableSearch
+        action={
+          isAdmin && (
+            <Button variant="default" className="font-medium text-red h-10 ml-5 dark:text-red">
+              <PlusIcon width={24} height={24} />
+              Create User
+            </Button>
+          )
+        }
+      />
+      <Table columns={columns} data={defaultData} />
     </div>
   );
 };

@@ -1,5 +1,4 @@
 import {
-  ColumnDef,
   ColumnFiltersState,
   flexRender,
   getCoreRowModel,
@@ -12,7 +11,7 @@ import {
 import { Column } from "@tanstack/react-table";
 import { useState } from "react";
 import ArrowUpIcon from "@assets/icon/ArrowUpIcon.svg?react";
-import { Button } from "@components/shared";
+import { Button, Pagination } from "@components/shared";
 import {
   Table as UITable,
   TableBody,
@@ -22,14 +21,8 @@ import {
   TableRow,
 } from "@components/ui/table";
 import { cn } from "@root/lib/utils";
+import { TableProps } from "./types";
 
-interface TableProps<TData> {
-  data: TData[];
-
-  // TanStack tables can contain columns with different accessor value types.
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  columns: ColumnDef<TData, any>[];
-}
 export const Table = <TData,>({ data, columns }: TableProps<TData>) => {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -41,6 +34,11 @@ export const Table = <TData,>({ data, columns }: TableProps<TData>) => {
       sorting,
       columnFilters,
     },
+    initialState: {
+      pagination: {
+        pageSize: 8,
+      },
+    },
     enableRowSelection: true,
     getCoreRowModel: getCoreRowModel(),
     onSortingChange: setSorting,
@@ -51,50 +49,56 @@ export const Table = <TData,>({ data, columns }: TableProps<TData>) => {
   });
 
   return (
-    <div className="space-y-4">
-      <div>
-        <UITable>
-          <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id} className="border-b-gray-5 dark:border-b-gray-3">
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id} className="font-medium">
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(header.column.columnDef.header, header.getContext())}
-                    </TableHead>
-                  );
-                })}
+    <>
+      <UITable>
+        <TableHeader>
+          {table.getHeaderGroups().map((headerGroup) => (
+            <TableRow key={headerGroup.id} className="border-b-gray-5 dark:border-b-gray-3">
+              {headerGroup.headers.map((header) => {
+                return (
+                  <TableHead key={header.id} className="font-medium">
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(header.column.columnDef.header, header.getContext())}
+                  </TableHead>
+                );
+              })}
+            </TableRow>
+          ))}
+        </TableHeader>
+        <TableBody className="font-normal">
+          {table.getRowModel().rows?.length ? (
+            table.getRowModel().rows.map((row) => (
+              <TableRow
+                key={row.id}
+                data-state={row.getIsSelected() && "selected"}
+                className="border-b-gray-5 dark:border-b-gray-3"
+              >
+                {row.getVisibleCells().map((cell) => (
+                  <TableCell key={cell.id} className="p-4 text-left">
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </TableCell>
+                ))}
               </TableRow>
-            ))}
-          </TableHeader>
-          <TableBody className="font-normal">
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                  className="border-b-gray-5 dark:border-b-gray-3"
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id} className="p-4 text-left">
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell colSpan={columns.length} className="h-24 text-center">
-                  {"No data results"}
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </UITable>
-      </div>
-    </div>
+            ))
+          ) : (
+            <TableRow>
+              <TableCell colSpan={columns.length} className="h-24 text-center">
+                {"No data results"}
+              </TableCell>
+            </TableRow>
+          )}
+        </TableBody>
+      </UITable>
+      <Pagination
+        className="justify-start fixed bottom-0"
+        pagesCount={table.getPageCount()}
+        currentPage={table.getState().pagination.pageIndex}
+        onPreviousPage={table.previousPage}
+        onNextPage={table.nextPage}
+        onPageChange={table.setPageIndex}
+      />
+    </>
   );
 };
 
@@ -107,7 +111,6 @@ interface TableColumnHeaderProps<TData, TValue> extends React.HTMLAttributes<HTM
 export const TableColumnHeader = <TData, TValue>({
   column,
   title,
-  enableSorting = false,
   className,
 }: TableColumnHeaderProps<TData, TValue>) => {
   if (!column.getCanSort()) {
@@ -118,7 +121,11 @@ export const TableColumnHeader = <TData, TValue>({
     <div className={"flex items-center space-x-2"}>
       <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
         <span className={cn(className)}>{title}</span>
-        {enableSorting && <ArrowUpIcon width={18} height={18} />}
+        <ArrowUpIcon
+          width={18}
+          height={18}
+          className={cn(column.getIsSorted() === "asc" ? "rotate-180" : "")}
+        />
       </Button>
     </div>
   );

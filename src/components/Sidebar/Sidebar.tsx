@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import LeftArrowIcon from "@assets/icon/LeftArrowIcon.svg?react";
-import { Logo } from "@root/components/Logo";
-import { Divider } from "@root/components/shared/Divider";
-import { LinkButton } from "@root/components/shared/LinkButton";
-import { ProfileBlock } from "@root/components/shared/ProfileBlock";
+import { Logo } from "@components/Logo";
+import { Divider, LinkButton, ProfileBlock } from "@components/shared";
 import getSidebarItems from "./const";
 
 export const Sidebar = () => {
@@ -11,7 +9,7 @@ export const Sidebar = () => {
 
   return (
     <div
-      className={`relative flex h-full flex-col justify-between pb-14 ${!isCollapsed && "w-50"}`}
+      className={`relative flex h-full flex-col justify-between pb-14 ${!isCollapsed && "min-w-50"}`}
     >
       <button
         type="button"
@@ -21,7 +19,7 @@ export const Sidebar = () => {
         <LeftArrowIcon />
       </button>
 
-      <div className="flex flex-col gap-3.5">
+      <div className="flex flex-col gap-3.5 ">
         <Logo collapsed={isCollapsed} />
         {getSidebarItems({ isAdmin: true }).map(
           (item) =>
@@ -39,7 +37,7 @@ export const Sidebar = () => {
         )}
       </div>
 
-      <ProfileBlock collapsed={isCollapsed} />
+      <ProfileBlock collapsed={isCollapsed} firstName="Rostislav" lastName="Harlanov" />
     </div>
   );
 };

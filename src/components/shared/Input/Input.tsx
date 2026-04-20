@@ -6,7 +6,10 @@ import { cn } from "@root/lib/utils";
 import type { InputWithLabelProps } from "./types";
 
 export const Input = forwardRef<HTMLInputElement, InputWithLabelProps>(
-  ({ label, className, value: controlledValue, onChange, type, error, ...props }, ref) => {
+  (
+    { label, className, value: controlledValue, defaultValue, onChange, type, error, ...props },
+    ref,
+  ) => {
     const generatedId = useId();
 
     const [value, setValue] = useState("");
@@ -46,6 +49,7 @@ export const Input = forwardRef<HTMLInputElement, InputWithLabelProps>(
             ref={ref}
             type={inputType}
             value={controlledValue}
+            defaultValue={defaultValue}
             onChange={handleChange}
             className={cn(
               "h-12 px-3 py-3 text-base leading-6 placeholder:text-gray-6 border-gray-5 shadow-none outline-none focus:outline-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:shadow-none dark:text-white dark:placeholder:text-gray-3",
