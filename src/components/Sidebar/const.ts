@@ -6,7 +6,7 @@ import LanguagesIcon from "@assets/icon/LanguagesIcon.svg?react";
 import SettingsIcon from "@assets/icon/SettingsIcon.svg?react";
 import TrendingUpIcon from "@assets/icon/TrendingUpIcon.svg?react";
 import UsersIcon from "@assets/icon/UsersIcon.svg?react";
-import { ROUTES } from "@root/constants/routes";
+import { ROUTES } from "@root/constants";
 
 interface GetSidebarItemsProps {
   isAdmin?: boolean;

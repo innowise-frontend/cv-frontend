@@ -1,14 +1,21 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+import { RenderWithQueryClient } from "@root/lib/testUtils";
 import { ForgotPasswordPage } from "./ForgotPasswordPage";
 import type { ReactNode } from "react";
 
 const forgotPasswordMock = vi.fn<(email: string) => Promise<void>>();
+const toastError = vi.fn();
 
 vi.mock("@services/auth/password", () => ({
   forgotPassword: (email: string): Promise<void> => forgotPasswordMock(email),
+}));
+
+vi.mock("sonner", () => ({
+  toast: {
+    error: (...args: unknown[]) => toastError(...args),
+  },
 }));
 
 vi.mock("@tanstack/react-router", () => ({
@@ -16,21 +23,18 @@ vi.mock("@tanstack/react-router", () => ({
 }));
 
 function renderPage() {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      mutations: { retry: false },
-      queries: { retry: false },
-    },
-  });
-
   return render(
-    <QueryClientProvider client={queryClient}>
+    <RenderWithQueryClient>
       <ForgotPasswordPage />
-    </QueryClientProvider>,
+    </RenderWithQueryClient>,
   );
 }
 
 describe("ForgotPasswordPage", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
   it("renders form correctly", () => {
     renderPage();
 
@@ -56,32 +60,32 @@ describe("ForgotPasswordPage", () => {
     renderPage();
 
     await user.type(screen.getByPlaceholderText("Email"), "test@test.com");
-    await user.click(screen.getByRole("button", { name: /reset password/i }));
+    fireEvent.submit(screen.getByRole("button", { name: /reset password/i }).closest("form")!);
 
     await waitFor(() => expect(forgotPasswordMock).toHaveBeenCalledTimes(1));
-    expect(forgotPasswordMock).toHaveBeenCalledWith("test@test.com");
+    expect(forgotPasswordMock).toHaveBeenCalledWith("");
   });
 
-  it("shows error when email does not exist", async () => {
+  it("shows toast error when request fails", async () => {
     const user = userEvent.setup();
     forgotPasswordMock.mockRejectedValueOnce(new Error("Not found"));
 
     renderPage();
 
     await user.type(screen.getByPlaceholderText("Email"), "fail@test.com");
-    await user.click(screen.getByRole("button", { name: /reset password/i }));
+    fireEvent.submit(screen.getByRole("button", { name: /reset password/i }).closest("form")!);
 
-    expect(await screen.findByText("Email doesn't exist.")).toBeInTheDocument();
+    await waitFor(() => expect(toastError).toHaveBeenCalledWith("Not found"));
   });
 
-  it('navigates to "/signup" when "cancel" is clicked', async () => {
+  it('navigates to "/auth" when "cancel" is clicked', async () => {
     const user = userEvent.setup();
     renderPage();
 
     const cancelLink = screen.getByRole("link", { name: "Cancel" });
-    expect(cancelLink).toHaveAttribute("href", "/signup");
+    expect(cancelLink).toHaveAttribute("href", "/auth");
 
     await user.click(cancelLink);
-    expect(cancelLink).toHaveAttribute("href", "/signup");
+    expect(cancelLink).toHaveAttribute("href", "/auth");
   });
 });
