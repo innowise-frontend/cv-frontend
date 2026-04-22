@@ -1,0 +1,76 @@
+{
+  "theme": {
+    "device": "Sistema",
+    "light": "Chiaro",
+    "dark": "Scuro"
+  },
+  "page": {
+    "home": {
+      "hello": "Ciao!"
+    },
+    "setting": {
+      "theme": "Tema",
+      "language": "Lingua",
+      "changePassword": "Cambia password",
+      "changePasswordButton": "Cambia",
+      "changePasswordSuccess": "Password changes",
+      "changePasswordError": "Error! Password doesnt change ",
+      "oldPassword": "Password",
+      "newPassword": "Nuova password",
+      "confirmPassword": "Conferma password",
+      "selectThemePlaceholder": "Seleziona un tema",
+      "selectLanguagePlaceholder": "Seleziona una lingua",
+      "togglePasswordVisibility": "Mostra/nascondi password",
+      "changeNewPasswordError": "La password deve essere di almeno 6 caratteri e contenere lettere e numeri",
+      "changeConfirmPasswordErrorTitle": "Le password non coincidono",
+      "validation": {
+        "currentPasswordRequired": "La password attuale è obbligatoria",
+        "passwordMinLength": "La password deve essere di almeno 6 caratteri",
+        "passwordsDoNotMatch": "Le password non coincidono",
+        "newPasswordMustDiffer": "La nuova password deve essere diversa da quella attuale"
+      }
+    },
+    "error": {
+      "oops": "Ops",
+      "goBack": "Indietro",
+      "defaultErrorMessage": "Error! Password doesnt change ",
+      "defaultNotFoundMessage": "Hmm… questa non sembra essere la pagina che stavi cercando. \n Ti riportiamo sulla strada giusta."
+    },
+    "forgotPassword": {
+      "title": "Password dimenticata",
+      "subtitle": "Ti invieremo un'email con ulteriori istruzioni",
+      "emailLabel": "Email",
+      "resetPassword": "Reimposta password",
+      "cancel": "Annulla",
+      "emailDoesNotExist": "L'email non esiste."
+    },
+    "login": {
+      "title": "Accedi"
+    },
+    "signup": {
+      "title": "Registrati"
+    },
+    "resetPassword": {
+      "title": "Reimposta password",
+      "subtitle": "Inserisci una nuova password e confermala qui sotto.",
+      "newPasswordLabel": "Nuova password",
+      "confirmPasswordLabel": "Conferma password",
+      "submit": "Invia",
+      "goSignIn": "Vai al login",
+      "validation": {
+        "passwordMinLength": "La password deve essere di almeno 6 caratteri",
+        "passwordsDoNotMatch": "Le password non coincidono"
+      }
+    },
+    "sidebar": {
+      "employees": "Dipendenti",
+      "skills": "Competenze",
+      "languages": "Lingue",
+      "settings": "Impostazioni",
+      "cvs": "CV",
+      "departments": "Reparti",
+      "positions": "Posizioni",
+      "projects": "Progetti"
+    }
+  }
+}

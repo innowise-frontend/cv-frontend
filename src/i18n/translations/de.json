@@ -1,0 +1,76 @@
+{
+  "theme": {
+    "device": "System",
+    "light": "Hell",
+    "dark": "Dunkel"
+  },
+  "page": {
+    "home": {
+      "hello": "Hallo!"
+    },
+    "setting": {
+      "theme": "Thema",
+      "language": "Sprache",
+      "changePassword": "Passwort ändern",
+      "changePasswordButton": "Ändern",
+      "changePasswordSuccess": "Password changes",
+      "changePasswordError": "Error! Password doesnt change ",
+      "oldPassword": "Passwort",
+      "newPassword": "Neues Passwort",
+      "confirmPassword": "Passwort bestätigen",
+      "selectThemePlaceholder": "Thema auswählen",
+      "selectLanguagePlaceholder": "Sprache auswählen",
+      "togglePasswordVisibility": "Passwortsichtbarkeit umschalten",
+      "changeNewPasswordError": "Das Passwort muss mindestens 8 Zeichen lang sein und Buchstaben sowie Zahlen enthalten",
+      "changeConfirmPasswordErrorTitle": "Passwörter stimmen nicht überein",
+      "validation": {
+        "currentPasswordRequired": "Aktuelles Passwort ist erforderlich",
+        "passwordMinLength": "Das Passwort muss mindestens 6 Zeichen lang sein",
+        "passwordsDoNotMatch": "Passwörter stimmen nicht überein",
+        "newPasswordMustDiffer": "Das neue Passwort muss sich vom aktuellen Passwort unterscheiden"
+      }
+    },
+    "error": {
+      "oops": "Ups",
+      "goBack": "Zurück",
+      "defaultErrorMessage": "Error! Password doesnt change ",
+      "defaultNotFoundMessage": "Hm… diese Seite scheint nicht die zu sein, nach der Sie gesucht haben. \n Wir bringen Sie wieder auf den richtigen Weg."
+    },
+    "forgotPassword": {
+      "title": "Passwort vergessen",
+      "subtitle": "Wir senden Ihnen eine E-Mail mit weiteren Anweisungen",
+      "emailLabel": "E-Mail",
+      "resetPassword": "Passwort zurücksetzen",
+      "cancel": "Abbrechen",
+      "emailDoesNotExist": "E-Mail existiert nicht."
+    },
+    "login": {
+      "title": "Anmelden"
+    },
+    "signup": {
+      "title": "Registrieren"
+    },
+    "resetPassword": {
+      "title": "Passwort zurücksetzen",
+      "subtitle": "Geben Sie ein neues Passwort ein und bestätigen Sie es unten.",
+      "newPasswordLabel": "Neues Passwort",
+      "confirmPasswordLabel": "Passwort bestätigen",
+      "submit": "Senden",
+      "goSignIn": "Zur Anmeldung",
+      "validation": {
+        "passwordMinLength": "Das Passwort muss mindestens 6 Zeichen lang sein",
+        "passwordsDoNotMatch": "Passwörter stimmen nicht überein"
+      }
+    },
+    "sidebar": {
+      "employees": "Mitarbeiter",
+      "skills": "Fähigkeiten",
+      "languages": "Sprachen",
+      "settings": "Einstellungen",
+      "cvs": "Lebensläufe",
+      "departments": "Abteilungen",
+      "positions": "Positionen",
+      "projects": "Projekte"
+    }
+  }
+}

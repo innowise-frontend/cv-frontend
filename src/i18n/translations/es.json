@@ -1,0 +1,76 @@
+{
+  "theme": {
+    "device": "Sistema",
+    "light": "Claro",
+    "dark": "Oscuro"
+  },
+  "page": {
+    "home": {
+      "hello": "Hola!"
+    },
+    "setting": {
+      "theme": "Tema",
+      "language": "Idioma",
+      "changePassword": "Cambiar contraseña",
+      "changePasswordButton": "Cambiar",
+      "changePasswordSuccess": "Password changes",
+      "changePasswordError": "Error! Password doesnt change ",
+      "oldPassword": "Contraseña",
+      "newPassword": "Nueva contraseña",
+      "confirmPassword": "Confirmar contraseña",
+      "selectThemePlaceholder": "Selecciona un tema",
+      "selectLanguagePlaceholder": "Selecciona un idioma",
+      "togglePasswordVisibility": "Mostrar/ocultar contraseña",
+      "changeNewPasswordError": "La contraseña debe tener al menos 8 caracteres y contener letras y números",
+      "changeConfirmPasswordErrorTitle": "Las contraseñas no coinciden",
+      "validation": {
+        "currentPasswordRequired": "La contraseña actual es obligatoria",
+        "passwordMinLength": "La contraseña debe tener al menos 6 caracteres",
+        "passwordsDoNotMatch": "Las contraseñas no coinciden",
+        "newPasswordMustDiffer": "La nueva contraseña debe ser diferente de la actual"
+      }
+    },
+    "error": {
+      "oops": "Ups",
+      "goBack": "Volver",
+      "defaultErrorMessage": "Error! Password doesnt change ",
+      "defaultNotFoundMessage": "Hmm… parece que esta no es la página que buscabas. \n Vamos a devolverte al camino correcto."
+    },
+    "forgotPassword": {
+      "title": "¿Olvidaste tu contraseña?",
+      "subtitle": "Te enviaremos un correo con más instrucciones",
+      "emailLabel": "Correo",
+      "resetPassword": "Restablecer contraseña",
+      "cancel": "Cancelar",
+      "emailDoesNotExist": "El correo no existe."
+    },
+    "login": {
+      "title": "Iniciar sesión"
+    },
+    "signup": {
+      "title": "Registrarse"
+    },
+    "resetPassword": {
+      "title": "Restablecer contraseña",
+      "subtitle": "Introduce una nueva contraseña y confírmala abajo.",
+      "newPasswordLabel": "Nueva contraseña",
+      "confirmPasswordLabel": "Confirmar contraseña",
+      "submit": "Enviar",
+      "goSignIn": "Ir a iniciar sesión",
+      "validation": {
+        "passwordMinLength": "La contraseña debe tener al menos 6 caracteres",
+        "passwordsDoNotMatch": "Las contraseñas no coinciden"
+      }
+    },
+    "sidebar": {
+      "employees": "Empleados",
+      "skills": "Habilidades",
+      "languages": "Idiomas",
+      "settings": "Ajustes",
+      "cvs": "CV",
+      "departments": "Departamentos",
+      "positions": "Puestos",
+      "projects": "Proyectos"
+    }
+  }
+}

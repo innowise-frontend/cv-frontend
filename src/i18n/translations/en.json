@@ -1,0 +1,76 @@
+{
+  "theme": {
+    "device": "Device system",
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "page": {
+    "home": {
+      "hello": "Hello !"
+    },
+    "setting": {
+      "theme": "Theme",
+      "language": "Language",
+      "changePassword": "Change password",
+      "changePasswordButton": "Change",
+      "changePasswordSuccess": "Password changes",
+      "changePasswordError": "Error! Password doesnt change ",
+      "oldPassword": "Password",
+      "newPassword": "New Password",
+      "confirmPassword": "Confirm Password",
+      "selectThemePlaceholder": "Select a theme",
+      "selectLanguagePlaceholder": "Select a language",
+      "togglePasswordVisibility": "Toggle password visibility",
+      "changeNewPasswordError": "Password must be at least 8 characters and contain letters and numbers",
+      "changeConfirmPasswordErrorTitle": "Passwords do not match",
+      "validation": {
+        "currentPasswordRequired": "Current password is required",
+        "passwordMinLength": "Password must be at least 6 characters long",
+        "passwordsDoNotMatch": "Passwords don't match",
+        "newPasswordMustDiffer": "New password must differ from current password"
+      }
+    },
+    "error": {
+      "oops": "Oops",
+      "goBack": "Go back",
+      "defaultErrorMessage": "Error! Password doesnt change ",
+      "defaultNotFoundMessage": "Hmm… this doesn’t seem to be the page you were looking for. \n Let’s get you back on track."
+    },
+    "forgotPassword": {
+      "title": "Forgot password",
+      "subtitle": "We will send you an email with further instructions",
+      "emailLabel": "Email",
+      "resetPassword": "Reset password",
+      "cancel": "Cancel",
+      "emailDoesNotExist": "Email doesn't exist."
+    },
+    "login": {
+      "title": "Login"
+    },
+    "signup": {
+      "title": "Sign up"
+    },
+    "resetPassword": {
+      "title": "Reset password",
+      "subtitle": "Enter a new password and confirm it below.",
+      "newPasswordLabel": "New password",
+      "confirmPasswordLabel": "Confirm password",
+      "submit": "Submit",
+      "goSignIn": "Go sign in",
+      "validation": {
+        "passwordMinLength": "Password must be at least 6 characters long",
+        "passwordsDoNotMatch": "Passwords don't match"
+      }
+    },
+    "sidebar": {
+      "employees": "Employees",
+      "skills": "Skills",
+      "languages": "Languages",
+      "settings": "Settings",
+      "cvs": "CVs",
+      "departments": "Departments",
+      "positions": "Positions",
+      "projects": "Projects"
+    }
+  }
+}

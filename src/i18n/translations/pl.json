@@ -1,0 +1,76 @@
+{
+  "theme": {
+    "device": "Systemowy",
+    "light": "Jasny",
+    "dark": "Ciemny"
+  },
+  "page": {
+    "home": {
+      "hello": "Cześć !"
+    },
+    "setting": {
+      "theme": "Motyw",
+      "language": "Język",
+      "changePassword": "Zmień hasło",
+      "changePasswordButton": "Zmień",
+      "changePasswordSuccess": "Password changes",
+      "changePasswordError": "Error! Password doesnt change ",
+      "oldPassword": "Hasło",
+      "newPassword": "Nowe hasło",
+      "confirmPassword": "Potwierdź hasło",
+      "selectThemePlaceholder": "Wybierz motyw",
+      "selectLanguagePlaceholder": "Wybierz język",
+      "togglePasswordVisibility": "Pokaż/ukryj hasło",
+      "changeNewPasswordError": "Hasło musi mieć co najmniej 6 znaków i zawierać litery oraz cyfry",
+      "changeConfirmPasswordErrorTitle": "Hasła nie są zgodne",
+      "validation": {
+        "currentPasswordRequired": "Aktualne hasło jest wymagane",
+        "passwordMinLength": "Hasło musi mieć co najmniej 6 znaków",
+        "passwordsDoNotMatch": "Hasła nie są zgodne",
+        "newPasswordMustDiffer": "Nowe hasło musi różnić się od aktualnego"
+      }
+    },
+    "error": {
+      "oops": "Ups",
+      "goBack": "Wstecz",
+      "defaultErrorMessage": "Error! Password doesnt change ",
+      "defaultNotFoundMessage": "Hmm… wygląda na to, że to nie jest strona, której szukasz. \n Pomóżmy Ci wrócić na właściwą ścieżkę."
+    },
+    "forgotPassword": {
+      "title": "Nie pamiętasz hasła",
+      "subtitle": "Wyślemy Ci e-mail z dalszymi instrukcjami",
+      "emailLabel": "E-mail",
+      "resetPassword": "Zresetuj hasło",
+      "cancel": "Anuluj",
+      "emailDoesNotExist": "Taki e-mail nie istnieje."
+    },
+    "login": {
+      "title": "Logowanie"
+    },
+    "signup": {
+      "title": "Rejestracja"
+    },
+    "resetPassword": {
+      "title": "Resetowanie hasła",
+      "subtitle": "Wprowadź nowe hasło i potwierdź je poniżej.",
+      "newPasswordLabel": "Nowe hasło",
+      "confirmPasswordLabel": "Potwierdź hasło",
+      "submit": "Wyślij",
+      "goSignIn": "Przejdź do logowania",
+      "validation": {
+        "passwordMinLength": "Hasło musi mieć co najmniej 6 znaków",
+        "passwordsDoNotMatch": "Hasła nie są zgodne"
+      }
+    },
+    "sidebar": {
+      "employees": "Pracownicy",
+      "skills": "Umiejętności",
+      "languages": "Języki",
+      "settings": "Ustawienia",
+      "cvs": "CV",
+      "departments": "Działy",
+      "positions": "Stanowiska",
+      "projects": "Projekty"
+    }
+  }
+}

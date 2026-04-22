@@ -91,8 +91,7 @@ describe("Table", () => {
     expect(screen.queryByText("User 1")).not.toBeInTheDocument();
   });
 
-  it("should call onChangeViewOption when view option is selected", async () => {
-    const user = userEvent.setup();
+  it("does not render view option select (no combobox)", async () => {
     const onChangeViewOption = vi.fn();
 
     render(
@@ -104,10 +103,7 @@ describe("Table", () => {
       />,
     );
 
-    await user.click(screen.getByRole("combobox"));
-    await user.click(await screen.findByRole("option", { name: "10" }));
-
-    expect(onChangeViewOption).toHaveBeenCalledTimes(1);
-    expect(onChangeViewOption).toHaveBeenCalledWith(10);
+    expect(screen.queryByRole("combobox")).not.toBeInTheDocument();
+    expect(onChangeViewOption).not.toHaveBeenCalled();
   });
 });

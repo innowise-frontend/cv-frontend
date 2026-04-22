@@ -19,7 +19,16 @@ vi.mock("sonner", () => ({
 }));
 
 vi.mock("@tanstack/react-router", () => ({
-  Link: ({ to, children }: { to: string; children: ReactNode }) => <a href={to}>{children}</a>,
+  Link: ({ to, children }: { to: string; children: ReactNode }) => (
+    <a
+      href={to}
+      onClick={(e) => {
+        e.preventDefault();
+      }}
+    >
+      {children}
+    </a>
+  ),
 }));
 
 function renderPage() {
@@ -75,7 +84,7 @@ describe("ForgotPasswordPage", () => {
     await user.type(screen.getByPlaceholderText("Email"), "fail@test.com");
     fireEvent.submit(screen.getByRole("button", { name: /reset password/i }).closest("form")!);
 
-    await waitFor(() => expect(toastError).toHaveBeenCalledWith("Not found"));
+    await waitFor(() => expect(toastError).toHaveBeenCalledWith("Email doesn't exist."));
   });
 
   it('navigates to "/auth" when "cancel" is clicked', async () => {

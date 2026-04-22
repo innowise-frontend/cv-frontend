@@ -1,4 +1,5 @@
 import { useRouter } from "@tanstack/react-router";
+import { useTranslation } from "react-i18next";
 import ErrorIcon from "@assets/icon/ErrorIcon.svg?react";
 import { Button } from "@components/shared";
 
@@ -8,6 +9,7 @@ interface ErrorPageProps {
 
 export const ErrorPage = ({ error }: ErrorPageProps) => {
   const { history } = useRouter();
+  const { t } = useTranslation();
 
   const handleGoBack = () => {
     history.back();
@@ -17,10 +19,10 @@ export const ErrorPage = ({ error }: ErrorPageProps) => {
     <div className="w-full h-screen flex items-center justify-center ">
       <div className="flex w-140 flex-col items-center justify-center gap-6 text-gray dark:text-gray-8">
         <ErrorIcon />
-        <p className="text-4xl">Oops</p>
+        <p className="text-4xl">{t("page.error.oops")}</p>
         <p className="whitespace-pre-line">{error}</p>
         <Button variant="filled" className="w-55" onClick={handleGoBack}>
-          GO BACK
+          {t("page.error.goBack")}
         </Button>
       </div>
     </div>
