@@ -102,8 +102,14 @@ describe("Signup", () => {
         expect(readStored("access_token")).toBe("jwt-token");
         expect(readStored("refresh_token")).toBe("jwt-refresh-token");
         expect(getMeMock).toHaveBeenCalledTimes(1);
-        expect(mockNavigate).toHaveBeenCalledWith({ to: "/" });
+        expect(mockNavigate).toHaveBeenCalledWith({
+          to: "/",
+          search: expect.any(Function),
+        });
       });
+
+      const [navigateArg] = mockNavigate.mock.calls[0] as [{ search: (prev: object) => object }];
+      expect(navigateArg.search({})).toEqual({ search: undefined });
     },
   );
 

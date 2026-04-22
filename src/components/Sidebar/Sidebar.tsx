@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import LeftArrowIcon from "@assets/icon/LeftArrowIcon.svg?react";
 import { Logo } from "@components/Logo";
 import { Divider, LinkButton, ProfileBlock } from "@components/shared";
+import { useAuth } from "@root/hooks/useAuth";
 import getSidebarItems from "./const";
 
 export const Sidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
-  // const { isAdmin } = useAuth();
+  const { isAdmin } = useAuth();
 
   return (
     <div
@@ -22,7 +23,7 @@ export const Sidebar = () => {
 
       <div className="flex flex-col gap-3.5 ">
         <Logo collapsed={isCollapsed} />
-        {getSidebarItems({ isAdmin: false }).map(
+        {getSidebarItems({ isAdmin: isAdmin }).map(
           (item) =>
             item.visible && (
               <React.Fragment key={item.title}>

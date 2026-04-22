@@ -13,3 +13,4 @@ export { Dropdown } from "./Dropdown/Dropdown";
 export { Pagination } from "./Pagination/Pagination";
 export { SearchInput } from "./SearchInput/SearchInput";
 export { Avatar } from "./Avatar/Avatar";
+export { Select } from "./Select/Select";

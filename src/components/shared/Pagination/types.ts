@@ -5,4 +5,9 @@ export interface PaginationProps {
   onNextPage: (page: number) => void;
   onPageChange: (page: number) => void;
   className?: string;
+  viewOptions: {
+    label: string;
+    value: number;
+  }[];
+  onChangeViewOption: (value: number) => void;
 }

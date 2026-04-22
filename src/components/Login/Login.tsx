@@ -28,7 +28,7 @@ export const Login = () => {
         queryFn: getMe,
       });
 
-      await navigate({ to: "/" });
+      await navigate({ to: "/", search: (prev) => ({ ...prev, search: undefined }) });
     },
     onError: (error) => {
       const message =

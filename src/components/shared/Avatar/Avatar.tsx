@@ -1,10 +1,5 @@
 import { cn } from "@root/lib/utils";
-
-interface AvatarProps {
-  name: string;
-  link?: string;
-  className?: string;
-}
+import { AvatarProps } from "./types";
 
 export const Avatar = ({ name, link, className }: AvatarProps) => {
   return link ? (

@@ -482,6 +482,33 @@ export type MutationVerifyMailArgs = {
   mail: VerifyMailInput;
 };
 
+export type PaginatedLanguages = {
+  __typename?: "PaginatedLanguages";
+  items: Array<Language>;
+  limit: Scalars["Int"]["output"];
+  page: Scalars["Int"]["output"];
+  total: Scalars["Int"]["output"];
+  total_pages: Scalars["Int"]["output"];
+};
+
+export type PaginatedSkills = {
+  __typename?: "PaginatedSkills";
+  items: Array<Skill>;
+  limit: Scalars["Int"]["output"];
+  page: Scalars["Int"]["output"];
+  total: Scalars["Int"]["output"];
+  total_pages: Scalars["Int"]["output"];
+};
+
+export type PaginatedUsers = {
+  __typename?: "PaginatedUsers";
+  items: Array<User>;
+  limit: Scalars["Int"]["output"];
+  page: Scalars["Int"]["output"];
+  total: Scalars["Int"]["output"];
+  total_pages: Scalars["Int"]["output"];
+};
+
 export type Position = {
   __typename?: "Position";
   created_at: Scalars["String"]["output"];
@@ -503,9 +530,11 @@ export type Profile = {
   __typename?: "Profile";
   avatar?: Maybe<Scalars["String"]["output"]>;
   created_at: Scalars["String"]["output"];
+  email?: Maybe<Scalars["String"]["output"]>;
   first_name?: Maybe<Scalars["String"]["output"]>;
   full_name?: Maybe<Scalars["String"]["output"]>;
   id: Scalars["ID"]["output"];
+  is_verified?: Maybe<Scalars["Boolean"]["output"]>;
   languages: Array<LanguageProficiency>;
   last_name?: Maybe<Scalars["String"]["output"]>;
   role?: Maybe<UserRole>;
@@ -530,7 +559,7 @@ export type Query = {
   cv: Cv;
   cvs: Array<Cv>;
   departments: Array<Department>;
-  languages: Array<Maybe<Language>>;
+  languages: PaginatedLanguages;
   me: Profile;
   position: Position;
   positions: Array<Position>;
@@ -538,13 +567,17 @@ export type Query = {
   project: Project;
   projects: Array<Project>;
   skillCategories: Array<SkillCategory>;
-  skills: Array<Skill>;
+  skills: PaginatedSkills;
   user: User;
-  users: Array<User>;
+  users: PaginatedUsers;
 };
 
 export type QueryCvArgs = {
   cvId: Scalars["ID"]["input"];
+};
+
+export type QueryLanguagesArgs = {
+  params?: InputMaybe<SearchPaginationInput>;
 };
 
 export type QueryPositionArgs = {
@@ -559,8 +592,16 @@ export type QueryProjectArgs = {
   projectId: Scalars["ID"]["input"];
 };
 
+export type QuerySkillsArgs = {
+  params?: InputMaybe<SearchPaginationInput>;
+};
+
 export type QueryUserArgs = {
   userId: Scalars["ID"]["input"];
+};
+
+export type QueryUsersArgs = {
+  params?: InputMaybe<SearchPaginationInput>;
 };
 
 export type RemoveCvProjectInput = {
@@ -571,6 +612,13 @@ export type RemoveCvProjectInput = {
 export type ResetPasswordInput = {
   confirmPassword: Scalars["String"]["input"];
   newPassword: Scalars["String"]["input"];
+};
+
+export type SearchPaginationInput = {
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  page?: InputMaybe<Scalars["Int"]["input"]>;
+  search?: InputMaybe<Scalars["String"]["input"]>;
+  sort_order?: InputMaybe<Scalars["String"]["input"]>;
 };
 
 export type Skill = {

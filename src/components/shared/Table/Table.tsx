@@ -1,15 +1,10 @@
 import {
-  ColumnFiltersState,
   flexRender,
   getCoreRowModel,
-  getFilteredRowModel,
   getPaginationRowModel,
-  getSortedRowModel,
-  SortingState,
   useReactTable,
 } from "@tanstack/react-table";
 import { Column } from "@tanstack/react-table";
-import { useState } from "react";
 import ArrowUpIcon from "@assets/icon/ArrowUpIcon.svg?react";
 import { Button, Pagination } from "@components/shared";
 import {
@@ -23,17 +18,16 @@ import {
 import { cn } from "@root/lib/utils";
 import { TableProps } from "./types";
 
-export const Table = <TData,>({ data, columns }: TableProps<TData>) => {
-  const [sorting, setSorting] = useState<SortingState>([]);
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+export const Table = <TData,>({
+  data,
+  columns,
+  viewOptions,
+  onChangeViewOption,
+}: TableProps<TData>) => {
   // eslint-disable-next-line react-hooks/incompatible-library
   const table = useReactTable({
     data,
     columns,
-    state: {
-      sorting,
-      columnFilters,
-    },
     initialState: {
       pagination: {
         pageSize: 8,
@@ -41,11 +35,7 @@ export const Table = <TData,>({ data, columns }: TableProps<TData>) => {
     },
     enableRowSelection: true,
     getCoreRowModel: getCoreRowModel(),
-    onSortingChange: setSorting,
-    getSortedRowModel: getSortedRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    onColumnFiltersChange: setColumnFilters,
   });
 
   return (
@@ -97,6 +87,8 @@ export const Table = <TData,>({ data, columns }: TableProps<TData>) => {
         onPreviousPage={table.previousPage}
         onNextPage={table.nextPage}
         onPageChange={table.setPageIndex}
+        viewOptions={viewOptions}
+        onChangeViewOption={onChangeViewOption}
       />
     </>
   );
