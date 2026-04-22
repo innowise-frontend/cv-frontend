@@ -24,8 +24,8 @@ export const Signup = () => {
       });
     },
     onSuccess: async (response) => {
-      setAccessToken(response.access_token);
-      setRefreshToken(response.refresh_token);
+      setAccessToken(() => response.access_token);
+      setRefreshToken(() => response.refresh_token);
 
       await queryClient.fetchQuery({
         queryKey: ["me"],

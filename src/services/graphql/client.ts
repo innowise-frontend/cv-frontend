@@ -10,39 +10,8 @@ export const graphqlClient = new GraphQLClient(url, {
   },
 });
 
-// const AUTH_ERROR_CODES = new Set(["UNAUTHENTICATED", "FORBIDDEN", "FORBIDDEN_RESOURCE"]);
-
-// const hasAuthGraphqlError = (error: ClientError) =>
-//   error.response.errors?.some((graphqlError) => {
-//     const code = graphqlError.extensions?.code;
-//     const message = graphqlError.message?.toLowerCase();
-
-//     return (
-//       (typeof code === "string" && AUTH_ERROR_CODES.has(code)) ||
-//       message?.includes("unauthorized") ||
-//       message?.includes("expired") ||
-//       message?.includes("invalid token")
-//     );
-//   });
-
 const getAuthHeader = (token: string | null): Record<string, string> | undefined =>
   token ? { Authorization: `Bearer ${token}` } : undefined;
-
-// const getTokenFromStorage = (key: string): string | null => {
-//   const value = localStorage.getItem(key);
-
-//   if (!value) {
-//     return null;
-//   }
-
-//   try {
-//     const parsedValue = JSON.parse(value);
-
-//     return typeof parsedValue === "string" ? parsedValue : value;
-//   } catch {
-//     return value;
-//   }
-// };
 
 export async function requestWithAuth<TData, TVariables extends object>(
   document: RequestDocument,
@@ -70,8 +39,8 @@ export async function requestWithAuth<TData, TVariables extends object>(
       const newToken = response.updateToken.access_token;
       const newRefreshToken = response.updateToken.refresh_token;
 
-      localStorage.setItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN, newToken);
-      localStorage.setItem(LOCAL_STORAGE_KEYS.REFRESH_TOKEN, newRefreshToken);
+      localStorage.setItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN, JSON.stringify(newToken));
+      localStorage.setItem(LOCAL_STORAGE_KEYS.REFRESH_TOKEN, JSON.stringify(newRefreshToken));
 
       return await graphqlClient.request<TData>(document, variables, getAuthHeader(newToken));
     }
