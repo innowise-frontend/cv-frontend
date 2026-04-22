@@ -1,5 +1,5 @@
 import { Mastery, Proficiency } from "@root/services/graphql/__generated__/graphql";
-import { createStylesMap } from "./progressLevelStyles";
+import { createStylesMap } from "./progressLevelUtils";
 
 export const MASTERY_ORDER: readonly Mastery[] = [
   Mastery.Novice,

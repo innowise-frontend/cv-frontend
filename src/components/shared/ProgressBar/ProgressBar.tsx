@@ -1,7 +1,7 @@
 import { Progress as ProgressPrimitive } from "@base-ui/react/progress";
 import { ProgressIndicator, ProgressTrack } from "@root/components/ui/progress";
 import { cn } from "@root/lib/utils";
-import { getMasteryBarStyles, getProficiencyBarStyles } from "./progressLevelStyles";
+import { getMasteryBarStyles, getProficiencyBarStyles } from "./progressLevelUtils";
 import { ProgressBarProps } from "./types";
 
 export function ProgressBar(props: ProgressBarProps) {
