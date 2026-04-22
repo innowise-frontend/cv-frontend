@@ -14,3 +14,5 @@ export { Pagination } from "./Pagination/Pagination";
 export { SearchInput } from "./SearchInput/SearchInput";
 export { Avatar } from "./Avatar/Avatar";
 export { Select } from "./Select/Select";
+export { ProgressBar } from "./ProgressBar/ProgressBar";
+export { CodeInput } from "./CodeInput/CodeInput";

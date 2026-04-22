@@ -2,7 +2,7 @@ export const ROUTES = {
   ROOT: "/",
   LOGIN: "/login",
   SIGNUP: "/signup",
-  VERIFICATION: "/verification",
+  VERIFY_EMAIL: "/verify-email",
   FORGOT_PASSWORD: "/forgot-password",
   CVS: "/cvs",
   DEPARTMENTS: "/departments",
@@ -13,3 +13,5 @@ export const ROUTES = {
   SETTINGS: "/settings",
   SKILLS: "/skills",
 };
+
+export type RouteKeys = keyof typeof ROUTES;

@@ -5,3 +5,7 @@ mutation ForgotPassword($auth: ForgotPasswordInput!) {
 mutation ResetPassword($auth: ResetPasswordInput!) {
   resetPassword(auth: $auth)
 }
+
+mutation verifyMail($otp: String!) {
+  verifyMail(mail: { otp: $otp })
+}
