@@ -1,6 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
+import { ClientError } from "graphql-request";
 import { useForm, useWatch } from "react-hook-form";
+import { toast } from "sonner";
 import { Button, Input } from "@components/shared";
 import { forgotPassword } from "@services/auth/password";
 
@@ -13,8 +15,6 @@ export function ForgotPasswordPage() {
     register,
     handleSubmit,
     formState: { errors },
-    setError,
-    clearErrors,
     control,
   } = useForm<FormValues>({
     defaultValues: {
@@ -26,13 +26,12 @@ export function ForgotPasswordPage() {
 
   const { mutate } = useMutation({
     mutationFn: (data: FormValues) => forgotPassword(data.email),
-    onSuccess: () => {
-      clearErrors();
-    },
-    onError: () => {
-      setError("email", {
-        message: "Email doesn't exist.",
-      });
+    onSuccess: () => {},
+    onError: (error) => {
+      const message =
+        error instanceof ClientError ? error.response.errors?.[0].message : error.message;
+
+      toast.error(message);
     },
   });
 
@@ -53,9 +52,8 @@ export function ForgotPasswordPage() {
           placeholder="Email"
           {...register("email")}
           error={errors.email?.message}
-          onChange={(e) => {
-            clearErrors("email");
-            register("email").onChange(e);
+          onChange={() => {
+            register("email");
           }}
         />
 
@@ -64,7 +62,7 @@ export function ForgotPasswordPage() {
             Reset password
           </Button>
 
-          <Link to="/signup">
+          <Link to="/auth" search={{ mode: "login" }}>
             <Button variant="default" type="button">
               Cancel
             </Button>

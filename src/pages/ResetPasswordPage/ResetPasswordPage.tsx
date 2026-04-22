@@ -7,14 +7,13 @@ import { resetPassword } from "@services/auth/password";
 import { resetPasswordSchema, ResetPasswordFormValues } from "./validation";
 
 export function ResetPasswordPage() {
-  const { token } = useSearch({ from: "/reset-password" });
+  const { token } = useSearch({ from: "/_public/reset-password" });
   const navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
-    clearErrors,
   } = useForm<ResetPasswordFormValues>({
     resolver: zodResolver(resetPasswordSchema),
     mode: "onChange",
@@ -27,7 +26,7 @@ export function ResetPasswordPage() {
   const { mutate } = useMutation({
     mutationFn: async (data: ResetPasswordFormValues) =>
       await resetPassword(token, data.newPassword, data.confirmPassword),
-    onSuccess: () => navigate({ to: "/login" }),
+    onSuccess: () => navigate({ to: "/auth", search: { mode: "login" } }),
   });
 
   const onSubmit = (data: ResetPasswordFormValues) => {
@@ -48,10 +47,6 @@ export function ResetPasswordPage() {
             autoComplete="new-password"
             {...register("newPassword")}
             error={errors.newPassword?.message}
-            onChange={(e) => {
-              clearErrors("newPassword");
-              register("newPassword").onChange(e);
-            }}
           />
 
           <Input
@@ -61,10 +56,6 @@ export function ResetPasswordPage() {
             autoComplete="new-password"
             {...register("confirmPassword")}
             error={errors.confirmPassword?.message}
-            onChange={(e) => {
-              clearErrors("confirmPassword");
-              register("confirmPassword").onChange(e);
-            }}
           />
         </div>
 
@@ -73,7 +64,7 @@ export function ResetPasswordPage() {
             Submit
           </Button>
 
-          <Link to="/login">
+          <Link to="/auth" search={{ mode: "login" }}>
             <Button variant="default" type="button">
               Go sign in
             </Button>

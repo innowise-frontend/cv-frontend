@@ -284,8 +284,10 @@ export type Mutation = {
   deleteUser: DeleteResult;
   exportPdf: Scalars["String"]["output"];
   forgotPassword?: Maybe<Scalars["Void"]["output"]>;
+  login: AuthResult;
   removeCvProject: Cv;
   resetPassword?: Maybe<Scalars["Void"]["output"]>;
+  sendVerification?: Maybe<Scalars["Void"]["output"]>;
   signup: AuthResult;
   updateCv: Cv;
   updateCvProject: Cv;
@@ -404,12 +406,20 @@ export type MutationForgotPasswordArgs = {
   auth: ForgotPasswordInput;
 };
 
+export type MutationLoginArgs = {
+  auth: AuthInput;
+};
+
 export type MutationRemoveCvProjectArgs = {
   project: RemoveCvProjectInput;
 };
 
 export type MutationResetPasswordArgs = {
   auth: ResetPasswordInput;
+};
+
+export type MutationSendVerificationArgs = {
+  email: Scalars["String"]["input"];
 };
 
 export type MutationSignupArgs = {
@@ -472,6 +482,33 @@ export type MutationVerifyMailArgs = {
   mail: VerifyMailInput;
 };
 
+export type PaginatedLanguages = {
+  __typename?: "PaginatedLanguages";
+  items: Array<Language>;
+  limit: Scalars["Int"]["output"];
+  page: Scalars["Int"]["output"];
+  total: Scalars["Int"]["output"];
+  total_pages: Scalars["Int"]["output"];
+};
+
+export type PaginatedSkills = {
+  __typename?: "PaginatedSkills";
+  items: Array<Skill>;
+  limit: Scalars["Int"]["output"];
+  page: Scalars["Int"]["output"];
+  total: Scalars["Int"]["output"];
+  total_pages: Scalars["Int"]["output"];
+};
+
+export type PaginatedUsers = {
+  __typename?: "PaginatedUsers";
+  items: Array<User>;
+  limit: Scalars["Int"]["output"];
+  page: Scalars["Int"]["output"];
+  total: Scalars["Int"]["output"];
+  total_pages: Scalars["Int"]["output"];
+};
+
 export type Position = {
   __typename?: "Position";
   created_at: Scalars["String"]["output"];
@@ -493,11 +530,14 @@ export type Profile = {
   __typename?: "Profile";
   avatar?: Maybe<Scalars["String"]["output"]>;
   created_at: Scalars["String"]["output"];
+  email?: Maybe<Scalars["String"]["output"]>;
   first_name?: Maybe<Scalars["String"]["output"]>;
   full_name?: Maybe<Scalars["String"]["output"]>;
   id: Scalars["ID"]["output"];
+  is_verified?: Maybe<Scalars["Boolean"]["output"]>;
   languages: Array<LanguageProficiency>;
   last_name?: Maybe<Scalars["String"]["output"]>;
+  role?: Maybe<UserRole>;
   skills: Array<SkillMastery>;
 };
 
@@ -519,25 +559,25 @@ export type Query = {
   cv: Cv;
   cvs: Array<Cv>;
   departments: Array<Department>;
-  languages: Array<Maybe<Language>>;
-  login: AuthResult;
+  languages: PaginatedLanguages;
+  me: Profile;
   position: Position;
   positions: Array<Position>;
   profile: Profile;
   project: Project;
   projects: Array<Project>;
   skillCategories: Array<SkillCategory>;
-  skills: Array<Skill>;
+  skills: PaginatedSkills;
   user: User;
-  users: Array<User>;
+  users: PaginatedUsers;
 };
 
 export type QueryCvArgs = {
   cvId: Scalars["ID"]["input"];
 };
 
-export type QueryLoginArgs = {
-  auth: AuthInput;
+export type QueryLanguagesArgs = {
+  params?: InputMaybe<SearchPaginationInput>;
 };
 
 export type QueryPositionArgs = {
@@ -552,8 +592,16 @@ export type QueryProjectArgs = {
   projectId: Scalars["ID"]["input"];
 };
 
+export type QuerySkillsArgs = {
+  params?: InputMaybe<SearchPaginationInput>;
+};
+
 export type QueryUserArgs = {
   userId: Scalars["ID"]["input"];
+};
+
+export type QueryUsersArgs = {
+  params?: InputMaybe<SearchPaginationInput>;
 };
 
 export type RemoveCvProjectInput = {
@@ -564,6 +612,13 @@ export type RemoveCvProjectInput = {
 export type ResetPasswordInput = {
   confirmPassword: Scalars["String"]["input"];
   newPassword: Scalars["String"]["input"];
+};
+
+export type SearchPaginationInput = {
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  page?: InputMaybe<Scalars["Int"]["input"]>;
+  search?: InputMaybe<Scalars["String"]["input"]>;
+  sort_order?: InputMaybe<Scalars["String"]["input"]>;
 };
 
 export type Skill = {
@@ -736,6 +791,48 @@ export type VerifyMailMutationVariables = Exact<{
 
 export type VerifyMailMutation = { __typename?: "Mutation"; verifyMail?: any | null };
 
+export type LoginMutationVariables = Exact<{
+  auth: AuthInput;
+}>;
+
+export type LoginMutation = {
+  __typename?: "Mutation";
+  login: {
+    __typename?: "AuthResult";
+    access_token: string;
+    refresh_token: string;
+    user: { __typename?: "User"; id: string };
+  };
+};
+
+export type SignupMutationVariables = Exact<{
+  auth: AuthInput;
+}>;
+
+export type SignupMutation = {
+  __typename?: "Mutation";
+  signup: {
+    __typename?: "AuthResult";
+    access_token: string;
+    refresh_token: string;
+    user: { __typename?: "User"; id: string };
+  };
+};
+
+export type UpdateTokenMutationVariables = Exact<{ [key: string]: never }>;
+
+export type UpdateTokenMutation = {
+  __typename?: "Mutation";
+  updateToken: { __typename?: "UpdateTokenResult"; access_token: string; refresh_token: string };
+};
+
+export type MeQueryVariables = Exact<{ [key: string]: never }>;
+
+export type MeQuery = {
+  __typename?: "Query";
+  me: { __typename?: "Profile"; role?: UserRole | null };
+};
+
 export const ForgotPasswordDocument = {
   kind: "Document",
   definitions: [
@@ -853,3 +950,154 @@ export const VerifyMailDocument = {
     },
   ],
 } as unknown as DocumentNode<VerifyMailMutation, VerifyMailMutationVariables>;
+export const LoginDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "Login" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "auth" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "AuthInput" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "login" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "auth" },
+                value: { kind: "Variable", name: { kind: "Name", value: "auth" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "user" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [{ kind: "Field", name: { kind: "Name", value: "id" } }],
+                  },
+                },
+                { kind: "Field", name: { kind: "Name", value: "access_token" } },
+                { kind: "Field", name: { kind: "Name", value: "refresh_token" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<LoginMutation, LoginMutationVariables>;
+export const SignupDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "Signup" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "auth" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "AuthInput" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "signup" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "auth" },
+                value: { kind: "Variable", name: { kind: "Name", value: "auth" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "user" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [{ kind: "Field", name: { kind: "Name", value: "id" } }],
+                  },
+                },
+                { kind: "Field", name: { kind: "Name", value: "access_token" } },
+                { kind: "Field", name: { kind: "Name", value: "refresh_token" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<SignupMutation, SignupMutationVariables>;
+export const UpdateTokenDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "UpdateToken" },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "updateToken" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "access_token" } },
+                { kind: "Field", name: { kind: "Name", value: "refresh_token" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<UpdateTokenMutation, UpdateTokenMutationVariables>;
+export const MeDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "Me" },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "me" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [{ kind: "Field", name: { kind: "Name", value: "role" } }],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<MeQuery, MeQueryVariables>;
