@@ -7,3 +7,4 @@ export { ROUTES } from "../../constants/routes";
 export { Divider } from "./Divider";
 export { LinkButton } from "./LinkButton";
 export { ProgressBar } from "./ProgressBar/ProgressBar";
+export { CodeInput } from "./CodeInput/CodeInput";

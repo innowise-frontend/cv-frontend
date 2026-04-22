@@ -12,7 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as PublicRouteRouteImport } from './routes/_public/route'
 import { Route as AppRouteRouteImport } from './routes/_app/route'
 import { Route as AppIndexRouteImport } from './routes/_app/index'
-import { Route as PublicVerificationRouteImport } from './routes/_public/verification'
+import { Route as PublicVerifyEmailRouteImport } from './routes/_public/verify-email'
 import { Route as PublicResetPasswordRouteImport } from './routes/_public/reset-password'
 import { Route as PublicForgotPasswordRouteImport } from './routes/_public/forgot-password'
 import { Route as PublicAuthRouteImport } from './routes/_public/auth'
@@ -38,9 +38,9 @@ const AppIndexRoute = AppIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AppRouteRoute,
 } as any)
-const PublicVerificationRoute = PublicVerificationRouteImport.update({
-  id: '/verification',
-  path: '/verification',
+const PublicVerifyEmailRoute = PublicVerifyEmailRouteImport.update({
+  id: '/verify-email',
+  path: '/verify-email',
   getParentRoute: () => PublicRouteRoute,
 } as any)
 const PublicResetPasswordRoute = PublicResetPasswordRouteImport.update({
@@ -112,7 +112,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof PublicAuthRoute
   '/forgot-password': typeof PublicForgotPasswordRoute
   '/reset-password': typeof PublicResetPasswordRoute
-  '/verification': typeof PublicVerificationRoute
+  '/verify-email': typeof PublicVerifyEmailRoute
 }
 export interface FileRoutesByTo {
   '/': typeof AppIndexRoute
@@ -127,7 +127,7 @@ export interface FileRoutesByTo {
   '/auth': typeof PublicAuthRoute
   '/forgot-password': typeof PublicForgotPasswordRoute
   '/reset-password': typeof PublicResetPasswordRoute
-  '/verification': typeof PublicVerificationRoute
+  '/verify-email': typeof PublicVerifyEmailRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -144,7 +144,7 @@ export interface FileRoutesById {
   '/_public/auth': typeof PublicAuthRoute
   '/_public/forgot-password': typeof PublicForgotPasswordRoute
   '/_public/reset-password': typeof PublicResetPasswordRoute
-  '/_public/verification': typeof PublicVerificationRoute
+  '/_public/verify-email': typeof PublicVerifyEmailRoute
   '/_app/': typeof AppIndexRoute
 }
 export interface FileRouteTypes {
@@ -162,7 +162,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/forgot-password'
     | '/reset-password'
-    | '/verification'
+    | '/verify-email'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -177,7 +177,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/forgot-password'
     | '/reset-password'
-    | '/verification'
+    | '/verify-email'
   id:
     | '__root__'
     | '/_app'
@@ -193,7 +193,7 @@ export interface FileRouteTypes {
     | '/_public/auth'
     | '/_public/forgot-password'
     | '/_public/reset-password'
-    | '/_public/verification'
+    | '/_public/verify-email'
     | '/_app/'
   fileRoutesById: FileRoutesById
 }
@@ -225,11 +225,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppIndexRouteImport
       parentRoute: typeof AppRouteRoute
     }
-    '/_public/verification': {
-      id: '/_public/verification'
-      path: '/verification'
-      fullPath: '/verification'
-      preLoaderRoute: typeof PublicVerificationRouteImport
+    '/_public/verify-email': {
+      id: '/_public/verify-email'
+      path: '/verify-email'
+      fullPath: '/verify-email'
+      preLoaderRoute: typeof PublicVerifyEmailRouteImport
       parentRoute: typeof PublicRouteRoute
     }
     '/_public/reset-password': {
@@ -344,14 +344,14 @@ interface PublicRouteRouteChildren {
   PublicAuthRoute: typeof PublicAuthRoute
   PublicForgotPasswordRoute: typeof PublicForgotPasswordRoute
   PublicResetPasswordRoute: typeof PublicResetPasswordRoute
-  PublicVerificationRoute: typeof PublicVerificationRoute
+  PublicVerifyEmailRoute: typeof PublicVerifyEmailRoute
 }
 
 const PublicRouteRouteChildren: PublicRouteRouteChildren = {
   PublicAuthRoute: PublicAuthRoute,
   PublicForgotPasswordRoute: PublicForgotPasswordRoute,
   PublicResetPasswordRoute: PublicResetPasswordRoute,
-  PublicVerificationRoute: PublicVerificationRoute,
+  PublicVerifyEmailRoute: PublicVerifyEmailRoute,
 }
 
 const PublicRouteRouteWithChildren = PublicRouteRoute._addFileChildren(
