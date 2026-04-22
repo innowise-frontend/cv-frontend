@@ -5,7 +5,7 @@ export const Route = createFileRoute("/_public")({
     const isVerifyEmail = location.pathname.endsWith("/verify-email");
 
     if (context.auth.isAuthenticated && !isVerifyEmail) {
-      throw redirect({ to: "/" });
+      throw redirect({ to: "/", search: { search: undefined } });
     }
   },
   component: () => <Outlet />,

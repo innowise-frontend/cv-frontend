@@ -1,53 +1,97 @@
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { renderWithFileRoutes } from "@root/lib/testUtils";
 import { Sidebar } from "./Sidebar";
 
-const PROFILE_BLOCK_MOCK = "ProfileBlock";
+const logoMock = vi.fn(({ collapsed }: { collapsed: boolean }) => (
+  <div data-testid="logo">{String(collapsed)}</div>
+));
+const linkButtonMock = vi.fn(({ title, collapsed }: { title: string; collapsed: boolean }) => (
+  <div data-testid={`sidebar-link-${title}`}>{String(collapsed)}</div>
+));
+const dividerMock = vi.fn(() => <div data-testid="sidebar-divider" />);
+const profileBlockMock = vi.fn(({ collapsed }: { collapsed: boolean }) => (
+  <div data-testid="profile-block">{String(collapsed)}</div>
+));
 
-vi.mock("@components/shared/ProfileBlock", () => ({
-  ProfileBlock: () => <div>{PROFILE_BLOCK_MOCK}</div>,
+const useAuthMock = vi.fn();
+
+vi.mock("@assets/icon/LeftArrowIcon.svg?react", () => ({
+  default: () => <svg data-testid="left-arrow-icon" />,
+}));
+
+vi.mock("@components/Logo", () => ({
+  Logo: (props: { collapsed: boolean }) => logoMock(props),
+}));
+
+vi.mock("@components/shared", () => ({
+  Divider: () => dividerMock(),
+  LinkButton: (props: { title: string; collapsed: boolean }) => linkButtonMock(props),
+  ProfileBlock: (props: { collapsed: boolean }) => profileBlockMock(props),
+}));
+
+vi.mock("@root/hooks/useAuth", () => ({
+  useAuth: () => useAuthMock(),
 }));
 
 describe("Sidebar", () => {
   beforeEach(() => {
-    localStorage.clear();
+    useAuthMock.mockReturnValue({ isAdmin: false });
+    logoMock.mockClear();
+    linkButtonMock.mockClear();
+    dividerMock.mockClear();
+    profileBlockMock.mockClear();
   });
 
-  // it.
-  // each([
-  //   { case: "role is user", setRole: () => localStorage.setItem("role", "user") },
-  //   { case: "role is unset", setRole: () => {} },
-  // ])
-  it("should render public links and hide admin-only nav when $case", async () => {
-    const { getByText, queryByText } = await renderWithFileRoutes(<Sidebar />, {
-      initialLocation: "/",
-    });
+  it("should render only common menu items for non-admin user", () => {
+    render(<Sidebar />);
 
-    expect(getByText("Employees")).toBeVisible();
-    expect(getByText("Employees")).toHaveAttribute("href", "/");
+    expect(screen.getByTestId("sidebar-link-Employees")).toBeInTheDocument();
+    expect(screen.getByTestId("sidebar-link-Skills")).toBeInTheDocument();
+    expect(screen.getByTestId("sidebar-link-Languages")).toBeInTheDocument();
+    expect(screen.getByTestId("sidebar-link-CVs")).toBeInTheDocument();
+    expect(screen.getByTestId("sidebar-link-Settings")).toBeInTheDocument();
 
-    expect(getByText("Skills")).toBeVisible();
-    expect(getByText("Skills")).toHaveAttribute("href", "/skills");
+    expect(screen.queryByTestId("sidebar-link-Departments")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("sidebar-link-Positions")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("sidebar-link-Projects")).not.toBeInTheDocument();
 
-    expect(getByText("Languages")).toBeVisible();
-    expect(getByText("Languages")).toHaveAttribute("href", "/languages");
-
-    expect(getByText("CVs")).toBeVisible();
-    expect(getByText("CVs")).toHaveAttribute("href", "/cvs");
-
-    expect(getByText("Settings")).toBeVisible();
-    expect(getByText("Settings")).toHaveAttribute("href", "/settings");
-
-    expect(queryByText("Departments")).not.toBeInTheDocument();
-    expect(queryByText("Positions")).not.toBeInTheDocument();
-    expect(queryByText("Projects")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("sidebar-divider")).not.toBeInTheDocument();
   });
 
-  it("should render profile block", async () => {
-    const { getByText } = await renderWithFileRoutes(<Sidebar />, {
-      initialLocation: "/",
-    });
+  it("should render admin-only menu items and divider for admin user", () => {
+    useAuthMock.mockReturnValue({ isAdmin: true });
 
-    expect(getByText(PROFILE_BLOCK_MOCK)).toBeVisible();
+    render(<Sidebar />);
+
+    expect(screen.getByTestId("sidebar-link-Departments")).toBeInTheDocument();
+    expect(screen.getByTestId("sidebar-link-Positions")).toBeInTheDocument();
+    expect(screen.getByTestId("sidebar-link-Projects")).toBeInTheDocument();
+    expect(screen.getByTestId("sidebar-divider")).toBeInTheDocument();
+  });
+
+  it("should pass collapsed state to child components after toggle click", async () => {
+    const user = userEvent.setup();
+
+    render(<Sidebar />);
+    await user.click(screen.getByRole("button"));
+
+    expect(logoMock).toHaveBeenLastCalledWith(expect.objectContaining({ collapsed: true }));
+    expect(profileBlockMock).toHaveBeenLastCalledWith(expect.objectContaining({ collapsed: true }));
+
+    const lastLinkCall = linkButtonMock.mock.calls.at(-1)?.[0];
+    expect(lastLinkCall).toEqual(expect.objectContaining({ collapsed: true }));
+  });
+
+  it("should remove expanded width class when sidebar is collapsed", async () => {
+    const user = userEvent.setup();
+
+    const { container } = render(<Sidebar />);
+    const sidebarRoot = container.firstChild;
+    expect(sidebarRoot).toHaveClass("min-w-50");
+
+    await user.click(screen.getByRole("button"));
+
+    expect(sidebarRoot).not.toHaveClass("min-w-50");
   });
 });

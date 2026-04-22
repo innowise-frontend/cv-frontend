@@ -1,19 +1,17 @@
 import React, { useState } from "react";
 import LeftArrowIcon from "@assets/icon/LeftArrowIcon.svg?react";
-import { Logo } from "@root/components/Logo";
-import { Divider } from "@root/components/shared/Divider";
-import { LinkButton } from "@root/components/shared/LinkButton";
-import { ProfileBlock } from "@root/components/shared/ProfileBlock";
-// import { useAuth } from "@root/hooks/useAuth";
+import { Logo } from "@components/Logo";
+import { Divider, LinkButton, ProfileBlock } from "@components/shared";
+import { useAuth } from "@root/hooks/useAuth";
 import getSidebarItems from "./const";
 
 export const Sidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
-  // const { isAdmin } = useAuth();
+  const { isAdmin } = useAuth();
 
   return (
     <div
-      className={`relative flex h-full flex-col justify-between pb-14 ${!isCollapsed && "w-50"}`}
+      className={`relative flex h-full flex-col justify-between pb-14 ${!isCollapsed && "min-w-50"}`}
     >
       <button
         type="button"
@@ -23,9 +21,9 @@ export const Sidebar = () => {
         <LeftArrowIcon />
       </button>
 
-      <div className="flex flex-col gap-3.5">
+      <div className="flex flex-col gap-3.5 ">
         <Logo collapsed={isCollapsed} />
-        {getSidebarItems({ isAdmin: false }).map(
+        {getSidebarItems({ isAdmin: isAdmin }).map(
           (item) =>
             item.visible && (
               <React.Fragment key={item.title}>
@@ -41,7 +39,7 @@ export const Sidebar = () => {
         )}
       </div>
 
-      <ProfileBlock collapsed={isCollapsed} />
+      <ProfileBlock collapsed={isCollapsed} firstName="Rostislav" lastName="Harlanov" />
     </div>
   );
 };
