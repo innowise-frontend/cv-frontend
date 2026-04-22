@@ -2,10 +2,11 @@ import { useMutation } from "@tanstack/react-query";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useForm, Controller, useWatch } from "react-hook-form";
 import { Button, CodeInput } from "@components/shared";
-import { verifyMail } from "@root/services/auth/verification";
+import { ROUTES } from "@root/constants/routes";
+import { verifyMail } from "@root/services/auth/verifyEmail";
 import { FormValues } from "./types";
 
-export function VerificationPage() {
+export function VerifyEmailPage() {
   const navigate = useNavigate();
 
   const {
@@ -23,7 +24,7 @@ export function VerificationPage() {
       await verifyMail(code);
     },
     onSuccess: () => {
-      navigate({ to: "/profile" });
+      navigate({ to: ROUTES.PROFILE });
     },
     onError: () => {
       setError("code", { message: "Invalid code" });
@@ -74,7 +75,7 @@ export function VerificationPage() {
           Confirm
         </Button>
 
-        <Link to="/">
+        <Link to={ROUTES.ROOT}>
           <Button variant="default" type="button">
             Later
           </Button>
