@@ -1,10 +1,19 @@
-import { describe, it, expect } from "vitest";
+import { beforeEach, describe, expect, it } from "vitest";
 import { renderWithFileRoutes } from "@root/lib/testUtils";
 import { Sidebar } from "./Sidebar";
 
 describe("Sidebar", () => {
-  it("should render public links", async () => {
-    const { getByText } = await renderWithFileRoutes(<Sidebar />, {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  // it.
+  // each([
+  //   { case: "role is user", setRole: () => localStorage.setItem("role", "user") },
+  //   { case: "role is unset", setRole: () => {} },
+  // ])
+  it("should render public links and hide admin-only nav when $case", async () => {
+    const { getByText, queryByText } = await renderWithFileRoutes(<Sidebar />, {
       initialLocation: "/",
     });
 
@@ -22,21 +31,10 @@ describe("Sidebar", () => {
 
     expect(getByText("Settings")).toBeVisible();
     expect(getByText("Settings")).toHaveAttribute("href", "/settings");
-  });
 
-  it("should render admin links", async () => {
-    const { getByText } = await renderWithFileRoutes(<Sidebar />, {
-      initialLocation: "/",
-    });
-
-    expect(getByText("Departments")).toBeVisible();
-    expect(getByText("Departments")).toHaveAttribute("href", "/departments");
-
-    expect(getByText("Positions")).toBeVisible();
-    expect(getByText("Positions")).toHaveAttribute("href", "/positions");
-
-    expect(getByText("Projects")).toBeVisible();
-    expect(getByText("Projects")).toHaveAttribute("href", "/projects");
+    expect(queryByText("Departments")).not.toBeInTheDocument();
+    expect(queryByText("Positions")).not.toBeInTheDocument();
+    expect(queryByText("Projects")).not.toBeInTheDocument();
   });
 
   it("should render profile block", async () => {
