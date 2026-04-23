@@ -10,7 +10,7 @@ const resetPasswordMock =
 
 const navigateMock = vi.fn();
 
-vi.mock("@services/auth/password", () => ({
+vi.mock("@root/services/auth/forgotPassword/forgotPassword", () => ({
   resetPassword: (token: string, newPassword: string, confirmPassword: string): Promise<void> =>
     resetPasswordMock(token, newPassword, confirmPassword),
 }));

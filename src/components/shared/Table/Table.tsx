@@ -4,9 +4,7 @@ import {
   getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { Column } from "@tanstack/react-table";
-import ArrowUpIcon from "@assets/icon/ArrowUpIcon.svg?react";
-import { Button, Pagination } from "@components/shared";
+import { Pagination } from "@components/shared";
 import {
   Table as UITable,
   TableBody,
@@ -15,7 +13,6 @@ import {
   TableHeader,
   TableRow,
 } from "@components/ui/table";
-import { cn } from "@root/lib/utils";
 import { TableProps } from "./types";
 
 export const Table = <TData,>({
@@ -91,34 +88,5 @@ export const Table = <TData,>({
         onChangeViewOption={onChangeViewOption}
       />
     </>
-  );
-};
-
-interface TableColumnHeaderProps<TData, TValue> extends React.HTMLAttributes<HTMLDivElement> {
-  column: Column<TData, TValue>;
-  title: string;
-  enableSorting?: boolean;
-}
-
-export const TableColumnHeader = <TData, TValue>({
-  column,
-  title,
-  className,
-}: TableColumnHeaderProps<TData, TValue>) => {
-  if (!column.getCanSort()) {
-    return <div className={cn(className)}>{title}</div>;
-  }
-
-  return (
-    <div className={"flex items-center space-x-2"}>
-      <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-        <span className={cn(className)}>{title}</span>
-        <ArrowUpIcon
-          width={18}
-          height={18}
-          className={cn(column.getIsSorted() === "asc" ? "rotate-180" : "")}
-        />
-      </Button>
-    </div>
   );
 };

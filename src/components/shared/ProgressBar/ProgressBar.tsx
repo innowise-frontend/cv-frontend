@@ -4,7 +4,7 @@ import { cn } from "@root/lib/utils";
 import { getMasteryBarStyles, getProficiencyBarStyles } from "./progressLevelUtils";
 import { ProgressBarProps } from "./types";
 
-export function ProgressBar(props: ProgressBarProps) {
+export const ProgressBar = (props: ProgressBarProps) => {
   const { label, className } = props;
   const { value, trackClassName, indicatorClassName } =
     "mastery" in props && props.mastery !== undefined
@@ -21,4 +21,4 @@ export function ProgressBar(props: ProgressBarProps) {
       <span className="shrink-0 text-base text-gray-3">{label}</span>
     </div>
   );
-}
+};

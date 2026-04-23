@@ -1,5 +1,5 @@
 import { useNavigate, useSearch } from "@tanstack/react-router";
-import { useDebounce } from "./useDebounce";
+import { useDebounce } from "../useDebounce/useDebounce";
 
 export const useHandleSearch = () => {
   const { search: searchParams } = useSearch({ from: "/_app/" });

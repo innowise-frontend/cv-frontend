@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { createContext, type ReactNode } from "react";
 import { LOCAL_STORAGE_KEYS } from "@root/constants/localStorage";
-import { getMe } from "@root/services/auth/me";
-import { UserRole } from "@root/services/graphql/__generated__/graphql";
+import { getMe } from "@services/auth";
+import { UserRole } from "@services/graphql/__generated__/graphql";
 
 export interface AuthContextType {
   isAdmin: boolean;

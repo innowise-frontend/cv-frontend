@@ -1,8 +1,8 @@
-import { InputOTP, InputOTPGroup, InputOTPSlot } from "@root/components/ui/input-otp";
+import { InputOTP, InputOTPGroup, InputOTPSlot } from "@components/ui/input-otp";
 import { cn } from "@root/lib/utils";
 import { CodeInputProps } from "./types";
 
-export function CodeInput({ value, onChange, length = 6, className, error }: CodeInputProps) {
+export const CodeInput = ({ value, onChange, length = 6, className, error }: CodeInputProps) => {
   return (
     <InputOTP
       value={value}
@@ -29,4 +29,4 @@ export function CodeInput({ value, onChange, length = 6, className, error }: Cod
       </InputOTPGroup>
     </InputOTP>
   );
-}
+};

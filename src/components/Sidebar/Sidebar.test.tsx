@@ -30,7 +30,7 @@ vi.mock("@components/shared", () => ({
   ProfileBlock: (props: { collapsed: boolean }) => profileBlockMock(props),
 }));
 
-vi.mock("@root/hooks/useAuth", () => ({
+vi.mock("@root/hooks/useAuth/useAuth", () => ({
   useAuth: () => useAuthMock(),
 }));
 
