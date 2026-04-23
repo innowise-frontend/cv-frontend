@@ -4,13 +4,13 @@ import { useForm, useWatch } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 import { Button, Input } from "@components/shared";
-import { forgotPassword } from "@services/auth/password";
+import { forgotPassword } from "@services/auth";
 
 type FormValues = {
   email: string;
 };
 
-export function ForgotPasswordPage() {
+export const ForgotPasswordPage = () => {
   const { t } = useTranslation();
   const {
     register,
@@ -69,4 +69,4 @@ export function ForgotPasswordPage() {
       </form>
     </div>
   );
-}
+};

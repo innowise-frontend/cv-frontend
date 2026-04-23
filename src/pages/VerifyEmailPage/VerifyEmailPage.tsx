@@ -3,10 +3,10 @@ import { Link, useNavigate } from "@tanstack/react-router";
 import { useForm, Controller, useWatch } from "react-hook-form";
 import { Button, CodeInput } from "@components/shared";
 import { ROUTES } from "@root/constants/routes";
-import { verifyMail } from "@root/services/auth/verifyEmail";
+import { verifyMail } from "@services/auth";
 import { FormValues } from "./types";
 
-export function VerifyEmailPage() {
+export const VerifyEmailPage = () => {
   const navigate = useNavigate();
 
   const {
@@ -83,4 +83,4 @@ export function VerifyEmailPage() {
       </div>
     </div>
   );
-}
+};

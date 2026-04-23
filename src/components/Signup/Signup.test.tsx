@@ -24,11 +24,8 @@ vi.mock("sonner", () => ({
   },
 }));
 
-vi.mock("@services/auth/signup", () => ({
+vi.mock("@services/auth", () => ({
   signup: (...args: unknown[]) => signupMock(...args),
-}));
-
-vi.mock("@root/services/auth/me", () => ({
   getMe: (...args: unknown[]) => getMeMock(...args),
 }));
 

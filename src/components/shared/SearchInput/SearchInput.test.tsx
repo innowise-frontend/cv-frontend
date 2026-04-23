@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
-import * as useSearchParamsHook from "@hooks/useSearchParams";
+import * as useSearchParamsHook from "@root/hooks/useHandleSearch/useHandleSearch";
 import { SearchInput } from "./SearchInput";
 
 describe("SearchInput", () => {

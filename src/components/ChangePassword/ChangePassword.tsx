@@ -10,7 +10,7 @@ import {
 } from "@root/components/ChangePassword/validation";
 import { LOCAL_STORAGE_KEYS } from "@root/constants/localStorage";
 import { cn } from "@root/lib/utils";
-import { changePassword } from "@services/auth/password";
+import { changePassword } from "@services/auth";
 import { Input, Button } from "../shared";
 import type { ChangePasswordProps } from "./types";
 

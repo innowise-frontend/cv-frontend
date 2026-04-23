@@ -5,10 +5,10 @@ import { useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Button, Input } from "@components/shared";
-import { resetPassword } from "@services/auth/password";
-import { createResetPasswordSchema, type ResetPasswordFormValues } from "./validation";
+import { resetPassword } from "@services/auth";
+import { ResetPasswordFormValues, createResetPasswordSchema } from "./validation";
 
-export function ResetPasswordPage() {
+export const ResetPasswordPage = () => {
   const { token } = useSearch({ from: "/_public/reset-password" });
   const { t } = useTranslation();
 
@@ -81,4 +81,4 @@ export function ResetPasswordPage() {
       </form>
     </div>
   );
-}
+};
