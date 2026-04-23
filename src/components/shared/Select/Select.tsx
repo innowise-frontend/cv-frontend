@@ -113,7 +113,7 @@ const SelectMulti = ({
               }
 
               return values.map((v: string) => (
-                <span
+                <div
                   key={v}
                   className="inline-flex h-6 max-w-full items-center gap-1 rounded-full border border-gray-2 bg-gray-8 py-0.5 pl-2 pr-1 text-xs leading-none text-gray-2 dark:border-gray-5 dark:bg-gray-3 dark:text-gray-8"
                 >
@@ -132,7 +132,7 @@ const SelectMulti = ({
                   >
                     <CloseIcon className="size-1.5 text-gray-8 dark:text-gray-4" aria-hidden />
                   </div>
-                </span>
+                </div>
               ));
             }}
           </SelectValue>
