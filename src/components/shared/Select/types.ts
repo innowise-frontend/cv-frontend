@@ -16,3 +16,6 @@ export type SelectProps =
       value: string[];
       onValueChange: (value: string[]) => void;
     });
+
+export type SingleSelectProps = Extract<SelectProps, { multiple?: false }>;
+export type MultiSelectProps = Extract<SelectProps, { multiple: true }>;

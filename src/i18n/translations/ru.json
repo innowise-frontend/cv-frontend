@@ -13,8 +13,8 @@
       "language": "Язык",
       "changePassword": "Сменить пароль",
       "changePasswordButton": "Сменить",
-      "changePasswordSuccess": "Password changes",
-      "changePasswordError": "Error! Password doesnt change ",
+      "changePasswordSuccess": "Пароль изменён",
+      "changePasswordError": "Ошибка! Не удалось изменить пароль",
       "oldPassword": "Пароль",
       "newPassword": "Новый пароль",
       "confirmPassword": "Подтвердите пароль",
@@ -33,7 +33,7 @@
     "error": {
       "oops": "Упс",
       "goBack": "Назад",
-      "defaultErrorMessage": "Error! Password doesnt change ",
+      "defaultErrorMessage": "Ошибка! Не удалось изменить пароль",
       "defaultNotFoundMessage": "Хм… похоже, это не та страница, которую вы искали. \n Давайте вернёмся на правильный путь."
     },
     "forgotPassword": {

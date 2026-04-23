@@ -2,27 +2,22 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ChangePassword } from "@components/ChangePassword";
 import { Select } from "@components/shared/Select/Select";
-import { getDefaultTheme, setDefaultTheme } from "@utils/theme";
+import { LOCAL_STORAGE_KEYS } from "@root/constants/localStorage";
+import { useLocalStorage } from "@root/hooks/useLocalStorage";
+import { applyTheme } from "@utils/theme";
 import { LANGUAGES, THEMES } from "./constants";
 import type { Theme } from "./types";
 
 export function SettingPage() {
   const { t, i18n } = useTranslation();
-  const [theme, setTheme] = useState<Theme>(getDefaultTheme() as Theme);
-  const [language, setLanguage] = useState<string>(() => {
-    const fallback = "en";
-    const detected = (i18n.resolvedLanguage ?? i18n.language ?? fallback)
-      .toLowerCase()
-      .split("-")[0];
-    const initial = detected || fallback;
-
-    return LANGUAGES.some((l) => l.value === initial) ? initial : fallback;
-  });
+  const [theme, setTheme] = useLocalStorage<Theme>(LOCAL_STORAGE_KEYS.THEME, "light");
+  const [language, setLanguage] = useState(i18n.resolvedLanguage ?? "en");
+  const [multiExample, setMultiExample] = useState<string[]>([]);
 
   const handleThemeChange = (value: string) => {
     const next = value as Theme;
     setTheme(next);
-    setDefaultTheme(next);
+    applyTheme(next);
   };
 
   const handleLanguageChange = (value: string) => {
@@ -34,6 +29,12 @@ export function SettingPage() {
     ...item,
     label: t(`theme.${item.value}`),
   }));
+
+  const multiExampleList = [
+    { value: "react", label: "React" },
+    { value: "ts", label: "TypeScript" },
+    { value: "graphql", label: "GraphQL" },
+  ];
 
   return (
     <div className="flex flex-col mt-10 gap-8 mx-auto">
@@ -52,6 +53,15 @@ export function SettingPage() {
         placeholder={t("page.setting.selectLanguagePlaceholder")}
         value={language}
         onValueChange={handleLanguageChange}
+      />
+      <Select
+        className="w-[852px]"
+        label="Multi-select example"
+        list={multiExampleList}
+        placeholder="Select multiple values"
+        multiple
+        value={multiExample}
+        onValueChange={setMultiExample}
       />
       <ChangePassword className="mt-2" />
     </div>

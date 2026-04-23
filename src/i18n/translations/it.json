@@ -13,8 +13,8 @@
       "language": "Lingua",
       "changePassword": "Cambia password",
       "changePasswordButton": "Cambia",
-      "changePasswordSuccess": "Password changes",
-      "changePasswordError": "Error! Password doesnt change ",
+      "changePasswordSuccess": "Password modificata",
+      "changePasswordError": "Errore! Impossibile modificare la password",
       "oldPassword": "Password",
       "newPassword": "Nuova password",
       "confirmPassword": "Conferma password",
@@ -33,7 +33,7 @@
     "error": {
       "oops": "Ops",
       "goBack": "Indietro",
-      "defaultErrorMessage": "Error! Password doesnt change ",
+      "defaultErrorMessage": "Errore! Impossibile modificare la password",
       "defaultNotFoundMessage": "Hmm… questa non sembra essere la pagina che stavi cercando. \n Ti riportiamo sulla strada giusta."
     },
     "forgotPassword": {

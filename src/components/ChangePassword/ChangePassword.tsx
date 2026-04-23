@@ -1,7 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { ClientError } from "graphql-request";
-import { useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
@@ -15,10 +14,10 @@ import { changePassword } from "@services/auth/password";
 import { Input, Button } from "../shared";
 import type { ChangePasswordProps } from "./types";
 
-export function ChangePassword({ className }: ChangePasswordProps) {
+export const ChangePassword = ({ className }: ChangePasswordProps) => {
   const { t } = useTranslation();
+  const changePasswordFormSchema = createChangePasswordFormSchema(t);
 
-  const changePasswordFormSchema = useMemo(() => createChangePasswordFormSchema(t), [t]);
   const {
     register,
     handleSubmit,
@@ -40,7 +39,7 @@ export function ChangePassword({ className }: ChangePasswordProps) {
       const token = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN)!);
 
       if (!token) {
-        return;
+        throw new Error(t("page.setting.changePasswordError"));
       }
 
       await changePassword(token, {
@@ -107,4 +106,4 @@ export function ChangePassword({ className }: ChangePasswordProps) {
       </form>
     </div>
   );
-}
+};
