@@ -67,7 +67,7 @@ describe("ResetPasswordPage", () => {
     expect(resetPasswordMock).toHaveBeenCalledWith("test-token", "123456", "123456");
 
     await waitFor(() => expect(navigateMock).toHaveBeenCalledTimes(1));
-    expect(navigateMock).toHaveBeenCalledWith({ to: ROUTES.AUTH, search: { mode: "login" } });
+    expect(navigateMock).toHaveBeenCalledWith({ to: "/auth", search: { mode: "login" } });
   });
 
   it("shows mismatch error and does not submit when passwords differ", async () => {
