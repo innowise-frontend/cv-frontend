@@ -6,6 +6,13 @@ mutation ResetPassword($auth: ResetPasswordInput!) {
   resetPassword(auth: $auth)
 }
 
+mutation ChangePassword($args: ChangePasswordInput!) {
+  changePassword(args: $args) {
+    id
+    email
+  }
+}
+
 mutation verifyMail($otp: String!) {
   verifyMail(mail: { otp: $otp })
 }

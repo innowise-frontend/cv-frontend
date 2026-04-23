@@ -1,4 +1,5 @@
 import React, { useState, useId, forwardRef } from "react";
+import { useTranslation } from "react-i18next";
 import CloseEyeIcon from "@assets/icon/CloseEyeIcon.svg?react";
 import OpenEyeIcon from "@assets/icon/OpenEyeIcon.svg?react";
 import { Input as UiInput } from "@components/ui/input";
@@ -10,6 +11,7 @@ export const Input = forwardRef<HTMLInputElement, InputWithLabelProps>(
     { label, className, value: controlledValue, defaultValue, onChange, type, error, ...props },
     ref,
   ) => {
+    const { t } = useTranslation();
     const generatedId = useId();
 
     const [value, setValue] = useState("");
@@ -36,7 +38,7 @@ export const Input = forwardRef<HTMLInputElement, InputWithLabelProps>(
           <label
             htmlFor={generatedId}
             className={cn(
-              "absolute z-10 left-2.5 -top-5 px-1 text-xs text-gray-3 dark:text-gray-5",
+              "absolute z-10 left-2.5 -top-4 px-1 text-xs text-gray-3 dark:text-gray-5",
               error && "text-red",
             )}
           >
@@ -62,7 +64,7 @@ export const Input = forwardRef<HTMLInputElement, InputWithLabelProps>(
           {isPasswordField && (
             <button
               type="button"
-              aria-label="Toggle password visibility"
+              aria-label={t("page.setting.togglePasswordVisibility")}
               onClick={togglePasswordVisibility}
               className="absolute right-5 top-1/2 -translate-y-1/2 text-gray-3 focus:outline-none dark:text-gray-8 dark:hover:text-gray-8"
             >

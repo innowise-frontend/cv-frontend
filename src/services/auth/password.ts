@@ -1,6 +1,8 @@
 import {
+  ChangePasswordDocument,
   ForgotPasswordDocument,
   ResetPasswordDocument,
+  type ChangePasswordInput,
 } from "@services/graphql/__generated__/graphql";
 import { graphqlClient } from "@services/graphql/client";
 
@@ -19,5 +21,16 @@ export async function resetPassword(
     ResetPasswordDocument,
     { auth: { newPassword, confirmPassword } },
     { Authorization: `Bearer ${token}` },
+  );
+}
+
+export async function changePassword(
+  accessToken: string,
+  args: ChangePasswordInput,
+): Promise<void> {
+  await graphqlClient.request(
+    ChangePasswordDocument,
+    { args },
+    { Authorization: `Bearer ${accessToken}` },
   );
 }

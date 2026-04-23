@@ -14,14 +14,14 @@ import { TypedDocumentNode as DocumentNode } from "@graphql-typed-document-node/
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 type Documents = {
-  "mutation ForgotPassword($auth: ForgotPasswordInput!) {\n  forgotPassword(auth: $auth)\n}\n\nmutation ResetPassword($auth: ResetPasswordInput!) {\n  resetPassword(auth: $auth)\n}\n\nmutation verifyMail($otp: String!) {\n  verifyMail(mail: {otp: $otp})\n}": typeof types.ForgotPasswordDocument;
+  "mutation ForgotPassword($auth: ForgotPasswordInput!) {\n  forgotPassword(auth: $auth)\n}\n\nmutation ResetPassword($auth: ResetPasswordInput!) {\n  resetPassword(auth: $auth)\n}\n\nmutation ChangePassword($args: ChangePasswordInput!) {\n  changePassword(args: $args) {\n    id\n    email\n  }\n}\n\nmutation verifyMail($otp: String!) {\n  verifyMail(mail: {otp: $otp})\n}": typeof types.ForgotPasswordDocument;
   "mutation Login($auth: AuthInput!) {\n  login(auth: $auth) {\n    user {\n      id\n    }\n    access_token\n    refresh_token\n  }\n}": typeof types.LoginDocument;
   "mutation Signup($auth: AuthInput!) {\n  signup(auth: $auth) {\n    user {\n      id\n    }\n    access_token\n    refresh_token\n  }\n}": typeof types.SignupDocument;
   "mutation UpdateToken {\n  updateToken {\n    access_token\n    refresh_token\n  }\n}": typeof types.UpdateTokenDocument;
   "query Me {\n  me {\n    role\n  }\n}": typeof types.MeDocument;
 };
 const documents: Documents = {
-  "mutation ForgotPassword($auth: ForgotPasswordInput!) {\n  forgotPassword(auth: $auth)\n}\n\nmutation ResetPassword($auth: ResetPasswordInput!) {\n  resetPassword(auth: $auth)\n}\n\nmutation verifyMail($otp: String!) {\n  verifyMail(mail: {otp: $otp})\n}":
+  "mutation ForgotPassword($auth: ForgotPasswordInput!) {\n  forgotPassword(auth: $auth)\n}\n\nmutation ResetPassword($auth: ResetPasswordInput!) {\n  resetPassword(auth: $auth)\n}\n\nmutation ChangePassword($args: ChangePasswordInput!) {\n  changePassword(args: $args) {\n    id\n    email\n  }\n}\n\nmutation verifyMail($otp: String!) {\n  verifyMail(mail: {otp: $otp})\n}":
     types.ForgotPasswordDocument,
   "mutation Login($auth: AuthInput!) {\n  login(auth: $auth) {\n    user {\n      id\n    }\n    access_token\n    refresh_token\n  }\n}":
     types.LoginDocument,
@@ -50,8 +50,8 @@ export function gql(source: string): unknown;
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
-  source: "mutation ForgotPassword($auth: ForgotPasswordInput!) {\n  forgotPassword(auth: $auth)\n}\n\nmutation ResetPassword($auth: ResetPasswordInput!) {\n  resetPassword(auth: $auth)\n}\n\nmutation verifyMail($otp: String!) {\n  verifyMail(mail: {otp: $otp})\n}",
-): (typeof documents)["mutation ForgotPassword($auth: ForgotPasswordInput!) {\n  forgotPassword(auth: $auth)\n}\n\nmutation ResetPassword($auth: ResetPasswordInput!) {\n  resetPassword(auth: $auth)\n}\n\nmutation verifyMail($otp: String!) {\n  verifyMail(mail: {otp: $otp})\n}"];
+  source: "mutation ForgotPassword($auth: ForgotPasswordInput!) {\n  forgotPassword(auth: $auth)\n}\n\nmutation ResetPassword($auth: ResetPasswordInput!) {\n  resetPassword(auth: $auth)\n}\n\nmutation ChangePassword($args: ChangePasswordInput!) {\n  changePassword(args: $args) {\n    id\n    email\n  }\n}\n\nmutation verifyMail($otp: String!) {\n  verifyMail(mail: {otp: $otp})\n}",
+): (typeof documents)["mutation ForgotPassword($auth: ForgotPasswordInput!) {\n  forgotPassword(auth: $auth)\n}\n\nmutation ResetPassword($auth: ResetPasswordInput!) {\n  resetPassword(auth: $auth)\n}\n\nmutation ChangePassword($args: ChangePasswordInput!) {\n  changePassword(args: $args) {\n    id\n    email\n  }\n}\n\nmutation verifyMail($otp: String!) {\n  verifyMail(mail: {otp: $otp})\n}"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
-import { ClientError } from "graphql-request";
 import { useForm, useWatch } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 import { Button, Input } from "@components/shared";
 import { forgotPassword } from "@services/auth/password";
@@ -11,6 +11,7 @@ type FormValues = {
 };
 
 export function ForgotPasswordPage() {
+  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -27,11 +28,8 @@ export function ForgotPasswordPage() {
   const { mutate } = useMutation({
     mutationFn: (data: FormValues) => forgotPassword(data.email),
     onSuccess: () => {},
-    onError: (error) => {
-      const message =
-        error instanceof ClientError ? error.response.errors?.[0].message : error.message;
-
-      toast.error(message);
+    onError: () => {
+      toast.error(t("page.forgotPassword.emailDoesNotExist"));
     },
   });
 
@@ -41,15 +39,15 @@ export function ForgotPasswordPage() {
 
   return (
     <div className="m-auto flex w-[560px] flex-col">
-      <h1 className="mb-6 text-34 font-normal leading-11 dark:text-white">Forgot password</h1>
-      <p className="mb-10 leading-6 dark:text-white">
-        We will send you an email with further instructions
-      </p>
+      <h1 className="mb-6 text-34 font-normal leading-11 dark:text-white">
+        {t("page.forgotPassword.title")}
+      </h1>
+      <p className="mb-10 leading-6 dark:text-white">{t("page.forgotPassword.subtitle")}</p>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
         <Input
-          label="Email"
+          label={t("page.forgotPassword.emailLabel")}
           type="email"
-          placeholder="Email"
+          placeholder={t("page.forgotPassword.emailLabel")}
           {...register("email")}
           error={errors.email?.message}
           onChange={() => {
@@ -59,12 +57,12 @@ export function ForgotPasswordPage() {
 
         <div className="flex flex-col items-center gap-0 mt-16">
           <Button className="w-55" variant="filled" type="submit" disabled={!emailValue?.trim()}>
-            Reset password
+            {t("page.forgotPassword.resetPassword")}
           </Button>
 
           <Link to="/auth" search={{ mode: "login" }}>
             <Button variant="default" type="button">
-              Cancel
+              {t("page.forgotPassword.cancel")}
             </Button>
           </Link>
         </div>

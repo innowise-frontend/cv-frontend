@@ -1,0 +1,76 @@
+{
+  "theme": {
+    "device": "Системная",
+    "light": "Светлая",
+    "dark": "Тёмная"
+  },
+  "page": {
+    "home": {
+      "hello": "Привет!"
+    },
+    "setting": {
+      "theme": "Тема",
+      "language": "Язык",
+      "changePassword": "Сменить пароль",
+      "changePasswordButton": "Сменить",
+      "changePasswordSuccess": "Пароль изменён",
+      "changePasswordError": "Ошибка! Не удалось изменить пароль",
+      "oldPassword": "Пароль",
+      "newPassword": "Новый пароль",
+      "confirmPassword": "Подтвердите пароль",
+      "selectThemePlaceholder": "Выберите тему",
+      "selectLanguagePlaceholder": "Выберите язык",
+      "togglePasswordVisibility": "Показать или скрыть пароль",
+      "changeNewPasswordError": "Пароль должен быть не короче 6 символов и содержать буквы и цифры",
+      "changeConfirmPasswordErrorTitle": "Пароли не совпадают",
+      "validation": {
+        "currentPasswordRequired": "Текущий пароль обязателен",
+        "passwordMinLength": "Пароль должен быть не короче 6 символов",
+        "passwordsDoNotMatch": "Пароли не совпадают",
+        "newPasswordMustDiffer": "Новый пароль должен отличаться от текущего"
+      }
+    },
+    "error": {
+      "oops": "Упс",
+      "goBack": "Назад",
+      "defaultErrorMessage": "Ошибка! Не удалось изменить пароль",
+      "defaultNotFoundMessage": "Хм… похоже, это не та страница, которую вы искали. \n Давайте вернёмся на правильный путь."
+    },
+    "forgotPassword": {
+      "title": "Забыли пароль",
+      "subtitle": "Мы отправим вам письмо с дальнейшими инструкциями",
+      "emailLabel": "Email",
+      "resetPassword": "Сбросить пароль",
+      "cancel": "Отмена",
+      "emailDoesNotExist": "Email не найден."
+    },
+    "login": {
+      "title": "Вход"
+    },
+    "signup": {
+      "title": "Регистрация"
+    },
+    "resetPassword": {
+      "title": "Сброс пароля",
+      "subtitle": "Введите новый пароль и подтвердите его ниже.",
+      "newPasswordLabel": "Новый пароль",
+      "confirmPasswordLabel": "Подтвердите пароль",
+      "submit": "Отправить",
+      "goSignIn": "Войти",
+      "validation": {
+        "passwordMinLength": "Пароль должен быть не короче 6 символов",
+        "passwordsDoNotMatch": "Пароли не совпадают"
+      }
+    },
+    "sidebar": {
+      "employees": "Сотрудники",
+      "skills": "Навыки",
+      "languages": "Языки",
+      "settings": "Настройки",
+      "cvs": "Резюме",
+      "departments": "Отделы",
+      "positions": "Должности",
+      "projects": "Проекты"
+    }
+  }
+}

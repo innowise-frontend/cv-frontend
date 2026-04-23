@@ -8,7 +8,6 @@ import {
   PaginationContent,
 } from "@components/ui/pagination";
 import { PaginationProps } from "./types";
-import { Select } from "../Select/Select";
 
 export const Pagination = ({
   pagesCount,
@@ -16,8 +15,6 @@ export const Pagination = ({
   onPreviousPage,
   onNextPage,
   onPageChange,
-  viewOptions,
-  onChangeViewOption,
   className,
 }: PaginationProps) => {
   const paginationPages = Array.from({ length: pagesCount }, (_, index) => index + 1);
@@ -55,7 +52,6 @@ export const Pagination = ({
           </Button>
         </PaginationItem>
       </PaginationContent>
-      <Select options={viewOptions} onValueChange={onChangeViewOption} />
     </UIPagination>
   );
 };
