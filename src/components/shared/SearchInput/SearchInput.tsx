@@ -1,6 +1,6 @@
 import SearchIcon from "@assets/icon/SearchIcon.svg?react";
 import { Input } from "@components/shared";
-import { useHandleSearch } from "@hooks/useSearchParams";
+import { useHandleSearch } from "@hooks/index";
 
 export const SearchInput = ({ defaultValue }: { defaultValue?: string }) => {
   const { onSearch } = useHandleSearch();

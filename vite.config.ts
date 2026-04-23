@@ -32,6 +32,9 @@ export default defineConfig({
   test: {
     environment: "jsdom",
     setupFiles: ["./src/test/setup.ts"],
+    coverage: {
+      exclude: ["./src/components/ui/**", "./src/assets/**", "./src/routeTree.gen.ts"],
+    },
     globals: true,
   },
 });

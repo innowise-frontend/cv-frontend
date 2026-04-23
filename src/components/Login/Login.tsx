@@ -3,10 +3,9 @@ import { Link, useNavigate } from "@tanstack/react-router";
 import { ClientError } from "graphql-request";
 import { toast } from "sonner";
 import { Button } from "@components/shared";
-import { useLocalStorage } from "@hooks/useLocalStorage";
+import { useLocalStorage } from "@hooks/index";
 import { LOCAL_STORAGE_KEYS } from "@root/constants";
-import { login } from "@services/auth/login";
-import { getMe } from "@services/auth/me";
+import { login, getMe } from "@services/auth";
 import { AuthForm } from "../AuthForm";
 
 export const Login = () => {

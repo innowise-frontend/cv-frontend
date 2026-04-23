@@ -4,10 +4,9 @@ import { ClientError } from "graphql-request";
 import { toast } from "sonner";
 import { AuthForm } from "@components/AuthForm";
 import { Button } from "@components/shared";
+import { useLocalStorage } from "@hooks/index";
 import { LOCAL_STORAGE_KEYS } from "@root/constants";
-import { useLocalStorage } from "@root/hooks";
-import { getMe } from "@root/services/auth/me";
-import { signup } from "@services/auth/signup";
+import { getMe, signup } from "@services/auth";
 
 export const Signup = () => {
   const navigate = useNavigate();

@@ -1,14 +1,13 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { RenderWithQueryClient } from "@root/lib/testUtils";
+import { RenderWithQueryClient, renderWithFileRoutes } from "@root/lib/testUtils";
 import { ForgotPasswordPage } from "./ForgotPasswordPage";
-import type { ReactNode } from "react";
 
 const forgotPasswordMock = vi.fn<(email: string) => Promise<void>>();
 const toastError = vi.fn();
 
-vi.mock("@services/auth/password", () => ({
+vi.mock("@root/services/auth/forgotPassword/forgotPassword", () => ({
   forgotPassword: (email: string): Promise<void> => forgotPasswordMock(email),
 }));
 
@@ -18,21 +17,8 @@ vi.mock("sonner", () => ({
   },
 }));
 
-vi.mock("@tanstack/react-router", () => ({
-  Link: ({ to, children }: { to: string; children: ReactNode }) => (
-    <a
-      href={to}
-      onClick={(e) => {
-        e.preventDefault();
-      }}
-    >
-      {children}
-    </a>
-  ),
-}));
-
-function renderPage() {
-  return render(
+async function renderPage() {
+  return renderWithFileRoutes(
     <RenderWithQueryClient>
       <ForgotPasswordPage />
     </RenderWithQueryClient>,
@@ -44,8 +30,8 @@ describe("ForgotPasswordPage", () => {
     vi.clearAllMocks();
   });
 
-  it("renders form correctly", () => {
-    renderPage();
+  it("renders form correctly", async () => {
+    await renderPage();
 
     expect(screen.getByText("Forgot password")).toBeInTheDocument();
     expect(
@@ -55,8 +41,8 @@ describe("ForgotPasswordPage", () => {
     expect(screen.getByRole("button", { name: /reset password/i })).toBeInTheDocument();
   });
 
-  it("disables submit button when email is empty", () => {
-    renderPage();
+  it("disables submit button when email is empty", async () => {
+    await renderPage();
 
     const button = screen.getByRole("button", { name: /reset password/i });
     expect(button).toBeDisabled();
@@ -66,7 +52,7 @@ describe("ForgotPasswordPage", () => {
     const user = userEvent.setup();
     forgotPasswordMock.mockResolvedValueOnce(undefined);
 
-    renderPage();
+    await renderPage();
 
     await user.type(screen.getByPlaceholderText("Email"), "test@test.com");
     fireEvent.submit(screen.getByRole("button", { name: /reset password/i }).closest("form")!);
@@ -79,7 +65,7 @@ describe("ForgotPasswordPage", () => {
     const user = userEvent.setup();
     forgotPasswordMock.mockRejectedValueOnce(new Error("Not found"));
 
-    renderPage();
+    await renderPage();
 
     await user.type(screen.getByPlaceholderText("Email"), "fail@test.com");
     fireEvent.submit(screen.getByRole("button", { name: /reset password/i }).closest("form")!);
@@ -88,13 +74,9 @@ describe("ForgotPasswordPage", () => {
   });
 
   it('navigates to "/auth" when "cancel" is clicked', async () => {
-    const user = userEvent.setup();
-    renderPage();
+    await renderPage();
 
     const cancelLink = screen.getByRole("link", { name: "Cancel" });
-    expect(cancelLink).toHaveAttribute("href", "/auth");
-
-    await user.click(cancelLink);
-    expect(cancelLink).toHaveAttribute("href", "/auth");
+    expect(cancelLink).toHaveAttribute("href", "/auth?mode=login");
   });
 });

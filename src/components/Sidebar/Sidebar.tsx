@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import LeftArrowIcon from "@assets/icon/LeftArrowIcon.svg?react";
 import { Logo } from "@components/Logo";
 import { Divider, LinkButton, ProfileBlock } from "@components/shared";
-import { useAuth } from "@root/hooks/useAuth";
+import { useAuth } from "@root/hooks/useAuth/useAuth";
 import getSidebarItems from "./const";
 
 export const Sidebar = () => {

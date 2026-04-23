@@ -1,0 +1,3 @@
+mutation verifyMail($otp: String!) {
+  verifyMail(mail: { otp: $otp })
+}

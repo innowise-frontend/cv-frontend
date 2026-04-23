@@ -2,13 +2,13 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ChangePassword } from "@components/ChangePassword";
 import { Select } from "@components/shared/Select/Select";
+import { useLocalStorage } from "@hooks/index";
 import { LOCAL_STORAGE_KEYS } from "@root/constants/localStorage";
-import { useLocalStorage } from "@root/hooks/useLocalStorage";
-import { applyTheme } from "@utils/theme";
+import { applyTheme } from "@root/lib/theme/theme";
 import { LANGUAGES, THEMES } from "./constants";
 import type { Theme } from "./types";
 
-export function SettingPage() {
+export const SettingPage = () => {
   const { t, i18n } = useTranslation();
   const [theme, setTheme] = useLocalStorage<Theme>(LOCAL_STORAGE_KEYS.THEME, "light");
   const [language, setLanguage] = useState(i18n.resolvedLanguage ?? "en");
@@ -50,4 +50,4 @@ export function SettingPage() {
       <ChangePassword className="mt-2" />
     </div>
   );
-}
+};

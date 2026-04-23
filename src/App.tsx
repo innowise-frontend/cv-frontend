@@ -2,7 +2,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createRouter, RouterProvider } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { AuthProvider } from "./context/AuthContext";
-import { useAuth } from "./hooks/useAuth";
+import { useAuth } from "./hooks/useAuth/useAuth";
 import { ErrorPage } from "./pages/ErrorPage";
 import { routeTree } from "./routeTree.gen";
 
