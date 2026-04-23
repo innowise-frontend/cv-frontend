@@ -15,7 +15,7 @@ import type { MultiSelectProps, SelectProps, SingleSelectProps } from "./types";
 const itemClassName = cn(
   "pl-2.5 pr-2.5 text-gray-2 dark:text-gray-5",
   "data-selected:bg-gray-6 data-selected:text-gray dark:data-selected:bg-gray-4 dark:data-selected:text-gray-8",
-  "[&_svg]:hidden",
+  "[&_svg]:hidden cursor-pointer",
 );
 
 const SelectSingle = ({
@@ -113,16 +113,15 @@ const SelectMulti = ({
               }
 
               return values.map((v: string) => (
-                <span
+                <div
                   key={v}
                   className="inline-flex h-6 max-w-full items-center gap-1 rounded-full border border-gray-2 bg-gray-8 py-0.5 pl-2 pr-1 text-xs leading-none text-gray-2 dark:border-gray-5 dark:bg-gray-3 dark:text-gray-8"
                 >
                   <span>{labelFor(v)}</span>
-                  <button
-                    type="button"
+                  <div
                     className={cn(
                       "inline-flex size-3 shrink-0 items-center justify-center rounded-full p-0 outline-none",
-                      "bg-gray-5 dark:bg-gray-5",
+                      "bg-gray-5 dark:bg-gray-5 cursor-pointer",
                     )}
                     onPointerDown={(e) => e.stopPropagation()}
                     onClick={(e) => {
@@ -132,8 +131,8 @@ const SelectMulti = ({
                     }}
                   >
                     <CloseIcon className="size-1.5 text-gray-8 dark:text-gray-4" aria-hidden />
-                  </button>
-                </span>
+                  </div>
+                </div>
               ));
             }}
           </SelectValue>

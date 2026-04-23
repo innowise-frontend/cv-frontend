@@ -12,7 +12,6 @@ export const SettingPage = () => {
   const { t, i18n } = useTranslation();
   const [theme, setTheme] = useLocalStorage<Theme>(LOCAL_STORAGE_KEYS.THEME, "light");
   const [language, setLanguage] = useState(i18n.resolvedLanguage ?? "en");
-  const [multiExample, setMultiExample] = useState<string[]>([]);
 
   const handleThemeChange = (value: string) => {
     const next = value as Theme;
@@ -29,12 +28,6 @@ export const SettingPage = () => {
     ...item,
     label: t(`theme.${item.value}`),
   }));
-
-  const multiExampleList = [
-    { value: "react", label: "React" },
-    { value: "ts", label: "TypeScript" },
-    { value: "graphql", label: "GraphQL" },
-  ];
 
   return (
     <div className="flex flex-col mt-10 gap-8 mx-auto">
@@ -53,15 +46,6 @@ export const SettingPage = () => {
         placeholder={t("page.setting.selectLanguagePlaceholder")}
         value={language}
         onValueChange={handleLanguageChange}
-      />
-      <Select
-        className="w-[852px]"
-        label="Multi-select example"
-        list={multiExampleList}
-        placeholder="Select multiple values"
-        multiple
-        value={multiExample}
-        onValueChange={setMultiExample}
       />
       <ChangePassword className="mt-2" />
     </div>
