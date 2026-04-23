@@ -1,7 +1,6 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { ROUTES } from "@root/constants/routes";
 import { RenderWithQueryClient } from "@root/lib/testUtils";
 import { ResetPasswordPage } from "./ResetPasswordPage";
 import type { ReactNode } from "react";
