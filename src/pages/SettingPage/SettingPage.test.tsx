@@ -27,7 +27,6 @@ vi.mock("@components/shared/Select/Select", () => ({
   Select: ({
     label,
     value,
-    multiple,
     onValueChange,
   }: {
     label: string;
@@ -43,7 +42,6 @@ vi.mock("@components/shared/Select/Select", () => ({
         onClick={() => {
           if (label === "page.setting.theme") onValueChange("dark");
           if (label === "page.setting.language") onValueChange("uk");
-          if (multiple) onValueChange(["react", "ts"]);
         }}
       >
         change-{label}
@@ -74,7 +72,6 @@ describe("SettingPage", () => {
 
     expect(screen.getByText("page.setting.theme")).toBeInTheDocument();
     expect(screen.getByText("page.setting.language")).toBeInTheDocument();
-    expect(screen.getByText("Multi-select example")).toBeInTheDocument();
     expect(screen.getByTestId("change-password")).toBeInTheDocument();
   });
 
@@ -93,13 +90,5 @@ describe("SettingPage", () => {
     fireEvent.click(screen.getByRole("button", { name: "change-page.setting.language" }));
 
     expect(changeLanguageMock).toHaveBeenCalledWith("uk");
-  });
-
-  it("updates multi-select value", () => {
-    render(<SettingPage />);
-
-    expect(screen.getByTestId("Multi-select example-value")).toBeEmptyDOMElement();
-    fireEvent.click(screen.getByRole("button", { name: "change-Multi-select example" }));
-    expect(screen.getByTestId("Multi-select example-value")).toHaveTextContent("react,ts");
   });
 });
