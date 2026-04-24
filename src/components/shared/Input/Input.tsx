@@ -1,4 +1,5 @@
 import React, { useState, useId, forwardRef } from "react";
+import { useTranslation } from "react-i18next";
 import CloseEyeIcon from "@assets/icon/CloseEyeIcon.svg?react";
 import OpenEyeIcon from "@assets/icon/OpenEyeIcon.svg?react";
 import { Input as UiInput } from "@components/ui/input";
@@ -6,7 +7,11 @@ import { cn } from "@root/lib/utils";
 import type { InputWithLabelProps } from "./types";
 
 export const Input = forwardRef<HTMLInputElement, InputWithLabelProps>(
-  ({ label, className, value: controlledValue, onChange, type, error, ...props }, ref) => {
+  (
+    { label, className, value: controlledValue, defaultValue, onChange, type, error, ...props },
+    ref,
+  ) => {
+    const { t } = useTranslation();
     const generatedId = useId();
 
     const [value, setValue] = useState("");
@@ -33,7 +38,7 @@ export const Input = forwardRef<HTMLInputElement, InputWithLabelProps>(
           <label
             htmlFor={generatedId}
             className={cn(
-              "absolute z-10 left-2.5 -top-5 px-1 text-xs text-gray-3 dark:text-gray-5",
+              "absolute z-10 left-2.5 -top-4 px-1 text-xs text-gray-3 dark:text-gray-5",
               error && "text-red",
             )}
           >
@@ -46,9 +51,10 @@ export const Input = forwardRef<HTMLInputElement, InputWithLabelProps>(
             ref={ref}
             type={inputType}
             value={controlledValue}
+            defaultValue={defaultValue}
             onChange={handleChange}
             className={cn(
-              "h-12 px-3 py-3 text-base leading-6 placeholder:text-gray-6 border-gray-5 shadow-none outline-none focus:outline-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:shadow-none dark:text-white dark:placeholder:text-gray-2",
+              "h-12 px-3 py-3 text-base leading-6 placeholder:text-gray-6 border-gray-5 shadow-none outline-none focus:outline-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:shadow-none dark:text-white dark:placeholder:text-gray-3",
               className,
               error &&
                 "border-red focus-visible:border-red dark:border-red dark:focus-visible:border-red",
@@ -58,7 +64,7 @@ export const Input = forwardRef<HTMLInputElement, InputWithLabelProps>(
           {isPasswordField && (
             <button
               type="button"
-              aria-label="Toggle password visibility"
+              aria-label={t("page.setting.togglePasswordVisibility")}
               onClick={togglePasswordVisibility}
               className="absolute right-5 top-1/2 -translate-y-1/2 text-gray-3 focus:outline-none dark:text-gray-8 dark:hover:text-gray-8"
             >
@@ -66,11 +72,12 @@ export const Input = forwardRef<HTMLInputElement, InputWithLabelProps>(
             </button>
           )}
         </div>
-        {error && (
-          <p id={`${generatedId}-error`} className="pl-2 mt-1.5 text-left text-sm text-red">
-            {error}
-          </p>
-        )}
+        <p
+          id={`${generatedId}-error`}
+          className={cn("pl-2 mt-1 text-left text-xs text-red h-3", !error && "invisible")}
+        >
+          {error || " "}
+        </p>
       </div>
     );
   },

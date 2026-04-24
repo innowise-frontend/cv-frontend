@@ -74,4 +74,10 @@ export default defineConfig([
       ],
     },
   },
+  {
+    files: ["src/routes/**/*.tsx"],
+    rules: {
+      "react-hooks/rules-of-hooks": "off",
+    },
+  },
 ]);

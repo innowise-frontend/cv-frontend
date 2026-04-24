@@ -1,0 +1,76 @@
+{
+  "theme": {
+    "device": "Système",
+    "light": "Clair",
+    "dark": "Sombre"
+  },
+  "page": {
+    "home": {
+      "hello": "Bonjour!"
+    },
+    "setting": {
+      "theme": "Thème",
+      "language": "Langue",
+      "changePassword": "Changer le mot de passe",
+      "changePasswordButton": "Changer",
+      "changePasswordSuccess": "Mot de passe modifié",
+      "changePasswordError": "Erreur ! Impossible de modifier le mot de passe",
+      "oldPassword": "Mot de passe",
+      "newPassword": "Nouveau mot de passe",
+      "confirmPassword": "Confirmer le mot de passe",
+      "selectThemePlaceholder": "Sélectionnez un thème",
+      "selectLanguagePlaceholder": "Sélectionnez une langue",
+      "togglePasswordVisibility": "Afficher/masquer le mot de passe",
+      "changeNewPasswordError": "Le mot de passe doit contenir au moins 6 caractères et inclure des lettres et des chiffres",
+      "changeConfirmPasswordErrorTitle": "Les mots de passe ne correspondent pas",
+      "validation": {
+        "currentPasswordRequired": "Le mot de passe actuel est requis",
+        "passwordMinLength": "Le mot de passe doit contenir au moins 6 caractères",
+        "passwordsDoNotMatch": "Les mots de passe ne correspondent pas",
+        "newPasswordMustDiffer": "Le nouveau mot de passe doit être différent de l'actuel"
+      }
+    },
+    "error": {
+      "oops": "Oups",
+      "goBack": "Retour",
+      "defaultErrorMessage": "Erreur ! Impossible de modifier le mot de passe",
+      "defaultNotFoundMessage": "Hum… il semble que ce ne soit pas la page que vous cherchiez. \n Revenons sur la bonne voie."
+    },
+    "forgotPassword": {
+      "title": "Mot de passe oublié",
+      "subtitle": "Nous vous enverrons un e-mail avec des instructions supplémentaires",
+      "emailLabel": "E-mail",
+      "resetPassword": "Réinitialiser le mot de passe",
+      "cancel": "Annuler",
+      "emailDoesNotExist": "L'e-mail n'existe pas."
+    },
+    "login": {
+      "title": "Connexion"
+    },
+    "signup": {
+      "title": "Inscription"
+    },
+    "resetPassword": {
+      "title": "Réinitialiser le mot de passe",
+      "subtitle": "Saisissez un nouveau mot de passe et confirmez-le ci-dessous.",
+      "newPasswordLabel": "Nouveau mot de passe",
+      "confirmPasswordLabel": "Confirmer le mot de passe",
+      "submit": "Envoyer",
+      "goSignIn": "Aller à la connexion",
+      "validation": {
+        "passwordMinLength": "Le mot de passe doit contenir au moins 6 caractères",
+        "passwordsDoNotMatch": "Les mots de passe ne correspondent pas"
+      }
+    },
+    "sidebar": {
+      "employees": "Employés",
+      "skills": "Compétences",
+      "languages": "Langues",
+      "settings": "Paramètres",
+      "cvs": "CV",
+      "departments": "Départements",
+      "positions": "Postes",
+      "projects": "Projets"
+    }
+  }
+}

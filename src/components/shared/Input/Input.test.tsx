@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import UserEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
+import i18n from "@root/i18n/i18n";
 import { Input } from "./Input";
 
 describe("InputWithLabel", () => {
@@ -72,7 +73,9 @@ describe("InputWithLabel", () => {
   it("should show the password visibility toggle when type is password", () => {
     render(<Input type="password" />);
 
-    expect(screen.getByRole("button", { name: "Toggle password visibility" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: i18n.t("page.setting.togglePasswordVisibility") }),
+    ).toBeInTheDocument();
   });
 
   it("should toggle password visibility when the button is clicked", async () => {
@@ -82,11 +85,15 @@ describe("InputWithLabel", () => {
 
     expect(field).toHaveAttribute("type", "password");
 
-    await user.click(screen.getByRole("button", { name: "Toggle password visibility" }));
+    await user.click(
+      screen.getByRole("button", { name: i18n.t("page.setting.togglePasswordVisibility") }),
+    );
 
     expect(field).toHaveAttribute("type", "text");
 
-    await user.click(screen.getByRole("button", { name: "Toggle password visibility" }));
+    await user.click(
+      screen.getByRole("button", { name: i18n.t("page.setting.togglePasswordVisibility") }),
+    );
 
     expect(field).toHaveAttribute("type", "password");
   });

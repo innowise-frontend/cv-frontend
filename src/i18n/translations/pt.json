@@ -1,0 +1,76 @@
+{
+  "theme": {
+    "device": "Sistema",
+    "light": "Claro",
+    "dark": "Escuro"
+  },
+  "page": {
+    "home": {
+      "hello": "Olá!"
+    },
+    "setting": {
+      "theme": "Tema",
+      "language": "Idioma",
+      "changePassword": "Alterar senha",
+      "changePasswordButton": "Alterar",
+      "changePasswordSuccess": "Senha alterada",
+      "changePasswordError": "Erro! Não foi possível alterar a senha",
+      "oldPassword": "Senha",
+      "newPassword": "Nova senha",
+      "confirmPassword": "Confirmar senha",
+      "selectThemePlaceholder": "Selecione um tema",
+      "selectLanguagePlaceholder": "Selecione um idioma",
+      "togglePasswordVisibility": "Mostrar/ocultar senha",
+      "changeNewPasswordError": "A senha deve ter pelo menos 6 caracteres e conter letras e números",
+      "changeConfirmPasswordErrorTitle": "As senhas não coincidem",
+      "validation": {
+        "currentPasswordRequired": "A senha atual é obrigatória",
+        "passwordMinLength": "A senha deve ter pelo menos 6 caracteres",
+        "passwordsDoNotMatch": "As senhas não coincidem",
+        "newPasswordMustDiffer": "A nova senha deve ser diferente da atual"
+      }
+    },
+    "error": {
+      "oops": "Ops",
+      "goBack": "Voltar",
+      "defaultErrorMessage": "Erro! Não foi possível alterar a senha",
+      "defaultNotFoundMessage": "Hmm… parece que esta não é a página que você estava procurando. \n Vamos colocar você de volta no caminho certo."
+    },
+    "forgotPassword": {
+      "title": "Esqueceu a senha",
+      "subtitle": "Enviaremos um e-mail com mais instruções",
+      "emailLabel": "E-mail",
+      "resetPassword": "Redefinir senha",
+      "cancel": "Cancelar",
+      "emailDoesNotExist": "O e-mail não existe."
+    },
+    "login": {
+      "title": "Entrar"
+    },
+    "signup": {
+      "title": "Cadastre-se"
+    },
+    "resetPassword": {
+      "title": "Redefinir senha",
+      "subtitle": "Digite uma nova senha e confirme abaixo.",
+      "newPasswordLabel": "Nova senha",
+      "confirmPasswordLabel": "Confirmar senha",
+      "submit": "Enviar",
+      "goSignIn": "Ir para entrar",
+      "validation": {
+        "passwordMinLength": "A senha deve ter pelo menos 6 caracteres",
+        "passwordsDoNotMatch": "As senhas não coincidem"
+      }
+    },
+    "sidebar": {
+      "employees": "Funcionários",
+      "skills": "Habilidades",
+      "languages": "Idiomas",
+      "settings": "Configurações",
+      "cvs": "CVs",
+      "departments": "Departamentos",
+      "positions": "Cargos",
+      "projects": "Projetos"
+    }
+  }
+}

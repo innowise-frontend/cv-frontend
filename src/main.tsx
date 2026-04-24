@@ -1,37 +1,20 @@
-import { RouterProvider, createRouter } from "@tanstack/react-router";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { ErrorPage } from "@root/pages/ErrorPage";
-import { routeTree } from "./routeTree.gen";
+import App from "@root/App";
 import "./index.css";
+import { applyTheme, getDefaultTheme, watchSystemTheme } from "@root/lib/theme/theme";
+import type { Theme } from "@root/pages/SettingPage/types";
+import "@root/i18n/i18n";
 
-const router = createRouter({
-  routeTree,
-  notFoundMode: "root",
-  defaultErrorComponent: () => (
-    <ErrorPage
-      error={
-        "Something went wrong. We’re already working on fixing it. \n Please try again or go back."
-      }
-    />
-  ),
-  defaultNotFoundComponent: () => (
-    <ErrorPage
-      error={
-        "Hmm… this doesn’t seem to be the page you were looking for. \n Let’s get you back on track."
-      }
-    />
-  ),
+applyTheme(getDefaultTheme() as Theme);
+
+watchSystemTheme(() => {
+  const theme = getDefaultTheme();
+  applyTheme(theme as Theme);
 });
 
-declare module "@tanstack/react-router" {
-  interface Register {
-    router: typeof router;
-  }
-}
-
-createRoot(document.getElementById("root")!).render(
+createRoot(document.getElementById("root") as HTMLElement).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <App />
   </StrictMode>,
 );

@@ -6,62 +6,61 @@ import LanguagesIcon from "@assets/icon/LanguagesIcon.svg?react";
 import SettingsIcon from "@assets/icon/SettingsIcon.svg?react";
 import TrendingUpIcon from "@assets/icon/TrendingUpIcon.svg?react";
 import UsersIcon from "@assets/icon/UsersIcon.svg?react";
-import { ROUTES } from "@root/constants/routes";
+import { ROUTES } from "@root/constants";
 
 interface GetSidebarItemsProps {
   isAdmin?: boolean;
 }
 
-const getSidebarItems = ({ isAdmin }: GetSidebarItemsProps) => [
+const getSidebarItems = ({ isAdmin, t }: GetSidebarItemsProps & { t: (key: string) => string }) => [
   {
-    title: "Employees",
+    title: t("page.sidebar.employees"),
     to: ROUTES.ROOT,
     icon: UsersIcon,
     visible: true,
   },
   {
-    title: "Skills",
+    title: t("page.sidebar.skills"),
     to: ROUTES.SKILLS,
     icon: TrendingUpIcon,
     visible: true,
   },
   {
-    title: "Languages",
+    title: t("page.sidebar.languages"),
     to: ROUTES.LANGUAGES,
     icon: LanguagesIcon,
     visible: true,
   },
   {
-    title: "CVs",
+    title: t("page.sidebar.settings"),
+    to: ROUTES.SETTINGS,
+    icon: SettingsIcon,
+    visible: true,
+  },
+  {
+    title: t("page.sidebar.cvs"),
     to: ROUTES.CVS,
     icon: FileUserIcon,
     visible: true,
     withDivider: isAdmin,
   },
-
   {
-    title: "Departments",
+    title: t("page.sidebar.departments"),
     to: ROUTES.DEPARTMENTS,
     icon: BuildingIcon,
     visible: isAdmin,
   },
   {
-    title: "Positions",
+    title: t("page.sidebar.positions"),
     to: ROUTES.POSITIONS,
     icon: BriefcaseIcon,
     visible: isAdmin,
   },
   {
-    title: "Projects",
+    title: t("page.sidebar.projects"),
     to: ROUTES.PROJECTS,
     icon: FoldersIcon,
     visible: isAdmin,
-  },
-  {
-    title: "Settings",
-    to: ROUTES.SETTINGS,
-    icon: SettingsIcon,
-    visible: true,
   },
 ];
 
