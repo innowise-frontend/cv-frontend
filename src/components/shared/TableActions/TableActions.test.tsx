@@ -57,8 +57,17 @@ describe("TableActions", () => {
 
     expect(screen.getByTestId("actions-dropdown")).toBeInTheDocument();
     expect(dropdownMock).toHaveBeenCalledWith(
-      expect.objectContaining({ options: actions, params: "42" }),
+      expect.objectContaining({
+        options: expect.arrayContaining([
+          expect.objectContaining({ label: "View profile", onClick: expect.any(Function) }),
+          expect.objectContaining({ label: "Delete", onClick: expect.any(Function) }),
+        ]),
+      }),
     );
+
+    const passedOptions = dropdownMock.mock.calls[0][0].options;
+    passedOptions[0].onClick();
+    expect(actions[0].onClick).toHaveBeenCalledWith("42");
     expect(screen.queryByTestId("router-link")).not.toBeInTheDocument();
   });
 

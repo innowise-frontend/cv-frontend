@@ -1,10 +1,9 @@
 export interface DropdownItem {
   label: string;
-  onClick: (params: string) => void;
+  onClick: () => void;
   icon?: React.ReactNode;
 }
 
 export interface DropdownProps {
   options: DropdownItem[];
-  params?: string;
 }

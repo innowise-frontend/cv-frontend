@@ -7,7 +7,7 @@ import {
 } from "@components/ui/dropdown-menu";
 import { DropdownProps } from "./types";
 
-export const Dropdown = ({ options, params }: DropdownProps) => {
+export const Dropdown = ({ options }: DropdownProps) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="flex h-8 w-8 items-center justify-center rounded-sm p-0 data-[state=open]:bg-muted">
@@ -21,7 +21,7 @@ export const Dropdown = ({ options, params }: DropdownProps) => {
         {options.map((option) => (
           <DropdownMenuItem
             key={option.label}
-            onClick={() => option.onClick(params ?? "")}
+            onClick={option.onClick}
             className="text-gray-2 hover:bg-gray-7 hover:text-gray-2 cursor-pointer dark:text-gray-8 dark:hover:bg-gray-3"
           >
             {option.icon}

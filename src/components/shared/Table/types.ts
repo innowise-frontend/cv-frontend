@@ -12,7 +12,7 @@ export interface TableProps<TData> {
   onChangePage: (page: number) => void;
   actions?: {
     label: string;
-    onClick: (userId: string) => void;
+    onClick: (params: string) => void;
   }[];
   viewOptions?: {
     label: string;
@@ -29,7 +29,7 @@ declare module "@tanstack/react-table" {
     currentSort?: "ASC" | "DESC";
     actions?: {
       label: string;
-      onClick: (userId: string) => void;
+      onClick: (params: string) => void;
     }[];
   }
 }
