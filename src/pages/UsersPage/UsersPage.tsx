@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate, useSearch } from "@tanstack/react-router";
 import { useState } from "react";
-import { Breadcrumbs, ROUTES, Table, TableSearch } from "@root/components/shared";
+import { Breadcrumbs, ROUTES, Table, TableSearch } from "@components/shared";
 import { getUsers } from "@services/users";
 import { columns } from "./columns";
 

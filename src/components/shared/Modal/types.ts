@@ -1,6 +1,8 @@
 export interface ModalProps {
-  inProp: boolean;
+  isOpen: boolean;
   children: React.ReactNode;
   showOverlay?: boolean;
   closeModal: () => void;
+  actions: React.ReactNode;
+  title: string;
 }
