@@ -18,3 +18,4 @@ export { ProgressBar } from "./ProgressBar/ProgressBar";
 export { CodeInput } from "./CodeInput/CodeInput";
 export { TableActions } from "./TableActions/TableActions";
 export { TableColumnHeader } from "./TableColumnHeader/TableColumnHeader";
+export { Modal } from "./Modal/Modal";
