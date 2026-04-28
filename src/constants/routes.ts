@@ -14,6 +14,7 @@ export const ROUTES = {
   PROJECTS: "/projects",
   SETTINGS: "/settings",
   SKILLS: "/skills",
+  USER_PAGE: "/users/$userId",
 };
 
 export type RouteKeys = keyof typeof ROUTES;

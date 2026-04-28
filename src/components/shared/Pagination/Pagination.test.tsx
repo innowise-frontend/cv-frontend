@@ -6,14 +6,7 @@ import { Pagination } from "./Pagination";
 const createProps = (overrides?: Partial<React.ComponentProps<typeof Pagination>>) => ({
   pagesCount: 3,
   currentPage: 1,
-  onPreviousPage: vi.fn(),
-  onNextPage: vi.fn(),
   onPageChange: vi.fn(),
-  viewOptions: [
-    { label: "5", value: 5 },
-    { label: "10", value: 10 },
-  ],
-  onChangeViewOption: vi.fn(),
   ...overrides,
 });
 
@@ -28,7 +21,7 @@ describe("Pagination", () => {
   });
 
   it("should disable previous button on the first page", () => {
-    render(<Pagination {...createProps({ currentPage: 0 })} />);
+    render(<Pagination {...createProps({ currentPage: 1 })} />);
     const nav = screen.getByRole("navigation", { name: "pagination" });
     const [previousButton, nextButton] = nav.querySelectorAll('[data-slot="button"]');
 
@@ -37,7 +30,7 @@ describe("Pagination", () => {
   });
 
   it("should disable next button on the last page", () => {
-    render(<Pagination {...createProps({ currentPage: 2, pagesCount: 3 })} />);
+    render(<Pagination {...createProps({ currentPage: 3, pagesCount: 3 })} />);
     const nav = screen.getByRole("navigation", { name: "pagination" });
     const [previousButton, nextButton] = nav.querySelectorAll('[data-slot="button"]');
 
@@ -45,31 +38,32 @@ describe("Pagination", () => {
     expect(nextButton).toBeDisabled();
   });
 
-  it("should call onPreviousPage when previous button is clicked", async () => {
+  it("should call onPageChange with previous page when previous button is clicked", async () => {
     const user = userEvent.setup();
-    const onPreviousPage = vi.fn();
+    const onPageChange = vi.fn();
 
-    render(<Pagination {...createProps({ onPreviousPage, currentPage: 1 })} />);
+    render(<Pagination {...createProps({ onPageChange, currentPage: 2 })} />);
     const nav = screen.getByRole("navigation", { name: "pagination" });
     const [previousButton] = nav.querySelectorAll('[data-slot="button"]');
 
     await user.click(previousButton);
 
-    expect(onPreviousPage).toHaveBeenCalledTimes(1);
+    expect(onPageChange).toHaveBeenCalledTimes(1);
+    expect(onPageChange).toHaveBeenCalledWith(1);
   });
 
-  it("should call onNextPage with next page index", async () => {
+  it("should call onPageChange with next page index", async () => {
     const user = userEvent.setup();
-    const onNextPage = vi.fn();
+    const onPageChange = vi.fn();
 
-    render(<Pagination {...createProps({ onNextPage, currentPage: 1 })} />);
+    render(<Pagination {...createProps({ onPageChange, currentPage: 1 })} />);
     const nav = screen.getByRole("navigation", { name: "pagination" });
     const [, nextButton] = nav.querySelectorAll('[data-slot="button"]');
 
     await user.click(nextButton);
 
-    expect(onNextPage).toHaveBeenCalledTimes(1);
-    expect(onNextPage).toHaveBeenCalledWith(2);
+    expect(onPageChange).toHaveBeenCalledTimes(1);
+    expect(onPageChange).toHaveBeenCalledWith(2);
   });
 
   it("should call onPageChange with selected page index", async () => {
@@ -81,7 +75,7 @@ describe("Pagination", () => {
     await user.click(screen.getByRole("button", { name: "3" }));
 
     expect(onPageChange).toHaveBeenCalledTimes(1);
-    expect(onPageChange).toHaveBeenCalledWith(2);
+    expect(onPageChange).toHaveBeenCalledWith(3);
   });
 
   it("should merge className onto pagination root", () => {

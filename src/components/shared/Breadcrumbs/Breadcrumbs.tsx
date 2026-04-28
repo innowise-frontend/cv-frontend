@@ -14,12 +14,13 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className }) =>
     <Breadcrumb className={className}>
       <BreadcrumbList className="text-base leading-6">
         {items.map((item, index) => {
+          const isEven = (index + 1) % 2 === 0;
           const isLast = index === items.length - 1;
 
           return (
             <React.Fragment key={item.label}>
               <BreadcrumbItem>
-                {isLast ? (
+                {isEven ? (
                   <BreadcrumbLink href={item.href || ""} className="text-red">
                     {item.label}
                   </BreadcrumbLink>

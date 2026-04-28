@@ -6,7 +6,7 @@ export const TableSearch = ({ action }: TableSearchProps) => {
   const search = params.get("search") ?? "";
 
   return (
-    <div className="flex w-full items-center justify-between h-14 px-5">
+    <div className="flex w-full relative items-center justify-between h-14 px-5">
       <SearchInput defaultValue={search} />
       {action}
     </div>

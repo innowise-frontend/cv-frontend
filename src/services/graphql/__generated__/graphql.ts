@@ -618,6 +618,7 @@ export type SearchPaginationInput = {
   limit?: InputMaybe<Scalars["Int"]["input"]>;
   page?: InputMaybe<Scalars["Int"]["input"]>;
   search?: InputMaybe<Scalars["String"]["input"]>;
+  sort_by?: InputMaybe<Scalars["String"]["input"]>;
   sort_order?: InputMaybe<Scalars["String"]["input"]>;
 };
 
@@ -840,6 +841,34 @@ export type MeQueryVariables = Exact<{ [key: string]: never }>;
 export type MeQuery = {
   __typename?: "Query";
   me: { __typename?: "Profile"; role?: UserRole | null };
+};
+
+export type UsersQueryVariables = Exact<{
+  params: SearchPaginationInput;
+}>;
+
+export type UsersQuery = {
+  __typename?: "Query";
+  users: {
+    __typename?: "PaginatedUsers";
+    total: number;
+    page: number;
+    limit: number;
+    total_pages: number;
+    items: Array<{
+      __typename?: "User";
+      id: string;
+      department_name?: string | null;
+      position_name?: string | null;
+      email: string;
+      profile: {
+        __typename?: "Profile";
+        last_name?: string | null;
+        first_name?: string | null;
+        avatar?: string | null;
+      };
+    }>;
+  };
 };
 
 export const ChangePasswordDocument = {
@@ -1153,3 +1182,73 @@ export const MeDocument = {
     },
   ],
 } as unknown as DocumentNode<MeQuery, MeQueryVariables>;
+export const UsersDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "Users" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "params" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "SearchPaginationInput" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "users" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "params" },
+                value: { kind: "Variable", name: { kind: "Name", value: "params" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "items" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      { kind: "Field", name: { kind: "Name", value: "department_name" } },
+                      { kind: "Field", name: { kind: "Name", value: "position_name" } },
+                      { kind: "Field", name: { kind: "Name", value: "email" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "profile" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            { kind: "Field", name: { kind: "Name", value: "last_name" } },
+                            { kind: "Field", name: { kind: "Name", value: "first_name" } },
+                            { kind: "Field", name: { kind: "Name", value: "avatar" } },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                { kind: "Field", name: { kind: "Name", value: "total" } },
+                { kind: "Field", name: { kind: "Name", value: "page" } },
+                { kind: "Field", name: { kind: "Name", value: "limit" } },
+                { kind: "Field", name: { kind: "Name", value: "total_pages" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<UsersQuery, UsersQueryVariables>;

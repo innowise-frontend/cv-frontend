@@ -16,3 +16,5 @@ export { Avatar } from "./Avatar/Avatar";
 export { Select } from "./Select/Select";
 export { ProgressBar } from "./ProgressBar/ProgressBar";
 export { CodeInput } from "./CodeInput/CodeInput";
+export { TableActions } from "./TableActions/TableActions";
+export { TableColumnHeader } from "./TableColumnHeader/TableColumnHeader";

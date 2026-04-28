@@ -37,6 +37,10 @@ describe("Table", () => {
           { id: 2, name: "Jane" },
         ]}
         columns={columns}
+        pagesAmount={1}
+        currentPage={1}
+        currentSort="ASC"
+        onChangePage={vi.fn()}
         viewOptions={viewOptions}
         onChangeViewOption={vi.fn()}
       />,
@@ -49,17 +53,30 @@ describe("Table", () => {
 
   it("should render no data state when rows are empty", () => {
     render(
-      <Table data={[]} columns={columns} viewOptions={viewOptions} onChangeViewOption={vi.fn()} />,
+      <Table
+        data={[]}
+        columns={columns}
+        pagesAmount={1}
+        currentPage={1}
+        currentSort="ASC"
+        onChangePage={vi.fn()}
+        viewOptions={viewOptions}
+        onChangeViewOption={vi.fn()}
+      />,
     );
 
     expect(screen.getByText("No data results")).toBeInTheDocument();
   });
 
-  it("should render first page with 8 rows by default", () => {
+  it("should render all rows from provided data", () => {
     render(
       <Table
         data={createPeople(10)}
         columns={columns}
+        pagesAmount={1}
+        currentPage={1}
+        currentSort="ASC"
+        onChangePage={vi.fn()}
         viewOptions={viewOptions}
         onChangeViewOption={vi.fn()}
       />,
@@ -67,16 +84,22 @@ describe("Table", () => {
 
     expect(screen.getByText("User 1")).toBeInTheDocument();
     expect(screen.getByText("User 8")).toBeInTheDocument();
-    expect(screen.queryByText("User 9")).not.toBeInTheDocument();
+    expect(screen.getByText("User 9")).toBeInTheDocument();
+    expect(screen.getByText("User 10")).toBeInTheDocument();
   });
 
-  it("should navigate to next page when next button is clicked", async () => {
+  it("should call onChangePage when next pagination button is clicked", async () => {
     const user = userEvent.setup();
+    const onChangePage = vi.fn();
 
     render(
       <Table
         data={createPeople(10)}
         columns={columns}
+        pagesAmount={3}
+        currentPage={1}
+        currentSort="ASC"
+        onChangePage={onChangePage}
         viewOptions={viewOptions}
         onChangeViewOption={vi.fn()}
       />,
@@ -87,8 +110,8 @@ describe("Table", () => {
 
     await user.click(nextButton);
 
-    expect(await screen.findByText("User 9")).toBeInTheDocument();
-    expect(screen.queryByText("User 1")).not.toBeInTheDocument();
+    expect(onChangePage).toHaveBeenCalledTimes(1);
+    expect(onChangePage).toHaveBeenCalledWith(2);
   });
 
   it("does not render view option select (no combobox)", async () => {
@@ -98,6 +121,10 @@ describe("Table", () => {
       <Table
         data={createPeople(3)}
         columns={columns}
+        pagesAmount={1}
+        currentPage={1}
+        currentSort="ASC"
+        onChangePage={vi.fn()}
         viewOptions={viewOptions}
         onChangeViewOption={onChangeViewOption}
       />,

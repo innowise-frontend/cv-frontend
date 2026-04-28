@@ -22,6 +22,7 @@ type Documents = {
   "mutation UpdateToken {\n  updateToken {\n    access_token\n    refresh_token\n  }\n}": typeof types.UpdateTokenDocument;
   "mutation verifyMail($otp: String!) {\n  verifyMail(mail: {otp: $otp})\n}": typeof types.VerifyMailDocument;
   "query Me {\n  me {\n    role\n  }\n}": typeof types.MeDocument;
+  "query Users($params: SearchPaginationInput!) {\n  users(params: $params) {\n    items {\n      id\n      department_name\n      position_name\n      email\n      profile {\n        last_name\n        first_name\n        avatar\n      }\n    }\n    total\n    page\n    limit\n    total_pages\n  }\n}": typeof types.UsersDocument;
 };
 const documents: Documents = {
   "mutation ChangePassword($args: ChangePasswordInput!) {\n  changePassword(args: $args) {\n    id\n    email\n  }\n}":
@@ -39,6 +40,8 @@ const documents: Documents = {
   "mutation verifyMail($otp: String!) {\n  verifyMail(mail: {otp: $otp})\n}":
     types.VerifyMailDocument,
   "query Me {\n  me {\n    role\n  }\n}": types.MeDocument,
+  "query Users($params: SearchPaginationInput!) {\n  users(params: $params) {\n    items {\n      id\n      department_name\n      position_name\n      email\n      profile {\n        last_name\n        first_name\n        avatar\n      }\n    }\n    total\n    page\n    limit\n    total_pages\n  }\n}":
+    types.UsersDocument,
 };
 
 /**
@@ -103,6 +106,12 @@ export function gql(
 export function gql(
   source: "query Me {\n  me {\n    role\n  }\n}",
 ): (typeof documents)["query Me {\n  me {\n    role\n  }\n}"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
+  source: "query Users($params: SearchPaginationInput!) {\n  users(params: $params) {\n    items {\n      id\n      department_name\n      position_name\n      email\n      profile {\n        last_name\n        first_name\n        avatar\n      }\n    }\n    total\n    page\n    limit\n    total_pages\n  }\n}",
+): (typeof documents)["query Users($params: SearchPaginationInput!) {\n  users(params: $params) {\n    items {\n      id\n      department_name\n      position_name\n      email\n      profile {\n        last_name\n        first_name\n        avatar\n      }\n    }\n    total\n    page\n    limit\n    total_pages\n  }\n}"];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};
