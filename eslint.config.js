@@ -28,10 +28,9 @@ export default defineConfig([
     rules: {
       "react-refresh/only-export-components": [
         "error",
-        "off",
         {
           allowConstantExport: true,
-          allowExportNames: ["buttonVariants"],
+          allowExportNames: ["buttonVariants","badgeVariants"],
         },
       ],
       "prettier/prettier": "error",

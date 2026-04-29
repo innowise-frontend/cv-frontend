@@ -1,5 +1,5 @@
-import { useId } from "react";
 import { Select as SelectBase } from "@base-ui/react/select";
+import { useId } from "react";
 import { Label } from "@root/components/ui/label";
 import {
   Select as SelectRoot,
