@@ -2,17 +2,13 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { SettingPage } from "./SettingPage";
 
-const setThemeMock = vi.fn();
 const changeLanguageMock = vi.fn<(language: string) => Promise<void>>();
-const applyThemeMock = vi.fn();
-const useLocalStorageMock = vi.fn();
+const getDefaultThemeMock = vi.fn(() => "light");
+const setDefaultThemeMock = vi.fn();
 
 vi.mock("@root/lib/theme/theme", () => ({
-  applyTheme: (theme: string) => applyThemeMock(theme),
-}));
-
-vi.mock("@hooks/index", () => ({
-  useLocalStorage: (...args: unknown[]) => useLocalStorageMock(...args),
+  getDefaultTheme: () => getDefaultThemeMock(),
+  setDefaultTheme: (theme: string) => setDefaultThemeMock(theme),
 }));
 
 vi.mock("@components/ChangePassword", () => ({
@@ -65,7 +61,6 @@ vi.mock("react-i18next", () => ({
 describe("SettingPage", () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    useLocalStorageMock.mockReturnValue(["light", setThemeMock]);
     changeLanguageMock.mockResolvedValue(undefined);
   });
 
@@ -82,8 +77,7 @@ describe("SettingPage", () => {
 
     fireEvent.click(screen.getByRole("button", { name: "change-page.setting.theme" }));
 
-    expect(setThemeMock).toHaveBeenCalledWith("dark");
-    expect(applyThemeMock).toHaveBeenCalledWith("dark");
+    expect(setDefaultThemeMock).toHaveBeenCalledWith("dark");
   });
 
   it("changes language using i18n", () => {
