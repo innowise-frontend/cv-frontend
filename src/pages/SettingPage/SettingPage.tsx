@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ChangePassword } from "@components/ChangePassword";
-import { MultiSelect } from "@root/components/shared/MultiSelect/MultiSelect";
 import { Select } from "@root/components/shared/Select/Select";
 import { getDefaultTheme, setDefaultTheme } from "@root/lib/theme/theme";
 import { LANGUAGES, THEMES } from "./constants";
@@ -11,39 +10,6 @@ export const SettingPage = () => {
   const { t, i18n } = useTranslation();
   const [theme, setTheme] = useState(getDefaultTheme ?? "light");
   const [language, setLanguage] = useState(i18n.resolvedLanguage ?? "en");
-
-  const options = [
-    {
-      label: "React",
-      value: "react",
-    },
-    {
-      label: "TypeScript",
-      value: "typescript",
-    },
-    {
-      label: "GraphQL",
-      value: "graphql",
-    },
-    {
-      label: "Next.js",
-      value: "nextjs",
-    },
-    {
-      label: "Tailwind CSS",
-      value: "tailwindcss",
-    },
-    {
-      label: "Node.js",
-      value: "nodejs",
-    },
-  ] as { label: string; value: string }[];
-
-  const [multiExampleList, setMultiExampleList] = useState<string[]>([
-    "react",
-    "typescript",
-    "graphql",
-  ]);
 
   const handleThemeChange = (value: string) => {
     setTheme(value as Theme);
@@ -77,14 +43,6 @@ export const SettingPage = () => {
         placeholder={t("page.setting.selectThemePlaceholder")}
         value={theme}
         onValueChange={handleThemeChange}
-      />
-      <MultiSelect
-        className="w-[852px]"
-        label="Multi-select example"
-        data={multiExampleList}
-        options={options}
-        disabled={false}
-        onChange={(value) => setMultiExampleList(value)}
       />
       <ChangePassword className="mt-2" />
     </div>

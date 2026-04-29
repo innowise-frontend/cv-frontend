@@ -1,9 +1,17 @@
-export type MultiSelectProps<T> = {
+export type MultiSelectOption<T> = {
+  value: T;
   label: string;
-  data: T[];
-  options: T[];
+};
+
+export type MultiSelectProps<
+  TValue,
+  TOption extends MultiSelectOption<TValue> = MultiSelectOption<TValue>,
+> = {
+  label: string;
+  data: TValue[];
+  options: TOption[];
   disabled?: boolean;
-  onChange: (value: T[]) => void;
+  onChange: (value: TValue[]) => void;
   className?: string;
   placeholder?: string;
 };

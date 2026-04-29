@@ -5,9 +5,12 @@ import { Command, CommandGroup, CommandItem, CommandList } from "@root/component
 import { Label } from "@root/components/ui/label";
 import { Popover, PopoverContent, PopoverTrigger } from "@root/components/ui/popover";
 import { cn } from "@root/lib/utils";
-import { MultiSelectProps } from "./types";
+import { MultiSelectOption, MultiSelectProps } from "./types";
 
-export function MultiSelect<T extends string, TOption extends { value: T; label: string }>({
+export function MultiSelect<
+  TValue extends string,
+  TOption extends MultiSelectOption<TValue> = MultiSelectOption<TValue>,
+>({
   label,
   data,
   options,
@@ -15,18 +18,18 @@ export function MultiSelect<T extends string, TOption extends { value: T; label:
   onChange,
   className,
   placeholder,
-}: Omit<MultiSelectProps<T>, "options"> & { options: TOption[] }) {
+}: MultiSelectProps<TValue, TOption>) {
   const [open, setOpen] = useState(false);
   const triggerId = useId();
 
-  const toggleValue = (value: T) => {
+  const toggleValue = (value: TValue) => {
     if (disabled) return;
     const exists = data.includes(value);
     const next = exists ? data.filter((item) => item !== value) : [...data, value];
     onChange(next);
   };
 
-  const removeValue = (value: T) => {
+  const removeValue = (value: TValue) => {
     if (disabled) return;
     onChange(data.filter((item) => item !== value));
   };
