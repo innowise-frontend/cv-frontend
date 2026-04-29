@@ -61,7 +61,7 @@ export function MultiSelect<
             "flex rounded-md border text-sm outline-none focus-visible:ring-0",
           )}
         >
-          <span className="flex flex-1 flex-wrap items-center gap-3 text-left">
+          <div className="flex flex-1 flex-wrap items-center gap-3 text-left">
             {data.length === 0 ? (
               <span className="text-gray-5 dark:text-gray-5">{placeholder}</span>
             ) : (
@@ -99,7 +99,7 @@ export function MultiSelect<
                 );
               })
             )}
-          </span>
+          </div>
           <ChevronDownIcon className="pointer-events-none size-4 shrink-0 text-gray-5 dark:text-gray-5" />
         </PopoverTrigger>
 
