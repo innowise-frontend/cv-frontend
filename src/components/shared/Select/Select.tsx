@@ -1,10 +1,12 @@
 import { useId } from "react";
+import { Select as SelectBase } from "@base-ui/react/select";
 import { Label } from "@root/components/ui/label";
 import {
-  Select as SelectShadcn,
-  SelectContent,
+  Select as SelectRoot,
   SelectGroup,
   SelectItem,
+  SelectScrollDownButton,
+  SelectScrollUpButton,
   SelectTrigger,
   SelectValue,
 } from "@root/components/ui/select";
@@ -13,27 +15,29 @@ import type { SelectProps } from "./types.ts";
 
 export const Select = ({
   list,
-  placeholder,
   label,
+  placeholder,
   className,
   value,
   onValueChange,
 }: SelectProps) => {
   const triggerId = useId();
 
-  const labelFor = (value?: string | number) =>
-    list.find((item) => item.value === value)?.label ?? placeholder;
+  const labelFor = (val?: string | number) =>
+    list.find((item) => item.value === val)?.label ?? placeholder;
 
   return (
-    <div className={cn("flex w-full flex-col", className)}>
+    <div className={cn("relative flex w-full flex-col", className)}>
       <Label
         htmlFor={triggerId}
         className="justify-start pl-3 text-left text-xs font-normal text-gray-3 dark:text-gray-5"
       >
         {label}
       </Label>
-      <SelectShadcn
+
+      <SelectRoot
         value={value as string}
+        modal={false}
         onValueChange={(next) => {
           if (next !== null) onValueChange?.(next);
         }}
@@ -41,28 +45,45 @@ export const Select = ({
         <SelectTrigger id={triggerId} className="w-full border-gray-5 text-gray-2 dark:text-gray-5">
           <SelectValue placeholder={placeholder}>{labelFor(value as string)}</SelectValue>
         </SelectTrigger>
-        <SelectContent
-          side="bottom"
-          align="start"
-          className="absolute top-[-5px] left-0 border border-gray-5 bg-gray-8 text-gray-2 shadow-none ring-0 dark:bg-gray-2 dark:text-gray-5"
-        >
-          <SelectGroup className="p-0">
-            {list.map((item) => (
-              <SelectItem
-                key={item.value}
-                value={item.value}
-                className={cn(
-                  "pl-2.5 pr-2.5 text-gray-2 dark:text-gray-5",
-                  "data-selected:bg-gray-6 data-selected:text-gray dark:data-selected:bg-gray-4 dark:data-selected:text-gray-8",
-                  "[&_svg]:hidden cursor-pointer",
-                )}
-              >
-                {item.label}
-              </SelectItem>
-            ))}
-          </SelectGroup>
-        </SelectContent>
-      </SelectShadcn>
+
+        <SelectBase.Portal>
+          <SelectBase.Positioner
+            side="bottom"
+            align="start"
+            alignItemWithTrigger={false}
+            sideOffset={4}
+            positionMethod="fixed"
+            collisionAvoidance={{ side: "shift", align: "none" }}
+            className="z-50"
+          >
+            <SelectBase.Popup
+              className={cn(
+                "w-(--anchor-width) min-w-36 border border-gray-5 bg-gray-8 shadow-none ring-0 text-gray-2 dark:bg-gray-2 dark:text-gray-5",
+                "max-h-(--available-height) overflow-x-hidden overflow-y-auto",
+              )}
+            >
+              <SelectScrollUpButton />
+              <SelectBase.List>
+                <SelectGroup className="p-0">
+                  {list.map((item) => (
+                    <SelectItem
+                      key={item.value}
+                      value={item.value}
+                      className={cn(
+                        "cursor-pointer pl-2.5 pr-2.5 text-gray-2 dark:text-gray-5 [&_svg]:hidden",
+                        "data-selected:bg-gray-6 data-selected:text-gray dark:data-selected:bg-gray-4 dark:data-selected:text-gray-8",
+                      )}
+                    >
+                      {item.label}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectBase.List>
+              <SelectScrollDownButton />
+            </SelectBase.Popup>
+          </SelectBase.Positioner>
+        </SelectBase.Portal>
+      </SelectRoot>
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import { useId, useState } from "react";
+import { ChevronDownIcon } from "lucide-react";
 import CloseIcon from "@root/assets/icon/CloseIcon.svg?react";
 import { Command, CommandGroup, CommandItem, CommandList } from "@root/components/ui/command";
 import { Label } from "@root/components/ui/label";
@@ -96,16 +97,17 @@ export function MultiSelect<T extends string, TOption extends { value: T; label:
               })
             )}
           </span>
+          <ChevronDownIcon className="pointer-events-none size-4 shrink-0 text-gray-5 dark:text-gray-5" />
         </PopoverTrigger>
 
         {!disabled && (
           <PopoverContent
             side="bottom"
             align="start"
-            className={cn(
-              "w-(--anchor-width) p-0",
-              "border border-gray-5 bg-gray-8 text-gray-2 shadow-none ring-0 dark:bg-gray-2 dark:text-gray-5",
-            )}
+            sideOffset={4}
+            positionMethod="fixed"
+            collisionAvoidance={{ side: "shift", align: "none" }}
+            className="absolute -top-[5px] w-(--anchor-width) p-0 border border-gray-5 bg-gray-8 text-gray-2 shadow-none ring-0 dark:bg-gray-2 dark:text-gray-5"
           >
             <Command className="rounded-none! bg-transparent p-0">
               <CommandList>
@@ -119,7 +121,7 @@ export function MultiSelect<T extends string, TOption extends { value: T; label:
                         value={opt.value}
                         onSelect={() => toggleValue(opt.value)}
                         className={cn(
-                          "pl-2.5 pr-2.5 cursor-pointer [&>svg]:hidden",
+                          "pl-2.5 pr-2.5 cursor-pointer",
                           isSelected && "bg-gray-6 text-gray-2 dark:bg-gray-4 dark:text-gray-8",
                         )}
                       >
