@@ -13,6 +13,26 @@ export const graphqlClient = new GraphQLClient(url, {
 const getAuthHeader = (token: string | null): Record<string, string> | undefined =>
   token ? { Authorization: `Bearer ${token}` } : undefined;
 
+const isUnauthorizedError = (error: unknown): error is ClientError => {
+  if (!(error instanceof ClientError)) {
+    return false;
+  }
+
+  if (error.response.status === 401) {
+    return true;
+  }
+
+  return (
+    error.response.errors?.some(({ message }) => {
+      const normalizedMessage = message.toLowerCase();
+
+      return (
+        normalizedMessage.includes("unauthorized") || normalizedMessage.includes("unathorized")
+      );
+    }) ?? false
+  );
+};
+
 export async function requestWithAuth<TData, TVariables extends object>(
   document: RequestDocument,
   variables?: TVariables,
@@ -22,7 +42,7 @@ export async function requestWithAuth<TData, TVariables extends object>(
   try {
     return await graphqlClient.request<TData>(document, variables, getAuthHeader(token));
   } catch (error) {
-    if (error instanceof ClientError && error.response.status === 401) {
+    if (isUnauthorizedError(error)) {
       const refreshToken = JSON.parse(
         localStorage.getItem(LOCAL_STORAGE_KEYS.REFRESH_TOKEN) || "null",
       );
