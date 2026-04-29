@@ -1,20 +1,47 @@
-import { useEffect, useRef } from "react";
-import { createPortal } from "react-dom";
+import { createContext, useContext, useEffect, useRef } from "react";
 import CloseIcon from "@assets/icon/CloseIcon.svg?react";
 import { Button } from "@components/shared";
-import { useClickOutside } from "@root/hooks";
+import { useModal } from "@root/hooks";
 import { cn } from "@root/lib";
-import { ModalProps } from "./types";
 
-export const Modal = ({
-  children,
-  showOverlay = true,
-  isOpen,
-  closeModal,
-  actions,
-  title,
-}: ModalProps) => {
-  const modalRef = useRef<HTMLDivElement | null>(null);
+const ModalContext = createContext<ReturnType<typeof useModal> | null>(null);
+
+function useModalContext() {
+  const ctx = useContext(ModalContext);
+
+  if (!ctx) {
+    throw new Error("Modal.* components must be used inside <Modal>");
+  }
+
+  return ctx;
+}
+
+function Modal({ children }: { children: React.ReactNode }) {
+  const { isOpen, openModal, closeModal } = useModal();
+
+  return <ModalContext value={{ isOpen, openModal, closeModal }}>{children}</ModalContext>;
+}
+
+function ModalTrigger({ children, className = "", ...props }: React.ComponentProps<typeof Button>) {
+  const { openModal } = useModalContext();
+
+  return (
+    <Button {...props} className={cn(className)} onClick={openModal}>
+      {children}
+    </Button>
+  );
+}
+
+function ModalContent({ children, className = "", ...props }: React.ComponentProps<"dialog">) {
+  const { isOpen, closeModal } = useModalContext();
+  const dialogRef = useRef<HTMLDialogElement | null>(null);
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+    if (isOpen && !dialog.open) dialog.showModal();
+    if (!isOpen && dialog.open) dialog.close();
+  }, [isOpen]);
 
   useEffect(() => {
     if (isOpen) {
@@ -24,58 +51,71 @@ export const Modal = ({
     return () => document.body.classList.remove("scroll-hidden");
   }, [isOpen]);
 
-  useClickOutside(modalRef, () => {
-    if (isOpen) {
+  const handleBackdropClick = (event: React.MouseEvent<HTMLDialogElement>) => {
+    if (event.target === dialogRef.current) {
       closeModal();
     }
-  });
+  };
 
-  return createPortal(
-    <div
+  const handleCancel = (event: React.SyntheticEvent<HTMLDialogElement, Event>) => {
+    event.preventDefault();
+    closeModal();
+  };
+
+  return (
+    <dialog
+      {...props}
+      onClick={handleBackdropClick}
+      onCancel={handleCancel}
       className={cn(
-        "fixed inset-0 z-50 h-screen flex items-center justify-center transition-opacity duration-250",
-        isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none",
+        "fixed top-1/2 left-1/2 m-0 min-w-155 max-w-215 min-h-50 max-h-131 -translate-x-1/2 -translate-y-1/2 bg-gray-8 px-6 py-4 shadow-2xl will-change-transform will-change-opacity transition-[opacity,transform] duration-300 ease-out dark:bg-gray-2 backdrop:bg-gray/50",
+        isOpen ? "opacity-100 scale-100" : "opacity-0 scale-95",
+        className,
       )}
+      ref={dialogRef}
     >
-      {showOverlay && (
-        <div
-          className={cn(
-            "absolute w-full h-full bg-black/50 transition-opacity duration-250",
-            isOpen ? "block" : "hidden",
-          )}
-        />
-      )}
-      <div
-        ref={modalRef}
-        className={cn(
-          "fixed bg-gray-8 min-w-155 max-w-215 min-h-50 max-h-131 px-6 py-4 transition-all duration-250 dark:bg-gray-2",
-          isOpen ? "translate-y-0 opacity-100 scale-100" : "translate-y-2 opacity-0 scale-95",
-        )}
-      >
-        <ModalHeader closeModal={closeModal} title={title} />
-        {children}
-        <ModalFooter closeModal={closeModal}>{actions}</ModalFooter>
-      </div>
-    </div>,
-    document.body,
-  );
-};
-
-function ModalHeader({ closeModal, title }: { title: string; closeModal: () => void }) {
-  return (
-    <div className="flex items-center justify-between pb-6.5">
-      <h2 className="text-lg font-bold">{title}</h2>
-      <Button onClick={closeModal} variant="ghost" className="absolute top-0 right-5">
-        <CloseIcon width={12} height={12} />
-      </Button>
-    </div>
-  );
-}
-
-function ModalFooter({ children }: { children: React.ReactNode; closeModal: () => void }) {
-  return (
-    <div className="flex items-center justify-end gap-6 fixed bottom-3 right-5 pt-6.5">
       {children}
-    </div>
+    </dialog>
   );
 }
+
+function ModalClose({ children }: { children?: React.ReactNode }) {
+  const { closeModal } = useModalContext();
+
+  return (
+    <Button
+      onClick={closeModal}
+      variant="ghost"
+      className="absolute top-3 right-5 h-7.5 w-7.5 rounded-full p-0"
+    >
+      {children ?? <CloseIcon />}
+    </Button>
+  );
+}
+
+function ModalHeader({ children }: { children: React.ReactNode }) {
+  return (
+    <header className="flex items-center justify-between">
+      <h2 className="text-lg font-bold">{children}</h2>
+    </header>
+  );
+}
+
+function ModalBody({ children }: { children: React.ReactNode }) {
+  return <div className="py-6.5">{children}</div>;
+}
+
+function ModalFooter({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="flex items-center justify-end gap-6 fixed bottom-3 right-5">{children}</div>
+  );
+}
+
+Modal.Trigger = ModalTrigger;
+Modal.Content = ModalContent;
+Modal.Close = ModalClose;
+Modal.Header = ModalHeader;
+Modal.Body = ModalBody;
+Modal.Footer = ModalFooter;
+
+export { Modal };
