@@ -6,7 +6,7 @@ import { cn } from "@root/lib";
 
 const ModalContext = createContext<ReturnType<typeof useModal> | null>(null);
 
-function useModalContext() {
+const useModalContext = () => {
   const ctx = useContext(ModalContext);
 
   if (!ctx) {
@@ -14,27 +14,41 @@ function useModalContext() {
   }
 
   return ctx;
-}
+};
 
-function Modal({ children }: { children: React.ReactNode }) {
+const Modal = ({ children }: { children: React.ReactNode }) => {
   const { isOpen, openModal, closeModal } = useModal();
 
   return <ModalContext value={{ isOpen, openModal, closeModal }}>{children}</ModalContext>;
-}
+};
 
-function ModalTrigger({ children, className = "", ...props }: React.ComponentProps<typeof Button>) {
+const ModalTrigger = ({
+  children,
+  className = "",
+  ...props
+}: React.ComponentProps<typeof Button>) => {
   const { openModal } = useModalContext();
 
   return (
-    <Button {...props} className={cn(className)} onClick={openModal}>
+    <Button {...props} className={className} onClick={openModal}>
       {children}
     </Button>
   );
-}
+};
 
-function ModalContent({ children, className = "", ...props }: React.ComponentProps<"dialog">) {
+const ModalContent = ({
+  children,
+  ref,
+  className = "",
+  ...props
+}: React.ComponentProps<"dialog">) => {
   const { isOpen, closeModal } = useModalContext();
   const dialogRef = useRef<HTMLDialogElement | null>(null);
+
+  useEffect(() => {
+    if (typeof ref === "function") ref(dialogRef.current);
+    else if (ref) ref.current = dialogRef.current;
+  }, [ref]);
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -77,9 +91,9 @@ function ModalContent({ children, className = "", ...props }: React.ComponentPro
       {children}
     </dialog>
   );
-}
+};
 
-function ModalClose({ children }: { children?: React.ReactNode }) {
+const ModalClose = ({ children }: { children?: React.ReactNode }) => {
   const { closeModal } = useModalContext();
 
   return (
@@ -91,25 +105,25 @@ function ModalClose({ children }: { children?: React.ReactNode }) {
       {children ?? <CloseIcon />}
     </Button>
   );
-}
+};
 
-function ModalHeader({ children }: { children: React.ReactNode }) {
+const ModalHeader = ({ children }: { children: React.ReactNode }) => {
   return (
     <header className="flex items-center justify-between">
       <h2 className="text-lg font-bold">{children}</h2>
     </header>
   );
-}
+};
 
-function ModalBody({ children }: { children: React.ReactNode }) {
+const ModalBody = ({ children }: { children: React.ReactNode }) => {
   return <div className="py-6.5">{children}</div>;
-}
+};
 
-function ModalFooter({ children }: { children: React.ReactNode }) {
+const ModalFooter = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="flex items-center justify-end gap-6 fixed bottom-3 right-5">{children}</div>
   );
-}
+};
 
 Modal.Trigger = ModalTrigger;
 Modal.Content = ModalContent;
