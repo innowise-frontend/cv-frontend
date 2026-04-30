@@ -30,7 +30,7 @@ export default defineConfig([
         "error",
         {
           allowConstantExport: true,
-          allowExportNames: ["buttonVariants"],
+          allowExportNames: ["buttonVariants","badgeVariants"],
         },
       ],
       "prettier/prettier": "error",
