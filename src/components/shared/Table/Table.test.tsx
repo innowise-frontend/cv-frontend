@@ -114,7 +114,8 @@ describe("Table", () => {
     expect(onChangePage).toHaveBeenCalledWith(2);
   });
 
-  it("does not render view option select (no combobox)", async () => {
+  it("should render view option select and call onChangeViewOption", async () => {
+    const user = userEvent.setup();
     const onChangeViewOption = vi.fn();
 
     render(
@@ -130,7 +131,13 @@ describe("Table", () => {
       />,
     );
 
-    expect(screen.queryByRole("combobox")).not.toBeInTheDocument();
-    expect(onChangeViewOption).not.toHaveBeenCalled();
+    expect(screen.getByRole("combobox")).toHaveTextContent("5");
+
+    await user.click(screen.getByRole("combobox"));
+    await user.click(screen.getByText("10"));
+
+    expect(onChangeViewOption).toHaveBeenCalledTimes(1);
+    expect(onChangeViewOption).toHaveBeenCalledWith(10);
+    expect(screen.getByRole("combobox")).toHaveTextContent("10");
   });
 });

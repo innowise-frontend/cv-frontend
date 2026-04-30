@@ -1,6 +1,7 @@
+import { useState } from "react";
 import { cn } from "tailwind-variants";
 import ChevronRightIcon from "@assets/icon/ChevronRightIcon.svg?react";
-import { Button } from "@components/shared";
+import { Button, Select } from "@components/shared";
 import {
   PaginationItem,
   Pagination as UIPagination,
@@ -16,9 +17,15 @@ export const Pagination = ({
   currentPage,
   onPageChange,
   className,
-  // viewOptions,
+  viewOptions,
+  onChangeViewOption,
 }: PaginationProps) => {
   const paginationPages = getPaginationPages(pagesCount, currentPage);
+  const selectOptions = (viewOptions ?? []).map((option) => ({
+    label: option.label,
+    value: String(option.value),
+  }));
+  const [selectedViewOption, setSelectedViewOption] = useState(() => selectOptions[0]?.value ?? "");
 
   return (
     <UIPagination className={cn("flex items-center w-full bg-gray-8 dark:bg-gray-2", className)}>
@@ -61,6 +68,20 @@ export const Pagination = ({
           </Button>
         </PaginationItem>
       </PaginationContent>
+      <Select
+        list={selectOptions}
+        label=""
+        side="top"
+        align="end"
+        className="w-15 **:data-[slot=select-trigger]:border-none **:data-[slot=select-trigger]:text-xs **:data-[slot=select-trigger]:px-2 **:data-[slot=select-trigger]:py-1 **:data-[slot=select-trigger]:h-auto **:data-[slot=select-trigger]:min-h-0 **:data-[slot=select-trigger]:shadow-none"
+        popupClassName="min-w-0 -translate-y-8 shadow-xs"
+        itemClassName="px-2 py-1 text-xs"
+        value={selectedViewOption}
+        onValueChange={(value) => {
+          setSelectedViewOption(value);
+          onChangeViewOption?.(Number(value));
+        }}
+      />
     </UIPagination>
   );
 };

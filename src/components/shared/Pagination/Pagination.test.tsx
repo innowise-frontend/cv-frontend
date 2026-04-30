@@ -7,6 +7,11 @@ const createProps = (overrides?: Partial<React.ComponentProps<typeof Pagination>
   pagesCount: 3,
   currentPage: 1,
   onPageChange: vi.fn(),
+  viewOptions: [
+    { label: "10", value: 10 },
+    { label: "20", value: 20 },
+  ],
+
   ...overrides,
 });
 
@@ -82,5 +87,25 @@ describe("Pagination", () => {
     render(<Pagination {...createProps({ className: "pagination-extra" })} />);
 
     expect(screen.getByRole("navigation", { name: "pagination" })).toHaveClass("pagination-extra");
+  });
+
+  it("should show initial selected view option value", () => {
+    render(<Pagination {...createProps()} />);
+
+    expect(screen.getByRole("combobox")).toHaveTextContent("10");
+  });
+
+  it("should update selected view option and call onChangeViewOption", async () => {
+    const user = userEvent.setup();
+    const onChangeViewOption = vi.fn();
+
+    render(<Pagination {...createProps({ onChangeViewOption })} />);
+
+    await user.click(screen.getByRole("combobox"));
+    await user.click(screen.getByText("20"));
+
+    expect(onChangeViewOption).toHaveBeenCalledTimes(1);
+    expect(onChangeViewOption).toHaveBeenCalledWith(20);
+    expect(screen.getByRole("combobox")).toHaveTextContent("20");
   });
 });
