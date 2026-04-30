@@ -14,6 +14,7 @@ export { Pagination } from "./Pagination/Pagination";
 export { SearchInput } from "./SearchInput/SearchInput";
 export { Avatar } from "./Avatar/Avatar";
 export { Select } from "./Select/Select";
+export { MultiSelect } from "./MultiSelect/MultiSelect";
 export { ProgressBar } from "./ProgressBar/ProgressBar";
 export { CodeInput } from "./CodeInput/CodeInput";
 export { TableActions } from "./TableActions/TableActions";
