@@ -1,21 +1,22 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
+import { VIEW_OPTIONS } from "@root/constants";
 import { Pagination } from "./Pagination";
 
 const createProps = (overrides?: Partial<React.ComponentProps<typeof Pagination>>) => ({
   pagesCount: 3,
   currentPage: 1,
   onPageChange: vi.fn(),
-  viewOptions: [
-    { label: "10", value: 10 },
-    { label: "20", value: 20 },
-  ],
+  viewOptions: VIEW_OPTIONS,
 
   ...overrides,
 });
 
 describe("Pagination", () => {
+  const firstViewOption = VIEW_OPTIONS[0];
+  const secondViewOption = VIEW_OPTIONS[1];
+
   it("should render all page links", () => {
     render(<Pagination {...createProps({ pagesCount: 4 })} />);
 
@@ -92,7 +93,7 @@ describe("Pagination", () => {
   it("should show initial selected view option value", () => {
     render(<Pagination {...createProps()} />);
 
-    expect(screen.getByRole("combobox")).toHaveTextContent("10");
+    expect(screen.getByRole("combobox")).toHaveTextContent(firstViewOption.label);
   });
 
   it("should update selected view option and call onChangeViewOption", async () => {
@@ -102,10 +103,10 @@ describe("Pagination", () => {
     render(<Pagination {...createProps({ onChangeViewOption })} />);
 
     await user.click(screen.getByRole("combobox"));
-    await user.click(screen.getByText("20"));
+    await user.click(screen.getByText(secondViewOption.label));
 
     expect(onChangeViewOption).toHaveBeenCalledTimes(1);
-    expect(onChangeViewOption).toHaveBeenCalledWith(20);
-    expect(screen.getByRole("combobox")).toHaveTextContent("20");
+    expect(onChangeViewOption).toHaveBeenCalledWith(secondViewOption.value);
+    expect(screen.getByRole("combobox")).toHaveTextContent(secondViewOption.label);
   });
 });
