@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useNavigate, useSearch } from "@tanstack/react-router";
 import { useState } from "react";
 import { Breadcrumbs, ROUTES, Table, TableSearch } from "@components/shared";
+import { VIEW_OPTIONS } from "@root/constants";
 import { getUsers } from "@services/users";
 import { columns } from "./columns";
 
@@ -28,7 +29,7 @@ export const UsersPage = () => {
     {
       label: "View profile",
       onClick: (userId: string) => {
-        navigate({ to: ROUTES.USER_PAGE, params: { userId: userId } });
+        navigate({ to: ROUTES.USER_PAGE, params: { userId } });
       },
     },
     {
@@ -53,20 +54,16 @@ export const UsersPage = () => {
           data={data?.items ?? []}
           pagesAmount={data?.total_pages ?? 0}
           currentPage={currentPage}
-          onChangePage={(page) => {
-            setCurrentPage(page);
-          }}
+          onChangePage={setCurrentPage}
           onSort={() => {
             setCurrentSort((prev) => (prev === "ASC" ? "DESC" : "ASC"));
+            setCurrentPage(1);
           }}
           currentSort={currentSort}
-          viewOptions={[
-            { label: "10", value: 10 },
-            { label: "20", value: 20 },
-            { label: "50", value: 50 },
-          ]}
+          viewOptions={VIEW_OPTIONS}
           onChangeViewOption={(limit) => {
             setCurrentLimit(limit);
+            setCurrentPage(1);
           }}
           actions={adminActions}
         />

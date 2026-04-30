@@ -6,9 +6,13 @@ import { TableActionsProps } from "./types";
 
 export const TableActions = ({ userId, actions }: TableActionsProps) => {
   const { isAdmin } = useAuth();
+  const dropdownOptions = actions.map((action) => ({
+    ...action,
+    onClick: () => action.onClick(userId),
+  }));
 
   return isAdmin === true ? (
-    <Dropdown options={actions} params={userId} />
+    <Dropdown options={dropdownOptions} />
   ) : (
     <Button className="flex items-center justify-start w-10 h-10">
       <Link to={ROUTES.USER_PAGE} params={{ userId }}>

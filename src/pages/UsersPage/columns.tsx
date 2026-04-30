@@ -23,13 +23,13 @@ export const columns = [
   columnHelper.accessor("profile.first_name", {
     header: () => <TableColumnHeader title="First Name" />,
     cell: ({ row }) => {
-      return <span>{row.original.profile.last_name}</span>;
+      return <span>{row.original.profile.first_name}</span>;
     },
   }),
   columnHelper.accessor("profile.last_name", {
     header: () => <TableColumnHeader title="Last Name" />,
     cell: ({ row }) => {
-      return <span>{row.original.email}</span>;
+      return <span>{row.original.profile.last_name}</span>;
     },
   }),
   columnHelper.accessor("email", {

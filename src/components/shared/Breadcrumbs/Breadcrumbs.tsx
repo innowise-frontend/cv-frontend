@@ -1,5 +1,6 @@
 import React from "react";
 import RightArrowIcon from "@assets/icon/RightArrowIcon.svg?react";
+import UserIcon from "@assets/icon/UserIcon.svg?react";
 import {
   Breadcrumb,
   BreadcrumbList,
@@ -14,14 +15,17 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className }) =>
     <Breadcrumb className={className}>
       <BreadcrumbList className="text-base leading-6">
         {items.map((item, index) => {
-          const isEven = (index + 1) % 2 === 0;
           const isLast = index === items.length - 1;
 
           return (
             <React.Fragment key={item.label}>
               <BreadcrumbItem>
-                {isEven ? (
-                  <BreadcrumbLink href={item.href || ""} className="text-red">
+                {item.isProfile ? (
+                  <BreadcrumbLink
+                    href={item.href || ""}
+                    className="text-red flex items-center gap-2"
+                  >
+                    <UserIcon />
                     {item.label}
                   </BreadcrumbLink>
                 ) : (
