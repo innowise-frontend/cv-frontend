@@ -55,7 +55,7 @@ export const ChangePassword = ({ className }: ChangePasswordProps) => {
     onError: (error) => {
       const message =
         error instanceof ClientError ? error.response.errors?.[0].message : error.message;
-      toast.error(message ?? t("page.error.defaultErrorMessage"));
+      toast.error(message ?? t("page.error.passwordChangeErrorMessage"));
     },
   });
 

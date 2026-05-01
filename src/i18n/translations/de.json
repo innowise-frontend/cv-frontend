@@ -33,8 +33,10 @@
     "error": {
       "oops": "Ups",
       "goBack": "Zurück",
-      "defaultErrorMessage": "Fehler! Passwort wurde nicht geändert",
-      "defaultNotFoundMessage": "Hm… diese Seite scheint nicht die zu sein, nach der Sie gesucht haben. \n Wir bringen Sie wieder auf den richtigen Weg."
+      "defaultErrorMessage": "Etwas ist schiefgelaufen. Wir arbeiten bereits an der Lösung. \n Bitte versuchen Sie es erneut oder gehen Sie zurück.",
+      "passwordChangeErrorMessage": "Fehler! Passwort wurde nicht geändert",
+      "defaultNotFoundMessage": "Hm… diese Seite scheint nicht die zu sein, nach der Sie gesucht haben. \n Wir bringen Sie wieder auf den richtigen Weg.",
+      "mobileNotSupportedMessage": "Ups… diese App wird auf Mobilgeräten nicht unterstützt. \n Bitte öffnen Sie sie auf einem Desktop oder Tablet, um fortzufahren."
     },
     "forgotPassword": {
       "title": "Passwort vergessen",
@@ -61,6 +63,28 @@
         "passwordMinLength": "Das Passwort muss mindestens 6 Zeichen lang sein",
         "passwordsDoNotMatch": "Passwörter stimmen nicht überein"
       }
+    },
+    "users": {
+      "breadcrumbs": "Mitarbeiter",
+      "columns": {
+        "firstName": "Vorname",
+        "lastName": "Nachname",
+        "email": "E-Mail",
+        "department": "Abteilung",
+        "position": "Position"
+      },
+      "actions": {
+        "viewProfile": "Profil anzeigen",
+        "edit": "Bearbeiten",
+        "delete": "Löschen"
+      }
+    },
+    "verifyEmail": {
+      "title": "E-Mail-Bestätigung",
+      "subtitle": "Geben Sie den Bestätigungscode ein, den wir an Ihre E-Mail gesendet haben.",
+      "confirm": "Bestätigen",
+      "later": "Später",
+      "invalidCode": "Ungültiger Code"
     },
     "sidebar": {
       "employees": "Mitarbeiter",

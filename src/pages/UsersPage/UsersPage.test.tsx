@@ -40,7 +40,22 @@ vi.mock("@root/components/shared", () => ({
 }));
 
 vi.mock("./columns", () => ({
-  columns: [{ accessorKey: "department", header: "Department" }],
+  getUserColumns: () => [{ accessorKey: "department", header: "Department" }],
+}));
+
+vi.mock("react-i18next", () => ({
+  useTranslation: () => ({
+    t: (key: string) => {
+      const translations: Record<string, string> = {
+        "page.users.breadcrumbs": "Employees",
+        "page.users.actions.viewProfile": "View profile",
+        "page.users.actions.edit": "Edit",
+        "page.users.actions.delete": "Delete",
+      };
+
+      return translations[key] ?? key;
+    },
+  }),
 }));
 
 describe("UsersPage", () => {

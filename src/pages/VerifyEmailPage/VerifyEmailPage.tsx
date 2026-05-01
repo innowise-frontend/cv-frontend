@@ -1,12 +1,14 @@
 import { useMutation } from "@tanstack/react-query";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useForm, Controller, useWatch } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { Button, CodeInput } from "@components/shared";
 import { ROUTES } from "@root/constants/routes";
 import { verifyMail } from "@services/auth";
 import { FormValues } from "./types";
 
 export const VerifyEmailPage = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const {
@@ -27,7 +29,7 @@ export const VerifyEmailPage = () => {
       navigate({ to: ROUTES.PROFILE });
     },
     onError: () => {
-      setError("code", { message: "Invalid code" });
+      setError("code", { message: t("page.verifyEmail.invalidCode") });
     },
   });
 
@@ -39,11 +41,11 @@ export const VerifyEmailPage = () => {
 
   return (
     <div className="m-auto flex w-[560px] flex-col items-center">
-      <h1 className="mb-6 text-34 font-normal leading-11 dark:text-white">Email verification</h1>
+      <h1 className="mb-6 text-34 font-normal leading-11 dark:text-white">
+        {t("page.verifyEmail.title")}
+      </h1>
 
-      <p className="mb-10 leading-6 dark:text-white">
-        Enter the verification code we sent to your email.
-      </p>
+      <p className="mb-10 leading-6 dark:text-white">{t("page.verifyEmail.subtitle")}</p>
 
       <Controller
         name="code"
@@ -72,12 +74,12 @@ export const VerifyEmailPage = () => {
           disabled={codeValue.trim().length !== 6 || isPending}
           onClick={handleSubmit(onSubmit)}
         >
-          Confirm
+          {t("page.verifyEmail.confirm")}
         </Button>
 
         <Link to={ROUTES.ROOT}>
           <Button variant="default" type="button">
-            Later
+            {t("page.verifyEmail.later")}
           </Button>
         </Link>
       </div>

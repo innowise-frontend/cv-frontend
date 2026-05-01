@@ -33,8 +33,10 @@
     "error": {
       "oops": "Ups",
       "goBack": "Wstecz",
-      "defaultErrorMessage": "Błąd! Nie udało się zmienić hasła",
-      "defaultNotFoundMessage": "Hmm… wygląda na to, że to nie jest strona, której szukasz. \n Pomóżmy Ci wrócić na właściwą ścieżkę."
+      "defaultErrorMessage": "Coś poszło nie tak. Już pracujemy nad naprawą. \n Spróbuj ponownie lub wróć.",
+      "passwordChangeErrorMessage": "Błąd! Nie udało się zmienić hasła",
+      "defaultNotFoundMessage": "Hmm… wygląda na to, że to nie jest strona, której szukasz. \n Pomóżmy Ci wrócić na właściwą ścieżkę.",
+      "mobileNotSupportedMessage": "Ups… ta aplikacja nie jest obsługiwana na urządzeniach mobilnych. \n Otwórz ją na komputerze lub tablecie, aby kontynuować."
     },
     "forgotPassword": {
       "title": "Nie pamiętasz hasła",
@@ -61,6 +63,28 @@
         "passwordMinLength": "Hasło musi mieć co najmniej 6 znaków",
         "passwordsDoNotMatch": "Hasła nie są zgodne"
       }
+    },
+    "users": {
+      "breadcrumbs": "Pracownicy",
+      "columns": {
+        "firstName": "Imię",
+        "lastName": "Nazwisko",
+        "email": "E-mail",
+        "department": "Dział",
+        "position": "Stanowisko"
+      },
+      "actions": {
+        "viewProfile": "Zobacz profil",
+        "edit": "Edytuj",
+        "delete": "Usuń"
+      }
+    },
+    "verifyEmail": {
+      "title": "Weryfikacja e-mail",
+      "subtitle": "Wpisz kod weryfikacyjny, który wysłaliśmy na Twój e-mail.",
+      "confirm": "Potwierdź",
+      "later": "Później",
+      "invalidCode": "Nieprawidłowy kod"
     },
     "sidebar": {
       "employees": "Pracownicy",
