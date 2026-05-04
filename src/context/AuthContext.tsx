@@ -5,6 +5,7 @@ import { getMe } from "@services/auth";
 import { UserRole } from "@services/graphql/__generated__/graphql";
 
 export interface AuthContextType {
+  userId: string;
   isAdmin: boolean;
   isAuthenticated: boolean;
   isFirstLoad: boolean;
@@ -24,9 +25,10 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const isAdmin = data?.role === UserRole.Admin;
   const isAuthenticated = hasAccessToken && (isFirstLoad || !!data);
+  const userId = data?.id ?? "";
 
   return (
-    <AuthContext.Provider value={{ isAdmin, isAuthenticated, isFirstLoad }}>
+    <AuthContext.Provider value={{ userId, isAdmin, isAuthenticated, isFirstLoad }}>
       {children}
     </AuthContext.Provider>
   );

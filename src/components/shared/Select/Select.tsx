@@ -18,6 +18,7 @@ export const Select = ({
   label,
   placeholder,
   className,
+  disabled = false,
   value,
   onValueChange,
 }: SelectProps) => {
@@ -39,10 +40,18 @@ export const Select = ({
         value={value as string}
         modal={false}
         onValueChange={(next) => {
+          if (disabled) return;
           if (next !== null) onValueChange?.(next);
         }}
       >
-        <SelectTrigger id={triggerId} className="w-full border-gray-5 text-gray-2 dark:text-gray-5">
+        <SelectTrigger
+          id={triggerId}
+          disabled={disabled}
+          className={cn(
+            "w-full border-gray-5 text-gray-2 data-[size=default]:h-auto px-3 py-3.25 dark:text-gray-5",
+            "disabled:bg-gray-6 dark:disabled:bg-gray-3",
+          )}
+        >
           <SelectValue placeholder={placeholder}>{labelFor(value as string)}</SelectValue>
         </SelectTrigger>
 

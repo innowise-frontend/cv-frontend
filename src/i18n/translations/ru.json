@@ -71,6 +71,35 @@
       "departments": "Отделы",
       "positions": "Должности",
       "projects": "Проекты"
+    },
+    "profile": {
+      "firstName": "Имя",
+      "lastName": "Фамилия",
+      "department": "Отдел",
+      "position": "Должность",
+      "selectDepartment": "Выберите отдел",
+      "selectPosition": "Выберите должность",
+      "uploadAvatar": "Загрузить аватар",
+      "uploadAvatarHint": "png, jpg или gif — не более 0,5 МБ",
+      "userAvatarAlt": "Аватар пользователя",
+      "initialsUnknown": "?",
+      "memberSince": "Участник с {{date}}",
+      "verifyEmail": "Подтвердить email",
+      "update": "Обновить",
+      "userNotFound": "Пользователь не найден",
+      "avatar": {
+        "wrongType": "Допустимы только png, jpg или gif.",
+        "tooLarge": "Размер файла не должен превышать 0,5 МБ.",
+        "invalidEncoding": "Некорректное кодирование файла аватара",
+        "readFailed": "Не удалось прочитать файл"
+      },
+      "toast": {
+        "userUpdated": "Данные пользователя обновлены",
+        "profileUpdated": "Профиль обновлён",
+        "avatarUpdated": "Аватар обновлён",
+        "verificationSent": "Письмо для подтверждения отправлено",
+        "verificationFailed": "Не удалось отправить письмо для подтверждения"
+      }
     }
   }
 }

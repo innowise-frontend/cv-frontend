@@ -3,6 +3,7 @@ export type SelectProps = {
   label: string;
   placeholder?: string;
   className?: string;
+  disabled?: boolean;
   value: string | number;
   onValueChange?: (value: string) => void;
 };
