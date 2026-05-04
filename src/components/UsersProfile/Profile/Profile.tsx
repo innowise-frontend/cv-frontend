@@ -17,7 +17,7 @@ import type { Option } from "./types";
 export const Profile = () => {
   const { t } = useTranslation();
   const { userId } = useParams({ from: "/_app/users/$userId" });
-  const { isAdmin, userId: authUserId } = useAuth();
+  const { isAdmin, userId: authUserId, isVerified } = useAuth();
   const { data, isPending, isError } = useUserProfile(userId);
   const { updateUser, updateProfile, uploadAvatar, sendVerificationEmail } =
     useUserProfileMutations(userId);
@@ -214,7 +214,7 @@ export const Profile = () => {
         </div>
         {isEditable && (
           <div className="mt-10 flex justify-end gap-6">
-            {!isAdmin && (
+            {userId === authUserId && !isVerified && (
               <Button variant="outline" type="button" onClick={() => handleVerifyEmail(email)}>
                 {t("page.profile.verifyEmail")}
               </Button>

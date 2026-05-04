@@ -13,9 +13,11 @@ describe("useAuth", () => {
 
   it("should return auth context values when provider is present", () => {
     const authValue: AuthContextType = {
+      userId: "user-1",
       isAdmin: true,
       isAuthenticated: true,
       isFirstLoad: false,
+      isVerified: false,
     };
 
     const wrapper = ({ children }: { children: React.ReactNode }) =>

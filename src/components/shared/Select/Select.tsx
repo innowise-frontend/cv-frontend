@@ -18,6 +18,10 @@ export const Select = ({
   label,
   placeholder,
   className,
+  popupClassName,
+  itemClassName,
+  side = "bottom",
+  align = "start",
   disabled = false,
   value,
   onValueChange,
@@ -57,8 +61,8 @@ export const Select = ({
 
         <SelectBase.Portal>
           <SelectBase.Positioner
-            side="bottom"
-            align="start"
+            side={side}
+            align={align}
             alignItemWithTrigger={false}
             sideOffset={4}
             positionMethod="fixed"
@@ -69,6 +73,7 @@ export const Select = ({
               className={cn(
                 "absolute -top-[5px] z-50 w-(--anchor-width) min-w-36 border border-gray-5 bg-gray-8 shadow-none ring-0 text-gray-2 dark:bg-gray-2 dark:text-gray-5",
                 "max-h-(--available-height) overflow-x-hidden overflow-y-auto",
+                popupClassName,
               )}
             >
               <SelectScrollUpButton />
@@ -81,6 +86,7 @@ export const Select = ({
                       className={cn(
                         "cursor-pointer pl-2.5 pr-2.5 text-gray-2 dark:text-gray-5 [&_svg]:hidden",
                         "data-selected:bg-gray-6 data-selected:text-gray dark:data-selected:bg-gray-4 dark:data-selected:text-gray-8",
+                        itemClassName,
                       )}
                     >
                       {item.label}
