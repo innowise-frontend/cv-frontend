@@ -82,7 +82,7 @@
       "uploadAvatar": "Upload avatar image",
       "uploadAvatarHint": "png, jpg or gif — no more than 0.5MB",
       "userAvatarAlt": "User avatar",
-      "initialsUnknown": "?",
+      "initialsUnknown": "",
       "memberSince": "A member since",
       "verifyEmail": "Verify email",
       "update": "Update",

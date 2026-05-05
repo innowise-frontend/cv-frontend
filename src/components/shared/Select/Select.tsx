@@ -31,6 +31,11 @@ export const Select = ({
   const labelFor = (val?: string | number) =>
     list.find((item) => item.value === val)?.label ?? placeholder;
 
+  const handleSelectValue = (next: string | null) => {
+    if (disabled) return;
+    if (next !== null) onValueChange?.(next);
+  };
+
   return (
     <div className={cn("relative flex w-full flex-col", className)}>
       <Label
@@ -44,8 +49,7 @@ export const Select = ({
         value={value as string}
         modal={false}
         onValueChange={(next) => {
-          if (disabled) return;
-          if (next !== null) onValueChange?.(next);
+          handleSelectValue(next);
         }}
       >
         <SelectTrigger

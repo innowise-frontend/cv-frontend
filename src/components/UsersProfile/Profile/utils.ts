@@ -1,10 +1,6 @@
-import type { UploadAvatarInput } from "@services/graphql/__generated__/graphql";
+import { ALLOWED_MIME, EXT_RE } from "./constants";
+import type { PreparedAvatarFields } from "./types";
 import type { TFunction } from "i18next";
-
-const ALLOWED_MIME = new Set(["image/png", "image/jpeg", "image/jpg", "image/gif"]);
-const EXT_RE = /\.(png|jpe?g|gif)$/i;
-
-export type PreparedAvatarFields = Omit<UploadAvatarInput, "userId">;
 
 function readFileAsDataUrl(file: File, t: TFunction): Promise<string> {
   return new Promise((resolve, reject) => {
