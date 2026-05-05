@@ -84,6 +84,35 @@ export interface TranslationTypes {
       positions: string;
       projects: string;
     };
+    profile: {
+      firstName: string;
+      lastName: string;
+      department: string;
+      position: string;
+      selectDepartment: string;
+      selectPosition: string;
+      uploadAvatar: string;
+      uploadAvatarHint: string;
+      userAvatarAlt: string;
+      initialsUnknown: string;
+      memberSince: string;
+      verifyEmail: string;
+      update: string;
+      userNotFound: string;
+      avatar: {
+        wrongType: string;
+        tooLarge: string;
+        invalidEncoding: string;
+        readFailed: string;
+      };
+      toast: {
+        userUpdated: string;
+        profileUpdated: string;
+        avatarUpdated: string;
+        verificationSent: string;
+        verificationFailed: string;
+      };
+    };
   };
   theme: {
     device: string;

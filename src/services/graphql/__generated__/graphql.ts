@@ -841,6 +841,12 @@ export type ResetPasswordMutationVariables = Exact<{
 
 export type ResetPasswordMutation = { __typename?: "Mutation"; resetPassword?: any | null };
 
+export type SendVerificationMutationVariables = Exact<{
+  email: Scalars["String"]["input"];
+}>;
+
+export type SendVerificationMutation = { __typename?: "Mutation"; sendVerification?: any | null };
+
 export type SignupMutationVariables = Exact<{
   auth: AuthInput;
 }>;
@@ -868,6 +874,19 @@ export type UpdateProfileLanguageMutation = {
       name: string;
       proficiency: Proficiency;
     }>;
+export type UpdateProfileMutationVariables = Exact<{
+  profile: UpdateProfileInput;
+}>;
+
+export type UpdateProfileMutation = {
+  __typename?: "Mutation";
+  updateProfile: {
+    __typename?: "Profile";
+    id: string;
+    first_name?: string | null;
+    last_name?: string | null;
+    full_name?: string | null;
+    avatar?: string | null;
   };
 };
 
@@ -877,6 +896,41 @@ export type UpdateTokenMutation = {
   __typename?: "Mutation";
   updateToken: { __typename?: "UpdateTokenResult"; access_token: string; refresh_token: string };
 };
+
+export type UpdateUserMutationVariables = Exact<{
+  user: UpdateUserInput;
+}>;
+
+export type UpdateUserMutation = {
+  __typename?: "Mutation";
+  updateUser: {
+    __typename?: "User";
+    id: string;
+    created_at: string;
+    email: string;
+    is_verified: boolean;
+    role: UserRole;
+    department_name?: string | null;
+    position_name?: string | null;
+    profile: {
+      __typename?: "Profile";
+      id: string;
+      created_at: string;
+      first_name?: string | null;
+      last_name?: string | null;
+      full_name?: string | null;
+      avatar?: string | null;
+    };
+    department?: { __typename?: "Department"; id: string; name: string } | null;
+    position?: { __typename?: "Position"; id: string; name: string } | null;
+  };
+};
+
+export type UploadAvatarMutationVariables = Exact<{
+  avatar: UploadAvatarInput;
+}>;
+
+export type UploadAvatarMutation = { __typename?: "Mutation"; uploadAvatar: string };
 
 export type VerifyMailMutationVariables = Exact<{
   otp: Scalars["String"]["input"];
@@ -926,6 +980,34 @@ export type ProfileQuery = {
       proficiency: Proficiency;
     }>;
   };
+  me: { __typename?: "Profile"; id: string; is_verified?: boolean | null; role?: UserRole | null };
+};
+
+export type UserQueryVariables = Exact<{
+  userId: Scalars["ID"]["input"];
+}>;
+
+export type UserQuery = {
+  __typename?: "Query";
+  user: {
+    __typename?: "User";
+    id: string;
+    email: string;
+    created_at: string;
+    department?: { __typename?: "Department"; id: string; name: string } | null;
+    position?: { __typename?: "Position"; id: string; name: string } | null;
+    profile: {
+      __typename?: "Profile";
+      avatar?: string | null;
+      email?: string | null;
+      first_name?: string | null;
+      last_name?: string | null;
+      full_name?: string | null;
+      created_at: string;
+    };
+  };
+  departments: Array<{ __typename?: "Department"; id: string; name: string }>;
+  positions: Array<{ __typename?: "Position"; id: string; name: string }>;
 };
 
 export type UsersQueryVariables = Exact<{
@@ -1229,6 +1311,42 @@ export const ResetPasswordDocument = {
     },
   ],
 } as unknown as DocumentNode<ResetPasswordMutation, ResetPasswordMutationVariables>;
+export const SendVerificationDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "sendVerification" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "email" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "String" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "sendVerification" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "email" },
+                value: { kind: "Variable", name: { kind: "Name", value: "email" } },
+              },
+            ],
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<SendVerificationMutation, SendVerificationMutationVariables>;
 export const SignupDocument = {
   kind: "Document",
   definitions: [
@@ -1281,6 +1399,7 @@ export const SignupDocument = {
   ],
 } as unknown as DocumentNode<SignupMutation, SignupMutationVariables>;
 export const UpdateProfileLanguageDocument = {
+export const UpdateProfileDocument = {
   kind: "Document",
   definitions: [
     {
@@ -1297,6 +1416,14 @@ export const UpdateProfileLanguageDocument = {
               kind: "NamedType",
               name: { kind: "Name", value: "UpdateProfileLanguageInput" },
             },
+      name: { kind: "Name", value: "UpdateProfile" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "profile" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "UpdateProfileInput" } },
           },
         },
       ],
@@ -1311,6 +1438,12 @@ export const UpdateProfileLanguageDocument = {
                 kind: "Argument",
                 name: { kind: "Name", value: "language" },
                 value: { kind: "Variable", name: { kind: "Name", value: "language" } },
+            name: { kind: "Name", value: "updateProfile" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "profile" },
+                value: { kind: "Variable", name: { kind: "Name", value: "profile" } },
               },
             ],
             selectionSet: {
@@ -1327,6 +1460,11 @@ export const UpdateProfileLanguageDocument = {
                     ],
                   },
                 },
+                { kind: "Field", name: { kind: "Name", value: "id" } },
+                { kind: "Field", name: { kind: "Name", value: "first_name" } },
+                { kind: "Field", name: { kind: "Name", value: "last_name" } },
+                { kind: "Field", name: { kind: "Name", value: "full_name" } },
+                { kind: "Field", name: { kind: "Name", value: "avatar" } },
               ],
             },
           },
@@ -1335,6 +1473,7 @@ export const UpdateProfileLanguageDocument = {
     },
   ],
 } as unknown as DocumentNode<UpdateProfileLanguageMutation, UpdateProfileLanguageMutationVariables>;
+} as unknown as DocumentNode<UpdateProfileMutation, UpdateProfileMutationVariables>;
 export const UpdateTokenDocument = {
   kind: "Document",
   definitions: [
@@ -1361,6 +1500,127 @@ export const UpdateTokenDocument = {
     },
   ],
 } as unknown as DocumentNode<UpdateTokenMutation, UpdateTokenMutationVariables>;
+export const UpdateUserDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "UpdateUser" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "user" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "UpdateUserInput" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "updateUser" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "user" },
+                value: { kind: "Variable", name: { kind: "Name", value: "user" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "id" } },
+                { kind: "Field", name: { kind: "Name", value: "created_at" } },
+                { kind: "Field", name: { kind: "Name", value: "email" } },
+                { kind: "Field", name: { kind: "Name", value: "is_verified" } },
+                { kind: "Field", name: { kind: "Name", value: "role" } },
+                { kind: "Field", name: { kind: "Name", value: "department_name" } },
+                { kind: "Field", name: { kind: "Name", value: "position_name" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "profile" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      { kind: "Field", name: { kind: "Name", value: "created_at" } },
+                      { kind: "Field", name: { kind: "Name", value: "first_name" } },
+                      { kind: "Field", name: { kind: "Name", value: "last_name" } },
+                      { kind: "Field", name: { kind: "Name", value: "full_name" } },
+                      { kind: "Field", name: { kind: "Name", value: "avatar" } },
+                    ],
+                  },
+                },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "department" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      { kind: "Field", name: { kind: "Name", value: "name" } },
+                    ],
+                  },
+                },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "position" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      { kind: "Field", name: { kind: "Name", value: "name" } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<UpdateUserMutation, UpdateUserMutationVariables>;
+export const UploadAvatarDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "UploadAvatar" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "avatar" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "UploadAvatarInput" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "uploadAvatar" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "avatar" },
+                value: { kind: "Variable", name: { kind: "Name", value: "avatar" } },
+              },
+            ],
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<UploadAvatarMutation, UploadAvatarMutationVariables>;
 export const VerifyMailDocument = {
   kind: "Document",
   definitions: [
@@ -1481,6 +1741,9 @@ export const MeDocument = {
               selections: [
                 { kind: "Field", name: { kind: "Name", value: "role" } },
                 { kind: "Field", name: { kind: "Name", value: "id" } },
+                { kind: "Field", name: { kind: "Name", value: "id" } },
+                { kind: "Field", name: { kind: "Name", value: "is_verified" } },
+                { kind: "Field", name: { kind: "Name", value: "role" } },
               ],
             },
           },
@@ -1490,12 +1753,14 @@ export const MeDocument = {
   ],
 } as unknown as DocumentNode<MeQuery, MeQueryVariables>;
 export const ProfileDocument = {
+export const UserDocument = {
   kind: "Document",
   definitions: [
     {
       kind: "OperationDefinition",
       operation: "query",
       name: { kind: "Name", value: "Profile" },
+      name: { kind: "Name", value: "user" },
       variableDefinitions: [
         {
           kind: "VariableDefinition",
@@ -1512,6 +1777,7 @@ export const ProfileDocument = {
           {
             kind: "Field",
             name: { kind: "Name", value: "profile" },
+            name: { kind: "Name", value: "user" },
             arguments: [
               {
                 kind: "Argument",
@@ -1533,6 +1799,68 @@ export const ProfileDocument = {
                     ],
                   },
                 },
+                { kind: "Field", name: { kind: "Name", value: "id" } },
+                { kind: "Field", name: { kind: "Name", value: "email" } },
+                { kind: "Field", name: { kind: "Name", value: "created_at" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "department" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      { kind: "Field", name: { kind: "Name", value: "name" } },
+                    ],
+                  },
+                },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "position" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      { kind: "Field", name: { kind: "Name", value: "name" } },
+                    ],
+                  },
+                },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "profile" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "avatar" } },
+                      { kind: "Field", name: { kind: "Name", value: "email" } },
+                      { kind: "Field", name: { kind: "Name", value: "first_name" } },
+                      { kind: "Field", name: { kind: "Name", value: "last_name" } },
+                      { kind: "Field", name: { kind: "Name", value: "full_name" } },
+                      { kind: "Field", name: { kind: "Name", value: "created_at" } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "departments" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "id" } },
+                { kind: "Field", name: { kind: "Name", value: "name" } },
+              ],
+            },
+          },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "positions" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "id" } },
+                { kind: "Field", name: { kind: "Name", value: "name" } },
               ],
             },
           },
@@ -1541,6 +1869,7 @@ export const ProfileDocument = {
     },
   ],
 } as unknown as DocumentNode<ProfileQuery, ProfileQueryVariables>;
+} as unknown as DocumentNode<UserQuery, UserQueryVariables>;
 export const UsersDocument = {
   kind: "Document",
   definitions: [

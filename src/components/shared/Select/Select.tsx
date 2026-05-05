@@ -14,7 +14,6 @@ import { cn } from "@root/lib/utils";
 import type { SelectProps } from "./types.ts";
 
 export const Select = ({
-  disabled,
   list,
   label,
   placeholder,
@@ -24,6 +23,7 @@ export const Select = ({
   disablePortal = false,
   side = "bottom",
   align = "start",
+  disabled = false,
   value,
   onValueChange,
 }: SelectProps) => {
@@ -77,6 +77,11 @@ export const Select = ({
     </SelectBase.Positioner>
   );
 
+  const handleSelectValue = (next: string | null) => {
+    if (disabled) return;
+    if (next !== null) onValueChange?.(next);
+  };
+
   return (
     <div ref={setContainerRef} className={cn("relative flex w-full flex-col", className)}>
       <Label
@@ -86,17 +91,14 @@ export const Select = ({
         {label}
       </Label>
 
-      <SelectRoot
-        value={value as string}
-        modal={false}
-        disabled={disabled}
-        onValueChange={(next) => {
-          if (next !== null) onValueChange?.(next);
-        }}
-      >
+      <SelectRoot value={value as string} modal={false} onValueChange={handleSelectValue}>
         <SelectTrigger
           id={triggerId}
-          className="w-full border-gray-5 text-gray-2 data-[size=default]:h-auto px-3 py-3.25 dark:text-gray-5 disabled:bg-gray-6"
+          disabled={disabled}
+          className={cn(
+            "w-full border-gray-5 text-gray-2 data-[size=default]:h-auto px-3 py-3.25 dark:text-gray-5",
+            "disabled:bg-gray-6 dark:disabled:bg-gray-3",
+          )}
         >
           <SelectValue placeholder={placeholder}>{labelFor(value as string)}</SelectValue>
         </SelectTrigger>

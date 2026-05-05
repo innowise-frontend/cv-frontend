@@ -9,6 +9,20 @@ import type { ReactNode } from "react";
 const verifyMailMock = vi.fn<(code: string) => Promise<void>>();
 const navigateMock = vi.fn();
 
+const testAuth = vi.hoisted(() => ({
+  userId: "user-test-99",
+}));
+
+vi.mock("@root/hooks/useAuth/useAuth", () => ({
+  useAuth: () => ({
+    userId: testAuth.userId,
+    isAdmin: false,
+    isAuthenticated: true,
+    isFirstLoad: false,
+    isVerified: false,
+  }),
+}));
+
 vi.mock("@services/auth", () => ({
   verifyMail: (code: string): Promise<void> => verifyMailMock(code),
 }));
@@ -115,9 +129,12 @@ describe("VerifyEmailPage", () => {
     expect(navigateMock).not.toHaveBeenCalled();
   });
 
-  it("renders later button as link to root route", async () => {
+  it("renders later button as link to the signed-in user's profile", async () => {
     await renderPage();
 
-    expect(screen.getByRole("link", { name: "Later" })).toHaveAttribute("href", ROUTES.ROOT);
+    expect(screen.getByRole("link", { name: "Later" })).toHaveAttribute(
+      "href",
+      `/users/${testAuth.userId}`,
+    );
   });
 });

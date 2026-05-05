@@ -24,7 +24,11 @@ import { Route as AppPositionsRouteImport } from './routes/_app/positions'
 import { Route as AppLanguagesRouteImport } from './routes/_app/languages'
 import { Route as AppDepartmentsRouteImport } from './routes/_app/departments'
 import { Route as AppCvsRouteImport } from './routes/_app/cvs'
-import { Route as AppUsersUserIdRouteImport } from './routes/_app/users.$userId'
+import { Route as AppUsersUserIdRouteImport } from './routes/_app/users/$userId'
+import { Route as AppUsersUserIdIndexRouteImport } from './routes/_app/users/$userId.index'
+import { Route as AppUsersUserIdSkillsRouteImport } from './routes/_app/users/$userId.skills'
+import { Route as AppUsersUserIdProfileRouteImport } from './routes/_app/users/$userId.profile'
+import { Route as AppUsersUserIdLanguagesRouteImport } from './routes/_app/users/$userId.languages'
 
 const PublicRouteRoute = PublicRouteRouteImport.update({
   id: '/_public',
@@ -104,6 +108,26 @@ const AppUsersUserIdRoute = AppUsersUserIdRouteImport.update({
   path: '/users/$userId',
   getParentRoute: () => AppRouteRoute,
 } as any)
+const AppUsersUserIdIndexRoute = AppUsersUserIdIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppUsersUserIdRoute,
+} as any)
+const AppUsersUserIdSkillsRoute = AppUsersUserIdSkillsRouteImport.update({
+  id: '/skills',
+  path: '/skills',
+  getParentRoute: () => AppUsersUserIdRoute,
+} as any)
+const AppUsersUserIdProfileRoute = AppUsersUserIdProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AppUsersUserIdRoute,
+} as any)
+const AppUsersUserIdLanguagesRoute = AppUsersUserIdLanguagesRouteImport.update({
+  id: '/languages',
+  path: '/languages',
+  getParentRoute: () => AppUsersUserIdRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof AppIndexRoute
@@ -119,7 +143,11 @@ export interface FileRoutesByFullPath {
   '/forgot-password': typeof PublicForgotPasswordRoute
   '/reset-password': typeof PublicResetPasswordRoute
   '/verify-email': typeof PublicVerifyEmailRoute
-  '/users/$userId': typeof AppUsersUserIdRoute
+  '/users/$userId': typeof AppUsersUserIdRouteWithChildren
+  '/users/$userId/languages': typeof AppUsersUserIdLanguagesRoute
+  '/users/$userId/profile': typeof AppUsersUserIdProfileRoute
+  '/users/$userId/skills': typeof AppUsersUserIdSkillsRoute
+  '/users/$userId/': typeof AppUsersUserIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof AppIndexRoute
@@ -135,7 +163,10 @@ export interface FileRoutesByTo {
   '/forgot-password': typeof PublicForgotPasswordRoute
   '/reset-password': typeof PublicResetPasswordRoute
   '/verify-email': typeof PublicVerifyEmailRoute
-  '/users/$userId': typeof AppUsersUserIdRoute
+  '/users/$userId/languages': typeof AppUsersUserIdLanguagesRoute
+  '/users/$userId/profile': typeof AppUsersUserIdProfileRoute
+  '/users/$userId/skills': typeof AppUsersUserIdSkillsRoute
+  '/users/$userId': typeof AppUsersUserIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -154,7 +185,11 @@ export interface FileRoutesById {
   '/_public/reset-password': typeof PublicResetPasswordRoute
   '/_public/verify-email': typeof PublicVerifyEmailRoute
   '/_app/': typeof AppIndexRoute
-  '/_app/users/$userId': typeof AppUsersUserIdRoute
+  '/_app/users/$userId': typeof AppUsersUserIdRouteWithChildren
+  '/_app/users/$userId/languages': typeof AppUsersUserIdLanguagesRoute
+  '/_app/users/$userId/profile': typeof AppUsersUserIdProfileRoute
+  '/_app/users/$userId/skills': typeof AppUsersUserIdSkillsRoute
+  '/_app/users/$userId/': typeof AppUsersUserIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -173,6 +208,10 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/verify-email'
     | '/users/$userId'
+    | '/users/$userId/languages'
+    | '/users/$userId/profile'
+    | '/users/$userId/skills'
+    | '/users/$userId/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -188,6 +227,9 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/reset-password'
     | '/verify-email'
+    | '/users/$userId/languages'
+    | '/users/$userId/profile'
+    | '/users/$userId/skills'
     | '/users/$userId'
   id:
     | '__root__'
@@ -207,6 +249,10 @@ export interface FileRouteTypes {
     | '/_public/verify-email'
     | '/_app/'
     | '/_app/users/$userId'
+    | '/_app/users/$userId/languages'
+    | '/_app/users/$userId/profile'
+    | '/_app/users/$userId/skills'
+    | '/_app/users/$userId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -328,8 +374,54 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppUsersUserIdRouteImport
       parentRoute: typeof AppRouteRoute
     }
+    '/_app/users/$userId/': {
+      id: '/_app/users/$userId/'
+      path: '/'
+      fullPath: '/users/$userId/'
+      preLoaderRoute: typeof AppUsersUserIdIndexRouteImport
+      parentRoute: typeof AppUsersUserIdRoute
+    }
+    '/_app/users/$userId/skills': {
+      id: '/_app/users/$userId/skills'
+      path: '/skills'
+      fullPath: '/users/$userId/skills'
+      preLoaderRoute: typeof AppUsersUserIdSkillsRouteImport
+      parentRoute: typeof AppUsersUserIdRoute
+    }
+    '/_app/users/$userId/profile': {
+      id: '/_app/users/$userId/profile'
+      path: '/profile'
+      fullPath: '/users/$userId/profile'
+      preLoaderRoute: typeof AppUsersUserIdProfileRouteImport
+      parentRoute: typeof AppUsersUserIdRoute
+    }
+    '/_app/users/$userId/languages': {
+      id: '/_app/users/$userId/languages'
+      path: '/languages'
+      fullPath: '/users/$userId/languages'
+      preLoaderRoute: typeof AppUsersUserIdLanguagesRouteImport
+      parentRoute: typeof AppUsersUserIdRoute
+    }
   }
 }
+
+interface AppUsersUserIdRouteChildren {
+  AppUsersUserIdLanguagesRoute: typeof AppUsersUserIdLanguagesRoute
+  AppUsersUserIdProfileRoute: typeof AppUsersUserIdProfileRoute
+  AppUsersUserIdSkillsRoute: typeof AppUsersUserIdSkillsRoute
+  AppUsersUserIdIndexRoute: typeof AppUsersUserIdIndexRoute
+}
+
+const AppUsersUserIdRouteChildren: AppUsersUserIdRouteChildren = {
+  AppUsersUserIdLanguagesRoute: AppUsersUserIdLanguagesRoute,
+  AppUsersUserIdProfileRoute: AppUsersUserIdProfileRoute,
+  AppUsersUserIdSkillsRoute: AppUsersUserIdSkillsRoute,
+  AppUsersUserIdIndexRoute: AppUsersUserIdIndexRoute,
+}
+
+const AppUsersUserIdRouteWithChildren = AppUsersUserIdRoute._addFileChildren(
+  AppUsersUserIdRouteChildren,
+)
 
 interface AppRouteRouteChildren {
   AppCvsRoute: typeof AppCvsRoute
@@ -341,7 +433,7 @@ interface AppRouteRouteChildren {
   AppSettingsRoute: typeof AppSettingsRoute
   AppSkillsRoute: typeof AppSkillsRoute
   AppIndexRoute: typeof AppIndexRoute
-  AppUsersUserIdRoute: typeof AppUsersUserIdRoute
+  AppUsersUserIdRoute: typeof AppUsersUserIdRouteWithChildren
 }
 
 const AppRouteRouteChildren: AppRouteRouteChildren = {
@@ -354,7 +446,7 @@ const AppRouteRouteChildren: AppRouteRouteChildren = {
   AppSettingsRoute: AppSettingsRoute,
   AppSkillsRoute: AppSkillsRoute,
   AppIndexRoute: AppIndexRoute,
-  AppUsersUserIdRoute: AppUsersUserIdRoute,
+  AppUsersUserIdRoute: AppUsersUserIdRouteWithChildren,
 }
 
 const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(
