@@ -86,6 +86,23 @@
       "later": "Später",
       "invalidCode": "Ungültiger Code"
     },
+    "languages": {
+      "currentLanguages": "Aktuelle Sprachen",
+      "emptyState": "Sie haben noch keine Sprachen",
+      "addLanguage": "Sprache hinzufügen",
+      "deleteLanguage": "Sprache löschen",
+      "updateLanguage": "Sprache aktualisieren",
+      "language": "Sprache",
+      "languages": "Sprachen",
+      "proficiency": "Niveau",
+      "delete": "Löschen",
+      "removeLanguage": "Sprache entfernen",
+      "confirmRemove": "Möchten Sie wirklich {{count}} {{languageLabel}} entfernen?",
+      "cancel": "Abbrechen",
+      "add": "Hinzufügen",
+      "remove": "Entfernen",
+      "save": "Speichern"
+    },
     "sidebar": {
       "employees": "Mitarbeiter",
       "skills": "Fähigkeiten",

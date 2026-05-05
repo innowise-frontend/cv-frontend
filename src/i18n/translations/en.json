@@ -86,6 +86,23 @@
       "later": "Later",
       "invalidCode": "Invalid code"
     },
+    "languages": {
+      "currentLanguages": "Current languages",
+      "emptyState": "You don't have any languages yet",
+      "addLanguage": "Add language",
+      "deleteLanguage": "Delete language",
+      "updateLanguage": "Update language",
+      "language": "Language",
+      "languages": "Languages",
+      "proficiency": "Proficiency",
+      "delete": "Delete",
+      "removeLanguage": "Remove language",
+      "confirmRemove": "Are you sure you want to remove {{count}} {{languageLabel}}?",
+      "cancel": "Cancel",
+      "add": "Add",
+      "remove": "Remove",
+      "save": "Save"
+    },
     "sidebar": {
       "employees": "Employees",
       "skills": "Skills",

@@ -57,6 +57,23 @@ export interface TranslationTypes {
         passwordsDoNotMatch: string;
       };
     };
+    languages: {
+      currentLanguages: string;
+      emptyState: string;
+      addLanguage: string;
+      deleteLanguage: string;
+      updateLanguage: string;
+      language: string;
+      languages: string;
+      proficiency: string;
+      delete: string;
+      removeLanguage: string;
+      confirmRemove: string;
+      cancel: string;
+      add: string;
+      remove: string;
+      save: string;
+    };
     sidebar: {
       employees: string;
       skills: string;

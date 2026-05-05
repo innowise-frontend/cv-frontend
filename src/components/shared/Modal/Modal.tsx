@@ -1,4 +1,5 @@
-import { createContext, useContext, useEffect, useRef } from "react";
+import React, { createContext, useContext, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import CloseIcon from "@assets/icon/CloseIcon.svg?react";
 import { Button } from "@components/shared";
 import { useModal } from "@root/hooks";
@@ -79,7 +80,7 @@ const ModalContent = ({
     closeModal();
   };
 
-  return (
+  return createPortal(
     <dialog
       {...props}
       onClick={handleBackdropClick}
@@ -92,7 +93,8 @@ const ModalContent = ({
       ref={dialogRef}
     >
       {children}
-    </dialog>
+    </dialog>,
+    document.body,
   );
 };
 
