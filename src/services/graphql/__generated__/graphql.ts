@@ -799,6 +799,22 @@ export type ChangePasswordMutation = {
   changePassword: { __typename?: "User"; id: string; email: string };
 };
 
+export type DeleteProfileLanguageMutationVariables = Exact<{
+  language: DeleteProfileLanguageInput;
+}>;
+
+export type DeleteProfileLanguageMutation = {
+  __typename?: "Mutation";
+  deleteProfileLanguage: {
+    __typename?: "Profile";
+    languages: Array<{
+      __typename?: "LanguageProficiency";
+      name: string;
+      proficiency: Proficiency;
+    }>;
+  };
+};
+
 export type ForgotPasswordMutationVariables = Exact<{
   auth: ForgotPasswordInput;
 }>;
@@ -1035,6 +1051,61 @@ export const ChangePasswordDocument = {
     },
   ],
 } as unknown as DocumentNode<ChangePasswordMutation, ChangePasswordMutationVariables>;
+export const DeleteProfileLanguageDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "DeleteProfileLanguage" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "language" } },
+          type: {
+            kind: "NonNullType",
+            type: {
+              kind: "NamedType",
+              name: { kind: "Name", value: "DeleteProfileLanguageInput" },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "deleteProfileLanguage" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "language" },
+                value: { kind: "Variable", name: { kind: "Name", value: "language" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "languages" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "name" } },
+                      { kind: "Field", name: { kind: "Name", value: "proficiency" } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<DeleteProfileLanguageMutation, DeleteProfileLanguageMutationVariables>;
 export const ForgotPasswordDocument = {
   kind: "Document",
   definitions: [

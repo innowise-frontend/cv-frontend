@@ -62,6 +62,23 @@
         "passwordsDoNotMatch": "Le password non coincidono"
       }
     },
+    "languages": {
+      "currentLanguages": "Lingue attuali",
+      "emptyState": "Non hai ancora nessuna lingua",
+      "addLanguage": "Aggiungi lingua",
+      "deleteLanguage": "Elimina lingua",
+      "updateLanguage": "Aggiorna lingua",
+      "language": "Lingua",
+      "languages": "Lingue",
+      "proficiency": "Livello",
+      "delete": "Elimina",
+      "removeLanguage": "Rimuovi lingua",
+      "confirmRemove": "Sei sicuro di voler rimuovere {{count}} {{languageLabel}}?",
+      "cancel": "Annulla",
+      "add": "Aggiungi",
+      "remove": "Rimuovi",
+      "save": "Salva"
+    },
     "sidebar": {
       "employees": "Dipendenti",
       "skills": "Competenze",

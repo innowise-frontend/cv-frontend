@@ -1,13 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 import { useLocation, useNavigate, useSearch } from "@tanstack/react-router";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Breadcrumbs, ROUTES, Table, TableSearch } from "@components/shared";
 import { VIEW_OPTIONS } from "@root/constants";
-import { getBreadcrumbsLink } from "@root/lib/getBreadcrumbsLink/getBreadCrumbsLink";
+import { getBreadcrumbsLink } from "@root/lib";
 import { getUsers } from "@services/users";
 import { columns } from "./columns";
 
 export const UsersPage = () => {
+  const { t } = useTranslation();
   const searchParams = useSearch({ from: "/_app/" });
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
@@ -49,7 +51,7 @@ export const UsersPage = () => {
 
   return (
     <div className="flex h-full min-h-0 flex-col">
-      <Breadcrumbs items={[getBreadcrumbsLink(location.pathname)]} className="pl-5" />
+      <Breadcrumbs items={[getBreadcrumbsLink(location.pathname, t)]} className="pl-5" />
       <TableSearch action={null} />
       <div className="min-h-0 flex-1">
         <Table

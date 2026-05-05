@@ -62,6 +62,23 @@
         "passwordsDoNotMatch": "Las contraseñas no coinciden"
       }
     },
+    "languages": {
+      "currentLanguages": "Idiomas actuales",
+      "emptyState": "Todavia no tienes idiomas",
+      "addLanguage": "Agregar idioma",
+      "deleteLanguage": "Eliminar idioma",
+      "updateLanguage": "Actualizar idioma",
+      "language": "Idioma",
+      "languages": "Idiomas",
+      "proficiency": "Nivel",
+      "delete": "Eliminar",
+      "removeLanguage": "Quitar idioma",
+      "confirmRemove": "¿Seguro que quieres quitar {{count}} {{languageLabel}}?",
+      "cancel": "Cancelar",
+      "add": "Agregar",
+      "remove": "Quitar",
+      "save": "Guardar"
+    },
     "sidebar": {
       "employees": "Empleados",
       "skills": "Habilidades",

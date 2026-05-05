@@ -1,20 +1,29 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { Modal, ProgressBar, Select } from "@components/shared";
+import { useTranslation } from "react-i18next";
+import { Button, Modal, ProgressBar, Select } from "@root/components/shared";
 import { useAuth } from "@root/hooks";
+import { cn } from "@root/lib";
 import { Proficiency, UpdateProfileLanguageInput } from "@services/graphql/__generated__/graphql";
-import { updateProfileLanguage } from "@services/languages/updateProfileLanguage/updateProfileLanguage";
+import { updateProfileLanguage } from "@services/languages";
 import { LanguageProps } from "./types";
 import { PROFICIENCY_ORDER } from "../../const";
 
-export const LanguageProgressBar = (language: LanguageProps) => {
+export const LanguageProgressBar = ({
+  name,
+  proficiency,
+  chosen = false,
+  isDeleteMode = false,
+  onClick,
+}: LanguageProps) => {
+  const { t } = useTranslation();
   const { userId } = useAuth();
   const queryClient = useQueryClient();
 
   const [updateLanguage, setUpdateLanguage] = useState<UpdateProfileLanguageInput>({
     userId: userId,
-    name: language.name,
-    proficiency: language.proficiency,
+    name: name,
+    proficiency: proficiency,
   });
 
   const proficiencyOptions = PROFICIENCY_ORDER.map((proficiency) => ({
@@ -30,49 +39,71 @@ export const LanguageProgressBar = (language: LanguageProps) => {
   });
 
   const resetUpdateLanguage = () => {
-    setUpdateLanguage({ userId, name: language.name, proficiency: language.proficiency });
+    setUpdateLanguage({ userId, name: name, proficiency: proficiency });
   };
+
+  if (isDeleteMode) {
+    return (
+      <Button variant="ghost" className="capitalize" onClick={onClick}>
+        <ProgressBar
+          className={cn(
+            "px-2 cursor-pointer transition-colors duration-150 hover:bg-gray-7 dark:hover:bg-gray5",
+            chosen && "*:text-gray *:dark:text-gray-8",
+          )}
+          key={name}
+          label={name || ""}
+          proficiency={chosen ? Proficiency.A1 : (proficiency as Proficiency)}
+        />
+      </Button>
+    );
+  }
 
   return (
     <Modal>
-      <Modal.Trigger className="lowercase">
+      <Modal.Trigger className="capitalize" variant="ghost">
         <ProgressBar
-          className="px-2 hover:bg-gray-7 cursor-pointer transition-colors duration-150"
-          key={language.name}
-          label={language.name || ""}
-          proficiency={language.proficiency as Proficiency}
+          className="px-2 cursor-pointer transition-colors duration-150 hover:bg-gray-7"
+          key={name}
+          label={name || ""}
+          proficiency={proficiency as Proficiency}
         />
       </Modal.Trigger>
       <Modal.Content onCancel={resetUpdateLanguage}>
-        <Modal.Header onCancel={resetUpdateLanguage}>Update language</Modal.Header>
+        <Modal.Header onCancel={resetUpdateLanguage}>
+          {t("page.languages.updateLanguage")}
+        </Modal.Header>
         <Modal.Body className="flex flex-col gap-4">
           <Select
-            list={[{ label: language.name, value: language.name }]}
-            label="Language"
+            list={[{ label: name, value: name }]}
+            label={t("page.languages.language")}
             disabled={true}
-            value={language.name}
+            value={name}
             onValueChange={(value) => setUpdateLanguage({ ...updateLanguage, name: value })}
+            className="[&_[data-slot=select-trigger][data-placeholder]]:text-gray-6"
           />
           <Select
             list={proficiencyOptions}
-            label="Proficiency"
+            label={t("page.languages.proficiency")}
+            placeholder={t("page.languages.proficiency")}
             value={updateLanguage.proficiency}
+            disablePortal
             onValueChange={(value) =>
               setUpdateLanguage({ ...updateLanguage, proficiency: value as Proficiency })
             }
+            className="[&_[data-slot=select-trigger][data-placeholder]]:text-gray-6"
           />
         </Modal.Body>
         <Modal.Footer>
           <Modal.Close variant="outline" className="w-40" onClick={resetUpdateLanguage}>
-            Cancel
+            {t("page.languages.cancel")}
           </Modal.Close>
           <Modal.Close
             variant="filled"
             className="w-40"
-            disabled={updateLanguage.proficiency === language.proficiency}
+            disabled={updateLanguage.proficiency === proficiency}
             onClick={() => mutate(updateLanguage)}
           >
-            Save
+            {t("page.languages.save")}
           </Modal.Close>
         </Modal.Footer>
       </Modal.Content>

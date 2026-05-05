@@ -62,6 +62,23 @@
         "passwordsDoNotMatch": "Пароли не совпадают"
       }
     },
+    "languages": {
+      "currentLanguages": "Текущие языки",
+      "emptyState": "У вас пока нет языков",
+      "addLanguage": "Добавить язык",
+      "deleteLanguage": "Удалить язык",
+      "updateLanguage": "Обновить язык",
+      "language": "Язык",
+      "languages": "Языки",
+      "proficiency": "Уровень",
+      "delete": "Удалить",
+      "removeLanguage": "Удалить язык",
+      "confirmRemove": "Вы уверены, что хотите удалить {{count}} {{languageLabel}}?",
+      "cancel": "Отмена",
+      "add": "Добавить",
+      "remove": "Удалить",
+      "save": "Сохранить"
+    },
     "sidebar": {
       "employees": "Сотрудники",
       "skills": "Навыки",
