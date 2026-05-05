@@ -92,7 +92,7 @@ export const Info = () => {
         ) : null}
       </div>
 
-      <div className="mx-auto mt-12 w-full max-w-[860px]">
+      <div className="mx-auto mt-12 w-[860px]">
         <div className="grid w-full grid-cols-1 gap-x-10 gap-y-8 md:grid-cols-[410px_410px] md:justify-center">
           <Input
             disabled={!isEditable}
