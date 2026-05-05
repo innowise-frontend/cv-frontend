@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import { useNavigate, useSearch } from "@tanstack/react-router";
+import { useLocation, useNavigate, useSearch } from "@tanstack/react-router";
 import { useState } from "react";
 import { Breadcrumbs, ROUTES, Table, TableSearch } from "@components/shared";
 import { VIEW_OPTIONS } from "@root/constants";
+import { getBreadcrumbsLink } from "@root/lib/getBreadcrumbsLink/getBreadCrumbsLink";
 import { getUsers } from "@services/users";
 import { columns } from "./columns";
 
@@ -12,6 +13,8 @@ export const UsersPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [currentLimit, setCurrentLimit] = useState(10);
   const [currentSort, setCurrentSort] = useState<"ASC" | "DESC">("ASC");
+
+  const location = useLocation();
 
   const { data } = useQuery({
     queryKey: ["users", searchParams.search, currentPage, currentLimit, currentSort],
@@ -46,7 +49,7 @@ export const UsersPage = () => {
 
   return (
     <div className="flex h-full min-h-0 flex-col">
-      <Breadcrumbs items={[{ label: "Employees", href: "/" }]} className="pl-5" />
+      <Breadcrumbs items={[getBreadcrumbsLink(location.pathname)]} className="pl-5" />
       <TableSearch action={null} />
       <div className="min-h-0 flex-1">
         <Table

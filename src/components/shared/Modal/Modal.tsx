@@ -40,8 +40,9 @@ const ModalContent = ({
   children,
   ref,
   className = "",
+  onCancel,
   ...props
-}: React.ComponentProps<"dialog">) => {
+}: React.ComponentProps<"dialog"> & { onCancel?: () => void }) => {
   const { isOpen, closeModal } = useModalContext();
   const dialogRef = useRef<HTMLDialogElement | null>(null);
 
@@ -67,12 +68,14 @@ const ModalContent = ({
 
   const handleBackdropClick = (event: React.MouseEvent<HTMLDialogElement>) => {
     if (event.target === dialogRef.current) {
+      onCancel?.();
       closeModal();
     }
   };
 
   const handleCancel = (event: React.SyntheticEvent<HTMLDialogElement, Event>) => {
     event.preventDefault();
+    onCancel?.();
     closeModal();
   };
 
@@ -93,36 +96,62 @@ const ModalContent = ({
   );
 };
 
-const ModalClose = ({ children }: { children?: React.ReactNode }) => {
+const ModalClose = ({
+  children,
+  onClick,
+  ...props
+}: { children?: React.ReactNode; onClick?: () => void } & React.ComponentProps<typeof Button>) => {
   const { closeModal } = useModalContext();
 
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+
+    onClick?.();
+    closeModal();
+  };
+
   return (
-    <Button
-      onClick={closeModal}
-      variant="ghost"
-      className="absolute top-3 right-5 h-7.5 w-7.5 rounded-full p-0"
-    >
+    <Button onClick={handleClick} {...props}>
       {children ?? <CloseIcon />}
     </Button>
   );
 };
 
-const ModalHeader = ({ children }: { children: React.ReactNode }) => {
+const ModalHeader = ({
+  children,
+  className = "",
+  onCancel,
+}: {
+  children?: React.ReactNode;
+  className?: string;
+  onCancel?: () => void;
+}) => {
   return (
-    <header className="flex items-center justify-between">
+    <header className={cn("flex items-center justify-between", className)}>
       <h2 className="text-lg font-bold">{children}</h2>
+      <Modal.Close className="ml-auto h-7.5 w-7.5 rounded-full p-0" onClick={onCancel} />
     </header>
   );
 };
 
-const ModalBody = ({ children }: { children: React.ReactNode }) => {
-  return <div className="py-6.5">{children}</div>;
+const ModalBody = ({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => {
+  return <div className={cn("py-6.5", className)}>{children}</div>;
 };
 
-const ModalFooter = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <div className="flex items-center justify-end gap-6 fixed bottom-3 right-5">{children}</div>
-  );
+const ModalFooter = ({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => {
+  return <div className={cn("flex items-center justify-end gap-6", className)}>{children}</div>;
 };
 
 Modal.Trigger = ModalTrigger;

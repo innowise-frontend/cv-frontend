@@ -1,5 +1,5 @@
 import { Select as SelectBase } from "@base-ui/react/select";
-import { useId } from "react";
+import { useCallback, useId, useState } from "react";
 import { Label } from "@root/components/ui/label";
 import {
   Select as SelectRoot,
@@ -14,6 +14,7 @@ import { cn } from "@root/lib/utils";
 import type { SelectProps } from "./types.ts";
 
 export const Select = ({
+  disabled,
   list,
   label,
   placeholder,
@@ -26,12 +27,17 @@ export const Select = ({
   onValueChange,
 }: SelectProps) => {
   const triggerId = useId();
+  const [containerNode, setContainerNode] = useState<HTMLDivElement | null>(null);
+  const setContainerRef = useCallback((node: HTMLDivElement | null) => {
+    setContainerNode(node);
+  }, []);
+  const dialogContainer = containerNode?.closest("dialog") ?? undefined;
 
   const labelFor = (val?: string | number) =>
     list.find((item) => item.value === val)?.label ?? placeholder;
 
   return (
-    <div className={cn("relative flex w-full flex-col", className)}>
+    <div ref={setContainerRef} className={cn("relative flex w-full flex-col", className)}>
       <Label
         htmlFor={triggerId}
         className="justify-start pl-3 text-left text-xs font-normal text-gray-3 dark:text-gray-5"
@@ -42,18 +48,19 @@ export const Select = ({
       <SelectRoot
         value={value as string}
         modal={false}
+        disabled={disabled}
         onValueChange={(next) => {
           if (next !== null) onValueChange?.(next);
         }}
       >
         <SelectTrigger
           id={triggerId}
-          className="w-full border-gray-5 text-gray-2 data-[size=default]:h-auto px-3 py-3.25 dark:text-gray-5"
+          className="w-full border-gray-5 text-gray-2 data-[size=default]:h-auto px-3 py-3.25 dark:text-gray-5 disabled:bg-gray-6"
         >
           <SelectValue placeholder={placeholder}>{labelFor(value as string)}</SelectValue>
         </SelectTrigger>
 
-        <SelectBase.Portal>
+        <SelectBase.Portal container={dialogContainer}>
           <SelectBase.Positioner
             side={side}
             align={align}

@@ -774,6 +774,22 @@ export type VerifyMailInput = {
   otp: Scalars["String"]["input"];
 };
 
+export type AddProfileLanguageMutationVariables = Exact<{
+  language: AddProfileLanguageInput;
+}>;
+
+export type AddProfileLanguageMutation = {
+  __typename?: "Mutation";
+  addProfileLanguage: {
+    __typename?: "Profile";
+    languages: Array<{
+      __typename?: "LanguageProficiency";
+      name: string;
+      proficiency: Proficiency;
+    }>;
+  };
+};
+
 export type ChangePasswordMutationVariables = Exact<{
   args: ChangePasswordInput;
 }>;
@@ -823,6 +839,22 @@ export type SignupMutation = {
   };
 };
 
+export type UpdateProfileLanguageMutationVariables = Exact<{
+  language: UpdateProfileLanguageInput;
+}>;
+
+export type UpdateProfileLanguageMutation = {
+  __typename?: "Mutation";
+  updateProfileLanguage: {
+    __typename?: "Profile";
+    languages: Array<{
+      __typename?: "LanguageProficiency";
+      name: string;
+      proficiency: Proficiency;
+    }>;
+  };
+};
+
 export type UpdateTokenMutationVariables = Exact<{ [key: string]: never }>;
 
 export type UpdateTokenMutation = {
@@ -836,11 +868,48 @@ export type VerifyMailMutationVariables = Exact<{
 
 export type VerifyMailMutation = { __typename?: "Mutation"; verifyMail?: any | null };
 
+export type LanguagesQueryVariables = Exact<{
+  params: SearchPaginationInput;
+}>;
+
+export type LanguagesQuery = {
+  __typename?: "Query";
+  languages: {
+    __typename?: "PaginatedLanguages";
+    total: number;
+    page: number;
+    limit: number;
+    total_pages: number;
+    items: Array<{
+      __typename?: "Language";
+      id: string;
+      name: string;
+      native_name?: string | null;
+    }>;
+  };
+};
+
 export type MeQueryVariables = Exact<{ [key: string]: never }>;
 
 export type MeQuery = {
   __typename?: "Query";
-  me: { __typename?: "Profile"; role?: UserRole | null };
+  me: { __typename?: "Profile"; role?: UserRole | null; id: string };
+};
+
+export type ProfileQueryVariables = Exact<{
+  userId: Scalars["ID"]["input"];
+}>;
+
+export type ProfileQuery = {
+  __typename?: "Query";
+  profile: {
+    __typename?: "Profile";
+    languages: Array<{
+      __typename?: "LanguageProficiency";
+      name: string;
+      proficiency: Proficiency;
+    }>;
+  };
 };
 
 export type UsersQueryVariables = Exact<{
@@ -871,6 +940,58 @@ export type UsersQuery = {
   };
 };
 
+export const AddProfileLanguageDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "AddProfileLanguage" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "language" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "AddProfileLanguageInput" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "addProfileLanguage" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "language" },
+                value: { kind: "Variable", name: { kind: "Name", value: "language" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "languages" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "name" } },
+                      { kind: "Field", name: { kind: "Name", value: "proficiency" } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<AddProfileLanguageMutation, AddProfileLanguageMutationVariables>;
 export const ChangePasswordDocument = {
   kind: "Document",
   definitions: [
@@ -1088,6 +1209,61 @@ export const SignupDocument = {
     },
   ],
 } as unknown as DocumentNode<SignupMutation, SignupMutationVariables>;
+export const UpdateProfileLanguageDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "UpdateProfileLanguage" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "language" } },
+          type: {
+            kind: "NonNullType",
+            type: {
+              kind: "NamedType",
+              name: { kind: "Name", value: "UpdateProfileLanguageInput" },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "updateProfileLanguage" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "language" },
+                value: { kind: "Variable", name: { kind: "Name", value: "language" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "languages" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "name" } },
+                      { kind: "Field", name: { kind: "Name", value: "proficiency" } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<UpdateProfileLanguageMutation, UpdateProfileLanguageMutationVariables>;
 export const UpdateTokenDocument = {
   kind: "Document",
   definitions: [
@@ -1159,6 +1335,63 @@ export const VerifyMailDocument = {
     },
   ],
 } as unknown as DocumentNode<VerifyMailMutation, VerifyMailMutationVariables>;
+export const LanguagesDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "Languages" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "params" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "SearchPaginationInput" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "languages" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "params" },
+                value: { kind: "Variable", name: { kind: "Name", value: "params" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "items" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      { kind: "Field", name: { kind: "Name", value: "name" } },
+                      { kind: "Field", name: { kind: "Name", value: "native_name" } },
+                    ],
+                  },
+                },
+                { kind: "Field", name: { kind: "Name", value: "total" } },
+                { kind: "Field", name: { kind: "Name", value: "page" } },
+                { kind: "Field", name: { kind: "Name", value: "limit" } },
+                { kind: "Field", name: { kind: "Name", value: "total_pages" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<LanguagesQuery, LanguagesQueryVariables>;
 export const MeDocument = {
   kind: "Document",
   definitions: [
@@ -1174,7 +1407,10 @@ export const MeDocument = {
             name: { kind: "Name", value: "me" },
             selectionSet: {
               kind: "SelectionSet",
-              selections: [{ kind: "Field", name: { kind: "Name", value: "role" } }],
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "role" } },
+                { kind: "Field", name: { kind: "Name", value: "id" } },
+              ],
             },
           },
         ],
@@ -1182,6 +1418,58 @@ export const MeDocument = {
     },
   ],
 } as unknown as DocumentNode<MeQuery, MeQueryVariables>;
+export const ProfileDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "Profile" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "userId" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "ID" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "profile" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "userId" },
+                value: { kind: "Variable", name: { kind: "Name", value: "userId" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "languages" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "name" } },
+                      { kind: "Field", name: { kind: "Name", value: "proficiency" } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<ProfileQuery, ProfileQueryVariables>;
 export const UsersDocument = {
   kind: "Document",
   definitions: [

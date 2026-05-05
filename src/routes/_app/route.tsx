@@ -12,9 +12,9 @@ export const Route = createFileRoute("/_app")({
     }
   },
   component: () => (
-    <div className="flex h-screen gap-20 overflow-hidden pb-3">
+    <div className="flex w-full h-screen overflow-hidden pb-3">
       <Sidebar />
-      <main className="min-w-0 flex-1 overflow-x-hidden  pt-4  pr-6">
+      <main className="flex-1 overflow-x-hidden h-full pt-4  pr-6">
         <Outlet />
       </main>
     </div>

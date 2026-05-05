@@ -8,6 +8,7 @@ export interface AuthContextType {
   isAdmin: boolean;
   isAuthenticated: boolean;
   isFirstLoad: boolean;
+  userId: string;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -24,9 +25,10 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const isAdmin = data?.role === UserRole.Admin;
   const isAuthenticated = hasAccessToken && (isFirstLoad || !!data);
+  const userId = data?.id;
 
   return (
-    <AuthContext.Provider value={{ isAdmin, isAuthenticated, isFirstLoad }}>
+    <AuthContext.Provider value={{ isAdmin, isAuthenticated, isFirstLoad, userId: userId ?? "" }}>
       {children}
     </AuthContext.Provider>
   );
