@@ -9,6 +9,7 @@ export type SelectProps = {
   itemClassName?: string;
   align?: SelectBase.Positioner.Props["align"];
   side?: SelectBase.Positioner.Props["side"];
+  disabled?: boolean;
   value: string | number;
   onValueChange?: (value: string) => void;
 };

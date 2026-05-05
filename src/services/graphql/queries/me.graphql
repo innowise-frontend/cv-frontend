@@ -1,5 +1,7 @@
 query Me {
   me {
+    id
+    is_verified
     role
   }
 }

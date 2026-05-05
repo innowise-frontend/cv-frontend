@@ -18,10 +18,15 @@ type Documents = {
   "mutation ForgotPassword($auth: ForgotPasswordInput!) {\n  forgotPassword(auth: $auth)\n}": typeof types.ForgotPasswordDocument;
   "mutation Login($auth: AuthInput!) {\n  login(auth: $auth) {\n    user {\n      id\n    }\n    access_token\n    refresh_token\n  }\n}": typeof types.LoginDocument;
   "mutation ResetPassword($auth: ResetPasswordInput!) {\n  resetPassword(auth: $auth)\n}": typeof types.ResetPasswordDocument;
+  "mutation sendVerification($email: String!) {\n  sendVerification(email: $email)\n}": typeof types.SendVerificationDocument;
   "mutation Signup($auth: AuthInput!) {\n  signup(auth: $auth) {\n    user {\n      id\n    }\n    access_token\n    refresh_token\n  }\n}": typeof types.SignupDocument;
+  "mutation UpdateProfile($profile: UpdateProfileInput!) {\n  updateProfile(profile: $profile) {\n    id\n    first_name\n    last_name\n    full_name\n    avatar\n  }\n}": typeof types.UpdateProfileDocument;
   "mutation UpdateToken {\n  updateToken {\n    access_token\n    refresh_token\n  }\n}": typeof types.UpdateTokenDocument;
+  "mutation UpdateUser($user: UpdateUserInput!) {\n  updateUser(user: $user) {\n    id\n    created_at\n    email\n    is_verified\n    role\n    department_name\n    position_name\n    profile {\n      id\n      created_at\n      first_name\n      last_name\n      full_name\n      avatar\n    }\n    department {\n      id\n      name\n    }\n    position {\n      id\n      name\n    }\n  }\n}": typeof types.UpdateUserDocument;
+  "mutation UploadAvatar($avatar: UploadAvatarInput!) {\n  uploadAvatar(avatar: $avatar)\n}": typeof types.UploadAvatarDocument;
   "mutation verifyMail($otp: String!) {\n  verifyMail(mail: {otp: $otp})\n}": typeof types.VerifyMailDocument;
-  "query Me {\n  me {\n    role\n  }\n}": typeof types.MeDocument;
+  "query Me {\n  me {\n    id\n    is_verified\n    role\n  }\n}": typeof types.MeDocument;
+  "query user($userId: ID!) {\n  user(userId: $userId) {\n    id\n    email\n    created_at\n    department {\n      id\n      name\n    }\n    position {\n      id\n      name\n    }\n    profile {\n      avatar\n      email\n      first_name\n      last_name\n      full_name\n      created_at\n    }\n  }\n  departments {\n    id\n    name\n  }\n  positions {\n    id\n    name\n  }\n}": typeof types.UserDocument;
   "query Users($params: SearchPaginationInput!) {\n  users(params: $params) {\n    items {\n      id\n      department_name\n      position_name\n      email\n      profile {\n        last_name\n        first_name\n        avatar\n      }\n    }\n    total\n    page\n    limit\n    total_pages\n  }\n}": typeof types.UsersDocument;
 };
 const documents: Documents = {
@@ -33,13 +38,23 @@ const documents: Documents = {
     types.LoginDocument,
   "mutation ResetPassword($auth: ResetPasswordInput!) {\n  resetPassword(auth: $auth)\n}":
     types.ResetPasswordDocument,
+  "mutation sendVerification($email: String!) {\n  sendVerification(email: $email)\n}":
+    types.SendVerificationDocument,
   "mutation Signup($auth: AuthInput!) {\n  signup(auth: $auth) {\n    user {\n      id\n    }\n    access_token\n    refresh_token\n  }\n}":
     types.SignupDocument,
+  "mutation UpdateProfile($profile: UpdateProfileInput!) {\n  updateProfile(profile: $profile) {\n    id\n    first_name\n    last_name\n    full_name\n    avatar\n  }\n}":
+    types.UpdateProfileDocument,
   "mutation UpdateToken {\n  updateToken {\n    access_token\n    refresh_token\n  }\n}":
     types.UpdateTokenDocument,
+  "mutation UpdateUser($user: UpdateUserInput!) {\n  updateUser(user: $user) {\n    id\n    created_at\n    email\n    is_verified\n    role\n    department_name\n    position_name\n    profile {\n      id\n      created_at\n      first_name\n      last_name\n      full_name\n      avatar\n    }\n    department {\n      id\n      name\n    }\n    position {\n      id\n      name\n    }\n  }\n}":
+    types.UpdateUserDocument,
+  "mutation UploadAvatar($avatar: UploadAvatarInput!) {\n  uploadAvatar(avatar: $avatar)\n}":
+    types.UploadAvatarDocument,
   "mutation verifyMail($otp: String!) {\n  verifyMail(mail: {otp: $otp})\n}":
     types.VerifyMailDocument,
-  "query Me {\n  me {\n    role\n  }\n}": types.MeDocument,
+  "query Me {\n  me {\n    id\n    is_verified\n    role\n  }\n}": types.MeDocument,
+  "query user($userId: ID!) {\n  user(userId: $userId) {\n    id\n    email\n    created_at\n    department {\n      id\n      name\n    }\n    position {\n      id\n      name\n    }\n    profile {\n      avatar\n      email\n      first_name\n      last_name\n      full_name\n      created_at\n    }\n  }\n  departments {\n    id\n    name\n  }\n  positions {\n    id\n    name\n  }\n}":
+    types.UserDocument,
   "query Users($params: SearchPaginationInput!) {\n  users(params: $params) {\n    items {\n      id\n      department_name\n      position_name\n      email\n      profile {\n        last_name\n        first_name\n        avatar\n      }\n    }\n    total\n    page\n    limit\n    total_pages\n  }\n}":
     types.UsersDocument,
 };
@@ -86,8 +101,20 @@ export function gql(
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
+  source: "mutation sendVerification($email: String!) {\n  sendVerification(email: $email)\n}",
+): (typeof documents)["mutation sendVerification($email: String!) {\n  sendVerification(email: $email)\n}"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
   source: "mutation Signup($auth: AuthInput!) {\n  signup(auth: $auth) {\n    user {\n      id\n    }\n    access_token\n    refresh_token\n  }\n}",
 ): (typeof documents)["mutation Signup($auth: AuthInput!) {\n  signup(auth: $auth) {\n    user {\n      id\n    }\n    access_token\n    refresh_token\n  }\n}"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
+  source: "mutation UpdateProfile($profile: UpdateProfileInput!) {\n  updateProfile(profile: $profile) {\n    id\n    first_name\n    last_name\n    full_name\n    avatar\n  }\n}",
+): (typeof documents)["mutation UpdateProfile($profile: UpdateProfileInput!) {\n  updateProfile(profile: $profile) {\n    id\n    first_name\n    last_name\n    full_name\n    avatar\n  }\n}"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -98,14 +125,32 @@ export function gql(
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
+  source: "mutation UpdateUser($user: UpdateUserInput!) {\n  updateUser(user: $user) {\n    id\n    created_at\n    email\n    is_verified\n    role\n    department_name\n    position_name\n    profile {\n      id\n      created_at\n      first_name\n      last_name\n      full_name\n      avatar\n    }\n    department {\n      id\n      name\n    }\n    position {\n      id\n      name\n    }\n  }\n}",
+): (typeof documents)["mutation UpdateUser($user: UpdateUserInput!) {\n  updateUser(user: $user) {\n    id\n    created_at\n    email\n    is_verified\n    role\n    department_name\n    position_name\n    profile {\n      id\n      created_at\n      first_name\n      last_name\n      full_name\n      avatar\n    }\n    department {\n      id\n      name\n    }\n    position {\n      id\n      name\n    }\n  }\n}"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
+  source: "mutation UploadAvatar($avatar: UploadAvatarInput!) {\n  uploadAvatar(avatar: $avatar)\n}",
+): (typeof documents)["mutation UploadAvatar($avatar: UploadAvatarInput!) {\n  uploadAvatar(avatar: $avatar)\n}"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
   source: "mutation verifyMail($otp: String!) {\n  verifyMail(mail: {otp: $otp})\n}",
 ): (typeof documents)["mutation verifyMail($otp: String!) {\n  verifyMail(mail: {otp: $otp})\n}"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
-  source: "query Me {\n  me {\n    role\n  }\n}",
-): (typeof documents)["query Me {\n  me {\n    role\n  }\n}"];
+  source: "query Me {\n  me {\n    id\n    is_verified\n    role\n  }\n}",
+): (typeof documents)["query Me {\n  me {\n    id\n    is_verified\n    role\n  }\n}"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
+  source: "query user($userId: ID!) {\n  user(userId: $userId) {\n    id\n    email\n    created_at\n    department {\n      id\n      name\n    }\n    position {\n      id\n      name\n    }\n    profile {\n      avatar\n      email\n      first_name\n      last_name\n      full_name\n      created_at\n    }\n  }\n  departments {\n    id\n    name\n  }\n  positions {\n    id\n    name\n  }\n}",
+): (typeof documents)["query user($userId: ID!) {\n  user(userId: $userId) {\n    id\n    email\n    created_at\n    department {\n      id\n      name\n    }\n    position {\n      id\n      name\n    }\n    profile {\n      avatar\n      email\n      first_name\n      last_name\n      full_name\n      created_at\n    }\n  }\n  departments {\n    id\n    name\n  }\n  positions {\n    id\n    name\n  }\n}"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

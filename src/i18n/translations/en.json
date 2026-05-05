@@ -71,6 +71,35 @@
       "departments": "Departments",
       "positions": "Positions",
       "projects": "Projects"
+    },
+    "profile": {
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "department": "Department",
+      "position": "Position",
+      "selectDepartment": "Select department",
+      "selectPosition": "Select position",
+      "uploadAvatar": "Upload avatar image",
+      "uploadAvatarHint": "png, jpg or gif — no more than 0.5MB",
+      "userAvatarAlt": "User avatar",
+      "initialsUnknown": "",
+      "memberSince": "A member since",
+      "verifyEmail": "Verify email",
+      "update": "Update",
+      "userNotFound": "User not found",
+      "avatar": {
+        "wrongType": "Use png, jpg, or gif only.",
+        "tooLarge": "Image must be no more than 0.5MB.",
+        "invalidEncoding": "Invalid avatar file encoding",
+        "readFailed": "Failed to read file"
+      },
+      "toast": {
+        "userUpdated": "User updated",
+        "profileUpdated": "Profile updated",
+        "avatarUpdated": "Avatar updated",
+        "verificationSent": "Verification email sent",
+        "verificationFailed": "Failed to send verification email"
+      }
     }
   }
 }
