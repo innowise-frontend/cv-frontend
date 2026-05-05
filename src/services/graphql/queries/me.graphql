@@ -3,5 +3,6 @@ query Me {
     id
     is_verified
     role
+    id
   }
 }

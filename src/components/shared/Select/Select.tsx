@@ -1,5 +1,5 @@
 import { Select as SelectBase } from "@base-ui/react/select";
-import { useId } from "react";
+import { useCallback, useId, useState } from "react";
 import { Label } from "@root/components/ui/label";
 import {
   Select as SelectRoot,
@@ -27,6 +27,11 @@ export const Select = ({
   onValueChange,
 }: SelectProps) => {
   const triggerId = useId();
+  const [containerNode, setContainerNode] = useState<HTMLDivElement | null>(null);
+  const setContainerRef = useCallback((node: HTMLDivElement | null) => {
+    setContainerNode(node);
+  }, []);
+  const dialogContainer = containerNode?.closest("dialog") ?? undefined;
 
   const labelFor = (val?: string | number) =>
     list.find((item) => item.value === val)?.label ?? placeholder;
@@ -37,7 +42,7 @@ export const Select = ({
   };
 
   return (
-    <div className={cn("relative flex w-full flex-col", className)}>
+    <div ref={setContainerRef} className={cn("relative flex w-full flex-col", className)}>
       <Label
         htmlFor={triggerId}
         className="justify-start pl-3 text-left text-xs font-normal text-gray-3 dark:text-gray-5"
@@ -45,19 +50,23 @@ export const Select = ({
         {label}
       </Label>
 
-      <SelectRoot value={value as string} modal={false} onValueChange={handleSelectValue}>
+      <SelectRoot
+        value={value as string}
+        modal={false}
+        disabled={disabled}
+        onValueChange={handleSelectValue}
+      >
         <SelectTrigger
           id={triggerId}
           disabled={disabled}
-          className={cn(
-            "w-full border-gray-5 text-gray-2 data-[size=default]:h-auto px-3 py-3.25 dark:text-gray-5",
-            "disabled:bg-gray-6 dark:disabled:bg-gray-3",
-          )}
+          className={
+            "w-full border-gray-5 text-gray-2 data-[size=default]:h-auto px-3 py-3.25 dark:text-gray-5 disabled:bg-gray-6 dark:disabled:bg-gray-3"
+          }
         >
           <SelectValue placeholder={placeholder}>{labelFor(value as string)}</SelectValue>
         </SelectTrigger>
 
-        <SelectBase.Portal>
+        <SelectBase.Portal container={dialogContainer}>
           <SelectBase.Positioner
             side={side}
             align={align}
