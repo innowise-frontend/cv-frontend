@@ -45,13 +45,7 @@ export const Select = ({
         {label}
       </Label>
 
-      <SelectRoot
-        value={value as string}
-        modal={false}
-        onValueChange={(next) => {
-          handleSelectValue(next);
-        }}
-      >
+      <SelectRoot value={value as string} modal={false} onValueChange={handleSelectValue}>
         <SelectTrigger
           id={triggerId}
           disabled={disabled}

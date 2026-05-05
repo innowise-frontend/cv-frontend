@@ -3,7 +3,7 @@ import { AvatarProps } from "./types";
 
 export const Avatar = ({ name, link, className }: AvatarProps) => {
   return link ? (
-    <img src={link} alt={name} className="w-10 h-10 rounded-full" />
+    <img src={link} alt={name} className={cn("w-10 h-10 rounded-full object-cover", className)} />
   ) : (
     <div
       className={cn(

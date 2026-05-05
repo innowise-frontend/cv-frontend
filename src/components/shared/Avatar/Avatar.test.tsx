@@ -10,7 +10,7 @@ describe("Avatar", () => {
 
     expect(image).toBeInTheDocument();
     expect(image).toHaveAttribute("src", "https://example.com/avatar.jpg");
-    expect(image).toHaveClass("w-10", "h-10", "rounded-full");
+    expect(image).toHaveClass("w-10", "h-10", "rounded-full", "object-cover");
   });
 
   it("should render the avatar placeholder when link is not provided", () => {

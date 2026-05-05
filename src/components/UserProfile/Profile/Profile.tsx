@@ -1,9 +1,9 @@
 import { useParams } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { ErrorPage } from "@root/pages/ErrorPage";
-import { Avatar } from "./Avatar";
-import { ProfileInformations } from "./ProfileInformations";
-import { useUserProfile } from "./useUserProfile";
+import { useUserProfile } from "./api";
+import { Avatar } from "./components/Avatar";
+import { Info } from "./components/Info";
 
 export const Profile = () => {
   const { t } = useTranslation();
@@ -21,7 +21,7 @@ export const Profile = () => {
   return (
     <div className="w-full py-3">
       <Avatar />
-      <ProfileInformations />
+      <Info />
     </div>
   );
 };
