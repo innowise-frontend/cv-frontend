@@ -2,7 +2,7 @@ import { createRootRouteWithContext, Outlet } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { Sonner } from "@components/shared/Sonner/Sonner";
 import { AuthContextType } from "@root/context/AuthContext";
-import { useMobileDevice } from "@root/hooks/useMobileDevice/useMobileDevice";
+import { getMobileDevice } from "@root/lib/getMobileDevice/getMobileDevice";
 import { ErrorPage } from "@root/pages/ErrorPage";
 
 interface RouterContext {
@@ -12,7 +12,7 @@ interface RouterContext {
 export const Route = createRootRouteWithContext<RouterContext>()({
   component: () => {
     const { t } = useTranslation();
-    const { isMobileDevice } = useMobileDevice();
+    const isMobileDevice = getMobileDevice();
 
     if (isMobileDevice) {
       return <ErrorPage error={t("page.error.mobileNotSupportedMessage")} deviceError />;
