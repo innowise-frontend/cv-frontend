@@ -1,12 +1,12 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Modal, ProgressBar, Select } from "@root/components/shared";
+import { useModalContext } from "@root/components/shared/Modal/useModalContext";
 import { useAuth } from "@root/hooks";
 import { cn } from "@root/lib";
 import { Proficiency, UpdateProfileLanguageInput } from "@services/graphql/__generated__/graphql";
-import { updateProfileLanguage } from "@services/languages";
 import { LanguageProps } from "./types";
+import { useUpdateProfileLanguageMutation } from "../../api";
 import { PROFICIENCY_ORDER } from "../../const";
 
 export const LanguageProgressBar = ({
@@ -18,7 +18,7 @@ export const LanguageProgressBar = ({
 }: LanguageProps) => {
   const { t } = useTranslation();
   const { userId } = useAuth();
-  const queryClient = useQueryClient();
+  const { closeModal } = useModalContext();
 
   const [updateLanguage, setUpdateLanguage] = useState<UpdateProfileLanguageInput>({
     userId: userId,
@@ -31,10 +31,9 @@ export const LanguageProgressBar = ({
     value: proficiency,
   }));
 
-  const { mutate } = useMutation({
-    mutationFn: updateProfileLanguage,
+  const { mutate } = useUpdateProfileLanguageMutation(userId, {
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["profile"] });
+      closeModal();
     },
   });
 
@@ -47,10 +46,9 @@ export const LanguageProgressBar = ({
       <Button variant="ghost" className="capitalize" onClick={onClick}>
         <ProgressBar
           className={cn(
-            "px-2 cursor-pointer transition-colors duration-150 hover:bg-gray-7 dark:hover:bg-gray5",
+            "px-2 cursor-pointer hover:bg-gray-7 dark:hover:bg-gray5",
             chosen && "*:text-gray *:dark:text-gray-8",
           )}
-          key={name}
           label={name || ""}
           proficiency={chosen ? Proficiency.A1 : (proficiency as Proficiency)}
         />
@@ -59,19 +57,16 @@ export const LanguageProgressBar = ({
   }
 
   return (
-    <Modal>
+    <>
       <Modal.Trigger className="capitalize" variant="ghost">
         <ProgressBar
-          className="px-2 cursor-pointer transition-colors duration-150 hover:bg-gray-7"
-          key={name}
+          className="px-2 cursor-pointer hover:bg-gray-7"
           label={name || ""}
-          proficiency={proficiency as Proficiency}
+          proficiency={proficiency}
         />
       </Modal.Trigger>
       <Modal.Content onCancel={resetUpdateLanguage}>
-        <Modal.Header onCancel={resetUpdateLanguage}>
-          {t("page.languages.updateLanguage")}
-        </Modal.Header>
+        <Modal.Header>{t("page.languages.updateLanguage")}</Modal.Header>
         <Modal.Body className="flex flex-col gap-4">
           <Select
             list={[{ label: name, value: name }]}
@@ -94,19 +89,21 @@ export const LanguageProgressBar = ({
           />
         </Modal.Body>
         <Modal.Footer>
-          <Modal.Close variant="outline" className="w-40" onClick={resetUpdateLanguage}>
+          <Modal.Close variant="outline" className="w-40">
             {t("page.languages.cancel")}
           </Modal.Close>
-          <Modal.Close
+          <Button
             variant="filled"
             className="w-40"
             disabled={updateLanguage.proficiency === proficiency}
-            onClick={() => mutate(updateLanguage)}
+            onClick={() => {
+              mutate(updateLanguage);
+            }}
           >
             {t("page.languages.save")}
-          </Modal.Close>
+          </Button>
         </Modal.Footer>
       </Modal.Content>
-    </Modal>
+    </>
   );
 };

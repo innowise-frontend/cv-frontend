@@ -1,21 +1,10 @@
-import React, { createContext, useContext, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import CloseIcon from "@assets/icon/CloseIcon.svg?react";
 import { Button } from "@components/shared";
 import { useModal } from "@root/hooks";
 import { cn } from "@root/lib";
-
-const ModalContext = createContext<ReturnType<typeof useModal> | null>(null);
-
-const useModalContext = () => {
-  const ctx = useContext(ModalContext);
-
-  if (!ctx) {
-    throw new Error("Modal.* components must be used inside <Modal>");
-  }
-
-  return ctx;
-};
+import { ModalContext, useModalContext } from "./useModalContext";
 
 const Modal = ({ children }: { children: React.ReactNode }) => {
   const { isOpen, openModal, closeModal } = useModal();
@@ -86,7 +75,7 @@ const ModalContent = ({
       onClick={handleBackdropClick}
       onCancel={handleCancel}
       className={cn(
-        "fixed top-1/2 left-1/2 m-0 min-w-155 max-w-215 min-h-50 max-h-131 -translate-x-1/2 -translate-y-1/2 bg-gray-8 px-6 py-4 shadow-2xl will-change-transform will-change-opacity transition-[opacity,transform] duration-300 ease-out dark:bg-gray-2 backdrop:bg-gray/50",
+        "fixed top-1/2 left-1/2 m-0 min-w-155 max-w-215 min-h-50 max-h-131 -translate-x-1/2 -translate-y-1/2 bg-gray-8 px-6 py-4 shadow-2xl will-change-transform will-change-opacity transition-[opacity,transform] duration-300 ease-out dark:bg-gray-2 backdrop:bg-gray/50 z-100",
         isOpen ? "opacity-100 scale-100" : "opacity-0 scale-95",
         className,
       )}
@@ -100,20 +89,14 @@ const ModalContent = ({
 
 const ModalClose = ({
   children,
-  onClick,
   ...props
-}: { children?: React.ReactNode; onClick?: () => void } & React.ComponentProps<typeof Button>) => {
+}: {
+  children?: React.ReactNode;
+} & React.ComponentProps<typeof Button>) => {
   const { closeModal } = useModalContext();
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-
-    onClick?.();
-    closeModal();
-  };
-
   return (
-    <Button onClick={handleClick} {...props}>
+    <Button onClick={closeModal} {...props}>
       {children ?? <CloseIcon />}
     </Button>
   );
@@ -122,16 +105,14 @@ const ModalClose = ({
 const ModalHeader = ({
   children,
   className = "",
-  onCancel,
 }: {
   children?: React.ReactNode;
   className?: string;
-  onCancel?: () => void;
 }) => {
   return (
     <header className={cn("flex items-center justify-between", className)}>
       <h2 className="text-lg font-bold">{children}</h2>
-      <Modal.Close className="ml-auto h-7.5 w-7.5 rounded-full p-0" onClick={onCancel} />
+      <Modal.Close className="ml-auto h-7.5 w-7.5 rounded-full p-0" />
     </header>
   );
 };

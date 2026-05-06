@@ -4,6 +4,7 @@ query Languages($params: SearchPaginationInput!) {
       id
       name
       native_name
+      iso2
     }
     total
     page

@@ -33,10 +33,16 @@
     "error": {
       "oops": "Ups",
       "goBack": "Wstecz",
-      "defaultErrorMessage": "Coś poszło nie tak. Już pracujemy nad naprawą. \n Spróbuj ponownie lub wróć.",
-      "passwordChangeErrorMessage": "Błąd! Nie udało się zmienić hasła",
+      "defaultErrorMessage": "Błąd! Nie udało się zmienić hasła",
       "defaultNotFoundMessage": "Hmm… wygląda na to, że to nie jest strona, której szukasz. \n Pomóżmy Ci wrócić na właściwą ścieżkę.",
-      "mobileNotSupportedMessage": "Ups… ta aplikacja nie jest obsługiwana na urządzeniach mobilnych. \n Otwórz ją na komputerze lub tablecie, aby kontynuować."
+      "api": {
+        "forbidden": "Nie masz uprawnień do wykonania tej akcji",
+        "unauthorized": "Musisz zalogować się ponownie",
+        "notFound": "Nie znaleziono żądanego zasobu",
+        "conflict": "Zasób został zmieniony przez kogoś innego. Odśwież i spróbuj ponownie",
+        "internalServerError": "Błąd serwera. Spróbuj ponownie później",
+        "default": "Coś poszło nie tak"
+      }
     },
     "forgotPassword": {
       "title": "Nie pamiętasz hasła",
@@ -90,17 +96,25 @@
       "currentLanguages": "Aktualne języki",
       "emptyState": "Nie masz jeszcze żadnych języków",
       "addLanguage": "Dodaj język",
+      "createLanguage": "Utwórz język",
       "deleteLanguage": "Usuń język",
       "updateLanguage": "Zaktualizuj język",
+      "name": "Nazwa",
+      "iso": "ISO",
+      "nativeName": "Nazwa natywna",
       "language": "Język",
       "languages": "Języki",
       "proficiency": "Poziom",
+      "edit": "Edytuj",
       "delete": "Usuń",
       "removeLanguage": "Usuń język",
-      "confirmRemove": "Czy na pewno chcesz usunąć {{count}} {{languageLabel}}?",
+      "confirmRemove": "Czy na pewno chcesz usunąć",
+      "confirmDeleteLanguage": "Czy na pewno chcesz usunąć język {{name}}?",
       "cancel": "Anuluj",
+      "confirm": "Potwierdź",
       "add": "Dodaj",
       "remove": "Usuń",
+      "update": "Zaktualizuj",
       "save": "Zapisz"
     },
     "sidebar": {

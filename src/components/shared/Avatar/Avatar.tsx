@@ -11,11 +11,11 @@ export const Avatar = ({ name, imageSrc, className }: AvatarProps) => {
   ) : (
     <div
       className={cn(
-        "w-10 h-10 rounded-full bg-red text-gray-8 dark:text-gray capitalize flex items-center justify-center",
+        "w-10 h-10 rounded-full bg-red capitalize flex items-center justify-center",
         className,
       )}
     >
-      {name.charAt(0)}
+      <span className="text-gray-8 dark:text-gray capitalize">{name.charAt(0)}</span>
     </div>
   );
 };

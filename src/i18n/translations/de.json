@@ -33,10 +33,16 @@
     "error": {
       "oops": "Ups",
       "goBack": "Zurück",
-      "defaultErrorMessage": "Etwas ist schiefgelaufen. Wir arbeiten bereits an der Lösung. \n Bitte versuchen Sie es erneut oder gehen Sie zurück.",
-      "passwordChangeErrorMessage": "Fehler! Passwort wurde nicht geändert",
+      "defaultErrorMessage": "Fehler! Passwort wurde nicht geändert",
       "defaultNotFoundMessage": "Hm… diese Seite scheint nicht die zu sein, nach der Sie gesucht haben. \n Wir bringen Sie wieder auf den richtigen Weg.",
-      "mobileNotSupportedMessage": "Ups… diese App wird auf Mobilgeräten nicht unterstützt. \n Bitte öffnen Sie sie auf einem Desktop oder Tablet, um fortzufahren."
+      "api": {
+        "forbidden": "Sie haben keine Rechte für diese Aktion",
+        "unauthorized": "Bitte melden Sie sich erneut an",
+        "notFound": "Die angeforderte Ressource wurde nicht gefunden",
+        "conflict": "Die Ressource wurde von jemand anderem geändert. Bitte aktualisieren und erneut versuchen",
+        "internalServerError": "Serverfehler. Bitte versuchen Sie es später erneut",
+        "default": "Etwas ist schiefgelaufen"
+      }
     },
     "forgotPassword": {
       "title": "Passwort vergessen",
@@ -90,17 +96,25 @@
       "currentLanguages": "Aktuelle Sprachen",
       "emptyState": "Sie haben noch keine Sprachen",
       "addLanguage": "Sprache hinzufügen",
+      "createLanguage": "Sprache erstellen",
       "deleteLanguage": "Sprache löschen",
       "updateLanguage": "Sprache aktualisieren",
+      "name": "Name",
+      "iso": "ISO",
+      "nativeName": "Muttersprache",
       "language": "Sprache",
       "languages": "Sprachen",
       "proficiency": "Niveau",
+      "edit": "Bearbeiten",
       "delete": "Löschen",
       "removeLanguage": "Sprache entfernen",
-      "confirmRemove": "Möchten Sie wirklich {{count}} {{languageLabel}} entfernen?",
+      "confirmRemove": "Möchten Sie wirklich entfernen",
+      "confirmDeleteLanguage": "Möchten Sie die Sprache {{name}} wirklich löschen?",
       "cancel": "Abbrechen",
+      "confirm": "Bestätigen",
       "add": "Hinzufügen",
       "remove": "Entfernen",
+      "update": "Aktualisieren",
       "save": "Speichern"
     },
     "sidebar": {
