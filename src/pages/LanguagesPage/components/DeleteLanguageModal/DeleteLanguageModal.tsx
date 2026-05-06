@@ -1,14 +1,20 @@
 import { useTranslation } from "react-i18next";
-import { Modal } from "@components/shared";
+import { Button, Modal } from "@components/shared";
+import { useModalContext } from "@root/components/shared/Modal/useModalContext";
 import { DeleteLanguageModalProps } from "./types";
 import { useDeleteLanguageMutation } from "../../api";
 
 export const DeleteLanguageModal = ({ name, id }: DeleteLanguageModalProps) => {
   const { t } = useTranslation();
-  const { mutateAsync } = useDeleteLanguageMutation();
+  const { closeModal } = useModalContext();
+  const { mutateAsync } = useDeleteLanguageMutation({
+    onSuccess: () => {
+      closeModal();
+    },
+  });
 
   return (
-    <Modal>
+    <>
       <Modal.Trigger className="w-full h-auto justify-start capitalize p-0">
         {t("page.languages.delete")}
       </Modal.Trigger>
@@ -19,23 +25,17 @@ export const DeleteLanguageModal = ({ name, id }: DeleteLanguageModalProps) => {
           <Modal.Close variant="outline" className="w-40">
             {t("page.languages.cancel")}
           </Modal.Close>
-          <Modal.Close
+          <Button
             variant="filled"
             className="w-40"
-            onClick={async () => {
-              try {
-                await mutateAsync({ languageId: id });
-
-                return true;
-              } catch {
-                return false;
-              }
+            onClick={() => {
+              mutateAsync({ languageId: id });
             }}
           >
             {t("page.languages.confirm")}
-          </Modal.Close>
+          </Button>
         </Modal.Footer>
       </Modal.Content>
-    </Modal>
+    </>
   );
 };

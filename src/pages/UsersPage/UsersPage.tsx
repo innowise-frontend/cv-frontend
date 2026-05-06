@@ -26,6 +26,7 @@ export const UsersPage = () => {
         search: { search: value.length === 0 ? undefined : value },
         replace: true,
       });
+      setCurrentPage(1);
     },
   });
 

@@ -1,21 +1,10 @@
-import React, { createContext, useContext, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import CloseIcon from "@assets/icon/CloseIcon.svg?react";
 import { Button } from "@components/shared";
 import { useModal } from "@root/hooks";
 import { cn } from "@root/lib";
-
-const ModalContext = createContext<ReturnType<typeof useModal> | null>(null);
-
-const useModalContext = () => {
-  const ctx = useContext(ModalContext);
-
-  if (!ctx) {
-    throw new Error("Modal.* components must be used inside <Modal>");
-  }
-
-  return ctx;
-};
+import { ModalContext, useModalContext } from "./useModalContext";
 
 const Modal = ({ children }: { children: React.ReactNode }) => {
   const { isOpen, openModal, closeModal } = useModal();
@@ -100,26 +89,14 @@ const ModalContent = ({
 
 const ModalClose = ({
   children,
-  onClick,
   ...props
 }: {
   children?: React.ReactNode;
-  onClick?: () => void | boolean | Promise<void | boolean>;
 } & React.ComponentProps<typeof Button>) => {
   const { closeModal } = useModalContext();
 
-  const handleClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-
-    const shouldClose = await onClick?.();
-
-    if (shouldClose !== false) {
-      closeModal();
-    }
-  };
-
   return (
-    <Button onClick={handleClick} {...props}>
+    <Button onClick={closeModal} {...props}>
       {children ?? <CloseIcon />}
     </Button>
   );

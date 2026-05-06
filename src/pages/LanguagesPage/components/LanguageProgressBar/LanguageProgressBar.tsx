@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Modal, ProgressBar, Select } from "@root/components/shared";
+import { useModalContext } from "@root/components/shared/Modal/useModalContext";
 import { useAuth } from "@root/hooks";
 import { cn } from "@root/lib";
 import { Proficiency, UpdateProfileLanguageInput } from "@services/graphql/__generated__/graphql";
@@ -17,6 +18,7 @@ export const LanguageProgressBar = ({
 }: LanguageProps) => {
   const { t } = useTranslation();
   const { userId } = useAuth();
+  const { closeModal } = useModalContext();
 
   const [updateLanguage, setUpdateLanguage] = useState<UpdateProfileLanguageInput>({
     userId: userId,
@@ -29,7 +31,11 @@ export const LanguageProgressBar = ({
     value: proficiency,
   }));
 
-  const { mutateAsync } = useUpdateProfileLanguageMutation(userId);
+  const { mutateAsync } = useUpdateProfileLanguageMutation(userId, {
+    onSuccess: () => {
+      closeModal();
+    },
+  });
 
   const resetUpdateLanguage = () => {
     setUpdateLanguage({ userId, name: name, proficiency: proficiency });
@@ -52,7 +58,7 @@ export const LanguageProgressBar = ({
   }
 
   return (
-    <Modal>
+    <>
       <Modal.Trigger className="capitalize" variant="ghost">
         <ProgressBar
           className="px-2 cursor-pointer transition-colors duration-150 hover:bg-gray-7"
@@ -90,24 +96,18 @@ export const LanguageProgressBar = ({
           <Modal.Close variant="outline" className="w-40" onClick={resetUpdateLanguage}>
             {t("page.languages.cancel")}
           </Modal.Close>
-          <Modal.Close
+          <Button
             variant="filled"
             className="w-40"
             disabled={updateLanguage.proficiency === proficiency}
-            onClick={async () => {
-              try {
-                await mutateAsync(updateLanguage);
-
-                return true;
-              } catch {
-                return false;
-              }
+            onClick={() => {
+              mutateAsync(updateLanguage);
             }}
           >
             {t("page.languages.save")}
-          </Modal.Close>
+          </Button>
         </Modal.Footer>
       </Modal.Content>
-    </Modal>
+    </>
   );
 };

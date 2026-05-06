@@ -1,5 +1,6 @@
 export interface UpdateLanguageModalProps {
+  languageId: string;
   name: string;
   iso2: string;
-  native_name?: string | null;
+  nativeName?: string | null;
 }

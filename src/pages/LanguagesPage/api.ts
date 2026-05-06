@@ -20,10 +20,11 @@ import {
 } from "@services/languages";
 import { getUserProfile } from "@services/users";
 
-export const useUserLanguagesQuery = (userId: string) =>
+export const useUserLanguagesQuery = (userId: string, isAdmin: boolean) =>
   useQuery({
     queryKey: ["profile", userId],
     queryFn: () => getUserProfile(userId),
+    enabled: !isAdmin,
   });
 
 export const useLanguagesSelectQuery = () =>
@@ -55,13 +56,17 @@ export const useLanguagesTableQuery = ({
       }),
   });
 
-export const useAddProfileLanguageMutation = (userId: string) => {
+export const useAddProfileLanguageMutation = (
+  userId: string,
+  { onSuccess }: { onSuccess?: () => void },
+) => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: (payload: AddProfileLanguageInput) => addProfileLanguage(payload),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["profile", userId] });
+      onSuccess?.();
     },
     onError: (error) => {
       toast.error(getErrorToastMessage(error));
@@ -69,7 +74,7 @@ export const useAddProfileLanguageMutation = (userId: string) => {
   });
 };
 
-export const useCreateLanguageMutation = () => {
+export const useCreateLanguageMutation = ({ onSuccess }: { onSuccess?: () => void }) => {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -77,6 +82,7 @@ export const useCreateLanguageMutation = () => {
       createLanguage(payload),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["languages"] });
+      onSuccess?.();
     },
     onError: (error) => {
       toast.error(getErrorToastMessage(error));
@@ -84,13 +90,14 @@ export const useCreateLanguageMutation = () => {
   });
 };
 
-export const useDeleteLanguageMutation = () => {
+export const useDeleteLanguageMutation = ({ onSuccess }: { onSuccess?: () => void }) => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: (payload: DeleteLanguageInput) => deleteLanguage(payload),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["languages"] });
+      onSuccess?.();
     },
     onError: (error) => {
       toast.error(getErrorToastMessage(error));
@@ -98,13 +105,14 @@ export const useDeleteLanguageMutation = () => {
   });
 };
 
-export const useUpdateLanguageMutation = () => {
+export const useUpdateLanguageMutation = ({ onSuccess }: { onSuccess?: () => void }) => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: (payload: UpdateLanguageInput) => updateLanguage(payload),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["languages"] });
+      onSuccess?.();
     },
     onError: (error) => {
       toast.error(getErrorToastMessage(error));
@@ -126,13 +134,17 @@ export const useDeleteProfileLanguagesMutation = (userId: string) => {
   });
 };
 
-export const useUpdateProfileLanguageMutation = (userId: string) => {
+export const useUpdateProfileLanguageMutation = (
+  userId: string,
+  { onSuccess }: { onSuccess?: () => void },
+) => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: (payload: UpdateProfileLanguageInput) => updateProfileLanguage(payload),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["profile", userId] });
+      onSuccess?.();
     },
     onError: (error) => {
       toast.error(getErrorToastMessage(error));

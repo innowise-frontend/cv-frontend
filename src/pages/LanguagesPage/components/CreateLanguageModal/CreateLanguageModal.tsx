@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import PlusIcon from "@assets/icon/PlusIcon.svg?react";
 import { Input, Modal } from "@components/shared";
+import { useModalContext } from "@root/components/shared/Modal/useModalContext";
 import { useCreateLanguageMutation } from "../../api";
 
 export const CreateLanguageModal = () => {
@@ -9,21 +10,27 @@ export const CreateLanguageModal = () => {
   const [createdLanguage, setCreatedLanguage] = useState({
     name: "",
     iso2: "",
-    native_name: "",
+    nativeName: "",
   });
+
+  const { closeModal } = useModalContext();
 
   const resetCreatedLanguage = () => {
     setCreatedLanguage({
       name: "",
       iso2: "",
-      native_name: "",
+      nativeName: "",
     });
   };
 
-  const { mutateAsync } = useCreateLanguageMutation();
+  const { mutateAsync } = useCreateLanguageMutation({
+    onSuccess: () => {
+      closeModal();
+    },
+  });
 
   return (
-    <Modal>
+    <>
       <Modal.Trigger className="text-red font-medium">
         <PlusIcon height={16} width={16} />
         {t("page.languages.createLanguage")}
@@ -48,10 +55,8 @@ export const CreateLanguageModal = () => {
           <Input
             placeholder={t("page.languages.nativeName")}
             label={t("page.languages.nativeName")}
-            value={createdLanguage.native_name}
-            onChange={(e) =>
-              setCreatedLanguage({ ...createdLanguage, native_name: e.target.value })
-            }
+            value={createdLanguage.nativeName}
+            onChange={(e) => setCreatedLanguage({ ...createdLanguage, nativeName: e.target.value })}
           />
         </Modal.Body>
         <Modal.Footer>
@@ -61,24 +66,19 @@ export const CreateLanguageModal = () => {
           <Modal.Close
             variant="filled"
             className="w-40"
-            disabled={
-              !createdLanguage.name || !createdLanguage.iso2 || !createdLanguage.native_name
-            }
-            onClick={async () => {
-              try {
-                await mutateAsync(createdLanguage);
-                resetCreatedLanguage();
-
-                return true;
-              } catch {
-                return false;
-              }
+            disabled={!createdLanguage.name || !createdLanguage.iso2 || !createdLanguage.nativeName}
+            onClick={() => {
+              mutateAsync({
+                name: createdLanguage.name,
+                iso2: createdLanguage.iso2,
+                native_name: createdLanguage.nativeName,
+              });
             }}
           >
             {t("page.languages.add")}
           </Modal.Close>
         </Modal.Footer>
       </Modal.Content>
-    </Modal>
+    </>
   );
 };

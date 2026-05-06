@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import PlusIcon from "@assets/icon/PlusIcon.svg?react";
 import { Modal, Select } from "@components/shared";
+import { useModalContext } from "@root/components/shared/Modal/useModalContext";
 import { useAuth } from "@root/hooks";
 import { AddProfileLanguageInput, Proficiency } from "@services/graphql/__generated__/graphql";
 import { AddLanguageModalProps } from "./types";
@@ -19,14 +20,20 @@ export const AddLanguageModal = ({
     proficiency: "" as Proficiency,
   });
 
+  const { closeModal } = useModalContext();
+
   const resetSelectedLanguage = () => {
     setSelectedLanguage({ userId, name: "", proficiency: "" as Proficiency });
   };
 
-  const { mutateAsync } = useAddProfileLanguageMutation(userId);
+  const { mutateAsync } = useAddProfileLanguageMutation(userId, {
+    onSuccess: () => {
+      closeModal();
+    },
+  });
 
   return (
-    <Modal>
+    <>
       <Modal.Trigger
         variant="ghost"
         className="w-40 uppercase text-gray-3 p-4 flex items-center justify-center gap-2"
@@ -70,20 +77,13 @@ export const AddLanguageModal = ({
             className="w-40"
             disabled={!selectedLanguage.name || !selectedLanguage.proficiency}
             onClick={async () => {
-              try {
-                await mutateAsync(selectedLanguage);
-                resetSelectedLanguage();
-
-                return true;
-              } catch {
-                return false;
-              }
+              mutateAsync(selectedLanguage);
             }}
           >
             {t("page.languages.add")}
           </Modal.Close>
         </Modal.Footer>
       </Modal.Content>
-    </Modal>
+    </>
   );
 };

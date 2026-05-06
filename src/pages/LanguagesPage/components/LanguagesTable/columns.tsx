@@ -1,5 +1,5 @@
 import { createColumnHelper } from "@tanstack/react-table";
-import { TableActions, TableColumnHeader } from "@components/shared";
+import { Modal, TableActions, TableColumnHeader } from "@components/shared";
 import i18n from "@root/i18n/i18n";
 import { LanguagesQuery } from "@services/graphql/__generated__/graphql";
 import { DeleteLanguageModal, UpdateLanguageModal } from "../../components";
@@ -45,15 +45,22 @@ export const columns = [
           actions={[
             {
               label: (
-                <UpdateLanguageModal
-                  name={row.original.name}
-                  iso2={row.original.iso2}
-                  native_name={row.original.native_name}
-                />
+                <Modal>
+                  <UpdateLanguageModal
+                    languageId={row.original.id}
+                    name={row.original.name}
+                    iso2={row.original.iso2}
+                    nativeName={row.original.native_name}
+                  />
+                </Modal>
               ),
             },
             {
-              label: <DeleteLanguageModal name={row.original.name} id={row.original.id} />,
+              label: (
+                <Modal>
+                  <DeleteLanguageModal name={row.original.name} id={row.original.id} />{" "}
+                </Modal>
+              ),
             },
           ]}
         />

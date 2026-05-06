@@ -1,6 +1,6 @@
 import { useLocation, useNavigate, useSearch } from "@tanstack/react-router";
 import { useState } from "react";
-import { Table, TableSearch } from "@components/shared";
+import { Modal, Table, TableSearch } from "@components/shared";
 import { VIEW_OPTIONS } from "@root/constants";
 import { useAuth, useHandleSearch } from "@root/hooks";
 import { columns } from "./columns";
@@ -24,6 +24,7 @@ export const LanguagesTable = () => {
         search: { search: value.length === 0 ? undefined : value },
         replace: true,
       });
+      setCurrentPage(1);
     },
   });
 
@@ -37,7 +38,13 @@ export const LanguagesTable = () => {
   return (
     <>
       <TableSearch
-        action={isAdmin && <CreateLanguageModal />}
+        action={
+          isAdmin && (
+            <Modal>
+              <CreateLanguageModal />
+            </Modal>
+          )
+        }
         searchValue={searchParams.search ?? ""}
         onSearch={onSearch}
       />

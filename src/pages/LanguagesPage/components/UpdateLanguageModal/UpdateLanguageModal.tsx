@@ -1,30 +1,43 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Input, Modal } from "@components/shared";
-import { UpdateLanguageInput } from "@services/graphql/__generated__/graphql";
+import { Button, Input, Modal } from "@components/shared";
+import { useModalContext } from "@root/components/shared/Modal/useModalContext";
 import { UpdateLanguageModalProps } from "./types";
 import { useUpdateLanguageMutation } from "../../api";
 
-export const UpdateLanguageModal = ({ name, iso2, native_name }: UpdateLanguageModalProps) => {
+export const UpdateLanguageModal = ({
+  name,
+  iso2,
+  nativeName,
+  languageId,
+}: UpdateLanguageModalProps) => {
   const { t } = useTranslation();
+  const { closeModal } = useModalContext();
+
   const [updatedLanguage, setUpdatedLanguage] = useState({
-    name: name,
-    iso2: iso2,
-    native_name: native_name,
+    name,
+    iso2,
+    nativeName,
+    languageId,
   });
 
-  const { mutateAsync } = useUpdateLanguageMutation();
+  const { mutateAsync } = useUpdateLanguageMutation({
+    onSuccess: () => {
+      closeModal();
+    },
+  });
 
   const resetUpdatedLanguage = () => {
     setUpdatedLanguage({
-      name: name,
-      iso2: iso2,
-      native_name: native_name,
+      name,
+      iso2,
+      nativeName,
+      languageId,
     });
   };
 
   return (
-    <Modal>
+    <>
       <Modal.Trigger className="w-full h-auto justify-start capitalize p-0">
         {t("page.languages.edit")}
       </Modal.Trigger>
@@ -49,38 +62,35 @@ export const UpdateLanguageModal = ({ name, iso2, native_name }: UpdateLanguageM
           <Input
             placeholder={t("page.languages.nativeName")}
             label={t("page.languages.nativeName")}
-            value={updatedLanguage.native_name || ""}
-            onChange={(e) =>
-              setUpdatedLanguage({ ...updatedLanguage, native_name: e.target.value })
-            }
+            value={updatedLanguage.nativeName || ""}
+            onChange={(e) => setUpdatedLanguage({ ...updatedLanguage, nativeName: e.target.value })}
           />
         </Modal.Body>
         <Modal.Footer>
           <Modal.Close variant="outline" className="w-40" onClick={resetUpdatedLanguage}>
             {t("page.languages.cancel")}
           </Modal.Close>
-          <Modal.Close
+          <Button
             variant="filled"
             className="w-40"
             disabled={
               updatedLanguage.name === name &&
               updatedLanguage.iso2 === iso2 &&
-              updatedLanguage.native_name === native_name
+              updatedLanguage.nativeName === nativeName
             }
-            onClick={async () => {
-              try {
-                await mutateAsync(updatedLanguage as UpdateLanguageInput);
-
-                return true;
-              } catch {
-                return false;
-              }
+            onClick={() => {
+              mutateAsync({
+                native_name: updatedLanguage.nativeName,
+                name: updatedLanguage.name,
+                iso2: updatedLanguage.iso2,
+                languageId: updatedLanguage.languageId,
+              });
             }}
           >
             {t("page.languages.update")}
-          </Modal.Close>
+          </Button>
         </Modal.Footer>
       </Modal.Content>
-    </Modal>
+    </>
   );
 };
