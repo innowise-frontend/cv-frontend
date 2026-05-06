@@ -1,12 +1,11 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Modal, ProgressBar, Select } from "@root/components/shared";
 import { useAuth } from "@root/hooks";
 import { cn } from "@root/lib";
 import { Proficiency, UpdateProfileLanguageInput } from "@services/graphql/__generated__/graphql";
-import { updateProfileLanguage } from "@services/languages";
 import { LanguageProps } from "./types";
+import { useUpdateProfileLanguageMutation } from "../../api";
 import { PROFICIENCY_ORDER } from "../../const";
 
 export const LanguageProgressBar = ({
@@ -18,7 +17,6 @@ export const LanguageProgressBar = ({
 }: LanguageProps) => {
   const { t } = useTranslation();
   const { userId } = useAuth();
-  const queryClient = useQueryClient();
 
   const [updateLanguage, setUpdateLanguage] = useState<UpdateProfileLanguageInput>({
     userId: userId,
@@ -31,12 +29,7 @@ export const LanguageProgressBar = ({
     value: proficiency,
   }));
 
-  const { mutate } = useMutation({
-    mutationFn: updateProfileLanguage,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["profile"] });
-    },
-  });
+  const { mutateAsync } = useUpdateProfileLanguageMutation(userId);
 
   const resetUpdateLanguage = () => {
     setUpdateLanguage({ userId, name: name, proficiency: proficiency });
@@ -101,7 +94,15 @@ export const LanguageProgressBar = ({
             variant="filled"
             className="w-40"
             disabled={updateLanguage.proficiency === proficiency}
-            onClick={() => mutate(updateLanguage)}
+            onClick={async () => {
+              try {
+                await mutateAsync(updateLanguage);
+
+                return true;
+              } catch {
+                return false;
+              }
+            }}
           >
             {t("page.languages.save")}
           </Modal.Close>

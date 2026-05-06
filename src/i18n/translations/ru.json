@@ -34,7 +34,15 @@
       "oops": "Упс",
       "goBack": "Назад",
       "defaultErrorMessage": "Ошибка! Не удалось изменить пароль",
-      "defaultNotFoundMessage": "Хм… похоже, это не та страница, которую вы искали. \n Давайте вернёмся на правильный путь."
+      "defaultNotFoundMessage": "Хм… похоже, это не та страница, которую вы искали. \n Давайте вернёмся на правильный путь.",
+      "api": {
+        "forbidden": "У вас нет прав для выполнения этого действия",
+        "unauthorized": "Вам нужно снова войти в систему",
+        "notFound": "Запрошенный ресурс не найден",
+        "conflict": "Ресурс был изменен другим пользователем. Обновите страницу и повторите попытку",
+        "internalServerError": "Ошибка сервера. Попробуйте позже",
+        "default": "Что-то пошло не так"
+      }
     },
     "forgotPassword": {
       "title": "Забыли пароль",
@@ -66,17 +74,25 @@
       "currentLanguages": "Текущие языки",
       "emptyState": "У вас пока нет языков",
       "addLanguage": "Добавить язык",
+      "createLanguage": "Создать язык",
       "deleteLanguage": "Удалить язык",
       "updateLanguage": "Обновить язык",
+      "name": "Название",
+      "iso": "ISO",
+      "nativeName": "Родное название",
       "language": "Язык",
       "languages": "Языки",
       "proficiency": "Уровень",
+      "edit": "Редактировать",
       "delete": "Удалить",
       "removeLanguage": "Удалить язык",
-      "confirmRemove": "Вы уверены, что хотите удалить {{count}} {{languageLabel}}?",
+      "confirmRemove": "Вы уверены, что хотите удалить",
+      "confirmDeleteLanguage": "Вы уверены, что хотите удалить язык {{name}}?",
       "cancel": "Отмена",
+      "confirm": "Подтвердить",
       "add": "Добавить",
       "remove": "Удалить",
+      "update": "Обновить",
       "save": "Сохранить"
     },
     "sidebar": {

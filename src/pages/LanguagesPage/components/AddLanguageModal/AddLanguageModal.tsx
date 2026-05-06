@@ -1,16 +1,11 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import PlusIcon from "@assets/icon/PlusIcon.svg?react";
 import { Modal, Select } from "@components/shared";
 import { useAuth } from "@root/hooks";
 import { AddProfileLanguageInput, Proficiency } from "@services/graphql/__generated__/graphql";
-import { addProfileLanguage } from "@services/languages";
-
-interface AddLanguageModalProps {
-  languageOptions: { label: string; value: string }[];
-  proficiencyOptions: { label: string; value: string }[];
-}
+import { AddLanguageModalProps } from "./types";
+import { useAddProfileLanguageMutation } from "../../api";
 
 export const AddLanguageModal = ({
   languageOptions,
@@ -18,23 +13,17 @@ export const AddLanguageModal = ({
 }: AddLanguageModalProps) => {
   const { t } = useTranslation();
   const { userId } = useAuth();
-  const queryClient = useQueryClient();
   const [selectedLanguage, setSelectedLanguage] = useState<AddProfileLanguageInput>({
     userId: userId,
     name: "",
     proficiency: "" as Proficiency,
   });
-  const { mutate } = useMutation({
-    mutationFn: addProfileLanguage,
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["profile", userId] });
-      setSelectedLanguage({ userId, name: "", proficiency: "" as Proficiency });
-    },
-  });
 
   const resetSelectedLanguage = () => {
     setSelectedLanguage({ userId, name: "", proficiency: "" as Proficiency });
   };
+
+  const { mutateAsync } = useAddProfileLanguageMutation(userId);
 
   return (
     <Modal>
@@ -80,7 +69,16 @@ export const AddLanguageModal = ({
             variant="filled"
             className="w-40"
             disabled={!selectedLanguage.name || !selectedLanguage.proficiency}
-            onClick={() => mutate(selectedLanguage)}
+            onClick={async () => {
+              try {
+                await mutateAsync(selectedLanguage);
+                resetSelectedLanguage();
+
+                return true;
+              } catch {
+                return false;
+              }
+            }}
           >
             {t("page.languages.add")}
           </Modal.Close>

@@ -34,7 +34,15 @@
       "oops": "Oups",
       "goBack": "Retour",
       "defaultErrorMessage": "Erreur ! Impossible de modifier le mot de passe",
-      "defaultNotFoundMessage": "Hum… il semble que ce ne soit pas la page que vous cherchiez. \n Revenons sur la bonne voie."
+      "defaultNotFoundMessage": "Hum… il semble que ce ne soit pas la page que vous cherchiez. \n Revenons sur la bonne voie.",
+      "api": {
+        "forbidden": "Vous n'avez pas les droits pour effectuer cette action",
+        "unauthorized": "Vous devez vous reconnecter",
+        "notFound": "La ressource demandée est introuvable",
+        "conflict": "La ressource a été modifiée par quelqu'un d'autre. Veuillez actualiser et réessayer",
+        "internalServerError": "Erreur serveur. Veuillez réessayer plus tard",
+        "default": "Une erreur est survenue"
+      }
     },
     "forgotPassword": {
       "title": "Mot de passe oublié",
@@ -66,17 +74,25 @@
       "currentLanguages": "Langues actuelles",
       "emptyState": "Vous n'avez encore aucune langue",
       "addLanguage": "Ajouter une langue",
+      "createLanguage": "Créer une langue",
       "deleteLanguage": "Supprimer une langue",
       "updateLanguage": "Mettre a jour la langue",
+      "name": "Nom",
+      "iso": "ISO",
+      "nativeName": "Nom natif",
       "language": "Langue",
       "languages": "Langues",
       "proficiency": "Niveau",
+      "edit": "Modifier",
       "delete": "Supprimer",
       "removeLanguage": "Supprimer la langue",
-      "confirmRemove": "Etes-vous sur de vouloir supprimer {{count}} {{languageLabel}} ?",
+      "confirmRemove": "Etes-vous sur de vouloir supprimer",
+      "confirmDeleteLanguage": "Etes-vous sur de vouloir supprimer la langue {{name}} ?",
       "cancel": "Annuler",
+      "confirm": "Confirmer",
       "add": "Ajouter",
       "remove": "Supprimer",
+      "update": "Mettre a jour",
       "save": "Enregistrer"
     },
     "sidebar": {

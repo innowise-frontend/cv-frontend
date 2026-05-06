@@ -799,6 +799,24 @@ export type ChangePasswordMutation = {
   changePassword: { __typename?: "User"; id: string; email: string };
 };
 
+export type CreateLanguageMutationVariables = Exact<{
+  language: CreateLanguageInput;
+}>;
+
+export type CreateLanguageMutation = {
+  __typename?: "Mutation";
+  createLanguage: { __typename?: "Language"; id: string };
+};
+
+export type DeleteLanguageMutationVariables = Exact<{
+  language: DeleteLanguageInput;
+}>;
+
+export type DeleteLanguageMutation = {
+  __typename?: "Mutation";
+  deleteLanguage: { __typename?: "DeleteResult"; affected: number };
+};
+
 export type DeleteProfileLanguageMutationVariables = Exact<{
   language: DeleteProfileLanguageInput;
 }>;
@@ -858,6 +876,21 @@ export type SignupMutation = {
     access_token: string;
     refresh_token: string;
     user: { __typename?: "User"; id: string };
+  };
+};
+
+export type UpdateLanguageMutationVariables = Exact<{
+  language: UpdateLanguageInput;
+}>;
+
+export type UpdateLanguageMutation = {
+  __typename?: "Mutation";
+  updateLanguage: {
+    __typename?: "Language";
+    id: string;
+    name: string;
+    iso2: string;
+    native_name?: string | null;
   };
 };
 
@@ -958,6 +991,7 @@ export type LanguagesQuery = {
       id: string;
       name: string;
       native_name?: string | null;
+      iso2: string;
     }>;
   };
 };
@@ -1135,6 +1169,86 @@ export const ChangePasswordDocument = {
     },
   ],
 } as unknown as DocumentNode<ChangePasswordMutation, ChangePasswordMutationVariables>;
+export const CreateLanguageDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "CreateLanguage" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "language" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "CreateLanguageInput" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "createLanguage" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "language" },
+                value: { kind: "Variable", name: { kind: "Name", value: "language" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [{ kind: "Field", name: { kind: "Name", value: "id" } }],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<CreateLanguageMutation, CreateLanguageMutationVariables>;
+export const DeleteLanguageDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "DeleteLanguage" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "language" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "DeleteLanguageInput" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "deleteLanguage" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "language" },
+                value: { kind: "Variable", name: { kind: "Name", value: "language" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [{ kind: "Field", name: { kind: "Name", value: "affected" } }],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<DeleteLanguageMutation, DeleteLanguageMutationVariables>;
 export const DeleteProfileLanguageDocument = {
   kind: "Document",
   definitions: [
@@ -1400,6 +1514,51 @@ export const SignupDocument = {
     },
   ],
 } as unknown as DocumentNode<SignupMutation, SignupMutationVariables>;
+export const UpdateLanguageDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "UpdateLanguage" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "language" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "UpdateLanguageInput" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "updateLanguage" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "language" },
+                value: { kind: "Variable", name: { kind: "Name", value: "language" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "id" } },
+                { kind: "Field", name: { kind: "Name", value: "name" } },
+                { kind: "Field", name: { kind: "Name", value: "iso2" } },
+                { kind: "Field", name: { kind: "Name", value: "native_name" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<UpdateLanguageMutation, UpdateLanguageMutationVariables>;
 export const UpdateProfileDocument = {
   kind: "Document",
   definitions: [
@@ -1735,6 +1894,7 @@ export const LanguagesDocument = {
                       { kind: "Field", name: { kind: "Name", value: "id" } },
                       { kind: "Field", name: { kind: "Name", value: "name" } },
                       { kind: "Field", name: { kind: "Name", value: "native_name" } },
+                      { kind: "Field", name: { kind: "Name", value: "iso2" } },
                     ],
                   },
                 },

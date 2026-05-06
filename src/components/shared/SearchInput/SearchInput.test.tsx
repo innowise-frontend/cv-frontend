@@ -1,14 +1,12 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { useState } from "react";
 import { describe, expect, it, vi } from "vitest";
-import * as useSearchParamsHook from "@root/hooks/useHandleSearch/useHandleSearch";
 import { SearchInput } from "./SearchInput";
 
 describe("SearchInput", () => {
   it("should render the search input with placeholder", () => {
-    vi.spyOn(useSearchParamsHook, "useHandleSearch").mockReturnValue({ onSearch: vi.fn() });
-
-    render(<SearchInput />);
+    render(<SearchInput value="" onValueChange={vi.fn()} />);
 
     expect(screen.getByRole("textbox")).toBeInTheDocument();
     expect(screen.getByPlaceholderText("Filter")).toBeInTheDocument();
@@ -16,30 +14,38 @@ describe("SearchInput", () => {
 
   it("should call onSearch when the input value changes", async () => {
     const user = userEvent.setup();
-    const onSearch = vi.fn();
+    const onValueChange = vi.fn();
 
-    vi.spyOn(useSearchParamsHook, "useHandleSearch").mockReturnValue({ onSearch });
+    const SearchInputWrapper = () => {
+      const [value, setValue] = useState("");
 
-    render(<SearchInput />);
+      return (
+        <SearchInput
+          value={value}
+          onValueChange={(nextValue) => {
+            setValue(nextValue);
+            onValueChange(nextValue);
+          }}
+        />
+      );
+    };
+
+    render(<SearchInputWrapper />);
 
     await user.type(screen.getByRole("textbox"), "test");
 
-    expect(onSearch).toHaveBeenCalled();
-    expect(onSearch).toHaveBeenLastCalledWith("test");
+    expect(onValueChange).toHaveBeenCalled();
+    expect(onValueChange).toHaveBeenLastCalledWith("test");
   });
 
   it("should render provided defaultValue", () => {
-    vi.spyOn(useSearchParamsHook, "useHandleSearch").mockReturnValue({ onSearch: vi.fn() });
-
-    render(<SearchInput defaultValue="initial query" />);
+    render(<SearchInput value="initial query" onValueChange={vi.fn()} />);
 
     expect(screen.getByRole("textbox")).toHaveDisplayValue("initial query");
   });
 
   it("should render the search input", () => {
-    vi.spyOn(useSearchParamsHook, "useHandleSearch").mockReturnValue({ onSearch: vi.fn() });
-
-    render(<SearchInput />);
+    render(<SearchInput value="" onValueChange={vi.fn()} />);
 
     expect(screen.getByRole("textbox")).toBeInTheDocument();
   });

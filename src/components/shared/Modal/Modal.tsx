@@ -86,7 +86,7 @@ const ModalContent = ({
       onClick={handleBackdropClick}
       onCancel={handleCancel}
       className={cn(
-        "fixed top-1/2 left-1/2 m-0 min-w-155 max-w-215 min-h-50 max-h-131 -translate-x-1/2 -translate-y-1/2 bg-gray-8 px-6 py-4 shadow-2xl will-change-transform will-change-opacity transition-[opacity,transform] duration-300 ease-out dark:bg-gray-2 backdrop:bg-gray/50",
+        "fixed top-1/2 left-1/2 m-0 min-w-155 max-w-215 min-h-50 max-h-131 -translate-x-1/2 -translate-y-1/2 bg-gray-8 px-6 py-4 shadow-2xl will-change-transform will-change-opacity transition-[opacity,transform] duration-300 ease-out dark:bg-gray-2 backdrop:bg-gray/50 z-100",
         isOpen ? "opacity-100 scale-100" : "opacity-0 scale-95",
         className,
       )}
@@ -102,14 +102,20 @@ const ModalClose = ({
   children,
   onClick,
   ...props
-}: { children?: React.ReactNode; onClick?: () => void } & React.ComponentProps<typeof Button>) => {
+}: {
+  children?: React.ReactNode;
+  onClick?: () => void | boolean | Promise<void | boolean>;
+} & React.ComponentProps<typeof Button>) => {
   const { closeModal } = useModalContext();
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
-    onClick?.();
-    closeModal();
+    const shouldClose = await onClick?.();
+
+    if (shouldClose !== false) {
+      closeModal();
+    }
   };
 
   return (

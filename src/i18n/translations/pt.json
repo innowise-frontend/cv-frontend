@@ -34,7 +34,15 @@
       "oops": "Ops",
       "goBack": "Voltar",
       "defaultErrorMessage": "Erro! Não foi possível alterar a senha",
-      "defaultNotFoundMessage": "Hmm… parece que esta não é a página que você estava procurando. \n Vamos colocar você de volta no caminho certo."
+      "defaultNotFoundMessage": "Hmm… parece que esta não é a página que você estava procurando. \n Vamos colocar você de volta no caminho certo.",
+      "api": {
+        "forbidden": "Você não tem permissão para realizar esta ação",
+        "unauthorized": "Você precisa entrar novamente",
+        "notFound": "O recurso solicitado não foi encontrado",
+        "conflict": "O recurso foi alterado por outra pessoa. Atualize e tente novamente",
+        "internalServerError": "Erro no servidor. Tente novamente mais tarde",
+        "default": "Algo deu errado"
+      }
     },
     "forgotPassword": {
       "title": "Esqueceu a senha",
@@ -66,17 +74,25 @@
       "currentLanguages": "Idiomas atuais",
       "emptyState": "Voce ainda nao tem idiomas",
       "addLanguage": "Adicionar idioma",
+      "createLanguage": "Criar idioma",
       "deleteLanguage": "Excluir idioma",
       "updateLanguage": "Atualizar idioma",
+      "name": "Nome",
+      "iso": "ISO",
+      "nativeName": "Nome nativo",
       "language": "Idioma",
       "languages": "Idiomas",
       "proficiency": "Nivel",
+      "edit": "Editar",
       "delete": "Excluir",
       "removeLanguage": "Remover idioma",
-      "confirmRemove": "Tem certeza de que deseja remover {{count}} {{languageLabel}}?",
+      "confirmRemove": "Tem certeza de que deseja remover",
+      "confirmDeleteLanguage": "Tem certeza de que deseja excluir o idioma {{name}}?",
       "cancel": "Cancelar",
+      "confirm": "Confirmar",
       "add": "Adicionar",
       "remove": "Remover",
+      "update": "Atualizar",
       "save": "Salvar"
     },
     "sidebar": {

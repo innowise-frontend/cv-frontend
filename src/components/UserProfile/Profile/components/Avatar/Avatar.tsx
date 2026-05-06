@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import DownloadIcon from "@root/assets/icon/DownloadIcon.svg?react";
 import { Avatar as AvatarComponent } from "@root/components/shared/Avatar/Avatar";
 import { useAuth } from "@root/hooks/useAuth/useAuth";
-import { cn } from "@root/lib/utils";
+import { cn, getErrorToastMessage } from "@root/lib";
 import { useUserProfile, useUserProfileMutations } from "../../api";
 import { AVATAR_ACCEPT, MAX_AVATAR_BYTES } from "../../constants";
 import { prepareAvatarForUpload } from "../../utils";
@@ -28,7 +28,7 @@ export const Avatar = () => {
     const prepared = await prepareAvatarForUpload(file, MAX_AVATAR_BYTES, t);
 
     if (!prepared.ok) {
-      toast.error(prepared.message);
+      toast.error(getErrorToastMessage(new Error(prepared.message)));
 
       return;
     }
@@ -36,7 +36,7 @@ export const Avatar = () => {
     try {
       await uploadAvatar.mutateAsync({ userId, ...prepared.avatar });
     } catch (e) {
-      toast.error((e as Error).message);
+      toast.error(getErrorToastMessage(e));
     }
   }
 

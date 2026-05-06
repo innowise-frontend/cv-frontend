@@ -22,10 +22,24 @@ export const Table = <TData,>({
   onChangePage,
   onChangeViewOption,
 }: TableProps<TData>) => {
+  const getRowId = (originalRow: TData, index: number) => {
+    if (
+      typeof originalRow === "object" &&
+      originalRow !== null &&
+      "id" in originalRow &&
+      typeof (originalRow as { id?: unknown }).id === "string"
+    ) {
+      return (originalRow as { id: string }).id;
+    }
+
+    return String(index);
+  };
+
   // eslint-disable-next-line react-hooks/incompatible-library
   const table = useReactTable({
     data,
     columns,
+    getRowId,
     meta: {
       onSort: onSort,
       currentSort: currentSort,
