@@ -13,4 +13,5 @@ export type SelectProps = {
   side?: SelectBase.Positioner.Props["side"];
   value: string | number;
   onValueChange?: (value: string) => void;
+  sideShift?: "flip" | "shift" | "none";
 };

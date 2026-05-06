@@ -155,6 +155,35 @@
         "verificationSent": "Verification email sent",
         "verificationFailed": "Failed to send verification email"
       }
+    },
+    "users": {
+      "edit": "Edit",
+      "delete": "Delete",
+      "viewProfile": "View profile",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "password": "Password",
+      "department": "Department",
+      "position": "Position",
+      "role": "Role",
+      "selectDepartment": "Department",
+      "selectPosition": "Position",
+      "selectRole": "Role",
+      "roleEmployee": "Employee",
+      "roleAdmin": "Admin",
+      "cancel": "Cancel",
+      "create": "Create",
+      "createUser": "Create user",
+      "createUserTitle": "Create User",
+      "update": "Update",
+      "updateUser": "Update",
+      "updateUserTitle": "Update user",
+      "deleteUser": "Delete",
+      "deleteUserTitle": "Delete user",
+      "confirmDeleteBefore": "Are you sure you want to delete ",
+      "confirmDeleteAfter": "?",
+      "confirm": "Confirm"
     }
   }
 }

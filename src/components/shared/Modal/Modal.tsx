@@ -72,26 +72,22 @@ const ModalContent = ({
     }
   };
 
-  const handleCancel = (event: React.SyntheticEvent<HTMLDialogElement, Event>) => {
-    event.preventDefault();
-    onCancel?.();
-    closeModal();
-  };
-
   return createPortal(
-    <dialog
-      {...props}
-      onClick={handleBackdropClick}
-      onCancel={handleCancel}
-      className={cn(
-        "fixed top-1/2 left-1/2 m-0 min-w-155 max-w-215 min-h-50 max-h-131 -translate-x-1/2 -translate-y-1/2 bg-gray-8 px-6 py-4 shadow-2xl will-change-transform will-change-opacity transition-[opacity,transform] duration-300 ease-out dark:bg-gray-2 backdrop:bg-gray/50 z-100",
-        isOpen ? "opacity-100 scale-100" : "opacity-0 scale-95",
-        className,
-      )}
-      ref={dialogRef}
-    >
-      {children}
-    </dialog>,
+    <>
+      {isOpen && <div className="fixed inset-0 bg-gray/50 z-50" onClick={closeModal} />}
+      <dialog
+        {...props}
+        onClick={handleBackdropClick}
+        className={cn(
+          "fixed top-1/2 left-1/2 m-0 min-w-155 max-w-215 min-h-50 max-h-131 -translate-x-1/2 -translate-y-1/2 bg-gray-8 px-6 py-4 shadow-2xl will-change-transform will-change-opacity transition-[opacity,transform] duration-300 ease-out dark:bg-gray-2 backdrop:bg-gray/50 z-50",
+          isOpen ? "opacity-100 scale-100" : "opacity-0 scale-95",
+          className,
+        )}
+        ref={dialogRef}
+      >
+        {children}
+      </dialog>
+    </>,
     document.body,
   );
 };

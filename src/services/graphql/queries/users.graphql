@@ -2,9 +2,17 @@ query Users($params: SearchPaginationInput!) {
   users(params: $params) {
     items {
       id
-      department_name
-      position_name
+
+      department {
+        id
+        name
+      }
+      position {
+        id
+        name
+      }
       email
+      role
       profile {
         last_name
         first_name

@@ -1,13 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
 import { useLocation, useNavigate, useSearch } from "@tanstack/react-router";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Breadcrumbs, ROUTES, Table, TableSearch } from "@components/shared";
+import { Breadcrumbs, Modal, ROUTES, Table, TableSearch } from "@components/shared";
 import { VIEW_OPTIONS } from "@root/constants";
 import { useHandleSearch } from "@root/hooks";
 import { getBreadcrumbsLink } from "@root/lib";
-import { getUsers } from "@services/users";
-import { getUserColumns } from "./columns";
+import { useUsersApi } from "./api";
+import { CreateUserModal } from "./components";
+import { useUserTableColumns } from "./useUserTableColumns";
 
 export const UsersPage = () => {
   const { t } = useTranslation();
@@ -29,17 +29,14 @@ export const UsersPage = () => {
       setCurrentPage(1);
     },
   });
+  const { columns } = useUserTableColumns();
 
-  const { data } = useQuery({
-    queryKey: ["users", searchParams.search, currentPage, currentLimit, currentSort],
-    queryFn: () =>
-      getUsers({
-        search: searchParams.search ?? "",
-        page: currentPage,
-        limit: currentLimit,
-        sort_order: currentSort,
-        sort_by: "department",
-      }),
+  const data = useUsersApi({
+    search: searchParams.search ?? "",
+    page: currentPage,
+    limit: currentLimit,
+    sort_order: currentSort,
+    sort_by: "department",
   });
 
   const adminActions = [
@@ -64,10 +61,18 @@ export const UsersPage = () => {
   return (
     <div className="flex h-full min-h-0 flex-col">
       <Breadcrumbs items={[getBreadcrumbsLink(location.pathname, t)]} className="pl-5" />
-      <TableSearch action={null} searchValue={searchParams.search ?? ""} onSearch={onSearch} />
+      <TableSearch
+        action={
+          <Modal>
+            <CreateUserModal />
+          </Modal>
+        }
+        searchValue={searchParams.search ?? ""}
+        onSearch={onSearch}
+      />
       <div className="min-h-0 flex-1">
         <Table
-          columns={getUserColumns(t)}
+          columns={columns}
           data={data?.items ?? []}
           pagesAmount={data?.total_pages ?? 0}
           currentPage={currentPage}

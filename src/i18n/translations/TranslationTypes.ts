@@ -129,6 +129,35 @@ export interface TranslationTypes {
         verificationFailed: string;
       };
     };
+    users: {
+      edit: string;
+      delete: string;
+      viewProfile: string;
+      firstName: string;
+      lastName: string;
+      email: string;
+      password: string;
+      department: string;
+      position: string;
+      role: string;
+      selectDepartment: string;
+      selectPosition: string;
+      selectRole: string;
+      roleEmployee: string;
+      roleAdmin: string;
+      cancel: string;
+      create: string;
+      createUser: string;
+      createUserTitle: string;
+      update: string;
+      updateUser: string;
+      updateUserTitle: string;
+      deleteUser: string;
+      deleteUserTitle: string;
+      confirmDeleteBefore: string;
+      confirmDeleteAfter: string;
+      confirm: string;
+    };
   };
   theme: {
     device: string;

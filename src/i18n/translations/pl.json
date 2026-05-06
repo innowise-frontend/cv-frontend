@@ -155,6 +155,35 @@
         "verificationSent": "Wysłano e-mail weryfikacyjny",
         "verificationFailed": "Nie udało się wysłać e-maila weryfikacyjnego"
       }
+    },
+    "users": {
+      "edit": "Edytuj",
+      "delete": "Usuń",
+      "viewProfile": "Zobacz profil",
+      "firstName": "Imię",
+      "lastName": "Nazwisko",
+      "email": "E-mail",
+      "password": "Hasło",
+      "department": "Dział",
+      "position": "Stanowisko",
+      "role": "Rola",
+      "selectDepartment": "Dział",
+      "selectPosition": "Stanowisko",
+      "selectRole": "Rola",
+      "roleEmployee": "Pracownik",
+      "roleAdmin": "Administrator",
+      "cancel": "Anuluj",
+      "create": "Utwórz",
+      "createUser": "Dodaj użytkownika",
+      "createUserTitle": "Dodawanie użytkownika",
+      "update": "Zapisz zmiany",
+      "updateUser": "Edytuj",
+      "updateUserTitle": "Edycja użytkownika",
+      "deleteUser": "Usuń",
+      "deleteUserTitle": "Usuwanie użytkownika",
+      "confirmDeleteBefore": "Czy na pewno chcesz usunąć ",
+      "confirmDeleteAfter": "?",
+      "confirm": "Potwierdź"
     }
   }
 }

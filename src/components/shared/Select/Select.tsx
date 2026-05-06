@@ -25,6 +25,7 @@ export const Select = ({
   align = "start",
   disabled = false,
   value,
+  sideShift = "shift",
   onValueChange,
 }: SelectProps) => {
   const triggerId = useId();
@@ -49,12 +50,12 @@ export const Select = ({
       alignItemWithTrigger={false}
       sideOffset={4}
       positionMethod="fixed"
-      collisionAvoidance={{ side: "shift", align: "none" }}
+      collisionAvoidance={{ side: sideShift, align: "none" }}
       className="z-50"
     >
       <SelectBase.Popup
         className={cn(
-          "absolute -top-[5px] z-50 w-(--anchor-width) min-w-36 border border-gray-5 bg-gray-8 shadow-none ring-0 text-gray-2 dark:bg-gray-2 dark:text-gray-5",
+          "z-50 w-(--anchor-width) min-w-36 border border-gray-5 bg-gray-8 shadow-none ring-0 text-gray-2 dark:bg-gray-2 dark:text-gray-5",
           "max-h-(--available-height) overflow-x-hidden overflow-y-auto",
           popupClassName,
         )}

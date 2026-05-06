@@ -78,6 +78,7 @@ export const Input = forwardRef<HTMLInputElement, InputWithLabelProps>(
           />
           {isPasswordField && (
             <button
+              disabled={disabled}
               type="button"
               aria-label={t("page.setting.togglePasswordVisibility")}
               onClick={togglePasswordVisibility}

@@ -155,6 +155,35 @@
         "verificationSent": "Письмо для подтверждения отправлено",
         "verificationFailed": "Не удалось отправить письмо для подтверждения"
       }
+    },
+    "users": {
+      "edit": "Редактировать",
+      "delete": "Удалить",
+      "viewProfile": "Просмотр профиля",
+      "firstName": "Имя",
+      "lastName": "Фамилия",
+      "email": "Электронная почта",
+      "password": "Пароль",
+      "department": "Отдел",
+      "position": "Должность",
+      "role": "Роль",
+      "selectDepartment": "Отдел",
+      "selectPosition": "Должность",
+      "selectRole": "Роль",
+      "roleEmployee": "Сотрудник",
+      "roleAdmin": "Администратор",
+      "cancel": "Отмена",
+      "create": "Создать",
+      "createUser": "Создать пользователя",
+      "createUserTitle": "Создание пользователя",
+      "update": "Обновить",
+      "updateUser": "Изменить",
+      "updateUserTitle": "Редактирование пользователя",
+      "deleteUser": "Удалить",
+      "deleteUserTitle": "Удаление пользователя",
+      "confirmDeleteBefore": "Вы уверены, что хотите удалить ",
+      "confirmDeleteAfter": "?",
+      "confirm": "Подтвердить"
     }
   }
 }
