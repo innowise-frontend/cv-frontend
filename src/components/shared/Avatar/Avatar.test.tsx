@@ -22,7 +22,8 @@ describe("Avatar", () => {
   it("should merge className when rendering placeholder", () => {
     render(<Avatar name="John" className="avatar-extra" />);
 
-    expect(screen.getByText("J")).toHaveClass("avatar-extra");
-    expect(screen.getByText("J")).toHaveClass("w-10", "h-10", "rounded-full");
+    const placeholder = screen.getByText("J").closest("div");
+    expect(placeholder).toHaveClass("avatar-extra");
+    expect(placeholder).toHaveClass("w-10", "h-10", "rounded-full");
   });
 });

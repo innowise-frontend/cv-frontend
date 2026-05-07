@@ -4,20 +4,24 @@ import { Button, Dropdown, ROUTES } from "@components/shared";
 import { useAuth } from "@root/hooks";
 import { TableActionsProps } from "./types";
 
-export const TableActions = ({ userId, actions }: TableActionsProps) => {
+export const TableActions = ({ userId, actions, dropdownKeepMounted }: TableActionsProps) => {
   const { isAdmin } = useAuth();
   const dropdownOptions = actions.map((action) => ({
     ...action,
-    onClick: () => action.onClick(userId),
+    onClick: () => action.onClick?.(userId),
   }));
 
-  return isAdmin === true ? (
-    <Dropdown options={dropdownOptions} />
-  ) : (
-    <Button className="flex items-center justify-start w-10 h-10">
-      <Link to={ROUTES.USER_PAGE} params={{ userId }}>
-        <ChevronRightIcon width={18} height={18} />
-      </Link>
-    </Button>
+  return (
+    <div className="flex justify-end">
+      {isAdmin === true ? (
+        <Dropdown options={dropdownOptions} keepMounted={dropdownKeepMounted} />
+      ) : (
+        <Button className="flex items-center justify-start w-10 h-10">
+          <Link to={ROUTES.USER_PAGE} params={{ userId }}>
+            <ChevronRightIcon width={18} height={18} />
+          </Link>
+        </Button>
+      )}
+    </div>
   );
 };

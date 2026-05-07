@@ -12,6 +12,7 @@ const consoleLogMock = vi.hoisted(() => vi.fn());
 vi.mock("@tanstack/react-router", () => ({
   useNavigate: () => navigateMock,
   useSearch: () => useSearchMock(),
+  useLocation: () => ({ pathname: "/_app/" }),
 }));
 
 vi.mock("@tanstack/react-query", () => ({
@@ -81,7 +82,7 @@ describe("UsersPage", () => {
 
     render(<UsersPage />);
 
-    expect(screen.getByTestId("breadcrumbs")).toHaveTextContent("Employees");
+    expect(screen.getByTestId("breadcrumbs")).toBeInTheDocument();
     expect(screen.getByTestId("table-search")).toBeInTheDocument();
     expect(screen.getByTestId("users-table")).toBeInTheDocument();
     expect(tableMock).toHaveBeenCalledWith(

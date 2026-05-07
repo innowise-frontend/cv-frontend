@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
+import { getErrorToastMessage } from "@root/lib";
 import { sendVerification } from "@services/auth/sendVerification/sendVerification";
 import {
   fetchUserProfile,
@@ -41,7 +42,7 @@ export function useUserProfileMutations(userId: string) {
       toast.success(t("page.profile.toast.userUpdated"));
     },
     onError: (error) => {
-      toast.error((error as Error).message);
+      toast.error(getErrorToastMessage(error));
     },
   });
 
@@ -52,7 +53,7 @@ export function useUserProfileMutations(userId: string) {
       toast.success(t("page.profile.toast.profileUpdated"));
     },
     onError: (error) => {
-      toast.error((error as Error).message);
+      toast.error(getErrorToastMessage(error));
     },
   });
 
@@ -63,7 +64,7 @@ export function useUserProfileMutations(userId: string) {
       toast.success(t("page.profile.toast.avatarUpdated"));
     },
     onError: (error) => {
-      toast.error((error as Error).message);
+      toast.error(getErrorToastMessage(error));
     },
   });
 
@@ -72,8 +73,8 @@ export function useUserProfileMutations(userId: string) {
     onSuccess: () => {
       toast.message(t("page.profile.toast.verificationSent"));
     },
-    onError: () => {
-      toast.error(t("page.profile.toast.verificationFailed"));
+    onError: (error) => {
+      toast.error(getErrorToastMessage(error) || t("page.profile.toast.verificationFailed"));
     },
   });
 

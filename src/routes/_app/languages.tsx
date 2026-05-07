@@ -1,5 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { LanguagesPage } from "@pages/LanguagesPage";
 
 export const Route = createFileRoute("/_app/languages")({
-  component: () => <div>user languages</div>,
+  validateSearch: ({ search }: { search?: string }) => {
+    return {
+      search: search,
+    };
+  },
+  component: () => <LanguagesPage />,
 });

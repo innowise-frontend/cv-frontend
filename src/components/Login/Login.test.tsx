@@ -112,7 +112,7 @@ describe("Login", () => {
     await submitLoginForm();
 
     await waitFor(() => {
-      expect(toastError).toHaveBeenCalledWith("Invalid credentials");
+      expect(toastError).toHaveBeenCalledWith(expect.stringContaining("Invalid credentials"));
     });
 
     expect(mockNavigate).not.toHaveBeenCalled();

@@ -6,6 +6,7 @@ import { Button } from "@root/components/shared/Button/Button";
 import { Input } from "@root/components/shared/Input/Input";
 import { Select } from "@root/components/shared/Select/Select";
 import { useAuth } from "@root/hooks/useAuth/useAuth";
+import { getErrorToastMessage } from "@root/lib";
 import { useUserProfile, useUserProfileMutations } from "../../api";
 import type { Option } from "../../types";
 
@@ -76,7 +77,7 @@ export const Info = () => {
 
       setDraft({});
     } catch (e) {
-      toast.error((e as Error).message);
+      toast.error(getErrorToastMessage(e));
     }
   }
 

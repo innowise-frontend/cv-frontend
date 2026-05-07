@@ -33,10 +33,16 @@
     "error": {
       "oops": "Ups",
       "goBack": "Volver",
-      "defaultErrorMessage": "Algo salió mal. Ya estamos trabajando en solucionarlo. \n Inténtalo de nuevo o vuelve atrás.",
-      "passwordChangeErrorMessage": "¡Error! No se pudo cambiar la contraseña",
+      "defaultErrorMessage": "¡Error! No se pudo cambiar la contraseña",
       "defaultNotFoundMessage": "Hmm… parece que esta no es la página que buscabas. \n Vamos a devolverte al camino correcto.",
-      "mobileNotSupportedMessage": "Ups… esta aplicación no es compatible con dispositivos móviles. \n Ábrela en un ordenador o tablet para continuar."
+      "api": {
+        "forbidden": "No tienes permisos para realizar esta acción",
+        "unauthorized": "Necesitas iniciar sesión de nuevo",
+        "notFound": "No se encontró el recurso solicitado",
+        "conflict": "El recurso fue modificado por otra persona. Actualiza e inténtalo de nuevo",
+        "internalServerError": "Error del servidor. Inténtalo más tarde",
+        "default": "Algo salió mal"
+      }
     },
     "forgotPassword": {
       "title": "¿Olvidaste tu contraseña?",
@@ -85,6 +91,31 @@
       "confirm": "Confirmar",
       "later": "Más tarde",
       "invalidCode": "Código inválido"
+    },
+    "languages": {
+      "currentLanguages": "Idiomas actuales",
+      "emptyState": "Todavia no tienes idiomas",
+      "addLanguage": "Agregar idioma",
+      "createLanguage": "Crear idioma",
+      "deleteLanguage": "Eliminar idioma",
+      "updateLanguage": "Actualizar idioma",
+      "name": "Nombre",
+      "iso": "ISO",
+      "nativeName": "Nombre nativo",
+      "language": "Idioma",
+      "languages": "Idiomas",
+      "proficiency": "Nivel",
+      "edit": "Editar",
+      "delete": "Eliminar",
+      "removeLanguage": "Quitar idioma",
+      "confirmRemove": "¿Seguro que quieres quitar",
+      "confirmDeleteLanguage": "¿Seguro que quieres eliminar el idioma {{name}}?",
+      "cancel": "Cancelar",
+      "confirm": "Confirmar",
+      "add": "Agregar",
+      "remove": "Quitar",
+      "update": "Actualizar",
+      "save": "Guardar"
     },
     "sidebar": {
       "employees": "Empleados",

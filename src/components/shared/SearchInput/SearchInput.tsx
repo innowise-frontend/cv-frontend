@@ -1,17 +1,15 @@
 import SearchIcon from "@assets/icon/SearchIcon.svg?react";
 import { Input } from "@components/shared";
-import { useHandleSearch } from "@hooks/index";
+import { SearchInputProps } from "./types";
 
-export const SearchInput = ({ defaultValue }: { defaultValue?: string }) => {
-  const { onSearch } = useHandleSearch();
-
+export const SearchInput = ({ value, onValueChange }: SearchInputProps) => {
   return (
     <div className="relative *:flex">
       <Input
         placeholder="Filter"
-        defaultValue={defaultValue}
+        value={value}
         onChange={(event) => {
-          onSearch(event.target.value);
+          onValueChange(event.target.value);
         }}
         className="h-10 w-80 rounded-40 border border-gray-5 pl-10"
       />

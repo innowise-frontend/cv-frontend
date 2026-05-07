@@ -1,0 +1,5 @@
+mutation CreateLanguage($language: CreateLanguageInput!) {
+  createLanguage(language: $language) {
+    id
+  }
+}
