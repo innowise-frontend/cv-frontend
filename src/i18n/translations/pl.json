@@ -95,6 +95,35 @@
       "departments": "Działy",
       "positions": "Stanowiska",
       "projects": "Projekty"
+    },
+    "profile": {
+      "firstName": "Imię",
+      "lastName": "Nazwisko",
+      "department": "Dział",
+      "position": "Stanowisko",
+      "selectDepartment": "Wybierz dział",
+      "selectPosition": "Wybierz stanowisko",
+      "uploadAvatar": "Prześlij zdjęcie profilowe",
+      "uploadAvatarHint": "png, jpg lub gif — maks. 0,5 MB",
+      "userAvatarAlt": "Awatar użytkownika",
+      "initialsUnknown": "",
+      "memberSince": "Członek od ",
+      "verifyEmail": "Potwierdź e-mail",
+      "update": "Zaktualizuj",
+      "userNotFound": "Nie znaleziono użytkownika",
+      "avatar": {
+        "wrongType": "Dozwolone są tylko pliki png, jpg lub gif.",
+        "tooLarge": "Plik nie może być większy niż 0,5 MB.",
+        "invalidEncoding": "Nieprawidłowe kodowanie pliku awatara",
+        "readFailed": "Nie udało się odczytać pliku"
+      },
+      "toast": {
+        "userUpdated": "Zaktualizowano użytkownika",
+        "profileUpdated": "Zaktualizowano profil",
+        "avatarUpdated": "Zaktualizowano awatar",
+        "verificationSent": "Wysłano e-mail weryfikacyjny",
+        "verificationFailed": "Nie udało się wysłać e-maila weryfikacyjnego"
+      }
     }
   }
 }

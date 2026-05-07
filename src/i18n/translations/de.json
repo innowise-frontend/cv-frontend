@@ -95,6 +95,35 @@
       "departments": "Abteilungen",
       "positions": "Positionen",
       "projects": "Projekte"
+    },
+    "profile": {
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "department": "Abteilung",
+      "position": "Position",
+      "selectDepartment": "Abteilung auswählen",
+      "selectPosition": "Position auswählen",
+      "uploadAvatar": "Profilbild hochladen",
+      "uploadAvatarHint": "png, jpg oder gif — maximal 0,5 MB",
+      "userAvatarAlt": "Benutzeravatar",
+      "initialsUnknown": "",
+      "memberSince": "Mitglied seit",
+      "verifyEmail": "E-Mail bestätigen",
+      "update": "Aktualisieren",
+      "userNotFound": "Benutzer nicht gefunden",
+      "avatar": {
+        "wrongType": "Nur png, jpg oder gif sind erlaubt.",
+        "tooLarge": "Die Datei darf höchstens 0,5 MB groß sein.",
+        "invalidEncoding": "Ungültige Avatar-Dateikodierung",
+        "readFailed": "Datei konnte nicht gelesen werden"
+      },
+      "toast": {
+        "userUpdated": "Benutzer aktualisiert",
+        "profileUpdated": "Profil aktualisiert",
+        "avatarUpdated": "Avatar aktualisiert",
+        "verificationSent": "Bestätigungs-E-Mail gesendet",
+        "verificationFailed": "Bestätigungs-E-Mail konnte nicht gesendet werden"
+      }
     }
   }
 }

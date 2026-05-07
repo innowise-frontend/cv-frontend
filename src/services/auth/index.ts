@@ -5,3 +5,4 @@ export * from "./signup/signup";
 export * from "./verifyEmail/verifyEmail";
 export * from "./me/me";
 export * from "./changePassword/changePassword";
+export * from "./updateUserProfile/updateUserProfile";

@@ -22,6 +22,7 @@ export const Select = ({
   itemClassName,
   side = "bottom",
   align = "start",
+  disabled = false,
   value,
   onValueChange,
 }: SelectProps) => {
@@ -29,6 +30,11 @@ export const Select = ({
 
   const labelFor = (val?: string | number) =>
     list.find((item) => item.value === val)?.label ?? placeholder;
+
+  const handleSelectValue = (next: string | null) => {
+    if (disabled) return;
+    if (next !== null) onValueChange?.(next);
+  };
 
   return (
     <div className={cn("relative flex w-full flex-col", className)}>
@@ -39,16 +45,14 @@ export const Select = ({
         {label}
       </Label>
 
-      <SelectRoot
-        value={value as string}
-        modal={false}
-        onValueChange={(next) => {
-          if (next !== null) onValueChange?.(next);
-        }}
-      >
+      <SelectRoot value={value as string} modal={false} onValueChange={handleSelectValue}>
         <SelectTrigger
           id={triggerId}
-          className="w-full border-gray-5 text-gray-2 data-[size=default]:h-auto px-3 py-3.25 dark:text-gray-5"
+          disabled={disabled}
+          className={cn(
+            "w-full border-gray-5 text-gray-2 data-[size=default]:h-auto px-3 py-3.25 dark:text-gray-5",
+            "disabled:bg-gray-6 dark:disabled:bg-gray-3",
+          )}
         >
           <SelectValue placeholder={placeholder}>{labelFor(value as string)}</SelectValue>
         </SelectTrigger>

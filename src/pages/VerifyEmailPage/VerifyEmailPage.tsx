@@ -1,15 +1,18 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useForm, Controller, useWatch } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Button, CodeInput } from "@components/shared";
 import { ROUTES } from "@root/constants/routes";
+import { useAuth } from "@root/hooks/useAuth/useAuth";
 import { verifyMail } from "@services/auth";
 import { FormValues } from "./types";
 
 export const VerifyEmailPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const { userId } = useAuth();
 
   const {
     control,
@@ -25,7 +28,8 @@ export const VerifyEmailPage = () => {
     mutationFn: async (code: string) => {
       await verifyMail(code);
     },
-    onSuccess: () => {
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["me"] });
       navigate({ to: ROUTES.PROFILE });
     },
     onError: () => {
@@ -77,7 +81,7 @@ export const VerifyEmailPage = () => {
           {t("page.verifyEmail.confirm")}
         </Button>
 
-        <Link to={ROUTES.ROOT}>
+        <Link to="/users/$userId" params={{ userId: userId }}>
           <Button variant="default" type="button">
             {t("page.verifyEmail.later")}
           </Button>
