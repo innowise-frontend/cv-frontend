@@ -7,7 +7,7 @@ import { VIEW_OPTIONS } from "@root/constants";
 import { useHandleSearch } from "@root/hooks";
 import { getBreadcrumbsLink } from "@root/lib";
 import { getUsers } from "@services/users";
-import { columns } from "./columns";
+import { getUserColumns } from "./columns";
 
 export const UsersPage = () => {
   const { t } = useTranslation();
@@ -44,19 +44,19 @@ export const UsersPage = () => {
 
   const adminActions = [
     {
-      label: "View profile",
+      label: t("page.users.actions.viewProfile"),
       onClick: (userId: string) => {
         navigate({ to: ROUTES.USER_PAGE, params: { userId } });
       },
     },
     {
-      label: "Edit",
+      label: t("page.users.actions.edit"),
       onClick: (userId: string) => {
         console.log(userId);
       },
     },
     {
-      label: "Delete",
+      label: t("page.users.actions.delete"),
       onClick: (userId: string) => console.log(userId),
     },
   ];
@@ -67,7 +67,7 @@ export const UsersPage = () => {
       <TableSearch action={null} searchValue={searchParams.search ?? ""} onSearch={onSearch} />
       <div className="min-h-0 flex-1">
         <Table
-          columns={columns}
+          columns={getUserColumns(t)}
           data={data?.items ?? []}
           pagesAmount={data?.total_pages ?? 0}
           currentPage={currentPage}

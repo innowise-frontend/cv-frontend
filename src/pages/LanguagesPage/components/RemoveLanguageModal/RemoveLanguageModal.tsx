@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { Modal } from "@components/shared";
+import { Button, Modal } from "@components/shared";
 import { useAuth } from "@root/hooks";
 import { RemoveLanguageModalProps } from "./types";
 import { useDeleteProfileLanguagesMutation } from "../../api";
@@ -17,7 +17,7 @@ export const RemoveLanguageModal = ({
     onChangeDeletedLanguages({ userId, name: [] });
   };
 
-  const { mutateAsync } = useDeleteProfileLanguagesMutation(userId);
+  const { mutate } = useDeleteProfileLanguagesMutation(userId);
 
   const selectedCount = deletedLanguages.name.length;
   const languageLabel =
@@ -44,25 +44,18 @@ export const RemoveLanguageModal = ({
           </p>
         </Modal.Body>
         <Modal.Footer className="flex justify-end gap-4">
-          <Modal.Close variant="outline" className="w-40" onClick={resetDeletedLanguages}>
+          <Modal.Close variant="outline" className="w-40">
             {t("page.languages.cancel")}
           </Modal.Close>
-          <Modal.Close
+          <Button
             variant="filled"
             className="w-40"
-            onClick={async () => {
-              try {
-                await mutateAsync(deletedLanguages);
-                resetDeletedLanguages();
-
-                return true;
-              } catch {
-                return false;
-              }
+            onClick={() => {
+              mutate(deletedLanguages);
             }}
           >
             {t("page.languages.confirm")}
-          </Modal.Close>
+          </Button>
         </Modal.Footer>
       </Modal.Content>
     </Modal>

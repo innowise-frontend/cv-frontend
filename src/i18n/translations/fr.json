@@ -70,6 +70,28 @@
         "passwordsDoNotMatch": "Les mots de passe ne correspondent pas"
       }
     },
+    "users": {
+      "breadcrumbs": "Employés",
+      "columns": {
+        "firstName": "Prénom",
+        "lastName": "Nom",
+        "email": "E-mail",
+        "department": "Département",
+        "position": "Poste"
+      },
+      "actions": {
+        "viewProfile": "Voir le profil",
+        "edit": "Modifier",
+        "delete": "Supprimer"
+      }
+    },
+    "verifyEmail": {
+      "title": "Vérification de l'e-mail",
+      "subtitle": "Entrez le code de vérification que nous avons envoyé à votre e-mail.",
+      "confirm": "Confirmer",
+      "later": "Plus tard",
+      "invalidCode": "Code invalide"
+    },
     "languages": {
       "currentLanguages": "Langues actuelles",
       "emptyState": "Vous n'avez encore aucune langue",
@@ -94,7 +116,7 @@
       "remove": "Supprimer",
       "update": "Mettre a jour",
       "save": "Enregistrer"
-    },
+    }, 
     "skills": {
       "currentSkills": "Compétences",
       "emptyState": "Vous n'avez encore aucune compétence",

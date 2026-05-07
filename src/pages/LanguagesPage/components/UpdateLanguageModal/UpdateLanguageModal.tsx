@@ -21,7 +21,7 @@ export const UpdateLanguageModal = ({
     languageId,
   });
 
-  const { mutateAsync } = useUpdateLanguageMutation({
+  const { mutate } = useUpdateLanguageMutation({
     onSuccess: () => {
       closeModal();
     },
@@ -41,7 +41,7 @@ export const UpdateLanguageModal = ({
       <Modal.Trigger className="w-full h-auto justify-start capitalize p-0">
         {t("page.languages.edit")}
       </Modal.Trigger>
-      <Modal.Content>
+      <Modal.Content onCancel={resetUpdatedLanguage}>
         <Modal.Header>{t("page.languages.updateLanguage")}</Modal.Header>
         <Modal.Body>
           <Input
@@ -67,7 +67,7 @@ export const UpdateLanguageModal = ({
           />
         </Modal.Body>
         <Modal.Footer>
-          <Modal.Close variant="outline" className="w-40" onClick={resetUpdatedLanguage}>
+          <Modal.Close variant="outline" className="w-40">
             {t("page.languages.cancel")}
           </Modal.Close>
           <Button
@@ -79,7 +79,7 @@ export const UpdateLanguageModal = ({
               updatedLanguage.nativeName === nativeName
             }
             onClick={() => {
-              mutateAsync({
+              mutate({
                 native_name: updatedLanguage.nativeName,
                 name: updatedLanguage.name,
                 iso2: updatedLanguage.iso2,

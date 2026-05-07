@@ -70,6 +70,28 @@
         "passwordsDoNotMatch": "Passwords don't match"
       }
     },
+    "users": {
+      "breadcrumbs": "Employees",
+      "columns": {
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "email": "Email",
+        "department": "Department",
+        "position": "Position"
+      },
+      "actions": {
+        "viewProfile": "View profile",
+        "edit": "Edit",
+        "delete": "Delete"
+      }
+    },
+    "verifyEmail": {
+      "title": "Email verification",
+      "subtitle": "Enter the verification code we sent to your email.",
+      "confirm": "Confirm",
+      "later": "Later",
+      "invalidCode": "Invalid code"
+    },
     "languages": {
       "currentLanguages": "Current languages",
       "emptyState": "You don't have any languages yet",

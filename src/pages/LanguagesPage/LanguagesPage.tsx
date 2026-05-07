@@ -5,8 +5,8 @@ import RemoveIcon from "@assets/icon/RemoveIcon.svg?react";
 import { Breadcrumbs, Button, Modal } from "@components/shared";
 import { useAuth } from "@root/hooks";
 import { getBreadcrumbsLink } from "@root/lib";
-import { DeleteProfileLanguageInput } from "@services/graphql/__generated__/graphql";
-import { getProficiencyOptions, useLanguagesSelectQuery, useUserLanguagesQuery } from "./api";
+import { DeleteProfileLanguageInput, Proficiency } from "@services/graphql/__generated__/graphql";
+import { getProficiencyOptions, useLanguagesQuery, useUserLanguagesQuery } from "./api";
 import {
   AddLanguageModal,
   RemoveLanguageModal,
@@ -27,9 +27,9 @@ export const LanguagesPage = () => {
 
   const proficiencyOptions = getProficiencyOptions(PROFICIENCY_ORDER);
 
-  const { data: userLanguagesData } = useUserLanguagesQuery(userId, isAdmin);
+  const { data: userLanguagesData } = useUserLanguagesQuery(userId, { enabled: !isAdmin });
 
-  const { data: languagesData } = useLanguagesSelectQuery();
+  const { data: languagesData } = useLanguagesQuery();
 
   const languageOptions =
     languagesData?.items?.map((item) => ({
@@ -40,6 +40,15 @@ export const LanguagesPage = () => {
   const resetDeletedLanguages = () => {
     setIsDeleteMode(false);
     setDeletedLanguages({ userId, name: [] });
+  };
+
+  const handleClick = (language: { name: string; proficiency: Proficiency }) => {
+    setDeletedLanguages({
+      ...deletedLanguages,
+      name: deletedLanguages.name.includes(language.name)
+        ? deletedLanguages.name.filter((deletedLanguage) => deletedLanguage !== language.name)
+        : [...deletedLanguages.name, language.name],
+    });
   };
 
   return (
@@ -55,23 +64,13 @@ export const LanguagesPage = () => {
               <div className="col-span-3">{t("page.languages.emptyState")}</div>
             ) : (
               userLanguagesData?.languages.map((language) => (
-                <Modal>
+                <Modal key={language.name}>
                   <LanguageProgressBar
-                    key={language.name}
                     name={language.name}
                     proficiency={language.proficiency}
                     isDeleteMode={isDeleteMode}
                     chosen={isDeleteMode && deletedLanguages.name.includes(language.name)}
-                    onClick={() =>
-                      setDeletedLanguages({
-                        ...deletedLanguages,
-                        name: deletedLanguages.name.includes(language.name)
-                          ? deletedLanguages.name.filter(
-                              (deletedLanguage) => deletedLanguage !== language.name,
-                            )
-                          : [...deletedLanguages.name, language.name],
-                      })
-                    }
+                    onClick={() => handleClick(language)}
                   />
                 </Modal>
               ))

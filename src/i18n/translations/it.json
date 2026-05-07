@@ -70,6 +70,28 @@
         "passwordsDoNotMatch": "Le password non coincidono"
       }
     },
+    "users": {
+      "breadcrumbs": "Dipendenti",
+      "columns": {
+        "firstName": "Nome",
+        "lastName": "Cognome",
+        "email": "Email",
+        "department": "Reparto",
+        "position": "Posizione"
+      },
+      "actions": {
+        "viewProfile": "Visualizza profilo",
+        "edit": "Modifica",
+        "delete": "Elimina"
+      }
+    },
+    "verifyEmail": {
+      "title": "Verifica email",
+      "subtitle": "Inserisci il codice di verifica che abbiamo inviato alla tua email.",
+      "confirm": "Conferma",
+      "later": "Più tardi",
+      "invalidCode": "Codice non valido"
+    },
     "languages": {
       "currentLanguages": "Lingue attuali",
       "emptyState": "Non hai ancora nessuna lingua",

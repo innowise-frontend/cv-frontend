@@ -1,13 +1,13 @@
 import { useTranslation } from "react-i18next";
 import { Button, Modal } from "@components/shared";
-import { useModalContext } from "@root/components/shared/Modal/useModalContext";
+import { useModalContext } from "@components/shared/Modal/useModalContext";
 import { DeleteLanguageModalProps } from "./types";
 import { useDeleteLanguageMutation } from "../../api";
 
 export const DeleteLanguageModal = ({ name, id }: DeleteLanguageModalProps) => {
   const { t } = useTranslation();
   const { closeModal } = useModalContext();
-  const { mutateAsync } = useDeleteLanguageMutation({
+  const { mutate } = useDeleteLanguageMutation({
     onSuccess: () => {
       closeModal();
     },
@@ -29,7 +29,7 @@ export const DeleteLanguageModal = ({ name, id }: DeleteLanguageModalProps) => {
             variant="filled"
             className="w-40"
             onClick={() => {
-              mutateAsync({ languageId: id });
+              mutate({ languageId: id });
             }}
           >
             {t("page.languages.confirm")}

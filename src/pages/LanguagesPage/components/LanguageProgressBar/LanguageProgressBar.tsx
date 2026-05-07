@@ -31,7 +31,7 @@ export const LanguageProgressBar = ({
     value: proficiency,
   }));
 
-  const { mutateAsync } = useUpdateProfileLanguageMutation(userId, {
+  const { mutate } = useUpdateProfileLanguageMutation(userId, {
     onSuccess: () => {
       closeModal();
     },
@@ -46,10 +46,9 @@ export const LanguageProgressBar = ({
       <Button variant="ghost" className="capitalize" onClick={onClick}>
         <ProgressBar
           className={cn(
-            "px-2 cursor-pointer transition-colors duration-150 hover:bg-gray-7 dark:hover:bg-gray5",
+            "px-2 cursor-pointer hover:bg-gray-7 dark:hover:bg-gray5",
             chosen && "*:text-gray *:dark:text-gray-8",
           )}
-          key={name}
           label={name || ""}
           proficiency={chosen ? Proficiency.A1 : (proficiency as Proficiency)}
         />
@@ -61,10 +60,9 @@ export const LanguageProgressBar = ({
     <>
       <Modal.Trigger className="capitalize" variant="ghost">
         <ProgressBar
-          className="px-2 cursor-pointer transition-colors duration-150 hover:bg-gray-7"
-          key={name}
+          className="px-2 cursor-pointer hover:bg-gray-7"
           label={name || ""}
-          proficiency={proficiency as Proficiency}
+          proficiency={proficiency}
         />
       </Modal.Trigger>
       <Modal.Content onCancel={resetUpdateLanguage}>
@@ -91,7 +89,7 @@ export const LanguageProgressBar = ({
           />
         </Modal.Body>
         <Modal.Footer>
-          <Modal.Close variant="outline" className="w-40" onClick={resetUpdateLanguage}>
+          <Modal.Close variant="outline" className="w-40">
             {t("page.languages.cancel")}
           </Modal.Close>
           <Button
@@ -99,7 +97,7 @@ export const LanguageProgressBar = ({
             className="w-40"
             disabled={updateLanguage.proficiency === proficiency}
             onClick={() => {
-              mutateAsync(updateLanguage);
+              mutate(updateLanguage);
             }}
           >
             {t("page.languages.save")}

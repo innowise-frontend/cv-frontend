@@ -44,7 +44,7 @@ export const Avatar = () => {
     <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-16">
       <AvatarComponent
         name={fullName}
-        link={avatar ?? ""}
+        imageSrc={avatar ?? ""}
         className="size-30 rounded-full text-4xl"
       />
 

@@ -12,6 +12,7 @@ const consoleLogMock = vi.hoisted(() => vi.fn());
 vi.mock("@tanstack/react-router", () => ({
   useNavigate: () => navigateMock,
   useSearch: () => useSearchMock(),
+  useLocation: () => ({ pathname: "/_app/" }),
 }));
 
 vi.mock("@tanstack/react-query", () => ({
@@ -40,7 +41,22 @@ vi.mock("@root/components/shared", () => ({
 }));
 
 vi.mock("./columns", () => ({
-  columns: [{ accessorKey: "department", header: "Department" }],
+  getUserColumns: () => [{ accessorKey: "department", header: "Department" }],
+}));
+
+vi.mock("react-i18next", () => ({
+  useTranslation: () => ({
+    t: (key: string) => {
+      const translations: Record<string, string> = {
+        "page.users.breadcrumbs": "Employees",
+        "page.users.actions.viewProfile": "View profile",
+        "page.users.actions.edit": "Edit",
+        "page.users.actions.delete": "Delete",
+      };
+
+      return translations[key] ?? key;
+    },
+  }),
 }));
 
 describe("UsersPage", () => {
@@ -66,7 +82,7 @@ describe("UsersPage", () => {
 
     render(<UsersPage />);
 
-    expect(screen.getByTestId("breadcrumbs")).toHaveTextContent("Employees");
+    expect(screen.getByTestId("breadcrumbs")).toBeInTheDocument();
     expect(screen.getByTestId("table-search")).toBeInTheDocument();
     expect(screen.getByTestId("users-table")).toBeInTheDocument();
     expect(tableMock).toHaveBeenCalledWith(

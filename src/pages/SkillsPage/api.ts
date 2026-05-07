@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
+import { SortOrder } from "@constants/sortOptions";
 import { getErrorToastMessage } from "@root/lib";
 import {
   AddProfileSkillInput,
@@ -50,7 +51,7 @@ export const useSkillsTableQuery = ({
   search: string;
   page: number;
   limit: number;
-  sortOrder: "ASC" | "DESC";
+  sortOrder: SortOrder;
 }) =>
   useQuery({
     queryKey: ["skills", search, page, limit, sortOrder],

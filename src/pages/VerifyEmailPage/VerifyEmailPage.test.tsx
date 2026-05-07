@@ -72,6 +72,22 @@ vi.mock("@tanstack/react-router", async (importOriginal) => {
   };
 });
 
+vi.mock("react-i18next", () => ({
+  useTranslation: () => ({
+    t: (key: string) => {
+      const translations: Record<string, string> = {
+        "page.verifyEmail.title": "Email verification",
+        "page.verifyEmail.subtitle": "Enter the verification code we sent to your email.",
+        "page.verifyEmail.confirm": "Confirm",
+        "page.verifyEmail.later": "Later",
+        "page.verifyEmail.invalidCode": "Invalid code",
+      };
+
+      return translations[key] ?? key;
+    },
+  }),
+}));
+
 async function renderPage() {
   return renderWithFileRoutes(
     <RenderWithQueryClient>

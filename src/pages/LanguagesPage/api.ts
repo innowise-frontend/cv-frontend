@@ -1,5 +1,6 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient, UseQueryOptions } from "@tanstack/react-query";
 import { toast } from "sonner";
+import { SortOrder } from "@constants/sortOptions";
 import { getErrorToastMessage } from "@root/lib";
 import {
   AddProfileLanguageInput,
@@ -20,17 +21,28 @@ import {
 } from "@services/languages";
 import { getUserProfile } from "@services/users";
 
-export const useUserLanguagesQuery = (userId: string, isAdmin: boolean) =>
+type UserLanguagesQueryConfig = Omit<
+  UseQueryOptions<Awaited<ReturnType<typeof getUserProfile>>>,
+  "queryKey" | "queryFn"
+>;
+
+type LanguagesQueryConfig = Omit<
+  UseQueryOptions<Awaited<ReturnType<typeof getLanguages>>>,
+  "queryKey" | "queryFn"
+>;
+
+export const useUserLanguagesQuery = (userId: string, config?: UserLanguagesQueryConfig) =>
   useQuery({
     queryKey: ["profile", userId],
     queryFn: () => getUserProfile(userId),
-    enabled: !isAdmin,
+    ...config,
   });
 
-export const useLanguagesSelectQuery = () =>
+export const useLanguagesQuery = (config?: LanguagesQueryConfig) =>
   useQuery({
     queryKey: ["languages"],
     queryFn: () => getLanguages({ page: 1, limit: 100 }),
+    ...config,
   });
 
 export const useLanguagesTableQuery = ({
@@ -42,7 +54,7 @@ export const useLanguagesTableQuery = ({
   search: string;
   page: number;
   limit: number;
-  sortOrder: "ASC" | "DESC";
+  sortOrder: SortOrder;
 }) =>
   useQuery({
     queryKey: ["languages", search, page, limit, sortOrder],

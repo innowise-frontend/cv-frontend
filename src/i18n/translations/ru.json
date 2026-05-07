@@ -70,6 +70,28 @@
         "passwordsDoNotMatch": "Пароли не совпадают"
       }
     },
+    "users": {
+      "breadcrumbs": "Сотрудники",
+      "columns": {
+        "firstName": "Имя",
+        "lastName": "Фамилия",
+        "email": "Email",
+        "department": "Отдел",
+        "position": "Должность"
+      },
+      "actions": {
+        "viewProfile": "Открыть профиль",
+        "edit": "Редактировать",
+        "delete": "Удалить"
+      }
+    },
+    "verifyEmail": {
+      "title": "Подтверждение e-mail",
+      "subtitle": "Введите код подтверждения, который мы отправили на ваш e-mail.",
+      "confirm": "Подтвердить",
+      "later": "Позже",
+      "invalidCode": "Неверный код"
+    },
     "languages": {
       "currentLanguages": "Текущие языки",
       "emptyState": "У вас пока нет языков",

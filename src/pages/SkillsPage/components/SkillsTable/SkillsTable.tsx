@@ -1,7 +1,7 @@
 import { useLocation, useNavigate, useSearch } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { Modal, Table, TableSearch } from "@components/shared";
-import { VIEW_OPTIONS } from "@root/constants";
+import { SortOrder, VIEW_OPTIONS } from "@root/constants";
 import { useAuth, useHandleSearch } from "@root/hooks";
 import { buildColumns } from "./columns";
 import { useSkillCategoriesQuery, useSkillsTableQuery } from "../../api";
@@ -15,7 +15,7 @@ export const SkillsTable = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [currentLimit, setCurrentLimit] = useState(10);
-  const [currentSort, setCurrentSort] = useState<"ASC" | "DESC">("ASC");
+  const [currentSort, setCurrentSort] = useState<SortOrder>(SortOrder.ASC);
 
   const { onSearch } = useHandleSearch({
     searchValue: searchParams.search ?? "",
@@ -61,7 +61,7 @@ export const SkillsTable = () => {
           currentPage={currentPage}
           onChangePage={setCurrentPage}
           onSort={() => {
-            setCurrentSort((prev) => (prev === "ASC" ? "DESC" : "ASC"));
+            setCurrentSort((prev) => (prev === SortOrder.ASC ? SortOrder.DESC : SortOrder.ASC));
             setCurrentPage(1);
           }}
           currentSort={currentSort}

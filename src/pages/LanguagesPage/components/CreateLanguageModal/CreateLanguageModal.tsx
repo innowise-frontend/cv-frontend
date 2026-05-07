@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import PlusIcon from "@assets/icon/PlusIcon.svg?react";
-import { Input, Modal } from "@components/shared";
-import { useModalContext } from "@root/components/shared/Modal/useModalContext";
-import { useCreateLanguageMutation } from "../../api";
+import { Button, Input, Modal } from "@components/shared";
+import { useModalContext } from "@components/shared/Modal/useModalContext";
+import { useCreateLanguageMutation, useLanguagesQuery } from "../../api";
 
 export const CreateLanguageModal = () => {
   const { t } = useTranslation();
@@ -23,11 +23,20 @@ export const CreateLanguageModal = () => {
     });
   };
 
-  const { mutateAsync } = useCreateLanguageMutation({
+  const { mutate } = useCreateLanguageMutation({
     onSuccess: () => {
       closeModal();
     },
   });
+
+  const { data } = useLanguagesQuery();
+
+  const disabledButton =
+    !createdLanguage.name ||
+    !createdLanguage.iso2 ||
+    !createdLanguage.nativeName ||
+    (data?.items?.some((item) => item.name === createdLanguage.name) ?? false) ||
+    (data?.items?.some((item) => item.iso2 === createdLanguage.iso2) ?? false);
 
   return (
     <>
@@ -58,15 +67,15 @@ export const CreateLanguageModal = () => {
           />
         </Modal.Body>
         <Modal.Footer>
-          <Modal.Close variant="outline" className="w-40" onClick={resetCreatedLanguage}>
+          <Modal.Close variant="outline" className="w-40">
             {t("page.languages.cancel")}
           </Modal.Close>
-          <Modal.Close
+          <Button
             variant="filled"
             className="w-40"
-            disabled={!createdLanguage.name || !createdLanguage.iso2 || !createdLanguage.nativeName}
+            disabled={disabledButton}
             onClick={() => {
-              mutateAsync({
+              mutate({
                 name: createdLanguage.name,
                 iso2: createdLanguage.iso2,
                 native_name: createdLanguage.nativeName,
@@ -74,7 +83,7 @@ export const CreateLanguageModal = () => {
             }}
           >
             {t("page.languages.add")}
-          </Modal.Close>
+          </Button>
         </Modal.Footer>
       </Modal.Content>
     </>
