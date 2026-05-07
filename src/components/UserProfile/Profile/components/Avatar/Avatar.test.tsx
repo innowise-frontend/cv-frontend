@@ -33,9 +33,9 @@ vi.mock("react-i18next", () => ({
 }));
 
 vi.mock("@root/components/shared/Avatar/Avatar", () => ({
-  Avatar: ({ name, link }: { name: string; link: string }) => (
+  Avatar: ({ name, imageSrc }: { name: string; imageSrc: string }) => (
     <div data-testid="avatar-component">
-      {name}-{link}
+      {name}-{imageSrc}
     </div>
   ),
 }));

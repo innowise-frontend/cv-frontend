@@ -33,8 +33,10 @@
     "error": {
       "oops": "Ups",
       "goBack": "Volver",
-      "defaultErrorMessage": "¡Error! No se pudo cambiar la contraseña",
-      "defaultNotFoundMessage": "Hmm… parece que esta no es la página que buscabas. \n Vamos a devolverte al camino correcto."
+      "defaultErrorMessage": "Algo salió mal. Ya estamos trabajando en solucionarlo. \n Inténtalo de nuevo o vuelve atrás.",
+      "passwordChangeErrorMessage": "¡Error! No se pudo cambiar la contraseña",
+      "defaultNotFoundMessage": "Hmm… parece que esta no es la página que buscabas. \n Vamos a devolverte al camino correcto.",
+      "mobileNotSupportedMessage": "Ups… esta aplicación no es compatible con dispositivos móviles. \n Ábrela en un ordenador o tablet para continuar."
     },
     "forgotPassword": {
       "title": "¿Olvidaste tu contraseña?",
@@ -61,6 +63,28 @@
         "passwordMinLength": "La contraseña debe tener al menos 6 caracteres",
         "passwordsDoNotMatch": "Las contraseñas no coinciden"
       }
+    },
+    "users": {
+      "breadcrumbs": "Empleados",
+      "columns": {
+        "firstName": "Nombre",
+        "lastName": "Apellido",
+        "email": "Correo",
+        "department": "Departamento",
+        "position": "Puesto"
+      },
+      "actions": {
+        "viewProfile": "Ver perfil",
+        "edit": "Editar",
+        "delete": "Eliminar"
+      }
+    },
+    "verifyEmail": {
+      "title": "Verificación de correo",
+      "subtitle": "Introduce el código de verificación que enviamos a tu correo.",
+      "confirm": "Confirmar",
+      "later": "Más tarde",
+      "invalidCode": "Código inválido"
     },
     "sidebar": {
       "employees": "Empleados",

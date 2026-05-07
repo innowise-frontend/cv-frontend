@@ -4,7 +4,7 @@ import { Avatar } from "./Avatar";
 
 describe("Avatar", () => {
   it("should render an image avatar when link is provided", () => {
-    render(<Avatar name="John" link="https://example.com/avatar.jpg" />);
+    render(<Avatar name="John" imageSrc="https://example.com/avatar.jpg" />);
 
     const image = screen.getByRole("img", { name: "John" });
 

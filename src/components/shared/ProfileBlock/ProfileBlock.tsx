@@ -10,7 +10,7 @@ export const ProfileBlock = ({
 }: ProfileBlockProps) => {
   return (
     <Link to="/profile" className="flex items-center justify-center gap-2">
-      <Avatar name={firstName} link={avatar} />
+      <Avatar name={firstName} imageSrc={avatar} />
       {!collapsed && `${firstName} ${lastName}`}
     </Link>
   );

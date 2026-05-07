@@ -33,8 +33,10 @@
     "error": {
       "oops": "Ops",
       "goBack": "Voltar",
-      "defaultErrorMessage": "Erro! Não foi possível alterar a senha",
-      "defaultNotFoundMessage": "Hmm… parece que esta não é a página que você estava procurando. \n Vamos colocar você de volta no caminho certo."
+      "defaultErrorMessage": "Algo deu errado. Já estamos trabalhando para corrigir isso. \n Tente novamente ou volte.",
+      "passwordChangeErrorMessage": "Erro! Não foi possível alterar a senha",
+      "defaultNotFoundMessage": "Hmm… parece que esta não é a página que você estava procurando. \n Vamos colocar você de volta no caminho certo.",
+      "mobileNotSupportedMessage": "Ops… este app não é compatível com dispositivos móveis. \n Abra-o em um desktop ou tablet para continuar."
     },
     "forgotPassword": {
       "title": "Esqueceu a senha",
@@ -61,6 +63,28 @@
         "passwordMinLength": "A senha deve ter pelo menos 6 caracteres",
         "passwordsDoNotMatch": "As senhas não coincidem"
       }
+    },
+    "users": {
+      "breadcrumbs": "Funcionários",
+      "columns": {
+        "firstName": "Nome",
+        "lastName": "Sobrenome",
+        "email": "E-mail",
+        "department": "Departamento",
+        "position": "Cargo"
+      },
+      "actions": {
+        "viewProfile": "Ver perfil",
+        "edit": "Editar",
+        "delete": "Excluir"
+      }
+    },
+    "verifyEmail": {
+      "title": "Verificação de e-mail",
+      "subtitle": "Digite o código de verificação que enviamos para o seu e-mail.",
+      "confirm": "Confirmar",
+      "later": "Depois",
+      "invalidCode": "Código inválido"
     },
     "sidebar": {
       "employees": "Funcionários",
