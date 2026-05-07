@@ -183,6 +183,7 @@
       "deleteUserTitle": "Benutzer löschen",
       "confirmDeleteBefore": "Sind Sie sicher, dass Sie löschen möchten ",
       "confirmDeleteAfter": "?",
+      "emailAlreadyExists": "Ein Benutzer mit dieser E-Mail existiert bereits.",
       "confirm": "Bestätigen"
     }
   }

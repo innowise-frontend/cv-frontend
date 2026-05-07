@@ -22,7 +22,7 @@ export const useUserTableColumns = () => {
         return (
           <Avatar
             name={row.original.profile.first_name ?? ""}
-            link={row.original.profile.avatar ?? ""}
+            imageSrc={row.original.profile.avatar ?? ""}
             className="bg-gray-5 dark:bg-gray-4"
           />
         );

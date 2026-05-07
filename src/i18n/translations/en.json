@@ -183,6 +183,7 @@
       "deleteUserTitle": "Delete user",
       "confirmDeleteBefore": "Are you sure you want to delete ",
       "confirmDeleteAfter": "?",
+      "emailAlreadyExists": "A user with this email already exists.",
       "confirm": "Confirm"
     }
   }

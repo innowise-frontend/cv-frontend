@@ -1,6 +1,6 @@
 import { Select as SelectBase } from "@base-ui/react/select";
 import { useCallback, useId, useState } from "react";
-import { Label } from "@root/components/ui/label";
+import { Label } from "@root/components/ui/label.tsx";
 import {
   Select as SelectRoot,
   SelectGroup,
@@ -16,6 +16,7 @@ import type { SelectProps } from "./types.ts";
 export const Select = ({
   list,
   label,
+  error,
   placeholder,
   className,
   popupClassName,
@@ -84,13 +85,18 @@ export const Select = ({
   );
 
   return (
-    <div ref={setContainerRef} className={cn("relative flex w-full flex-col", className)}>
-      <Label
-        htmlFor={triggerId}
-        className="justify-start pl-3 text-left text-xs font-normal text-gray-3 dark:text-gray-5"
-      >
-        {label}
-      </Label>
+    <div ref={setContainerRef} className={cn("relative w-full", className)}>
+      {label && value && (
+        <Label
+          htmlFor={triggerId}
+          className={cn(
+            "pointer-events-none absolute z-10 left-2.5 -top-4 px-1 text-xs text-gray-3 dark:text-gray-5",
+            error && "text-red",
+          )}
+        >
+          {label}
+        </Label>
+      )}
 
       <SelectRoot
         value={value as string}
@@ -101,9 +107,15 @@ export const Select = ({
         <SelectTrigger
           id={triggerId}
           disabled={disabled}
-          className={
-            "w-full border-gray-5 text-gray-2 data-[size=default]:h-auto px-3 py-3.25 dark:text-gray-5 disabled:bg-gray-6 dark:disabled:bg-gray-3"
-          }
+          aria-invalid={error ? true : undefined}
+          aria-describedby={error ? `${triggerId}-error` : undefined}
+          className={cn(
+            "h-12 w-full px-3 py-3 text-base leading-6 border-gray-5 shadow-none outline-none data-[size=default]:h-12",
+            "focus:outline-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:shadow-none",
+            "text-gray-2 dark:text-white disabled:bg-gray-6 dark:disabled:bg-gray-3",
+            error &&
+              "border-red focus-visible:border-red dark:border-red dark:focus-visible:border-red",
+          )}
         >
           <SelectValue placeholder={placeholder}>{labelFor(value as string)}</SelectValue>
         </SelectTrigger>
@@ -114,6 +126,13 @@ export const Select = ({
           <SelectBase.Portal container={dialogContainer}>{popup}</SelectBase.Portal>
         )}
       </SelectRoot>
+
+      <p
+        id={`${triggerId}-error`}
+        className={cn("pl-2 mt-1 text-left text-xs text-red h-3", !error && "invisible")}
+      >
+        {error || " "}
+      </p>
     </div>
   );
 };

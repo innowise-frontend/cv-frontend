@@ -157,6 +157,7 @@ export interface TranslationTypes {
       confirmDeleteBefore: string;
       confirmDeleteAfter: string;
       confirm: string;
+      emailAlreadyExists: string;
     };
   };
   theme: {

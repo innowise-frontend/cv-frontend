@@ -183,6 +183,7 @@
       "deleteUserTitle": "Excluir utilizador",
       "confirmDeleteBefore": "Tem a certeza de que pretende eliminar ",
       "confirmDeleteAfter": "?",
+      "emailAlreadyExists": "Já existe um utilizador com este e-mail.",
       "confirm": "Confirmar"
     }
   }

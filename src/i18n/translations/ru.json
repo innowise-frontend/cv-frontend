@@ -183,6 +183,7 @@
       "deleteUserTitle": "Удаление пользователя",
       "confirmDeleteBefore": "Вы уверены, что хотите удалить ",
       "confirmDeleteAfter": "?",
+      "emailAlreadyExists": "Пользователь с таким email уже существует.",
       "confirm": "Подтвердить"
     }
   }

@@ -100,14 +100,16 @@ export const Table = <TData,>({
           </TableBody>
         </UITable>
       </div>
-      <Pagination
-        className="justify-start shrink-0"
-        pagesCount={pagesAmount}
-        currentPage={currentPage}
-        onPageChange={onChangePage}
-        viewOptions={viewOptions}
-        onChangeViewOption={onChangeViewOption}
-      />
+      {data.length > 0 && (
+        <Pagination
+          className="justify-start shrink-0"
+          pagesCount={pagesAmount}
+          currentPage={currentPage}
+          onPageChange={onChangePage}
+          viewOptions={viewOptions}
+          onChangeViewOption={onChangeViewOption}
+        />
+      )}
     </div>
   );
 };

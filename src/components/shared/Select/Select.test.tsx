@@ -23,7 +23,7 @@ describe("Select", () => {
       />,
     );
 
-    expect(screen.getByText("Language")).toBeInTheDocument();
+    expect(screen.queryByText("Language")).not.toBeInTheDocument();
 
     const trigger = screen.getByText("Choose a language").closest("button");
     expect(trigger).toBeTruthy();
@@ -63,6 +63,8 @@ describe("Select", () => {
 
     render(<Controlled />);
 
+    expect(screen.queryByText("Language")).not.toBeInTheDocument();
+
     const trigger = screen.getByText("Choose a language").closest("button");
     expect(trigger).toBeTruthy();
 
@@ -70,6 +72,8 @@ describe("Select", () => {
     await user.click(await screen.findByText("English"));
 
     expect(onValueChange).toHaveBeenCalledWith("en");
+    const floatingLabel = screen.getByText("Language").closest("label");
+    expect(floatingLabel).toHaveClass("absolute", "-top-4", "left-2.5");
     const combobox = screen.getByRole("combobox");
     expect(within(combobox).getByText("English")).toBeInTheDocument();
 

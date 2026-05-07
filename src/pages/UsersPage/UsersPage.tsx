@@ -1,7 +1,7 @@
 import { useLocation, useNavigate, useSearch } from "@tanstack/react-router";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Breadcrumbs, Modal, ROUTES, Table, TableSearch } from "@components/shared";
+import { Breadcrumbs, Modal, Table, TableSearch } from "@components/shared";
 import { VIEW_OPTIONS } from "@root/constants";
 import { useHandleSearch } from "@root/hooks";
 import { getBreadcrumbsLink } from "@root/lib";
@@ -31,32 +31,13 @@ export const UsersPage = () => {
   });
   const { columns } = useUserTableColumns();
 
-  const data = useUsersApi({
+  const { data } = useUsersApi({
     search: searchParams.search ?? "",
     page: currentPage,
     limit: currentLimit,
     sort_order: currentSort,
     sort_by: "department",
   });
-
-  const adminActions = [
-    {
-      label: t("page.users.actions.viewProfile"),
-      onClick: (userId: string) => {
-        navigate({ to: ROUTES.USER_PAGE, params: { userId } });
-      },
-    },
-    {
-      label: t("page.users.actions.edit"),
-      onClick: (userId: string) => {
-        console.log(userId);
-      },
-    },
-    {
-      label: t("page.users.actions.delete"),
-      onClick: (userId: string) => console.log(userId),
-    },
-  ];
 
   return (
     <div className="flex h-full min-h-0 flex-col">
@@ -87,7 +68,6 @@ export const UsersPage = () => {
             setCurrentLimit(limit);
             setCurrentPage(1);
           }}
-          actions={adminActions}
         />
       </div>
     </div>

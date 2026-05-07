@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { createContext, type ReactNode } from "react";
 import { LOCAL_STORAGE_KEYS } from "@root/constants/localStorage";
 import { getMe } from "@services/auth";
-// import { UserRole } from "@services/graphql/__generated__/graphql";
+import { UserRole } from "@services/graphql/__generated__/graphql";
 
 export interface AuthContextType {
   userId: string;
@@ -24,8 +24,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     retry: false,
   });
 
-  // const isAdmin = data?.role === UserRole.Admin;
-  const isAdmin = true;
+  const isAdmin = data?.role === UserRole.Admin;
   const isAuthenticated = hasAccessToken && (isFirstLoad || !!data);
   const userId = data?.id ?? "";
   const isVerified = data?.is_verified === true;

@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient, UseQueryOptions } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { getErrorToastMessage } from "@root/lib";
 import { getDepartments } from "@services/departments";
@@ -13,18 +13,16 @@ interface UseUsersApiParams {
   sort_by: string;
 }
 
-export const useUsersApi = ({ search, page, limit, sort_order, sort_by }: UseUsersApiParams) => {
-  const { data } = useQuery({
+export const useUsersApi = ({ search, page, limit, sort_order, sort_by }: UseUsersApiParams) =>
+  useQuery({
     queryKey: ["users", search, page, limit, sort_order, sort_by],
     queryFn: () => getUsers({ search, page, limit, sort_order, sort_by }),
   });
 
-  return data;
-};
-
 export const useCreateUserApi = ({ onSuccess }: { onSuccess?: () => void }) => {
   const queryClient = useQueryClient();
-  const { mutate } = useMutation({
+
+  return useMutation({
     mutationFn: createUser,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["users"] });
@@ -34,13 +32,12 @@ export const useCreateUserApi = ({ onSuccess }: { onSuccess?: () => void }) => {
       toast.error(getErrorToastMessage(error));
     },
   });
-
-  return { mutate };
 };
 
 export const useUpdateUserApi = ({ onSuccess }: { onSuccess?: () => void }) => {
   const queryClient = useQueryClient();
-  const { mutate } = useMutation({
+
+  return useMutation({
     mutationFn: updateUser,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["users"] });
@@ -50,13 +47,12 @@ export const useUpdateUserApi = ({ onSuccess }: { onSuccess?: () => void }) => {
       toast.error(getErrorToastMessage(error));
     },
   });
-
-  return { mutate };
 };
 
 export const useDeleteUserApi = ({ onSuccess }: { onSuccess?: () => void }) => {
   const queryClient = useQueryClient();
-  const { mutate } = useMutation({
+
+  return useMutation({
     mutationFn: deleteUser,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["users"] });
@@ -66,26 +62,28 @@ export const useDeleteUserApi = ({ onSuccess }: { onSuccess?: () => void }) => {
       toast.error(getErrorToastMessage(error));
     },
   });
-
-  return { mutate };
 };
 
-export const useGetDepartmentsApi = (isAdmin: boolean) => {
-  const { data } = useQuery({
+type UseGetDepartmentsApiConfig = Omit<
+  UseQueryOptions<Awaited<ReturnType<typeof getDepartments>>>,
+  "queryKey" | "queryFn"
+>;
+
+export const useGetDepartmentsApi = (config: UseGetDepartmentsApiConfig) =>
+  useQuery({
     queryKey: ["departments"],
     queryFn: getDepartments,
-    enabled: isAdmin,
+    ...config,
   });
 
-  return { data };
-};
+type UseGetPositionsApiConfig = Omit<
+  UseQueryOptions<Awaited<ReturnType<typeof getPositions>>>,
+  "queryKey" | "queryFn"
+>;
 
-export const useGetPositionsApi = (isAdmin: boolean) => {
-  const { data } = useQuery({
+export const useGetPositionsApi = (config: UseGetPositionsApiConfig) =>
+  useQuery({
     queryKey: ["positions"],
     queryFn: getPositions,
-    enabled: isAdmin,
+    ...config,
   });
-
-  return { data };
-};

@@ -37,7 +37,7 @@ const ModalContent = ({
   className = "",
   onCancel,
   ...props
-}: React.ComponentProps<"dialog"> & { onCancel?: () => void }) => {
+}: Omit<React.ComponentProps<"dialog">, "onCancel"> & { onCancel?: () => void }) => {
   const { isOpen, closeModal } = useModalContext();
   const dialogRef = useRef<HTMLDialogElement | null>(null);
 
@@ -72,11 +72,22 @@ const ModalContent = ({
     }
   };
 
+  const handleDialogCancel = (event: React.SyntheticEvent<HTMLDialogElement>) => {
+    event.preventDefault();
+    onCancel?.();
+    closeModal();
+
+    if (dialogRef.current?.open) {
+      dialogRef.current.close();
+    }
+  };
+
   return createPortal(
     <>
       {isOpen && <div className="fixed inset-0 bg-gray/50 z-50" onClick={closeModal} />}
       <dialog
         {...props}
+        onCancel={handleDialogCancel}
         onClick={handleBackdropClick}
         className={cn(
           "fixed top-1/2 left-1/2 m-0 min-w-155 max-w-215 min-h-50 max-h-131 -translate-x-1/2 -translate-y-1/2 bg-gray-8 px-6 py-4 shadow-2xl will-change-transform will-change-opacity transition-[opacity,transform] duration-300 ease-out dark:bg-gray-2 backdrop:bg-gray/50 z-50",

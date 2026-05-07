@@ -38,8 +38,8 @@ export const UpdateUserModal = ({
     },
   });
 
-  const { data: departments } = useGetDepartmentsApi(isAdmin);
-  const { data: positions } = useGetPositionsApi(isAdmin);
+  const { data: departments } = useGetDepartmentsApi({ enabled: isAdmin });
+  const { data: positions } = useGetPositionsApi({ enabled: isAdmin });
 
   const resetUpdatedUser = () => {
     setUpdatedUser({

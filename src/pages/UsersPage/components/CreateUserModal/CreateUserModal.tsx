@@ -5,6 +5,8 @@ import PlusIcon from "@assets/icon/PlusIcon.svg?react";
 import { Button, Input, Modal, Select } from "@components/shared";
 import { useModalContext } from "@components/shared/Modal/useModalContext";
 import { useAuth } from "@root/hooks";
+import { UserRole } from "@services/graphql/__generated__/graphql";
+import { getUsers } from "@services/users";
 import { useCreateUserApi, useGetDepartmentsApi, useGetPositionsApi } from "../../api";
 
 export const CreateUserModal = () => {
@@ -24,14 +26,18 @@ export const CreateUserModal = () => {
   });
   const { isAdmin } = useAuth();
   const { closeModal } = useModalContext();
-  const { handleSubmit } = useForm();
+  const {
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm();
   const { mutate } = useCreateUserApi({
     onSuccess: () => {
       closeModal();
     },
   });
-  const { data: departments } = useGetDepartmentsApi(isAdmin);
-  const { data: positions } = useGetPositionsApi(isAdmin);
+  const { data: departments } = useGetDepartmentsApi({ enabled: isAdmin });
+  const { data: positions } = useGetPositionsApi({ enabled: isAdmin });
 
   const resetNewUser = () => {
     setNewUser({
@@ -60,32 +66,54 @@ export const CreateUserModal = () => {
 
   return (
     <>
-      <Modal.Trigger className="flex items-center gap-2 text-red">
+      <Modal.Trigger className="flex items-center gap-2 text-red dark:text-red">
         <PlusIcon />
         {t("page.users.createUser")}
       </Modal.Trigger>
       <Modal.Content onCancel={resetNewUser}>
         <Modal.Header>{t("page.users.createUserTitle")}</Modal.Header>
         <form
-          onSubmit={handleSubmit((data) =>
+          onSubmit={handleSubmit(async () => {
+            const email = newUser.auth.email.trim();
+            const normalizedEmail = email.toLowerCase();
+
+            const paginated = await getUsers({
+              search: email,
+              page: 1,
+              limit: 100,
+              sort_order: "ASC",
+              sort_by: "email",
+            });
+
+            const emailTaken = paginated.items.some(
+              (item) => (item.email ?? "").trim().toLowerCase() === normalizedEmail,
+            );
+
+            if (emailTaken) {
+              setError("email", { message: t("page.users.emailAlreadyExists") });
+
+              return;
+            }
+
             mutate({
               auth: {
-                email: data.email,
-                password: data.password,
+                email: newUser.auth.email,
+                password: newUser.auth.password,
               },
               profile: {
-                first_name: data.firstName,
-                last_name: data.lastName,
+                first_name: newUser.profile.firstName,
+                last_name: newUser.profile.lastName,
               },
-              departmentId: data.departmentId,
-              positionId: data.positionId,
-              role: data.role,
-              cvsIds: data.cvsIds,
-            }),
-          )}
+              departmentId: newUser.departmentId,
+              positionId: newUser.positionId,
+              role: newUser.role as UserRole,
+              cvsIds: [],
+            });
+          })}
         >
-          <Modal.Body className="grid grid-cols-2 gap-4">
+          <Modal.Body className="grid grid-cols-2 gap-6">
             <Input
+              error={typeof errors.email?.message === "string" ? errors.email.message : undefined}
               label={t("page.users.email")}
               name="email"
               placeholder={t("page.users.email")}
@@ -129,6 +157,7 @@ export const CreateUserModal = () => {
               }
             />
             <Select
+              disablePortal
               className="[&_[data-slot=select-trigger][data-placeholder]]:text-gray-6"
               list={
                 departments?.map((department) => ({
@@ -142,6 +171,7 @@ export const CreateUserModal = () => {
               onValueChange={(value) => setNewUser({ ...newUser, departmentId: value })}
             />
             <Select
+              disablePortal
               className="[&_[data-slot=select-trigger][data-placeholder]]:text-gray-6"
               list={
                 positions?.map((position) => ({
@@ -155,6 +185,7 @@ export const CreateUserModal = () => {
               onValueChange={(value) => setNewUser({ ...newUser, positionId: value })}
             />
             <Select
+              disablePortal
               list={[
                 { value: "Employee", label: t("page.users.roleEmployee") },
                 { value: "Admin", label: t("page.users.roleAdmin") },

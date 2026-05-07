@@ -73,8 +73,8 @@ export const Pagination = ({
         label=""
         side="top"
         align="end"
-        className="w-15 **:data-[slot=select-trigger]:border-none **:data-[slot=select-trigger]:text-xs **:data-[slot=select-trigger]:px-2 **:data-[slot=select-trigger]:py-1 **:data-[slot=select-trigger]:h-auto **:data-[slot=select-trigger]:min-h-0 **:data-[slot=select-trigger]:shadow-none"
-        popupClassName="min-w-0 -translate-y-8 shadow-xs"
+        className="flex w-15 **:data-[slot=select-trigger]:border-none **:data-[slot=select-trigger]:text-xs **:data-[slot=select-trigger]:px-2 **:data-[slot=select-trigger]:py-1 **:data-[slot=select-trigger]:h-auto **:data-[slot=select-trigger]:min-h-0 **:data-[slot=select-trigger]:shadow-none"
+        popupClassName="min-w-0 -translate-y-px shadow-xs"
         itemClassName="px-2 py-1 text-xs"
         value={selectedViewOption}
         onValueChange={(value) => {
