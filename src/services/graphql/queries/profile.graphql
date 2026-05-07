@@ -4,5 +4,10 @@ query Profile($userId: ID!) {
       name
       proficiency
     }
+    skills {
+      name
+      mastery
+      categoryId
+    }
   }
 }

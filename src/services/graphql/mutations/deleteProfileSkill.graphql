@@ -1,0 +1,9 @@
+mutation DeleteProfileSkill($skill: DeleteProfileSkillInput!) {
+  deleteProfileSkill(skill: $skill) {
+    skills {
+      name
+      mastery
+      categoryId
+    }
+  }
+}
