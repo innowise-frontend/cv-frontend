@@ -30,6 +30,14 @@ export interface TranslationTypes {
       goBack: string;
       defaultErrorMessage: string;
       defaultNotFoundMessage: string;
+      api: {
+        forbidden: string;
+        unauthorized: string;
+        notFound: string;
+        conflict: string;
+        internalServerError: string;
+        default: string;
+      };
     };
     forgotPassword: {
       title: string;
@@ -56,6 +64,31 @@ export interface TranslationTypes {
         passwordMinLength: string;
         passwordsDoNotMatch: string;
       };
+    };
+    languages: {
+      currentLanguages: string;
+      emptyState: string;
+      addLanguage: string;
+      createLanguage: string;
+      deleteLanguage: string;
+      updateLanguage: string;
+      name: string;
+      iso: string;
+      nativeName: string;
+      language: string;
+      languages: string;
+      proficiency: string;
+      edit: string;
+      delete: string;
+      removeLanguage: string;
+      confirmRemove: string;
+      confirmDeleteLanguage: string;
+      cancel: string;
+      confirm: string;
+      add: string;
+      remove: string;
+      update: string;
+      save: string;
     };
     sidebar: {
       employees: string;

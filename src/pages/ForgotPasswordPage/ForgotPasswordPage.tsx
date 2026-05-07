@@ -4,6 +4,7 @@ import { useForm, useWatch } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 import { Button, Input } from "@components/shared";
+import { getErrorToastMessage } from "@root/lib";
 import { forgotPassword } from "@services/auth";
 
 type FormValues = {
@@ -29,7 +30,7 @@ export const ForgotPasswordPage = () => {
     mutationFn: (data: FormValues) => forgotPassword(data.email),
     onSuccess: () => {},
     onError: () => {
-      toast.error(t("page.forgotPassword.emailDoesNotExist"));
+      toast.error(getErrorToastMessage(new Error(t("page.forgotPassword.emailDoesNotExist"))));
     },
   });
 

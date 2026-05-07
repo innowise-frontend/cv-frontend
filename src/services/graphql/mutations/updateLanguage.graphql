@@ -1,0 +1,8 @@
+mutation UpdateLanguage($language: UpdateLanguageInput!) {
+  updateLanguage(language: $language) {
+    id
+    name
+    iso2
+    native_name
+  }
+}

@@ -7,7 +7,7 @@ import {
 } from "@components/ui/dropdown-menu";
 import { DropdownProps } from "./types";
 
-export const Dropdown = ({ options }: DropdownProps) => {
+export const Dropdown = ({ options, keepMounted = false }: DropdownProps) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="flex h-8 w-8 items-center justify-center rounded-sm p-0 data-[state=open]:bg-muted">
@@ -15,17 +15,20 @@ export const Dropdown = ({ options }: DropdownProps) => {
         <VerticalDotsIcon className="h-10 w-10" />
       </DropdownMenuTrigger>
       <DropdownMenuContent
+        keepMounted={keepMounted}
         align="end"
         className="text-gray-5 rounded-[8px] bg-gray-8 dark:bg-gray-2"
       >
-        {options.map((option) => (
+        {options.map((option, index) => (
           <DropdownMenuItem
-            key={option.label}
-            onClick={option.onClick}
+            key={typeof option.label === "string" ? option.label : index}
+            onClick={() => {
+              option.onClick?.();
+            }}
             className="text-gray-2 hover:bg-gray-7 hover:text-gray-2 cursor-pointer dark:text-gray-8 dark:hover:bg-gray-3"
           >
             {option.icon}
-            <span>{option.label}</span>
+            {typeof option.label === "string" ? <span>{option.label}</span> : option.label}
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>

@@ -130,7 +130,7 @@ describe("Signup", () => {
     await user.click(screen.getByRole("button", { name: "Create account" }));
 
     await waitFor(() => {
-      expect(toastError).toHaveBeenCalledWith("Email already registered");
+      expect(toastError).toHaveBeenCalledWith(expect.stringContaining("Email already registered"));
     });
 
     expect(mockNavigate).not.toHaveBeenCalled();

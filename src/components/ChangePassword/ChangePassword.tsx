@@ -1,6 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-import { ClientError } from "graphql-request";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
@@ -9,7 +8,7 @@ import {
   type ChangePasswordFormValues,
 } from "@root/components/ChangePassword/validation";
 import { LOCAL_STORAGE_KEYS } from "@root/constants/localStorage";
-import { cn } from "@root/lib/utils";
+import { cn, getErrorToastMessage } from "@root/lib";
 import { changePassword } from "@services/auth";
 import { Input, Button } from "../shared";
 import type { ChangePasswordProps } from "./types";
@@ -53,9 +52,7 @@ export const ChangePassword = ({ className }: ChangePasswordProps) => {
       toast.success(t("page.setting.changePasswordSuccess"));
     },
     onError: (error) => {
-      const message =
-        error instanceof ClientError ? error.response.errors?.[0].message : error.message;
-      toast.error(message ?? t("page.error.passwordChangeErrorMessage"));
+      toast.error(getErrorToastMessage(error));
     },
   });
 

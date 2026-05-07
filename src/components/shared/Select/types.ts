@@ -7,9 +7,10 @@ export type SelectProps = {
   className?: string;
   popupClassName?: string;
   itemClassName?: string;
+  disabled?: boolean;
+  disablePortal?: boolean;
   align?: SelectBase.Positioner.Props["align"];
   side?: SelectBase.Positioner.Props["side"];
-  disabled?: boolean;
   value: string | number;
   onValueChange?: (value: string) => void;
 };
