@@ -32,7 +32,7 @@ export const AddLanguageModal = ({
     },
   });
 
-  const { data } = useUserLanguagesQuery(userId, !isAdmin);
+  const { data } = useUserLanguagesQuery(userId, { enabled: !isAdmin });
 
   const disabledButton =
     !selectedLanguage.name ||
@@ -49,7 +49,7 @@ export const AddLanguageModal = ({
         {t("page.languages.addLanguage")}
       </Modal.Trigger>
       <Modal.Content onCancel={resetSelectedLanguage}>
-        <Modal.Header>{t("page.languages.addLanguage")}</Modal.Header>
+        <Modal.Header className="">{t("page.languages.addLanguage")}</Modal.Header>
         <Modal.Body className="flex flex-col gap-4">
           <Select
             list={languageOptions}

@@ -7,7 +7,6 @@ coverage
 
 dist
 
-src/services/graphql/__generated__/
 *.local
 .env
 .env.*

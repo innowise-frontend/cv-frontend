@@ -27,7 +27,7 @@ export const LanguagesPage = () => {
 
   const proficiencyOptions = getProficiencyOptions(PROFICIENCY_ORDER);
 
-  const { data: userLanguagesData } = useUserLanguagesQuery(userId, !isAdmin);
+  const { data: userLanguagesData } = useUserLanguagesQuery(userId, { enabled: !isAdmin });
 
   const { data: languagesData } = useLanguagesQuery();
 

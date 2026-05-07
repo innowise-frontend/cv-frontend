@@ -12,6 +12,11 @@ const Modal = ({ children }: { children: React.ReactNode }) => {
   return <ModalContext value={{ isOpen, openModal, closeModal }}>{children}</ModalContext>;
 };
 
+interface ModalComponentProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
 const ModalTrigger = ({
   children,
   className = "",
@@ -45,8 +50,12 @@ const ModalContent = ({
     const dialog = dialogRef.current;
     if (!dialog) return;
     if (isOpen && !dialog.open) dialog.showModal();
-    if (!isOpen && dialog.open) dialog.close();
-  }, [isOpen]);
+
+    if (!isOpen && dialog.open) {
+      onCancel?.();
+      dialog.close();
+    }
+  }, [isOpen, onCancel]);
 
   useEffect(() => {
     if (isOpen) {
@@ -102,13 +111,7 @@ const ModalClose = ({
   );
 };
 
-const ModalHeader = ({
-  children,
-  className = "",
-}: {
-  children?: React.ReactNode;
-  className?: string;
-}) => {
+const ModalHeader = ({ children, className = "" }: ModalComponentProps) => {
   return (
     <header className={cn("flex items-center justify-between", className)}>
       <h2 className="text-lg font-bold">{children}</h2>
@@ -117,23 +120,11 @@ const ModalHeader = ({
   );
 };
 
-const ModalBody = ({
-  children,
-  className = "",
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) => {
+const ModalBody = ({ children, className = "" }: ModalComponentProps) => {
   return <div className={cn("py-6.5", className)}>{children}</div>;
 };
 
-const ModalFooter = ({
-  children,
-  className = "",
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) => {
+const ModalFooter = ({ children, className = "" }: ModalComponentProps) => {
   return <div className={cn("flex items-center justify-end gap-6", className)}>{children}</div>;
 };
 

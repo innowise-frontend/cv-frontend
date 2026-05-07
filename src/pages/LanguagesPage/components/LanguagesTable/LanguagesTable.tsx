@@ -1,8 +1,7 @@
 import { useLocation, useNavigate, useSearch } from "@tanstack/react-router";
 import { useState } from "react";
 import { Modal, Table, TableSearch } from "@components/shared";
-import { VIEW_OPTIONS } from "@root/constants";
-import { SortOptions } from "@root/constants/sortOptions";
+import { VIEW_OPTIONS, SortOrder } from "@root/constants";
 import { useAuth, useHandleSearch } from "@root/hooks";
 import { useLanguagesTableColumns } from "./useLanguagesTableColumns";
 import { useLanguagesTableQuery } from "../../api";
@@ -16,7 +15,7 @@ export const LanguagesTable = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [currentLimit, setCurrentLimit] = useState(10);
-  const [currentSort, setCurrentSort] = useState<SortOptions>(SortOptions.ASC);
+  const [currentSort, setCurrentSort] = useState<SortOrder>(SortOrder.ASC);
   const { onSearch } = useHandleSearch({
     searchValue: searchParams.search ?? "",
     onSearchChange: (value) => {
@@ -59,9 +58,7 @@ export const LanguagesTable = () => {
           currentPage={currentPage}
           onChangePage={setCurrentPage}
           onSort={() => {
-            setCurrentSort((prev) =>
-              prev === SortOptions.ASC ? SortOptions.DESC : SortOptions.ASC,
-            );
+            setCurrentSort((prev) => (prev === SortOrder.ASC ? SortOrder.DESC : SortOrder.ASC));
             setCurrentPage(1);
           }}
           currentSort={currentSort}
