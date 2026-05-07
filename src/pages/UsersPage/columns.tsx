@@ -11,13 +11,15 @@ export const getUserColumns = (t: TFunction) => [
   columnHelper.accessor("profile.avatar", {
     header: () => null,
     size: 80,
-    cell: ({ row }) => (
-      <Avatar
-        name={row.original.profile.first_name ?? ""}
-        link={row.original.profile.avatar ?? ""}
-        className="bg-gray-5 dark:bg-gray-4"
-      />
-    ),
+    cell: ({ row }) => {
+      return (
+        <Avatar
+          name={row.original.profile.first_name ?? ""}
+          imageSrc={row.original.profile.avatar ?? ""}
+          className="bg-gray-5 dark:bg-gray-4"
+        />
+      );
+    },
   }),
   columnHelper.accessor("profile.first_name", {
     header: () => <TableColumnHeader title={t("page.users.columns.firstName")} />,
