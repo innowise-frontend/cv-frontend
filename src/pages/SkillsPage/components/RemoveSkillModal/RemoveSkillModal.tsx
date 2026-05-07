@@ -22,6 +22,17 @@ export const RemoveSkillModal = ({
   const selectedCount = deletedSkills.name.length;
   const skillLabel = selectedCount === 1 ? "page.skills.skill" : "page.skills.skills";
 
+  const handleRemoveSkills = async () => {
+    try {
+      await mutateAsync(deletedSkills);
+      resetDeletedSkills();
+
+      return true;
+    } catch {
+      return false;
+    }
+  };
+
   return (
     <Modal>
       <Modal.Trigger variant="filled" className="w-40" disabled={selectedCount === 0}>
@@ -33,7 +44,7 @@ export const RemoveSkillModal = ({
         )}
       </Modal.Trigger>
       <Modal.Content onCancel={resetDeletedSkills}>
-        <Modal.Header onCancel={resetDeletedSkills}>{t("page.skills.removeSkills")}</Modal.Header>
+        <Modal.Header>{t("page.skills.removeSkills")}</Modal.Header>
         <Modal.Body>
           <p className="text-left">
             <span>{t("page.skills.confirmRemove")} </span>
@@ -46,20 +57,7 @@ export const RemoveSkillModal = ({
           <Modal.Close variant="outline" className="w-40" onClick={resetDeletedSkills}>
             {t("page.skills.cancel")}
           </Modal.Close>
-          <Modal.Close
-            variant="filled"
-            className="w-40"
-            onClick={async () => {
-              try {
-                await mutateAsync(deletedSkills);
-                resetDeletedSkills();
-
-                return true;
-              } catch {
-                return false;
-              }
-            }}
-          >
+          <Modal.Close variant="filled" className="w-40" onClick={handleRemoveSkills}>
             {t("page.skills.confirm")}
           </Modal.Close>
         </Modal.Footer>

@@ -36,9 +36,7 @@ export const CreateLanguageModal = () => {
         {t("page.languages.createLanguage")}
       </Modal.Trigger>
       <Modal.Content onCancel={resetCreatedLanguage}>
-        <Modal.Header onCancel={resetCreatedLanguage}>
-          {t("page.languages.createLanguage")}
-        </Modal.Header>
+        <Modal.Header>{t("page.languages.createLanguage")}</Modal.Header>
         <Modal.Body className="flex flex-col gap-4">
           <Input
             placeholder={t("page.languages.name")}

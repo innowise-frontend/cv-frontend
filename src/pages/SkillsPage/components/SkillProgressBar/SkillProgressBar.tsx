@@ -50,7 +50,8 @@ export const SkillProgressBar = ({
           )}
           key={name}
           label={name}
-          mastery={chosen ? Mastery.Novice : mastery}
+          mastery={mastery}
+          chosen={chosen}
         />
       </Button>
     );
@@ -67,7 +68,7 @@ export const SkillProgressBar = ({
         />
       </Modal.Trigger>
       <Modal.Content onCancel={resetUpdateSkill}>
-        <Modal.Header onCancel={resetUpdateSkill}>{t("page.skills.updateSkill")}</Modal.Header>
+        <Modal.Header>{t("page.skills.updateSkill")}</Modal.Header>
         <Modal.Body className="flex flex-col gap-4">
           <Select
             list={[{ label: name, value: name }]}

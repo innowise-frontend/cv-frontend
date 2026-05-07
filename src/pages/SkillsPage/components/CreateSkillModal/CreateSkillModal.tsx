@@ -41,7 +41,7 @@ export const CreateSkillModal = () => {
         {t("page.skills.createSkill")}
       </Modal.Trigger>
       <Modal.Content onCancel={resetCreatedSkill}>
-        <Modal.Header onCancel={resetCreatedSkill}>{t("page.skills.createSkill")}</Modal.Header>
+        <Modal.Header>{t("page.skills.createSkill")}</Modal.Header>
         <Modal.Body className="flex flex-col gap-4">
           <Input
             placeholder={t("page.skills.name")}

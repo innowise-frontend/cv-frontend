@@ -34,9 +34,7 @@ export const RemoveLanguageModal = ({
         )}
       </Modal.Trigger>
       <Modal.Content onCancel={resetDeletedLanguages}>
-        <Modal.Header onCancel={resetDeletedLanguages}>
-          {t("page.languages.removeLanguage")}
-        </Modal.Header>
+        <Modal.Header>{t("page.languages.removeLanguage")}</Modal.Header>
         <Modal.Body>
           <p className="text-left">
             <span>{t("page.languages.confirmRemove")} </span>

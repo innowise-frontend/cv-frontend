@@ -68,9 +68,7 @@ export const LanguageProgressBar = ({
         />
       </Modal.Trigger>
       <Modal.Content onCancel={resetUpdateLanguage}>
-        <Modal.Header onCancel={resetUpdateLanguage}>
-          {t("page.languages.updateLanguage")}
-        </Modal.Header>
+        <Modal.Header>{t("page.languages.updateLanguage")}</Modal.Header>
         <Modal.Body className="flex flex-col gap-4">
           <Select
             list={[{ label: name, value: name }]}

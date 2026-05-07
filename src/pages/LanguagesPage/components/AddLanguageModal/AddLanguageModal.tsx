@@ -42,9 +42,7 @@ export const AddLanguageModal = ({
         {t("page.languages.addLanguage")}
       </Modal.Trigger>
       <Modal.Content onCancel={resetSelectedLanguage}>
-        <Modal.Header onCancel={resetSelectedLanguage}>
-          {t("page.languages.addLanguage")}
-        </Modal.Header>
+        <Modal.Header>{t("page.languages.addLanguage")}</Modal.Header>
         <Modal.Body className="flex flex-col gap-4">
           <Select
             list={languageOptions}

@@ -1,10 +1,10 @@
 import { useLocation, useNavigate, useSearch } from "@tanstack/react-router";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Modal, Table, TableSearch } from "@components/shared";
 import { VIEW_OPTIONS } from "@root/constants";
 import { useAuth, useHandleSearch } from "@root/hooks";
-import { columns } from "./columns";
-import { useSkillsTableQuery } from "../../api";
+import { buildColumns } from "./columns";
+import { useSkillCategoriesQuery, useSkillsTableQuery } from "../../api";
 import { CreateSkillModal } from "../CreateSkillModal/CreateSkillModal";
 
 export const SkillsTable = () => {
@@ -35,6 +35,10 @@ export const SkillsTable = () => {
     limit: currentLimit,
     sortOrder: currentSort,
   });
+
+  const { data: categoriesData } = useSkillCategoriesQuery();
+
+  const columns = useMemo(() => buildColumns(categoriesData), [categoriesData]);
 
   return (
     <>

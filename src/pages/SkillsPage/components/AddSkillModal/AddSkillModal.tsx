@@ -59,7 +59,7 @@ export const AddSkillModal = ({ skills, masteryOptions }: AddSkillModalProps) =>
         {t("page.skills.addSkill")}
       </Modal.Trigger>
       <Modal.Content onCancel={resetSelectedSkill}>
-        <Modal.Header onCancel={resetSelectedSkill}>{t("page.skills.addSkill")}</Modal.Header>
+        <Modal.Header>{t("page.skills.addSkill")}</Modal.Header>
         <Modal.Body className="flex flex-col gap-4">
           <Select
             list={skillOptions}

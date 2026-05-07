@@ -11,13 +11,17 @@ export const TableActions = ({ userId, actions, dropdownKeepMounted }: TableActi
     onClick: () => action.onClick?.(userId),
   }));
 
-  return isAdmin === true ? (
-    <Dropdown options={dropdownOptions} keepMounted={dropdownKeepMounted} />
-  ) : (
-    <Button className="flex items-center justify-start w-10 h-10">
-      <Link to={ROUTES.USER_PAGE} params={{ userId }}>
-        <ChevronRightIcon width={18} height={18} />
-      </Link>
-    </Button>
+  return (
+    <div className="flex justify-end">
+      {isAdmin === true ? (
+        <Dropdown options={dropdownOptions} keepMounted={dropdownKeepMounted} />
+      ) : (
+        <Button className="flex items-center justify-start w-10 h-10">
+          <Link to={ROUTES.USER_PAGE} params={{ userId }}>
+            <ChevronRightIcon width={18} height={18} />
+          </Link>
+        </Button>
+      )}
+    </div>
   );
 };

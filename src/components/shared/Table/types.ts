@@ -22,6 +22,8 @@ export interface TableProps<TData> {
   onSort?: () => void;
 }
 
+export type ColumnAlign = "left" | "center" | "right";
+
 declare module "@tanstack/react-table" {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface TableMeta<TData extends RowData> {
@@ -31,5 +33,10 @@ declare module "@tanstack/react-table" {
       label: string;
       onClick: (params: string) => void;
     }[];
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  interface ColumnMeta<TData extends RowData, TValue> {
+    align?: ColumnAlign;
   }
 }

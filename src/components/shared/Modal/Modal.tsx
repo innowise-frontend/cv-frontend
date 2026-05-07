@@ -105,16 +105,14 @@ const ModalClose = ({
 const ModalHeader = ({
   children,
   className = "",
-  onCancel,
 }: {
   children?: React.ReactNode;
   className?: string;
-  onCancel?: () => void;
 }) => {
   return (
     <header className={cn("flex items-center justify-between", className)}>
       <h2 className="text-lg font-bold">{children}</h2>
-      <Modal.Close className="ml-auto h-7.5 w-7.5 rounded-full p-0" onClick={onCancel} />
+      <Modal.Close className="ml-auto h-7.5 w-7.5 rounded-full p-0" />
     </header>
   );
 };

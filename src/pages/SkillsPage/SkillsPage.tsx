@@ -47,13 +47,12 @@ export const SkillsPage = () => {
   };
 
   return (
-    <div className="flex flex-col">
-      <Breadcrumbs items={[getBreadcrumbsLink(location.pathname, t)]} className="pl-5" />
+    <div className="flex flex-col px-6 w-full">
+      <Breadcrumbs items={[getBreadcrumbsLink(location.pathname, t)]} className="pl-5 px-4" />
       {isAdmin ? (
         <SkillsTable />
       ) : (
-        <div className="mx-auto flex flex-col pt-8 px-6">
-          <h2 className="text-left pb-4">{t("page.skills.currentSkills")}</h2>
+        <div className="mx-auto flex flex-col pt-8">
           {groupedSkills.length === 0 ? (
             <div>{t("page.skills.emptyState")}</div>
           ) : (
