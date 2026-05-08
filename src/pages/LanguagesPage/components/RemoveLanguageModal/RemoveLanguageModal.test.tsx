@@ -33,6 +33,7 @@ describe("RemoveLanguageModal", () => {
   it("submits deleted languages", () => {
     render(
       <RemoveLanguageModal
+        userId="u-1"
         deletedLanguages={{ userId: "u-1", name: ["English"] }}
         onChangeDeletedLanguages={vi.fn()}
         onChangeMode={vi.fn()}

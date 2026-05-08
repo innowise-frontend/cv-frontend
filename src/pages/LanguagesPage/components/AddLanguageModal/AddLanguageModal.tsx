@@ -3,19 +3,18 @@ import { useTranslation } from "react-i18next";
 import PlusIcon from "@assets/icon/PlusIcon.svg?react";
 import { Button, Modal, Select } from "@components/shared";
 import { useModalContext } from "@components/shared/Modal/useModalContext";
-import { useAuth } from "@root/hooks";
 import { AddProfileLanguageInput, Proficiency } from "@services/graphql/__generated__/graphql";
 import { AddLanguageModalProps } from "./types";
 import { useAddProfileLanguageMutation, useUserLanguagesQuery } from "../../api";
 
 export const AddLanguageModal = ({
+  userId,
   languageOptions,
   proficiencyOptions,
 }: AddLanguageModalProps) => {
   const { t } = useTranslation();
-  const { userId, isAdmin } = useAuth();
   const [selectedLanguage, setSelectedLanguage] = useState<AddProfileLanguageInput>({
-    userId: userId,
+    userId,
     name: "",
     proficiency: "" as Proficiency,
   });
@@ -32,12 +31,17 @@ export const AddLanguageModal = ({
     },
   });
 
-  const { data } = useUserLanguagesQuery(userId, { enabled: !isAdmin });
+  const { data } = useUserLanguagesQuery(userId, { enabled: !!userId });
 
   const disabledButton =
+    !userId ||
     !selectedLanguage.name ||
     !selectedLanguage.proficiency ||
     (data?.languages?.some((item) => item.name === selectedLanguage.name) ?? false);
+
+  const handleAddLanguage = () => {
+    mutate({ ...selectedLanguage, userId });
+  };
 
   return (
     <>
@@ -81,9 +85,7 @@ export const AddLanguageModal = ({
             variant="filled"
             className="w-40"
             disabled={disabledButton}
-            onClick={() => {
-              mutate(selectedLanguage);
-            }}
+            onClick={handleAddLanguage}
           >
             {t("page.languages.add")}
           </Button>
