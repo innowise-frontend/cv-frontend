@@ -1,16 +1,16 @@
 import { useTranslation } from "react-i18next";
 import { Button, Modal } from "@components/shared";
-import { useAuth } from "@root/hooks";
+import { ONE_ITEM } from "@root/pages/SkillsPage/const";
 import { RemoveLanguageModalProps } from "./types";
 import { useDeleteProfileLanguagesMutation } from "../../api";
 
 export const RemoveLanguageModal = ({
+  userId,
   deletedLanguages,
   onChangeDeletedLanguages,
   onChangeMode,
 }: RemoveLanguageModalProps) => {
   const { t } = useTranslation();
-  const { userId } = useAuth();
 
   const resetDeletedLanguages = () => {
     onChangeMode(false);
@@ -21,7 +21,11 @@ export const RemoveLanguageModal = ({
 
   const selectedCount = deletedLanguages.name.length;
   const languageLabel =
-    selectedCount === 1 ? "page.languages.language" : "page.languages.languages";
+    selectedCount === ONE_ITEM ? "page.languages.language" : "page.languages.languages";
+
+  const handleRemoveLanguages = () => {
+    mutate({ ...deletedLanguages, userId }, { onSuccess: resetDeletedLanguages });
+  };
 
   return (
     <Modal>
@@ -47,13 +51,7 @@ export const RemoveLanguageModal = ({
           <Modal.Close variant="outline" className="w-40">
             {t("page.languages.cancel")}
           </Modal.Close>
-          <Button
-            variant="filled"
-            className="w-40"
-            onClick={() => {
-              mutate(deletedLanguages);
-            }}
-          >
+          <Button variant="filled" className="w-40" onClick={handleRemoveLanguages}>
             {t("page.languages.confirm")}
           </Button>
         </Modal.Footer>
