@@ -41,6 +41,31 @@ describe("RemoveLanguageModal", () => {
     );
 
     fireEvent.click(screen.getByRole("button", { name: "Confirm" }));
-    expect(mutateMock).toHaveBeenCalledWith({ userId: "u-1", name: ["English"] });
+    expect(mutateMock).toHaveBeenCalledWith(
+      { userId: "u-1", name: ["English"] },
+      expect.objectContaining({ onSuccess: expect.any(Function) }),
+    );
+  });
+
+  it("closes delete mode and clears selection on successful removal", () => {
+    const onChangeDeletedLanguages = vi.fn();
+    const onChangeMode = vi.fn();
+
+    render(
+      <RemoveLanguageModal
+        userId="u-1"
+        deletedLanguages={{ userId: "u-1", name: ["English"] }}
+        onChangeDeletedLanguages={onChangeDeletedLanguages}
+        onChangeMode={onChangeMode}
+      />,
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Confirm" }));
+
+    const [, options] = mutateMock.mock.calls.at(-1) ?? [];
+    options?.onSuccess?.();
+
+    expect(onChangeMode).toHaveBeenCalledWith(false);
+    expect(onChangeDeletedLanguages).toHaveBeenCalledWith({ userId: "u-1", name: [] });
   });
 });
