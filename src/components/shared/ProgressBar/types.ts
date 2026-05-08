@@ -12,10 +12,12 @@ export type ProgressBarProps =
       mastery: Mastery;
       proficiency?: undefined;
       className?: string;
+      chosen?: boolean;
     }
   | {
       label: string;
       proficiency: Proficiency;
       mastery?: undefined;
       className?: string;
+      chosen?: boolean;
     };
