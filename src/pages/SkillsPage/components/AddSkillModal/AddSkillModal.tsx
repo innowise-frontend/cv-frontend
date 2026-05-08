@@ -49,6 +49,10 @@ export const AddSkillModal = ({ skills, masteryOptions }: AddSkillModalProps) =>
     });
   };
 
+  const handleAddSkill = () => {
+    mutateAsync({ ...selectedSkill, userId });
+  };
+
   return (
     <>
       <Modal.Trigger
@@ -90,10 +94,8 @@ export const AddSkillModal = ({ skills, masteryOptions }: AddSkillModalProps) =>
           <Modal.Close
             variant="filled"
             className="w-40"
-            disabled={!selectedSkill.name || !selectedSkill.mastery}
-            onClick={async () => {
-              mutateAsync(selectedSkill);
-            }}
+            disabled={!selectedSkill.name || !selectedSkill.mastery || !userId}
+            onClick={handleAddSkill}
           >
             {t("page.skills.add")}
           </Modal.Close>

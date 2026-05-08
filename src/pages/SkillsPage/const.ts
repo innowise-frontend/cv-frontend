@@ -1,4 +1,7 @@
 import { Mastery, SkillCategory, SkillMastery } from "@root/services/graphql/__generated__/graphql";
+import { SkillGroup } from "./types";
+
+export const ONE_ITEM = 1;
 
 export const MASTERY_ORDER: readonly Mastery[] = [
   Mastery.Novice,
@@ -22,12 +25,6 @@ export const buildCategoryNameById = (
 
   return map;
 };
-
-export interface SkillGroup {
-  categoryId: string | null;
-  categoryName: string;
-  skills: SkillMastery[];
-}
 
 export const groupSkillsByCategory = (
   skills: readonly SkillMastery[] | null | undefined,

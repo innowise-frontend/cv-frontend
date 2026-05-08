@@ -3,6 +3,7 @@ import { Modal } from "@components/shared";
 import { useAuth } from "@root/hooks";
 import { RemoveSkillModalProps } from "./types";
 import { useDeleteProfileSkillsMutation } from "../../api";
+import { ONE_ITEM } from "../../const";
 
 export const RemoveSkillModal = ({
   deletedSkills,
@@ -20,17 +21,11 @@ export const RemoveSkillModal = ({
   const { mutateAsync } = useDeleteProfileSkillsMutation(userId);
 
   const selectedCount = deletedSkills.name.length;
-  const skillLabel = selectedCount === 1 ? "page.skills.skill" : "page.skills.skills";
+  const skillLabel = selectedCount === ONE_ITEM ? "page.skills.skill" : "page.skills.skills";
 
   const handleRemoveSkills = async () => {
-    try {
-      await mutateAsync(deletedSkills);
-      resetDeletedSkills();
-
-      return true;
-    } catch {
-      return false;
-    }
+    await mutateAsync(deletedSkills);
+    resetDeletedSkills();
   };
 
   return (

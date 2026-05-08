@@ -15,7 +15,6 @@ export const CreateSkillModal = () => {
 
   const { closeModal } = useModalContext();
   const { data: categoriesData } = useSkillCategoriesQuery();
-  console.log(categoriesData);
 
   const categoryOptions = useMemo(() => {
     const map = buildCategoryNameById(categoriesData);

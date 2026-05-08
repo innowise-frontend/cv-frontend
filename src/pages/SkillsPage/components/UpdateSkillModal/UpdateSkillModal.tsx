@@ -10,13 +10,11 @@ export const UpdateSkillModal = ({ name, categoryId, skillId }: UpdateSkillModal
   const { t } = useTranslation();
   const { closeModal } = useModalContext();
 
-  const initialState = {
+  const [updatedSkill, setUpdatedSkill] = useState({
     name,
     categoryId: categoryId ?? "",
     skillId,
-  };
-
-  const [updatedSkill, setUpdatedSkill] = useState(initialState);
+  });
 
   const { data: categoriesData } = useSkillCategoriesQuery();
 
@@ -33,7 +31,7 @@ export const UpdateSkillModal = ({ name, categoryId, skillId }: UpdateSkillModal
   });
 
   const resetUpdatedSkill = () => {
-    setUpdatedSkill(initialState);
+    setUpdatedSkill({ name, categoryId: categoryId ?? "", skillId });
   };
 
   const isPristine = updatedSkill.name === name && updatedSkill.categoryId === (categoryId ?? "");

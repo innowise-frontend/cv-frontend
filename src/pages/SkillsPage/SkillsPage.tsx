@@ -46,16 +46,36 @@ export const SkillsPage = () => {
     setDeletedSkills({ userId, name: [] });
   };
 
+  const enableDeleteMode = () => {
+    setDeletedSkills({ userId, name: [] });
+    setIsDeleteMode(true);
+  };
+
+  const toggleDeletedSkill = (skillName: string) => {
+    setDeletedSkills((prev) => {
+      const isSelected = prev.name.includes(skillName);
+
+      return {
+        ...prev,
+        name: isSelected
+          ? prev.name.filter((name) => name !== skillName)
+          : [...prev.name, skillName],
+      };
+    });
+  };
+
+  const hasGroupedSkills = groupedSkills.length > 0;
+
   return (
     <div className="flex flex-col px-6 w-full">
-      <Breadcrumbs items={[getBreadcrumbsLink(location.pathname, t)]} className="pl-5 px-4" />
-      {isAdmin ? (
-        <SkillsTable />
-      ) : (
+      <Breadcrumbs items={[getBreadcrumbsLink(location.pathname, t)]} className="pl-5 pb-4" />
+      {isAdmin && <SkillsTable />}
+
+      {!isAdmin && (
         <div className="mx-auto flex flex-col pt-8">
-          {groupedSkills.length === 0 ? (
-            <div>{t("page.skills.emptyState")}</div>
-          ) : (
+          {!hasGroupedSkills && <div>{t("page.skills.emptyState")}</div>}
+
+          {hasGroupedSkills && (
             <div className="flex flex-col gap-6">
               {groupedSkills.map((group) => (
                 <div key={group.categoryId ?? "uncategorized"} className="flex flex-col gap-2">
@@ -69,16 +89,7 @@ export const SkillsPage = () => {
                           categoryId={skill.categoryId}
                           isDeleteMode={isDeleteMode}
                           chosen={isDeleteMode && deletedSkills.name.includes(skill.name)}
-                          onClick={() =>
-                            setDeletedSkills({
-                              ...deletedSkills,
-                              name: deletedSkills.name.includes(skill.name)
-                                ? deletedSkills.name.filter(
-                                    (deletedName) => deletedName !== skill.name,
-                                  )
-                                : [...deletedSkills.name, skill.name],
-                            })
-                          }
+                          onClick={() => toggleDeletedSkill(skill.name)}
                         />
                       </Modal>
                     ))}
@@ -87,8 +98,9 @@ export const SkillsPage = () => {
               ))}
             </div>
           )}
+
           <div className="min-h-14 flex gap-8 justify-end pt-8">
-            {isDeleteMode ? (
+            {isDeleteMode && (
               <>
                 <Button variant="outline" className="w-40" onClick={resetDeletedSkills}>
                   {t("page.skills.cancel")}
@@ -99,16 +111,15 @@ export const SkillsPage = () => {
                   onChangeMode={setIsDeleteMode}
                 />
               </>
-            ) : (
+            )}
+
+            {!isDeleteMode && (
               <Modal>
                 <AddSkillModal skills={skillsData?.items} masteryOptions={masteryOptions} />
                 <Button
                   variant="ghost"
                   className="w-40 uppercase text-red p-4 flex items-center justify-center gap-2"
-                  onClick={() => {
-                    setDeletedSkills({ userId, name: [] });
-                    setIsDeleteMode(true);
-                  }}
+                  onClick={enableDeleteMode}
                 >
                   <RemoveIcon />
                   {t("page.skills.removeSkills")}

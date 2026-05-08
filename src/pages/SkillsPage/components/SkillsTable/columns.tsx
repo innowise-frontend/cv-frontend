@@ -1,33 +1,8 @@
-import { createColumnHelper } from "@tanstack/react-table";
 import { Modal, TableActions, TableColumnHeader } from "@components/shared";
 import i18n from "@root/i18n/i18n";
-import { SkillCategoriesQuery, SkillsQuery } from "@services/graphql/__generated__/graphql";
 import { DeleteSkillModal, UpdateSkillModal } from "../index";
-
-type SkillTableRow = SkillsQuery["skills"]["items"][number];
-type SkillCategoriesData = SkillCategoriesQuery["skillCategories"];
-
-const columnHelper = createColumnHelper<SkillTableRow>();
-
-type CategoryById = Map<string, SkillCategoriesData[number]>;
-
-const findCategory = (row: SkillTableRow, categoryById: CategoryById) => {
-  const categoryId = row.category?.id;
-  if (!categoryId) return undefined;
-
-  return categoryById.get(categoryId);
-};
-
-const getCategoryTypeName = (row: SkillTableRow, categoryById: CategoryById): string | null => {
-  const category = findCategory(row, categoryById);
-  if (!category) return null;
-
-  return category.parent?.name ?? category.name;
-};
-
-const getCategoryName = (row: SkillTableRow, categoryById: CategoryById): string | null => {
-  return findCategory(row, categoryById)?.name ?? null;
-};
+import { SkillCategoriesData } from "./types";
+import { columnHelper, getCategoryName, getCategoryTypeName } from "./utils";
 
 export const buildColumns = (categories: SkillCategoriesData | undefined) => {
   const categoryById = new Map((categories ?? []).map((category) => [category.id, category]));
