@@ -1,31 +1,29 @@
 import { useTranslation } from "react-i18next";
 import { Modal } from "@components/shared";
-import { useAuth } from "@root/hooks";
 import { RemoveSkillModalProps } from "./types";
 import { useDeleteProfileSkillsMutation } from "../../api";
 import { ONE_ITEM } from "../../const";
 
 export const RemoveSkillModal = ({
+  userId,
   deletedSkills,
   onChangeDeletedSkills,
   onChangeMode,
 }: RemoveSkillModalProps) => {
   const { t } = useTranslation();
-  const { userId } = useAuth();
 
   const resetDeletedSkills = () => {
     onChangeMode(false);
     onChangeDeletedSkills({ userId, name: [] });
   };
 
-  const { mutateAsync } = useDeleteProfileSkillsMutation(userId);
+  const { mutate } = useDeleteProfileSkillsMutation(userId);
 
   const selectedCount = deletedSkills.name.length;
   const skillLabel = selectedCount === ONE_ITEM ? "page.skills.skill" : "page.skills.skills";
 
-  const handleRemoveSkills = async () => {
-    await mutateAsync(deletedSkills);
-    resetDeletedSkills();
+  const handleRemoveSkills = () => {
+    mutate({ ...deletedSkills, userId }, { onSuccess: resetDeletedSkills });
   };
 
   return (

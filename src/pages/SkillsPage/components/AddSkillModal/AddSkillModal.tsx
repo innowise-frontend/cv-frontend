@@ -3,14 +3,12 @@ import { useTranslation } from "react-i18next";
 import PlusIcon from "@assets/icon/PlusIcon.svg?react";
 import { Modal, Select } from "@components/shared";
 import { useModalContext } from "@root/components/shared/Modal/useModalContext";
-import { useAuth } from "@root/hooks";
 import { AddProfileSkillInput, Mastery } from "@services/graphql/__generated__/graphql";
 import { AddSkillModalProps } from "./types";
 import { useAddProfileSkillMutation } from "../../api";
 
-export const AddSkillModal = ({ skills, masteryOptions }: AddSkillModalProps) => {
+export const AddSkillModal = ({ userId, skills, masteryOptions }: AddSkillModalProps) => {
   const { t } = useTranslation();
-  const { userId } = useAuth();
   const [selectedSkill, setSelectedSkill] = useState<AddProfileSkillInput>({
     userId: userId,
     name: "",

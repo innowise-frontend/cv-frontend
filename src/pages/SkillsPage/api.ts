@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient, UseQueryOptions } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { SortOrder } from "@constants/sortOptions";
 import { getErrorToastMessage } from "@root/lib";
@@ -23,11 +23,16 @@ import {
 } from "@services/skills";
 import { getUserProfile } from "@services/users";
 
-export const useUserSkillsQuery = (userId: string, isAdmin: boolean) =>
+type UserSkillsQueryConfig = Omit<
+  UseQueryOptions<Awaited<ReturnType<typeof getUserProfile>>>,
+  "queryKey" | "queryFn"
+>;
+
+export const useUserSkillsQuery = (userId: string, config?: UserSkillsQueryConfig) =>
   useQuery({
     queryKey: ["profile", userId],
     queryFn: () => getUserProfile(userId),
-    enabled: !isAdmin,
+    ...config,
   });
 
 export const useSkillsSelectQuery = () =>

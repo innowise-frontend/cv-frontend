@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Modal, ProgressBar, Select } from "@root/components/shared";
 import { useModalContext } from "@root/components/shared/Modal/useModalContext";
-import { useAuth } from "@root/hooks";
 import { cn } from "@root/lib";
 import { Mastery, UpdateProfileSkillInput } from "@services/graphql/__generated__/graphql";
 import { SkillProgressBarProps } from "./types";
@@ -10,6 +9,7 @@ import { getMasteryOptions, useUpdateProfileSkillMutation } from "../../api";
 import { MASTERY_ORDER } from "../../const";
 
 export const SkillProgressBar = ({
+  userId,
   name,
   mastery,
   categoryId,
@@ -18,14 +18,13 @@ export const SkillProgressBar = ({
   onClick,
 }: SkillProgressBarProps) => {
   const { t } = useTranslation();
-  const { userId } = useAuth();
   const { closeModal } = useModalContext();
 
   const [updateSkill, setUpdateSkill] = useState<UpdateProfileSkillInput>({
-    userId: userId,
-    name: name,
-    mastery: mastery,
-    categoryId: categoryId,
+    userId,
+    name,
+    mastery,
+    categoryId,
   });
 
   const masteryOptions = getMasteryOptions(MASTERY_ORDER);
@@ -95,9 +94,9 @@ export const SkillProgressBar = ({
           <Button
             variant="filled"
             className="w-40"
-            disabled={updateSkill.mastery === mastery}
+            disabled={updateSkill.mastery === mastery || !userId}
             onClick={() => {
-              mutateAsync(updateSkill);
+              mutateAsync({ ...updateSkill, userId });
             }}
           >
             {t("page.skills.update")}
