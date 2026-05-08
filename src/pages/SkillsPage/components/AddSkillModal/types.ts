@@ -7,6 +7,7 @@ export type SkillSelectOption = {
 };
 
 export interface AddSkillModalProps {
+  userId: string;
   skills: SkillsQuery["skills"]["items"] | undefined;
   masteryOptions: { value: string; label: string }[];
 }
