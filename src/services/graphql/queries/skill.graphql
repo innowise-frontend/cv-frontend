@@ -1,0 +1,34 @@
+query Skills($params: SearchPaginationInput!) {
+  skills(params: $params) {
+    items {
+      id
+      name
+      created_at
+      category_name
+      category_parent_name
+      category {
+        id
+        name
+      }
+    }
+    total
+    page
+    limit
+    total_pages
+  }
+}
+
+query SkillCategories {
+  skillCategories {
+    id
+    name
+    children {
+      id
+      name
+    }
+    parent {
+      id
+      name
+    }
+  }
+}

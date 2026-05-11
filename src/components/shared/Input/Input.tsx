@@ -8,11 +8,22 @@ import type { InputWithLabelProps } from "./types";
 
 export const Input = forwardRef<HTMLInputElement, InputWithLabelProps>(
   (
-    { label, className, value: controlledValue, defaultValue, onChange, type, error, ...props },
+    {
+      label,
+      className,
+      value: controlledValue,
+      defaultValue,
+      onChange,
+      type,
+      error,
+      disabled,
+      ...props
+    },
     ref,
   ) => {
     const { t } = useTranslation();
     const generatedId = useId();
+    const [initialDefaultValue] = useState(defaultValue);
 
     const [value, setValue] = useState("");
     const [showPassword, setShowPassword] = useState(false);
@@ -47,14 +58,18 @@ export const Input = forwardRef<HTMLInputElement, InputWithLabelProps>(
         )}
         <div className="relative">
           <UiInput
+            disabled={disabled}
             id={generatedId}
             ref={ref}
             type={inputType}
-            value={controlledValue}
-            defaultValue={defaultValue}
             onChange={handleChange}
+            {...(controlledValue !== undefined
+              ? { value: controlledValue }
+              : { defaultValue: initialDefaultValue })}
             className={cn(
-              "h-12 px-3 py-3 text-base leading-6 placeholder:text-gray-6 border-gray-5 shadow-none outline-none focus:outline-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:shadow-none dark:text-white dark:placeholder:text-gray-3",
+              "h-12 px-3 py-3 text-base leading-6 placeholder:text-gray-6 border-gray-5 shadow-none outline-none",
+              "focus:outline-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:shadow-none",
+              "dark:text-white dark:placeholder:text-gray-3 disabled:bg-gray-6 dark:disabled:bg-gray-3",
               className,
               error &&
                 "border-red focus-visible:border-red dark:border-red dark:focus-visible:border-red",

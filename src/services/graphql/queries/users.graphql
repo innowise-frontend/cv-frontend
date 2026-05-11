@@ -1,0 +1,19 @@
+query Users($params: SearchPaginationInput!) {
+  users(params: $params) {
+    items {
+      id
+      department_name
+      position_name
+      email
+      profile {
+        last_name
+        first_name
+        avatar
+      }
+    }
+    total
+    page
+    limit
+    total_pages
+  }
+}

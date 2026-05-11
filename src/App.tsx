@@ -1,5 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createRouter, RouterProvider } from "@tanstack/react-router";
+import { t } from "i18next";
 import { useEffect } from "react";
 import { AuthProvider } from "./context/AuthContext";
 import { useAuth } from "./hooks/useAuth/useAuth";
@@ -14,20 +15,8 @@ const router = createRouter({
   },
   routeTree,
   notFoundMode: "root",
-  defaultErrorComponent: () => (
-    <ErrorPage
-      error={
-        "Something went wrong. We’re already working on fixing it. \n Please try again or go back."
-      }
-    />
-  ),
-  defaultNotFoundComponent: () => (
-    <ErrorPage
-      error={
-        "Hmm… this doesn’t seem to be the page you were looking for. \n Let’s get you back on track."
-      }
-    />
-  ),
+  defaultErrorComponent: () => <ErrorPage error={t("page.error.defaultErrorMessage")} />,
+  defaultNotFoundComponent: () => <ErrorPage error={t("page.error.defaultNotFoundMessage")} />,
 });
 
 declare module "@tanstack/react-router" {
@@ -41,7 +30,7 @@ function InnerApp() {
 
   useEffect(() => {
     router.invalidate();
-  }, [auth.isAuthenticated, auth.isFirstLoad]);
+  }, [auth.isAuthenticated, auth.isFirstLoad, auth.isVerified]);
 
   return <RouterProvider router={router} context={{ auth }} />;
 }

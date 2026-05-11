@@ -1,23 +1,22 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
+import { VIEW_OPTIONS } from "@root/constants";
 import { Pagination } from "./Pagination";
 
 const createProps = (overrides?: Partial<React.ComponentProps<typeof Pagination>>) => ({
   pagesCount: 3,
   currentPage: 1,
-  onPreviousPage: vi.fn(),
-  onNextPage: vi.fn(),
   onPageChange: vi.fn(),
-  viewOptions: [
-    { label: "5", value: 5 },
-    { label: "10", value: 10 },
-  ],
-  onChangeViewOption: vi.fn(),
+  viewOptions: VIEW_OPTIONS,
+
   ...overrides,
 });
 
 describe("Pagination", () => {
+  const firstViewOption = VIEW_OPTIONS[0];
+  const secondViewOption = VIEW_OPTIONS[1];
+
   it("should render all page links", () => {
     render(<Pagination {...createProps({ pagesCount: 4 })} />);
 
@@ -28,7 +27,7 @@ describe("Pagination", () => {
   });
 
   it("should disable previous button on the first page", () => {
-    render(<Pagination {...createProps({ currentPage: 0 })} />);
+    render(<Pagination {...createProps({ currentPage: 1 })} />);
     const nav = screen.getByRole("navigation", { name: "pagination" });
     const [previousButton, nextButton] = nav.querySelectorAll('[data-slot="button"]');
 
@@ -37,7 +36,7 @@ describe("Pagination", () => {
   });
 
   it("should disable next button on the last page", () => {
-    render(<Pagination {...createProps({ currentPage: 2, pagesCount: 3 })} />);
+    render(<Pagination {...createProps({ currentPage: 3, pagesCount: 3 })} />);
     const nav = screen.getByRole("navigation", { name: "pagination" });
     const [previousButton, nextButton] = nav.querySelectorAll('[data-slot="button"]');
 
@@ -45,31 +44,32 @@ describe("Pagination", () => {
     expect(nextButton).toBeDisabled();
   });
 
-  it("should call onPreviousPage when previous button is clicked", async () => {
+  it("should call onPageChange with previous page when previous button is clicked", async () => {
     const user = userEvent.setup();
-    const onPreviousPage = vi.fn();
+    const onPageChange = vi.fn();
 
-    render(<Pagination {...createProps({ onPreviousPage, currentPage: 1 })} />);
+    render(<Pagination {...createProps({ onPageChange, currentPage: 2 })} />);
     const nav = screen.getByRole("navigation", { name: "pagination" });
     const [previousButton] = nav.querySelectorAll('[data-slot="button"]');
 
     await user.click(previousButton);
 
-    expect(onPreviousPage).toHaveBeenCalledTimes(1);
+    expect(onPageChange).toHaveBeenCalledTimes(1);
+    expect(onPageChange).toHaveBeenCalledWith(1);
   });
 
-  it("should call onNextPage with next page index", async () => {
+  it("should call onPageChange with next page index", async () => {
     const user = userEvent.setup();
-    const onNextPage = vi.fn();
+    const onPageChange = vi.fn();
 
-    render(<Pagination {...createProps({ onNextPage, currentPage: 1 })} />);
+    render(<Pagination {...createProps({ onPageChange, currentPage: 1 })} />);
     const nav = screen.getByRole("navigation", { name: "pagination" });
     const [, nextButton] = nav.querySelectorAll('[data-slot="button"]');
 
     await user.click(nextButton);
 
-    expect(onNextPage).toHaveBeenCalledTimes(1);
-    expect(onNextPage).toHaveBeenCalledWith(2);
+    expect(onPageChange).toHaveBeenCalledTimes(1);
+    expect(onPageChange).toHaveBeenCalledWith(2);
   });
 
   it("should call onPageChange with selected page index", async () => {
@@ -81,12 +81,32 @@ describe("Pagination", () => {
     await user.click(screen.getByRole("button", { name: "3" }));
 
     expect(onPageChange).toHaveBeenCalledTimes(1);
-    expect(onPageChange).toHaveBeenCalledWith(2);
+    expect(onPageChange).toHaveBeenCalledWith(3);
   });
 
   it("should merge className onto pagination root", () => {
     render(<Pagination {...createProps({ className: "pagination-extra" })} />);
 
     expect(screen.getByRole("navigation", { name: "pagination" })).toHaveClass("pagination-extra");
+  });
+
+  it("should show initial selected view option value", () => {
+    render(<Pagination {...createProps()} />);
+
+    expect(screen.getByRole("combobox")).toHaveTextContent(firstViewOption.label);
+  });
+
+  it("should update selected view option and call onChangeViewOption", async () => {
+    const user = userEvent.setup();
+    const onChangeViewOption = vi.fn();
+
+    render(<Pagination {...createProps({ onChangeViewOption })} />);
+
+    await user.click(screen.getByRole("combobox"));
+    await user.click(screen.getByText(secondViewOption.label));
+
+    expect(onChangeViewOption).toHaveBeenCalledTimes(1);
+    expect(onChangeViewOption).toHaveBeenCalledWith(secondViewOption.value);
+    expect(screen.getByRole("combobox")).toHaveTextContent(secondViewOption.label);
   });
 });

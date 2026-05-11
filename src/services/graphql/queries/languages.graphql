@@ -1,0 +1,14 @@
+query Languages($params: SearchPaginationInput!) {
+  languages(params: $params) {
+    items {
+      id
+      name
+      native_name
+      iso2
+    }
+    total
+    page
+    limit
+    total_pages
+  }
+}

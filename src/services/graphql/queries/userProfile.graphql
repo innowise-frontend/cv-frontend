@@ -1,0 +1,31 @@
+query user($userId: ID!) {
+  user(userId: $userId) {
+    id
+    email
+    created_at
+    department {
+      id
+      name
+    }
+    position {
+      id
+      name
+    }
+    profile {
+      avatar
+      email
+      first_name
+      last_name
+      full_name
+      created_at
+    }
+  }
+  departments {
+    id
+    name
+  }
+  positions {
+    id
+    name
+  }
+}

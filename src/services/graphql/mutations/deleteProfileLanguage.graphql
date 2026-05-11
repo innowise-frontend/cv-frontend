@@ -1,0 +1,8 @@
+mutation DeleteProfileLanguage($language: DeleteProfileLanguageInput!) {
+  deleteProfileLanguage(language: $language) {
+    languages {
+      name
+      proficiency
+    }
+  }
+}

@@ -1,0 +1,13 @@
+query Profile($userId: ID!) {
+  profile(userId: $userId) {
+    languages {
+      name
+      proficiency
+    }
+    skills {
+      name
+      mastery
+      categoryId
+    }
+  }
+}

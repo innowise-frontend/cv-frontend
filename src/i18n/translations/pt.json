@@ -34,7 +34,15 @@
       "oops": "Ops",
       "goBack": "Voltar",
       "defaultErrorMessage": "Erro! Não foi possível alterar a senha",
-      "defaultNotFoundMessage": "Hmm… parece que esta não é a página que você estava procurando. \n Vamos colocar você de volta no caminho certo."
+      "defaultNotFoundMessage": "Hmm… parece que esta não é a página que você estava procurando. \n Vamos colocar você de volta no caminho certo.",
+      "api": {
+        "forbidden": "Você não tem permissão para realizar esta ação",
+        "unauthorized": "Você precisa entrar novamente",
+        "notFound": "O recurso solicitado não foi encontrado",
+        "conflict": "O recurso foi alterado por outra pessoa. Atualize e tente novamente",
+        "internalServerError": "Erro no servidor. Tente novamente mais tarde",
+        "default": "Algo deu errado"
+      }
     },
     "forgotPassword": {
       "title": "Esqueceu a senha",
@@ -62,6 +70,79 @@
         "passwordsDoNotMatch": "As senhas não coincidem"
       }
     },
+    "users": {
+      "breadcrumbs": "Funcionários",
+      "columns": {
+        "firstName": "Nome",
+        "lastName": "Sobrenome",
+        "email": "E-mail",
+        "department": "Departamento",
+        "position": "Cargo"
+      },
+      "actions": {
+        "viewProfile": "Ver perfil",
+        "edit": "Editar",
+        "delete": "Excluir"
+      }
+    },
+    "verifyEmail": {
+      "title": "Verificação de e-mail",
+      "subtitle": "Digite o código de verificação que enviamos para o seu e-mail.",
+      "confirm": "Confirmar",
+      "later": "Depois",
+      "invalidCode": "Código inválido"
+    },
+    "languages": {
+      "currentLanguages": "Idiomas atuais",
+      "emptyState": "Voce ainda nao tem idiomas",
+      "addLanguage": "Adicionar idioma",
+      "createLanguage": "Criar idioma",
+      "deleteLanguage": "Excluir idioma",
+      "updateLanguage": "Atualizar idioma",
+      "name": "Nome",
+      "iso": "ISO",
+      "nativeName": "Nome nativo",
+      "language": "Idioma",
+      "languages": "Idiomas",
+      "proficiency": "Nivel",
+      "edit": "Editar",
+      "delete": "Excluir",
+      "removeLanguage": "Remover idioma",
+      "confirmRemove": "Tem certeza de que deseja remover",
+      "confirmDeleteLanguage": "Tem certeza de que deseja excluir o idioma {{name}}?",
+      "cancel": "Cancelar",
+      "confirm": "Confirmar",
+      "add": "Adicionar",
+      "remove": "Remover",
+      "update": "Atualizar",
+      "save": "Salvar"
+    },
+    "skills": {
+      "currentSkills": "Habilidades",
+      "emptyState": "Voce ainda nao tem habilidades",
+      "addSkill": "Adicionar habilidade",
+      "createSkill": "Criar habilidade",
+      "updateSkill": "Atualizar habilidade",
+      "deleteSkill": "Excluir habilidade",
+      "removeSkills": "Remover habilidades",
+      "uncategorized": "Outro",
+      "name": "Nome",
+      "type": "Tipo",
+      "category": "Categoria",
+      "skill": "Habilidade",
+      "skills": "Habilidades",
+      "mastery": "Nivel",
+      "edit": "Editar",
+      "delete": "Excluir",
+      "confirmRemove": "Tem certeza de que deseja remover",
+      "confirmDeleteSkill": "Tem certeza de que deseja excluir a habilidade {{name}}?",
+      "cancel": "Cancelar",
+      "confirm": "Confirmar",
+      "add": "Adicionar",
+      "remove": "Remover",
+      "update": "Atualizar",
+      "save": "Salvar"
+    },
     "sidebar": {
       "employees": "Funcionários",
       "skills": "Habilidades",
@@ -71,6 +152,35 @@
       "departments": "Departamentos",
       "positions": "Cargos",
       "projects": "Projetos"
+    },
+    "profile": {
+      "firstName": "Nome",
+      "lastName": "Sobrenome",
+      "department": "Departamento",
+      "position": "Cargo",
+      "selectDepartment": "Selecione o departamento",
+      "selectPosition": "Selecione o cargo",
+      "uploadAvatar": "Enviar imagem de perfil",
+      "uploadAvatarHint": "png, jpg ou gif — no máximo 0,5 MB",
+      "userAvatarAlt": "Avatar do utilizador",
+      "initialsUnknown": "",
+      "memberSince": "Membro desde",
+      "verifyEmail": "Verificar e-mail",
+      "update": "Atualizar",
+      "userNotFound": "Utilizador não encontrado",
+      "avatar": {
+        "wrongType": "Use apenas png, jpg ou gif.",
+        "tooLarge": "A imagem não pode ultrapassar 0,5 MB.",
+        "invalidEncoding": "Codificação do ficheiro de avatar inválida",
+        "readFailed": "Não foi possível ler o ficheiro"
+      },
+      "toast": {
+        "userUpdated": "Utilizador atualizado",
+        "profileUpdated": "Perfil atualizado",
+        "avatarUpdated": "Avatar atualizado",
+        "verificationSent": "E-mail de verificação enviado",
+        "verificationFailed": "Falha ao enviar o e-mail de verificação"
+      }
     }
   }
 }

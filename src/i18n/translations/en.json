@@ -34,7 +34,15 @@
       "oops": "Oops",
       "goBack": "Go back",
       "defaultErrorMessage": "Error! Password wasn't changed",
-      "defaultNotFoundMessage": "Hmm… this doesn’t seem to be the page you were looking for. \n Let’s get you back on track."
+      "defaultNotFoundMessage": "Hmm… this doesn’t seem to be the page you were looking for. \n Let’s get you back on track.",
+      "api": {
+        "forbidden": "You have no rights to perform this action",
+        "unauthorized": "You need to sign in again",
+        "notFound": "Requested resource was not found",
+        "conflict": "The resource was changed by someone else. Please refresh and try again",
+        "internalServerError": "Server error. Please try again later",
+        "default": "Something went wrong"
+      }
     },
     "forgotPassword": {
       "title": "Forgot password",
@@ -62,6 +70,79 @@
         "passwordsDoNotMatch": "Passwords don't match"
       }
     },
+    "users": {
+      "breadcrumbs": "Employees",
+      "columns": {
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "email": "Email",
+        "department": "Department",
+        "position": "Position"
+      },
+      "actions": {
+        "viewProfile": "View profile",
+        "edit": "Edit",
+        "delete": "Delete"
+      }
+    },
+    "verifyEmail": {
+      "title": "Email verification",
+      "subtitle": "Enter the verification code we sent to your email.",
+      "confirm": "Confirm",
+      "later": "Later",
+      "invalidCode": "Invalid code"
+    },
+    "languages": {
+      "currentLanguages": "Current languages",
+      "emptyState": "You don't have any languages yet",
+      "addLanguage": "Add language",
+      "createLanguage": "Create language",
+      "deleteLanguage": "Delete language",
+      "updateLanguage": "Update language",
+      "name": "Name",
+      "iso": "ISO",
+      "nativeName": "Native name",
+      "language": "Language",
+      "languages": "Languages",
+      "proficiency": "Proficiency",
+      "edit": "Edit",
+      "delete": "Delete",
+      "removeLanguage": "Remove language",
+      "confirmRemove": "Are you sure you want to remove",
+      "confirmDeleteLanguage": "Are you sure you want to delete language {{name}}?",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "add": "Add",
+      "remove": "Remove",
+      "update": "Update",
+      "save": "Save"
+    },
+    "skills": {
+      "currentSkills": "Skills",
+      "emptyState": "You don't have any skills yet",
+      "addSkill": "Add skill",
+      "createSkill": "Create skill",
+      "updateSkill": "Update skill",
+      "deleteSkill": "Delete skill",
+      "removeSkills": "Remove skills",
+      "uncategorized": "Other",
+      "name": "Name",
+      "type": "Type",
+      "category": "Category",
+      "skill": "Skill",
+      "skills": "Skills",
+      "mastery": "Skill mastery",
+      "edit": "Edit",
+      "delete": "Delete",
+      "confirmRemove": "Are you sure you want to remove",
+      "confirmDeleteSkill": "Are you sure you want to delete skill {{name}}?",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "add": "Add",
+      "remove": "Remove",
+      "update": "Update",
+      "save": "Save"
+    },
     "sidebar": {
       "employees": "Employees",
       "skills": "Skills",
@@ -71,6 +152,35 @@
       "departments": "Departments",
       "positions": "Positions",
       "projects": "Projects"
+    },
+    "profile": {
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "department": "Department",
+      "position": "Position",
+      "selectDepartment": "Select department",
+      "selectPosition": "Select position",
+      "uploadAvatar": "Upload avatar image",
+      "uploadAvatarHint": "png, jpg or gif — no more than 0.5MB",
+      "userAvatarAlt": "User avatar",
+      "initialsUnknown": "",
+      "memberSince": "A member since",
+      "verifyEmail": "Verify email",
+      "update": "Update",
+      "userNotFound": "User not found",
+      "avatar": {
+        "wrongType": "Use png, jpg, or gif only.",
+        "tooLarge": "Image must be no more than 0.5MB.",
+        "invalidEncoding": "Invalid avatar file encoding",
+        "readFailed": "Failed to read file"
+      },
+      "toast": {
+        "userUpdated": "User updated",
+        "profileUpdated": "Profile updated",
+        "avatarUpdated": "Avatar updated",
+        "verificationSent": "Verification email sent",
+        "verificationFailed": "Failed to send verification email"
+      }
     }
   }
 }

@@ -34,7 +34,15 @@
       "oops": "Упс",
       "goBack": "Назад",
       "defaultErrorMessage": "Ошибка! Не удалось изменить пароль",
-      "defaultNotFoundMessage": "Хм… похоже, это не та страница, которую вы искали. \n Давайте вернёмся на правильный путь."
+      "defaultNotFoundMessage": "Хм… похоже, это не та страница, которую вы искали. \n Давайте вернёмся на правильный путь.",
+      "api": {
+        "forbidden": "У вас нет прав для выполнения этого действия",
+        "unauthorized": "Вам нужно снова войти в систему",
+        "notFound": "Запрошенный ресурс не найден",
+        "conflict": "Ресурс был изменен другим пользователем. Обновите страницу и повторите попытку",
+        "internalServerError": "Ошибка сервера. Попробуйте позже",
+        "default": "Что-то пошло не так"
+      }
     },
     "forgotPassword": {
       "title": "Забыли пароль",
@@ -62,6 +70,79 @@
         "passwordsDoNotMatch": "Пароли не совпадают"
       }
     },
+    "users": {
+      "breadcrumbs": "Сотрудники",
+      "columns": {
+        "firstName": "Имя",
+        "lastName": "Фамилия",
+        "email": "Email",
+        "department": "Отдел",
+        "position": "Должность"
+      },
+      "actions": {
+        "viewProfile": "Открыть профиль",
+        "edit": "Редактировать",
+        "delete": "Удалить"
+      }
+    },
+    "verifyEmail": {
+      "title": "Подтверждение e-mail",
+      "subtitle": "Введите код подтверждения, который мы отправили на ваш e-mail.",
+      "confirm": "Подтвердить",
+      "later": "Позже",
+      "invalidCode": "Неверный код"
+    },
+    "languages": {
+      "currentLanguages": "Текущие языки",
+      "emptyState": "У вас пока нет языков",
+      "addLanguage": "Добавить язык",
+      "createLanguage": "Создать язык",
+      "deleteLanguage": "Удалить язык",
+      "updateLanguage": "Обновить язык",
+      "name": "Название",
+      "iso": "ISO",
+      "nativeName": "Родное название",
+      "language": "Язык",
+      "languages": "Языки",
+      "proficiency": "Уровень",
+      "edit": "Редактировать",
+      "delete": "Удалить",
+      "removeLanguage": "Удалить язык",
+      "confirmRemove": "Вы уверены, что хотите удалить",
+      "confirmDeleteLanguage": "Вы уверены, что хотите удалить язык {{name}}?",
+      "cancel": "Отмена",
+      "confirm": "Подтвердить",
+      "add": "Добавить",
+      "remove": "Удалить",
+      "update": "Обновить",
+      "save": "Сохранить"
+    },
+    "skills": {
+      "currentSkills": "Навыки",
+      "emptyState": "У вас пока нет навыков",
+      "addSkill": "Добавить навык",
+      "createSkill": "Создать навык",
+      "updateSkill": "Обновить навык",
+      "deleteSkill": "Удалить навык",
+      "removeSkills": "Удалить навыки",
+      "uncategorized": "Другое",
+      "name": "Название",
+      "type": "Тип",
+      "category": "Категория",
+      "skill": "Навык",
+      "skills": "Навыки",
+      "mastery": "Уровень владения",
+      "edit": "Редактировать",
+      "delete": "Удалить",
+      "confirmRemove": "Вы уверены, что хотите удалить",
+      "confirmDeleteSkill": "Вы уверены, что хотите удалить навык {{name}}?",
+      "cancel": "Отмена",
+      "confirm": "Подтвердить",
+      "add": "Добавить",
+      "remove": "Удалить",
+      "update": "Обновить",
+      "save": "Сохранить"
+    },
     "sidebar": {
       "employees": "Сотрудники",
       "skills": "Навыки",
@@ -71,6 +152,35 @@
       "departments": "Отделы",
       "positions": "Должности",
       "projects": "Проекты"
+    },
+    "profile": {
+      "firstName": "Имя",
+      "lastName": "Фамилия",
+      "department": "Отдел",
+      "position": "Должность",
+      "selectDepartment": "Выберите отдел",
+      "selectPosition": "Выберите должность",
+      "uploadAvatar": "Загрузить аватар",
+      "uploadAvatarHint": "png, jpg или gif — не более 0,5 МБ",
+      "userAvatarAlt": "Аватар пользователя",
+      "initialsUnknown": "?",
+      "memberSince": "Участник с",
+      "verifyEmail": "Подтвердить email",
+      "update": "Обновить",
+      "userNotFound": "Пользователь не найден",
+      "avatar": {
+        "wrongType": "Допустимы только png, jpg или gif.",
+        "tooLarge": "Размер файла не должен превышать 0,5 МБ.",
+        "invalidEncoding": "Некорректное кодирование файла аватара",
+        "readFailed": "Не удалось прочитать файл"
+      },
+      "toast": {
+        "userUpdated": "Данные пользователя обновлены",
+        "profileUpdated": "Профиль обновлён",
+        "avatarUpdated": "Аватар обновлён",
+        "verificationSent": "Письмо для подтверждения отправлено",
+        "verificationFailed": "Не удалось отправить письмо для подтверждения"
+      }
     }
   }
 }

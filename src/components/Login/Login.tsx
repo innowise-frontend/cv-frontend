@@ -1,10 +1,10 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Link, useNavigate } from "@tanstack/react-router";
-import { ClientError } from "graphql-request";
 import { toast } from "sonner";
 import { Button } from "@components/shared";
 import { useLocalStorage } from "@hooks/index";
 import { LOCAL_STORAGE_KEYS } from "@root/constants";
+import { getErrorToastMessage } from "@root/lib";
 import { login, getMe } from "@services/auth";
 import { AuthForm } from "../AuthForm";
 
@@ -30,9 +30,7 @@ export const Login = () => {
       await navigate({ to: "/", search: (prev) => ({ ...prev, search: undefined }) });
     },
     onError: (error) => {
-      const message =
-        error instanceof ClientError ? error.response.errors?.[0].message : error.message;
-      toast.error(message);
+      toast.error(getErrorToastMessage(error));
     },
   });
 
