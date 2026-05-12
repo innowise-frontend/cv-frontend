@@ -32,17 +32,17 @@ const getSidebarItems = ({ isAdmin, t }: GetSidebarItemsProps & { t: (key: strin
     visible: true,
   },
   {
-    title: t("page.sidebar.settings"),
-    to: ROUTES.SETTINGS,
-    icon: SettingsIcon,
-    visible: true,
-  },
-  {
     title: t("page.sidebar.cvs"),
     to: ROUTES.CVS,
     icon: FileUserIcon,
     visible: true,
-    withDivider: isAdmin,
+  },
+  {
+    title: t("page.sidebar.settings"),
+    to: ROUTES.SETTINGS,
+    icon: SettingsIcon,
+    visible: true,
+    withDivider: true,
   },
   {
     title: t("page.sidebar.departments"),

@@ -9,6 +9,7 @@
       "hello": "Olá!"
     },
     "setting": {
+      "breadcrumbs": "Definições",
       "theme": "Tema",
       "language": "Idioma",
       "changePassword": "Alterar senha",

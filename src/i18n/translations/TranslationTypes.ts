@@ -4,6 +4,7 @@ export interface TranslationTypes {
       hello: string;
     };
     setting: {
+      breadcrumbs: string;
       theme: string;
       language: string;
       changePassword: string;

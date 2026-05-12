@@ -88,10 +88,10 @@ describe("Sidebar", () => {
 
     const { container } = render(<Sidebar />);
     const sidebarRoot = container.firstChild;
-    expect(sidebarRoot).toHaveClass("min-w-50");
+    expect(sidebarRoot).toHaveClass("w-50");
 
     await user.click(screen.getByRole("button"));
 
-    expect(sidebarRoot).not.toHaveClass("min-w-50");
+    expect(sidebarRoot).not.toHaveClass("w-50");
   });
 });

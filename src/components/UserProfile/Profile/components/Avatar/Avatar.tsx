@@ -66,7 +66,7 @@ export const Avatar = () => {
               type="button"
               onClick={() => avatarInputRef.current?.click()}
               className={cn(
-                "flex max-w-full items-center gap-3 rounded-md text-left outline-none text-gray-2 dark:text-gray-8",
+                "cursor-pointer flex max-w-full items-center gap-3 rounded-md text-left outline-none text-gray-2 dark:text-gray-8",
               )}
             >
               <DownloadIcon className="size-6 shrink-0 text-gray-2 dark:text-gray-8 " />

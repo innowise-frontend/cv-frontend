@@ -101,7 +101,7 @@ export const Select = ({
           id={triggerId}
           disabled={disabled}
           className={
-            "w-full border-gray-5 text-gray-2 data-[size=default]:h-auto px-3 py-3.25 dark:text-gray-5 disabled:bg-gray-6 dark:disabled:bg-gray-3"
+            "w-full cursor-pointer border-gray-5 text-gray-2 data-[size=default]:h-auto px-3 py-3.25 dark:text-gray-5 disabled:bg-gray-6 dark:disabled:bg-gray-3"
           }
         >
           <SelectValue placeholder={placeholder}>{labelFor(value as string)}</SelectValue>

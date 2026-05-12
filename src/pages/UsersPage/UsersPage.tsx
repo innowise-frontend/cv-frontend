@@ -3,7 +3,7 @@ import { useLocation, useNavigate, useSearch } from "@tanstack/react-router";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Breadcrumbs, ROUTES, Table, TableSearch } from "@components/shared";
-import { VIEW_OPTIONS } from "@root/constants";
+import { SortOrder, VIEW_OPTIONS } from "@root/constants";
 import { useHandleSearch } from "@root/hooks";
 import { getBreadcrumbsLink } from "@root/lib";
 import { getUsers } from "@services/users";
@@ -15,7 +15,7 @@ export const UsersPage = () => {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const [currentLimit, setCurrentLimit] = useState(10);
-  const [currentSort, setCurrentSort] = useState<"ASC" | "DESC">("ASC");
+  const [currentSort, setCurrentSort] = useState<SortOrder>(SortOrder.ASC);
 
   const location = useLocation();
   const { onSearch } = useHandleSearch({
@@ -73,7 +73,7 @@ export const UsersPage = () => {
           currentPage={currentPage}
           onChangePage={setCurrentPage}
           onSort={() => {
-            setCurrentSort((prev) => (prev === "ASC" ? "DESC" : "ASC"));
+            setCurrentSort((prev) => (prev === SortOrder.ASC ? SortOrder.DESC : SortOrder.ASC));
             setCurrentPage(1);
           }}
           currentSort={currentSort}

@@ -29,7 +29,13 @@ body {
   box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
+.dark {
+  :root {
+    color-scheme: dark;
+  }
+}
+
+.dark {
   body {
     color: var(--color-gray-8);
     background: var(--color-gray-2);
