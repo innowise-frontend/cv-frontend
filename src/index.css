@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @config "../tailwind.config.ts";
-@import "./shadcn/tailwind.css";
+@import "./styles/tailwind.css";
 
 body {
   color: var(--color-gray-2);
