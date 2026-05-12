@@ -19,7 +19,7 @@ export const ProfileBlock = ({ collapsed = false }: ProfileBlockProps) => {
       params={{ userId }}
       className="flex w-full min-w-0 items-center justify-center gap-2 overflow-hidden"
     >
-      <Avatar name={fullName} imageSrc={profile?.avatar ?? undefined} className="shrink-0" />
+      <Avatar name={fullName} imageSrc={profile?.avatar ?? ""} className="shrink-0" />
       {!collapsed && fullName && (
         <span className="truncate" title={fullName}>
           {fullName}
