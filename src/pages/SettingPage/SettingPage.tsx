@@ -10,7 +10,6 @@ import type { Theme } from "./types";
 export const SettingPage = () => {
   const { t, i18n } = useTranslation();
   const [theme, setTheme] = useState<Theme>(getDefaultTheme);
-  console.log(theme);
   const [language, setLanguage] = useState(i18n.resolvedLanguage ?? "en");
 
   const handleThemeChange = (value: string) => {
