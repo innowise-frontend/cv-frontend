@@ -67,7 +67,7 @@ export const Input = forwardRef<HTMLInputElement, InputWithLabelProps>(
               ? { value: controlledValue }
               : { defaultValue: initialDefaultValue })}
             className={cn(
-              "h-12 px-3 py-3 text-base leading-6 placeholder:text-gray-6 border-gray-5 shadow-none outline-none",
+              "cursor-pointer h-12 px-3 py-3 text-base leading-6 placeholder:text-gray-6 border-gray-5 shadow-none outline-none",
               "focus:outline-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:shadow-none",
               "dark:text-white dark:placeholder:text-gray-3 disabled:bg-gray-6 dark:disabled:bg-gray-3",
               className,
@@ -81,7 +81,7 @@ export const Input = forwardRef<HTMLInputElement, InputWithLabelProps>(
               type="button"
               aria-label={t("page.setting.togglePasswordVisibility")}
               onClick={togglePasswordVisibility}
-              className="absolute right-5 top-1/2 -translate-y-1/2 text-gray-3 focus:outline-none dark:text-gray-8 dark:hover:text-gray-8"
+              className="cursor-pointer absolute right-5 top-1/2 -translate-y-1/2 text-gray-3 focus:outline-none dark:text-gray-8 dark:hover:text-gray-8"
             >
               {showPassword ? <OpenEyeIcon /> : <CloseEyeIcon />}
             </button>

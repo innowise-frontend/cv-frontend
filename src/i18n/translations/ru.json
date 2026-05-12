@@ -9,6 +9,7 @@
       "hello": "Привет!"
     },
     "setting": {
+      "breadcrumbs": "Настройки",
       "theme": "Тема",
       "language": "Язык",
       "changePassword": "Сменить пароль",
