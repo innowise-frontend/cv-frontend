@@ -44,7 +44,7 @@ export const SkillProgressBar = ({
       <Button variant="ghost" className="capitalize" onClick={onClick}>
         <ProgressBar
           className={cn(
-            "px-2 cursor-pointer transition-colors duration-150 hover:bg-gray-7 dark:hover:bg-gray5",
+            "px-2 cursor-pointer transition-colors duration-150 hover:bg-gray-7 dark:hover:bg-gray-5",
             chosen && "*:text-gray *:dark:text-gray-8",
           )}
           key={name}
@@ -60,7 +60,7 @@ export const SkillProgressBar = ({
     <>
       <Modal.Trigger className="capitalize" variant="ghost">
         <ProgressBar
-          className="px-2 cursor-pointer transition-colors duration-150 hover:bg-gray-7"
+          className="px-2 cursor-pointer transition-colors duration-150 hover:bg-gray-7 dark:hover:bg-gray-5"
           key={name}
           label={name}
           mastery={mastery}
