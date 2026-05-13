@@ -54,29 +54,31 @@ export const Select = ({
     >
       <SelectBase.Popup
         className={cn(
-          "absolute -top-[5px] z-50 w-(--anchor-width) min-w-36 border border-gray-5 bg-gray-8 shadow-none ring-0 text-gray-2 dark:bg-gray-2 dark:text-gray-5",
-          "max-h-(--available-height) overflow-x-hidden overflow-y-auto",
+          "absolute -top-[5px] z-50 flex w-(--anchor-width) min-w-36 flex-col overflow-hidden border border-b-2 border-gray-5 border-b-gray-3 bg-gray-8 shadow-none ring-0 text-gray-2 dark:bg-gray-2 dark:border-b-gray-5 dark:text-gray-5",
+          "max-h-[min(16rem,var(--available-height,24rem))]",
           popupClassName,
         )}
       >
         <SelectScrollUpButton />
-        <SelectBase.List>
-          <SelectGroup className="p-0">
-            {list.map((item) => (
-              <SelectItem
-                key={item.value}
-                value={item.value}
-                className={cn(
-                  "cursor-pointer pl-2.5 pr-2.5 text-gray-2 dark:text-gray-5 [&_svg]:hidden",
-                  "data-selected:bg-gray-6 data-selected:text-gray dark:data-selected:bg-gray-4 dark:data-selected:text-gray-8",
-                  itemClassName,
-                )}
-              >
-                {item.label}
-              </SelectItem>
-            ))}
-          </SelectGroup>
-        </SelectBase.List>
+        <div className="min-h-0 flex-1 overflow-x-hidden overflow-y-auto">
+          <SelectBase.List>
+            <SelectGroup className="p-0">
+              {list.map((item) => (
+                <SelectItem
+                  key={item.value}
+                  value={item.value}
+                  className={cn(
+                    "cursor-pointer pl-2.5 pr-2.5 text-gray-2 dark:text-gray-5 [&_svg]:hidden",
+                    "data-selected:bg-gray-6 data-selected:text-gray dark:data-selected:bg-gray-4 dark:data-selected:text-gray-8",
+                    itemClassName,
+                  )}
+                >
+                  {item.label}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectBase.List>
+        </div>
         <SelectScrollDownButton />
       </SelectBase.Popup>
     </SelectBase.Positioner>
