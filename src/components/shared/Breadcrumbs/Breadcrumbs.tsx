@@ -8,7 +8,6 @@ import {
   BreadcrumbLink,
   BreadcrumbSeparator,
 } from "@components/ui/breadcrumb";
-import { displayBreadcrumbLabel } from "./utils";
 import type { BreadcrumbsProps } from "./types";
 
 export const Breadcrumbs = ({ items, className }: BreadcrumbsProps) => {
@@ -24,14 +23,17 @@ export const Breadcrumbs = ({ items, className }: BreadcrumbsProps) => {
                 {item.isProfile ? (
                   <BreadcrumbLink
                     href={item.href || ""}
-                    className="text-red flex items-center gap-2"
+                    className="capitalize text-red flex items-center gap-2"
                   >
                     <UserIcon className="size-4 shrink-0" />
-                    {displayBreadcrumbLabel(item.label)}
+                    {item.label}
                   </BreadcrumbLink>
                 ) : (
-                  <BreadcrumbLink href={item.href || ""} className="text-gray-3 dark:text-gray-5">
-                    {displayBreadcrumbLabel(item.label)}
+                  <BreadcrumbLink
+                    href={item.href || ""}
+                    className="capitalize text-gray-3 dark:text-gray-5"
+                  >
+                    {item.label}
                   </BreadcrumbLink>
                 )}
               </BreadcrumbItem>
