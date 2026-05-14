@@ -47,6 +47,7 @@ describe("LanguageProgressBar", () => {
     const onClick = vi.fn();
     render(
       <LanguageProgressBar
+        userId="u-1"
         name="English"
         proficiency={Proficiency.B2}
         isDeleteMode
@@ -60,7 +61,7 @@ describe("LanguageProgressBar", () => {
   });
 
   it("submits updated proficiency", () => {
-    render(<LanguageProgressBar name="English" proficiency={Proficiency.B2} />);
+    render(<LanguageProgressBar userId="u-1" name="English" proficiency={Proficiency.B2} />);
 
     fireEvent.click(screen.getAllByRole("button", { name: "select" })[1]);
     fireEvent.click(screen.getByRole("button", { name: "Save" }));

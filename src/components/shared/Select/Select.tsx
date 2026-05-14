@@ -56,29 +56,31 @@ export const Select = ({
     >
       <SelectBase.Popup
         className={cn(
-          "z-50 w-(--anchor-width) min-w-36 border border-gray-5 bg-gray-8 shadow-none ring-0 text-gray-2 dark:bg-gray-2 dark:text-gray-5",
-          "max-h-(--available-height) overflow-x-hidden overflow-y-auto",
+          "absolute -top-[5px] z-50 flex w-(--anchor-width) min-w-36 flex-col overflow-hidden border border-b-2 border-gray-5 border-b-gray-3 bg-gray-8 shadow-none ring-0 text-gray-2 dark:bg-gray-2 dark:border-b-gray-5 dark:text-gray-5",
+          "max-h-[min(16rem,var(--available-height,24rem))]",
           popupClassName,
         )}
       >
         <SelectScrollUpButton />
-        <SelectBase.List>
-          <SelectGroup className="p-0">
-            {list.map((item) => (
-              <SelectItem
-                key={item.value}
-                value={item.value}
-                className={cn(
-                  "cursor-pointer pl-2.5 pr-2.5 text-gray-2 dark:text-gray-5 [&_svg]:hidden",
-                  "data-selected:bg-gray-6 data-selected:text-gray dark:data-selected:bg-gray-4 dark:data-selected:text-gray-8",
-                  itemClassName,
-                )}
-              >
-                {item.label}
-              </SelectItem>
-            ))}
-          </SelectGroup>
-        </SelectBase.List>
+        <div className="min-h-0 flex-1 overflow-x-hidden overflow-y-auto">
+          <SelectBase.List>
+            <SelectGroup className="p-0">
+              {list.map((item) => (
+                <SelectItem
+                  key={item.value}
+                  value={item.value}
+                  className={cn(
+                    "cursor-pointer pl-2.5 pr-2.5 text-gray-2 dark:text-gray-5 [&_svg]:hidden",
+                    "data-selected:bg-gray-6 data-selected:text-gray dark:data-selected:bg-gray-4 dark:data-selected:text-gray-8",
+                    itemClassName,
+                  )}
+                >
+                  {item.label}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectBase.List>
+        </div>
         <SelectScrollDownButton />
       </SelectBase.Popup>
     </SelectBase.Positioner>
@@ -107,15 +109,9 @@ export const Select = ({
         <SelectTrigger
           id={triggerId}
           disabled={disabled}
-          aria-invalid={error ? true : undefined}
-          aria-describedby={error ? `${triggerId}-error` : undefined}
-          className={cn(
-            "h-12 w-full px-3 py-3 text-base leading-6 border-gray-5 shadow-none outline-none data-[size=default]:h-12",
-            "focus:outline-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:shadow-none",
-            "text-gray-2 dark:text-white disabled:bg-gray-6 dark:disabled:bg-gray-3",
-            error &&
-              "border-red focus-visible:border-red dark:border-red dark:focus-visible:border-red",
-          )}
+          className={
+            "w-full cursor-pointer border-gray-5 text-gray-2 data-[size=default]:h-auto px-3 py-3.25 dark:text-gray-5 disabled:bg-gray-6 dark:disabled:bg-gray-3"
+          }
         >
           <SelectValue placeholder={placeholder}>{labelFor(value as string)}</SelectValue>
         </SelectTrigger>

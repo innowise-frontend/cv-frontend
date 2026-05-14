@@ -9,6 +9,7 @@
       "hello": "Hallo!"
     },
     "setting": {
+      "breadcrumbs": "Einstellungen",
       "theme": "Thema",
       "language": "Sprache",
       "changePassword": "Passwort ändern",
@@ -117,6 +118,32 @@
       "update": "Aktualisieren",
       "save": "Speichern"
     },
+    "skills": {
+      "currentSkills": "Fähigkeiten",
+      "emptyState": "Sie haben noch keine Fähigkeiten",
+      "addSkill": "Fähigkeit hinzufügen",
+      "createSkill": "Fähigkeit erstellen",
+      "updateSkill": "Fähigkeit aktualisieren",
+      "deleteSkill": "Fähigkeit löschen",
+      "removeSkills": "Fähigkeiten entfernen",
+      "uncategorized": "Sonstiges",
+      "name": "Name",
+      "type": "Typ",
+      "category": "Kategorie",
+      "skill": "Fähigkeit",
+      "skills": "Fähigkeiten",
+      "mastery": "Niveau",
+      "edit": "Bearbeiten",
+      "delete": "Löschen",
+      "confirmRemove": "Möchten Sie wirklich entfernen",
+      "confirmDeleteSkill": "Möchten Sie die Fähigkeit {{name}} wirklich löschen?",
+      "cancel": "Abbrechen",
+      "confirm": "Bestätigen",
+      "add": "Hinzufügen",
+      "remove": "Entfernen",
+      "update": "Aktualisieren",
+      "save": "Speichern"
+    },
     "sidebar": {
       "employees": "Mitarbeiter",
       "skills": "Fähigkeiten",
@@ -179,6 +206,7 @@
       "update": "Aktualisieren",
       "updateUser": "Bearbeiten",
       "updateUserTitle": "Benutzer bearbeiten",
+      "updateUserFailed": "Benutzer konnte nicht aktualisiert werden",
       "deleteUser": "Löschen",
       "deleteUserTitle": "Benutzer löschen",
       "confirmDeleteBefore": "Sind Sie sicher, dass Sie löschen möchten ",

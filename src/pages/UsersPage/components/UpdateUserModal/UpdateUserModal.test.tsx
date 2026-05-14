@@ -15,7 +15,8 @@ let originalShowModal: typeof HTMLDialogElement.prototype.showModal | undefined;
 let originalClose: typeof HTMLDialogElement.prototype.close | undefined;
 
 vi.mock("../../api", () => ({
-  useUpdateUserApi: () => ({ mutate: vi.fn() }),
+  useUpdateUserApi: () => ({ mutateAsync: vi.fn() }),
+  useUpdateProfileApi: () => ({ mutateAsync: vi.fn() }),
   useGetDepartmentsApi: () => ({ data: [] }),
   useGetPositionsApi: () => ({ data: [] }),
 }));

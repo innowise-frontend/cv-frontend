@@ -4,6 +4,7 @@ export interface TranslationTypes {
       hello: string;
     };
     setting: {
+      breadcrumbs: string;
       theme: string;
       language: string;
       changePassword: string;
@@ -90,6 +91,32 @@ export interface TranslationTypes {
       update: string;
       save: string;
     };
+    skills: {
+      currentSkills: string;
+      emptyState: string;
+      addSkill: string;
+      createSkill: string;
+      updateSkill: string;
+      deleteSkill: string;
+      removeSkills: string;
+      uncategorized: string;
+      name: string;
+      type: string;
+      category: string;
+      skill: string;
+      skills: string;
+      mastery: string;
+      edit: string;
+      delete: string;
+      confirmRemove: string;
+      confirmDeleteSkill: string;
+      cancel: string;
+      confirm: string;
+      add: string;
+      remove: string;
+      update: string;
+      save: string;
+    };
     sidebar: {
       employees: string;
       skills: string;
@@ -152,6 +179,7 @@ export interface TranslationTypes {
       update: string;
       updateUser: string;
       updateUserTitle: string;
+      updateUserFailed: string;
       deleteUser: string;
       deleteUserTitle: string;
       confirmDeleteBefore: string;

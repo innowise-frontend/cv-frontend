@@ -6,6 +6,7 @@ export const Sonner = () => {
       position="top-center"
       toastOptions={{
         classNames: {
+          toast: "dark:!bg-gray-4",
           success: "backdrop-blur-sm rounded-md",
           error: "border-red! text-red! backdrop-blur-sm rounded-md!",
           description: "text-gray-2",

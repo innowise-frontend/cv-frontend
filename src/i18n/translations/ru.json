@@ -9,6 +9,7 @@
       "hello": "Привет!"
     },
     "setting": {
+      "breadcrumbs": "Настройки",
       "theme": "Тема",
       "language": "Язык",
       "changePassword": "Сменить пароль",
@@ -117,6 +118,32 @@
       "update": "Обновить",
       "save": "Сохранить"
     },
+    "skills": {
+      "currentSkills": "Навыки",
+      "emptyState": "У вас пока нет навыков",
+      "addSkill": "Добавить навык",
+      "createSkill": "Создать навык",
+      "updateSkill": "Обновить навык",
+      "deleteSkill": "Удалить навык",
+      "removeSkills": "Удалить навыки",
+      "uncategorized": "Другое",
+      "name": "Название",
+      "type": "Тип",
+      "category": "Категория",
+      "skill": "Навык",
+      "skills": "Навыки",
+      "mastery": "Уровень владения",
+      "edit": "Редактировать",
+      "delete": "Удалить",
+      "confirmRemove": "Вы уверены, что хотите удалить",
+      "confirmDeleteSkill": "Вы уверены, что хотите удалить навык {{name}}?",
+      "cancel": "Отмена",
+      "confirm": "Подтвердить",
+      "add": "Добавить",
+      "remove": "Удалить",
+      "update": "Обновить",
+      "save": "Сохранить"
+    },
     "sidebar": {
       "employees": "Сотрудники",
       "skills": "Навыки",
@@ -179,6 +206,7 @@
       "update": "Обновить",
       "updateUser": "Изменить",
       "updateUserTitle": "Редактирование пользователя",
+      "updateUserFailed": "Не удалось обновить пользователя",
       "deleteUser": "Удалить",
       "deleteUserTitle": "Удаление пользователя",
       "confirmDeleteBefore": "Вы уверены, что хотите удалить ",

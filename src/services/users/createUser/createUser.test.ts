@@ -23,7 +23,6 @@ describe("createUser service", () => {
       departmentId: "d1",
       positionId: "p1",
       role: "Employee",
-      cvsIds: [],
     } as CreateUserInput;
 
     const result = await createUser(input);

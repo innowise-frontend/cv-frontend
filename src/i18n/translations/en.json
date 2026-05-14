@@ -9,6 +9,7 @@
       "hello": "Hello !"
     },
     "setting": {
+      "breadcrumbs": "Settings",
       "theme": "Theme",
       "language": "Language",
       "changePassword": "Change password",
@@ -117,6 +118,32 @@
       "update": "Update",
       "save": "Save"
     },
+    "skills": {
+      "currentSkills": "Skills",
+      "emptyState": "You don't have any skills yet",
+      "addSkill": "Add skill",
+      "createSkill": "Create skill",
+      "updateSkill": "Update skill",
+      "deleteSkill": "Delete skill",
+      "removeSkills": "Remove skills",
+      "uncategorized": "Other",
+      "name": "Name",
+      "type": "Type",
+      "category": "Category",
+      "skill": "Skill",
+      "skills": "Skills",
+      "mastery": "Skill mastery",
+      "edit": "Edit",
+      "delete": "Delete",
+      "confirmRemove": "Are you sure you want to remove",
+      "confirmDeleteSkill": "Are you sure you want to delete skill {{name}}?",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "add": "Add",
+      "remove": "Remove",
+      "update": "Update",
+      "save": "Save"
+    },
     "sidebar": {
       "employees": "Employees",
       "skills": "Skills",
@@ -179,6 +206,7 @@
       "update": "Update",
       "updateUser": "Update",
       "updateUserTitle": "Update user",
+      "updateUserFailed": "Failed to update user",
       "deleteUser": "Delete",
       "deleteUserTitle": "Delete user",
       "confirmDeleteBefore": "Are you sure you want to delete ",

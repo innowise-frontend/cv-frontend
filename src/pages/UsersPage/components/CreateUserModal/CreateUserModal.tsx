@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm, useWatch } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import PlusIcon from "@assets/icon/PlusIcon.svg?react";
 import { Button, Input, Modal, Select } from "@components/shared";
@@ -9,60 +8,63 @@ import { UserRole } from "@services/graphql/__generated__/graphql";
 import { getUsers } from "@services/users";
 import { useCreateUserApi, useGetDepartmentsApi, useGetPositionsApi } from "../../api";
 
+type CreateUserFormValues = {
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  departmentId: string;
+  positionId: string;
+  role: string;
+};
+
+const defaultFormValues: CreateUserFormValues = {
+  email: "",
+  password: "",
+  firstName: "",
+  lastName: "",
+  departmentId: "",
+  positionId: "",
+  role: "Employee",
+};
+
 export const CreateUserModal = () => {
   const { t } = useTranslation();
-  const [newUser, setNewUser] = useState({
-    auth: {
-      email: "",
-      password: "",
-    },
-    profile: {
-      firstName: "",
-      lastName: "",
-    },
-    departmentId: "",
-    positionId: "",
-    role: "Employee",
-  });
   const { isAdmin } = useAuth();
   const { closeModal } = useModalContext();
+
   const {
+    control,
+    register,
     handleSubmit,
+    reset,
     setError,
+    clearErrors,
     formState: { errors },
-  } = useForm();
+  } = useForm<CreateUserFormValues>({
+    defaultValues: defaultFormValues,
+    mode: "onChange",
+  });
+
+  const watched = useWatch<CreateUserFormValues>({ control }) ?? defaultFormValues;
+
   const { mutate } = useCreateUserApi({
     onSuccess: () => {
+      reset(defaultFormValues);
       closeModal();
     },
   });
   const { data: departments } = useGetDepartmentsApi({ enabled: isAdmin });
   const { data: positions } = useGetPositionsApi({ enabled: isAdmin });
 
-  const resetNewUser = () => {
-    setNewUser({
-      auth: {
-        email: "",
-        password: "",
-      },
-      profile: {
-        firstName: "",
-        lastName: "",
-      },
-      departmentId: "",
-      positionId: "",
-      role: "Employee",
-    });
-  };
-
   const disabled =
-    !newUser.auth.email ||
-    !newUser.auth.password ||
-    !newUser.profile.firstName ||
-    !newUser.profile.lastName ||
-    !newUser.departmentId ||
-    !newUser.positionId ||
-    !newUser.role;
+    !watched.email?.trim() ||
+    !watched.password ||
+    !watched.firstName?.trim() ||
+    !watched.lastName?.trim() ||
+    !watched.departmentId ||
+    !watched.positionId ||
+    !watched.role;
 
   return (
     <>
@@ -70,11 +72,12 @@ export const CreateUserModal = () => {
         <PlusIcon />
         {t("page.users.createUser")}
       </Modal.Trigger>
-      <Modal.Content onCancel={resetNewUser}>
+      <Modal.Content onCancel={() => reset(defaultFormValues)}>
         <Modal.Header>{t("page.users.createUserTitle")}</Modal.Header>
         <form
-          onSubmit={handleSubmit(async () => {
-            const email = newUser.auth.email.trim();
+          onSubmit={handleSubmit(async (data) => {
+            clearErrors("email");
+            const email = data.email.trim();
             const normalizedEmail = email.toLowerCase();
 
             const paginated = await getUsers({
@@ -97,17 +100,16 @@ export const CreateUserModal = () => {
 
             mutate({
               auth: {
-                email: newUser.auth.email,
-                password: newUser.auth.password,
+                email: data.email,
+                password: data.password,
               },
               profile: {
-                first_name: newUser.profile.firstName,
-                last_name: newUser.profile.lastName,
+                first_name: data.firstName,
+                last_name: data.lastName,
               },
-              departmentId: newUser.departmentId,
-              positionId: newUser.positionId,
-              role: newUser.role as UserRole,
-              cvsIds: [],
+              departmentId: data.departmentId,
+              positionId: data.positionId,
+              role: data.role as UserRole,
             });
           })}
         >
@@ -115,85 +117,88 @@ export const CreateUserModal = () => {
             <Input
               error={typeof errors.email?.message === "string" ? errors.email.message : undefined}
               label={t("page.users.email")}
-              name="email"
               placeholder={t("page.users.email")}
-              value={newUser.auth.email}
-              onChange={(e) =>
-                setNewUser({ ...newUser, auth: { ...newUser.auth, email: e.target.value } })
-              }
+              {...register("email", { required: true })}
+              value={watched.email}
             />
             <Input
               label={t("page.users.password")}
-              name="password"
               type="password"
               placeholder={t("page.users.password")}
-              value={newUser.auth.password}
-              onChange={(e) =>
-                setNewUser({ ...newUser, auth: { ...newUser.auth, password: e.target.value } })
-              }
+              {...register("password", { required: true })}
+              value={watched.password}
             />
             <Input
               label={t("page.users.firstName")}
-              name="firstName"
               placeholder={t("page.users.firstName")}
-              value={newUser.profile.firstName}
-              onChange={(e) =>
-                setNewUser({
-                  ...newUser,
-                  profile: { ...newUser.profile, firstName: e.target.value },
-                })
-              }
+              {...register("firstName", { required: true })}
+              value={watched.firstName}
             />
             <Input
               label={t("page.users.lastName")}
-              name="lastName"
               placeholder={t("page.users.lastName")}
-              value={newUser.profile.lastName}
-              onChange={(e) =>
-                setNewUser({
-                  ...newUser,
-                  profile: { ...newUser.profile, lastName: e.target.value },
-                })
-              }
+              {...register("lastName", { required: true })}
+              value={watched.lastName}
             />
-            <Select
-              disablePortal
-              className="[&_[data-slot=select-trigger][data-placeholder]]:text-gray-6"
-              list={
-                departments?.map((department) => ({
-                  value: department.id,
-                  label: department.name,
-                })) ?? []
-              }
-              placeholder={t("page.users.selectDepartment")}
-              label={t("page.users.department")}
-              value={newUser.departmentId}
-              onValueChange={(value) => setNewUser({ ...newUser, departmentId: value })}
+            <Controller
+              name="departmentId"
+              control={control}
+              rules={{ required: true }}
+              render={({ field }) => (
+                <Select
+                  disablePortal
+                  className="[&_[data-slot=select-trigger][data-placeholder]]:text-gray-6"
+                  list={
+                    departments?.map((department) => ({
+                      value: department.id,
+                      label: department.name,
+                    })) ?? []
+                  }
+                  placeholder={t("page.users.selectDepartment")}
+                  label={t("page.users.department")}
+                  value={field.value}
+                  onValueChange={field.onChange}
+                />
+              )}
             />
-            <Select
-              disablePortal
-              className="[&_[data-slot=select-trigger][data-placeholder]]:text-gray-6"
-              list={
-                positions?.map((position) => ({
-                  value: position.id,
-                  label: position.name,
-                })) ?? []
-              }
-              placeholder={t("page.users.selectPosition")}
-              label={t("page.users.position")}
-              value={newUser.positionId}
-              onValueChange={(value) => setNewUser({ ...newUser, positionId: value })}
+            <Controller
+              name="positionId"
+              control={control}
+              rules={{ required: true }}
+              render={({ field }) => (
+                <Select
+                  disablePortal
+                  className="[&_[data-slot=select-trigger][data-placeholder]]:text-gray-6"
+                  list={
+                    positions?.map((position) => ({
+                      value: position.id,
+                      label: position.name,
+                    })) ?? []
+                  }
+                  placeholder={t("page.users.selectPosition")}
+                  label={t("page.users.position")}
+                  value={field.value}
+                  onValueChange={field.onChange}
+                />
+              )}
             />
-            <Select
-              disablePortal
-              list={[
-                { value: "Employee", label: t("page.users.roleEmployee") },
-                { value: "Admin", label: t("page.users.roleAdmin") },
-              ]}
-              placeholder={t("page.users.selectRole")}
-              label={t("page.users.role")}
-              value={newUser.role}
-              onValueChange={(value) => setNewUser({ ...newUser, role: value })}
+            <Controller
+              name="role"
+              control={control}
+              rules={{ required: true }}
+              render={({ field }) => (
+                <Select
+                  disablePortal
+                  list={[
+                    { value: "Employee", label: t("page.users.roleEmployee") },
+                    { value: "Admin", label: t("page.users.roleAdmin") },
+                  ]}
+                  placeholder={t("page.users.selectRole")}
+                  label={t("page.users.role")}
+                  value={field.value}
+                  onValueChange={field.onChange}
+                />
+              )}
             />
           </Modal.Body>
 

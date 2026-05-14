@@ -1,0 +1,13 @@
+mutation UpdateSkill($skill: UpdateSkillInput!) {
+  updateSkill(skill: $skill) {
+    id
+    name
+    created_at
+    category_name
+    category_parent_name
+    category {
+      id
+      name
+    }
+  }
+}

@@ -1,8 +1,10 @@
 import { useMutation, useQuery, useQueryClient, UseQueryOptions } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { getErrorToastMessage } from "@root/lib";
+import { submitUpdateProfile } from "@services/auth/updateUserProfile/updateUserProfile";
 import { getDepartments } from "@services/departments";
 import { getPositions } from "@services/positions";
+import type { UpdateProfileInput } from "@services/graphql/__generated__/graphql";
 import { createUser, deleteUser, getUsers, updateUser } from "@services/users";
 
 interface UseUsersApiParams {
@@ -34,13 +36,30 @@ export const useCreateUserApi = ({ onSuccess }: { onSuccess?: () => void }) => {
   });
 };
 
-export const useUpdateUserApi = ({ onSuccess }: { onSuccess?: () => void }) => {
+export const useUpdateUserApi = ({ onSuccess }: { onSuccess?: () => void } = {}) => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: updateUser,
-    onSuccess: () => {
+    onSuccess: (_data, variables) => {
       queryClient.invalidateQueries({ queryKey: ["users"] });
+      queryClient.invalidateQueries({ queryKey: ["user-profile", variables.userId] });
+      onSuccess?.();
+    },
+    onError: (error) => {
+      toast.error(getErrorToastMessage(error));
+    },
+  });
+};
+
+export const useUpdateProfileApi = ({ onSuccess }: { onSuccess?: () => void } = {}) => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (profile: UpdateProfileInput) => submitUpdateProfile(profile),
+    onSuccess: (_data, variables) => {
+      queryClient.invalidateQueries({ queryKey: ["users"] });
+      queryClient.invalidateQueries({ queryKey: ["user-profile", variables.userId] });
       onSuccess?.();
     },
     onError: (error) => {

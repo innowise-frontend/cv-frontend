@@ -111,7 +111,6 @@ export type CreateSkillInput = {
 
 export type CreateUserInput = {
   auth: AuthInput;
-  cvsIds: Array<Scalars["String"]["input"]>;
   departmentId?: InputMaybe<Scalars["ID"]["input"]>;
   positionId?: InputMaybe<Scalars["ID"]["input"]>;
   profile: CreateProfileInput;
@@ -736,7 +735,6 @@ export type UpdateTokenResult = {
 };
 
 export type UpdateUserInput = {
-  cvsIds?: InputMaybe<Array<Scalars["String"]["input"]>>;
   departmentId?: InputMaybe<Scalars["ID"]["input"]>;
   positionId?: InputMaybe<Scalars["ID"]["input"]>;
   role?: InputMaybe<UserRole>;
@@ -790,6 +788,23 @@ export type AddProfileLanguageMutation = {
   };
 };
 
+export type AddProfileSkillMutationVariables = Exact<{
+  skill: AddProfileSkillInput;
+}>;
+
+export type AddProfileSkillMutation = {
+  __typename?: "Mutation";
+  addProfileSkill: {
+    __typename?: "Profile";
+    skills: Array<{
+      __typename?: "SkillMastery";
+      name: string;
+      mastery: Mastery;
+      categoryId?: string | null;
+    }>;
+  };
+};
+
 export type ChangePasswordMutationVariables = Exact<{
   args: ChangePasswordInput;
 }>;
@@ -806,6 +821,23 @@ export type CreateLanguageMutationVariables = Exact<{
 export type CreateLanguageMutation = {
   __typename?: "Mutation";
   createLanguage: { __typename?: "Language"; id: string };
+};
+
+export type CreateSkillMutationVariables = Exact<{
+  skill: CreateSkillInput;
+}>;
+
+export type CreateSkillMutation = {
+  __typename?: "Mutation";
+  createSkill: {
+    __typename?: "Skill";
+    id: string;
+    name: string;
+    created_at: string;
+    category_name?: string | null;
+    category_parent_name?: string | null;
+    category?: { __typename?: "SkillCategory"; id: string; name: string } | null;
+  };
 };
 
 export type CreateUserMutationVariables = Exact<{
@@ -840,6 +872,32 @@ export type DeleteProfileLanguageMutation = {
       proficiency: Proficiency;
     }>;
   };
+};
+
+export type DeleteProfileSkillMutationVariables = Exact<{
+  skill: DeleteProfileSkillInput;
+}>;
+
+export type DeleteProfileSkillMutation = {
+  __typename?: "Mutation";
+  deleteProfileSkill: {
+    __typename?: "Profile";
+    skills: Array<{
+      __typename?: "SkillMastery";
+      name: string;
+      mastery: Mastery;
+      categoryId?: string | null;
+    }>;
+  };
+};
+
+export type DeleteSkillMutationVariables = Exact<{
+  skill: DeleteSkillInput;
+}>;
+
+export type DeleteSkillMutation = {
+  __typename?: "Mutation";
+  deleteSkill: { __typename?: "DeleteResult"; affected: number };
 };
 
 export type DeleteUserMutationVariables = Exact<{
@@ -941,6 +999,40 @@ export type UpdateProfileLanguageMutation = {
       name: string;
       proficiency: Proficiency;
     }>;
+  };
+};
+
+export type UpdateProfileSkillMutationVariables = Exact<{
+  skill: UpdateProfileSkillInput;
+}>;
+
+export type UpdateProfileSkillMutation = {
+  __typename?: "Mutation";
+  updateProfileSkill: {
+    __typename?: "Profile";
+    skills: Array<{
+      __typename?: "SkillMastery";
+      name: string;
+      mastery: Mastery;
+      categoryId?: string | null;
+    }>;
+  };
+};
+
+export type UpdateSkillMutationVariables = Exact<{
+  skill: UpdateSkillInput;
+}>;
+
+export type UpdateSkillMutation = {
+  __typename?: "Mutation";
+  updateSkill: {
+    __typename?: "Skill";
+    id: string;
+    name: string;
+    created_at: string;
+    category_name?: string | null;
+    category_parent_name?: string | null;
+    category?: { __typename?: "SkillCategory"; id: string; name: string } | null;
   };
 };
 
@@ -1048,7 +1140,50 @@ export type ProfileQuery = {
       name: string;
       proficiency: Proficiency;
     }>;
+    skills: Array<{
+      __typename?: "SkillMastery";
+      name: string;
+      mastery: Mastery;
+      categoryId?: string | null;
+    }>;
   };
+};
+
+export type SkillsQueryVariables = Exact<{
+  params: SearchPaginationInput;
+}>;
+
+export type SkillsQuery = {
+  __typename?: "Query";
+  skills: {
+    __typename?: "PaginatedSkills";
+    total: number;
+    page: number;
+    limit: number;
+    total_pages: number;
+    items: Array<{
+      __typename?: "Skill";
+      id: string;
+      name: string;
+      created_at: string;
+      category_name?: string | null;
+      category_parent_name?: string | null;
+      category?: { __typename?: "SkillCategory"; id: string; name: string } | null;
+    }>;
+  };
+};
+
+export type SkillCategoriesQueryVariables = Exact<{ [key: string]: never }>;
+
+export type SkillCategoriesQuery = {
+  __typename?: "Query";
+  skillCategories: Array<{
+    __typename?: "SkillCategory";
+    id: string;
+    name: string;
+    children: Array<{ __typename?: "SkillCategory"; id: string; name: string }>;
+    parent?: { __typename?: "SkillCategory"; id: string; name: string } | null;
+  }>;
 };
 
 export type UserQueryVariables = Exact<{
@@ -1159,6 +1294,59 @@ export const AddProfileLanguageDocument = {
     },
   ],
 } as unknown as DocumentNode<AddProfileLanguageMutation, AddProfileLanguageMutationVariables>;
+export const AddProfileSkillDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "AddProfileSkill" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "skill" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "AddProfileSkillInput" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "addProfileSkill" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "skill" },
+                value: { kind: "Variable", name: { kind: "Name", value: "skill" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "skills" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "name" } },
+                      { kind: "Field", name: { kind: "Name", value: "mastery" } },
+                      { kind: "Field", name: { kind: "Name", value: "categoryId" } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<AddProfileSkillMutation, AddProfileSkillMutationVariables>;
 export const ChangePasswordDocument = {
   kind: "Document",
   definitions: [
@@ -1242,6 +1430,63 @@ export const CreateLanguageDocument = {
     },
   ],
 } as unknown as DocumentNode<CreateLanguageMutation, CreateLanguageMutationVariables>;
+export const CreateSkillDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "CreateSkill" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "skill" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "CreateSkillInput" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "createSkill" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "skill" },
+                value: { kind: "Variable", name: { kind: "Name", value: "skill" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "id" } },
+                { kind: "Field", name: { kind: "Name", value: "name" } },
+                { kind: "Field", name: { kind: "Name", value: "created_at" } },
+                { kind: "Field", name: { kind: "Name", value: "category_name" } },
+                { kind: "Field", name: { kind: "Name", value: "category_parent_name" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "category" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      { kind: "Field", name: { kind: "Name", value: "name" } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<CreateSkillMutation, CreateSkillMutationVariables>;
 export const CreateUserDocument = {
   kind: "Document",
   definitions: [
@@ -1381,6 +1626,99 @@ export const DeleteProfileLanguageDocument = {
     },
   ],
 } as unknown as DocumentNode<DeleteProfileLanguageMutation, DeleteProfileLanguageMutationVariables>;
+export const DeleteProfileSkillDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "DeleteProfileSkill" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "skill" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "DeleteProfileSkillInput" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "deleteProfileSkill" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "skill" },
+                value: { kind: "Variable", name: { kind: "Name", value: "skill" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "skills" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "name" } },
+                      { kind: "Field", name: { kind: "Name", value: "mastery" } },
+                      { kind: "Field", name: { kind: "Name", value: "categoryId" } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<DeleteProfileSkillMutation, DeleteProfileSkillMutationVariables>;
+export const DeleteSkillDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "DeleteSkill" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "skill" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "DeleteSkillInput" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "deleteSkill" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "skill" },
+                value: { kind: "Variable", name: { kind: "Name", value: "skill" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [{ kind: "Field", name: { kind: "Name", value: "affected" } }],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<DeleteSkillMutation, DeleteSkillMutationVariables>;
 export const DeleteUserDocument = {
   kind: "Document",
   definitions: [
@@ -1777,6 +2115,116 @@ export const UpdateProfileLanguageDocument = {
     },
   ],
 } as unknown as DocumentNode<UpdateProfileLanguageMutation, UpdateProfileLanguageMutationVariables>;
+export const UpdateProfileSkillDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "UpdateProfileSkill" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "skill" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "UpdateProfileSkillInput" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "updateProfileSkill" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "skill" },
+                value: { kind: "Variable", name: { kind: "Name", value: "skill" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "skills" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "name" } },
+                      { kind: "Field", name: { kind: "Name", value: "mastery" } },
+                      { kind: "Field", name: { kind: "Name", value: "categoryId" } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<UpdateProfileSkillMutation, UpdateProfileSkillMutationVariables>;
+export const UpdateSkillDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "UpdateSkill" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "skill" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "UpdateSkillInput" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "updateSkill" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "skill" },
+                value: { kind: "Variable", name: { kind: "Name", value: "skill" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "id" } },
+                { kind: "Field", name: { kind: "Name", value: "name" } },
+                { kind: "Field", name: { kind: "Name", value: "created_at" } },
+                { kind: "Field", name: { kind: "Name", value: "category_name" } },
+                { kind: "Field", name: { kind: "Name", value: "category_parent_name" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "category" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      { kind: "Field", name: { kind: "Name", value: "name" } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<UpdateSkillMutation, UpdateSkillMutationVariables>;
 export const UpdateTokenDocument = {
   kind: "Document",
   definitions: [
@@ -2151,6 +2599,18 @@ export const ProfileDocument = {
                     ],
                   },
                 },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "skills" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "name" } },
+                      { kind: "Field", name: { kind: "Name", value: "mastery" } },
+                      { kind: "Field", name: { kind: "Name", value: "categoryId" } },
+                    ],
+                  },
+                },
               ],
             },
           },
@@ -2159,6 +2619,124 @@ export const ProfileDocument = {
     },
   ],
 } as unknown as DocumentNode<ProfileQuery, ProfileQueryVariables>;
+export const SkillsDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "Skills" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "params" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "SearchPaginationInput" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "skills" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "params" },
+                value: { kind: "Variable", name: { kind: "Name", value: "params" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "items" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      { kind: "Field", name: { kind: "Name", value: "name" } },
+                      { kind: "Field", name: { kind: "Name", value: "created_at" } },
+                      { kind: "Field", name: { kind: "Name", value: "category_name" } },
+                      { kind: "Field", name: { kind: "Name", value: "category_parent_name" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "category" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            { kind: "Field", name: { kind: "Name", value: "id" } },
+                            { kind: "Field", name: { kind: "Name", value: "name" } },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                { kind: "Field", name: { kind: "Name", value: "total" } },
+                { kind: "Field", name: { kind: "Name", value: "page" } },
+                { kind: "Field", name: { kind: "Name", value: "limit" } },
+                { kind: "Field", name: { kind: "Name", value: "total_pages" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<SkillsQuery, SkillsQueryVariables>;
+export const SkillCategoriesDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "SkillCategories" },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "skillCategories" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "id" } },
+                { kind: "Field", name: { kind: "Name", value: "name" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "children" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      { kind: "Field", name: { kind: "Name", value: "name" } },
+                    ],
+                  },
+                },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "parent" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      { kind: "Field", name: { kind: "Name", value: "name" } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<SkillCategoriesQuery, SkillCategoriesQueryVariables>;
 export const UserDocument = {
   kind: "Document",
   definitions: [

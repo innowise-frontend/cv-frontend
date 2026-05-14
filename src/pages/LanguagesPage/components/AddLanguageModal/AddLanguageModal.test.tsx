@@ -53,6 +53,7 @@ describe("AddLanguageModal", () => {
   it("submits selected language and proficiency", () => {
     render(
       <AddLanguageModal
+        userId="u-1"
         languageOptions={[{ label: "English", value: "English" }]}
         proficiencyOptions={[{ label: "B2", value: "B2" }]}
       />,

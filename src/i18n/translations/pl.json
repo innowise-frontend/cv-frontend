@@ -9,6 +9,7 @@
       "hello": "Cześć !"
     },
     "setting": {
+      "breadcrumbs": "Ustawienia",
       "theme": "Motyw",
       "language": "Język",
       "changePassword": "Zmień hasło",
@@ -117,6 +118,32 @@
       "update": "Zaktualizuj",
       "save": "Zapisz"
     },
+    "skills": {
+      "currentSkills": "Umiejętności",
+      "emptyState": "Nie masz jeszcze żadnych umiejętności",
+      "addSkill": "Dodaj umiejętność",
+      "createSkill": "Utwórz umiejętność",
+      "updateSkill": "Zaktualizuj umiejętność",
+      "deleteSkill": "Usuń umiejętność",
+      "removeSkills": "Usuń umiejętności",
+      "uncategorized": "Inne",
+      "name": "Nazwa",
+      "type": "Typ",
+      "category": "Kategoria",
+      "skill": "Umiejętność",
+      "skills": "Umiejętności",
+      "mastery": "Poziom",
+      "edit": "Edytuj",
+      "delete": "Usuń",
+      "confirmRemove": "Czy na pewno chcesz usunąć",
+      "confirmDeleteSkill": "Czy na pewno chcesz usunąć umiejętność {{name}}?",
+      "cancel": "Anuluj",
+      "confirm": "Potwierdź",
+      "add": "Dodaj",
+      "remove": "Usuń",
+      "update": "Zaktualizuj",
+      "save": "Zapisz"
+    },
     "sidebar": {
       "employees": "Pracownicy",
       "skills": "Umiejętności",
@@ -179,6 +206,7 @@
       "update": "Zapisz zmiany",
       "updateUser": "Edytuj",
       "updateUserTitle": "Edycja użytkownika",
+      "updateUserFailed": "Nie udało się zaktualizować użytkownika",
       "deleteUser": "Usuń",
       "deleteUserTitle": "Usuwanie użytkownika",
       "confirmDeleteBefore": "Czy na pewno chcesz usunąć ",

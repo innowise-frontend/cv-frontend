@@ -1,11 +1,18 @@
-import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useCallback, useEffect } from "react";
+import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { toast } from "sonner";
 import { Button, Input, Modal, Select } from "@components/shared";
 import { useModalContext } from "@components/shared/Modal/useModalContext";
 import { useAuth } from "@root/hooks";
-import { UpdateUserModalProps } from "./types";
-import { useGetDepartmentsApi, useGetPositionsApi, useUpdateUserApi } from "../../api";
+import type { UserRole } from "@root/services/graphql/__generated__/graphql";
+import { UpdateUserModalProps, UpdateUserFormValues } from "./types";
+import {
+  useGetDepartmentsApi,
+  useGetPositionsApi,
+  useUpdateProfileApi,
+  useUpdateUserApi,
+} from "../../api";
 
 export const UpdateUserModal = ({
   userId,
@@ -17,137 +24,149 @@ export const UpdateUserModal = ({
   role,
 }: UpdateUserModalProps) => {
   const { t } = useTranslation();
-  const [updatedUser, setUpdatedUser] = useState({
-    userId,
-    profile: {
+  const { isAdmin } = useAuth();
+  const { handleSubmit, reset, control, register } = useForm<UpdateUserFormValues>({
+    defaultValues: {
+      email,
+      password: "********",
       firstName,
       lastName,
+      departmentId,
+      positionId,
+      role,
     },
-    cvsIds: [],
-    departmentId,
-    positionId,
-    role,
   });
-  const { isAdmin } = useAuth();
-  const { handleSubmit } = useForm();
   const { closeModal } = useModalContext();
 
-  const { mutate } = useUpdateUserApi({
-    onSuccess: () => {
-      closeModal();
-    },
-  });
+  const { mutateAsync: updateUserAsync } = useUpdateUserApi();
+  const { mutateAsync: updateProfileAsync } = useUpdateProfileApi();
 
   const { data: departments } = useGetDepartmentsApi({ enabled: isAdmin });
   const { data: positions } = useGetPositionsApi({ enabled: isAdmin });
 
-  const resetUpdatedUser = () => {
-    setUpdatedUser({
-      userId,
-      profile: {
-        firstName,
-        lastName,
-      },
-      cvsIds: [],
+  const resetToInitial = useCallback(() => {
+    reset({
+      email,
+      password: "********",
+      firstName,
+      lastName,
       departmentId,
       positionId,
       role,
     });
+  }, [reset, email, firstName, lastName, departmentId, positionId, role]);
+
+  const handleUpdateUser = async (data: UpdateUserFormValues) => {
+    try {
+      await updateUserAsync({
+        userId,
+        departmentId: data.departmentId,
+        positionId: data.positionId,
+        role: data.role as UserRole,
+      });
+      await updateProfileAsync({
+        userId,
+        first_name: data.firstName,
+        last_name: data.lastName,
+      });
+      closeModal();
+      toast.success(t("page.users.updateUserTitle"));
+    } catch {
+      toast.error(t("page.users.updateUserFailed"));
+    }
   };
+
+  useEffect(() => {
+    resetToInitial();
+  }, [userId, resetToInitial]);
 
   return (
     <>
       <Modal.Trigger className="w-full h-auto justify-start capitalize p-0 text-gray dark:text-gray-8">
         {t("page.users.updateUser")}
       </Modal.Trigger>
-      <Modal.Content onCancel={resetUpdatedUser}>
+      <Modal.Content onCancel={resetToInitial}>
         <Modal.Header>{t("page.users.updateUserTitle")}</Modal.Header>
-        <form
-          onSubmit={handleSubmit((data) =>
-            mutate({
-              userId: updatedUser.userId,
-              departmentId: data.departmentId,
-              positionId: data.positionId,
-              role: data.role,
-              cvsIds: data.cvsIds,
-            }),
-          )}
-        >
+        <form onSubmit={handleSubmit(handleUpdateUser)}>
           <Modal.Body className="grid grid-cols-2 gap-4">
-            <Input label="Email" name="email" disabled placeholder="Email" value={email} />
+            <Input
+              label="Email"
+              disabled
+              placeholder="Email"
+              {...register("email", { disabled: true })}
+            />
             <Input
               disabled
               label="Password"
-              name="password"
               type="password"
               placeholder="Password"
-              value={"********"}
+              {...register("password", { disabled: true })}
             />
-            <Input
-              label="First Name"
-              name="firstName"
-              placeholder="First Name"
-              value={updatedUser.profile.firstName}
-              onChange={(e) =>
-                setUpdatedUser({
-                  ...updatedUser,
-                  profile: { ...updatedUser.profile, firstName: e.target.value },
-                })
-              }
-            />
+            <Input label="First Name" placeholder="First Name" {...register("firstName")} />
             <Input
               label={t("page.users.lastName")}
-              name="lastName"
               placeholder={t("page.users.lastName")}
-              value={updatedUser.profile.lastName}
-              onChange={(e) =>
-                setUpdatedUser({
-                  ...updatedUser,
-                  profile: { ...updatedUser.profile, lastName: e.target.value },
-                })
-              }
+              {...register("lastName")}
             />
-            <Select
-              disablePortal
-              sideShift="none"
-              className="[&_[data-slot=select-trigger][data-placeholder]]:text-gray-6"
-              list={
-                departments?.map((department) => ({
-                  value: department.id,
-                  label: department.name,
-                })) ?? []
-              }
-              placeholder={t("page.users.selectDepartment")}
-              label={t("page.users.department")}
-              value={updatedUser.departmentId}
-              onValueChange={(value) => setUpdatedUser({ ...updatedUser, departmentId: value })}
+            <Controller
+              name="departmentId"
+              control={control}
+              render={({ field }) => (
+                <Select
+                  disablePortal
+                  sideShift="none"
+                  className="[&_[data-slot=select-trigger][data-placeholder]]:text-gray-6"
+                  list={
+                    departments?.map((d) => ({
+                      value: d.id,
+                      label: d.name,
+                    })) ?? []
+                  }
+                  placeholder={t("page.users.selectDepartment")}
+                  label={t("page.users.department")}
+                  value={field.value}
+                  onValueChange={field.onChange}
+                />
+              )}
             />
-            <Select
-              disablePortal
-              sideShift="none"
-              className="[&_[data-slot=select-trigger][data-placeholder]]:text-gray-6"
-              list={
-                positions?.map((position) => ({
-                  value: position.id,
-                  label: position.name,
-                })) ?? []
-              }
-              placeholder={t("page.users.selectPosition")}
-              label={t("page.users.position")}
-              value={updatedUser.positionId}
-              onValueChange={(value) => setUpdatedUser({ ...updatedUser, positionId: value })}
+            <Controller
+              name="positionId"
+              control={control}
+              render={({ field }) => (
+                <Select
+                  disablePortal
+                  sideShift="none"
+                  className="[&_[data-slot=select-trigger][data-placeholder]]:text-gray-6"
+                  list={
+                    positions?.map((p) => ({
+                      value: p.id,
+                      label: p.name,
+                    })) ?? []
+                  }
+                  placeholder={t("page.users.selectPosition")}
+                  label={t("page.users.position")}
+                  value={field.value}
+                  onValueChange={field.onChange}
+                />
+              )}
             />
-            <Select
-              disablePortal
-              sideShift="none"
-              list={[
-                { value: "Employee", label: t("page.users.roleEmployee") },
-                { value: "Admin", label: t("page.users.roleAdmin") },
-              ]}
-              placeholder={t("page.users.selectRole")}
-              label={t("page.users.role")}
-              value={updatedUser.role}
-              onValueChange={(value) => setUpdatedUser({ ...updatedUser, role: value })}
+            <Controller
+              name="role"
+              control={control}
+              render={({ field }) => (
+                <Select
+                  disablePortal
+                  sideShift="none"
+                  list={[
+                    { value: "Employee", label: t("page.users.roleEmployee") },
+                    { value: "Admin", label: t("page.users.roleAdmin") },
+                  ]}
+                  placeholder={t("page.users.selectRole")}
+                  label={t("page.users.role")}
+                  value={field.value}
+                  onValueChange={field.onChange}
+                />
+              )}
             />
           </Modal.Body>
           <Modal.Footer>

@@ -9,9 +9,7 @@ import { requestWithAuth } from "@root/services/graphql/client";
 export const createUser = async (user: CreateUserInput) => {
   const response = await requestWithAuth<CreateUserMutation, CreateUserMutationVariables>(
     CreateUserDocument,
-    {
-      user,
-    },
+    { user },
   );
 
   return response.createUser;

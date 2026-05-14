@@ -19,7 +19,6 @@ import { Route as PublicAuthRouteImport } from './routes/_public/auth'
 import { Route as AppSkillsRouteImport } from './routes/_app/skills'
 import { Route as AppSettingsRouteImport } from './routes/_app/settings'
 import { Route as AppProjectsRouteImport } from './routes/_app/projects'
-import { Route as AppProfileRouteImport } from './routes/_app/profile'
 import { Route as AppPositionsRouteImport } from './routes/_app/positions'
 import { Route as AppLanguagesRouteImport } from './routes/_app/languages'
 import { Route as AppDepartmentsRouteImport } from './routes/_app/departments'
@@ -78,11 +77,6 @@ const AppProjectsRoute = AppProjectsRouteImport.update({
   path: '/projects',
   getParentRoute: () => AppRouteRoute,
 } as any)
-const AppProfileRoute = AppProfileRouteImport.update({
-  id: '/profile',
-  path: '/profile',
-  getParentRoute: () => AppRouteRoute,
-} as any)
 const AppPositionsRoute = AppPositionsRouteImport.update({
   id: '/positions',
   path: '/positions',
@@ -135,7 +129,6 @@ export interface FileRoutesByFullPath {
   '/departments': typeof AppDepartmentsRoute
   '/languages': typeof AppLanguagesRoute
   '/positions': typeof AppPositionsRoute
-  '/profile': typeof AppProfileRoute
   '/projects': typeof AppProjectsRoute
   '/settings': typeof AppSettingsRoute
   '/skills': typeof AppSkillsRoute
@@ -155,7 +148,6 @@ export interface FileRoutesByTo {
   '/departments': typeof AppDepartmentsRoute
   '/languages': typeof AppLanguagesRoute
   '/positions': typeof AppPositionsRoute
-  '/profile': typeof AppProfileRoute
   '/projects': typeof AppProjectsRoute
   '/settings': typeof AppSettingsRoute
   '/skills': typeof AppSkillsRoute
@@ -176,7 +168,6 @@ export interface FileRoutesById {
   '/_app/departments': typeof AppDepartmentsRoute
   '/_app/languages': typeof AppLanguagesRoute
   '/_app/positions': typeof AppPositionsRoute
-  '/_app/profile': typeof AppProfileRoute
   '/_app/projects': typeof AppProjectsRoute
   '/_app/settings': typeof AppSettingsRoute
   '/_app/skills': typeof AppSkillsRoute
@@ -199,7 +190,6 @@ export interface FileRouteTypes {
     | '/departments'
     | '/languages'
     | '/positions'
-    | '/profile'
     | '/projects'
     | '/settings'
     | '/skills'
@@ -219,7 +209,6 @@ export interface FileRouteTypes {
     | '/departments'
     | '/languages'
     | '/positions'
-    | '/profile'
     | '/projects'
     | '/settings'
     | '/skills'
@@ -239,7 +228,6 @@ export interface FileRouteTypes {
     | '/_app/departments'
     | '/_app/languages'
     | '/_app/positions'
-    | '/_app/profile'
     | '/_app/projects'
     | '/_app/settings'
     | '/_app/skills'
@@ -332,13 +320,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppProjectsRouteImport
       parentRoute: typeof AppRouteRoute
     }
-    '/_app/profile': {
-      id: '/_app/profile'
-      path: '/profile'
-      fullPath: '/profile'
-      preLoaderRoute: typeof AppProfileRouteImport
-      parentRoute: typeof AppRouteRoute
-    }
     '/_app/positions': {
       id: '/_app/positions'
       path: '/positions'
@@ -428,7 +409,6 @@ interface AppRouteRouteChildren {
   AppDepartmentsRoute: typeof AppDepartmentsRoute
   AppLanguagesRoute: typeof AppLanguagesRoute
   AppPositionsRoute: typeof AppPositionsRoute
-  AppProfileRoute: typeof AppProfileRoute
   AppProjectsRoute: typeof AppProjectsRoute
   AppSettingsRoute: typeof AppSettingsRoute
   AppSkillsRoute: typeof AppSkillsRoute
@@ -441,7 +421,6 @@ const AppRouteRouteChildren: AppRouteRouteChildren = {
   AppDepartmentsRoute: AppDepartmentsRoute,
   AppLanguagesRoute: AppLanguagesRoute,
   AppPositionsRoute: AppPositionsRoute,
-  AppProfileRoute: AppProfileRoute,
   AppProjectsRoute: AppProjectsRoute,
   AppSettingsRoute: AppSettingsRoute,
   AppSkillsRoute: AppSkillsRoute,

@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Modal, ProgressBar, Select } from "@root/components/shared";
 import { useModalContext } from "@root/components/shared/Modal/useModalContext";
-import { useAuth } from "@root/hooks";
 import { cn } from "@root/lib";
 import { Proficiency, UpdateProfileLanguageInput } from "@services/graphql/__generated__/graphql";
 import { LanguageProps } from "./types";
@@ -10,6 +9,7 @@ import { useUpdateProfileLanguageMutation } from "../../api";
 import { PROFICIENCY_ORDER } from "../../const";
 
 export const LanguageProgressBar = ({
+  userId,
   name,
   proficiency,
   chosen = false,
@@ -17,13 +17,12 @@ export const LanguageProgressBar = ({
   onClick,
 }: LanguageProps) => {
   const { t } = useTranslation();
-  const { userId } = useAuth();
   const { closeModal } = useModalContext();
 
   const [updateLanguage, setUpdateLanguage] = useState<UpdateProfileLanguageInput>({
-    userId: userId,
-    name: name,
-    proficiency: proficiency,
+    userId,
+    name,
+    proficiency,
   });
 
   const proficiencyOptions = PROFICIENCY_ORDER.map((proficiency) => ({
@@ -38,7 +37,11 @@ export const LanguageProgressBar = ({
   });
 
   const resetUpdateLanguage = () => {
-    setUpdateLanguage({ userId, name: name, proficiency: proficiency });
+    setUpdateLanguage({ userId, name, proficiency });
+  };
+
+  const handleUpdateLanguage = () => {
+    mutate({ ...updateLanguage, userId });
   };
 
   if (isDeleteMode) {
@@ -46,7 +49,7 @@ export const LanguageProgressBar = ({
       <Button variant="ghost" className="capitalize" onClick={onClick}>
         <ProgressBar
           className={cn(
-            "px-2 cursor-pointer hover:bg-gray-7 dark:hover:bg-gray5",
+            "px-2 cursor-pointer hover:bg-gray-7 dark:hover:bg-gray-5",
             chosen && "*:text-gray *:dark:text-gray-8",
           )}
           label={name || ""}
@@ -60,7 +63,7 @@ export const LanguageProgressBar = ({
     <>
       <Modal.Trigger className="capitalize" variant="ghost">
         <ProgressBar
-          className="px-2 cursor-pointer hover:bg-gray-7"
+          className="px-2 cursor-pointer hover:bg-gray-7 dark:hover:bg-gray-5"
           label={name || ""}
           proficiency={proficiency}
         />
@@ -95,10 +98,8 @@ export const LanguageProgressBar = ({
           <Button
             variant="filled"
             className="w-40"
-            disabled={updateLanguage.proficiency === proficiency}
-            onClick={() => {
-              mutate(updateLanguage);
-            }}
+            disabled={updateLanguage.proficiency === proficiency || !userId}
+            onClick={handleUpdateLanguage}
           >
             {t("page.languages.save")}
           </Button>

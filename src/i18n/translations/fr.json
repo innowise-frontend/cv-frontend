@@ -9,6 +9,7 @@
       "hello": "Bonjour!"
     },
     "setting": {
+      "breadcrumbs": "Paramètres",
       "theme": "Thème",
       "language": "Langue",
       "changePassword": "Changer le mot de passe",
@@ -116,6 +117,32 @@
       "remove": "Supprimer",
       "update": "Mettre a jour",
       "save": "Enregistrer"
+    }, 
+    "skills": {
+      "currentSkills": "Compétences",
+      "emptyState": "Vous n'avez encore aucune compétence",
+      "addSkill": "Ajouter une compétence",
+      "createSkill": "Créer une compétence",
+      "updateSkill": "Mettre à jour la compétence",
+      "deleteSkill": "Supprimer la compétence",
+      "removeSkills": "Supprimer des compétences",
+      "uncategorized": "Autre",
+      "name": "Nom",
+      "type": "Type",
+      "category": "Catégorie",
+      "skill": "Compétence",
+      "skills": "Compétences",
+      "mastery": "Niveau",
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "confirmRemove": "Etes-vous sur de vouloir supprimer",
+      "confirmDeleteSkill": "Etes-vous sur de vouloir supprimer la compétence {{name}} ?",
+      "cancel": "Annuler",
+      "confirm": "Confirmer",
+      "add": "Ajouter",
+      "remove": "Supprimer",
+      "update": "Mettre a jour",
+      "save": "Enregistrer"
     },
     "sidebar": {
       "employees": "Employés",
@@ -179,6 +206,7 @@
       "update": "Mettre à jour",
       "updateUser": "Modifier",
       "updateUserTitle": "Modifier l'utilisateur",
+      "updateUserFailed": "Échec de la mise à jour de l'utilisateur",
       "deleteUser": "Supprimer",
       "deleteUserTitle": "Supprimer l'utilisateur",
       "confirmDeleteBefore": "Êtes-vous sûr de vouloir supprimer ",

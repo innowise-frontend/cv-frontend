@@ -9,6 +9,7 @@
       "hello": "Ciao!"
     },
     "setting": {
+      "breadcrumbs": "Impostazioni",
       "theme": "Tema",
       "language": "Lingua",
       "changePassword": "Cambia password",
@@ -117,6 +118,32 @@
       "update": "Aggiorna",
       "save": "Salva"
     },
+    "skills": {
+      "currentSkills": "Competenze",
+      "emptyState": "Non hai ancora nessuna competenza",
+      "addSkill": "Aggiungi competenza",
+      "createSkill": "Crea competenza",
+      "updateSkill": "Aggiorna competenza",
+      "deleteSkill": "Elimina competenza",
+      "removeSkills": "Rimuovi competenze",
+      "uncategorized": "Altro",
+      "name": "Nome",
+      "type": "Tipo",
+      "category": "Categoria",
+      "skill": "Competenza",
+      "skills": "Competenze",
+      "mastery": "Livello",
+      "edit": "Modifica",
+      "delete": "Elimina",
+      "confirmRemove": "Sei sicuro di voler rimuovere",
+      "confirmDeleteSkill": "Sei sicuro di voler eliminare la competenza {{name}}?",
+      "cancel": "Annulla",
+      "confirm": "Conferma",
+      "add": "Aggiungi",
+      "remove": "Rimuovi",
+      "update": "Aggiorna",
+      "save": "Salva"
+    },
     "sidebar": {
       "employees": "Dipendenti",
       "skills": "Competenze",
@@ -179,6 +206,7 @@
       "update": "Aggiorna",
       "updateUser": "Aggiorna",
       "updateUserTitle": "Modifica utente",
+      "updateUserFailed": "Impossibile aggiornare l'utente",
       "deleteUser": "Elimina",
       "deleteUserTitle": "Elimina utente",
       "confirmDeleteBefore": "Sei sicuro di voler eliminare ",

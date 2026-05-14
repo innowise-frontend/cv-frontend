@@ -29,7 +29,10 @@ vi.mock("./components", () => ({
   CreateUserModal: () => <div data-testid="create-user-modal" />,
 }));
 
+const useAuthMock = vi.hoisted(() => vi.fn(() => ({ isAdmin: true })));
+
 vi.mock("@root/hooks", () => ({
+  useAuth: () => useAuthMock(),
   useHandleSearch: () => ({
     onSearch: vi.fn(),
   }),
@@ -76,12 +79,21 @@ vi.mock("react-i18next", () => ({
 describe("UsersPage", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    useAuthMock.mockReturnValue({ isAdmin: true });
     useSearchMock.mockReturnValue({ search: "" });
     useUsersApiMock.mockReturnValue({ data: undefined });
   });
 
   afterEach(() => {
     vi.restoreAllMocks();
+  });
+
+  it("does not render create user modal for non-admin", () => {
+    useAuthMock.mockReturnValue({ isAdmin: false });
+
+    render(<UsersPage />);
+
+    expect(screen.queryByTestId("modal")).not.toBeInTheDocument();
   });
 
   it("renders layout parts and passes fetched users into Table", () => {

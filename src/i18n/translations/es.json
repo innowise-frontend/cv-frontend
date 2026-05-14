@@ -9,6 +9,7 @@
       "hello": "Hola!"
     },
     "setting": {
+      "breadcrumbs": "Ajustes",
       "theme": "Tema",
       "language": "Idioma",
       "changePassword": "Cambiar contraseña",
@@ -117,6 +118,32 @@
       "update": "Actualizar",
       "save": "Guardar"
     },
+    "skills": {
+      "currentSkills": "Habilidades",
+      "emptyState": "Todavía no tienes habilidades",
+      "addSkill": "Agregar habilidad",
+      "createSkill": "Crear habilidad",
+      "updateSkill": "Actualizar habilidad",
+      "deleteSkill": "Eliminar habilidad",
+      "removeSkills": "Quitar habilidades",
+      "uncategorized": "Otro",
+      "name": "Nombre",
+      "type": "Tipo",
+      "category": "Categoría",
+      "skill": "Habilidad",
+      "skills": "Habilidades",
+      "mastery": "Nivel",
+      "edit": "Editar",
+      "delete": "Eliminar",
+      "confirmRemove": "¿Seguro que quieres quitar",
+      "confirmDeleteSkill": "¿Seguro que quieres eliminar la habilidad {{name}}?",
+      "cancel": "Cancelar",
+      "confirm": "Confirmar",
+      "add": "Agregar",
+      "remove": "Quitar",
+      "update": "Actualizar",
+      "save": "Guardar"
+    },
     "sidebar": {
       "employees": "Empleados",
       "skills": "Habilidades",
@@ -179,6 +206,7 @@
       "update": "Actualizar",
       "updateUser": "Actualizar",
       "updateUserTitle": "Editar usuario",
+      "updateUserFailed": "No se pudo actualizar el usuario",
       "deleteUser": "Eliminar",
       "deleteUserTitle": "Eliminar usuario",
       "confirmDeleteBefore": "¿Seguro que deseas eliminar a ",
