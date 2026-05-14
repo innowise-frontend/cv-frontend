@@ -10,7 +10,7 @@ import {
 } from "@components/ui/breadcrumb";
 import type { BreadcrumbsProps } from "./types";
 
-export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className }) => {
+export const Breadcrumbs = ({ items, className }: BreadcrumbsProps) => {
   return (
     <Breadcrumb className={className}>
       <BreadcrumbList className="text-base leading-6">
@@ -23,13 +23,16 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className }) =>
                 {item.isProfile ? (
                   <BreadcrumbLink
                     href={item.href || ""}
-                    className="text-red flex items-center gap-2"
+                    className="capitalize text-red flex items-center gap-2"
                   >
-                    <UserIcon />
+                    <UserIcon className="size-4 shrink-0" />
                     {item.label}
                   </BreadcrumbLink>
                 ) : (
-                  <BreadcrumbLink href={item.href || ""} className="text-gray-3 dark:text-gray-5">
+                  <BreadcrumbLink
+                    href={item.href || ""}
+                    className="capitalize text-gray-3 dark:text-gray-5"
+                  >
                     {item.label}
                   </BreadcrumbLink>
                 )}

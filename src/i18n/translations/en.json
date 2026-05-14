@@ -209,6 +209,7 @@
       "updateUserFailed": "Failed to update user",
       "deleteUser": "Delete",
       "deleteUserTitle": "Delete user",
+      "deleteUserSuccess": "User deleted successfully",
       "confirmDeleteBefore": "Are you sure you want to delete ",
       "confirmDeleteAfter": "?",
       "emailAlreadyExists": "A user with this email already exists.",

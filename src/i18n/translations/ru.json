@@ -209,6 +209,7 @@
       "updateUserFailed": "Не удалось обновить пользователя",
       "deleteUser": "Удалить",
       "deleteUserTitle": "Удаление пользователя",
+      "deleteUserSuccess": "Пользователь успешно удалён",
       "confirmDeleteBefore": "Вы уверены, что хотите удалить ",
       "confirmDeleteAfter": "?",
       "emailAlreadyExists": "Пользователь с таким email уже существует.",

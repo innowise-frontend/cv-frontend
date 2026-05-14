@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { Button, Input, Modal, Select } from "@components/shared";
 import { useModalContext } from "@components/shared/Modal/useModalContext";
 import { useAuth } from "@root/hooks";
-import type { UserRole } from "@root/services/graphql/__generated__/graphql";
+import { UserRole } from "@root/services/graphql/__generated__/graphql";
 import { UpdateUserModalProps, UpdateUserFormValues } from "./types";
 import {
   useGetDepartmentsApi,
@@ -90,19 +90,23 @@ export const UpdateUserModal = ({
         <form onSubmit={handleSubmit(handleUpdateUser)}>
           <Modal.Body className="grid grid-cols-2 gap-4">
             <Input
-              label="Email"
+              label={t("page.users.email")}
               disabled
-              placeholder="Email"
+              placeholder={t("page.users.email")}
               {...register("email", { disabled: true })}
             />
             <Input
               disabled
-              label="Password"
+              label={t("page.users.password")}
               type="password"
-              placeholder="Password"
+              placeholder={t("page.users.password")}
               {...register("password", { disabled: true })}
             />
-            <Input label="First Name" placeholder="First Name" {...register("firstName")} />
+            <Input
+              label={t("page.users.firstName")}
+              placeholder={t("page.users.firstName")}
+              {...register("firstName")}
+            />
             <Input
               label={t("page.users.lastName")}
               placeholder={t("page.users.lastName")}
@@ -158,8 +162,8 @@ export const UpdateUserModal = ({
                   disablePortal
                   sideShift="none"
                   list={[
-                    { value: "Employee", label: t("page.users.roleEmployee") },
-                    { value: "Admin", label: t("page.users.roleAdmin") },
+                    { value: UserRole.Employee, label: t("page.users.roleEmployee") },
+                    { value: UserRole.Admin, label: t("page.users.roleAdmin") },
                   ]}
                   placeholder={t("page.users.selectRole")}
                   label={t("page.users.role")}
@@ -170,7 +174,15 @@ export const UpdateUserModal = ({
             />
           </Modal.Body>
           <Modal.Footer>
-            <Modal.Close variant="outline" className="w-40">
+            <Modal.Close
+              type="button"
+              variant="outline"
+              className="w-40"
+              onClick={() => {
+                resetToInitial();
+                closeModal();
+              }}
+            >
               {t("page.users.cancel")}
             </Modal.Close>
             <Button type="submit" className="w-40" variant="filled">

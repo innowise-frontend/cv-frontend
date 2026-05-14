@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { toast } from "sonner";
 import { Button, Modal } from "@components/shared";
 import { useModalContext } from "@components/shared/Modal/useModalContext";
 import { DeleteUserModalProps } from "./types";
@@ -12,6 +13,7 @@ export const DeleteUserModal = ({ userId, firstName, lastName }: DeleteUserModal
   const { mutate } = useDeleteUserApi({
     onSuccess: () => {
       closeModal();
+      toast.success(t("page.users.deleteUserSuccess"));
     },
   });
 

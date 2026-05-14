@@ -54,4 +54,12 @@ describe("Breadcrumbs", () => {
 
     expect(container.firstChild).toHaveClass("breadcrumbs-extra");
   });
+
+  it("should apply capitalize to breadcrumb link labels", () => {
+    render(<Breadcrumbs items={[{ label: "profile", href: "/users/1/profile" }]} />);
+
+    const link = screen.getByRole("link", { name: "profile" });
+
+    expect(link).toHaveClass("capitalize");
+  });
 });

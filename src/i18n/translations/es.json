@@ -209,6 +209,7 @@
       "updateUserFailed": "No se pudo actualizar el usuario",
       "deleteUser": "Eliminar",
       "deleteUserTitle": "Eliminar usuario",
+      "deleteUserSuccess": "Usuario eliminado correctamente",
       "confirmDeleteBefore": "¿Seguro que deseas eliminar a ",
       "confirmDeleteAfter": "?",
       "emailAlreadyExists": "Ya existe un usuario con este correo electrónico.",

@@ -182,6 +182,7 @@ export interface TranslationTypes {
       updateUserFailed: string;
       deleteUser: string;
       deleteUserTitle: string;
+      deleteUserSuccess: string;
       confirmDeleteBefore: string;
       confirmDeleteAfter: string;
       confirm: string;

@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import PlusIcon from "@assets/icon/PlusIcon.svg?react";
 import { Button, Input, Modal, Select } from "@components/shared";
 import { useModalContext } from "@components/shared/Modal/useModalContext";
+import { SortOrder } from "@root/constants";
 import { useAuth } from "@root/hooks";
 import { UserRole } from "@services/graphql/__generated__/graphql";
 import { getUsers } from "@services/users";
@@ -15,7 +16,7 @@ type CreateUserFormValues = {
   lastName: string;
   departmentId: string;
   positionId: string;
-  role: string;
+  role: UserRole;
 };
 
 const defaultFormValues: CreateUserFormValues = {
@@ -25,7 +26,7 @@ const defaultFormValues: CreateUserFormValues = {
   lastName: "",
   departmentId: "",
   positionId: "",
-  role: "Employee",
+  role: UserRole.Employee,
 };
 
 export const CreateUserModal = () => {
@@ -84,7 +85,7 @@ export const CreateUserModal = () => {
               search: email,
               page: 1,
               limit: 100,
-              sort_order: "ASC",
+              sort_order: SortOrder.ASC,
               sort_by: "email",
             });
 
@@ -109,7 +110,7 @@ export const CreateUserModal = () => {
               },
               departmentId: data.departmentId,
               positionId: data.positionId,
-              role: data.role as UserRole,
+              role: data.role,
             });
           })}
         >
@@ -190,8 +191,8 @@ export const CreateUserModal = () => {
                 <Select
                   disablePortal
                   list={[
-                    { value: "Employee", label: t("page.users.roleEmployee") },
-                    { value: "Admin", label: t("page.users.roleAdmin") },
+                    { value: UserRole.Employee, label: t("page.users.roleEmployee") },
+                    { value: UserRole.Admin, label: t("page.users.roleAdmin") },
                   ]}
                   placeholder={t("page.users.selectRole")}
                   label={t("page.users.role")}

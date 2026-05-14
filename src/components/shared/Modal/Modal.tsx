@@ -5,17 +5,13 @@ import { Button } from "@components/shared";
 import { useModal } from "@root/hooks";
 import { cn } from "@root/lib";
 import { ModalContext, useModalContext } from "./useModalContext";
+import type { ModalComponentProps, ModalContentProps } from "./types";
 
 const Modal = ({ children }: { children: React.ReactNode }) => {
   const { isOpen, openModal, closeModal } = useModal();
 
   return <ModalContext value={{ isOpen, openModal, closeModal }}>{children}</ModalContext>;
 };
-
-interface ModalComponentProps {
-  children: React.ReactNode;
-  className?: string;
-}
 
 const ModalTrigger = ({
   children,
@@ -31,13 +27,7 @@ const ModalTrigger = ({
   );
 };
 
-const ModalContent = ({
-  children,
-  ref,
-  className = "",
-  onCancel,
-  ...props
-}: Omit<React.ComponentProps<"dialog">, "onCancel"> & { onCancel?: () => void }) => {
+const ModalContent = ({ children, ref, className = "", onCancel, ...props }: ModalContentProps) => {
   const { isOpen, closeModal } = useModalContext();
   const dialogRef = useRef<HTMLDialogElement | null>(null);
 

@@ -3,8 +3,8 @@ import { toast } from "sonner";
 import { getErrorToastMessage } from "@root/lib";
 import { submitUpdateProfile } from "@services/auth/updateUserProfile/updateUserProfile";
 import { getDepartments } from "@services/departments";
-import { getPositions } from "@services/positions";
 import type { UpdateProfileInput } from "@services/graphql/__generated__/graphql";
+import { getPositions } from "@services/positions";
 import { createUser, deleteUser, getUsers, updateUser } from "@services/users";
 
 interface UseUsersApiParams {
