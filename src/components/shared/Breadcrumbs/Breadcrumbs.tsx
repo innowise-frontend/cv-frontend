@@ -8,9 +8,10 @@ import {
   BreadcrumbLink,
   BreadcrumbSeparator,
 } from "@components/ui/breadcrumb";
+import { displayBreadcrumbLabel } from "./utils";
 import type { BreadcrumbsProps } from "./types";
 
-export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className }) => {
+export const Breadcrumbs = ({ items, className }: BreadcrumbsProps) => {
   return (
     <Breadcrumb className={className}>
       <BreadcrumbList className="text-base leading-6">
@@ -25,12 +26,12 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className }) =>
                     href={item.href || ""}
                     className="text-red flex items-center gap-2"
                   >
-                    <UserIcon />
-                    {item.label}
+                    <UserIcon className="size-4 shrink-0" />
+                    {displayBreadcrumbLabel(item.label)}
                   </BreadcrumbLink>
                 ) : (
                   <BreadcrumbLink href={item.href || ""} className="text-gray-3 dark:text-gray-5">
-                    {item.label}
+                    {displayBreadcrumbLabel(item.label)}
                   </BreadcrumbLink>
                 )}
               </BreadcrumbItem>

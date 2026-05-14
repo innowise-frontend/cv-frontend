@@ -54,4 +54,10 @@ describe("Breadcrumbs", () => {
 
     expect(container.firstChild).toHaveClass("breadcrumbs-extra");
   });
+
+  it("should capitalize the first letter of each label for display", () => {
+    render(<Breadcrumbs items={[{ label: "profile", href: "/users/1/profile" }]} />);
+
+    expect(screen.getByRole("link", { name: "Profile" })).toBeInTheDocument();
+  });
 });
