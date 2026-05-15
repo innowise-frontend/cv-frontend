@@ -178,6 +178,8 @@
       "toast": {
         "userUpdated": "Данные пользователя обновлены",
         "profileUpdated": "Профиль обновлён",
+        "userUpdateFailed": "Не удалось обновить пользователя",
+        "profileUpdateFailed": "Не удалось обновить профиль",
         "avatarUpdated": "Аватар обновлён",
         "verificationSent": "Письмо для подтверждения отправлено",
         "verificationFailed": "Не удалось отправить письмо для подтверждения"

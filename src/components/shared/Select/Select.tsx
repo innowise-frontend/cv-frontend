@@ -54,7 +54,7 @@ export const Select = ({
     >
       <SelectBase.Popup
         className={cn(
-          "absolute -top-[5px] z-50 flex w-(--anchor-width) min-w-36 flex-col overflow-hidden border border-b-2 border-gray-5 border-b-gray-3 bg-gray-8 shadow-none ring-0 text-gray-2 dark:bg-gray-2 dark:border-b-gray-5 dark:text-gray-5",
+          "absolute -top-[5px] z-50 flex w-(--anchor-width) min-w-36 flex-col overflow-hidden border border-b border-gray-5 bg-gray-8 shadow-none ring-0 text-gray-2 dark:bg-gray-2 dark:border-b-gray-5 dark:text-gray-5",
           "max-h-[min(16rem,var(--available-height,24rem))]",
           "placeholder:text-gray-8 dark:placeholder:text-gray-6 disabled:placeholder:text-gray-2 disabled:dark:placeholder:text-gray-6",
           popupClassName,

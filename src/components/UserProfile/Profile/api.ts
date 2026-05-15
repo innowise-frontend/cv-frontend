@@ -41,8 +41,8 @@ export function useUserProfileMutations(userId: string) {
       await invalidate();
       toast.success(t("page.profile.toast.userUpdated"));
     },
-    onError: (error) => {
-      toast.error(getErrorToastMessage(error));
+    onError: () => {
+      toast.error(t("page.profile.toast.userUpdateFailed"));
     },
   });
 
@@ -52,8 +52,8 @@ export function useUserProfileMutations(userId: string) {
       await invalidate();
       toast.success(t("page.profile.toast.profileUpdated"));
     },
-    onError: (error) => {
-      toast.error(getErrorToastMessage(error));
+    onError: () => {
+      toast.error(t("page.profile.toast.profileUpdateFailed"));
     },
   });
 
@@ -73,8 +73,8 @@ export function useUserProfileMutations(userId: string) {
     onSuccess: () => {
       toast.message(t("page.profile.toast.verificationSent"));
     },
-    onError: (error) => {
-      toast.error(getErrorToastMessage(error) || t("page.profile.toast.verificationFailed"));
+    onError: () => {
+      toast.error(t("page.profile.toast.verificationFailed"));
     },
   });
 
