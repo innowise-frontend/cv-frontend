@@ -184,6 +184,38 @@
         "verificationSent": "E-mail de vérification envoyé",
         "verificationFailed": "Échec de l'envoi de l'e-mail de vérification"
       }
+    },
+    "users": {
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "viewProfile": "Voir le profil",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "email": "E-mail",
+      "password": "Mot de passe",
+      "department": "Service",
+      "position": "Poste",
+      "role": "Rôle",
+      "selectDepartment": "Service",
+      "selectPosition": "Poste",
+      "selectRole": "Rôle",
+      "roleEmployee": "Employé",
+      "roleAdmin": "Administrateur",
+      "cancel": "Annuler",
+      "create": "Créer",
+      "createUser": "Créer un utilisateur",
+      "createUserTitle": "Créer un utilisateur",
+      "update": "Mettre à jour",
+      "updateUser": "Modifier",
+      "updateUserTitle": "Modifier l'utilisateur",
+      "updateUserFailed": "Échec de la mise à jour de l'utilisateur",
+      "deleteUser": "Supprimer",
+      "deleteUserTitle": "Supprimer l'utilisateur",
+      "deleteUserSuccess": "Utilisateur supprimé avec succès",
+      "confirmDeleteBefore": "Êtes-vous sûr de vouloir supprimer ",
+      "confirmDeleteAfter": " ?",
+      "emailAlreadyExists": "Un utilisateur avec cet e-mail existe déjà.",
+      "confirm": "Confirmer"
     }
   }
 }

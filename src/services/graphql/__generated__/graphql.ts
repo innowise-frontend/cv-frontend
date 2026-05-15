@@ -111,7 +111,6 @@ export type CreateSkillInput = {
 
 export type CreateUserInput = {
   auth: AuthInput;
-  cvsIds: Array<Scalars["String"]["input"]>;
   departmentId?: InputMaybe<Scalars["ID"]["input"]>;
   positionId?: InputMaybe<Scalars["ID"]["input"]>;
   profile: CreateProfileInput;
@@ -736,7 +735,6 @@ export type UpdateTokenResult = {
 };
 
 export type UpdateUserInput = {
-  cvsIds?: InputMaybe<Array<Scalars["String"]["input"]>>;
   departmentId?: InputMaybe<Scalars["ID"]["input"]>;
   positionId?: InputMaybe<Scalars["ID"]["input"]>;
   role?: InputMaybe<UserRole>;
@@ -842,6 +840,15 @@ export type CreateSkillMutation = {
   };
 };
 
+export type CreateUserMutationVariables = Exact<{
+  user: CreateUserInput;
+}>;
+
+export type CreateUserMutation = {
+  __typename?: "Mutation";
+  createUser: { __typename?: "User"; id: string; email: string; role: UserRole };
+};
+
 export type DeleteLanguageMutationVariables = Exact<{
   language: DeleteLanguageInput;
 }>;
@@ -891,6 +898,15 @@ export type DeleteSkillMutationVariables = Exact<{
 export type DeleteSkillMutation = {
   __typename?: "Mutation";
   deleteSkill: { __typename?: "DeleteResult"; affected: number };
+};
+
+export type DeleteUserMutationVariables = Exact<{
+  userId: Scalars["ID"]["input"];
+}>;
+
+export type DeleteUserMutation = {
+  __typename?: "Mutation";
+  deleteUser: { __typename?: "DeleteResult"; affected: number };
 };
 
 export type ForgotPasswordMutationVariables = Exact<{
@@ -1068,6 +1084,13 @@ export type VerifyMailMutationVariables = Exact<{
 
 export type VerifyMailMutation = { __typename?: "Mutation"; verifyMail?: any | null };
 
+export type DepartmentsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type DepartmentsQuery = {
+  __typename?: "Query";
+  departments: Array<{ __typename?: "Department"; id: string; name: string }>;
+};
+
 export type LanguagesQueryVariables = Exact<{
   params: SearchPaginationInput;
 }>;
@@ -1095,6 +1118,13 @@ export type MeQueryVariables = Exact<{ [key: string]: never }>;
 export type MeQuery = {
   __typename?: "Query";
   me: { __typename?: "Profile"; id: string; is_verified?: boolean | null; role?: UserRole | null };
+};
+
+export type PositionsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type PositionsQuery = {
+  __typename?: "Query";
+  positions: Array<{ __typename?: "Position"; id: string; name: string }>;
 };
 
 export type ProfileQueryVariables = Exact<{
@@ -1198,9 +1228,11 @@ export type UsersQuery = {
     items: Array<{
       __typename?: "User";
       id: string;
-      department_name?: string | null;
-      position_name?: string | null;
       email: string;
+      role: UserRole;
+      is_verified: boolean;
+      department?: { __typename?: "Department"; id: string; name: string } | null;
+      position?: { __typename?: "Position"; id: string; name: string } | null;
       profile: {
         __typename?: "Profile";
         last_name?: string | null;
@@ -1456,6 +1488,50 @@ export const CreateSkillDocument = {
     },
   ],
 } as unknown as DocumentNode<CreateSkillMutation, CreateSkillMutationVariables>;
+export const CreateUserDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "CreateUser" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "user" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "CreateUserInput" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "createUser" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "user" },
+                value: { kind: "Variable", name: { kind: "Name", value: "user" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "id" } },
+                { kind: "Field", name: { kind: "Name", value: "email" } },
+                { kind: "Field", name: { kind: "Name", value: "role" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<CreateUserMutation, CreateUserMutationVariables>;
 export const DeleteLanguageDocument = {
   kind: "Document",
   definitions: [
@@ -1644,6 +1720,46 @@ export const DeleteSkillDocument = {
     },
   ],
 } as unknown as DocumentNode<DeleteSkillMutation, DeleteSkillMutationVariables>;
+export const DeleteUserDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "DeleteUser" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "userId" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "ID" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "deleteUser" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "userId" },
+                value: { kind: "Variable", name: { kind: "Name", value: "userId" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [{ kind: "Field", name: { kind: "Name", value: "affected" } }],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<DeleteUserMutation, DeleteUserMutationVariables>;
 export const ForgotPasswordDocument = {
   kind: "Document",
   definitions: [
@@ -2302,6 +2418,32 @@ export const VerifyMailDocument = {
     },
   ],
 } as unknown as DocumentNode<VerifyMailMutation, VerifyMailMutationVariables>;
+export const DepartmentsDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "Departments" },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "departments" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "id" } },
+                { kind: "Field", name: { kind: "Name", value: "name" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<DepartmentsQuery, DepartmentsQueryVariables>;
 export const LanguagesDocument = {
   kind: "Document",
   definitions: [
@@ -2388,6 +2530,32 @@ export const MeDocument = {
     },
   ],
 } as unknown as DocumentNode<MeQuery, MeQueryVariables>;
+export const PositionsDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "Positions" },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "positions" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "id" } },
+                { kind: "Field", name: { kind: "Name", value: "name" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<PositionsQuery, PositionsQueryVariables>;
 export const ProfileDocument = {
   kind: "Document",
   definitions: [
@@ -2713,9 +2881,31 @@ export const UsersDocument = {
                     kind: "SelectionSet",
                     selections: [
                       { kind: "Field", name: { kind: "Name", value: "id" } },
-                      { kind: "Field", name: { kind: "Name", value: "department_name" } },
-                      { kind: "Field", name: { kind: "Name", value: "position_name" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "department" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            { kind: "Field", name: { kind: "Name", value: "id" } },
+                            { kind: "Field", name: { kind: "Name", value: "name" } },
+                          ],
+                        },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "position" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            { kind: "Field", name: { kind: "Name", value: "id" } },
+                            { kind: "Field", name: { kind: "Name", value: "name" } },
+                          ],
+                        },
+                      },
                       { kind: "Field", name: { kind: "Name", value: "email" } },
+                      { kind: "Field", name: { kind: "Name", value: "role" } },
+                      { kind: "Field", name: { kind: "Name", value: "is_verified" } },
                       {
                         kind: "Field",
                         name: { kind: "Name", value: "profile" },

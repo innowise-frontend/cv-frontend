@@ -184,6 +184,38 @@
         "verificationSent": "Correo de verificación enviado",
         "verificationFailed": "No se pudo enviar el correo de verificación"
       }
+    },
+    "users": {
+      "edit": "Editar",
+      "delete": "Eliminar",
+      "viewProfile": "Ver perfil",
+      "firstName": "Nombre",
+      "lastName": "Apellidos",
+      "email": "Correo electrónico",
+      "password": "Contraseña",
+      "department": "Departamento",
+      "position": "Puesto",
+      "role": "Rol",
+      "selectDepartment": "Departamento",
+      "selectPosition": "Puesto",
+      "selectRole": "Rol",
+      "roleEmployee": "Empleado",
+      "roleAdmin": "Administrador",
+      "cancel": "Cancelar",
+      "create": "Crear",
+      "createUser": "Crear usuario",
+      "createUserTitle": "Crear usuario",
+      "update": "Actualizar",
+      "updateUser": "Actualizar",
+      "updateUserTitle": "Editar usuario",
+      "updateUserFailed": "No se pudo actualizar el usuario",
+      "deleteUser": "Eliminar",
+      "deleteUserTitle": "Eliminar usuario",
+      "deleteUserSuccess": "Usuario eliminado correctamente",
+      "confirmDeleteBefore": "¿Seguro que deseas eliminar a ",
+      "confirmDeleteAfter": "?",
+      "emailAlreadyExists": "Ya existe un usuario con este correo electrónico.",
+      "confirm": "Confirmar"
     }
   }
 }

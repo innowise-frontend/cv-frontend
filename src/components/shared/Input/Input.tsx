@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import CloseEyeIcon from "@assets/icon/CloseEyeIcon.svg?react";
 import OpenEyeIcon from "@assets/icon/OpenEyeIcon.svg?react";
 import { Input as UiInput } from "@components/ui/input";
+import { Label } from "@root/components/ui/label";
 import { cn } from "@root/lib/utils";
 import type { InputWithLabelProps } from "./types";
 
@@ -47,7 +48,7 @@ export const Input = forwardRef<HTMLInputElement, InputWithLabelProps>(
     return (
       <div className="relative w-full">
         {label && (value || controlledValue) && (
-          <label
+          <Label
             htmlFor={generatedId}
             className={cn(
               "absolute z-10 left-2.5 -top-4 px-1 text-xs text-gray-3 dark:text-gray-5",
@@ -55,7 +56,7 @@ export const Input = forwardRef<HTMLInputElement, InputWithLabelProps>(
             )}
           >
             {label}
-          </label>
+          </Label>
         )}
         <div className="relative">
           <UiInput
@@ -81,6 +82,7 @@ export const Input = forwardRef<HTMLInputElement, InputWithLabelProps>(
           />
           {isPasswordField && (
             <button
+              disabled={disabled}
               type="button"
               aria-label={t("page.setting.togglePasswordVisibility")}
               onClick={togglePasswordVisibility}

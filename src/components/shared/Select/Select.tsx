@@ -1,6 +1,6 @@
 import { Select as SelectBase } from "@base-ui/react/select";
 import { useCallback, useId, useState } from "react";
-import { Label } from "@root/components/ui/label";
+import { Label } from "@root/components/ui/label.tsx";
 import {
   Select as SelectRoot,
   SelectGroup,
@@ -16,6 +16,7 @@ import type { SelectProps } from "./types.ts";
 export const Select = ({
   list,
   label,
+  error,
   placeholder,
   className,
   popupClassName,
@@ -25,6 +26,7 @@ export const Select = ({
   align = "start",
   disabled = false,
   value,
+  sideShift = "shift",
   onValueChange,
 }: SelectProps) => {
   const triggerId = useId();
@@ -49,7 +51,7 @@ export const Select = ({
       alignItemWithTrigger={false}
       sideOffset={4}
       positionMethod="fixed"
-      collisionAvoidance={{ side: "shift", align: "none" }}
+      collisionAvoidance={{ side: sideShift, align: "none" }}
       className="z-50"
     >
       <SelectBase.Popup
@@ -120,6 +122,13 @@ export const Select = ({
           <SelectBase.Portal container={dialogContainer}>{popup}</SelectBase.Portal>
         )}
       </SelectRoot>
+
+      <p
+        id={`${triggerId}-error`}
+        className={cn("pl-2 mt-1 text-left text-xs text-red h-3", !error && "invisible")}
+      >
+        {error || " "}
+      </p>
     </div>
   );
 };

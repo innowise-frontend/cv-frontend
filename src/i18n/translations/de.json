@@ -184,6 +184,38 @@
         "verificationSent": "Bestätigungs-E-Mail gesendet",
         "verificationFailed": "Bestätigungs-E-Mail konnte nicht gesendet werden"
       }
+    },
+    "users": {
+      "edit": "Bearbeiten",
+      "delete": "Löschen",
+      "viewProfile": "Profil anzeigen",
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "email": "E-Mail",
+      "password": "Passwort",
+      "department": "Abteilung",
+      "position": "Position",
+      "role": "Rolle",
+      "selectDepartment": "Abteilung",
+      "selectPosition": "Position",
+      "selectRole": "Rolle",
+      "roleEmployee": "Mitarbeiter",
+      "roleAdmin": "Administrator",
+      "cancel": "Abbrechen",
+      "create": "Erstellen",
+      "createUser": "Benutzer anlegen",
+      "createUserTitle": "Benutzer anlegen",
+      "update": "Aktualisieren",
+      "updateUser": "Bearbeiten",
+      "updateUserTitle": "Benutzer bearbeiten",
+      "updateUserFailed": "Benutzer konnte nicht aktualisiert werden",
+      "deleteUser": "Löschen",
+      "deleteUserTitle": "Benutzer löschen",
+      "deleteUserSuccess": "Benutzer wurde erfolgreich gelöscht",
+      "confirmDeleteBefore": "Sind Sie sicher, dass Sie löschen möchten ",
+      "confirmDeleteAfter": "?",
+      "emailAlreadyExists": "Ein Benutzer mit dieser E-Mail existiert bereits.",
+      "confirm": "Bestätigen"
     }
   }
 }

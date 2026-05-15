@@ -25,7 +25,7 @@ export const Dropdown = ({ options, keepMounted = false }: DropdownProps) => {
             onClick={() => {
               option.onClick?.();
             }}
-            className="text-gray-2 hover:bg-gray-7 hover:text-gray-2 cursor-pointer dark:text-gray-8 dark:hover:bg-gray-3"
+            className="text-gray-2 hover:bg-gray-7 hover:text-gray-2 cursor-pointer dark:text-gray-8 dark:hover:text-gray-8 dark:hover:bg-gray-3"
           >
             {option.icon}
             {typeof option.label === "string" ? <span>{option.label}</span> : option.label}

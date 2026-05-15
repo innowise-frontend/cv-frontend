@@ -11,7 +11,7 @@ export const LanguagesPage = () => {
   const { userId, isAdmin } = useAuth();
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col ml-6">
       <Breadcrumbs items={[getBreadcrumbsLink(location.pathname, t)]} className="pl-5 pb-4" />
       {isAdmin && <LanguagesTable />}
       {!isAdmin && (
