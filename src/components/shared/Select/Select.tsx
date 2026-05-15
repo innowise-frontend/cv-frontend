@@ -35,7 +35,7 @@ export const Select = ({
   const dialogContainer = containerNode?.closest("dialog") ?? undefined;
 
   const labelFor = (val?: string | number) =>
-    list.find((item) => item.value === val)?.label ?? placeholder;
+    list.find((item) => item.value === val)?.label ?? undefined;
 
   const handleSelectValue = (next: string | null) => {
     if (disabled) return;
@@ -54,8 +54,9 @@ export const Select = ({
     >
       <SelectBase.Popup
         className={cn(
-          "absolute -top-[5px] z-50 flex w-(--anchor-width) min-w-36 flex-col overflow-hidden border border-b-2 border-gray-5 border-b-gray-3 bg-gray-8 shadow-none ring-0 text-gray-2 dark:bg-gray-2 dark:border-b-gray-5 dark:text-gray-5",
+          "absolute -top-[5px] z-50 flex w-(--anchor-width) min-w-36 flex-col overflow-hidden border border-b border-gray-5 bg-gray-8 shadow-none ring-0 text-gray-2 dark:bg-gray-2 dark:border-b-gray-5 dark:text-gray-5",
           "max-h-[min(16rem,var(--available-height,24rem))]",
+          "placeholder:text-gray-8 dark:placeholder:text-gray-6 disabled:placeholder:text-gray-2 disabled:dark:placeholder:text-gray-6",
           popupClassName,
         )}
       >
@@ -86,12 +87,14 @@ export const Select = ({
 
   return (
     <div ref={setContainerRef} className={cn("relative flex w-full flex-col", className)}>
-      <Label
-        htmlFor={triggerId}
-        className="justify-start pl-3 text-left text-xs font-normal text-gray-3 dark:text-gray-5"
-      >
-        {label}
-      </Label>
+      {label && value && (
+        <Label
+          htmlFor={triggerId}
+          className="absolute z-10 left-2.5 -top-4 px-1 text-xs text-gray-3 dark:text-gray-5"
+        >
+          {label}
+        </Label>
+      )}
 
       <SelectRoot
         value={value as string}
@@ -102,9 +105,11 @@ export const Select = ({
         <SelectTrigger
           id={triggerId}
           disabled={disabled}
-          className={
-            "w-full cursor-pointer border-gray-5 text-gray-2 data-[size=default]:h-auto px-3 py-3.25 dark:text-gray-5 disabled:bg-gray-6 dark:disabled:bg-gray-3"
-          }
+          className={cn(
+            "w-full cursor-pointer border-gray-5 text-gray-2 data-[size=default]:h-auto px-3 py-3.25 dark:text-gray-5 disabled:bg-gray-6 dark:disabled:bg-gray-3",
+            "data-placeholder:text-gray-6 dark:data-placeholder:text-gray-3",
+            "disabled:data-placeholder:text-gray-2 disabled:dark:data-placeholder:text-gray-6",
+          )}
         >
           <SelectValue placeholder={placeholder}>{labelFor(value as string)}</SelectValue>
         </SelectTrigger>

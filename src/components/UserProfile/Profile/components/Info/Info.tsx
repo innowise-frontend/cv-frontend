@@ -62,16 +62,16 @@ export const Info = () => {
       if (firstName !== initialFirstName || lastName !== initialLastName) {
         await updateProfile.mutateAsync({
           userId,
-          first_name: firstName || null,
-          last_name: lastName || null,
+          first_name: firstName,
+          last_name: lastName,
         });
       }
 
       if (departmentId !== initialDepartmentId || positionId !== initialPositionId) {
         await updateUser.mutateAsync({
           userId,
-          departmentId: departmentId || undefined,
-          positionId: positionId || undefined,
+          departmentId,
+          positionId,
         });
       }
 
@@ -83,7 +83,7 @@ export const Info = () => {
 
   return (
     <>
-      <div className="mt-8 mb-16.5 flex flex-col">
+      <div className="mt-8 mb-16.5 flex flex-col h-20">
         <p className="text-gray-2 dark:text-gray-8 text-2xl mb-2">{fullName}</p>
         <p className="text-gray-3 dark:text-gray-5 text-base">{email}</p>
         {memberSinceLine ? (
@@ -94,10 +94,11 @@ export const Info = () => {
       </div>
 
       <div className="mx-auto mt-12 w-[860px]">
-        <div className="grid w-full grid-cols-1 gap-x-10 gap-y-8 md:grid-cols-[410px_410px] md:justify-center">
+        <div className="grid w-full grid-cols-1 gap-x-10 gap-y-6 md:grid-cols-[410px_410px] md:justify-center">
           <Input
             disabled={!isEditable}
             label={t("page.profile.firstName")}
+            placeholder={t("page.profile.firstName")}
             value={firstName}
             className="w-full md:w-[410px] border-gray-5 bg-gray-8 text-gray-2 dark:bg-gray-2 dark:text-gray-5"
             onChange={(e) => setDraft((prev) => ({ ...prev, firstName: e.target.value }))}
@@ -106,6 +107,7 @@ export const Info = () => {
           <Input
             disabled={!isEditable}
             label={t("page.profile.lastName")}
+            placeholder={t("page.profile.lastName")}
             value={lastName}
             className="w-full md:w-[410px] border-gray-5 bg-gray-8 text-gray-2 dark:bg-gray-2 dark:text-gray-5"
             onChange={(e) => setDraft((prev) => ({ ...prev, lastName: e.target.value }))}
@@ -115,7 +117,7 @@ export const Info = () => {
             disabled={!isEditable}
             label={t("page.profile.department")}
             list={departments}
-            placeholder={t("page.profile.selectDepartment")}
+            placeholder={t("page.profile.department")}
             value={departmentId}
             onValueChange={(next) => setDraft((prev) => ({ ...prev, departmentId: next }))}
             className="w-full md:w-[410px]"
@@ -125,7 +127,7 @@ export const Info = () => {
             disabled={!isEditable}
             label={t("page.profile.position")}
             list={positions}
-            placeholder={t("page.profile.selectPosition")}
+            placeholder={t("page.profile.position")}
             value={positionId}
             onValueChange={(next) => setDraft((prev) => ({ ...prev, positionId: next }))}
             className="w-full md:w-[410px]"
