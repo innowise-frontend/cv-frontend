@@ -97,7 +97,7 @@ export const Select = ({
       )}
 
       <SelectRoot
-        value={(value as string) ?? undefined}
+        value={value as string}
         modal={false}
         disabled={disabled}
         onValueChange={handleSelectValue}
