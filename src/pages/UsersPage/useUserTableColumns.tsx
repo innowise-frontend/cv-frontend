@@ -69,46 +69,45 @@ export const useUserTableColumns = () => {
       header: () => null,
       size: 72,
       cell: ({ row }) => {
-        return (
-          <TableActions
-            dropdownKeepMounted
-            userId={row.original.id}
-            actions={[
-              {
-                label: <span className="p-px">{t("page.users.viewProfile")}</span>,
-                onClick: (userId: string) => {
-                  navigate({ to: ROUTES.USER_PAGE, params: { userId } });
-                },
-              },
-              {
-                label: (
-                  <Modal>
-                    <UpdateUserModal
-                      userId={row.original.id}
-                      firstName={row.original.profile.first_name ?? ""}
-                      lastName={row.original.profile.last_name ?? ""}
-                      departmentId={row.original.department?.id ?? ""}
-                      positionId={row.original.position?.id ?? ""}
-                      email={row.original.email ?? ""}
-                      role={row.original.role}
-                    />
-                  </Modal>
-                ),
-              },
-              {
-                label: (
-                  <Modal>
-                    <DeleteUserModal
-                      userId={row.original.id}
-                      firstName={row.original.profile.first_name ?? ""}
-                      lastName={row.original.profile.last_name ?? ""}
-                    />
-                  </Modal>
-                ),
-              },
-            ]}
-          />
-        );
+        const actions = [
+          {
+            label: <span className="p-px">{t("page.users.viewProfile")}</span>,
+            onClick: (userId: string) => {
+              navigate({ to: ROUTES.USER_PAGE, params: { userId } });
+            },
+          },
+          {
+            label: (
+              <Modal>
+                <UpdateUserModal
+                  userId={row.original.id}
+                  firstName={row.original.profile.first_name ?? ""}
+                  lastName={row.original.profile.last_name ?? ""}
+                  departmentId={row.original.department?.id ?? ""}
+                  positionId={row.original.position?.id ?? ""}
+                  email={row.original.email ?? ""}
+                  role={row.original.role}
+                />
+              </Modal>
+            ),
+          },
+        ];
+
+        if (!row.original.is_verified) {
+          actions.push({
+            label: (
+              <Modal>
+                <DeleteUserModal
+                  userId={row.original.id}
+                  firstName={row.original.profile.first_name ?? ""}
+                  lastName={row.original.profile.last_name ?? ""}
+                />
+              </Modal>
+            ),
+          });
+        }
+
+        return <TableActions dropdownKeepMounted userId={row.original.id} actions={actions} />;
       },
     }),
   ];

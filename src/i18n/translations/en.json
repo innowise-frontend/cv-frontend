@@ -178,7 +178,10 @@
       "toast": {
         "userUpdated": "User updated",
         "profileUpdated": "Profile updated",
+        "userUpdateFailed": "Failed to update user",
+        "profileUpdateFailed": "Failed to update profile",
         "avatarUpdated": "Avatar updated",
+        "avatarUpdateFailed": "Failed to update avatar",
         "verificationSent": "Verification email sent",
         "verificationFailed": "Failed to send verification email"
       }

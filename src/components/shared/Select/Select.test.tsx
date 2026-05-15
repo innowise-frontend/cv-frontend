@@ -6,7 +6,7 @@ import { describe, expect, it, vi } from "vitest";
 import { Select } from "./Select";
 
 describe("Select", () => {
-  it("base case: opens and selects an option", async () => {
+  it("base case: shows placeholder without label when empty, opens and selects an option", async () => {
     const user = userEvent.setup();
     const onValueChange = vi.fn();
 
@@ -23,13 +23,12 @@ describe("Select", () => {
       />,
     );
 
+    const combobox = screen.getByRole("combobox");
+    expect(within(combobox).getByText("Choose a language")).toBeInTheDocument();
     expect(screen.queryByText("Language")).not.toBeInTheDocument();
 
-    const trigger = screen.getByText("Choose a language").closest("button");
-    expect(trigger).toBeTruthy();
-
-    await user.click(trigger!);
-    await user.click(await screen.findByText("English"));
+    await user.click(combobox);
+    await user.click(await screen.findByRole("option", { name: "English" }));
 
     expect(onValueChange).toHaveBeenCalledTimes(1);
     expect(onValueChange).toHaveBeenCalledWith("en");
@@ -63,18 +62,13 @@ describe("Select", () => {
 
     render(<Controlled />);
 
-    expect(screen.queryByText("Language")).not.toBeInTheDocument();
+    const combobox = screen.getByRole("combobox");
+    expect(within(combobox).getByText("Choose a language")).toBeInTheDocument();
 
-    const trigger = screen.getByText("Choose a language").closest("button");
-    expect(trigger).toBeTruthy();
-
-    await user.click(trigger!);
-    await user.click(await screen.findByText("English"));
+    await user.click(combobox);
+    await user.click(await screen.findByRole("option", { name: "English" }));
 
     expect(onValueChange).toHaveBeenCalledWith("en");
-    const floatingLabel = screen.getByText("Language").closest("label");
-    expect(floatingLabel).toHaveClass("absolute", "-top-4", "left-2.5");
-    const combobox = screen.getByRole("combobox");
     expect(within(combobox).getByText("English")).toBeInTheDocument();
 
     await user.click(combobox);

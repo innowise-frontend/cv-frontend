@@ -13,6 +13,7 @@ query Users($params: SearchPaginationInput!) {
       }
       email
       role
+      is_verified
       profile {
         last_name
         first_name

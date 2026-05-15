@@ -41,8 +41,8 @@ export const UsersPage = () => {
   });
 
   return (
-    <div className="flex h-full min-h-0 flex-col">
-      <Breadcrumbs items={[getBreadcrumbsLink(location.pathname, t)]} className="pl-5" />
+    <div className="flex h-full min-h-0 flex-col ml-5">
+      <Breadcrumbs items={[getBreadcrumbsLink(location.pathname, t)]} className="pl-5 pb-4" />
       <TableSearch
         action={
           isAdmin && (

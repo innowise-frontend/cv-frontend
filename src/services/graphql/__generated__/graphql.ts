@@ -1230,6 +1230,7 @@ export type UsersQuery = {
       id: string;
       email: string;
       role: UserRole;
+      is_verified: boolean;
       department?: { __typename?: "Department"; id: string; name: string } | null;
       position?: { __typename?: "Position"; id: string; name: string } | null;
       profile: {
@@ -2904,6 +2905,7 @@ export const UsersDocument = {
                       },
                       { kind: "Field", name: { kind: "Name", value: "email" } },
                       { kind: "Field", name: { kind: "Name", value: "role" } },
+                      { kind: "Field", name: { kind: "Name", value: "is_verified" } },
                       {
                         kind: "Field",
                         name: { kind: "Name", value: "profile" },

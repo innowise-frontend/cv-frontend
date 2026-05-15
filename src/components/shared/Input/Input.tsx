@@ -13,6 +13,7 @@ export const Input = forwardRef<HTMLInputElement, InputWithLabelProps>(
       label,
       className,
       value: controlledValue,
+      placeholder,
       defaultValue,
       onChange,
       type,
@@ -62,6 +63,7 @@ export const Input = forwardRef<HTMLInputElement, InputWithLabelProps>(
             disabled={disabled}
             id={generatedId}
             ref={ref}
+            placeholder={placeholder}
             type={inputType}
             onChange={handleChange}
             {...(controlledValue !== undefined
@@ -71,6 +73,7 @@ export const Input = forwardRef<HTMLInputElement, InputWithLabelProps>(
               "cursor-pointer h-12 px-3 py-3 text-base leading-6 placeholder:text-gray-6 border-gray-5 shadow-none outline-none",
               "focus:outline-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:shadow-none",
               "dark:text-white dark:placeholder:text-gray-3 disabled:bg-gray-6 dark:disabled:bg-gray-3",
+              "disabled:placeholder:text-gray-2 disabled:dark:placeholder:text-gray-6",
               className,
               error &&
                 "border-red focus-visible:border-red dark:border-red dark:focus-visible:border-red",

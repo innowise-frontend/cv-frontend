@@ -178,6 +178,8 @@
       "toast": {
         "userUpdated": "Utilisateur mis à jour",
         "profileUpdated": "Profil mis à jour",
+        "userUpdateFailed": "Échec de la mise à jour de l'utilisateur",
+        "profileUpdateFailed": "Échec de la mise à jour du profil",
         "avatarUpdated": "Avatar mis à jour",
         "verificationSent": "E-mail de vérification envoyé",
         "verificationFailed": "Échec de l'envoi de l'e-mail de vérification"
