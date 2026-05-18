@@ -11,9 +11,9 @@ export const Input = forwardRef<HTMLInputElement, InputWithLabelProps>(
   (
     {
       label,
+      placeholder,
       className,
       value: controlledValue,
-      placeholder,
       defaultValue,
       onChange,
       type,
@@ -47,17 +47,6 @@ export const Input = forwardRef<HTMLInputElement, InputWithLabelProps>(
 
     return (
       <div className="relative w-full">
-        {label && (value || controlledValue) && (
-          <Label
-            htmlFor={generatedId}
-            className={cn(
-              "absolute z-10 left-2.5 -top-4 px-1 text-xs text-gray-3 dark:text-gray-5",
-              error && "text-red",
-            )}
-          >
-            {label}
-          </Label>
-        )}
         <div className="relative">
           <UiInput
             disabled={disabled}
@@ -70,8 +59,8 @@ export const Input = forwardRef<HTMLInputElement, InputWithLabelProps>(
               ? { value: controlledValue }
               : { defaultValue: initialDefaultValue })}
             className={cn(
-              "cursor-pointer h-12 px-3 py-3 text-base leading-6 placeholder:text-gray-6 border-gray-5 shadow-none outline-none",
-              "focus:outline-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:shadow-none",
+              "peer block cursor-pointer h-12 px-3 py-3 text-base leading-6 placeholder:text-gray-6 border-gray-5 shadow-none outline-none",
+              "focus:outline-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:shadow-none focus:placeholder:opacity-0 transition-all duration-300",
               "dark:text-white dark:placeholder:text-gray-3 disabled:bg-gray-6 dark:disabled:bg-gray-3",
               "disabled:placeholder:text-gray-2 disabled:dark:placeholder:text-gray-6",
               className,
@@ -80,6 +69,10 @@ export const Input = forwardRef<HTMLInputElement, InputWithLabelProps>(
             )}
             {...props}
           />
+          <Label htmlFor={generatedId} className={cn("", error && "text-red")}>
+            {label}
+          </Label>
+
           {isPasswordField && (
             <button
               disabled={disabled}
@@ -94,7 +87,7 @@ export const Input = forwardRef<HTMLInputElement, InputWithLabelProps>(
         </div>
         <p
           id={`${generatedId}-error`}
-          className={cn("pl-2 mt-1 text-left text-xs text-red h-3", !error && "invisible")}
+          className={cn("pl-2 text-left text-xs text-red", !error && "opacity-0")}
         >
           {error || " "}
         </p>
