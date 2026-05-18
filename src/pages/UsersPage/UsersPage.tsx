@@ -40,6 +40,10 @@ export const UsersPage = () => {
     sort_by: "department",
   });
 
+  const tableData = data?.items ?? [];
+  const hasActiveSearch = (searchParams.search ?? "").trim().length > 0;
+  const emptyMessage = hasActiveSearch ? t("page.table.noResults") : t("page.users.noData");
+
   return (
     <div className="flex h-full min-h-0 flex-col ml-5">
       <Breadcrumbs items={[getBreadcrumbsLink(location.pathname, t)]} className="pl-5 pb-4" />
@@ -57,7 +61,8 @@ export const UsersPage = () => {
       <div className="min-h-0 flex-1">
         <Table
           columns={columns}
-          data={data?.items ?? []}
+          data={tableData}
+          emptyMessage={emptyMessage}
           pagesAmount={data?.total_pages ?? 0}
           currentPage={currentPage}
           onChangePage={setCurrentPage}

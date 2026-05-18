@@ -59,6 +59,10 @@
     "signup": {
       "title": "Регистрация"
     },
+    "table": {
+      "noResults": "Нет результатов",
+      "noDataResults": "Нет данных"
+    },
     "resetPassword": {
       "title": "Сброс пароля",
       "subtitle": "Введите новый пароль и подтвердите его ниже.",
@@ -95,7 +99,7 @@
     },
     "languages": {
       "currentLanguages": "Текущие языки",
-      "emptyState": "У вас пока нет языков",
+      "emptyState": "У текущего пользователя пока нет языков",
       "addLanguage": "Добавить язык",
       "createLanguage": "Создать язык",
       "deleteLanguage": "Удалить язык",
@@ -116,11 +120,12 @@
       "add": "Добавить",
       "remove": "Удалить",
       "update": "Обновить",
-      "save": "Сохранить"
+      "save": "Сохранить",
+      "noData": "Нет данных"
     },
     "skills": {
       "currentSkills": "Навыки",
-      "emptyState": "У вас пока нет навыков",
+      "emptyState": "У текущего пользователя пока нет навыков",
       "addSkill": "Добавить навык",
       "createSkill": "Создать навык",
       "updateSkill": "Обновить навык",
@@ -142,7 +147,8 @@
       "add": "Добавить",
       "remove": "Удалить",
       "update": "Обновить",
-      "save": "Сохранить"
+      "save": "Сохранить",
+      "noData": "Нет данных"
     },
     "sidebar": {
       "employees": "Сотрудники",
@@ -215,7 +221,8 @@
       "confirmDeleteBefore": "Вы уверены, что хотите удалить ",
       "confirmDeleteAfter": "?",
       "emailAlreadyExists": "Пользователь с таким email уже существует.",
-      "confirm": "Подтвердить"
+      "confirm": "Подтвердить",
+      "noData": "Нет данных"
     }
   }
 }

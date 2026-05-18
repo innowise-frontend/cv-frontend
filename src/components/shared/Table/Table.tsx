@@ -1,4 +1,5 @@
 import { flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table";
+import { useTranslation } from "react-i18next";
 import { Pagination } from "@components/shared";
 import {
   Table as UITable,
@@ -8,6 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@components/ui/table";
+import { EmptyContent } from "@root/components/shared/EmptyContent/EmptyContent";
 import { TableProps } from "./types";
 
 export const Table = <TData,>({
@@ -21,7 +23,11 @@ export const Table = <TData,>({
   onSort,
   onChangePage,
   onChangeViewOption,
+  isLoading = false,
+  emptyMessage,
 }: TableProps<TData>) => {
+  const { t } = useTranslation();
+
   const getRowId = (originalRow: TData, index: number) => {
     if (
       typeof originalRow === "object" &&
@@ -73,7 +79,11 @@ export const Table = <TData,>({
             ))}
           </TableHeader>
           <TableBody className="font-normal">
-            {table.getRowModel().rows?.length ? (
+            {isLoading ? (
+              <TableRow className="!border-b border-b-gray-5 hover:bg-transparent dark:border-b-gray-3">
+                <TableCell colSpan={columns.length} className="h-48 p-0" />
+              </TableRow>
+            ) : table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
@@ -91,9 +101,9 @@ export const Table = <TData,>({
                 </TableRow>
               ))
             ) : (
-              <TableRow>
-                <TableCell colSpan={columns.length} className="h-24 text-center">
-                  {"No data results"}
+              <TableRow className="!border-b border-b-gray-5 hover:bg-transparent dark:border-b-gray-3">
+                <TableCell colSpan={columns.length}>
+                  <EmptyContent message={emptyMessage ?? t("page.table.noResults")} />
                 </TableCell>
               </TableRow>
             )}

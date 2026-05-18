@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import RemoveIcon from "@assets/icon/RemoveIcon.svg?react";
 import { Button, Modal } from "@components/shared";
+import { EmptyContent } from "@root/components/shared/EmptyContent/EmptyContent";
 import { DeleteProfileSkillInput } from "@services/graphql/__generated__/graphql";
 import { SkillsEditorProps } from "./types";
 import {
@@ -66,7 +67,7 @@ export const SkillsEditor = ({ userId }: SkillsEditorProps) => {
 
   return (
     <div className="mx-auto flex flex-col px-6 w-full">
-      {!hasGroupedSkills && <div>{t("page.skills.emptyState")}</div>}
+      {!hasGroupedSkills && <EmptyContent message={t("page.skills.emptyState")} />}
 
       {hasGroupedSkills && (
         <div className="flex flex-col gap-6">

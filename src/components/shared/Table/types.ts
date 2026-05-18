@@ -20,6 +20,8 @@ export interface TableProps<TData> {
   }[];
   onChangeViewOption?: (value: number) => void;
   onSort?: () => void;
+  isLoading?: boolean;
+  emptyMessage?: string;
 }
 
 export type ColumnAlign = "left" | "center" | "right";

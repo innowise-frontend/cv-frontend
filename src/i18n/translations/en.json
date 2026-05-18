@@ -59,6 +59,10 @@
     "signup": {
       "title": "Sign up"
     },
+    "table": {
+      "noResults": "No results",
+      "noDataResults": "No data results"
+    },
     "resetPassword": {
       "title": "Reset password",
       "subtitle": "Enter a new password and confirm it below.",
@@ -95,7 +99,7 @@
     },
     "languages": {
       "currentLanguages": "Current languages",
-      "emptyState": "You don't have any languages yet",
+      "emptyState": "Current user doesn't have any languages yet",
       "addLanguage": "Add language",
       "createLanguage": "Create language",
       "deleteLanguage": "Delete language",
@@ -116,11 +120,12 @@
       "add": "Add",
       "remove": "Remove",
       "update": "Update",
-      "save": "Save"
+      "save": "Save",
+      "noData": "No data"
     },
     "skills": {
       "currentSkills": "Skills",
-      "emptyState": "You don't have any skills yet",
+      "emptyState": "Current user doesn't have any skills yet",
       "addSkill": "Add skill",
       "createSkill": "Create skill",
       "updateSkill": "Update skill",
@@ -142,7 +147,8 @@
       "add": "Add",
       "remove": "Remove",
       "update": "Update",
-      "save": "Save"
+      "save": "Save",
+      "noData": "No data"
     },
     "sidebar": {
       "employees": "Employees",
@@ -216,7 +222,8 @@
       "confirmDeleteBefore": "Are you sure you want to delete ",
       "confirmDeleteAfter": "?",
       "emailAlreadyExists": "A user with this email already exists.",
-      "confirm": "Confirm"
+      "confirm": "Confirm",
+      "noData": "No data"
     }
   }
 }

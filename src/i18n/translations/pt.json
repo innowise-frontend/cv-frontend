@@ -59,6 +59,10 @@
     "signup": {
       "title": "Cadastre-se"
     },
+    "table": {
+      "noResults": "Sem resultados",
+      "noDataResults": "Sem dados"
+    },
     "resetPassword": {
       "title": "Redefinir senha",
       "subtitle": "Digite uma nova senha e confirme abaixo.",
@@ -95,7 +99,7 @@
     },
     "languages": {
       "currentLanguages": "Idiomas atuais",
-      "emptyState": "Voce ainda nao tem idiomas",
+      "emptyState": "O utilizador atual ainda não tem idiomas",
       "addLanguage": "Adicionar idioma",
       "createLanguage": "Criar idioma",
       "deleteLanguage": "Excluir idioma",
@@ -116,11 +120,12 @@
       "add": "Adicionar",
       "remove": "Remover",
       "update": "Atualizar",
-      "save": "Salvar"
+      "save": "Salvar",
+      "noData": "Sem dados"
     },
     "skills": {
       "currentSkills": "Habilidades",
-      "emptyState": "Voce ainda nao tem habilidades",
+      "emptyState": "O utilizador atual ainda não tem habilidades",
       "addSkill": "Adicionar habilidade",
       "createSkill": "Criar habilidade",
       "updateSkill": "Atualizar habilidade",
@@ -142,7 +147,8 @@
       "add": "Adicionar",
       "remove": "Remover",
       "update": "Atualizar",
-      "save": "Salvar"
+      "save": "Salvar",
+      "noData": "Sem dados"
     },
     "sidebar": {
       "employees": "Funcionários",
@@ -215,7 +221,8 @@
       "confirmDeleteBefore": "Tem a certeza de que pretende eliminar ",
       "confirmDeleteAfter": "?",
       "emailAlreadyExists": "Já existe um utilizador com este e-mail.",
-      "confirm": "Confirmar"
+      "confirm": "Confirmar",
+      "noData": "Sem dados"
     }
   }
 }

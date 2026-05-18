@@ -2,6 +2,7 @@ import { useParams } from "@tanstack/react-router";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { ProgressBar } from "@components/shared";
+import { EmptyContent } from "@root/components/shared/EmptyContent/EmptyContent";
 import { useAuth } from "@root/hooks";
 import { useSkillCategoriesQuery, useUserSkillsQuery } from "@root/pages/SkillsPage/api";
 import { SkillsEditor } from "@root/pages/SkillsPage/components";
@@ -34,7 +35,7 @@ export const Skills = () => {
         <SkillsEditor userId={profileUserId} />
       ) : (
         <>
-          {!hasGroupedSkills && <div>{t("page.skills.emptyState")}</div>}
+          {!hasGroupedSkills && <EmptyContent message={t("page.skills.emptyState")} />}
 
           {hasGroupedSkills && (
             <div className="flex flex-col gap-6">
