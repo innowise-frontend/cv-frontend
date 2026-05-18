@@ -1,6 +1,7 @@
 import { flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table";
 import { useTranslation } from "react-i18next";
 import { Pagination } from "@components/shared";
+import { EmptyContent } from "@components/shared/EmptyContent/EmptyContent";
 import {
   Table as UITable,
   TableBody,
@@ -9,7 +10,6 @@ import {
   TableHeader,
   TableRow,
 } from "@components/ui/table";
-import { EmptyContent } from "@root/components/shared/EmptyContent/EmptyContent";
 import { TableProps } from "./types";
 
 export const Table = <TData,>({
