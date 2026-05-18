@@ -54,6 +54,10 @@ export interface TranslationTypes {
     signup: {
       title: string;
     };
+    table: {
+      noResults: string;
+      noDataResults: string;
+    };
     resetPassword: {
       title: string;
       subtitle: string;
@@ -90,6 +94,7 @@ export interface TranslationTypes {
       remove: string;
       update: string;
       save: string;
+      noData: string;
     };
     skills: {
       currentSkills: string;
@@ -116,6 +121,7 @@ export interface TranslationTypes {
       remove: string;
       update: string;
       save: string;
+      noData: string;
     };
     sidebar: {
       employees: string;
@@ -187,6 +193,7 @@ export interface TranslationTypes {
       confirmDeleteAfter: string;
       confirm: string;
       emailAlreadyExists: string;
+      noData: string;
     };
   };
   theme: {

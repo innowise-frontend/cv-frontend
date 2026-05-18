@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import RemoveIcon from "@assets/icon/RemoveIcon.svg?react";
 import { Button, Modal } from "@components/shared";
+import { EmptyContent } from "@components/shared/EmptyContent/EmptyContent";
 import { DeleteProfileLanguageInput } from "@services/graphql/__generated__/graphql";
 import { LanguagesEditorProps } from "./types";
 import { getProficiencyOptions, useLanguagesQuery, useUserLanguagesQuery } from "../../api";
@@ -52,28 +53,30 @@ export const LanguagesEditor = ({ userId }: LanguagesEditorProps) => {
   };
 
   return (
-    <div className="mx-auto flex flex-col pt-8 px-6 w-full">
-      <h2 className="text-left pb-4">{t("page.languages.currentLanguages")}</h2>
+    <div className="mx-auto flex flex-col px-6 w-full">
+      {hasLanguages ? (
+        <>
+          <h2 className="text-left pb-4">{t("page.languages.currentLanguages")}</h2>
+          <div className="grid grid-cols-3">
+            {languages.map((language) => (
+              <Modal key={language.name}>
+                <LanguageProgressBar
+                  userId={userId}
+                  name={language.name}
+                  proficiency={language.proficiency}
+                  isDeleteMode={isDeleteMode}
+                  chosen={isDeleteMode && deletedLanguages.name.includes(language.name)}
+                  onClick={() => toggleDeletedLanguage(language.name)}
+                />
+              </Modal>
+            ))}
+          </div>
+        </>
+      ) : (
+        <EmptyContent message={t("page.languages.emptyState")} />
+      )}
 
-      <div className="grid grid-cols-3">
-        {!hasLanguages && <div className="col-span-3">{t("page.languages.emptyState")}</div>}
-
-        {hasLanguages &&
-          languages.map((language) => (
-            <Modal key={language.name}>
-              <LanguageProgressBar
-                userId={userId}
-                name={language.name}
-                proficiency={language.proficiency}
-                isDeleteMode={isDeleteMode}
-                chosen={isDeleteMode && deletedLanguages.name.includes(language.name)}
-                onClick={() => toggleDeletedLanguage(language.name)}
-              />
-            </Modal>
-          ))}
-      </div>
-
-      <div className="min-h-14 flex gap-8 justify-end pt-4">
+      <div className="min-h-14 flex gap-8 justify-end pt-8">
         {isDeleteMode && (
           <>
             <Button variant="outline" className="w-40" onClick={resetDeletedLanguages}>

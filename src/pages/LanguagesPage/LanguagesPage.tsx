@@ -11,11 +11,15 @@ export const LanguagesPage = () => {
   const { userId, isAdmin } = useAuth();
 
   return (
-    <div className="flex flex-col ml-6">
+    <div className="flex h-full min-h-0 flex-col px-6">
       <Breadcrumbs items={[getBreadcrumbsLink(location.pathname, t)]} className="pl-5 pb-4" />
-      {isAdmin && <LanguagesTable />}
+      {isAdmin && (
+        <div className="flex min-h-0 flex-1 flex-col">
+          <LanguagesTable />
+        </div>
+      )}
       {!isAdmin && (
-        <div className="mx-auto flex flex-col w-[852px]">
+        <div className="mx-auto flex flex-col w-[852px] pt-8">
           <LanguagesEditor userId={userId} />
         </div>
       )}

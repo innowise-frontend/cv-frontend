@@ -59,6 +59,10 @@
     "signup": {
       "title": "Registrieren"
     },
+    "table": {
+      "noResults": "Keine Ergebnisse",
+      "noDataResults": "Keine Daten vorhanden"
+    },
     "resetPassword": {
       "title": "Passwort zurücksetzen",
       "subtitle": "Geben Sie ein neues Passwort ein und bestätigen Sie es unten.",
@@ -95,7 +99,7 @@
     },
     "languages": {
       "currentLanguages": "Aktuelle Sprachen",
-      "emptyState": "Sie haben noch keine Sprachen",
+      "emptyState": "Der aktuelle Benutzer hat noch keine Sprachen",
       "addLanguage": "Sprache hinzufügen",
       "createLanguage": "Sprache erstellen",
       "deleteLanguage": "Sprache löschen",
@@ -116,11 +120,12 @@
       "add": "Hinzufügen",
       "remove": "Entfernen",
       "update": "Aktualisieren",
-      "save": "Speichern"
+      "save": "Speichern",
+      "noData": "Keine Daten"
     },
     "skills": {
       "currentSkills": "Fähigkeiten",
-      "emptyState": "Sie haben noch keine Fähigkeiten",
+      "emptyState": "Der aktuelle Benutzer hat noch keine Fähigkeiten",
       "addSkill": "Fähigkeit hinzufügen",
       "createSkill": "Fähigkeit erstellen",
       "updateSkill": "Fähigkeit aktualisieren",
@@ -142,7 +147,8 @@
       "add": "Hinzufügen",
       "remove": "Entfernen",
       "update": "Aktualisieren",
-      "save": "Speichern"
+      "save": "Speichern",
+      "noData": "Keine Daten"
     },
     "sidebar": {
       "employees": "Mitarbeiter",
@@ -215,7 +221,8 @@
       "confirmDeleteBefore": "Sind Sie sicher, dass Sie löschen möchten ",
       "confirmDeleteAfter": "?",
       "emailAlreadyExists": "Ein Benutzer mit dieser E-Mail existiert bereits.",
-      "confirm": "Bestätigen"
+      "confirm": "Bestätigen",
+      "noData": "Keine Daten"
     }
   }
 }

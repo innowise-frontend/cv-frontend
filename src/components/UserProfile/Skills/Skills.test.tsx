@@ -73,7 +73,7 @@ describe("UserProfile Skills", () => {
 
     render(<Skills />);
 
-    expect(screen.getByText("You don't have any skills yet")).toBeInTheDocument();
+    expect(screen.getByText("Current user doesn't have any skills yet")).toBeInTheDocument();
     expect(screen.queryByText("editor")).not.toBeInTheDocument();
   });
 });

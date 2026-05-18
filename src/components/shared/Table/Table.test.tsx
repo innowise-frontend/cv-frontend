@@ -65,7 +65,7 @@ describe("Table", () => {
       />,
     );
 
-    expect(screen.getByText("No data results")).toBeInTheDocument();
+    expect(screen.getByText("No results")).toBeInTheDocument();
   });
 
   it("should render all rows from provided data", () => {

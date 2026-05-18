@@ -1,5 +1,6 @@
 import { useLocation, useNavigate, useSearch } from "@tanstack/react-router";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Modal, Table, TableSearch } from "@components/shared";
 import { VIEW_OPTIONS, SortOrder } from "@root/constants";
 import { useAuth, useHandleSearch } from "@root/hooks";
@@ -8,6 +9,7 @@ import { useLanguagesTableQuery } from "../../api";
 import { CreateLanguageModal } from "../CreateLanguageModal/CreateLanguageModal";
 
 export const LanguagesTable = () => {
+  const { t } = useTranslation();
   const { isAdmin } = useAuth();
   const searchParams = useSearch({ from: "/_app/languages" });
   const location = useLocation();
@@ -30,15 +32,19 @@ export const LanguagesTable = () => {
 
   const { columns } = useLanguagesTableColumns();
 
-  const { data } = useLanguagesTableQuery({
+  const { data, isPending } = useLanguagesTableQuery({
     search: searchParams.search ?? "",
     page: currentPage,
     limit: currentLimit,
     sortOrder: currentSort,
   });
 
+  const tableData = data?.items ?? [];
+  const hasActiveSearch = (searchParams.search ?? "").trim().length > 0;
+  const emptyMessage = hasActiveSearch ? t("page.table.noResults") : t("page.languages.noData");
+
   return (
-    <>
+    <div className="flex h-full min-h-0 flex-col">
       <TableSearch
         action={
           isAdmin && (
@@ -52,8 +58,10 @@ export const LanguagesTable = () => {
       />
       <div className="min-h-0 flex-1">
         <Table
-          data={data?.items ?? []}
+          data={tableData}
           columns={columns}
+          isLoading={isPending}
+          emptyMessage={emptyMessage}
           pagesAmount={data?.total_pages ?? 0}
           currentPage={currentPage}
           onChangePage={setCurrentPage}
@@ -69,6 +77,6 @@ export const LanguagesTable = () => {
           }}
         />
       </div>
-    </>
+    </div>
   );
 };
