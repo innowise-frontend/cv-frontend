@@ -51,15 +51,20 @@ describe("MultiSelect", () => {
 
     render(<Controlled />);
 
+    const floatingLabel = screen.getByText("Programming languages", { selector: "label" });
+    expect(floatingLabel).toHaveClass("opacity-0");
+
     const trigger = screen.getByText("Choose languages").closest("button");
     expect(trigger).toBeTruthy();
 
     const triggerButton = trigger!;
 
     await user.click(triggerButton);
+    expect(floatingLabel).toHaveClass("opacity-100");
     await user.click(await screen.findByText("TypeScript"));
 
     expect(onChange).toHaveBeenCalledTimes(1);
+    expect(floatingLabel).toHaveClass("-translate-y-4");
     expect(onChange).toHaveBeenCalledWith(["ts"]);
     expect(within(triggerButton).getByText("TypeScript")).toBeInTheDocument();
 
