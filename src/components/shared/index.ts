@@ -20,3 +20,4 @@ export { CodeInput } from "./CodeInput/CodeInput";
 export { TableActions } from "./TableActions/TableActions";
 export { TableColumnHeader } from "./TableColumnHeader/TableColumnHeader";
 export { Modal } from "./Modal/Modal";
+export { Spinner } from "./Spinner";

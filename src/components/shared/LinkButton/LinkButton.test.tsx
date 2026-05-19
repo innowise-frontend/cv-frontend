@@ -5,6 +5,8 @@ import { LinkButton } from "./LinkButton";
 const linkMock = vi.hoisted(() => vi.fn());
 
 vi.mock("@tanstack/react-router", () => ({
+  useRouterState: ({ select }: { select: (state: { location: { pathname: string } }) => string }) =>
+    select({ location: { pathname: "/" } }),
   Link: (props: {
     to: string;
     className?: string;

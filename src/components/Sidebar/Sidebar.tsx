@@ -34,6 +34,7 @@ export const Sidebar = () => {
                   to={item.to}
                   icon={item.icon}
                   collapsed={isCollapsed}
+                  matchActive={item.matchActive}
                 />
                 {item.withDivider && isAdmin && <Divider />}
               </React.Fragment>

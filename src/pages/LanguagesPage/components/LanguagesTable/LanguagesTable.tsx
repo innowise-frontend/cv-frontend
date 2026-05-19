@@ -32,7 +32,7 @@ export const LanguagesTable = () => {
 
   const { columns } = useLanguagesTableColumns();
 
-  const { data, isPending } = useLanguagesTableQuery({
+  const { data, isLoading } = useLanguagesTableQuery({
     search: searchParams.search ?? "",
     page: currentPage,
     limit: currentLimit,
@@ -60,7 +60,7 @@ export const LanguagesTable = () => {
         <Table
           data={tableData}
           columns={columns}
-          isLoading={isPending}
+          isLoading={isLoading}
           emptyMessage={emptyMessage}
           pagesAmount={data?.total_pages ?? 0}
           currentPage={currentPage}

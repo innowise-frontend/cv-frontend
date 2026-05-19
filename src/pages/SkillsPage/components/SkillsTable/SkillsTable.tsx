@@ -31,7 +31,7 @@ export const SkillsTable = () => {
     },
   });
 
-  const { data } = useSkillsTableQuery({
+  const { data, isLoading } = useSkillsTableQuery({
     search: searchParams.search ?? "",
     page: currentPage,
     limit: currentLimit,
@@ -62,6 +62,7 @@ export const SkillsTable = () => {
         <Table
           data={tableData}
           columns={columns}
+          isLoading={isLoading}
           emptyMessage={emptyMessage}
           pagesAmount={data?.total_pages ?? 0}
           currentPage={currentPage}
