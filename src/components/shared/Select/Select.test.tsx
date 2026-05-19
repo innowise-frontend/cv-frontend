@@ -49,10 +49,12 @@ describe("Select", () => {
 
     await user.click(combobox);
 
-    expect(combobox).toHaveAttribute("aria-expanded", "true");
+    await waitFor(() => expect(combobox).toHaveAttribute("aria-expanded", "true"));
     await waitFor(() => expect(placeholder).toHaveClass("opacity-0"));
-    await waitFor(() => expect(floatingLabel).toHaveClass("opacity-100"));
-    expect(floatingLabel).toHaveClass("-translate-y-4");
+    await waitFor(() => {
+      expect(floatingLabel).toHaveClass("opacity-100");
+      expect(floatingLabel).toHaveClass("-translate-y-4");
+    });
 
     await user.click(await screen.findByRole("option", { name: "English" }));
 

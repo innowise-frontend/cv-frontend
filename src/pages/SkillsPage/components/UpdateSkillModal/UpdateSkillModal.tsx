@@ -43,7 +43,7 @@ export const UpdateSkillModal = ({ name, categoryId, skillId }: UpdateSkillModal
       </Modal.Trigger>
       <Modal.Content>
         <Modal.Header>{t("page.skills.updateSkill")}</Modal.Header>
-        <Modal.Body className="flex flex-col gap-4">
+        <Modal.Body className="flex flex-col gap-9">
           <Input
             placeholder={t("page.skills.name")}
             label={t("page.skills.name")}
@@ -57,7 +57,6 @@ export const UpdateSkillModal = ({ name, categoryId, skillId }: UpdateSkillModal
             placeholder={t("page.skills.category")}
             value={updatedSkill.categoryId}
             onValueChange={(value) => setUpdatedSkill({ ...updatedSkill, categoryId: value })}
-            className="[&_[data-slot=select-trigger][data-placeholder]]:text-gray-6"
           />
         </Modal.Body>
         <Modal.Footer>

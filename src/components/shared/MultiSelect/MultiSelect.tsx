@@ -1,5 +1,5 @@
 import { ChevronDownIcon } from "lucide-react";
-import { useId, useState } from "react";
+import { type MouseEvent, useId, useState } from "react";
 import { customPlaceholderClassName } from "@components/shared/formFieldStyles";
 import CloseIcon from "@root/assets/icon/CloseIcon.svg?react";
 import { Command, CommandGroup, CommandItem, CommandList } from "@root/components/ui/command";
@@ -38,6 +38,40 @@ export function MultiSelect<
     onChange(data.filter((item) => item !== value));
   };
 
+  const getSelectedLabel = (value: TValue) =>
+    options.find((opt) => opt.value === value)?.label ?? value;
+
+  const createRemoveHandler = (value: TValue) => (e: MouseEvent<HTMLSpanElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    removeValue(value);
+  };
+
+  const renderSelectedChip = (value: TValue) => (
+    <div
+      key={value}
+      className={cn(
+        "inline-flex h-6 max-w-full items-center gap-1 rounded-full border border-gray-2 bg-gray-8 px-2 py-0.5 text-xs leading-none text-gray-2 dark:border-gray-8 dark:bg-gray-2 dark:text-gray-8",
+        disabled &&
+          "cursor-not-allowed border-gray-5 bg-gray-6 text-gray-5 dark:border-gray-5 dark:bg-gray-3 dark:text-gray-5",
+      )}
+    >
+      <span>{getSelectedLabel(value)}</span>
+      {!disabled && (
+        <span
+          className={cn(
+            "inline-flex size-3 shrink-0 cursor-pointer items-center justify-center rounded-full bg-gray-5 p-0 outline-none dark:bg-gray-5",
+          )}
+          onPointerDown={(e) => e.stopPropagation()}
+          onClick={createRemoveHandler(value)}
+          role="button"
+        >
+          <CloseIcon className="size-1.5 text-gray-8 dark:text-gray-4" aria-hidden />
+        </span>
+      )}
+    </div>
+  );
+
   return (
     <div className={cn("relative flex w-full flex-col", className)}>
       <div className="relative">
@@ -72,41 +106,7 @@ export function MultiSelect<
                   {placeholder}
                 </span>
               ) : (
-                data.map((value) => {
-                  const selectedLabel = options.find((opt) => opt.value === value)?.label ?? value;
-
-                  return (
-                    <div
-                      key={value}
-                      className={cn(
-                        "inline-flex h-6 max-w-full items-center gap-1 rounded-full border border-gray-2 bg-gray-8 px-2 py-0.5 text-xs leading-none text-gray-2 dark:border-gray-8 dark:bg-gray-2 dark:text-gray-8",
-                        disabled &&
-                          "cursor-not-allowed border-gray-5 bg-gray-6 text-gray-5 dark:border-gray-5 dark:bg-gray-3 dark:text-gray-5",
-                      )}
-                    >
-                      <span>{selectedLabel}</span>
-                      {!disabled && (
-                        <span
-                          className={cn(
-                            "inline-flex size-3 shrink-0 cursor-pointer items-center justify-center rounded-full bg-gray-5 p-0 outline-none dark:bg-gray-5",
-                          )}
-                          onPointerDown={(e) => e.stopPropagation()}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            removeValue(value);
-                          }}
-                          role="button"
-                        >
-                          <CloseIcon
-                            className="size-1.5 text-gray-8 dark:text-gray-4"
-                            aria-hidden
-                          />
-                        </span>
-                      )}
-                    </div>
-                  );
-                })
+                data.map(renderSelectedChip)
               )}
             </div>
             <ChevronDownIcon className="pointer-events-none size-4 shrink-0 text-gray-5 dark:text-gray-5" />

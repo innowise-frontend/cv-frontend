@@ -62,14 +62,13 @@ export const AddSkillModal = ({ userId, skills, masteryOptions }: AddSkillModalP
       </Modal.Trigger>
       <Modal.Content onCancel={resetSelectedSkill}>
         <Modal.Header>{t("page.skills.addSkill")}</Modal.Header>
-        <Modal.Body className="flex flex-col gap-4">
+        <Modal.Body className="flex flex-col gap-9">
           <Select
             list={skillOptions}
             label={t("page.skills.skill")}
             placeholder={t("page.skills.skill")}
             value={selectedSkill.name}
             onValueChange={handleSelectSkill}
-            className="[&_[data-slot=select-trigger][data-placeholder]]:text-gray-6"
           />
           <Select
             list={masteryOptions}
@@ -82,11 +81,10 @@ export const AddSkillModal = ({ userId, skills, masteryOptions }: AddSkillModalP
                 mastery: value as Mastery,
               })
             }
-            className="[&_[data-slot=select-trigger][data-placeholder]]:text-gray-6"
           />
         </Modal.Body>
         <Modal.Footer className="flex justify-end gap-4">
-          <Modal.Close variant="outline" className="w-40" onClick={resetSelectedSkill}>
+          <Modal.Close variant="outline" className="w-40">
             {t("page.skills.cancel")}
           </Modal.Close>
           <Modal.Close
