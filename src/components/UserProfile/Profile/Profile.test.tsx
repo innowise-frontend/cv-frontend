@@ -24,6 +24,10 @@ vi.mock("./components/Info", () => ({
   Info: () => <div data-testid="profile-info" />,
 }));
 
+vi.mock("@components/shared", () => ({
+  Spinner: () => <div data-testid="spinner" />,
+}));
+
 vi.mock("react-i18next", () => ({
   useTranslation: () => ({
     t: (key: string) => key,
@@ -35,16 +39,16 @@ describe("Profile", () => {
     vi.clearAllMocks();
   });
 
-  it("renders nothing while loading", () => {
+  it("renders Spinner while loading", () => {
     useUserProfileMock.mockReturnValue({
       data: undefined,
       isPending: true,
       isError: false,
     });
 
-    const { container } = render(<Profile />);
+    render(<Profile />);
 
-    expect(container.firstChild).toBeNull();
+    expect(screen.getByTestId("spinner")).toBeInTheDocument();
   });
 
   it("renders ErrorPage when query fails or data is missing", () => {

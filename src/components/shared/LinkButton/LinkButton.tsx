@@ -1,15 +1,33 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
+import { cn } from "@root/lib/utils";
 import type { LinkButtonProps } from "./types";
 
-export const LinkButton = ({ title, to, icon: Icon, collapsed = false }: LinkButtonProps) => {
+const baseClassName = "flex items-center gap-4 p-4 rounded-r-40 cursor-pointer";
+const activeClassName = "text-gray-2 dark:text-gray-8 opacity-100 bg-gray-7 dark:bg-gray-4";
+const inactiveClassName = "text-gray-3 dark:text-gray-5";
+
+export const LinkButton = ({
+  title,
+  to,
+  icon: Icon,
+  collapsed = false,
+  matchActive,
+}: LinkButtonProps) => {
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
+  const hasCustomActive = matchActive !== undefined;
+  const isActive = hasCustomActive && matchActive(pathname);
+
   return (
     <Link
       to={to}
-      className="flex items-center gap-4 p-4 rounded-r-40 cursor-pointer"
-      activeProps={{
-        className: "text-gray-2 dark:text-gray-8 opacity-100 bg-gray-7 dark:bg-gray-4",
-      }}
-      inactiveProps={{ className: "text-gray-3 dark:text-gray-5" }}
+      className={cn(
+        baseClassName,
+        hasCustomActive && (isActive ? activeClassName : inactiveClassName),
+      )}
+      {...(!hasCustomActive && {
+        activeProps: { className: activeClassName },
+        inactiveProps: { className: inactiveClassName },
+      })}
     >
       <Icon alt={title} width={24} height={24} />
       {!collapsed && title}

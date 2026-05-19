@@ -1,6 +1,6 @@
 import { flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table";
 import { useTranslation } from "react-i18next";
-import { Pagination } from "@components/shared";
+import { Pagination, Spinner } from "@components/shared";
 import { EmptyContent } from "@components/shared/EmptyContent/EmptyContent";
 import {
   Table as UITable,
@@ -55,6 +55,10 @@ export const Table = <TData,>({
     getCoreRowModel: getCoreRowModel(),
   });
 
+  if (isLoading) {
+    return <Spinner />;
+  }
+
   return (
     <div className="flex h-full min-h-0 flex-col">
       <div className="min-h-0 flex-1 overflow-auto relative">
@@ -79,11 +83,7 @@ export const Table = <TData,>({
             ))}
           </TableHeader>
           <TableBody className="font-normal">
-            {isLoading ? (
-              <TableRow className="!border-b border-b-gray-5 hover:bg-transparent dark:border-b-gray-3">
-                <TableCell colSpan={columns.length} className="h-48 p-0" />
-              </TableRow>
-            ) : table.getRowModel().rows?.length ? (
+            {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}

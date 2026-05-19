@@ -1,7 +1,7 @@
 import { useLocation, useNavigate, useSearch } from "@tanstack/react-router";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Breadcrumbs, Modal, Table, TableSearch } from "@components/shared";
+import { Breadcrumbs, Modal, Spinner, Table, TableSearch } from "@components/shared";
 import { SortOrder, VIEW_OPTIONS } from "@root/constants";
 import { useAuth, useHandleSearch } from "@root/hooks";
 import { getBreadcrumbsLink } from "@root/lib";
@@ -32,7 +32,7 @@ export const UsersPage = () => {
   });
   const { columns } = useUserTableColumns();
 
-  const { data } = useUsersApi({
+  const { data, isLoading } = useUsersApi({
     search: searchParams.search ?? "",
     page: currentPage,
     limit: currentLimit,
@@ -43,6 +43,10 @@ export const UsersPage = () => {
   const tableData = data?.items ?? [];
   const hasActiveSearch = (searchParams.search ?? "").trim().length > 0;
   const emptyMessage = hasActiveSearch ? t("page.table.noResults") : t("page.users.noData");
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <div className="flex h-full min-h-0 flex-col ml-5">

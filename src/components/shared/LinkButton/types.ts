@@ -3,4 +3,5 @@ export interface LinkButtonProps {
   to: string;
   icon: React.ElementType;
   collapsed?: boolean;
+  matchActive?: (pathname: string) => boolean;
 }
