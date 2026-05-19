@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useState } from "react";
@@ -6,32 +6,53 @@ import { describe, expect, it, vi } from "vitest";
 import { Select } from "./Select";
 
 describe("Select", () => {
-  it("base case: shows placeholder without label when empty, opens and selects an option", async () => {
+  it("shows placeholder when closed and empty, floats label when open, and selects an option", async () => {
     const user = userEvent.setup();
     const onValueChange = vi.fn();
 
-    render(
-      <Select
-        label="Language"
-        placeholder="Choose a language"
-        value=""
-        onValueChange={onValueChange}
-        list={[
-          { value: "en", label: "English" },
-          { value: "uk", label: "Ukrainian" },
-        ]}
-      />,
-    );
+    function Controlled() {
+      const [value, setValue] = useState("");
+
+      return (
+        <Select
+          label="Language"
+          placeholder="Choose a language"
+          value={value}
+          onValueChange={(next) => {
+            onValueChange(next);
+            setValue(next);
+          }}
+          list={[
+            { value: "en", label: "English" },
+            { value: "uk", label: "Ukrainian" },
+          ]}
+        />
+      );
+    }
+
+    render(<Controlled />);
 
     const combobox = screen.getByRole("combobox");
-    expect(within(combobox).getByText("Choose a language")).toBeInTheDocument();
-    expect(screen.queryByText("Language")).not.toBeInTheDocument();
+    const placeholder = within(combobox).getByText("Choose a language");
+    const floatingLabel = screen.getByText("Language", { selector: "label" });
+
+    expect(placeholder).toBeVisible();
+    expect(floatingLabel).toHaveClass("opacity-0");
+    expect(floatingLabel).toHaveClass("top-1/2");
 
     await user.click(combobox);
+
+    expect(combobox).toHaveAttribute("aria-expanded", "true");
+    await waitFor(() => expect(placeholder).toHaveClass("opacity-0"));
+    await waitFor(() => expect(floatingLabel).toHaveClass("opacity-100"));
+    expect(floatingLabel).toHaveClass("-translate-y-4");
+
     await user.click(await screen.findByRole("option", { name: "English" }));
 
     expect(onValueChange).toHaveBeenCalledTimes(1);
     expect(onValueChange).toHaveBeenCalledWith("en");
+    expect(floatingLabel).toHaveClass("opacity-100");
+    expect(floatingLabel).toHaveClass("-translate-y-4");
   });
 
   it("should allow changing selection to another option", async () => {
@@ -63,19 +84,24 @@ describe("Select", () => {
     render(<Controlled />);
 
     const combobox = screen.getByRole("combobox");
-    expect(within(combobox).getByText("Choose a language")).toBeInTheDocument();
+    const floatingLabel = screen.getByText("Language", { selector: "label" });
+
+    expect(within(combobox).getByText("Choose a language")).toBeVisible();
+    expect(floatingLabel).toHaveClass("opacity-0");
 
     await user.click(combobox);
     await user.click(await screen.findByRole("option", { name: "English" }));
 
     expect(onValueChange).toHaveBeenCalledWith("en");
-    expect(within(combobox).getByText("English")).toBeInTheDocument();
+    expect(within(combobox).getByText("English")).toBeVisible();
+    expect(floatingLabel).toHaveClass("opacity-100");
+    expect(floatingLabel).toHaveClass("-translate-y-4");
 
     await user.click(combobox);
     await user.click(await screen.findByRole("option", { name: "Ukrainian" }));
 
     expect(onValueChange).toHaveBeenCalledWith("uk");
-    expect(within(combobox).getByText("Ukrainian")).toBeInTheDocument();
+    expect(within(combobox).getByText("Ukrainian")).toBeVisible();
     expect(onValueChange).toHaveBeenCalledTimes(2);
   });
 });

@@ -27,17 +27,12 @@ export const Input = forwardRef<HTMLInputElement, InputWithLabelProps>(
     const generatedId = useId();
     const [initialDefaultValue] = useState(defaultValue);
 
-    const [value, setValue] = useState("");
     const [showPassword, setShowPassword] = useState(false);
 
     const isPasswordField = type === "password";
     const inputType = isPasswordField && showPassword ? "text" : type;
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (controlledValue === undefined) {
-        setValue(e.target.value);
-      }
-
       onChange?.(e);
     };
 
@@ -59,7 +54,7 @@ export const Input = forwardRef<HTMLInputElement, InputWithLabelProps>(
               ? { value: controlledValue }
               : { defaultValue: initialDefaultValue })}
             className={cn(
-              "peer block cursor-pointer h-12 px-3 py-3 text-base leading-6 placeholder:text-gray-6 border-gray-5 shadow-none outline-none",
+              "peer block cursor-pointer h-12 px-3 py-3 text-base leading-6 placeholder:text-md placeholder:text-gray-6 border-gray-5 shadow-none outline-none",
               "focus:outline-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:shadow-none focus:placeholder:opacity-0 transition-all duration-300",
               "dark:text-white dark:placeholder:text-gray-3 disabled:bg-gray-6 dark:disabled:bg-gray-3",
               "disabled:placeholder:text-gray-2 disabled:dark:placeholder:text-gray-6",
