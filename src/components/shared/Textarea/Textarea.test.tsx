@@ -2,6 +2,10 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { forwardRef } from "react";
 import { describe, expect, it, vi } from "vitest";
+import {
+  getFormFieldClassList,
+  nativePlaceholderClassName,
+} from "@components/shared/formFieldStyles";
 import { Textarea } from "./Textarea";
 
 vi.mock("@components/ui/textarea", () => ({
@@ -35,6 +39,14 @@ describe("TextareaWithLabel", () => {
     expect(screen.getByPlaceholderText("Placeholder")).toBeInTheDocument();
   });
 
+  it("should apply shared native placeholder styles", () => {
+    render(<Textarea placeholder="Placeholder" />);
+
+    getFormFieldClassList(nativePlaceholderClassName).forEach((className) => {
+      expect(screen.getByRole("textbox")).toHaveClass(className);
+    });
+  });
+
   it("should show the value instead of placeholder text when value is non-empty", () => {
     render(<Textarea value="Value" placeholder="Placeholder" onChange={() => {}} />);
 
@@ -44,16 +56,38 @@ describe("TextareaWithLabel", () => {
     expect(field).toHaveAttribute("placeholder", "Placeholder");
   });
 
-  it("should show the label when value is non-empty", () => {
-    render(<Textarea label="Notes" value="filled" onChange={() => {}} />);
+  it("should render a floating label linked to the textarea when label is provided", () => {
+    render(<Textarea label="Notes" placeholder="Notes" />);
 
-    expect(screen.getByText("Notes")).toBeInTheDocument();
+    const field = screen.getByRole("textbox");
+    const label = screen.getByText("Notes", { selector: "label" });
+
+    expect(label).toBeInTheDocument();
+    expect(label).toHaveAttribute("for", field.id);
   });
 
-  it("should not show the label when value is empty", () => {
-    render(<Textarea label="Notes" value="" onChange={() => {}} />);
+  it("should apply hidden label styles when value is empty and placeholder is shown", () => {
+    render(<Textarea label="Notes" placeholder="Notes" value="" onChange={() => {}} />);
 
-    expect(screen.queryByText("Notes")).not.toBeInTheDocument();
+    const label = screen.getByText("Notes", { selector: "label" });
+
+    expect(label).toHaveClass("peer-placeholder-shown:opacity-0");
+  });
+
+  it("should apply floated label styles when value is non-empty", () => {
+    render(<Textarea label="Notes" placeholder="Notes" value="filled" onChange={() => {}} />);
+
+    const label = screen.getByText("Notes", { selector: "label" });
+
+    expect(label).toHaveClass("-translate-y-4");
+    expect(label).toHaveClass("text-xs");
+  });
+
+  it("should hide placeholder on focus via shared placeholder styles", () => {
+    render(<Textarea placeholder="Placeholder" />);
+
+    expect(nativePlaceholderClassName).toContain("focus:placeholder:opacity-0");
+    expect(screen.getByPlaceholderText("Placeholder")).toHaveClass("focus:placeholder:opacity-0");
   });
 
   it("should forward ref to the native textarea", () => {
@@ -64,7 +98,7 @@ describe("TextareaWithLabel", () => {
     expect(ref.mock.calls[0]?.[0]).toBeInstanceOf(HTMLTextAreaElement);
   });
 
-  it("should merge className onto the outer wrapper", () => {
+  it("should merge className onto the textarea", () => {
     render(<Textarea className="textarea-extra" />);
 
     expect(screen.getByRole("textbox")).toHaveClass("textarea-extra");

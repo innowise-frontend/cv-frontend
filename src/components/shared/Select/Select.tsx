@@ -1,5 +1,6 @@
 import { Select as SelectBase } from "@base-ui/react/select";
 import { useCallback, useId, useState } from "react";
+import { selectPlaceholderClassName } from "@components/shared/formFieldStyles";
 import { Label } from "@root/components/ui/label";
 import {
   Select as SelectRoot,
@@ -106,8 +107,7 @@ export const Select = ({
             className={cn(
               "w-full cursor-pointer border-gray-5 text-gray-2 shadow-none outline-none transition-all duration-300",
               "h-12! px-3 py-3 text-base leading-6 dark:text-gray-5 disabled:bg-gray-6 dark:disabled:bg-gray-3",
-              "data-placeholder:text-gray-6 dark:data-placeholder:text-gray-3",
-              "disabled:data-placeholder:text-gray-2 disabled:dark:data-placeholder:text-gray-6",
+              selectPlaceholderClassName,
               "focus:outline-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:shadow-none",
             )}
           >

@@ -2,6 +2,10 @@ import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useState } from "react";
 import { describe, expect, it, vi } from "vitest";
+import {
+  customPlaceholderClassName,
+  getFormFieldClassList,
+} from "@components/shared/formFieldStyles";
 
 vi.mock("@root/components/ui/command", async () => {
   const React = await import("react");
@@ -54,7 +58,12 @@ describe("MultiSelect", () => {
     const floatingLabel = screen.getByText("Programming languages", { selector: "label" });
     expect(floatingLabel).toHaveClass("opacity-0");
 
-    const trigger = screen.getByText("Choose languages").closest("button");
+    const placeholder = screen.getByText("Choose languages");
+    getFormFieldClassList(customPlaceholderClassName).forEach((className) => {
+      expect(placeholder).toHaveClass(className);
+    });
+
+    const trigger = placeholder.closest("button");
     expect(trigger).toBeTruthy();
 
     const triggerButton = trigger!;

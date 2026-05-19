@@ -1,5 +1,6 @@
 import { ChevronDownIcon } from "lucide-react";
 import { useId, useState } from "react";
+import { customPlaceholderClassName } from "@components/shared/formFieldStyles";
 import CloseIcon from "@root/assets/icon/CloseIcon.svg?react";
 import { Command, CommandGroup, CommandItem, CommandList } from "@root/components/ui/command";
 import { Label } from "@root/components/ui/label";
@@ -62,8 +63,10 @@ export function MultiSelect<
               {data.length === 0 ? (
                 <span
                   className={cn(
-                    "text-gray-6 transition-all duration-300 dark:text-gray-3",
+                    customPlaceholderClassName,
+                    "transition-opacity duration-300",
                     open && "opacity-0",
+                    disabled && "text-gray-2 dark:text-gray-6",
                   )}
                 >
                   {placeholder}

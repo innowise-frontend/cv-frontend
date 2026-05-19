@@ -2,6 +2,7 @@ import React, { useState, useId, forwardRef } from "react";
 import { useTranslation } from "react-i18next";
 import CloseEyeIcon from "@assets/icon/CloseEyeIcon.svg?react";
 import OpenEyeIcon from "@assets/icon/OpenEyeIcon.svg?react";
+import { nativePlaceholderClassName } from "@components/shared/formFieldStyles";
 import { Input as UiInput } from "@components/ui/input";
 import { Label } from "@root/components/ui/label";
 import { cn } from "@root/lib/utils";
@@ -54,10 +55,10 @@ export const Input = forwardRef<HTMLInputElement, InputWithLabelProps>(
               ? { value: controlledValue }
               : { defaultValue: initialDefaultValue })}
             className={cn(
-              "peer block cursor-pointer h-12 px-3 py-3 text-base leading-6 placeholder:text-md placeholder:text-gray-6 border-gray-5 shadow-none outline-none",
-              "focus:outline-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:shadow-none focus:placeholder:opacity-0 transition-all duration-300",
-              "dark:text-white dark:placeholder:text-gray-3 disabled:bg-gray-6 dark:disabled:bg-gray-3",
-              "disabled:placeholder:text-gray-2 disabled:dark:placeholder:text-gray-6",
+              "peer block h-12 cursor-pointer border-gray-5 px-3 py-3 text-base leading-6 shadow-none outline-none",
+              "focus:outline-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:shadow-none transition-all duration-300",
+              "dark:text-white disabled:bg-gray-6 dark:disabled:bg-gray-3",
+              nativePlaceholderClassName,
               className,
               error &&
                 "border-red focus-visible:border-red dark:border-red dark:focus-visible:border-red",

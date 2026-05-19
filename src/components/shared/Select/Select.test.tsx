@@ -3,6 +3,10 @@ import { within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useState } from "react";
 import { describe, expect, it, vi } from "vitest";
+import {
+  getFormFieldClassList,
+  selectPlaceholderClassName,
+} from "@components/shared/formFieldStyles";
 import { Select } from "./Select";
 
 describe("Select", () => {
@@ -37,6 +41,9 @@ describe("Select", () => {
     const floatingLabel = screen.getByText("Language", { selector: "label" });
 
     expect(placeholder).toBeVisible();
+    getFormFieldClassList(selectPlaceholderClassName).forEach((className) => {
+      expect(combobox).toHaveClass(className);
+    });
     expect(floatingLabel).toHaveClass("opacity-0");
     expect(floatingLabel).toHaveClass("top-1/2");
 

@@ -1,6 +1,10 @@
 import { render, screen } from "@testing-library/react";
 import UserEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
+import {
+  getFormFieldClassList,
+  nativePlaceholderClassName,
+} from "@components/shared/formFieldStyles";
 import i18n from "@root/i18n/i18n";
 import { Input } from "./Input";
 
@@ -27,6 +31,14 @@ describe("InputWithLabel", () => {
     render(<Input placeholder="Placeholder" />);
 
     expect(screen.getByPlaceholderText("Placeholder")).toBeInTheDocument();
+  });
+
+  it("should apply shared native placeholder styles", () => {
+    render(<Input placeholder="Placeholder" />);
+
+    getFormFieldClassList(nativePlaceholderClassName).forEach((className) => {
+      expect(screen.getByRole("textbox")).toHaveClass(className);
+    });
   });
 
   it("should show the value instead of placeholder text when value is non-empty", () => {
@@ -65,9 +77,10 @@ describe("InputWithLabel", () => {
     expect(label).toHaveClass("text-xs");
   });
 
-  it("should hide placeholder on focus via input classes", () => {
+  it("should hide placeholder on focus via shared placeholder styles", () => {
     render(<Input placeholder="Placeholder" />);
 
+    expect(nativePlaceholderClassName).toContain("focus:placeholder:opacity-0");
     expect(screen.getByPlaceholderText("Placeholder")).toHaveClass("focus:placeholder:opacity-0");
   });
 
