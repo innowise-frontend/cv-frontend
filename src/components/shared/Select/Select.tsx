@@ -16,7 +16,6 @@ import type { SelectProps } from "./types.ts";
 export const Select = ({
   list,
   label,
-  error,
   placeholder,
   className,
   popupClassName,
@@ -122,13 +121,6 @@ export const Select = ({
           <SelectBase.Portal container={dialogContainer}>{popup}</SelectBase.Portal>
         )}
       </SelectRoot>
-
-      <p
-        id={`${triggerId}-error`}
-        className={cn("pl-2 mt-1 text-left text-xs text-red h-3", !error && "invisible")}
-      >
-        {error || " "}
-      </p>
     </div>
   );
 };

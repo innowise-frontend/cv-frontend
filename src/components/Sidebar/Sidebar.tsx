@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
 import LeftArrowIcon from "@assets/icon/LeftArrowIcon.svg?react";
 import { Logo } from "@components/Logo";
@@ -13,7 +13,7 @@ export const Sidebar = () => {
 
   return (
     <div
-      className={`relative flex h-full flex-col justify-between pb-14 transition-[min-width] duration-300 ease-in-out ${isCollapsed ? "min-w-14" : "w-50"}`}
+      className={`relative flex h-full flex-col justify-between pb-14 transition-[min-width] duration-300 ease-in-out ${isCollapsed ? "w-14" : "w-50"}`}
     >
       <button
         type="button"
@@ -28,7 +28,7 @@ export const Sidebar = () => {
         {getSidebarItems({ isAdmin: isAdmin, t }).map(
           (item) =>
             item.visible && (
-              <React.Fragment key={item.title}>
+              <Fragment key={item.title}>
                 <LinkButton
                   title={item.title}
                   to={item.to}
@@ -36,7 +36,7 @@ export const Sidebar = () => {
                   collapsed={isCollapsed}
                 />
                 {item.withDivider && isAdmin && <Divider />}
-              </React.Fragment>
+              </Fragment>
             ),
         )}
       </div>
