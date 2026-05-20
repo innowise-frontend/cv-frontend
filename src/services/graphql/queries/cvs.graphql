@@ -1,11 +1,17 @@
-query Cvs {
-  cvs {
-    id
-    name
-    education
-    description
-    user {
-      email
+query Cvs($params: SearchPaginationInput!) {
+  cvs(params: $params) {
+    items {
+      id
+      name
+      education
+      description
+      user {
+        email
+      }
     }
+    total
+    page
+    limit
+    total_pages
   }
 }

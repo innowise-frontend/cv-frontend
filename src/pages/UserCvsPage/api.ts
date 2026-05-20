@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient, UseQueryOptions } from "@tanstack/react-query";
 import { t } from "i18next";
 import { toast } from "sonner";
+import { SortOrder } from "@root/constants";
 import { getErrorToastMessage } from "@root/lib";
 import { createCv, deleteCv, getCvs, updateCv } from "@services/cvs";
 import {
@@ -14,10 +15,25 @@ type CvsQueryConfig = Omit<
   "queryKey" | "queryFn"
 >;
 
-export const useCvsTableQuery = (config?: CvsQueryConfig) =>
+interface UseCvsTableQueryParams {
+  search: string;
+  page: number;
+  limit: number;
+  sortOrder: SortOrder;
+  config?: CvsQueryConfig;
+}
+
+export const useCvsTableQuery = ({
+  search,
+  page,
+  limit,
+  sortOrder,
+  config,
+}: UseCvsTableQueryParams) =>
   useQuery({
-    queryKey: ["cvs"],
-    queryFn: () => getCvs(),
+    queryKey: ["cvs", search, page, limit, sortOrder],
+    queryFn: () =>
+      getCvs({ search, page: page, limit: limit, sort_order: sortOrder, sort_by: "name" }),
     ...config,
   });
 

@@ -111,7 +111,6 @@ export type CreateSkillInput = {
 
 export type CreateUserInput = {
   auth: AuthInput;
-  cvsIds: Array<Scalars["String"]["input"]>;
   departmentId?: InputMaybe<Scalars["ID"]["input"]>;
   positionId?: InputMaybe<Scalars["ID"]["input"]>;
   profile: CreateProfileInput;
@@ -482,6 +481,15 @@ export type MutationVerifyMailArgs = {
   mail: VerifyMailInput;
 };
 
+export type PaginatedCvs = {
+  __typename?: "PaginatedCvs";
+  items: Array<Cv>;
+  limit: Scalars["Int"]["output"];
+  page: Scalars["Int"]["output"];
+  total: Scalars["Int"]["output"];
+  total_pages: Scalars["Int"]["output"];
+};
+
 export type PaginatedLanguages = {
   __typename?: "PaginatedLanguages";
   items: Array<Language>;
@@ -557,7 +565,7 @@ export type Project = {
 export type Query = {
   __typename?: "Query";
   cv: Cv;
-  cvs: Array<Cv>;
+  cvs: PaginatedCvs;
   departments: Array<Department>;
   languages: PaginatedLanguages;
   me: Profile;
@@ -574,6 +582,10 @@ export type Query = {
 
 export type QueryCvArgs = {
   cvId: Scalars["ID"]["input"];
+};
+
+export type QueryCvsArgs = {
+  params?: InputMaybe<SearchPaginationInput>;
 };
 
 export type QueryLanguagesArgs = {
@@ -736,7 +748,6 @@ export type UpdateTokenResult = {
 };
 
 export type UpdateUserInput = {
-  cvsIds?: InputMaybe<Array<Scalars["String"]["input"]>>;
   departmentId?: InputMaybe<Scalars["ID"]["input"]>;
   positionId?: InputMaybe<Scalars["ID"]["input"]>;
   role?: InputMaybe<UserRole>;
@@ -1127,18 +1138,27 @@ export type VerifyMailMutationVariables = Exact<{
 
 export type VerifyMailMutation = { __typename?: "Mutation"; verifyMail?: any | null };
 
-export type CvsQueryVariables = Exact<{ [key: string]: never }>;
+export type CvsQueryVariables = Exact<{
+  params: SearchPaginationInput;
+}>;
 
 export type CvsQuery = {
   __typename?: "Query";
-  cvs: Array<{
-    __typename?: "Cv";
-    id: string;
-    name: string;
-    education?: string | null;
-    description: string;
-    user?: { __typename?: "User"; email: string } | null;
-  }>;
+  cvs: {
+    __typename?: "PaginatedCvs";
+    total: number;
+    page: number;
+    limit: number;
+    total_pages: number;
+    items: Array<{
+      __typename?: "Cv";
+      id: string;
+      name: string;
+      education?: string | null;
+      description: string;
+      user?: { __typename?: "User"; email: string } | null;
+    }>;
+  };
 };
 
 export type DepartmentsQueryVariables = Exact<{ [key: string]: never }>;
@@ -1256,14 +1276,6 @@ export type UserQuery = {
     created_at: string;
     department?: { __typename?: "Department"; id: string; name: string } | null;
     position?: { __typename?: "Position"; id: string; name: string } | null;
-    cvs?: Array<{
-      __typename?: "Cv";
-      id: string;
-      name: string;
-      education?: string | null;
-      description: string;
-      user?: { __typename?: "User"; email: string } | null;
-    }> | null;
     profile: {
       __typename?: "Profile";
       avatar?: string | null;
@@ -2636,27 +2648,57 @@ export const CvsDocument = {
       kind: "OperationDefinition",
       operation: "query",
       name: { kind: "Name", value: "Cvs" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "params" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "SearchPaginationInput" } },
+          },
+        },
+      ],
       selectionSet: {
         kind: "SelectionSet",
         selections: [
           {
             kind: "Field",
             name: { kind: "Name", value: "cvs" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "params" },
+                value: { kind: "Variable", name: { kind: "Name", value: "params" } },
+              },
+            ],
             selectionSet: {
               kind: "SelectionSet",
               selections: [
-                { kind: "Field", name: { kind: "Name", value: "id" } },
-                { kind: "Field", name: { kind: "Name", value: "name" } },
-                { kind: "Field", name: { kind: "Name", value: "education" } },
-                { kind: "Field", name: { kind: "Name", value: "description" } },
                 {
                   kind: "Field",
-                  name: { kind: "Name", value: "user" },
+                  name: { kind: "Name", value: "items" },
                   selectionSet: {
                     kind: "SelectionSet",
-                    selections: [{ kind: "Field", name: { kind: "Name", value: "email" } }],
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      { kind: "Field", name: { kind: "Name", value: "name" } },
+                      { kind: "Field", name: { kind: "Name", value: "education" } },
+                      { kind: "Field", name: { kind: "Name", value: "description" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "user" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [{ kind: "Field", name: { kind: "Name", value: "email" } }],
+                        },
+                      },
+                    ],
                   },
                 },
+                { kind: "Field", name: { kind: "Name", value: "total" } },
+                { kind: "Field", name: { kind: "Name", value: "page" } },
+                { kind: "Field", name: { kind: "Name", value: "limit" } },
+                { kind: "Field", name: { kind: "Name", value: "total_pages" } },
               ],
             },
           },
@@ -3040,27 +3082,6 @@ export const UserDocument = {
                     selections: [
                       { kind: "Field", name: { kind: "Name", value: "id" } },
                       { kind: "Field", name: { kind: "Name", value: "name" } },
-                    ],
-                  },
-                },
-                {
-                  kind: "Field",
-                  name: { kind: "Name", value: "cvs" },
-                  selectionSet: {
-                    kind: "SelectionSet",
-                    selections: [
-                      { kind: "Field", name: { kind: "Name", value: "id" } },
-                      { kind: "Field", name: { kind: "Name", value: "name" } },
-                      { kind: "Field", name: { kind: "Name", value: "education" } },
-                      { kind: "Field", name: { kind: "Name", value: "description" } },
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "user" },
-                        selectionSet: {
-                          kind: "SelectionSet",
-                          selections: [{ kind: "Field", name: { kind: "Name", value: "email" } }],
-                        },
-                      },
                     ],
                   },
                 },
