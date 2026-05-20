@@ -16,8 +16,7 @@ export const LanguagesPage = () => {
         <div className="flex min-h-0 flex-1 flex-col">
           <LanguagesTable />
         </div>
-      )}
-      {!isAdmin && (
+      ) : (
         <div className="mx-auto flex flex-col w-[852px] pt-8">
           <LanguagesEditor userId={userId} />
         </div>

@@ -127,6 +127,31 @@ export interface TranslationTypes {
       save: string;
       noData: string;
     };
+    cvs: {
+      createCv: string;
+      createCvSuccess: string;
+      updateCvSuccess: string;
+      deleteCvSuccess: string;
+      edit: string;
+      editCv: string;
+      name: string;
+      education: string;
+      description: string;
+      employee: string;
+      delete: string;
+      deleteCv: string;
+      confirmDeleteCv: string;
+      cancel: string;
+      confirm: string;
+      create: string;
+      update: string;
+      noData: string;
+      validation: {
+        nameRequired: string;
+        educationRequired: string;
+        descriptionRequired: string;
+      };
+    };
     sidebar: {
       employees: string;
       skills: string;

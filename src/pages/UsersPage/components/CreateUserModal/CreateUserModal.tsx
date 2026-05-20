@@ -80,6 +80,7 @@ export const CreateUserModal = () => {
         first_name: data.firstName,
         last_name: data.lastName,
       },
+      cvsIds: [],
       departmentId: data.departmentId,
       positionId: data.positionId,
       role: data.role,

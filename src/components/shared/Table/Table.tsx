@@ -1,5 +1,7 @@
 import { flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table";
+import React from "react";
 import { useTranslation } from "react-i18next";
+import { cn } from "tailwind-variants";
 import { Pagination, Spinner } from "@components/shared";
 import { EmptyContent } from "@components/shared/EmptyContent/EmptyContent";
 import {
@@ -26,6 +28,7 @@ export const Table = <TData,>({
   onChangeViewOption,
   isLoading = false,
   emptyMessage,
+  renderSubRow,
 }: TableProps<TData>) => {
   const { t } = useTranslation();
 
@@ -86,23 +89,38 @@ export const Table = <TData,>({
           <TableBody className="font-normal">
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                  className="border-b-gray-5 dark:border-b-gray-3"
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell
-                      className="p-4 text-left whitespace-normal wrap-break-word"
-                      key={cell.id}
-                    >
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                    </TableCell>
-                  ))}
-                </TableRow>
+                <React.Fragment key={row.id}>
+                  <TableRow
+                    key={row.id}
+                    data-state={row.getIsSelected() && "selected"}
+                    className={cn(
+                      "border-b-gray-5 dark:border-b-gray-3",
+                      renderSubRow && "border-b-0",
+                    )}
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell
+                        className="p-4 text-left whitespace-normal wrap-break-word"
+                        key={cell.id}
+                      >
+                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                  {renderSubRow && (
+                    <TableRow className="border-b-gray-5 hover:bg-transparent dark:border-b-gray-3">
+                      <TableCell
+                        colSpan={row.getVisibleCells().length}
+                        className="p-4 pt-0 text-left whitespace-normal wrap-break-word"
+                      >
+                        {renderSubRow(row)}
+                      </TableCell>
+                    </TableRow>
+                  )}
+                </React.Fragment>
               ))
             ) : (
-              <TableRow className="!border-b border-b-gray-5 hover:bg-transparent dark:border-b-gray-3">
+              <TableRow className="border-b! border-b-gray-5 hover:bg-transparent dark:border-b-gray-3">
                 <TableCell colSpan={columns.length}>
                   <EmptyContent message={emptyMessage ?? t("page.table.noResults")} />
                 </TableCell>

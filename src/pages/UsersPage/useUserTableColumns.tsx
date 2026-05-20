@@ -2,6 +2,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { createColumnHelper } from "@tanstack/react-table";
 import { useTranslation } from "react-i18next";
 import { TableColumnHeader, Avatar, TableActions, ROUTES, Modal } from "@components/shared";
+import { useAuth } from "@root/hooks";
 import { UsersQuery } from "@services/graphql/__generated__/graphql";
 import { DeleteUserModal } from "./components/DeleteUserModal/DeleteUserModal";
 import { UpdateUserModal } from "./components/UpdateUserModal/UpdateUserModal";
@@ -11,6 +12,7 @@ type UserTableRow = UsersQuery["users"]["items"][number];
 export const useUserTableColumns = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { isAdmin } = useAuth();
 
   const columnHelper = createColumnHelper<UserTableRow>();
 
@@ -107,7 +109,14 @@ export const useUserTableColumns = () => {
           });
         }
 
-        return <TableActions dropdownKeepMounted userId={row.original.id} actions={actions} />;
+        return (
+          <TableActions
+            dropdownKeepMounted
+            userId={row.original.id}
+            actions={actions}
+            variant={isAdmin ? "dropdown" : "profileLink"}
+          />
+        );
       },
     }),
   ];

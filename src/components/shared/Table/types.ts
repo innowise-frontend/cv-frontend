@@ -1,4 +1,4 @@
-import { ColumnDef, RowData } from "@tanstack/react-table";
+import { ColumnDef, Row, RowData } from "@tanstack/react-table";
 
 export interface TableProps<TData> {
   data: TData[];
@@ -23,6 +23,7 @@ export interface TableProps<TData> {
   onSort?: () => void;
   isLoading?: boolean;
   emptyMessage?: string;
+  renderSubRow?: (row: Row<TData>) => React.ReactNode;
 }
 
 export type ColumnAlign = "left" | "center" | "right";

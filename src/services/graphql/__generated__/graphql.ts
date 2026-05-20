@@ -111,6 +111,7 @@ export type CreateSkillInput = {
 
 export type CreateUserInput = {
   auth: AuthInput;
+  cvsIds: Array<Scalars["String"]["input"]>;
   departmentId?: InputMaybe<Scalars["ID"]["input"]>;
   positionId?: InputMaybe<Scalars["ID"]["input"]>;
   profile: CreateProfileInput;
@@ -735,6 +736,7 @@ export type UpdateTokenResult = {
 };
 
 export type UpdateUserInput = {
+  cvsIds?: InputMaybe<Array<Scalars["String"]["input"]>>;
   departmentId?: InputMaybe<Scalars["ID"]["input"]>;
   positionId?: InputMaybe<Scalars["ID"]["input"]>;
   role?: InputMaybe<UserRole>;
@@ -814,6 +816,22 @@ export type ChangePasswordMutation = {
   changePassword: { __typename?: "User"; id: string; email: string };
 };
 
+export type CreateCvMutationVariables = Exact<{
+  cv: CreateCvInput;
+}>;
+
+export type CreateCvMutation = {
+  __typename?: "Mutation";
+  createCv: {
+    __typename?: "Cv";
+    id: string;
+    name: string;
+    education?: string | null;
+    description: string;
+    user?: { __typename?: "User"; email: string } | null;
+  };
+};
+
 export type CreateLanguageMutationVariables = Exact<{
   language: CreateLanguageInput;
 }>;
@@ -847,6 +865,15 @@ export type CreateUserMutationVariables = Exact<{
 export type CreateUserMutation = {
   __typename?: "Mutation";
   createUser: { __typename?: "User"; id: string; email: string; role: UserRole };
+};
+
+export type DeleteCvMutationVariables = Exact<{
+  cv: DeleteCvInput;
+}>;
+
+export type DeleteCvMutation = {
+  __typename?: "Mutation";
+  deleteCv: { __typename?: "DeleteResult"; affected: number };
 };
 
 export type DeleteLanguageMutationVariables = Exact<{
@@ -952,6 +979,22 @@ export type SignupMutation = {
     access_token: string;
     refresh_token: string;
     user: { __typename?: "User"; id: string };
+  };
+};
+
+export type UpdateCvMutationVariables = Exact<{
+  cv: UpdateCvInput;
+}>;
+
+export type UpdateCvMutation = {
+  __typename?: "Mutation";
+  updateCv: {
+    __typename?: "Cv";
+    id: string;
+    name: string;
+    education?: string | null;
+    description: string;
+    user?: { __typename?: "User"; email: string } | null;
   };
 };
 
@@ -1084,6 +1127,20 @@ export type VerifyMailMutationVariables = Exact<{
 
 export type VerifyMailMutation = { __typename?: "Mutation"; verifyMail?: any | null };
 
+export type CvsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type CvsQuery = {
+  __typename?: "Query";
+  cvs: Array<{
+    __typename?: "Cv";
+    id: string;
+    name: string;
+    education?: string | null;
+    description: string;
+    user?: { __typename?: "User"; email: string } | null;
+  }>;
+};
+
 export type DepartmentsQueryVariables = Exact<{ [key: string]: never }>;
 
 export type DepartmentsQuery = {
@@ -1199,6 +1256,14 @@ export type UserQuery = {
     created_at: string;
     department?: { __typename?: "Department"; id: string; name: string } | null;
     position?: { __typename?: "Position"; id: string; name: string } | null;
+    cvs?: Array<{
+      __typename?: "Cv";
+      id: string;
+      name: string;
+      education?: string | null;
+      description: string;
+      user?: { __typename?: "User"; email: string } | null;
+    }> | null;
     profile: {
       __typename?: "Profile";
       avatar?: string | null;
@@ -1391,6 +1456,59 @@ export const ChangePasswordDocument = {
     },
   ],
 } as unknown as DocumentNode<ChangePasswordMutation, ChangePasswordMutationVariables>;
+export const CreateCvDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "CreateCv" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "cv" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "CreateCvInput" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "createCv" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "cv" },
+                value: { kind: "Variable", name: { kind: "Name", value: "cv" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "id" } },
+                { kind: "Field", name: { kind: "Name", value: "name" } },
+                { kind: "Field", name: { kind: "Name", value: "education" } },
+                { kind: "Field", name: { kind: "Name", value: "description" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "user" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [{ kind: "Field", name: { kind: "Name", value: "email" } }],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<CreateCvMutation, CreateCvMutationVariables>;
 export const CreateLanguageDocument = {
   kind: "Document",
   definitions: [
@@ -1532,6 +1650,46 @@ export const CreateUserDocument = {
     },
   ],
 } as unknown as DocumentNode<CreateUserMutation, CreateUserMutationVariables>;
+export const DeleteCvDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "DeleteCv" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "cv" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "DeleteCvInput" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "deleteCv" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "cv" },
+                value: { kind: "Variable", name: { kind: "Name", value: "cv" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [{ kind: "Field", name: { kind: "Name", value: "affected" } }],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<DeleteCvMutation, DeleteCvMutationVariables>;
 export const DeleteLanguageDocument = {
   kind: "Document",
   definitions: [
@@ -1970,6 +2128,59 @@ export const SignupDocument = {
     },
   ],
 } as unknown as DocumentNode<SignupMutation, SignupMutationVariables>;
+export const UpdateCvDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "UpdateCv" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "cv" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "UpdateCvInput" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "updateCv" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "cv" },
+                value: { kind: "Variable", name: { kind: "Name", value: "cv" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "id" } },
+                { kind: "Field", name: { kind: "Name", value: "name" } },
+                { kind: "Field", name: { kind: "Name", value: "education" } },
+                { kind: "Field", name: { kind: "Name", value: "description" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "user" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [{ kind: "Field", name: { kind: "Name", value: "email" } }],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<UpdateCvMutation, UpdateCvMutationVariables>;
 export const UpdateLanguageDocument = {
   kind: "Document",
   definitions: [
@@ -2418,6 +2629,42 @@ export const VerifyMailDocument = {
     },
   ],
 } as unknown as DocumentNode<VerifyMailMutation, VerifyMailMutationVariables>;
+export const CvsDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "Cvs" },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "cvs" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "id" } },
+                { kind: "Field", name: { kind: "Name", value: "name" } },
+                { kind: "Field", name: { kind: "Name", value: "education" } },
+                { kind: "Field", name: { kind: "Name", value: "description" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "user" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [{ kind: "Field", name: { kind: "Name", value: "email" } }],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<CvsQuery, CvsQueryVariables>;
 export const DepartmentsDocument = {
   kind: "Document",
   definitions: [
@@ -2793,6 +3040,27 @@ export const UserDocument = {
                     selections: [
                       { kind: "Field", name: { kind: "Name", value: "id" } },
                       { kind: "Field", name: { kind: "Name", value: "name" } },
+                    ],
+                  },
+                },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "cvs" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      { kind: "Field", name: { kind: "Name", value: "name" } },
+                      { kind: "Field", name: { kind: "Name", value: "education" } },
+                      { kind: "Field", name: { kind: "Name", value: "description" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "user" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [{ kind: "Field", name: { kind: "Name", value: "email" } }],
+                        },
+                      },
                     ],
                   },
                 },

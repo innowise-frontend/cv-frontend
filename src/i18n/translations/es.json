@@ -172,6 +172,31 @@
       "categoryLabel": "Categoría",
       "category": {}
     },
+    "cvs": {
+      "createCv": "Crear CV",
+      "createCvSuccess": "CV creado correctamente",
+      "updateCvSuccess": "CV actualizado correctamente",
+      "deleteCvSuccess": "CV eliminado correctamente",
+      "edit": "Editar",
+      "editCv": "Actualizar CV",
+      "name": "Nombre",
+      "education": "Educación",
+      "description": "Descripción",
+      "employee": "Empleado",
+      "delete": "Eliminar",
+      "deleteCv": "Eliminar CV",
+      "confirmDeleteCv": "¿Seguro que desea eliminar el CV {{name}}?",
+      "cancel": "Cancelar",
+      "confirm": "Confirmar",
+      "create": "Crear",
+      "update": "Actualizar",
+      "noData": "Aún no hay CVs",
+      "validation": {
+        "nameRequired": "El nombre es obligatorio",
+        "educationRequired": "La educación es obligatoria",
+        "descriptionRequired": "La descripción es obligatoria"
+      }
+    },
     "sidebar": {
       "employees": "Empleados",
       "skills": "Habilidades",

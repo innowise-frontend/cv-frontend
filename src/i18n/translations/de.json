@@ -172,6 +172,31 @@
       "categoryLabel": "Kategorie",
       "category": {}
     },
+    "cvs": {
+      "createCv": "Lebenslauf erstellen",
+      "createCvSuccess": "Lebenslauf erfolgreich erstellt",
+      "updateCvSuccess": "Lebenslauf erfolgreich aktualisiert",
+      "deleteCvSuccess": "Lebenslauf erfolgreich gelöscht",
+      "edit": "Bearbeiten",
+      "editCv": "Lebenslauf aktualisieren",
+      "name": "Name",
+      "education": "Ausbildung",
+      "description": "Beschreibung",
+      "employee": "Mitarbeiter",
+      "delete": "Löschen",
+      "deleteCv": "Lebenslauf löschen",
+      "confirmDeleteCv": "Möchten Sie den Lebenslauf {{name}} wirklich löschen?",
+      "cancel": "Abbrechen",
+      "confirm": "Bestätigen",
+      "create": "Erstellen",
+      "update": "Aktualisieren",
+      "noData": "Noch keine Lebensläufe",
+      "validation": {
+        "nameRequired": "Name ist erforderlich",
+        "educationRequired": "Ausbildung ist erforderlich",
+        "descriptionRequired": "Beschreibung ist erforderlich"
+      }
+    },
     "sidebar": {
       "employees": "Mitarbeiter",
       "skills": "Fähigkeiten",

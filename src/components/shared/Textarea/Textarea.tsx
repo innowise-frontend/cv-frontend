@@ -7,7 +7,16 @@ import type { TextareaWithLabelProps } from "./types";
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaWithLabelProps>(
   (
-    { label, className, value: controlledValue, defaultValue, onChange, placeholder, ...props },
+    {
+      label,
+      error,
+      className,
+      value: controlledValue,
+      defaultValue,
+      onChange,
+      placeholder,
+      ...props
+    },
     ref,
   ) => {
     const generatedId = useId();
@@ -36,6 +45,12 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaWithLabelProps>(
           {...props}
         />
         {label && <Label htmlFor={generatedId}>{label}</Label>}
+        <p
+          id={`${generatedId}-error`}
+          className={cn("pl-2 mt-1 text-left text-xs text-red h-3", !error && "invisible")}
+        >
+          {error || " "}
+        </p>
       </div>
     );
   },

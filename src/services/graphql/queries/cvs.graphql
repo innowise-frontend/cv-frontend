@@ -1,0 +1,11 @@
+query Cvs {
+  cvs {
+    id
+    name
+    education
+    description
+    user {
+      email
+    }
+  }
+}
