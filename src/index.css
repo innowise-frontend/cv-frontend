@@ -45,3 +45,33 @@ body {
     color: var(--color-gray-8);
   }
 }
+
+:root:not(.dark) input[data-slot="input"]:-webkit-autofill,
+:root:not(.dark) input[data-slot="input"]:-webkit-autofill:hover,
+:root:not(.dark) input[data-slot="input"]:-webkit-autofill:focus,
+:root:not(.dark) input[data-slot="input"]:-webkit-autofill:active,
+:root:not(.dark) textarea[data-slot="textarea"]:-webkit-autofill,
+:root:not(.dark) textarea[data-slot="textarea"]:-webkit-autofill:hover,
+:root:not(.dark) textarea[data-slot="textarea"]:-webkit-autofill:focus,
+:root:not(.dark) textarea[data-slot="textarea"]:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px var(--color-gray-8) inset !important;
+  -webkit-text-fill-color: var(--color-gray-2) !important;
+  caret-color: var(--color-gray-2);
+  transition: background-color 99999s ease-out 0s;
+}
+
+.dark input[data-slot="input"]:-webkit-autofill,
+.dark input[data-slot="input"]:-webkit-autofill:hover,
+.dark input[data-slot="input"]:-webkit-autofill:focus,
+.dark input[data-slot="input"]:-webkit-autofill:active,
+.dark textarea[data-slot="textarea"]:-webkit-autofill,
+.dark textarea[data-slot="textarea"]:-webkit-autofill:hover,
+.dark textarea[data-slot="textarea"]:-webkit-autofill:focus,
+.dark textarea[data-slot="textarea"]:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px var(--color-gray-2) inset !important;
+  -webkit-text-fill-color: var(--color-gray-8) !important;
+  caret-color: var(--color-gray-8);
+  transition:
+    background-color 99999s ease-out 0s,
+    -webkit-text-fill-color 99999s ease-out 0s;
+}

@@ -1,5 +1,9 @@
 import React, { useState, useId, forwardRef } from "react";
-import { nativePlaceholderClassName } from "@components/shared/formFieldStyles";
+import {
+  nativeAutofillClassName,
+  nativePlaceholderClassName,
+  themeTextClassName,
+} from "@components/shared/formFieldStyles";
 import { Textarea as UiTextarea } from "@components/ui/textarea";
 import { Label } from "@root/components/ui/label";
 import { cn } from "@root/lib/utils";
@@ -38,13 +42,22 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaWithLabelProps>(
             : { defaultValue: initialDefaultValue })}
           className={cn(
             "peer resize-none border-gray-5 px-3 py-5 text-base leading-6 shadow-none outline-none",
-            "focus:outline-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:shadow-none transition-all duration-300",
+            themeTextClassName,
+            "focus:outline-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:shadow-none transition-[border-color,box-shadow] duration-300",
+            "disabled:bg-gray-6 dark:disabled:bg-gray-3",
             nativePlaceholderClassName,
+            nativeAutofillClassName,
             className,
+            error &&
+              "border-red focus-visible:border-red dark:border-red dark:focus-visible:border-red",
           )}
           {...props}
         />
-        {label && <Label htmlFor={generatedId}>{label}</Label>}
+        {label && (
+          <Label htmlFor={generatedId} className={cn("", error && "text-red dark:text-red")}>
+            {label}
+          </Label>
+        )}
         <p
           id={`${generatedId}-error`}
           className={cn("pl-2 mt-1 text-left text-xs text-red h-3", !error && "invisible")}

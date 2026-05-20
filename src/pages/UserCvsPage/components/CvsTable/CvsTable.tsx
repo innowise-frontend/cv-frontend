@@ -58,9 +58,7 @@ export const CvsTable = () => {
           pagesAmount={0}
           currentPage={currentPage}
           renderSubRow={(row) => (
-            <div className="text-[16px] text-gray-5 dark:text-gray-3">
-              {row.original.description}
-            </div>
+            <div className="text-[16px] text-gray-5">{row.original.description}</div>
           )}
           onChangePage={setCurrentPage}
           onSort={() => {

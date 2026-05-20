@@ -94,7 +94,7 @@ export const Table = <TData,>({
                     key={row.id}
                     data-state={row.getIsSelected() && "selected"}
                     className={cn(
-                      "border-b-gray-5 dark:border-b-gray-3",
+                      "border-b-gray-5 hover:bg-gray-7/50 dark:border-b-gray-3 dark:hover:bg-gray-3/50",
                       renderSubRow && "border-b-0",
                     )}
                   >

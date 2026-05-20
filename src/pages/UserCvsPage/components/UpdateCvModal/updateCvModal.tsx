@@ -53,7 +53,7 @@ export const UpdateCvModal = ({ cvId, name, education, description }: UpdateCvMo
       <Modal.Content onCancel={resetUpdatedCv}>
         <Modal.Header>{t("page.cvs.editCv")}</Modal.Header>
         <form onSubmit={handleSubmit(handleUpdateCv)}>
-          <Modal.Body className="flex flex-col gap-4">
+          <Modal.Body className="flex flex-col gap-9">
             <Input
               placeholder={t("page.cvs.name")}
               label={t("page.cvs.name")}

@@ -20,7 +20,7 @@ export const ErrorPage = ({ error, deviceError, embedded = false }: ErrorPagePro
         embedded ? "h-full min-h-0" : "h-screen",
       )}
     >
-      <div className="flex w-140 flex-col items-center justify-center gap-6 text-gray dark:text-gray-8">
+      <div className="flex w-140 flex-col items-center justify-center gap-6">
         <ErrorIcon />
         <p className="text-4xl">{t("page.error.oops")}</p>
         <p className="whitespace-pre-line">{error}</p>

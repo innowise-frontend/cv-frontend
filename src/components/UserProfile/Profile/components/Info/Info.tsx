@@ -84,10 +84,10 @@ export const Info = () => {
   return (
     <>
       <div className="mt-8 mb-16.5 flex flex-col h-20">
-        <p className="text-gray-2 dark:text-gray-8 text-2xl mb-2">{fullName}</p>
+        <p className="text-2xl mb-2">{fullName}</p>
         <p className="text-gray-3 dark:text-gray-5 text-base">{email}</p>
         {memberSinceLine ? (
-          <p className="text-gray-2 dark:text-gray-8 text-base">
+          <p className="text-base">
             {t("page.profile.memberSince")} {memberSinceLine}
           </p>
         ) : null}

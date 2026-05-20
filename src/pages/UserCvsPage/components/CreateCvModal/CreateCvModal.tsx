@@ -61,7 +61,7 @@ export const CreateCvModal = () => {
       <Modal.Content onCancel={resetCreatedCv}>
         <Modal.Header>{t("page.cvs.createCv")}</Modal.Header>
         <form onSubmit={handleSubmit(handleCreateCv)}>
-          <Modal.Body className="flex flex-col gap-4">
+          <Modal.Body className="flex flex-col gap-9">
             <Input
               placeholder={t("page.cvs.name")}
               label={t("page.cvs.name")}

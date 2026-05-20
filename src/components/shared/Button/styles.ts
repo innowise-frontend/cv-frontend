@@ -10,7 +10,7 @@ export const buttonStyles = tv({
       outline:
         "border border-gray-3 bg-transparent text-gray-3 hover:bg-transparent dark:border-gray-7 dark:text-gray-7",
       ghost:
-        "capitalize hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-muted/50 px-0",
+        "capitalize hover:bg-gray-7 dark:hover:bg-gray-3 aria-expanded:bg-gray-7 dark:aria-expanded:bg-gray-3 px-0",
     },
   },
   defaultVariants: {
