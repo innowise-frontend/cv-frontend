@@ -1,6 +1,7 @@
 import { Select as SelectBase } from "@base-ui/react/select";
 import { useCallback, useId, useState } from "react";
-import { Label } from "@root/components/ui/label.tsx";
+import { selectPlaceholderClassName } from "@components/shared/formFieldStyles";
+import { Label } from "@root/components/ui/label";
 import {
   Select as SelectRoot,
   SelectGroup,
@@ -29,11 +30,15 @@ export const Select = ({
   onValueChange,
 }: SelectProps) => {
   const triggerId = useId();
+  const [isOpen, setIsOpen] = useState(false);
   const [containerNode, setContainerNode] = useState<HTMLDivElement | null>(null);
   const setContainerRef = useCallback((node: HTMLDivElement | null) => {
     setContainerNode(node);
   }, []);
   const dialogContainer = containerNode?.closest("dialog") ?? undefined;
+
+  const hasValue = value !== "" && value !== undefined && value !== null;
+  const isLabelFloating = hasValue || isOpen;
 
   const labelFor = (val?: string | number) =>
     list.find((item) => item.value === val)?.label ?? undefined;
@@ -88,39 +93,52 @@ export const Select = ({
 
   return (
     <div ref={setContainerRef} className={cn("relative flex w-full flex-col", className)}>
-      {label && value && (
-        <Label
-          htmlFor={triggerId}
-          className="absolute z-10 left-2.5 -top-4 px-1 text-xs text-gray-3 dark:text-gray-5"
-        >
-          {label}
-        </Label>
-      )}
-
-      <SelectRoot
-        value={value as string}
-        modal={false}
-        disabled={disabled}
-        onValueChange={handleSelectValue}
-      >
-        <SelectTrigger
-          id={triggerId}
+      <div className="relative">
+        <SelectRoot
+          value={value as string}
+          modal={false}
           disabled={disabled}
-          className={cn(
-            "w-full cursor-pointer border-gray-5 text-gray-2 data-[size=default]:h-auto px-3 py-3.25 dark:text-gray-5 disabled:bg-gray-6 dark:disabled:bg-gray-3",
-            "data-placeholder:text-gray-6 dark:data-placeholder:text-gray-3",
-            "disabled:data-placeholder:text-gray-2 disabled:dark:data-placeholder:text-gray-6",
-          )}
+          onOpenChange={setIsOpen}
+          onValueChange={handleSelectValue}
         >
-          <SelectValue placeholder={placeholder}>{labelFor(value as string)}</SelectValue>
-        </SelectTrigger>
+          <SelectTrigger
+            id={triggerId}
+            disabled={disabled}
+            className={cn(
+              "w-full cursor-pointer border-gray-5 text-gray-2 shadow-none outline-none transition-all duration-300",
+              "h-12! px-3 py-3 text-base leading-6 dark:text-gray-5 disabled:bg-gray-6 dark:disabled:bg-gray-3",
+              selectPlaceholderClassName,
+              "focus:outline-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:shadow-none",
+            )}
+          >
+            <SelectValue
+              className={cn("transition-all duration-300", !hasValue && isOpen && "opacity-0")}
+              placeholder={placeholder}
+            >
+              {labelFor(value as string)}
+            </SelectValue>
+          </SelectTrigger>
 
-        {disablePortal ? (
-          popup
-        ) : (
-          <SelectBase.Portal container={dialogContainer}>{popup}</SelectBase.Portal>
-        )}
-      </SelectRoot>
+          {label && (
+            <Label
+              htmlFor={triggerId}
+              className={cn(
+                isLabelFloating
+                  ? "-top-0.5 translate-x-2.5 -translate-y-4 text-xs text-gray-3 opacity-100 dark:text-gray-5"
+                  : "top-1/2 -translate-y-1/2 translate-x-2.5 text-sm text-gray-6 opacity-0 dark:text-gray-3",
+              )}
+            >
+              {label}
+            </Label>
+          )}
+
+          {disablePortal ? (
+            popup
+          ) : (
+            <SelectBase.Portal container={dialogContainer}>{popup}</SelectBase.Portal>
+          )}
+        </SelectRoot>
+      </div>
     </div>
   );
 };

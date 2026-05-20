@@ -94,7 +94,7 @@ export const Info = () => {
       </div>
 
       <div className="mx-auto mt-12 w-[860px]">
-        <div className="grid w-full grid-cols-1 gap-x-10 gap-y-6 md:grid-cols-[410px_410px] md:justify-center">
+        <div className="grid w-full grid-cols-1 gap-x-10 gap-y-9 md:grid-cols-[410px_410px] md:justify-center">
           <Input
             disabled={!isEditable}
             label={t("page.profile.firstName")}

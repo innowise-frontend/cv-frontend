@@ -43,7 +43,7 @@ export const UpdateLanguageModal = ({
       </Modal.Trigger>
       <Modal.Content onCancel={resetUpdatedLanguage}>
         <Modal.Header>{t("page.languages.updateLanguage")}</Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="flex flex-col gap-9">
           <Input
             placeholder={t("page.languages.name")}
             label={t("page.languages.name")}

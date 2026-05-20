@@ -68,7 +68,7 @@ export const SkillProgressBar = ({
       </Modal.Trigger>
       <Modal.Content onCancel={resetUpdateSkill}>
         <Modal.Header>{t("page.skills.updateSkill")}</Modal.Header>
-        <Modal.Body className="flex flex-col gap-4">
+        <Modal.Body className="flex flex-col gap-9">
           <Select
             list={[{ label: name, value: name }]}
             label={t("page.skills.skill")}
@@ -88,7 +88,7 @@ export const SkillProgressBar = ({
           />
         </Modal.Body>
         <Modal.Footer>
-          <Modal.Close variant="outline" className="w-40" onClick={resetUpdateSkill}>
+          <Modal.Close variant="outline" className="w-40">
             {t("page.skills.cancel")}
           </Modal.Close>
           <Button

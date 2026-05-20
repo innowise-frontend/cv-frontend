@@ -70,7 +70,7 @@ export const LanguageProgressBar = ({
       </Modal.Trigger>
       <Modal.Content onCancel={resetUpdateLanguage}>
         <Modal.Header>{t("page.languages.updateLanguage")}</Modal.Header>
-        <Modal.Body className="flex flex-col gap-4">
+        <Modal.Body className="flex flex-col gap-9">
           <Select
             list={[{ label: name, value: name }]}
             label={t("page.languages.language")}

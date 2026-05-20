@@ -41,7 +41,7 @@ export const CreateSkillModal = () => {
       </Modal.Trigger>
       <Modal.Content onCancel={resetCreatedSkill}>
         <Modal.Header>{t("page.skills.createSkill")}</Modal.Header>
-        <Modal.Body className="flex flex-col gap-4">
+        <Modal.Body className="flex flex-col gap-9">
           <Input
             placeholder={t("page.skills.name")}
             label={t("page.skills.name")}
@@ -54,11 +54,10 @@ export const CreateSkillModal = () => {
             placeholder={t("page.skills.category")}
             value={createdSkill.categoryId}
             onValueChange={(value) => setCreatedSkill({ ...createdSkill, categoryId: value })}
-            className="[&_[data-slot=select-trigger][data-placeholder]]:text-gray-6"
           />
         </Modal.Body>
         <Modal.Footer>
-          <Modal.Close variant="outline" className="w-40" onClick={resetCreatedSkill}>
+          <Modal.Close variant="outline" className="w-40">
             {t("page.skills.cancel")}
           </Modal.Close>
           <Modal.Close

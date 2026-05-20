@@ -54,14 +54,13 @@ export const AddLanguageModal = ({
       </Modal.Trigger>
       <Modal.Content onCancel={resetSelectedLanguage}>
         <Modal.Header className="">{t("page.languages.addLanguage")}</Modal.Header>
-        <Modal.Body className="flex flex-col gap-4">
+        <Modal.Body className="flex flex-col gap-9">
           <Select
             list={languageOptions}
             label={t("page.languages.language")}
             placeholder={t("page.languages.language")}
             value={selectedLanguage.name}
             onValueChange={(value) => setSelectedLanguage({ ...selectedLanguage, name: value })}
-            className="[&_[data-slot=select-trigger][data-placeholder]]:text-gray-6"
           />
           <Select
             list={proficiencyOptions}
@@ -74,7 +73,6 @@ export const AddLanguageModal = ({
                 proficiency: value as Proficiency,
               })
             }
-            className="[&_[data-slot=select-trigger][data-placeholder]]:text-gray-6"
           />
         </Modal.Body>
         <Modal.Footer className="flex justify-end gap-4">

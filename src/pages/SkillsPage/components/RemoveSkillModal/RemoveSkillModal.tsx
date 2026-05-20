@@ -47,7 +47,7 @@ export const RemoveSkillModal = ({
           </p>
         </Modal.Body>
         <Modal.Footer className="flex justify-end gap-4">
-          <Modal.Close variant="outline" className="w-40" onClick={resetDeletedSkills}>
+          <Modal.Close variant="outline" className="w-40">
             {t("page.skills.cancel")}
           </Modal.Close>
           <Modal.Close variant="filled" className="w-40" onClick={handleRemoveSkills}>
