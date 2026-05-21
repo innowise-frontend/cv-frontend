@@ -9,7 +9,7 @@ describe("SearchInput", () => {
     render(<SearchInput value="" onValueChange={vi.fn()} />);
 
     expect(screen.getByRole("textbox")).toBeInTheDocument();
-    expect(screen.getByPlaceholderText("Filter")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("Search")).toBeInTheDocument();
   });
 
   it("should call onSearch when the input value changes", async () => {

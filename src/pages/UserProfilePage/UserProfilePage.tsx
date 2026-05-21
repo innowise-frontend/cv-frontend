@@ -4,8 +4,9 @@ import { Spinner } from "@components/shared";
 import { Breadcrumbs } from "@components/shared/Breadcrumbs/Breadcrumbs";
 import { PageTabs } from "@components/shared/Tabs/Tabs";
 import { useUserProfile } from "@components/UserProfile/Profile/api";
+import { getBreadcrumbsLink, getTabs } from "@root/lib";
 import { ErrorPage } from "@root/pages/ErrorPage";
-import { PROFILE_TABS } from "./constants";
+import { PROFILE_TAB_CONFIG } from "./constants";
 import type React from "react";
 
 export const UserProfilePage = ({ children }: { children: React.ReactNode }) => {
@@ -16,6 +17,8 @@ export const UserProfilePage = ({ children }: { children: React.ReactNode }) => 
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const activeTab = pathname.split("/").at(-1) ?? "profile";
   const fullName = data?.user.profile.full_name ?? "";
+  const tabs = getTabs(PROFILE_TAB_CONFIG, t);
+  const activeTabLabel = tabs.find((tab) => tab.value === activeTab)?.label ?? activeTab;
 
   if (isLoading) {
     return <Spinner />;
@@ -25,20 +28,20 @@ export const UserProfilePage = ({ children }: { children: React.ReactNode }) => 
     <div className="flex h-full min-h-0 w-full flex-col overflow-hidden px-6">
       <Breadcrumbs
         items={[
-          { label: "Employees", href: `/` },
+          getBreadcrumbsLink("/", t),
           {
             label: fullName,
             href: `/users/${userId}/profile`,
             isProfile: true,
           },
-          { label: activeTab, href: `/users/${userId}/${activeTab}` },
+          { label: activeTabLabel, href: `/users/${userId}/${activeTab}` },
         ]}
         className="shrink-0 px-5 py-4"
       />
 
       <PageTabs
         className="min-h-0 flex-1 overflow-hidden"
-        tabs={PROFILE_TABS}
+        tabs={tabs}
         value={activeTab}
         onValueChange={(next) => {
           navigate({

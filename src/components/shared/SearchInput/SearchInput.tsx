@@ -1,3 +1,4 @@
+import { t } from "i18next";
 import SearchIcon from "@assets/icon/SearchIcon.svg?react";
 import { Input } from "@components/shared";
 import { SearchInputProps } from "./types";
@@ -6,7 +7,7 @@ export const SearchInput = ({ value, onValueChange }: SearchInputProps) => {
   return (
     <div className="relative *:flex">
       <Input
-        placeholder="Filter"
+        placeholder={t("page.table.search")}
         value={value}
         onChange={(event) => {
           onValueChange(event.target.value);
