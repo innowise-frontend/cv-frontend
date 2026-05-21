@@ -16,6 +16,7 @@ type CvsQueryConfig = Omit<
 >;
 
 interface UseCvsTableQueryParams {
+  userId: string;
   search: string;
   page: number;
   limit: number;
@@ -24,6 +25,7 @@ interface UseCvsTableQueryParams {
 }
 
 export const useCvsTableQuery = ({
+  userId,
   search,
   page,
   limit,
@@ -31,9 +33,9 @@ export const useCvsTableQuery = ({
   config,
 }: UseCvsTableQueryParams) =>
   useQuery({
-    queryKey: ["cvs", search, page, limit, sortOrder],
+    queryKey: ["cvs", userId, search, page, limit, sortOrder],
     queryFn: () =>
-      getCvs({ search, page: page, limit: limit, sort_order: sortOrder, sort_by: "name" }),
+      getCvs({ search, page: page, limit: limit, sort_order: sortOrder, sort_by: "name" }, userId),
     ...config,
   });
 

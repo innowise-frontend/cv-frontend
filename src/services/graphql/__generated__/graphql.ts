@@ -566,6 +566,7 @@ export type Query = {
   __typename?: "Query";
   cv: Cv;
   cvs: PaginatedCvs;
+  cvsByUserId: PaginatedCvs;
   departments: Array<Department>;
   languages: PaginatedLanguages;
   me: Profile;
@@ -586,6 +587,11 @@ export type QueryCvArgs = {
 
 export type QueryCvsArgs = {
   params?: InputMaybe<SearchPaginationInput>;
+};
+
+export type QueryCvsByUserIdArgs = {
+  params?: InputMaybe<SearchPaginationInput>;
+  userId: Scalars["ID"]["input"];
 };
 
 export type QueryLanguagesArgs = {
@@ -1138,13 +1144,14 @@ export type VerifyMailMutationVariables = Exact<{
 
 export type VerifyMailMutation = { __typename?: "Mutation"; verifyMail?: any | null };
 
-export type CvsQueryVariables = Exact<{
+export type CvsByUserIdQueryVariables = Exact<{
   params: SearchPaginationInput;
+  userId: Scalars["ID"]["input"];
 }>;
 
-export type CvsQuery = {
+export type CvsByUserIdQuery = {
   __typename?: "Query";
-  cvs: {
+  cvsByUserId: {
     __typename?: "PaginatedCvs";
     total: number;
     page: number;
@@ -2641,13 +2648,13 @@ export const VerifyMailDocument = {
     },
   ],
 } as unknown as DocumentNode<VerifyMailMutation, VerifyMailMutationVariables>;
-export const CvsDocument = {
+export const CvsByUserIdDocument = {
   kind: "Document",
   definitions: [
     {
       kind: "OperationDefinition",
       operation: "query",
-      name: { kind: "Name", value: "Cvs" },
+      name: { kind: "Name", value: "CvsByUserId" },
       variableDefinitions: [
         {
           kind: "VariableDefinition",
@@ -2657,18 +2664,31 @@ export const CvsDocument = {
             type: { kind: "NamedType", name: { kind: "Name", value: "SearchPaginationInput" } },
           },
         },
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "userId" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "ID" } },
+          },
+        },
       ],
       selectionSet: {
         kind: "SelectionSet",
         selections: [
           {
             kind: "Field",
-            name: { kind: "Name", value: "cvs" },
+            name: { kind: "Name", value: "cvsByUserId" },
             arguments: [
               {
                 kind: "Argument",
                 name: { kind: "Name", value: "params" },
                 value: { kind: "Variable", name: { kind: "Name", value: "params" } },
+              },
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "userId" },
+                value: { kind: "Variable", name: { kind: "Name", value: "userId" } },
               },
             ],
             selectionSet: {
@@ -2706,7 +2726,7 @@ export const CvsDocument = {
       },
     },
   ],
-} as unknown as DocumentNode<CvsQuery, CvsQueryVariables>;
+} as unknown as DocumentNode<CvsByUserIdQuery, CvsByUserIdQueryVariables>;
 export const DepartmentsDocument = {
   kind: "Document",
   definitions: [

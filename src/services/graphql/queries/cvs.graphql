@@ -1,5 +1,5 @@
-query Cvs($params: SearchPaginationInput!) {
-  cvs(params: $params) {
+query CvsByUserId($params: SearchPaginationInput!, $userId: ID!) {
+  cvsByUserId(params: $params, userId: $userId) {
     items {
       id
       name

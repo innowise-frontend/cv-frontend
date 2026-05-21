@@ -14,6 +14,7 @@ export const UserProfilePage = ({ children }: { children: React.ReactNode }) => 
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { userId } = useParams({ from: "/_app/users/$userId" });
+  const { isAdmin } = useAuth();
   const { data, isLoading, isError } = useUserProfile(userId);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const activeTab = pathname.split("/").at(-1) ?? "profile";

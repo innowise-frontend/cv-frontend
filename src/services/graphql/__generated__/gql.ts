@@ -42,7 +42,7 @@ type Documents = {
   "mutation UpdateUser($user: UpdateUserInput!) {\n  updateUser(user: $user) {\n    id\n    created_at\n    email\n    is_verified\n    role\n    department_name\n    position_name\n    profile {\n      id\n      created_at\n      first_name\n      last_name\n      full_name\n      avatar\n    }\n    department {\n      id\n      name\n    }\n    position {\n      id\n      name\n    }\n  }\n}": typeof types.UpdateUserDocument;
   "mutation UploadAvatar($avatar: UploadAvatarInput!) {\n  uploadAvatar(avatar: $avatar)\n}": typeof types.UploadAvatarDocument;
   "mutation verifyMail($otp: String!) {\n  verifyMail(mail: {otp: $otp})\n}": typeof types.VerifyMailDocument;
-  "query Cvs($params: SearchPaginationInput!) {\n  cvs(params: $params) {\n    items {\n      id\n      name\n      education\n      description\n      user {\n        email\n      }\n    }\n    total\n    page\n    limit\n    total_pages\n  }\n}": typeof types.CvsDocument;
+  "query CvsByUserId($params: SearchPaginationInput!, $userId: ID!) {\n  cvsByUserId(params: $params, userId: $userId) {\n    items {\n      id\n      name\n      education\n      description\n      user {\n        email\n      }\n    }\n    total\n    page\n    limit\n    total_pages\n  }\n}": typeof types.CvsByUserIdDocument;
   "query Departments {\n  departments {\n    id\n    name\n  }\n}": typeof types.DepartmentsDocument;
   "query Languages($params: SearchPaginationInput!) {\n  languages(params: $params) {\n    items {\n      id\n      name\n      native_name\n      iso2\n    }\n    total\n    page\n    limit\n    total_pages\n  }\n}": typeof types.LanguagesDocument;
   "query Me {\n  me {\n    id\n    is_verified\n    role\n    id\n  }\n}": typeof types.MeDocument;
@@ -109,8 +109,8 @@ const documents: Documents = {
     types.UploadAvatarDocument,
   "mutation verifyMail($otp: String!) {\n  verifyMail(mail: {otp: $otp})\n}":
     types.VerifyMailDocument,
-  "query Cvs($params: SearchPaginationInput!) {\n  cvs(params: $params) {\n    items {\n      id\n      name\n      education\n      description\n      user {\n        email\n      }\n    }\n    total\n    page\n    limit\n    total_pages\n  }\n}":
-    types.CvsDocument,
+  "query CvsByUserId($params: SearchPaginationInput!, $userId: ID!) {\n  cvsByUserId(params: $params, userId: $userId) {\n    items {\n      id\n      name\n      education\n      description\n      user {\n        email\n      }\n    }\n    total\n    page\n    limit\n    total_pages\n  }\n}":
+    types.CvsByUserIdDocument,
   "query Departments {\n  departments {\n    id\n    name\n  }\n}": types.DepartmentsDocument,
   "query Languages($params: SearchPaginationInput!) {\n  languages(params: $params) {\n    items {\n      id\n      name\n      native_name\n      iso2\n    }\n    total\n    page\n    limit\n    total_pages\n  }\n}":
     types.LanguagesDocument,
@@ -312,8 +312,8 @@ export function gql(
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
-  source: "query Cvs($params: SearchPaginationInput!) {\n  cvs(params: $params) {\n    items {\n      id\n      name\n      education\n      description\n      user {\n        email\n      }\n    }\n    total\n    page\n    limit\n    total_pages\n  }\n}",
-): (typeof documents)["query Cvs($params: SearchPaginationInput!) {\n  cvs(params: $params) {\n    items {\n      id\n      name\n      education\n      description\n      user {\n        email\n      }\n    }\n    total\n    page\n    limit\n    total_pages\n  }\n}"];
+  source: "query CvsByUserId($params: SearchPaginationInput!, $userId: ID!) {\n  cvsByUserId(params: $params, userId: $userId) {\n    items {\n      id\n      name\n      education\n      description\n      user {\n        email\n      }\n    }\n    total\n    page\n    limit\n    total_pages\n  }\n}",
+): (typeof documents)["query CvsByUserId($params: SearchPaginationInput!, $userId: ID!) {\n  cvsByUserId(params: $params, userId: $userId) {\n    items {\n      id\n      name\n      education\n      description\n      user {\n        email\n      }\n    }\n    total\n    page\n    limit\n    total_pages\n  }\n}"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

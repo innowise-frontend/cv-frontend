@@ -5,9 +5,14 @@ import { UserProfilePage } from "./UserProfilePage";
 
 const navigateMock = vi.hoisted(() => vi.fn());
 const useUserProfileMock = vi.hoisted(() => vi.fn());
+const useAuthMock = vi.hoisted(() => vi.fn());
 
 vi.mock("@root/components/UserProfile/Profile/api", () => ({
   useUserProfile: (userId: string) => useUserProfileMock(userId),
+}));
+
+vi.mock("@root/hooks", () => ({
+  useAuth: () => useAuthMock(),
 }));
 
 vi.mock("@tanstack/react-router", () => ({
@@ -34,12 +39,14 @@ vi.mock("@root/components/shared/Tabs/Tabs", () => ({
     children,
     onValueChange,
     value,
+    tabs,
   }: {
     children: React.ReactNode;
     onValueChange: (next: string) => void;
     value: string;
+    tabs: Array<{ value: string; label: string }>;
   }) => (
-    <div data-testid="page-tabs" data-active={value}>
+    <div data-testid="page-tabs" data-active={value} data-tab-count={tabs.length}>
       <button type="button" onClick={() => onValueChange("skills")}>
         switch-skills
       </button>
@@ -51,6 +58,7 @@ vi.mock("@root/components/shared/Tabs/Tabs", () => ({
 describe("UserProfilePage", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    useAuthMock.mockReturnValue({ isAdmin: true, isFirstLoad: false });
     useUserProfileMock.mockReturnValue({
       data: {
         user: {
@@ -88,6 +96,18 @@ describe("UserProfilePage", () => {
     expect(screen.getByText("Ada Lovelace")).toHaveAttribute("data-href", "/users/user-42/profile");
     expect(screen.getByText("Profile")).toHaveAttribute("data-href", "/users/user-42/profile");
     expect(useUserProfileMock).toHaveBeenCalledWith("user-42");
+  });
+
+  it("hides the cvs tab for non-admin users", () => {
+    useAuthMock.mockReturnValue({ isAdmin: false, isFirstLoad: false });
+
+    render(
+      <UserProfilePage>
+        <div>tab-body</div>
+      </UserProfilePage>,
+    );
+
+    expect(screen.getByTestId("page-tabs")).toHaveAttribute("data-tab-count", "3");
   });
 
   it("navigates when tab value changes", async () => {

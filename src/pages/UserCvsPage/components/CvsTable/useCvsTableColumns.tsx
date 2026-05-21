@@ -1,11 +1,10 @@
 import { createColumnHelper } from "@tanstack/react-table";
 import { useTranslation } from "react-i18next";
 import { Modal, TableActions, TableColumnHeader } from "@components/shared";
-import { CvsQuery } from "@services/graphql/__generated__/graphql";
-import { DeleteCvModal } from "../DeleteCvModal/DeleteCvModal";
-import { UpdateCvModal } from "../UpdateCvModal/updateCvModal";
+import { CvsByUserIdQuery } from "@services/graphql/__generated__/graphql";
+import { DeleteCvModal, UpdateCvModal } from "../../components";
 
-type CvsTableRow = CvsQuery["cvs"][number];
+type CvsTableRow = CvsByUserIdQuery["cvsByUserId"]["items"][number];
 
 export const useCvsTableColumns = () => {
   const { t } = useTranslation();
