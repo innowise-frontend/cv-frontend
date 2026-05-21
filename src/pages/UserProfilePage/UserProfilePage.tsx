@@ -4,6 +4,7 @@ import { Spinner } from "@components/shared";
 import { Breadcrumbs } from "@components/shared/Breadcrumbs/Breadcrumbs";
 import { PageTabs } from "@components/shared/Tabs/Tabs";
 import { useUserProfile } from "@components/UserProfile/Profile/api";
+import { ROUTES } from "@root/constants";
 import { getBreadcrumbsLink, getTabs } from "@root/lib";
 import { ErrorPage } from "@root/pages/ErrorPage";
 import { PROFILE_TAB_CONFIG } from "./constants";
@@ -28,7 +29,7 @@ export const UserProfilePage = ({ children }: { children: React.ReactNode }) => 
     <div className="flex h-full min-h-0 w-full flex-col overflow-hidden px-6">
       <Breadcrumbs
         items={[
-          getBreadcrumbsLink("/", t),
+          getBreadcrumbsLink(ROUTES.ROOT, t),
           {
             label: fullName,
             href: `/users/${userId}/profile`,

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ChangePassword } from "@components/ChangePassword";
-import { Breadcrumbs, ROUTES } from "@root/components/shared";
-import { Select } from "@root/components/shared/Select/Select";
+import { Breadcrumbs, Select } from "@components/shared";
+import { ROUTES } from "@root/constants";
 import { getBreadcrumbsLink, getDefaultTheme, setDefaultTheme } from "@root/lib";
 import { LANGUAGES, THEMES } from "./constants";
 import type { Theme } from "./types";
