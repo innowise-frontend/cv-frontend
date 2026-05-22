@@ -44,24 +44,23 @@ export const useCvsTableQuery = ({
 
   const queryScope = routeUserId ? "byUserId" : isAdmin ? "all" : "me";
 
-  const isEnabled =
-    (routeUserId && !!routeUserId) || (!routeUserId && !isFirstLoad && (isAdmin || !!authUserId));
+  const isEnabled = !!routeUserId || (!routeUserId && !isFirstLoad && (isAdmin || !!authUserId));
 
   return useQuery({
     queryKey: ["cvs", queryScope, routeUserId ?? authUserId, search, page, limit, sortOrder],
     queryFn: () => {
       if (routeUserId) {
-        return getUserCvs(params, routeUserId);
+        return getUserCvs(routeUserId, params);
       }
 
       if (isAdmin) {
         return getCvs(params);
       }
 
-      return getUserCvs(params, authUserId);
+      return getUserCvs(authUserId, params);
     },
-    enabled: isEnabled,
     ...config,
+    enabled: isEnabled,
   });
 };
 

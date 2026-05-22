@@ -4,7 +4,7 @@ import { UserCvsPage } from "@root/pages/UserCvsPage/UserCvsPage";
 export const Route = createFileRoute("/_app/cvs")({
   validateSearch: ({ search }: { search?: string }) => {
     return {
-      search: search,
+      search,
     };
   },
   component: () => <UserCvsPage />,

@@ -23,7 +23,7 @@ describe("getUserCvs", () => {
     const paginated = { items: [{ id: "cv-1", name: "CV 1" }], total_pages: 1 };
     requestWithAuthMock.mockResolvedValue({ cvsByUserId: paginated });
 
-    const result = await getUserCvs(params, "user-42");
+    const result = await getUserCvs("user-42", params);
 
     expect(requestWithAuthMock).toHaveBeenCalledWith("CVS_BY_USER_ID_DOCUMENT", {
       params,

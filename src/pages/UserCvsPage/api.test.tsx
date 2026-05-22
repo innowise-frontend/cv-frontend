@@ -58,8 +58,8 @@ describe("useCvsTableQuery", () => {
 
     expect(getCvsMock).not.toHaveBeenCalled();
     expect(getUserCvsMock).toHaveBeenCalledWith(
-      expect.objectContaining({ page: 1, limit: 10, sort_order: SortOrder.ASC }),
       "route-user",
+      expect.objectContaining({ page: 1, limit: 10, sort_order: SortOrder.ASC }),
     );
   });
 
@@ -89,8 +89,8 @@ describe("useCvsTableQuery", () => {
 
     expect(getCvsMock).not.toHaveBeenCalled();
     expect(getUserCvsMock).toHaveBeenCalledWith(
-      expect.objectContaining({ page: 1, limit: 10, sort_order: SortOrder.ASC }),
       "auth-user",
+      expect.objectContaining({ page: 1, limit: 10, sort_order: SortOrder.ASC }),
     );
   });
 });

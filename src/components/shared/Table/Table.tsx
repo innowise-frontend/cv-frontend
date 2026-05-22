@@ -91,7 +91,6 @@ export const Table = <TData,>({
               table.getRowModel().rows.map((row) => (
                 <React.Fragment key={row.id}>
                   <TableRow
-                    key={row.id}
                     data-state={row.getIsSelected() && "selected"}
                     className={cn(
                       "border-b-gray-5 hover:bg-gray-7/50 dark:border-b-gray-3 dark:hover:bg-gray-3/50",

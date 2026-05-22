@@ -6,10 +6,10 @@ import {
 } from "@services/graphql/__generated__/graphql";
 import { requestWithAuth } from "@services/graphql/client";
 
-export const getUserCvs = async (params: SearchPaginationInput, userId: string) => {
+export const getUserCvs = async (userId: string, params: SearchPaginationInput) => {
   const response = await requestWithAuth<CvsByUserIdQuery, CvsByUserIdQueryVariables>(
     CvsByUserIdDocument,
-    { params, userId },
+    { userId, params },
   );
 
   return response.cvsByUserId;

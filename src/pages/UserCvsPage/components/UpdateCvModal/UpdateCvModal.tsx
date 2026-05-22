@@ -25,7 +25,7 @@ export const UpdateCvModal = ({ cvId, name, education, description }: UpdateCvMo
     resolver: zodResolver(validationSchema),
   });
 
-  const { mutate: UpdateCvMutation } = useUpdateCvMutation({
+  const { mutate: updateCvMutation } = useUpdateCvMutation({
     onSuccess: () => {
       reset({ name, education, description });
       closeModal();
@@ -37,7 +37,7 @@ export const UpdateCvModal = ({ cvId, name, education, description }: UpdateCvMo
   }, [reset, name, education, description]);
 
   const handleUpdateCv = (data: UpdateCvFormValues) => {
-    UpdateCvMutation({
+    updateCvMutation({
       cvId,
       name: data.name,
       education: data.education,

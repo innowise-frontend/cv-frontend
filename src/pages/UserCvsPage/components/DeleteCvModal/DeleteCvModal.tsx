@@ -7,7 +7,7 @@ import { useDeleteCvMutation } from "../../api";
 export const DeleteCvModal = ({ name, cvId }: DeleteCvModalProps) => {
   const { t } = useTranslation();
   const { closeModal } = useModalContext();
-  const { mutate } = useDeleteCvMutation({
+  const { mutate, isPending } = useDeleteCvMutation({
     onSuccess: () => {
       closeModal();
     },
@@ -26,8 +26,10 @@ export const DeleteCvModal = ({ name, cvId }: DeleteCvModalProps) => {
             {t("page.cvs.cancel")}
           </Modal.Close>
           <Button
+            type="button"
             variant="filled"
             className="w-40"
+            disabled={isPending}
             onClick={() => {
               mutate({ cvId });
             }}

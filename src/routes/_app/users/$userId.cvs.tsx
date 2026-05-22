@@ -15,8 +15,6 @@ export const Route = createFileRoute("/_app/users/$userId/cvs")({
   },
   errorComponent: ({ error }) => {
     if (isNotFound(error)) {
-      // Возвращаем глобальную ошибку.
-      // Если роутер всё равно зажимает её в аутлете, используйте Решение №2.
       throw error;
     }
   },
