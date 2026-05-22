@@ -53,8 +53,8 @@ export const UpdateSkillModal = ({ name, categoryId, skillId }: UpdateSkillModal
           />
           <Select
             list={categoryOptions}
-            label={t("page.skills.category")}
-            placeholder={t("page.skills.category")}
+            label={t("page.skills.categoryLabel")}
+            placeholder={t("page.skills.categoryLabel")}
             value={updatedSkill.categoryId}
             onValueChange={(value) => setUpdatedSkill({ ...updatedSkill, categoryId: value })}
           />

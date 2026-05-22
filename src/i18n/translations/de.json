@@ -54,14 +54,17 @@
       "emailDoesNotExist": "E-Mail existiert nicht."
     },
     "login": {
-      "title": "Anmelden"
+      "title": "Anmelden",
+      "tab": "Anmelden"
     },
     "signup": {
-      "title": "Registrieren"
+      "title": "Registrieren",
+      "tab": "Registrieren"
     },
     "table": {
       "noResults": "Keine Ergebnisse",
-      "noDataResults": "Keine Daten vorhanden"
+      "noDataResults": "Keine Daten vorhanden",
+      "search": "Suchen"
     },
     "resetPassword": {
       "title": "Passwort zurücksetzen",
@@ -76,19 +79,37 @@
       }
     },
     "users": {
-      "breadcrumbs": "Mitarbeiter",
-      "columns": {
-        "firstName": "Vorname",
-        "lastName": "Nachname",
-        "email": "E-Mail",
-        "department": "Abteilung",
-        "position": "Position"
-      },
-      "actions": {
-        "viewProfile": "Profil anzeigen",
-        "edit": "Bearbeiten",
-        "delete": "Löschen"
-      }
+      "edit": "Bearbeiten",
+      "delete": "Löschen",
+      "viewProfile": "Profil anzeigen",
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "email": "E-Mail",
+      "password": "Passwort",
+      "department": "Abteilung",
+      "position": "Position",
+      "role": "Rolle",
+      "selectDepartment": "Abteilung",
+      "selectPosition": "Position",
+      "selectRole": "Rolle",
+      "roleEmployee": "Mitarbeiter",
+      "roleAdmin": "Administrator",
+      "cancel": "Abbrechen",
+      "create": "Erstellen",
+      "createUser": "Benutzer anlegen",
+      "createUserTitle": "Benutzer anlegen",
+      "update": "Aktualisieren",
+      "updateUser": "Bearbeiten",
+      "updateUserTitle": "Benutzer bearbeiten",
+      "updateUserFailed": "Benutzer konnte nicht aktualisiert werden",
+      "deleteUser": "Löschen",
+      "deleteUserTitle": "Benutzer löschen",
+      "deleteUserSuccess": "Benutzer wurde erfolgreich gelöscht",
+      "confirmDeleteBefore": "Sind Sie sicher, dass Sie löschen möchten ",
+      "confirmDeleteAfter": "?",
+      "emailAlreadyExists": "Ein Benutzer mit dieser E-Mail existiert bereits.",
+      "confirm": "Bestätigen",
+      "noData": "Keine Daten"
     },
     "verifyEmail": {
       "title": "E-Mail-Bestätigung",
@@ -134,7 +155,6 @@
       "uncategorized": "Sonstiges",
       "name": "Name",
       "type": "Typ",
-      "category": "Kategorie",
       "skill": "Fähigkeit",
       "skills": "Fähigkeiten",
       "mastery": "Niveau",
@@ -148,7 +168,9 @@
       "remove": "Entfernen",
       "update": "Aktualisieren",
       "save": "Speichern",
-      "noData": "Keine Daten"
+      "noData": "Keine Daten",
+      "categoryLabel": "Kategorie",
+      "category": {}
     },
     "sidebar": {
       "employees": "Mitarbeiter",
@@ -189,40 +211,12 @@
         "avatarUpdated": "Avatar aktualisiert",
         "verificationSent": "Bestätigungs-E-Mail gesendet",
         "verificationFailed": "Bestätigungs-E-Mail konnte nicht gesendet werden"
+      },
+      "tabs": {
+        "profile": "Profil",
+        "skills": "Fähigkeiten",
+        "languages": "Sprachen"
       }
-    },
-    "users": {
-      "edit": "Bearbeiten",
-      "delete": "Löschen",
-      "viewProfile": "Profil anzeigen",
-      "firstName": "Vorname",
-      "lastName": "Nachname",
-      "email": "E-Mail",
-      "password": "Passwort",
-      "department": "Abteilung",
-      "position": "Position",
-      "role": "Rolle",
-      "selectDepartment": "Abteilung",
-      "selectPosition": "Position",
-      "selectRole": "Rolle",
-      "roleEmployee": "Mitarbeiter",
-      "roleAdmin": "Administrator",
-      "cancel": "Abbrechen",
-      "create": "Erstellen",
-      "createUser": "Benutzer anlegen",
-      "createUserTitle": "Benutzer anlegen",
-      "update": "Aktualisieren",
-      "updateUser": "Bearbeiten",
-      "updateUserTitle": "Benutzer bearbeiten",
-      "updateUserFailed": "Benutzer konnte nicht aktualisiert werden",
-      "deleteUser": "Löschen",
-      "deleteUserTitle": "Benutzer löschen",
-      "deleteUserSuccess": "Benutzer wurde erfolgreich gelöscht",
-      "confirmDeleteBefore": "Sind Sie sicher, dass Sie löschen möchten ",
-      "confirmDeleteAfter": "?",
-      "emailAlreadyExists": "Ein Benutzer mit dieser E-Mail existiert bereits.",
-      "confirm": "Bestätigen",
-      "noData": "Keine Daten"
     }
   }
 }

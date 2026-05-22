@@ -54,14 +54,17 @@
       "emailDoesNotExist": "Email не найден."
     },
     "login": {
-      "title": "Вход"
+      "title": "Вход",
+      "tab": "Войти"
     },
     "signup": {
-      "title": "Регистрация"
+      "title": "Регистрация",
+      "tab": "Регистрация"
     },
     "table": {
       "noResults": "Нет результатов",
-      "noDataResults": "Нет данных"
+      "noDataResults": "Нет данных",
+      "search": "Поиск"
     },
     "resetPassword": {
       "title": "Сброс пароля",
@@ -76,19 +79,37 @@
       }
     },
     "users": {
-      "breadcrumbs": "Сотрудники",
-      "columns": {
-        "firstName": "Имя",
-        "lastName": "Фамилия",
-        "email": "Email",
-        "department": "Отдел",
-        "position": "Должность"
-      },
-      "actions": {
-        "viewProfile": "Открыть профиль",
-        "edit": "Редактировать",
-        "delete": "Удалить"
-      }
+      "edit": "Редактировать",
+      "delete": "Удалить",
+      "viewProfile": "Просмотр профиля",
+      "firstName": "Имя",
+      "lastName": "Фамилия",
+      "email": "Электронная почта",
+      "password": "Пароль",
+      "department": "Отдел",
+      "position": "Должность",
+      "role": "Роль",
+      "selectDepartment": "Отдел",
+      "selectPosition": "Должность",
+      "selectRole": "Роль",
+      "roleEmployee": "Сотрудник",
+      "roleAdmin": "Администратор",
+      "cancel": "Отмена",
+      "create": "Создать",
+      "createUser": "Создать пользователя",
+      "createUserTitle": "Создание пользователя",
+      "update": "Обновить",
+      "updateUser": "Изменить",
+      "updateUserTitle": "Редактирование пользователя",
+      "updateUserFailed": "Не удалось обновить пользователя",
+      "deleteUser": "Удалить",
+      "deleteUserTitle": "Удаление пользователя",
+      "deleteUserSuccess": "Пользователь успешно удалён",
+      "confirmDeleteBefore": "Вы уверены, что хотите удалить ",
+      "confirmDeleteAfter": "?",
+      "emailAlreadyExists": "Пользователь с таким email уже существует.",
+      "confirm": "Подтвердить",
+      "noData": "Нет данных"
     },
     "verifyEmail": {
       "title": "Подтверждение e-mail",
@@ -134,7 +155,6 @@
       "uncategorized": "Другое",
       "name": "Название",
       "type": "Тип",
-      "category": "Категория",
       "skill": "Навык",
       "skills": "Навыки",
       "mastery": "Уровень владения",
@@ -148,7 +168,9 @@
       "remove": "Удалить",
       "update": "Обновить",
       "save": "Сохранить",
-      "noData": "Нет данных"
+      "noData": "Нет данных",
+      "categoryLabel": "Категория",
+      "category": {}
     },
     "sidebar": {
       "employees": "Сотрудники",
@@ -189,40 +211,12 @@
         "avatarUpdated": "Аватар обновлён",
         "verificationSent": "Письмо для подтверждения отправлено",
         "verificationFailed": "Не удалось отправить письмо для подтверждения"
+      },
+      "tabs": {
+        "profile": "Профиль",
+        "skills": "Навыки",
+        "languages": "Языки"
       }
-    },
-    "users": {
-      "edit": "Редактировать",
-      "delete": "Удалить",
-      "viewProfile": "Просмотр профиля",
-      "firstName": "Имя",
-      "lastName": "Фамилия",
-      "email": "Электронная почта",
-      "password": "Пароль",
-      "department": "Отдел",
-      "position": "Должность",
-      "role": "Роль",
-      "selectDepartment": "Отдел",
-      "selectPosition": "Должность",
-      "selectRole": "Роль",
-      "roleEmployee": "Сотрудник",
-      "roleAdmin": "Администратор",
-      "cancel": "Отмена",
-      "create": "Создать",
-      "createUser": "Создать пользователя",
-      "createUserTitle": "Создание пользователя",
-      "update": "Обновить",
-      "updateUser": "Изменить",
-      "updateUserTitle": "Редактирование пользователя",
-      "updateUserFailed": "Не удалось обновить пользователя",
-      "deleteUser": "Удалить",
-      "deleteUserTitle": "Удаление пользователя",
-      "deleteUserSuccess": "Пользователь успешно удалён",
-      "confirmDeleteBefore": "Вы уверены, что хотите удалить ",
-      "confirmDeleteAfter": "?",
-      "emailAlreadyExists": "Пользователь с таким email уже существует.",
-      "confirm": "Подтвердить",
-      "noData": "Нет данных"
     }
   }
 }

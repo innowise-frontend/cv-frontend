@@ -11,6 +11,19 @@ vi.mock("@tanstack/react-router", () => ({
   useNavigate: () => mockNavigate,
 }));
 
+vi.mock("react-i18next", () => ({
+  useTranslation: () => ({
+    t: (key: string) => {
+      const map: Record<string, string> = {
+        "page.login.tab": "Sign in",
+        "page.signup.tab": "Sign up",
+      };
+
+      return map[key] ?? key;
+    },
+  }),
+}));
+
 vi.mock("@components/Login", () => ({
   Login: () => <div>Login form stub</div>,
 }));

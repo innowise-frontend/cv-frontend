@@ -54,14 +54,17 @@
       "emailDoesNotExist": "L'email non esiste."
     },
     "login": {
-      "title": "Accedi"
+      "title": "Accedi",
+      "tab": "Accedi"
     },
     "signup": {
-      "title": "Registrati"
+      "title": "Registrati",
+      "tab": "Registrati"
     },
     "table": {
       "noResults": "Nessun risultato",
-      "noDataResults": "Nessun dato disponibile"
+      "noDataResults": "Nessun dato disponibile",
+      "search": "Cerca"
     },
     "resetPassword": {
       "title": "Reimposta password",
@@ -76,19 +79,37 @@
       }
     },
     "users": {
-      "breadcrumbs": "Dipendenti",
-      "columns": {
-        "firstName": "Nome",
-        "lastName": "Cognome",
-        "email": "Email",
-        "department": "Reparto",
-        "position": "Posizione"
-      },
-      "actions": {
-        "viewProfile": "Visualizza profilo",
-        "edit": "Modifica",
-        "delete": "Elimina"
-      }
+      "edit": "Modifica",
+      "delete": "Elimina",
+      "viewProfile": "Vedi profilo",
+      "firstName": "Nome",
+      "lastName": "Cognome",
+      "email": "Email",
+      "password": "Password",
+      "department": "Reparto",
+      "position": "Posizione",
+      "role": "Ruolo",
+      "selectDepartment": "Reparto",
+      "selectPosition": "Posizione",
+      "selectRole": "Ruolo",
+      "roleEmployee": "Dipendente",
+      "roleAdmin": "Amministratore",
+      "cancel": "Annulla",
+      "create": "Crea",
+      "createUser": "Crea utente",
+      "createUserTitle": "Crea utente",
+      "update": "Aggiorna",
+      "updateUser": "Aggiorna",
+      "updateUserTitle": "Modifica utente",
+      "updateUserFailed": "Impossibile aggiornare l'utente",
+      "deleteUser": "Elimina",
+      "deleteUserTitle": "Elimina utente",
+      "deleteUserSuccess": "Utente eliminato con successo",
+      "confirmDeleteBefore": "Sei sicuro di voler eliminare ",
+      "confirmDeleteAfter": "?",
+      "emailAlreadyExists": "Esiste già un utente con questa email.",
+      "confirm": "Conferma",
+      "noData": "Nessun dato"
     },
     "verifyEmail": {
       "title": "Verifica email",
@@ -134,7 +155,6 @@
       "uncategorized": "Altro",
       "name": "Nome",
       "type": "Tipo",
-      "category": "Categoria",
       "skill": "Competenza",
       "skills": "Competenze",
       "mastery": "Livello",
@@ -148,7 +168,9 @@
       "remove": "Rimuovi",
       "update": "Aggiorna",
       "save": "Salva",
-      "noData": "Nessun dato"
+      "noData": "Nessun dato",
+      "categoryLabel": "Categoria",
+      "category": {}
     },
     "sidebar": {
       "employees": "Dipendenti",
@@ -189,40 +211,12 @@
         "avatarUpdated": "Avatar aggiornato",
         "verificationSent": "Email di verifica inviata",
         "verificationFailed": "Invio dell'email di verifica non riuscito"
+      },
+      "tabs": {
+        "profile": "Profilo",
+        "skills": "Competenze",
+        "languages": "Lingue"
       }
-    },
-    "users": {
-      "edit": "Modifica",
-      "delete": "Elimina",
-      "viewProfile": "Vedi profilo",
-      "firstName": "Nome",
-      "lastName": "Cognome",
-      "email": "Email",
-      "password": "Password",
-      "department": "Reparto",
-      "position": "Posizione",
-      "role": "Ruolo",
-      "selectDepartment": "Reparto",
-      "selectPosition": "Posizione",
-      "selectRole": "Ruolo",
-      "roleEmployee": "Dipendente",
-      "roleAdmin": "Amministratore",
-      "cancel": "Annulla",
-      "create": "Crea",
-      "createUser": "Crea utente",
-      "createUserTitle": "Crea utente",
-      "update": "Aggiorna",
-      "updateUser": "Aggiorna",
-      "updateUserTitle": "Modifica utente",
-      "updateUserFailed": "Impossibile aggiornare l'utente",
-      "deleteUser": "Elimina",
-      "deleteUserTitle": "Elimina utente",
-      "deleteUserSuccess": "Utente eliminato con successo",
-      "confirmDeleteBefore": "Sei sicuro di voler eliminare ",
-      "confirmDeleteAfter": "?",
-      "emailAlreadyExists": "Esiste già un utente con questa email.",
-      "confirm": "Conferma",
-      "noData": "Nessun dato"
     }
   }
 }

@@ -50,8 +50,8 @@ export const CreateSkillModal = () => {
           />
           <Select
             list={categoryOptions}
-            label={t("page.skills.category")}
-            placeholder={t("page.skills.category")}
+            label={t("page.skills.categoryLabel")}
+            placeholder={t("page.skills.categoryLabel")}
             value={createdSkill.categoryId}
             onValueChange={(value) => setCreatedSkill({ ...createdSkill, categoryId: value })}
           />

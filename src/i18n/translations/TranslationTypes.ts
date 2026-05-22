@@ -50,13 +50,16 @@ export interface TranslationTypes {
     };
     login: {
       title: string;
+      tab: string;
     };
     signup: {
       title: string;
+      tab: string;
     };
     table: {
       noResults: string;
       noDataResults: string;
+      search: string;
     };
     resetPassword: {
       title: string;
@@ -107,7 +110,8 @@ export interface TranslationTypes {
       uncategorized: string;
       name: string;
       type: string;
-      category: string;
+      categoryLabel: string;
+      category: Record<string, string>;
       skill: string;
       skills: string;
       mastery: string;
@@ -134,6 +138,11 @@ export interface TranslationTypes {
       projects: string;
     };
     profile: {
+      tabs: {
+        profile: string;
+        skills: string;
+        languages: string;
+      };
       firstName: string;
       lastName: string;
       department: string;

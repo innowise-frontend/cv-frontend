@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ChangePassword } from "@components/ChangePassword";
-import { Breadcrumbs, ROUTES } from "@root/components/shared";
-import { Select } from "@root/components/shared/Select/Select";
-import { getDefaultTheme, setDefaultTheme } from "@root/lib/theme/theme";
+import { Breadcrumbs, Select } from "@components/shared";
+import { ROUTES } from "@root/constants";
+import { getBreadcrumbsLink, getDefaultTheme, setDefaultTheme } from "@root/lib";
 import { LANGUAGES, THEMES } from "./constants";
 import type { Theme } from "./types";
 
@@ -29,10 +29,7 @@ export const SettingPage = () => {
 
   return (
     <div className="flex flex-col ml-2">
-      <Breadcrumbs
-        items={[{ label: t("page.setting.breadcrumbs"), href: ROUTES.SETTINGS }]}
-        className="pb-4 ml-9"
-      />
+      <Breadcrumbs items={[getBreadcrumbsLink(ROUTES.SETTINGS, t)]} className="pb-4 ml-9" />
       <div className="flex flex-col w-[852px] m-auto gap-9">
         <Select
           label={t("page.setting.language")}

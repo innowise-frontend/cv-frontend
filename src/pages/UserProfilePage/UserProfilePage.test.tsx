@@ -86,7 +86,7 @@ describe("UserProfilePage", () => {
     expect(screen.getByTestId("breadcrumbs")).toBeInTheDocument();
     expect(screen.getByText("Employees")).toHaveAttribute("data-href", "/");
     expect(screen.getByText("Ada Lovelace")).toHaveAttribute("data-href", "/users/user-42/profile");
-    expect(screen.getByText("profile")).toHaveAttribute("data-href", "/users/user-42/profile");
+    expect(screen.getByText("Profile")).toHaveAttribute("data-href", "/users/user-42/profile");
     expect(useUserProfileMock).toHaveBeenCalledWith("user-42");
   });
 

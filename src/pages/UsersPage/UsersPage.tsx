@@ -2,7 +2,7 @@ import { useLocation, useNavigate, useSearch } from "@tanstack/react-router";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Breadcrumbs, Modal, Spinner, Table, TableSearch } from "@components/shared";
-import { SortOrder, VIEW_OPTIONS } from "@root/constants";
+import { SortOrder, VIEW_OPTIONS, ROUTES } from "@root/constants";
 import { useAuth, useHandleSearch } from "@root/hooks";
 import { getBreadcrumbsLink } from "@root/lib";
 import { useUsersApi } from "./api";
@@ -50,7 +50,7 @@ export const UsersPage = () => {
 
   return (
     <div className="flex h-full min-h-0 flex-col ml-5">
-      <Breadcrumbs items={[getBreadcrumbsLink(location.pathname, t)]} className="pl-5 pb-4" />
+      <Breadcrumbs items={[getBreadcrumbsLink(ROUTES.ROOT, t)]} className="pl-5 pb-4" />
       <TableSearch
         action={
           isAdmin && (

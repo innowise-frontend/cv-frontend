@@ -54,14 +54,17 @@
       "emailDoesNotExist": "El correo no existe."
     },
     "login": {
-      "title": "Iniciar sesión"
+      "title": "Iniciar sesión",
+      "tab": "Iniciar sesión"
     },
     "signup": {
-      "title": "Registrarse"
+      "title": "Registrarse",
+      "tab": "Registrarse"
     },
     "table": {
       "noResults": "Sin resultados",
-      "noDataResults": "Sin datos"
+      "noDataResults": "Sin datos",
+      "search": "Buscar"
     },
     "resetPassword": {
       "title": "Restablecer contraseña",
@@ -76,19 +79,37 @@
       }
     },
     "users": {
-      "breadcrumbs": "Empleados",
-      "columns": {
-        "firstName": "Nombre",
-        "lastName": "Apellido",
-        "email": "Correo",
-        "department": "Departamento",
-        "position": "Puesto"
-      },
-      "actions": {
-        "viewProfile": "Ver perfil",
-        "edit": "Editar",
-        "delete": "Eliminar"
-      }
+      "edit": "Editar",
+      "delete": "Eliminar",
+      "viewProfile": "Ver perfil",
+      "firstName": "Nombre",
+      "lastName": "Apellidos",
+      "email": "Correo electrónico",
+      "password": "Contraseña",
+      "department": "Departamento",
+      "position": "Puesto",
+      "role": "Rol",
+      "selectDepartment": "Departamento",
+      "selectPosition": "Puesto",
+      "selectRole": "Rol",
+      "roleEmployee": "Empleado",
+      "roleAdmin": "Administrador",
+      "cancel": "Cancelar",
+      "create": "Crear",
+      "createUser": "Crear usuario",
+      "createUserTitle": "Crear usuario",
+      "update": "Actualizar",
+      "updateUser": "Actualizar",
+      "updateUserTitle": "Editar usuario",
+      "updateUserFailed": "No se pudo actualizar el usuario",
+      "deleteUser": "Eliminar",
+      "deleteUserTitle": "Eliminar usuario",
+      "deleteUserSuccess": "Usuario eliminado correctamente",
+      "confirmDeleteBefore": "¿Seguro que deseas eliminar a ",
+      "confirmDeleteAfter": "?",
+      "emailAlreadyExists": "Ya existe un usuario con este correo electrónico.",
+      "confirm": "Confirmar",
+      "noData": "Sin datos"
     },
     "verifyEmail": {
       "title": "Verificación de correo",
@@ -134,7 +155,6 @@
       "uncategorized": "Otro",
       "name": "Nombre",
       "type": "Tipo",
-      "category": "Categoría",
       "skill": "Habilidad",
       "skills": "Habilidades",
       "mastery": "Nivel",
@@ -148,7 +168,9 @@
       "remove": "Quitar",
       "update": "Actualizar",
       "save": "Guardar",
-      "noData": "Sin datos"
+      "noData": "Sin datos",
+      "categoryLabel": "Categoría",
+      "category": {}
     },
     "sidebar": {
       "employees": "Empleados",
@@ -189,40 +211,12 @@
         "avatarUpdated": "Avatar actualizado",
         "verificationSent": "Correo de verificación enviado",
         "verificationFailed": "No se pudo enviar el correo de verificación"
+      },
+      "tabs": {
+        "profile": "Perfil",
+        "skills": "Habilidades",
+        "languages": "Idiomas"
       }
-    },
-    "users": {
-      "edit": "Editar",
-      "delete": "Eliminar",
-      "viewProfile": "Ver perfil",
-      "firstName": "Nombre",
-      "lastName": "Apellidos",
-      "email": "Correo electrónico",
-      "password": "Contraseña",
-      "department": "Departamento",
-      "position": "Puesto",
-      "role": "Rol",
-      "selectDepartment": "Departamento",
-      "selectPosition": "Puesto",
-      "selectRole": "Rol",
-      "roleEmployee": "Empleado",
-      "roleAdmin": "Administrador",
-      "cancel": "Cancelar",
-      "create": "Crear",
-      "createUser": "Crear usuario",
-      "createUserTitle": "Crear usuario",
-      "update": "Actualizar",
-      "updateUser": "Actualizar",
-      "updateUserTitle": "Editar usuario",
-      "updateUserFailed": "No se pudo actualizar el usuario",
-      "deleteUser": "Eliminar",
-      "deleteUserTitle": "Eliminar usuario",
-      "deleteUserSuccess": "Usuario eliminado correctamente",
-      "confirmDeleteBefore": "¿Seguro que deseas eliminar a ",
-      "confirmDeleteAfter": "?",
-      "emailAlreadyExists": "Ya existe un usuario con este correo electrónico.",
-      "confirm": "Confirmar",
-      "noData": "Sin datos"
     }
   }
 }
