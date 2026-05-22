@@ -18,6 +18,7 @@ export const Pagination = ({
   onPageChange,
   className,
   viewOptions,
+  viewOptionValue,
   onChangeViewOption,
 }: PaginationProps) => {
   const paginationPages = getPaginationPages(pagesCount, currentPage);
@@ -25,7 +26,18 @@ export const Pagination = ({
     label: option.label,
     value: String(option.value),
   }));
-  const [selectedViewOption, setSelectedViewOption] = useState(() => selectOptions[0]?.value ?? "");
+  const defaultViewOption = selectOptions[0]?.value ?? "";
+  const [uncontrolledViewOption, setUncontrolledViewOption] = useState(defaultViewOption);
+  const selectedViewOption =
+    viewOptionValue !== undefined ? String(viewOptionValue) : uncontrolledViewOption;
+
+  const handleViewOptionChange = (value: string) => {
+    if (viewOptionValue === undefined) {
+      setUncontrolledViewOption(value);
+    }
+
+    onChangeViewOption?.(Number(value));
+  };
 
   return (
     <UIPagination className={cn("flex items-center w-full bg-gray-8 dark:bg-gray-2", className)}>
@@ -77,10 +89,7 @@ export const Pagination = ({
         popupClassName="min-w-0 -translate-y-px shadow-xs"
         itemClassName="px-2 py-1 text-xs"
         value={selectedViewOption}
-        onValueChange={(value) => {
-          setSelectedViewOption(value);
-          onChangeViewOption?.(Number(value));
-        }}
+        onValueChange={handleViewOptionChange}
       />
     </UIPagination>
   );

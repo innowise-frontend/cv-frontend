@@ -17,6 +17,7 @@ export const Table = <TData,>({
   actions,
   columns,
   viewOptions,
+  currentViewOption,
   pagesAmount,
   currentPage,
   currentSort,
@@ -117,6 +118,7 @@ export const Table = <TData,>({
           currentPage={currentPage}
           onPageChange={onChangePage}
           viewOptions={viewOptions}
+          viewOptionValue={currentViewOption}
           onChangeViewOption={onChangeViewOption}
         />
       )}

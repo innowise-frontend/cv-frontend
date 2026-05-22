@@ -7,5 +7,6 @@ export interface PaginationProps {
     label: string;
     value: number;
   }[];
+  viewOptionValue?: number;
   onChangeViewOption?: (value: number) => void;
 }

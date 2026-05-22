@@ -40,8 +40,8 @@ export const Select = ({
   const hasValue = value !== "" && value !== undefined && value !== null;
   const isLabelFloating = hasValue || isOpen;
 
-  const labelFor = (val?: string | number) =>
-    list.find((item) => item.value === val)?.label ?? undefined;
+  const labelFor = (val?: string | number | null) =>
+    list.find((item) => String(item.value) === String(val))?.label ?? undefined;
 
   const handleSelectValue = (next: string | null) => {
     if (disabled) return;
@@ -115,7 +115,7 @@ export const Select = ({
               className={cn("transition-all duration-300", !hasValue && isOpen && "opacity-0")}
               placeholder={placeholder}
             >
-              {labelFor(value as string)}
+              {(selectedValue) => labelFor(selectedValue) ?? placeholder}
             </SelectValue>
           </SelectTrigger>
 

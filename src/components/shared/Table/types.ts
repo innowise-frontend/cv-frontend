@@ -18,6 +18,7 @@ export interface TableProps<TData> {
     label: string;
     value: number;
   }[];
+  currentViewOption?: number;
   onChangeViewOption?: (value: number) => void;
   onSort?: () => void;
   isLoading?: boolean;
