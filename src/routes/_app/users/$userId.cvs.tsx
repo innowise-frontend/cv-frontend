@@ -1,4 +1,4 @@
-import { createFileRoute, redirect } from "@tanstack/react-router";
+import { createFileRoute, notFound, isNotFound } from "@tanstack/react-router";
 import { TabsContent } from "@root/components/shared";
 import { CvsTable } from "@root/pages/UserCvsPage/components/CvsTable/CvsTable";
 
@@ -10,7 +10,14 @@ export const Route = createFileRoute("/_app/users/$userId/cvs")({
   },
   beforeLoad: ({ context }) => {
     if (!context.auth.isAdmin) {
-      throw redirect({ to: "/not-found" });
+      throw notFound();
+    }
+  },
+  errorComponent: ({ error }) => {
+    if (isNotFound(error)) {
+      // Возвращаем глобальную ошибку.
+      // Если роутер всё равно зажимает её в аутлете, используйте Решение №2.
+      throw error;
     }
   },
   component: () => (

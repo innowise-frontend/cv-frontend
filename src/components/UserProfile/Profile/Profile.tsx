@@ -16,7 +16,7 @@ export const Profile = () => {
   }
 
   if (isError || !data) {
-    return <ErrorPage embedded error={t("page.profile.userNotFound")} />;
+    return <ErrorPage error={t("page.profile.userNotFound")} />;
   }
 
   return (

@@ -14,7 +14,6 @@ import { Route as AppRouteRouteImport } from './routes/_app/route'
 import { Route as AppIndexRouteImport } from './routes/_app/index'
 import { Route as PublicVerifyEmailRouteImport } from './routes/_public/verify-email'
 import { Route as PublicResetPasswordRouteImport } from './routes/_public/reset-password'
-import { Route as PublicNotFoundRouteImport } from './routes/_public/not-found'
 import { Route as PublicForgotPasswordRouteImport } from './routes/_public/forgot-password'
 import { Route as PublicAuthRouteImport } from './routes/_public/auth'
 import { Route as AppSkillsRouteImport } from './routes/_app/skills'
@@ -52,11 +51,6 @@ const PublicVerifyEmailRoute = PublicVerifyEmailRouteImport.update({
 const PublicResetPasswordRoute = PublicResetPasswordRouteImport.update({
   id: '/reset-password',
   path: '/reset-password',
-  getParentRoute: () => PublicRouteRoute,
-} as any)
-const PublicNotFoundRoute = PublicNotFoundRouteImport.update({
-  id: '/not-found',
-  path: '/not-found',
   getParentRoute: () => PublicRouteRoute,
 } as any)
 const PublicForgotPasswordRoute = PublicForgotPasswordRouteImport.update({
@@ -146,7 +140,6 @@ export interface FileRoutesByFullPath {
   '/skills': typeof AppSkillsRoute
   '/auth': typeof PublicAuthRoute
   '/forgot-password': typeof PublicForgotPasswordRoute
-  '/not-found': typeof PublicNotFoundRoute
   '/reset-password': typeof PublicResetPasswordRoute
   '/verify-email': typeof PublicVerifyEmailRoute
   '/users/$userId': typeof AppUsersUserIdRouteWithChildren
@@ -167,7 +160,6 @@ export interface FileRoutesByTo {
   '/skills': typeof AppSkillsRoute
   '/auth': typeof PublicAuthRoute
   '/forgot-password': typeof PublicForgotPasswordRoute
-  '/not-found': typeof PublicNotFoundRoute
   '/reset-password': typeof PublicResetPasswordRoute
   '/verify-email': typeof PublicVerifyEmailRoute
   '/users/$userId/cvs': typeof AppUsersUserIdCvsRoute
@@ -189,7 +181,6 @@ export interface FileRoutesById {
   '/_app/skills': typeof AppSkillsRoute
   '/_public/auth': typeof PublicAuthRoute
   '/_public/forgot-password': typeof PublicForgotPasswordRoute
-  '/_public/not-found': typeof PublicNotFoundRoute
   '/_public/reset-password': typeof PublicResetPasswordRoute
   '/_public/verify-email': typeof PublicVerifyEmailRoute
   '/_app/': typeof AppIndexRoute
@@ -213,7 +204,6 @@ export interface FileRouteTypes {
     | '/skills'
     | '/auth'
     | '/forgot-password'
-    | '/not-found'
     | '/reset-password'
     | '/verify-email'
     | '/users/$userId'
@@ -234,7 +224,6 @@ export interface FileRouteTypes {
     | '/skills'
     | '/auth'
     | '/forgot-password'
-    | '/not-found'
     | '/reset-password'
     | '/verify-email'
     | '/users/$userId/cvs'
@@ -255,7 +244,6 @@ export interface FileRouteTypes {
     | '/_app/skills'
     | '/_public/auth'
     | '/_public/forgot-password'
-    | '/_public/not-found'
     | '/_public/reset-password'
     | '/_public/verify-email'
     | '/_app/'
@@ -307,13 +295,6 @@ declare module '@tanstack/react-router' {
       path: '/reset-password'
       fullPath: '/reset-password'
       preLoaderRoute: typeof PublicResetPasswordRouteImport
-      parentRoute: typeof PublicRouteRoute
-    }
-    '/_public/not-found': {
-      id: '/_public/not-found'
-      path: '/not-found'
-      fullPath: '/not-found'
-      preLoaderRoute: typeof PublicNotFoundRouteImport
       parentRoute: typeof PublicRouteRoute
     }
     '/_public/forgot-password': {
@@ -475,7 +456,6 @@ const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(
 interface PublicRouteRouteChildren {
   PublicAuthRoute: typeof PublicAuthRoute
   PublicForgotPasswordRoute: typeof PublicForgotPasswordRoute
-  PublicNotFoundRoute: typeof PublicNotFoundRoute
   PublicResetPasswordRoute: typeof PublicResetPasswordRoute
   PublicVerifyEmailRoute: typeof PublicVerifyEmailRoute
 }
@@ -483,7 +463,6 @@ interface PublicRouteRouteChildren {
 const PublicRouteRouteChildren: PublicRouteRouteChildren = {
   PublicAuthRoute: PublicAuthRoute,
   PublicForgotPasswordRoute: PublicForgotPasswordRoute,
-  PublicNotFoundRoute: PublicNotFoundRoute,
   PublicResetPasswordRoute: PublicResetPasswordRoute,
   PublicVerifyEmailRoute: PublicVerifyEmailRoute,
 }

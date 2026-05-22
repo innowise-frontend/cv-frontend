@@ -1144,14 +1144,13 @@ export type VerifyMailMutationVariables = Exact<{
 
 export type VerifyMailMutation = { __typename?: "Mutation"; verifyMail?: any | null };
 
-export type CvsByUserIdQueryVariables = Exact<{
+export type CvsQueryVariables = Exact<{
   params: SearchPaginationInput;
-  userId: Scalars["ID"]["input"];
 }>;
 
-export type CvsByUserIdQuery = {
+export type CvsQuery = {
   __typename?: "Query";
-  cvsByUserId: {
+  cvs: {
     __typename?: "PaginatedCvs";
     total: number;
     page: number;
@@ -1268,6 +1267,30 @@ export type SkillCategoriesQuery = {
     children: Array<{ __typename?: "SkillCategory"; id: string; name: string }>;
     parent?: { __typename?: "SkillCategory"; id: string; name: string } | null;
   }>;
+};
+
+export type CvsByUserIdQueryVariables = Exact<{
+  params: SearchPaginationInput;
+  userId: Scalars["ID"]["input"];
+}>;
+
+export type CvsByUserIdQuery = {
+  __typename?: "Query";
+  cvsByUserId: {
+    __typename?: "PaginatedCvs";
+    total: number;
+    page: number;
+    limit: number;
+    total_pages: number;
+    items: Array<{
+      __typename?: "Cv";
+      id: string;
+      name: string;
+      education?: string | null;
+      description: string;
+      user?: { __typename?: "User"; email: string } | null;
+    }>;
+  };
 };
 
 export type UserQueryVariables = Exact<{
@@ -2648,13 +2671,13 @@ export const VerifyMailDocument = {
     },
   ],
 } as unknown as DocumentNode<VerifyMailMutation, VerifyMailMutationVariables>;
-export const CvsByUserIdDocument = {
+export const CvsDocument = {
   kind: "Document",
   definitions: [
     {
       kind: "OperationDefinition",
       operation: "query",
-      name: { kind: "Name", value: "CvsByUserId" },
+      name: { kind: "Name", value: "Cvs" },
       variableDefinitions: [
         {
           kind: "VariableDefinition",
@@ -2664,31 +2687,18 @@ export const CvsByUserIdDocument = {
             type: { kind: "NamedType", name: { kind: "Name", value: "SearchPaginationInput" } },
           },
         },
-        {
-          kind: "VariableDefinition",
-          variable: { kind: "Variable", name: { kind: "Name", value: "userId" } },
-          type: {
-            kind: "NonNullType",
-            type: { kind: "NamedType", name: { kind: "Name", value: "ID" } },
-          },
-        },
       ],
       selectionSet: {
         kind: "SelectionSet",
         selections: [
           {
             kind: "Field",
-            name: { kind: "Name", value: "cvsByUserId" },
+            name: { kind: "Name", value: "cvs" },
             arguments: [
               {
                 kind: "Argument",
                 name: { kind: "Name", value: "params" },
                 value: { kind: "Variable", name: { kind: "Name", value: "params" } },
-              },
-              {
-                kind: "Argument",
-                name: { kind: "Name", value: "userId" },
-                value: { kind: "Variable", name: { kind: "Name", value: "userId" } },
               },
             ],
             selectionSet: {
@@ -2726,7 +2736,7 @@ export const CvsByUserIdDocument = {
       },
     },
   ],
-} as unknown as DocumentNode<CvsByUserIdQuery, CvsByUserIdQueryVariables>;
+} as unknown as DocumentNode<CvsQuery, CvsQueryVariables>;
 export const DepartmentsDocument = {
   kind: "Document",
   definitions: [
@@ -3047,6 +3057,85 @@ export const SkillCategoriesDocument = {
     },
   ],
 } as unknown as DocumentNode<SkillCategoriesQuery, SkillCategoriesQueryVariables>;
+export const CvsByUserIdDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "CvsByUserId" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "params" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "SearchPaginationInput" } },
+          },
+        },
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "userId" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "ID" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "cvsByUserId" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "params" },
+                value: { kind: "Variable", name: { kind: "Name", value: "params" } },
+              },
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "userId" },
+                value: { kind: "Variable", name: { kind: "Name", value: "userId" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "items" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      { kind: "Field", name: { kind: "Name", value: "name" } },
+                      { kind: "Field", name: { kind: "Name", value: "education" } },
+                      { kind: "Field", name: { kind: "Name", value: "description" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "user" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [{ kind: "Field", name: { kind: "Name", value: "email" } }],
+                        },
+                      },
+                    ],
+                  },
+                },
+                { kind: "Field", name: { kind: "Name", value: "total" } },
+                { kind: "Field", name: { kind: "Name", value: "page" } },
+                { kind: "Field", name: { kind: "Name", value: "limit" } },
+                { kind: "Field", name: { kind: "Name", value: "total_pages" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<CvsByUserIdQuery, CvsByUserIdQueryVariables>;
 export const UserDocument = {
   kind: "Document",
   definitions: [

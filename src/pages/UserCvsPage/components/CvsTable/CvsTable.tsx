@@ -1,18 +1,15 @@
-import { useLocation, useNavigate, useParams, useSearch } from "@tanstack/react-router";
+import { useLocation, useNavigate, useSearch } from "@tanstack/react-router";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Modal, Table, TableSearch } from "@components/shared";
 import { SortOrder, VIEW_OPTIONS } from "@root/constants";
-import { useAuth, useHandleSearch } from "@root/hooks";
+import { useHandleSearch } from "@root/hooks";
 import { useCvsTableColumns } from "./useCvsTableColumns";
 import { useCvsTableQuery } from "../../api";
 import { CreateCvModal } from "../CreateCvModal/CreateCvModal";
 
 export const CvsTable = () => {
   const { t } = useTranslation();
-  const { userId: authUserId } = useAuth();
-  const { userId: routeUserId } = useParams({ strict: false });
-  const userId = routeUserId ?? authUserId;
   const searchParams = useSearch({ strict: false });
   const location = useLocation();
   const navigate = useNavigate();
@@ -35,14 +32,10 @@ export const CvsTable = () => {
   const { columns } = useCvsTableColumns();
 
   const { data, isLoading } = useCvsTableQuery({
-    userId,
     search: searchParams.search ?? "",
     page: currentPage,
     limit: currentLimit,
     sortOrder: currentSort,
-    config: {
-      enabled: !!userId,
-    },
   });
 
   const tableData = data?.items ?? [];

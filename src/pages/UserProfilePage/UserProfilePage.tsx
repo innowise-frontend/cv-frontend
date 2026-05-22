@@ -52,7 +52,7 @@ export const UserProfilePage = ({ children }: { children: React.ReactNode }) => 
           });
         }}
       >
-        {isError ? <ErrorPage embedded error={t("page.profile.userNotFound")} /> : children}
+        {isError ? <ErrorPage error={t("page.profile.userNotFound")} /> : children}
       </PageTabs>
     </div>
   );
