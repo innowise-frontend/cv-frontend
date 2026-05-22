@@ -71,6 +71,7 @@ export const LanguagesTable = () => {
           }}
           currentSort={currentSort}
           viewOptions={VIEW_OPTIONS}
+          currentViewOption={currentLimit}
           onChangeViewOption={(limit) => {
             setCurrentLimit(limit);
             setCurrentPage(1);
