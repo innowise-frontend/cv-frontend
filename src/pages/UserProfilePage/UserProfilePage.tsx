@@ -1,10 +1,12 @@
 import { useNavigate, useParams, useRouterState } from "@tanstack/react-router";
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Spinner } from "@components/shared";
 import { Breadcrumbs } from "@components/shared/Breadcrumbs/Breadcrumbs";
 import { PageTabs } from "@components/shared/Tabs/Tabs";
 import { useUserProfile } from "@components/UserProfile/Profile/api";
 import { ROUTES } from "@root/constants";
+import { useAuth } from "@root/hooks";
 import { getBreadcrumbsLink, getTabs } from "@root/lib";
 import { ErrorPage } from "@root/pages/ErrorPage";
 import { PROFILE_TAB_CONFIG } from "./constants";
@@ -14,12 +16,21 @@ export const UserProfilePage = ({ children }: { children: React.ReactNode }) => 
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { userId } = useParams({ from: "/_app/users/$userId" });
-  const { isAdmin } = useAuth();
+  const { isAdmin, isFirstLoad } = useAuth();
   const { data, isLoading, isError } = useUserProfile(userId);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const activeTab = pathname.split("/").at(-1) ?? "profile";
   const fullName = data?.user.profile.full_name ?? "";
-  const tabs = getTabs(PROFILE_TAB_CONFIG, t);
+  const tabs = useMemo(
+    () =>
+      getTabs(
+        !isFirstLoad && !isAdmin
+          ? PROFILE_TAB_CONFIG.filter((tab) => tab.value !== "cvs")
+          : PROFILE_TAB_CONFIG,
+        t,
+      ),
+    [isAdmin, isFirstLoad, t],
+  );
   const activeTabLabel = tabs.find((tab) => tab.value === activeTab)?.label ?? activeTab;
 
   if (isLoading) {

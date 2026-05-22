@@ -167,6 +167,7 @@ export interface TranslationTypes {
         profile: string;
         skills: string;
         languages: string;
+        cvs: string;
       };
       firstName: string;
       lastName: string;

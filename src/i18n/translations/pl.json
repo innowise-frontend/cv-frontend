@@ -240,7 +240,8 @@
       "tabs": {
         "profile": "Profil",
         "skills": "Umiejętności",
-        "languages": "Języki"
+        "languages": "Języki",
+        "cvs": "CVs"
       }
     }
   }

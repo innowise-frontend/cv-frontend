@@ -241,7 +241,8 @@
       "tabs": {
         "profile": "Profile",
         "skills": "Skills",
-        "languages": "Languages"
+        "languages": "Languages",
+        "cvs": "CVs"
       }
     }
   }
