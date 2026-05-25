@@ -3,7 +3,7 @@ import { cn } from "@root/lib/utils";
 import type { LinkButtonProps } from "./types";
 
 const baseClassName = "flex items-center gap-4 p-4 rounded-r-40 cursor-pointer";
-const activeClassName = "text-gray-2 dark:text-gray-8 opacity-100 bg-gray-7 dark:bg-gray-4";
+const activeClassName = "opacity-100 bg-gray-7 dark:bg-gray-4";
 const inactiveClassName = "text-gray-3 dark:text-gray-5";
 
 export const LinkButton = ({

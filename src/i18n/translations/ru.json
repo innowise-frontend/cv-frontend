@@ -172,6 +172,31 @@
       "categoryLabel": "Категория",
       "category": {}
     },
+    "cvs": {
+      "createCv": "Создать резюме",
+      "createCvSuccess": "Резюме успешно создано",
+      "updateCvSuccess": "Резюме успешно обновлено",
+      "deleteCvSuccess": "Резюме успешно удалено",
+      "edit": "Редактировать",
+      "editCv": "Обновить резюме",
+      "name": "Название",
+      "education": "Образование",
+      "description": "Описание",
+      "employee": "Сотрудник",
+      "delete": "Удалить",
+      "deleteCv": "Удалить резюме",
+      "confirmDeleteCv": "Вы уверены, что хотите удалить резюме {{name}}?",
+      "cancel": "Отмена",
+      "confirm": "Подтвердить",
+      "create": "Создать",
+      "update": "Обновить",
+      "noData": "Резюме пока нет",
+      "validation": {
+        "nameRequired": "Название обязательно",
+        "educationRequired": "Образование обязательно",
+        "descriptionRequired": "Описание обязательно"
+      }
+    },
     "sidebar": {
       "employees": "Сотрудники",
       "skills": "Навыки",
@@ -215,7 +240,8 @@
       "tabs": {
         "profile": "Профиль",
         "skills": "Навыки",
-        "languages": "Языки"
+        "languages": "Языки",
+        "cvs": "Резюме"
       }
     }
   }

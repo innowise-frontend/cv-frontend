@@ -5,7 +5,7 @@ import { Button } from "@components/shared";
 import { cn } from "@root/lib/utils";
 import { ErrorPageProps } from "./types";
 
-export const ErrorPage = ({ error, deviceError, embedded = false }: ErrorPageProps) => {
+export const ErrorPage = ({ error, deviceError }: ErrorPageProps) => {
   const { history } = useRouter();
   const { t } = useTranslation();
 
@@ -16,11 +16,10 @@ export const ErrorPage = ({ error, deviceError, embedded = false }: ErrorPagePro
   return (
     <div
       className={cn(
-        "flex w-full items-center justify-center",
-        embedded ? "h-full min-h-0" : "h-screen",
+        "fixed inset-0 z-999 bg-gray-8 dark:bg-color-gray-2 flex items-center justify-center",
       )}
     >
-      <div className="flex w-140 flex-col items-center justify-center gap-6 text-gray dark:text-gray-8">
+      <div className="flex w-140 flex-col items-center justify-center gap-6">
         <ErrorIcon />
         <p className="text-4xl">{t("page.error.oops")}</p>
         <p className="whitespace-pre-line">{error}</p>

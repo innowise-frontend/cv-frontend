@@ -36,6 +36,16 @@ describe("routes/_public beforeLoad", () => {
     expect(redirectMock).not.toHaveBeenCalled();
   });
 
+  it("should allow authenticated users on not-found route", () => {
+    const result = beforeLoad({
+      context: { auth: { isAuthenticated: true } },
+      location: { pathname: "/not-found" },
+    });
+
+    expect(result).toBeUndefined();
+    expect(redirectMock).not.toHaveBeenCalled();
+  });
+
   it("should redirect authenticated users away from public routes", () => {
     try {
       beforeLoad({

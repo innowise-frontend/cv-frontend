@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import CloseIcon from "@assets/icon/CloseIcon.svg?react";
 import { Button } from "@components/shared";
+import { themeTextClassName } from "@components/shared/formFieldStyles";
 import { useModal } from "@root/hooks";
 import { cn } from "@root/lib";
 import { ModalContext, useModalContext } from "./useModalContext";
@@ -81,6 +82,7 @@ const ModalContent = ({ children, ref, className = "", onCancel, ...props }: Mod
         onClick={handleBackdropClick}
         className={cn(
           "fixed top-1/2 left-1/2 z-100 m-0 min-h-50 min-w-155 max-w-215 -translate-x-1/2 -translate-y-1/2 overflow-visible bg-gray-8 px-6 py-4 shadow-2xl will-change-[opacity,transform] dark:bg-gray-2",
+          themeTextClassName,
           "transition-[opacity,transform,display] transition-discrete duration-100 ease-out",
           "opacity-0 scale-95",
           "open:opacity-100 open:scale-100 open:duration-300 open:ease-out",

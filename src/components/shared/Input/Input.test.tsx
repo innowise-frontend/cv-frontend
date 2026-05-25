@@ -3,6 +3,7 @@ import UserEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import {
   getFormFieldClassList,
+  nativeAutofillClassName,
   nativePlaceholderClassName,
 } from "@components/shared/formFieldStyles";
 import i18n from "@root/i18n/i18n";
@@ -37,6 +38,14 @@ describe("InputWithLabel", () => {
     render(<Input placeholder="Placeholder" />);
 
     getFormFieldClassList(nativePlaceholderClassName).forEach((className) => {
+      expect(screen.getByRole("textbox")).toHaveClass(className);
+    });
+  });
+
+  it("should apply shared native autofill override styles", () => {
+    render(<Input placeholder="Placeholder" />);
+
+    getFormFieldClassList(nativeAutofillClassName).forEach((className) => {
       expect(screen.getByRole("textbox")).toHaveClass(className);
     });
   });

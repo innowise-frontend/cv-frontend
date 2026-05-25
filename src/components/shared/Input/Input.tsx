@@ -2,7 +2,11 @@ import React, { useState, useId, forwardRef } from "react";
 import { useTranslation } from "react-i18next";
 import CloseEyeIcon from "@assets/icon/CloseEyeIcon.svg?react";
 import OpenEyeIcon from "@assets/icon/OpenEyeIcon.svg?react";
-import { nativePlaceholderClassName } from "@components/shared/formFieldStyles";
+import {
+  nativeAutofillClassName,
+  nativePlaceholderClassName,
+  themeTextClassName,
+} from "@components/shared/formFieldStyles";
 import { Input as UiInput } from "@components/ui/input";
 import { Label } from "@root/components/ui/label";
 import { cn } from "@root/lib/utils";
@@ -56,9 +60,11 @@ export const Input = forwardRef<HTMLInputElement, InputWithLabelProps>(
               : { defaultValue: initialDefaultValue })}
             className={cn(
               "peer block h-12 cursor-pointer border-gray-5 px-3 py-3 text-base leading-6 shadow-none outline-none",
-              "focus:outline-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:shadow-none transition-all duration-300",
-              "dark:text-white disabled:bg-gray-6 dark:disabled:bg-gray-3",
+              themeTextClassName,
+              "focus:outline-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:shadow-none transition-[border-color,box-shadow] duration-300",
+              "disabled:bg-gray-6 dark:disabled:bg-gray-3",
               nativePlaceholderClassName,
+              nativeAutofillClassName,
               className,
               error &&
                 "border-red focus-visible:border-red dark:border-red dark:focus-visible:border-red",

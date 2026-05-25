@@ -172,6 +172,31 @@
       "categoryLabel": "Categoria",
       "category": {}
     },
+    "cvs": {
+      "createCv": "Crea CV",
+      "createCvSuccess": "CV creato con successo",
+      "updateCvSuccess": "CV aggiornato con successo",
+      "deleteCvSuccess": "CV eliminato con successo",
+      "edit": "Modifica",
+      "editCv": "Aggiorna CV",
+      "name": "Nome",
+      "education": "Istruzione",
+      "description": "Descrizione",
+      "employee": "Dipendente",
+      "delete": "Elimina",
+      "deleteCv": "Elimina CV",
+      "confirmDeleteCv": "Sei sicuro di voler eliminare il CV {{name}}?",
+      "cancel": "Annulla",
+      "confirm": "Conferma",
+      "create": "Crea",
+      "update": "Aggiorna",
+      "noData": "Nessun CV ancora",
+      "validation": {
+        "nameRequired": "Il nome è obbligatorio",
+        "educationRequired": "L'istruzione è obbligatoria",
+        "descriptionRequired": "La descrizione è obbligatoria"
+      }
+    },
     "sidebar": {
       "employees": "Dipendenti",
       "skills": "Competenze",
@@ -215,7 +240,8 @@
       "tabs": {
         "profile": "Profilo",
         "skills": "Competenze",
-        "languages": "Lingue"
+        "languages": "Lingue",
+        "cvs": "CVs"
       }
     }
   }

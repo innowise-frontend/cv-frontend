@@ -21,7 +21,7 @@ export const DeleteUserModal = ({ userId, firstName, lastName }: DeleteUserModal
 
   return (
     <>
-      <Modal.Trigger className="w-full h-auto justify-start capitalize p-0 text-gray dark:text-gray-8">
+      <Modal.Trigger className="w-full h-auto justify-start capitalize p-0">
         {t("page.users.deleteUser")}
       </Modal.Trigger>
       <Modal.Content>

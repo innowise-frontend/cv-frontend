@@ -82,7 +82,7 @@ export const UpdateUserModal = ({
 
   return (
     <>
-      <Modal.Trigger className="w-full h-auto justify-start capitalize p-0 text-gray dark:text-gray-8">
+      <Modal.Trigger className="w-full h-auto justify-start capitalize p-0">
         {t("page.users.updateUser")}
       </Modal.Trigger>
       <Modal.Content onCancel={resetToInitial}>

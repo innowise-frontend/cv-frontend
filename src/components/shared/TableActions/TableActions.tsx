@@ -1,11 +1,14 @@
 import { Link } from "@tanstack/react-router";
 import ChevronRightIcon from "@assets/icon/ChevronRightIcon.svg?react";
 import { Button, Dropdown, ROUTES } from "@components/shared";
-import { useAuth } from "@root/hooks";
 import { TableActionsProps } from "./types";
 
-export const TableActions = ({ userId, actions, dropdownKeepMounted }: TableActionsProps) => {
-  const { isAdmin } = useAuth();
+export const TableActions = ({
+  userId,
+  actions,
+  variant = "dropdown",
+  dropdownKeepMounted,
+}: TableActionsProps) => {
   const dropdownOptions = actions.map((action) => ({
     ...action,
     onClick: () => action.onClick?.(userId),
@@ -13,7 +16,7 @@ export const TableActions = ({ userId, actions, dropdownKeepMounted }: TableActi
 
   return (
     <div className="flex justify-end">
-      {isAdmin === true ? (
+      {variant === "dropdown" ? (
         <Dropdown options={dropdownOptions} keepMounted={dropdownKeepMounted} />
       ) : (
         <Button className="flex items-center justify-start w-10 h-10">

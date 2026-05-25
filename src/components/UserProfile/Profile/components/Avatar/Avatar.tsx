@@ -66,10 +66,10 @@ export const Avatar = () => {
               type="button"
               onClick={() => avatarInputRef.current?.click()}
               className={cn(
-                "cursor-pointer flex max-w-full items-center gap-3 rounded-md text-left outline-none text-gray-2 dark:text-gray-8",
+                "cursor-pointer flex max-w-full items-center gap-3 rounded-md text-left outline-none",
               )}
             >
-              <DownloadIcon className="size-6 shrink-0 text-gray-2 dark:text-gray-8 " />
+              <DownloadIcon className="size-6 shrink-0" />
               <span className="text-xl font-semibold">{t("page.profile.uploadAvatar")}</span>
             </button>
             <p className="text-base text-gray-4 dark:text-gray-5">

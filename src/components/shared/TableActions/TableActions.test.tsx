@@ -2,12 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { TableActions } from "./TableActions";
 
-const useAuthMock = vi.hoisted(() => vi.fn());
 const dropdownMock = vi.hoisted(() => vi.fn());
-
-vi.mock("@root/hooks", () => ({
-  useAuth: () => useAuthMock(),
-}));
 
 vi.mock("@tanstack/react-router", () => ({
   Link: ({
@@ -50,10 +45,8 @@ describe("TableActions", () => {
     { label: "Delete", onClick: vi.fn() },
   ];
 
-  it("renders dropdown with actions for admin", () => {
-    useAuthMock.mockReturnValue({ isAdmin: true });
-
-    render(<TableActions userId="42" actions={actions} />);
+  it("renders dropdown when variant is dropdown", () => {
+    render(<TableActions userId="42" actions={actions} variant="dropdown" />);
 
     expect(screen.getByTestId("actions-dropdown")).toBeInTheDocument();
     expect(dropdownMock).toHaveBeenCalledWith(
@@ -71,10 +64,14 @@ describe("TableActions", () => {
     expect(screen.queryByTestId("router-link")).not.toBeInTheDocument();
   });
 
-  it("renders user profile link button for non-admin", () => {
-    useAuthMock.mockReturnValue({ isAdmin: false });
+  it("defaults to dropdown variant", () => {
+    render(<TableActions userId="42" actions={actions} />);
 
-    render(<TableActions userId="99" actions={actions} />);
+    expect(screen.getByTestId("actions-dropdown")).toBeInTheDocument();
+  });
+
+  it("renders user profile link when variant is profileLink", () => {
+    render(<TableActions userId="99" actions={actions} variant="profileLink" />);
 
     const link = screen.getByTestId("router-link");
     expect(link).toHaveAttribute("data-to", "/users/$userId");

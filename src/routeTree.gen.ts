@@ -28,6 +28,7 @@ import { Route as AppUsersUserIdIndexRouteImport } from './routes/_app/users/$us
 import { Route as AppUsersUserIdSkillsRouteImport } from './routes/_app/users/$userId.skills'
 import { Route as AppUsersUserIdProfileRouteImport } from './routes/_app/users/$userId.profile'
 import { Route as AppUsersUserIdLanguagesRouteImport } from './routes/_app/users/$userId.languages'
+import { Route as AppUsersUserIdCvsRouteImport } from './routes/_app/users/$userId.cvs'
 
 const PublicRouteRoute = PublicRouteRouteImport.update({
   id: '/_public',
@@ -122,6 +123,11 @@ const AppUsersUserIdLanguagesRoute = AppUsersUserIdLanguagesRouteImport.update({
   path: '/languages',
   getParentRoute: () => AppUsersUserIdRoute,
 } as any)
+const AppUsersUserIdCvsRoute = AppUsersUserIdCvsRouteImport.update({
+  id: '/cvs',
+  path: '/cvs',
+  getParentRoute: () => AppUsersUserIdRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof AppIndexRoute
@@ -137,6 +143,7 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof PublicResetPasswordRoute
   '/verify-email': typeof PublicVerifyEmailRoute
   '/users/$userId': typeof AppUsersUserIdRouteWithChildren
+  '/users/$userId/cvs': typeof AppUsersUserIdCvsRoute
   '/users/$userId/languages': typeof AppUsersUserIdLanguagesRoute
   '/users/$userId/profile': typeof AppUsersUserIdProfileRoute
   '/users/$userId/skills': typeof AppUsersUserIdSkillsRoute
@@ -155,6 +162,7 @@ export interface FileRoutesByTo {
   '/forgot-password': typeof PublicForgotPasswordRoute
   '/reset-password': typeof PublicResetPasswordRoute
   '/verify-email': typeof PublicVerifyEmailRoute
+  '/users/$userId/cvs': typeof AppUsersUserIdCvsRoute
   '/users/$userId/languages': typeof AppUsersUserIdLanguagesRoute
   '/users/$userId/profile': typeof AppUsersUserIdProfileRoute
   '/users/$userId/skills': typeof AppUsersUserIdSkillsRoute
@@ -177,6 +185,7 @@ export interface FileRoutesById {
   '/_public/verify-email': typeof PublicVerifyEmailRoute
   '/_app/': typeof AppIndexRoute
   '/_app/users/$userId': typeof AppUsersUserIdRouteWithChildren
+  '/_app/users/$userId/cvs': typeof AppUsersUserIdCvsRoute
   '/_app/users/$userId/languages': typeof AppUsersUserIdLanguagesRoute
   '/_app/users/$userId/profile': typeof AppUsersUserIdProfileRoute
   '/_app/users/$userId/skills': typeof AppUsersUserIdSkillsRoute
@@ -198,6 +207,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/verify-email'
     | '/users/$userId'
+    | '/users/$userId/cvs'
     | '/users/$userId/languages'
     | '/users/$userId/profile'
     | '/users/$userId/skills'
@@ -216,6 +226,7 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/reset-password'
     | '/verify-email'
+    | '/users/$userId/cvs'
     | '/users/$userId/languages'
     | '/users/$userId/profile'
     | '/users/$userId/skills'
@@ -237,6 +248,7 @@ export interface FileRouteTypes {
     | '/_public/verify-email'
     | '/_app/'
     | '/_app/users/$userId'
+    | '/_app/users/$userId/cvs'
     | '/_app/users/$userId/languages'
     | '/_app/users/$userId/profile'
     | '/_app/users/$userId/skills'
@@ -383,10 +395,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppUsersUserIdLanguagesRouteImport
       parentRoute: typeof AppUsersUserIdRoute
     }
+    '/_app/users/$userId/cvs': {
+      id: '/_app/users/$userId/cvs'
+      path: '/cvs'
+      fullPath: '/users/$userId/cvs'
+      preLoaderRoute: typeof AppUsersUserIdCvsRouteImport
+      parentRoute: typeof AppUsersUserIdRoute
+    }
   }
 }
 
 interface AppUsersUserIdRouteChildren {
+  AppUsersUserIdCvsRoute: typeof AppUsersUserIdCvsRoute
   AppUsersUserIdLanguagesRoute: typeof AppUsersUserIdLanguagesRoute
   AppUsersUserIdProfileRoute: typeof AppUsersUserIdProfileRoute
   AppUsersUserIdSkillsRoute: typeof AppUsersUserIdSkillsRoute
@@ -394,6 +414,7 @@ interface AppUsersUserIdRouteChildren {
 }
 
 const AppUsersUserIdRouteChildren: AppUsersUserIdRouteChildren = {
+  AppUsersUserIdCvsRoute: AppUsersUserIdCvsRoute,
   AppUsersUserIdLanguagesRoute: AppUsersUserIdLanguagesRoute,
   AppUsersUserIdProfileRoute: AppUsersUserIdProfileRoute,
   AppUsersUserIdSkillsRoute: AppUsersUserIdSkillsRoute,
