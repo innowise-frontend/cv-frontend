@@ -9,6 +9,7 @@
       "hello": "Cześć !"
     },
     "setting": {
+      "breadcrumbs": "Ustawienia",
       "theme": "Motyw",
       "language": "Język",
       "changePassword": "Zmień hasło",
@@ -53,10 +54,17 @@
       "emailDoesNotExist": "Taki e-mail nie istnieje."
     },
     "login": {
-      "title": "Logowanie"
+      "title": "Logowanie",
+      "tab": "Zaloguj się"
     },
     "signup": {
-      "title": "Rejestracja"
+      "title": "Rejestracja",
+      "tab": "Zarejestruj się"
+    },
+    "table": {
+      "noResults": "Brak wyników",
+      "noDataResults": "Brak danych",
+      "search": "Szukaj"
     },
     "resetPassword": {
       "title": "Resetowanie hasła",
@@ -71,19 +79,37 @@
       }
     },
     "users": {
-      "breadcrumbs": "Pracownicy",
-      "columns": {
-        "firstName": "Imię",
-        "lastName": "Nazwisko",
-        "email": "E-mail",
-        "department": "Dział",
-        "position": "Stanowisko"
-      },
-      "actions": {
-        "viewProfile": "Zobacz profil",
-        "edit": "Edytuj",
-        "delete": "Usuń"
-      }
+      "edit": "Edytuj",
+      "delete": "Usuń",
+      "viewProfile": "Zobacz profil",
+      "firstName": "Imię",
+      "lastName": "Nazwisko",
+      "email": "E-mail",
+      "password": "Hasło",
+      "department": "Dział",
+      "position": "Stanowisko",
+      "role": "Rola",
+      "selectDepartment": "Dział",
+      "selectPosition": "Stanowisko",
+      "selectRole": "Rola",
+      "roleEmployee": "Pracownik",
+      "roleAdmin": "Administrator",
+      "cancel": "Anuluj",
+      "create": "Utwórz",
+      "createUser": "Dodaj użytkownika",
+      "createUserTitle": "Dodawanie użytkownika",
+      "update": "Zapisz zmiany",
+      "updateUser": "Edytuj",
+      "updateUserTitle": "Edycja użytkownika",
+      "updateUserFailed": "Nie udało się zaktualizować użytkownika",
+      "deleteUser": "Usuń",
+      "deleteUserTitle": "Usuwanie użytkownika",
+      "deleteUserSuccess": "Użytkownik został pomyślnie usunięty",
+      "confirmDeleteBefore": "Czy na pewno chcesz usunąć ",
+      "confirmDeleteAfter": "?",
+      "emailAlreadyExists": "Użytkownik z tym adresem e-mail już istnieje.",
+      "confirm": "Potwierdź",
+      "noData": "Brak danych"
     },
     "verifyEmail": {
       "title": "Weryfikacja e-mail",
@@ -94,7 +120,7 @@
     },
     "languages": {
       "currentLanguages": "Aktualne języki",
-      "emptyState": "Nie masz jeszcze żadnych języków",
+      "emptyState": "Bieżący użytkownik nie ma jeszcze żadnych języków",
       "addLanguage": "Dodaj język",
       "createLanguage": "Utwórz język",
       "deleteLanguage": "Usuń język",
@@ -115,11 +141,12 @@
       "add": "Dodaj",
       "remove": "Usuń",
       "update": "Zaktualizuj",
-      "save": "Zapisz"
+      "save": "Zapisz",
+      "noData": "Brak danych"
     },
     "skills": {
       "currentSkills": "Umiejętności",
-      "emptyState": "Nie masz jeszcze żadnych umiejętności",
+      "emptyState": "Bieżący użytkownik nie ma jeszcze żadnych umiejętności",
       "addSkill": "Dodaj umiejętność",
       "createSkill": "Utwórz umiejętność",
       "updateSkill": "Zaktualizuj umiejętność",
@@ -128,7 +155,6 @@
       "uncategorized": "Inne",
       "name": "Nazwa",
       "type": "Typ",
-      "category": "Kategoria",
       "skill": "Umiejętność",
       "skills": "Umiejętności",
       "mastery": "Poziom",
@@ -141,7 +167,35 @@
       "add": "Dodaj",
       "remove": "Usuń",
       "update": "Zaktualizuj",
-      "save": "Zapisz"
+      "save": "Zapisz",
+      "noData": "Brak danych",
+      "categoryLabel": "Kategoria",
+      "category": {}
+    },
+    "cvs": {
+      "createCv": "Utwórz CV",
+      "createCvSuccess": "CV zostało utworzone",
+      "updateCvSuccess": "CV zostało zaktualizowane",
+      "deleteCvSuccess": "CV zostało usunięte",
+      "edit": "Edytuj",
+      "editCv": "Aktualizuj CV",
+      "name": "Nazwa",
+      "education": "Wykształcenie",
+      "description": "Opis",
+      "employee": "Pracownik",
+      "delete": "Usuń",
+      "deleteCv": "Usuń CV",
+      "confirmDeleteCv": "Czy na pewno chcesz usunąć CV {{name}}?",
+      "cancel": "Anuluj",
+      "confirm": "Potwierdź",
+      "create": "Utwórz",
+      "update": "Aktualizuj",
+      "noData": "Brak CV",
+      "validation": {
+        "nameRequired": "Nazwa jest wymagana",
+        "educationRequired": "Wykształcenie jest wymagane",
+        "descriptionRequired": "Opis jest wymagany"
+      }
     },
     "sidebar": {
       "employees": "Pracownicy",
@@ -177,9 +231,17 @@
       "toast": {
         "userUpdated": "Zaktualizowano użytkownika",
         "profileUpdated": "Zaktualizowano profil",
+        "userUpdateFailed": "Nie udało się zaktualizować użytkownika",
+        "profileUpdateFailed": "Nie udało się zaktualizować profilu",
         "avatarUpdated": "Zaktualizowano awatar",
         "verificationSent": "Wysłano e-mail weryfikacyjny",
         "verificationFailed": "Nie udało się wysłać e-maila weryfikacyjnego"
+      },
+      "tabs": {
+        "profile": "Profil",
+        "skills": "Umiejętności",
+        "languages": "Języki",
+        "cvs": "CVs"
       }
     }
   }

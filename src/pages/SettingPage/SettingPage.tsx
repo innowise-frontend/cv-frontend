@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ChangePassword } from "@components/ChangePassword";
-import { Select } from "@root/components/shared/Select/Select";
-import { getDefaultTheme, setDefaultTheme } from "@root/lib/theme/theme";
+import { Breadcrumbs, Select } from "@components/shared";
+import { ROUTES } from "@root/constants";
+import { getBreadcrumbsLink, getDefaultTheme, setDefaultTheme } from "@root/lib";
 import { LANGUAGES, THEMES } from "./constants";
 import type { Theme } from "./types";
 
 export const SettingPage = () => {
   const { t, i18n } = useTranslation();
-  const [theme, setTheme] = useState(getDefaultTheme ?? "light");
+  const [theme, setTheme] = useState<Theme>(getDefaultTheme);
   const [language, setLanguage] = useState(i18n.resolvedLanguage ?? "en");
 
   const handleThemeChange = (value: string) => {
@@ -27,24 +28,25 @@ export const SettingPage = () => {
   }));
 
   return (
-    <div className="flex flex-col mt-10 gap-8 mx-auto">
-      <Select
-        className="w-[852px]"
-        label={t("page.setting.language")}
-        list={LANGUAGES}
-        placeholder={t("page.setting.selectLanguagePlaceholder")}
-        value={language}
-        onValueChange={handleLanguageChange}
-      />
-      <Select
-        className="w-[852px]"
-        label={t("page.setting.theme")}
-        list={themesList}
-        placeholder={t("page.setting.selectThemePlaceholder")}
-        value={theme}
-        onValueChange={handleThemeChange}
-      />
-      <ChangePassword className="mt-2" />
+    <div className="flex flex-col ml-2">
+      <Breadcrumbs items={[getBreadcrumbsLink(ROUTES.SETTINGS, t)]} className="pb-4 ml-9" />
+      <div className="flex flex-col w-[852px] m-auto gap-9">
+        <Select
+          label={t("page.setting.language")}
+          list={LANGUAGES}
+          placeholder={t("page.setting.selectLanguagePlaceholder")}
+          value={language}
+          onValueChange={handleLanguageChange}
+        />
+        <Select
+          label={t("page.setting.theme")}
+          list={themesList}
+          placeholder={t("page.setting.selectThemePlaceholder")}
+          value={theme}
+          onValueChange={handleThemeChange}
+        />
+        <ChangePassword className="mt-2" />
+      </div>
     </div>
   );
 };

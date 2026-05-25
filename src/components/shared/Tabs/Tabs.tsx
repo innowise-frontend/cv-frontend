@@ -35,7 +35,7 @@ export const PageTabs: React.FC<PageTabsProps> = ({
           ))}
         </TabsList>
 
-        <div className={"flex-1 w-full"}>{children}</div>
+        <div className="flex min-h-0 flex-1 w-full overflow-hidden">{children}</div>
       </TabsRoot>
     </div>
   );

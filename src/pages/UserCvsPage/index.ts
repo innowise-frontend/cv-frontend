@@ -1,0 +1,1 @@
+export { UserCvsPage } from "./UserCvsPage";

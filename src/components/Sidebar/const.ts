@@ -12,12 +12,25 @@ interface GetSidebarItemsProps {
   isAdmin?: boolean;
 }
 
-const getSidebarItems = ({ isAdmin, t }: GetSidebarItemsProps & { t: (key: string) => string }) => [
+export interface SidebarItem {
+  title: string;
+  to: string;
+  icon: React.ElementType;
+  visible: boolean;
+  withDivider?: boolean;
+  matchActive?: (pathname: string) => boolean;
+}
+
+const getSidebarItems = ({
+  isAdmin,
+  t,
+}: GetSidebarItemsProps & { t: (key: string) => string }): SidebarItem[] => [
   {
     title: t("page.sidebar.employees"),
     to: ROUTES.ROOT,
     icon: UsersIcon,
     visible: true,
+    matchActive: (pathname) => pathname === "/" || pathname.startsWith("/users/"),
   },
   {
     title: t("page.sidebar.skills"),
@@ -32,35 +45,35 @@ const getSidebarItems = ({ isAdmin, t }: GetSidebarItemsProps & { t: (key: strin
     visible: true,
   },
   {
-    title: t("page.sidebar.settings"),
-    to: ROUTES.SETTINGS,
-    icon: SettingsIcon,
-    visible: true,
-  },
-  {
     title: t("page.sidebar.cvs"),
     to: ROUTES.CVS,
     icon: FileUserIcon,
     visible: true,
-    withDivider: isAdmin,
+  },
+  {
+    title: t("page.sidebar.settings"),
+    to: ROUTES.SETTINGS,
+    icon: SettingsIcon,
+    visible: true,
+    withDivider: true,
   },
   {
     title: t("page.sidebar.departments"),
     to: ROUTES.DEPARTMENTS,
     icon: BuildingIcon,
-    visible: isAdmin,
+    visible: !!isAdmin,
   },
   {
     title: t("page.sidebar.positions"),
     to: ROUTES.POSITIONS,
     icon: BriefcaseIcon,
-    visible: isAdmin,
+    visible: !!isAdmin,
   },
   {
     title: t("page.sidebar.projects"),
     to: ROUTES.PROJECTS,
     icon: FoldersIcon,
-    visible: isAdmin,
+    visible: !!isAdmin,
   },
 ];
 

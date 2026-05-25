@@ -1,21 +1,22 @@
-import { useQuery } from "@tanstack/react-query";
 import { useLocation, useNavigate, useSearch } from "@tanstack/react-router";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Breadcrumbs, ROUTES, Table, TableSearch } from "@components/shared";
-import { VIEW_OPTIONS } from "@root/constants";
-import { useHandleSearch } from "@root/hooks";
+import { Breadcrumbs, Modal, Spinner, Table, TableSearch } from "@components/shared";
+import { SortOrder, VIEW_OPTIONS, ROUTES } from "@root/constants";
+import { useAuth, useHandleSearch } from "@root/hooks";
 import { getBreadcrumbsLink } from "@root/lib";
-import { getUsers } from "@services/users";
-import { getUserColumns } from "./columns";
+import { useUsersApi } from "./api";
+import { CreateUserModal } from "./components";
+import { useUserTableColumns } from "./useUserTableColumns";
 
 export const UsersPage = () => {
+  const { isAdmin } = useAuth();
   const { t } = useTranslation();
   const searchParams = useSearch({ from: "/_app/" });
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const [currentLimit, setCurrentLimit] = useState(10);
-  const [currentSort, setCurrentSort] = useState<"ASC" | "DESC">("ASC");
+  const [currentSort, setCurrentSort] = useState<SortOrder>(SortOrder.ASC);
 
   const location = useLocation();
   const { onSearch } = useHandleSearch({
@@ -29,60 +30,57 @@ export const UsersPage = () => {
       setCurrentPage(1);
     },
   });
+  const { columns } = useUserTableColumns();
 
-  const { data } = useQuery({
-    queryKey: ["users", searchParams.search, currentPage, currentLimit, currentSort],
-    queryFn: () =>
-      getUsers({
-        search: searchParams.search ?? "",
-        page: currentPage,
-        limit: currentLimit,
-        sort_order: currentSort,
-        sort_by: "department",
-      }),
+  const { data, isLoading } = useUsersApi({
+    search: searchParams.search ?? "",
+    page: currentPage,
+    limit: currentLimit,
+    sort_order: currentSort,
+    sort_by: "department",
   });
 
-  const adminActions = [
-    {
-      label: t("page.users.actions.viewProfile"),
-      onClick: (userId: string) => {
-        navigate({ to: ROUTES.USER_PAGE, params: { userId } });
-      },
-    },
-    {
-      label: t("page.users.actions.edit"),
-      onClick: (userId: string) => {
-        console.log(userId);
-      },
-    },
-    {
-      label: t("page.users.actions.delete"),
-      onClick: (userId: string) => console.log(userId),
-    },
-  ];
+  const tableData = data?.items ?? [];
+  const hasActiveSearch = (searchParams.search ?? "").trim().length > 0;
+  const emptyMessage = hasActiveSearch ? t("page.table.noResults") : t("page.users.noData");
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
-    <div className="flex h-full min-h-0 flex-col">
-      <Breadcrumbs items={[getBreadcrumbsLink(location.pathname, t)]} className="pl-5" />
-      <TableSearch action={null} searchValue={searchParams.search ?? ""} onSearch={onSearch} />
+    <div className="flex h-full min-h-0 flex-col ml-5">
+      <Breadcrumbs items={[getBreadcrumbsLink(ROUTES.ROOT, t)]} className="pl-5 pb-4" />
+      <TableSearch
+        action={
+          isAdmin && (
+            <Modal>
+              <CreateUserModal />
+            </Modal>
+          )
+        }
+        searchValue={searchParams.search ?? ""}
+        onSearch={onSearch}
+      />
       <div className="min-h-0 flex-1">
         <Table
-          columns={getUserColumns(t)}
-          data={data?.items ?? []}
+          columns={columns}
+          data={tableData}
+          emptyMessage={emptyMessage}
           pagesAmount={data?.total_pages ?? 0}
           currentPage={currentPage}
           onChangePage={setCurrentPage}
           onSort={() => {
-            setCurrentSort((prev) => (prev === "ASC" ? "DESC" : "ASC"));
+            setCurrentSort((prev) => (prev === SortOrder.ASC ? SortOrder.DESC : SortOrder.ASC));
             setCurrentPage(1);
           }}
           currentSort={currentSort}
           viewOptions={VIEW_OPTIONS}
+          currentViewOption={currentLimit}
           onChangeViewOption={(limit) => {
             setCurrentLimit(limit);
             setCurrentPage(1);
           }}
-          actions={adminActions}
         />
       </div>
     </div>

@@ -9,6 +9,7 @@
       "hello": "Olá!"
     },
     "setting": {
+      "breadcrumbs": "Definições",
       "theme": "Tema",
       "language": "Idioma",
       "changePassword": "Alterar senha",
@@ -53,10 +54,17 @@
       "emailDoesNotExist": "O e-mail não existe."
     },
     "login": {
-      "title": "Entrar"
+      "title": "Entrar",
+      "tab": "Entrar"
     },
     "signup": {
-      "title": "Cadastre-se"
+      "title": "Cadastre-se",
+      "tab": "Cadastre-se"
+    },
+    "table": {
+      "noResults": "Sem resultados",
+      "noDataResults": "Sem dados",
+      "search": "Pesquisar"
     },
     "resetPassword": {
       "title": "Redefinir senha",
@@ -71,19 +79,37 @@
       }
     },
     "users": {
-      "breadcrumbs": "Funcionários",
-      "columns": {
-        "firstName": "Nome",
-        "lastName": "Sobrenome",
-        "email": "E-mail",
-        "department": "Departamento",
-        "position": "Cargo"
-      },
-      "actions": {
-        "viewProfile": "Ver perfil",
-        "edit": "Editar",
-        "delete": "Excluir"
-      }
+      "edit": "Editar",
+      "delete": "Excluir",
+      "viewProfile": "Ver perfil",
+      "firstName": "Nome",
+      "lastName": "Sobrenome",
+      "email": "E-mail",
+      "password": "Senha",
+      "department": "Departamento",
+      "position": "Cargo",
+      "role": "Função",
+      "selectDepartment": "Departamento",
+      "selectPosition": "Cargo",
+      "selectRole": "Função",
+      "roleEmployee": "Colaborador",
+      "roleAdmin": "Administrador",
+      "cancel": "Cancelar",
+      "create": "Criar",
+      "createUser": "Criar utilizador",
+      "createUserTitle": "Criar utilizador",
+      "update": "Atualizar",
+      "updateUser": "Editar",
+      "updateUserTitle": "Editar utilizador",
+      "updateUserFailed": "Falha ao atualizar o utilizador",
+      "deleteUser": "Excluir",
+      "deleteUserTitle": "Excluir utilizador",
+      "deleteUserSuccess": "Utilizador eliminado com sucesso",
+      "confirmDeleteBefore": "Tem a certeza de que pretende eliminar ",
+      "confirmDeleteAfter": "?",
+      "emailAlreadyExists": "Já existe um utilizador com este e-mail.",
+      "confirm": "Confirmar",
+      "noData": "Sem dados"
     },
     "verifyEmail": {
       "title": "Verificação de e-mail",
@@ -94,7 +120,7 @@
     },
     "languages": {
       "currentLanguages": "Idiomas atuais",
-      "emptyState": "Voce ainda nao tem idiomas",
+      "emptyState": "O utilizador atual ainda não tem idiomas",
       "addLanguage": "Adicionar idioma",
       "createLanguage": "Criar idioma",
       "deleteLanguage": "Excluir idioma",
@@ -115,11 +141,12 @@
       "add": "Adicionar",
       "remove": "Remover",
       "update": "Atualizar",
-      "save": "Salvar"
+      "save": "Salvar",
+      "noData": "Sem dados"
     },
     "skills": {
       "currentSkills": "Habilidades",
-      "emptyState": "Voce ainda nao tem habilidades",
+      "emptyState": "O utilizador atual ainda não tem habilidades",
       "addSkill": "Adicionar habilidade",
       "createSkill": "Criar habilidade",
       "updateSkill": "Atualizar habilidade",
@@ -128,7 +155,6 @@
       "uncategorized": "Outro",
       "name": "Nome",
       "type": "Tipo",
-      "category": "Categoria",
       "skill": "Habilidade",
       "skills": "Habilidades",
       "mastery": "Nivel",
@@ -141,7 +167,35 @@
       "add": "Adicionar",
       "remove": "Remover",
       "update": "Atualizar",
-      "save": "Salvar"
+      "save": "Salvar",
+      "noData": "Sem dados",
+      "categoryLabel": "Categoria",
+      "category": {}
+    },
+    "cvs": {
+      "createCv": "Criar CV",
+      "createCvSuccess": "CV criado com sucesso",
+      "updateCvSuccess": "CV atualizado com sucesso",
+      "deleteCvSuccess": "CV excluído com sucesso",
+      "edit": "Editar",
+      "editCv": "Atualizar CV",
+      "name": "Nome",
+      "education": "Educação",
+      "description": "Descrição",
+      "employee": "Funcionário",
+      "delete": "Excluir",
+      "deleteCv": "Excluir CV",
+      "confirmDeleteCv": "Tem certeza de que deseja excluir o CV {{name}}?",
+      "cancel": "Cancelar",
+      "confirm": "Confirmar",
+      "create": "Criar",
+      "update": "Atualizar",
+      "noData": "Ainda não há CVs",
+      "validation": {
+        "nameRequired": "O nome é obrigatório",
+        "educationRequired": "A educação é obrigatória",
+        "descriptionRequired": "A descrição é obrigatória"
+      }
     },
     "sidebar": {
       "employees": "Funcionários",
@@ -177,9 +231,17 @@
       "toast": {
         "userUpdated": "Utilizador atualizado",
         "profileUpdated": "Perfil atualizado",
+        "userUpdateFailed": "Falha ao atualizar o utilizador",
+        "profileUpdateFailed": "Falha ao atualizar o perfil",
         "avatarUpdated": "Avatar atualizado",
         "verificationSent": "E-mail de verificação enviado",
         "verificationFailed": "Falha ao enviar o e-mail de verificação"
+      },
+      "tabs": {
+        "profile": "Perfil",
+        "skills": "Habilidades",
+        "languages": "Idiomas",
+        "cvs": "CVs"
       }
     }
   }

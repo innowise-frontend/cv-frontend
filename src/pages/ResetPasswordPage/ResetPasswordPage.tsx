@@ -47,7 +47,7 @@ export const ResetPasswordPage = () => {
       <p className="mb-10 leading-6 dark:text-white">{t("page.resetPassword.subtitle")}</p>
 
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-9">
           <Input
             label={t("page.resetPassword.newPasswordLabel")}
             type="password"

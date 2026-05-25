@@ -1,5 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { Button, Input } from "@components/shared";
 import { AuthFormProps } from "./types";
 import { formSchema, type FormSchema } from "./validation";
@@ -13,6 +14,7 @@ export const AuthForm = ({ onSubmit, label }: AuthFormProps) => {
     resolver: zodResolver(formSchema),
     mode: "onChange",
   });
+  const { t } = useTranslation();
 
   return (
     <form
@@ -21,8 +23,8 @@ export const AuthForm = ({ onSubmit, label }: AuthFormProps) => {
     >
       <Input
         type="email"
-        placeholder="Email"
-        label="Email"
+        label={t("page.users.email")}
+        placeholder={t("page.users.email")}
         {...register("email")}
         autoComplete="email"
         error={errors.email?.message}
@@ -30,8 +32,8 @@ export const AuthForm = ({ onSubmit, label }: AuthFormProps) => {
       />
       <Input
         type="password"
-        placeholder="Password"
-        label="Password"
+        label={t("page.users.password")}
+        placeholder={t("page.users.password")}
         autoComplete="current-password"
         {...register("password")}
         error={errors.password?.message}

@@ -1,6 +1,11 @@
 import { render, screen } from "@testing-library/react";
 import UserEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
+import {
+  getFormFieldClassList,
+  nativeAutofillClassName,
+  nativePlaceholderClassName,
+} from "@components/shared/formFieldStyles";
 import i18n from "@root/i18n/i18n";
 import { Input } from "./Input";
 
@@ -29,6 +34,22 @@ describe("InputWithLabel", () => {
     expect(screen.getByPlaceholderText("Placeholder")).toBeInTheDocument();
   });
 
+  it("should apply shared native placeholder styles", () => {
+    render(<Input placeholder="Placeholder" />);
+
+    getFormFieldClassList(nativePlaceholderClassName).forEach((className) => {
+      expect(screen.getByRole("textbox")).toHaveClass(className);
+    });
+  });
+
+  it("should apply shared native autofill override styles", () => {
+    render(<Input placeholder="Placeholder" />);
+
+    getFormFieldClassList(nativeAutofillClassName).forEach((className) => {
+      expect(screen.getByRole("textbox")).toHaveClass(className);
+    });
+  });
+
   it("should show the value instead of placeholder text when value is non-empty", () => {
     render(<Input value="Value" placeholder="Placeholder" onChange={() => {}} />);
 
@@ -38,16 +59,50 @@ describe("InputWithLabel", () => {
     expect(field).toHaveAttribute("placeholder", "Placeholder");
   });
 
-  it("should show the label when value is non-empty", () => {
-    render(<Input label="Label" value="Value" onChange={() => {}} />);
+  it("should render a floating label linked to the input when label is provided", () => {
+    render(<Input label="Label" placeholder="Label" />);
 
-    expect(screen.getByText("Label")).toBeInTheDocument();
+    const field = screen.getByRole("textbox");
+    const label = screen.getByText("Label", { selector: "label" });
+
+    expect(label).toBeInTheDocument();
+    expect(label).toHaveAttribute("for", field.id);
   });
 
-  it("should not show the label when value is empty", () => {
-    render(<Input label="Label" value="" onChange={() => {}} />);
+  it("should apply hidden label styles when value is empty and placeholder is shown", () => {
+    render(<Input label="Label" placeholder="Label" value="" onChange={() => {}} />);
 
-    expect(screen.queryByText("Label")).not.toBeInTheDocument();
+    const label = screen.getByText("Label", { selector: "label" });
+
+    expect(label).toHaveClass("peer-placeholder-shown:opacity-0");
+  });
+
+  it("should apply floated label styles when value is non-empty", () => {
+    render(<Input label="Label" placeholder="Label" value="Value" onChange={() => {}} />);
+
+    const label = screen.getByText("Label", { selector: "label" });
+
+    expect(label).toHaveClass("-translate-y-4");
+    expect(label).toHaveClass("text-xs");
+  });
+
+  it("should hide placeholder on focus via shared placeholder styles", () => {
+    render(<Input placeholder="Placeholder" />);
+
+    expect(nativePlaceholderClassName).toContain("focus:placeholder:opacity-0");
+    expect(screen.getByPlaceholderText("Placeholder")).toHaveClass("focus:placeholder:opacity-0");
+  });
+
+  it("should apply error styles to the label when error is provided", () => {
+    render(<Input label="Label" placeholder="Label" error="Required" />);
+
+    expect(screen.getByText("Label", { selector: "label" })).toHaveClass("text-red");
+  });
+
+  it("should reserve error space with opacity-0 when error is absent", () => {
+    const { container } = render(<Input />);
+
+    expect(container.querySelector("p[id$='-error']")).toHaveClass("opacity-0");
   });
 
   it("should forward ref to the native input", () => {

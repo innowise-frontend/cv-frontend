@@ -5,6 +5,8 @@ import { LinkButton } from "./LinkButton";
 const linkMock = vi.hoisted(() => vi.fn());
 
 vi.mock("@tanstack/react-router", () => ({
+  useRouterState: ({ select }: { select: (state: { location: { pathname: string } }) => string }) =>
+    select({ location: { pathname: "/" } }),
   Link: (props: {
     to: string;
     className?: string;
@@ -52,7 +54,7 @@ describe("LinkButton", () => {
       expect.objectContaining({
         className: "flex items-center gap-4 p-4 rounded-r-40 cursor-pointer",
         activeProps: {
-          className: "text-gray-2 dark:text-gray-8 opacity-100 bg-gray-7 dark:bg-gray-4",
+          className: "opacity-100 bg-gray-7 dark:bg-gray-4",
         },
         inactiveProps: { className: "text-gray-3 dark:text-gray-5" },
       }),

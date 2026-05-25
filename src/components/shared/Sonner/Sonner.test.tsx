@@ -44,8 +44,8 @@ describe("Sonner", () => {
       expect.objectContaining({
         toastOptions: expect.objectContaining({
           classNames: expect.objectContaining({
-            success: "z-50 backdrop-blur-sm rounded-md",
-            error: "z-50 border-red! text-red! backdrop-blur-sm rounded-md!",
+            success: "backdrop-blur-sm rounded-md",
+            error: "border-red! text-red! backdrop-blur-sm rounded-md!",
             description: "text-gray-2",
           }),
         }),

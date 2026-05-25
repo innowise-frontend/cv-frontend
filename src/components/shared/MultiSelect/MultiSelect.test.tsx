@@ -2,6 +2,10 @@ import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useState } from "react";
 import { describe, expect, it, vi } from "vitest";
+import {
+  customPlaceholderClassName,
+  getFormFieldClassList,
+} from "@components/shared/formFieldStyles";
 
 vi.mock("@root/components/ui/command", async () => {
   const React = await import("react");
@@ -51,15 +55,25 @@ describe("MultiSelect", () => {
 
     render(<Controlled />);
 
-    const trigger = screen.getByText("Choose languages").closest("button");
+    const floatingLabel = screen.getByText("Programming languages", { selector: "label" });
+    expect(floatingLabel).toHaveClass("opacity-0");
+
+    const placeholder = screen.getByText("Choose languages");
+    getFormFieldClassList(customPlaceholderClassName).forEach((className) => {
+      expect(placeholder).toHaveClass(className);
+    });
+
+    const trigger = placeholder.closest("button");
     expect(trigger).toBeTruthy();
 
     const triggerButton = trigger!;
 
     await user.click(triggerButton);
+    expect(floatingLabel).toHaveClass("opacity-100");
     await user.click(await screen.findByText("TypeScript"));
 
     expect(onChange).toHaveBeenCalledTimes(1);
+    expect(floatingLabel).toHaveClass("-translate-y-4");
     expect(onChange).toHaveBeenCalledWith(["ts"]);
     expect(within(triggerButton).getByText("TypeScript")).toBeInTheDocument();
 

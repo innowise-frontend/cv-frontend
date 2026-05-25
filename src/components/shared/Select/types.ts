@@ -3,6 +3,7 @@ import type { Select as SelectBase } from "@base-ui/react/select";
 export type SelectProps = {
   list: { value: string; label: string }[];
   label: string;
+  error?: string;
   placeholder?: string;
   className?: string;
   popupClassName?: string;
@@ -13,4 +14,5 @@ export type SelectProps = {
   side?: SelectBase.Positioner.Props["side"];
   value: string | number;
   onValueChange?: (value: string) => void;
+  sideShift?: "flip" | "shift" | "none";
 };

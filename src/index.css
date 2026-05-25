@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @config "../tailwind.config.ts";
-@import "./shadcn/tailwind.css";
+@import "./styles/tailwind.css";
 
 body {
   color: var(--color-gray-2);
@@ -17,7 +17,7 @@ body {
 }
 
 #root {
-  width: 1440px;
+  width: 1920px;
   max-width: 100%;
   color: var(--color-gray-2);
   background: var(--color-gray-8);
@@ -29,7 +29,13 @@ body {
   box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
+.dark {
+  :root {
+    color-scheme: dark;
+  }
+}
+
+.dark {
   body {
     color: var(--color-gray-8);
     background: var(--color-gray-2);
@@ -38,4 +44,34 @@ body {
     background: var(--color-gray-2);
     color: var(--color-gray-8);
   }
+}
+
+:root:not(.dark) input[data-slot="input"]:-webkit-autofill,
+:root:not(.dark) input[data-slot="input"]:-webkit-autofill:hover,
+:root:not(.dark) input[data-slot="input"]:-webkit-autofill:focus,
+:root:not(.dark) input[data-slot="input"]:-webkit-autofill:active,
+:root:not(.dark) textarea[data-slot="textarea"]:-webkit-autofill,
+:root:not(.dark) textarea[data-slot="textarea"]:-webkit-autofill:hover,
+:root:not(.dark) textarea[data-slot="textarea"]:-webkit-autofill:focus,
+:root:not(.dark) textarea[data-slot="textarea"]:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px var(--color-gray-8) inset !important;
+  -webkit-text-fill-color: var(--color-gray-2) !important;
+  caret-color: var(--color-gray-2);
+  transition: background-color 99999s ease-out 0s;
+}
+
+.dark input[data-slot="input"]:-webkit-autofill,
+.dark input[data-slot="input"]:-webkit-autofill:hover,
+.dark input[data-slot="input"]:-webkit-autofill:focus,
+.dark input[data-slot="input"]:-webkit-autofill:active,
+.dark textarea[data-slot="textarea"]:-webkit-autofill,
+.dark textarea[data-slot="textarea"]:-webkit-autofill:hover,
+.dark textarea[data-slot="textarea"]:-webkit-autofill:focus,
+.dark textarea[data-slot="textarea"]:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px var(--color-gray-2) inset !important;
+  -webkit-text-fill-color: var(--color-gray-8) !important;
+  caret-color: var(--color-gray-8);
+  transition:
+    background-color 99999s ease-out 0s,
+    -webkit-text-fill-color 99999s ease-out 0s;
 }

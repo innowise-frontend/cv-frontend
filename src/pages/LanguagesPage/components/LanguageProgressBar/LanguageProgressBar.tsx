@@ -49,7 +49,7 @@ export const LanguageProgressBar = ({
       <Button variant="ghost" className="capitalize" onClick={onClick}>
         <ProgressBar
           className={cn(
-            "px-2 cursor-pointer hover:bg-gray-7 dark:hover:bg-gray5",
+            "px-2 cursor-pointer hover:bg-gray-7 dark:hover:bg-gray-5",
             chosen && "*:text-gray *:dark:text-gray-8",
           )}
           label={name || ""}
@@ -63,14 +63,14 @@ export const LanguageProgressBar = ({
     <>
       <Modal.Trigger className="capitalize" variant="ghost">
         <ProgressBar
-          className="px-2 cursor-pointer hover:bg-gray-7"
+          className="px-2 cursor-pointer hover:bg-gray-7 dark:hover:bg-gray-5"
           label={name || ""}
           proficiency={proficiency}
         />
       </Modal.Trigger>
       <Modal.Content onCancel={resetUpdateLanguage}>
         <Modal.Header>{t("page.languages.updateLanguage")}</Modal.Header>
-        <Modal.Body className="flex flex-col gap-4">
+        <Modal.Body className="flex flex-col gap-9">
           <Select
             list={[{ label: name, value: name }]}
             label={t("page.languages.language")}

@@ -25,7 +25,7 @@ export const buildColumns = (categories: SkillCategoriesData | undefined) => {
     }),
     columnHelper.accessor((row) => getCategoryName(row, categoryById), {
       id: "category",
-      header: () => <TableColumnHeader title={i18n.t("page.skills.category")} />,
+      header: () => <TableColumnHeader title={i18n.t("page.skills.categoryLabel")} />,
       cell: ({ row }) => <span>{getCategoryName(row.original, categoryById) ?? "-"}</span>,
     }),
     columnHelper.display({

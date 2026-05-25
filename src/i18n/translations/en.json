@@ -9,6 +9,7 @@
       "hello": "Hello !"
     },
     "setting": {
+      "breadcrumbs": "Settings",
       "theme": "Theme",
       "language": "Language",
       "changePassword": "Change password",
@@ -53,10 +54,17 @@
       "emailDoesNotExist": "Email doesn't exist."
     },
     "login": {
-      "title": "Login"
+      "title": "Login",
+      "tab": "Sign in"
     },
     "signup": {
-      "title": "Sign up"
+      "title": "Sign up",
+      "tab": "Sign up"
+    },
+    "table": {
+      "noResults": "No results",
+      "noDataResults": "No data results",
+      "search": "Search"
     },
     "resetPassword": {
       "title": "Reset password",
@@ -71,19 +79,37 @@
       }
     },
     "users": {
-      "breadcrumbs": "Employees",
-      "columns": {
-        "firstName": "First Name",
-        "lastName": "Last Name",
-        "email": "Email",
-        "department": "Department",
-        "position": "Position"
-      },
-      "actions": {
-        "viewProfile": "View profile",
-        "edit": "Edit",
-        "delete": "Delete"
-      }
+      "edit": "Edit",
+      "delete": "Delete",
+      "viewProfile": "View profile",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "password": "Password",
+      "department": "Department",
+      "position": "Position",
+      "role": "Role",
+      "selectDepartment": "Department",
+      "selectPosition": "Position",
+      "selectRole": "Role",
+      "roleEmployee": "Employee",
+      "roleAdmin": "Admin",
+      "cancel": "Cancel",
+      "create": "Create",
+      "createUser": "Create user",
+      "createUserTitle": "Create User",
+      "update": "Update",
+      "updateUser": "Update",
+      "updateUserTitle": "Update user",
+      "updateUserFailed": "Failed to update user",
+      "deleteUser": "Delete",
+      "deleteUserTitle": "Delete user",
+      "deleteUserSuccess": "User deleted successfully",
+      "confirmDeleteBefore": "Are you sure you want to delete ",
+      "confirmDeleteAfter": "?",
+      "emailAlreadyExists": "A user with this email already exists.",
+      "confirm": "Confirm",
+      "noData": "No data"
     },
     "verifyEmail": {
       "title": "Email verification",
@@ -94,7 +120,7 @@
     },
     "languages": {
       "currentLanguages": "Current languages",
-      "emptyState": "You don't have any languages yet",
+      "emptyState": "Current user doesn't have any languages yet",
       "addLanguage": "Add language",
       "createLanguage": "Create language",
       "deleteLanguage": "Delete language",
@@ -115,11 +141,12 @@
       "add": "Add",
       "remove": "Remove",
       "update": "Update",
-      "save": "Save"
+      "save": "Save",
+      "noData": "No data"
     },
     "skills": {
       "currentSkills": "Skills",
-      "emptyState": "You don't have any skills yet",
+      "emptyState": "Current user doesn't have any skills yet",
       "addSkill": "Add skill",
       "createSkill": "Create skill",
       "updateSkill": "Update skill",
@@ -128,7 +155,6 @@
       "uncategorized": "Other",
       "name": "Name",
       "type": "Type",
-      "category": "Category",
       "skill": "Skill",
       "skills": "Skills",
       "mastery": "Skill mastery",
@@ -141,7 +167,35 @@
       "add": "Add",
       "remove": "Remove",
       "update": "Update",
-      "save": "Save"
+      "save": "Save",
+      "noData": "No data",
+      "categoryLabel": "Category",
+      "category": {}
+    },
+    "cvs": {
+      "createCv": "Create CV",
+      "createCvSuccess": "CV created successfully",
+      "updateCvSuccess": "CV updated successfully",
+      "deleteCvSuccess": "CV deleted successfully",
+      "edit": "Edit",
+      "editCv": "Update CV",
+      "name": "Name",
+      "education": "Education",
+      "description": "Description",
+      "employee": "Employee",
+      "delete": "Delete",
+      "deleteCv": "Delete CV",
+      "confirmDeleteCv": "Are you sure you want to delete CV {{name}}?",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "create": "Create",
+      "update": "Update",
+      "noData": "No CVs yet",
+      "validation": {
+        "nameRequired": "Name is required",
+        "educationRequired": "Education is required",
+        "descriptionRequired": "Description is required"
+      }
     },
     "sidebar": {
       "employees": "Employees",
@@ -177,9 +231,18 @@
       "toast": {
         "userUpdated": "User updated",
         "profileUpdated": "Profile updated",
+        "userUpdateFailed": "Failed to update user",
+        "profileUpdateFailed": "Failed to update profile",
         "avatarUpdated": "Avatar updated",
+        "avatarUpdateFailed": "Failed to update avatar",
         "verificationSent": "Verification email sent",
         "verificationFailed": "Failed to send verification email"
+      },
+      "tabs": {
+        "profile": "Profile",
+        "skills": "Skills",
+        "languages": "Languages",
+        "cvs": "CVs"
       }
     }
   }

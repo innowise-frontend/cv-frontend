@@ -9,6 +9,7 @@
       "hello": "Bonjour!"
     },
     "setting": {
+      "breadcrumbs": "Paramètres",
       "theme": "Thème",
       "language": "Langue",
       "changePassword": "Changer le mot de passe",
@@ -53,10 +54,17 @@
       "emailDoesNotExist": "L'e-mail n'existe pas."
     },
     "login": {
-      "title": "Connexion"
+      "title": "Connexion",
+      "tab": "Connexion"
     },
     "signup": {
-      "title": "Inscription"
+      "title": "Inscription",
+      "tab": "S'inscrire"
+    },
+    "table": {
+      "noResults": "Aucun résultat",
+      "noDataResults": "Aucune donnée",
+      "search": "Rechercher"
     },
     "resetPassword": {
       "title": "Réinitialiser le mot de passe",
@@ -71,19 +79,37 @@
       }
     },
     "users": {
-      "breadcrumbs": "Employés",
-      "columns": {
-        "firstName": "Prénom",
-        "lastName": "Nom",
-        "email": "E-mail",
-        "department": "Département",
-        "position": "Poste"
-      },
-      "actions": {
-        "viewProfile": "Voir le profil",
-        "edit": "Modifier",
-        "delete": "Supprimer"
-      }
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "viewProfile": "Voir le profil",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "email": "E-mail",
+      "password": "Mot de passe",
+      "department": "Service",
+      "position": "Poste",
+      "role": "Rôle",
+      "selectDepartment": "Service",
+      "selectPosition": "Poste",
+      "selectRole": "Rôle",
+      "roleEmployee": "Employé",
+      "roleAdmin": "Administrateur",
+      "cancel": "Annuler",
+      "create": "Créer",
+      "createUser": "Créer un utilisateur",
+      "createUserTitle": "Créer un utilisateur",
+      "update": "Mettre à jour",
+      "updateUser": "Modifier",
+      "updateUserTitle": "Modifier l'utilisateur",
+      "updateUserFailed": "Échec de la mise à jour de l'utilisateur",
+      "deleteUser": "Supprimer",
+      "deleteUserTitle": "Supprimer l'utilisateur",
+      "deleteUserSuccess": "Utilisateur supprimé avec succès",
+      "confirmDeleteBefore": "Êtes-vous sûr de vouloir supprimer ",
+      "confirmDeleteAfter": " ?",
+      "emailAlreadyExists": "Un utilisateur avec cet e-mail existe déjà.",
+      "confirm": "Confirmer",
+      "noData": "Aucune donnée"
     },
     "verifyEmail": {
       "title": "Vérification de l'e-mail",
@@ -94,7 +120,7 @@
     },
     "languages": {
       "currentLanguages": "Langues actuelles",
-      "emptyState": "Vous n'avez encore aucune langue",
+      "emptyState": "L'utilisateur actuel n'a encore aucune langue",
       "addLanguage": "Ajouter une langue",
       "createLanguage": "Créer une langue",
       "deleteLanguage": "Supprimer une langue",
@@ -115,11 +141,12 @@
       "add": "Ajouter",
       "remove": "Supprimer",
       "update": "Mettre a jour",
-      "save": "Enregistrer"
-    }, 
+      "save": "Enregistrer",
+      "noData": "Aucune donnée"
+    },
     "skills": {
       "currentSkills": "Compétences",
-      "emptyState": "Vous n'avez encore aucune compétence",
+      "emptyState": "L'utilisateur actuel n'a encore aucune compétence",
       "addSkill": "Ajouter une compétence",
       "createSkill": "Créer une compétence",
       "updateSkill": "Mettre à jour la compétence",
@@ -128,7 +155,6 @@
       "uncategorized": "Autre",
       "name": "Nom",
       "type": "Type",
-      "category": "Catégorie",
       "skill": "Compétence",
       "skills": "Compétences",
       "mastery": "Niveau",
@@ -141,7 +167,35 @@
       "add": "Ajouter",
       "remove": "Supprimer",
       "update": "Mettre a jour",
-      "save": "Enregistrer"
+      "save": "Enregistrer",
+      "noData": "Aucune donnée",
+      "categoryLabel": "Catégorie",
+      "category": {}
+    },
+    "cvs": {
+      "createCv": "Créer un CV",
+      "createCvSuccess": "CV créé avec succès",
+      "updateCvSuccess": "CV mis à jour avec succès",
+      "deleteCvSuccess": "CV supprimé avec succès",
+      "edit": "Modifier",
+      "editCv": "Mettre à jour le CV",
+      "name": "Nom",
+      "education": "Formation",
+      "description": "Description",
+      "employee": "Employé",
+      "delete": "Supprimer",
+      "deleteCv": "Supprimer le CV",
+      "confirmDeleteCv": "Voulez-vous vraiment supprimer le CV {{name}} ?",
+      "cancel": "Annuler",
+      "confirm": "Confirmer",
+      "create": "Créer",
+      "update": "Mettre à jour",
+      "noData": "Aucun CV pour le moment",
+      "validation": {
+        "nameRequired": "Le nom est requis",
+        "educationRequired": "La formation est requise",
+        "descriptionRequired": "La description est requise"
+      }
     },
     "sidebar": {
       "employees": "Employés",
@@ -177,9 +231,17 @@
       "toast": {
         "userUpdated": "Utilisateur mis à jour",
         "profileUpdated": "Profil mis à jour",
+        "userUpdateFailed": "Échec de la mise à jour de l'utilisateur",
+        "profileUpdateFailed": "Échec de la mise à jour du profil",
         "avatarUpdated": "Avatar mis à jour",
         "verificationSent": "E-mail de vérification envoyé",
         "verificationFailed": "Échec de l'envoi de l'e-mail de vérification"
+      },
+      "tabs": {
+        "profile": "Profil",
+        "skills": "Compétences",
+        "languages": "Langues",
+        "cvs": "CVs"
       }
     }
   }

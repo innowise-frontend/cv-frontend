@@ -1,5 +1,9 @@
 import { flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table";
-import { Pagination } from "@components/shared";
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { cn } from "tailwind-variants";
+import { Pagination, Spinner } from "@components/shared";
+import { EmptyContent } from "@components/shared/EmptyContent/EmptyContent";
 import {
   Table as UITable,
   TableBody,
@@ -15,13 +19,19 @@ export const Table = <TData,>({
   actions,
   columns,
   viewOptions,
+  currentViewOption,
   pagesAmount,
   currentPage,
   currentSort,
   onSort,
   onChangePage,
   onChangeViewOption,
+  isLoading = false,
+  emptyMessage,
+  renderSubRow,
 }: TableProps<TData>) => {
+  const { t } = useTranslation();
+
   const getRowId = (originalRow: TData, index: number) => {
     if (
       typeof originalRow === "object" &&
@@ -49,6 +59,10 @@ export const Table = <TData,>({
     getCoreRowModel: getCoreRowModel(),
   });
 
+  if (isLoading) {
+    return <Spinner />;
+  }
+
   return (
     <div className="flex h-full min-h-0 flex-col">
       <div className="min-h-0 flex-1 overflow-auto relative">
@@ -75,39 +89,56 @@ export const Table = <TData,>({
           <TableBody className="font-normal">
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                  className="border-b-gray-5 dark:border-b-gray-3"
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell
-                      className="p-4 text-left whitespace-normal wrap-break-word"
-                      key={cell.id}
-                    >
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                    </TableCell>
-                  ))}
-                </TableRow>
+                <React.Fragment key={row.id}>
+                  <TableRow
+                    data-state={row.getIsSelected() && "selected"}
+                    className={cn(
+                      "border-b-gray-5 hover:bg-gray-7/50 dark:border-b-gray-3 dark:hover:bg-gray-3/50",
+                      renderSubRow && "border-b-0",
+                    )}
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell
+                        className="p-4 text-left whitespace-normal wrap-break-word"
+                        key={cell.id}
+                      >
+                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                  {renderSubRow && (
+                    <TableRow className="border-b-gray-5 hover:bg-transparent dark:border-b-gray-3">
+                      <TableCell
+                        colSpan={row.getVisibleCells().length}
+                        className="p-4 pt-0 text-left whitespace-normal wrap-break-word"
+                      >
+                        {renderSubRow(row)}
+                      </TableCell>
+                    </TableRow>
+                  )}
+                </React.Fragment>
               ))
             ) : (
-              <TableRow>
-                <TableCell colSpan={columns.length} className="h-24 text-center">
-                  {"No data results"}
+              <TableRow className="border-b! border-b-gray-5 hover:bg-transparent dark:border-b-gray-3">
+                <TableCell colSpan={columns.length}>
+                  <EmptyContent message={emptyMessage ?? t("page.table.noResults")} />
                 </TableCell>
               </TableRow>
             )}
           </TableBody>
         </UITable>
       </div>
-      <Pagination
-        className="justify-start shrink-0"
-        pagesCount={pagesAmount}
-        currentPage={currentPage}
-        onPageChange={onChangePage}
-        viewOptions={viewOptions}
-        onChangeViewOption={onChangeViewOption}
-      />
+      {data.length > 0 && (
+        <Pagination
+          className="justify-start shrink-0"
+          pagesCount={pagesAmount}
+          currentPage={currentPage}
+          onPageChange={onChangePage}
+          viewOptions={viewOptions}
+          viewOptionValue={currentViewOption}
+          onChangeViewOption={onChangeViewOption}
+        />
+      )}
     </div>
   );
 };

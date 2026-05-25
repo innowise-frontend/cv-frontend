@@ -40,13 +40,13 @@ export const CreateLanguageModal = () => {
 
   return (
     <>
-      <Modal.Trigger className="text-red font-medium">
+      <Modal.Trigger className="text-red font-medium dark:text-red">
         <PlusIcon height={16} width={16} />
         {t("page.languages.createLanguage")}
       </Modal.Trigger>
       <Modal.Content onCancel={resetCreatedLanguage}>
         <Modal.Header>{t("page.languages.createLanguage")}</Modal.Header>
-        <Modal.Body className="flex flex-col gap-4">
+        <Modal.Body className="flex flex-col gap-9">
           <Input
             placeholder={t("page.languages.name")}
             label={t("page.languages.name")}

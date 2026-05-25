@@ -1,0 +1,11 @@
+mutation CreateCv($cv: CreateCvInput!) {
+  createCv(cv: $cv) {
+    id
+    name
+    education
+    description
+    user {
+      email
+    }
+  }
+}

@@ -9,6 +9,7 @@
       "hello": "Hallo!"
     },
     "setting": {
+      "breadcrumbs": "Einstellungen",
       "theme": "Thema",
       "language": "Sprache",
       "changePassword": "Passwort ändern",
@@ -53,10 +54,17 @@
       "emailDoesNotExist": "E-Mail existiert nicht."
     },
     "login": {
-      "title": "Anmelden"
+      "title": "Anmelden",
+      "tab": "Anmelden"
     },
     "signup": {
-      "title": "Registrieren"
+      "title": "Registrieren",
+      "tab": "Registrieren"
+    },
+    "table": {
+      "noResults": "Keine Ergebnisse",
+      "noDataResults": "Keine Daten vorhanden",
+      "search": "Suchen"
     },
     "resetPassword": {
       "title": "Passwort zurücksetzen",
@@ -71,19 +79,37 @@
       }
     },
     "users": {
-      "breadcrumbs": "Mitarbeiter",
-      "columns": {
-        "firstName": "Vorname",
-        "lastName": "Nachname",
-        "email": "E-Mail",
-        "department": "Abteilung",
-        "position": "Position"
-      },
-      "actions": {
-        "viewProfile": "Profil anzeigen",
-        "edit": "Bearbeiten",
-        "delete": "Löschen"
-      }
+      "edit": "Bearbeiten",
+      "delete": "Löschen",
+      "viewProfile": "Profil anzeigen",
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "email": "E-Mail",
+      "password": "Passwort",
+      "department": "Abteilung",
+      "position": "Position",
+      "role": "Rolle",
+      "selectDepartment": "Abteilung",
+      "selectPosition": "Position",
+      "selectRole": "Rolle",
+      "roleEmployee": "Mitarbeiter",
+      "roleAdmin": "Administrator",
+      "cancel": "Abbrechen",
+      "create": "Erstellen",
+      "createUser": "Benutzer anlegen",
+      "createUserTitle": "Benutzer anlegen",
+      "update": "Aktualisieren",
+      "updateUser": "Bearbeiten",
+      "updateUserTitle": "Benutzer bearbeiten",
+      "updateUserFailed": "Benutzer konnte nicht aktualisiert werden",
+      "deleteUser": "Löschen",
+      "deleteUserTitle": "Benutzer löschen",
+      "deleteUserSuccess": "Benutzer wurde erfolgreich gelöscht",
+      "confirmDeleteBefore": "Sind Sie sicher, dass Sie löschen möchten ",
+      "confirmDeleteAfter": "?",
+      "emailAlreadyExists": "Ein Benutzer mit dieser E-Mail existiert bereits.",
+      "confirm": "Bestätigen",
+      "noData": "Keine Daten"
     },
     "verifyEmail": {
       "title": "E-Mail-Bestätigung",
@@ -94,7 +120,7 @@
     },
     "languages": {
       "currentLanguages": "Aktuelle Sprachen",
-      "emptyState": "Sie haben noch keine Sprachen",
+      "emptyState": "Der aktuelle Benutzer hat noch keine Sprachen",
       "addLanguage": "Sprache hinzufügen",
       "createLanguage": "Sprache erstellen",
       "deleteLanguage": "Sprache löschen",
@@ -115,11 +141,12 @@
       "add": "Hinzufügen",
       "remove": "Entfernen",
       "update": "Aktualisieren",
-      "save": "Speichern"
+      "save": "Speichern",
+      "noData": "Keine Daten"
     },
     "skills": {
       "currentSkills": "Fähigkeiten",
-      "emptyState": "Sie haben noch keine Fähigkeiten",
+      "emptyState": "Der aktuelle Benutzer hat noch keine Fähigkeiten",
       "addSkill": "Fähigkeit hinzufügen",
       "createSkill": "Fähigkeit erstellen",
       "updateSkill": "Fähigkeit aktualisieren",
@@ -128,7 +155,6 @@
       "uncategorized": "Sonstiges",
       "name": "Name",
       "type": "Typ",
-      "category": "Kategorie",
       "skill": "Fähigkeit",
       "skills": "Fähigkeiten",
       "mastery": "Niveau",
@@ -141,7 +167,35 @@
       "add": "Hinzufügen",
       "remove": "Entfernen",
       "update": "Aktualisieren",
-      "save": "Speichern"
+      "save": "Speichern",
+      "noData": "Keine Daten",
+      "categoryLabel": "Kategorie",
+      "category": {}
+    },
+    "cvs": {
+      "createCv": "Lebenslauf erstellen",
+      "createCvSuccess": "Lebenslauf erfolgreich erstellt",
+      "updateCvSuccess": "Lebenslauf erfolgreich aktualisiert",
+      "deleteCvSuccess": "Lebenslauf erfolgreich gelöscht",
+      "edit": "Bearbeiten",
+      "editCv": "Lebenslauf aktualisieren",
+      "name": "Name",
+      "education": "Ausbildung",
+      "description": "Beschreibung",
+      "employee": "Mitarbeiter",
+      "delete": "Löschen",
+      "deleteCv": "Lebenslauf löschen",
+      "confirmDeleteCv": "Möchten Sie den Lebenslauf {{name}} wirklich löschen?",
+      "cancel": "Abbrechen",
+      "confirm": "Bestätigen",
+      "create": "Erstellen",
+      "update": "Aktualisieren",
+      "noData": "Noch keine Lebensläufe",
+      "validation": {
+        "nameRequired": "Name ist erforderlich",
+        "educationRequired": "Ausbildung ist erforderlich",
+        "descriptionRequired": "Beschreibung ist erforderlich"
+      }
     },
     "sidebar": {
       "employees": "Mitarbeiter",
@@ -177,9 +231,17 @@
       "toast": {
         "userUpdated": "Benutzer aktualisiert",
         "profileUpdated": "Profil aktualisiert",
+        "userUpdateFailed": "Benutzer konnte nicht aktualisiert werden",
+        "profileUpdateFailed": "Profil konnte nicht aktualisiert werden",
         "avatarUpdated": "Avatar aktualisiert",
         "verificationSent": "Bestätigungs-E-Mail gesendet",
         "verificationFailed": "Bestätigungs-E-Mail konnte nicht gesendet werden"
+      },
+      "tabs": {
+        "profile": "Profil",
+        "skills": "Fähigkeiten",
+        "languages": "Sprachen",
+        "cvs": "Lebensläufe"
       }
     }
   }

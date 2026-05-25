@@ -4,6 +4,7 @@ export interface TranslationTypes {
       hello: string;
     };
     setting: {
+      breadcrumbs: string;
       theme: string;
       language: string;
       changePassword: string;
@@ -49,9 +50,16 @@ export interface TranslationTypes {
     };
     login: {
       title: string;
+      tab: string;
     };
     signup: {
       title: string;
+      tab: string;
+    };
+    table: {
+      noResults: string;
+      noDataResults: string;
+      search: string;
     };
     resetPassword: {
       title: string;
@@ -89,6 +97,7 @@ export interface TranslationTypes {
       remove: string;
       update: string;
       save: string;
+      noData: string;
     };
     skills: {
       currentSkills: string;
@@ -101,7 +110,8 @@ export interface TranslationTypes {
       uncategorized: string;
       name: string;
       type: string;
-      category: string;
+      categoryLabel: string;
+      category: Record<string, string>;
       skill: string;
       skills: string;
       mastery: string;
@@ -115,6 +125,32 @@ export interface TranslationTypes {
       remove: string;
       update: string;
       save: string;
+      noData: string;
+    };
+    cvs: {
+      createCv: string;
+      createCvSuccess: string;
+      updateCvSuccess: string;
+      deleteCvSuccess: string;
+      edit: string;
+      editCv: string;
+      name: string;
+      education: string;
+      description: string;
+      employee: string;
+      delete: string;
+      deleteCv: string;
+      confirmDeleteCv: string;
+      cancel: string;
+      confirm: string;
+      create: string;
+      update: string;
+      noData: string;
+      validation: {
+        nameRequired: string;
+        educationRequired: string;
+        descriptionRequired: string;
+      };
     };
     sidebar: {
       employees: string;
@@ -127,6 +163,12 @@ export interface TranslationTypes {
       projects: string;
     };
     profile: {
+      tabs: {
+        profile: string;
+        skills: string;
+        languages: string;
+        cvs: string;
+      };
       firstName: string;
       lastName: string;
       department: string;
@@ -154,6 +196,39 @@ export interface TranslationTypes {
         verificationSent: string;
         verificationFailed: string;
       };
+    };
+    users: {
+      edit: string;
+      delete: string;
+      viewProfile: string;
+      firstName: string;
+      lastName: string;
+      email: string;
+      password: string;
+      department: string;
+      position: string;
+      role: string;
+      selectDepartment: string;
+      selectPosition: string;
+      selectRole: string;
+      roleEmployee: string;
+      roleAdmin: string;
+      cancel: string;
+      create: string;
+      createUser: string;
+      createUserTitle: string;
+      update: string;
+      updateUser: string;
+      updateUserTitle: string;
+      updateUserFailed: string;
+      deleteUser: string;
+      deleteUserTitle: string;
+      deleteUserSuccess: string;
+      confirmDeleteBefore: string;
+      confirmDeleteAfter: string;
+      confirm: string;
+      emailAlreadyExists: string;
+      noData: string;
     };
   };
   theme: {

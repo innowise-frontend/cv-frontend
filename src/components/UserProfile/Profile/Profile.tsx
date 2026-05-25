@@ -1,9 +1,10 @@
 import { useParams } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
+import { Spinner } from "@components/shared";
+import { Avatar } from "@components/UserProfile/Profile/components/Avatar";
+import { Info } from "@components/UserProfile/Profile/components/Info";
 import { ErrorPage } from "@root/pages/ErrorPage";
 import { useUserProfile } from "./api";
-import { Avatar } from "./components/Avatar";
-import { Info } from "./components/Info";
 
 export const Profile = () => {
   const { t } = useTranslation();
@@ -11,7 +12,7 @@ export const Profile = () => {
   const { data, isPending, isError } = useUserProfile(userId);
 
   if (isPending) {
-    return null;
+    return <Spinner />;
   }
 
   if (isError || !data) {

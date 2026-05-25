@@ -30,7 +30,7 @@ function InnerApp() {
 
   useEffect(() => {
     router.invalidate();
-  }, [auth.isAuthenticated, auth.isFirstLoad, auth.isVerified]);
+  }, [auth.isAuthenticated, auth.isFirstLoad, auth.isVerified, auth.isAdmin]);
 
   return <RouterProvider router={router} context={{ auth }} />;
 }

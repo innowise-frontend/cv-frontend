@@ -1,5 +1,6 @@
 import { useLocation, useNavigate, useSearch } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Modal, Table, TableSearch } from "@components/shared";
 import { SortOrder, VIEW_OPTIONS } from "@root/constants";
 import { useAuth, useHandleSearch } from "@root/hooks";
@@ -8,6 +9,7 @@ import { useSkillCategoriesQuery, useSkillsTableQuery } from "../../api";
 import { CreateSkillModal } from "../CreateSkillModal/CreateSkillModal";
 
 export const SkillsTable = () => {
+  const { t } = useTranslation();
   const { isAdmin } = useAuth();
   const searchParams = useSearch({ from: "/_app/skills" });
   const location = useLocation();
@@ -29,7 +31,7 @@ export const SkillsTable = () => {
     },
   });
 
-  const { data } = useSkillsTableQuery({
+  const { data, isLoading } = useSkillsTableQuery({
     search: searchParams.search ?? "",
     page: currentPage,
     limit: currentLimit,
@@ -39,6 +41,9 @@ export const SkillsTable = () => {
   const { data: categoriesData } = useSkillCategoriesQuery();
 
   const columns = useMemo(() => buildColumns(categoriesData), [categoriesData]);
+  const tableData = data?.items ?? [];
+  const hasActiveSearch = (searchParams.search ?? "").trim().length > 0;
+  const emptyMessage = hasActiveSearch ? t("page.table.noResults") : t("page.skills.noData");
 
   return (
     <>
@@ -55,8 +60,10 @@ export const SkillsTable = () => {
       />
       <div className="min-h-0 flex-1">
         <Table
-          data={data?.items ?? []}
+          data={tableData}
           columns={columns}
+          isLoading={isLoading}
+          emptyMessage={emptyMessage}
           pagesAmount={data?.total_pages ?? 0}
           currentPage={currentPage}
           onChangePage={setCurrentPage}
@@ -66,6 +73,7 @@ export const SkillsTable = () => {
           }}
           currentSort={currentSort}
           viewOptions={VIEW_OPTIONS}
+          currentViewOption={currentLimit}
           onChangeViewOption={(limit) => {
             setCurrentLimit(limit);
             setCurrentPage(1);

@@ -10,7 +10,7 @@ import { DropdownProps } from "./types";
 export const Dropdown = ({ options, keepMounted = false }: DropdownProps) => {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="flex h-8 w-8 items-center justify-center rounded-sm p-0 data-[state=open]:bg-muted">
+      <DropdownMenuTrigger className="flex h-8 w-8 items-center justify-center rounded-sm p-0 text-gray-3 data-[state=open]:bg-gray-7 dark:text-gray-8 dark:data-[state=open]:bg-gray-3">
         <span className="sr-only">open dropdown</span>
         <VerticalDotsIcon className="h-10 w-10" />
       </DropdownMenuTrigger>
@@ -25,7 +25,7 @@ export const Dropdown = ({ options, keepMounted = false }: DropdownProps) => {
             onClick={() => {
               option.onClick?.();
             }}
-            className="text-gray-2 hover:bg-gray-7 hover:text-gray-2 cursor-pointer dark:text-gray-8 dark:hover:bg-gray-3"
+            className="hover:bg-gray-7 cursor-pointer dark:hover:bg-gray-3"
           >
             {option.icon}
             {typeof option.label === "string" ? <span>{option.label}</span> : option.label}

@@ -8,10 +8,6 @@ vi.mock("@root/hooks", () => ({
   useAuth: () => useAuthMock(),
 }));
 
-vi.mock("@tanstack/react-router", () => ({
-  useLocation: () => ({ pathname: "/_app/skills" }),
-}));
-
 vi.mock("@root/lib", async () => {
   const actual = await vi.importActual<object>("@root/lib");
 

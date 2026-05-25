@@ -63,11 +63,11 @@ export const ChangePassword = ({ className }: ChangePasswordProps) => {
   return (
     <div className={cn("flex flex-col gap-6", className)}>
       <p className="text-left leading-6">{t("page.setting.changePassword")}</p>
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-9">
         <Input
           type="password"
-          placeholder={t("page.setting.oldPassword")}
           label={t("page.setting.oldPassword")}
+          placeholder={t("page.setting.oldPassword")}
           {...register("oldPassword")}
           error={errors.oldPassword?.message}
           onChange={(e) => {
@@ -77,8 +77,8 @@ export const ChangePassword = ({ className }: ChangePasswordProps) => {
         />
         <Input
           type="password"
-          placeholder={t("page.setting.newPassword")}
           label={t("page.setting.newPassword")}
+          placeholder={t("page.setting.newPassword")}
           {...register("newPassword")}
           error={errors.newPassword?.message}
           onChange={(e) => {
@@ -88,8 +88,8 @@ export const ChangePassword = ({ className }: ChangePasswordProps) => {
         />
         <Input
           type="password"
-          placeholder={t("page.setting.confirmPassword")}
           label={t("page.setting.confirmPassword")}
+          placeholder={t("page.setting.confirmPassword")}
           {...register("confirmPassword")}
           error={errors.confirmPassword?.message}
           onChange={(e) => {

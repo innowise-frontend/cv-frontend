@@ -2,20 +2,17 @@ import React, { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import CloseIcon from "@assets/icon/CloseIcon.svg?react";
 import { Button } from "@components/shared";
+import { themeTextClassName } from "@components/shared/formFieldStyles";
 import { useModal } from "@root/hooks";
 import { cn } from "@root/lib";
 import { ModalContext, useModalContext } from "./useModalContext";
+import type { ModalComponentProps, ModalContentProps } from "./types";
 
 const Modal = ({ children }: { children: React.ReactNode }) => {
   const { isOpen, openModal, closeModal } = useModal();
 
   return <ModalContext value={{ isOpen, openModal, closeModal }}>{children}</ModalContext>;
 };
-
-interface ModalComponentProps {
-  children: React.ReactNode;
-  className?: string;
-}
 
 const ModalTrigger = ({
   children,
@@ -31,13 +28,7 @@ const ModalTrigger = ({
   );
 };
 
-const ModalContent = ({
-  children,
-  ref,
-  className = "",
-  onCancel,
-  ...props
-}: React.ComponentProps<"dialog"> & { onCancel?: () => void }) => {
+const ModalContent = ({ children, ref, className = "", onCancel, ...props }: ModalContentProps) => {
   const { isOpen, closeModal } = useModalContext();
   const dialogRef = useRef<HTMLDialogElement | null>(null);
 
@@ -72,26 +63,38 @@ const ModalContent = ({
     }
   };
 
-  const handleCancel = (event: React.SyntheticEvent<HTMLDialogElement, Event>) => {
+  const handleDialogCancel = (event: React.SyntheticEvent<HTMLDialogElement>) => {
     event.preventDefault();
     onCancel?.();
     closeModal();
+
+    if (dialogRef.current?.open) {
+      dialogRef.current.close();
+    }
   };
 
   return createPortal(
-    <dialog
-      {...props}
-      onClick={handleBackdropClick}
-      onCancel={handleCancel}
-      className={cn(
-        "fixed top-1/2 left-1/2 m-0 min-w-155 max-w-215 min-h-50 max-h-131 -translate-x-1/2 -translate-y-1/2 bg-gray-8 px-6 py-4 shadow-2xl will-change-transform will-change-opacity transition-[opacity,transform] duration-300 ease-out dark:bg-gray-2 backdrop:bg-gray/50 z-100",
-        isOpen ? "opacity-100 scale-100" : "opacity-0 scale-95",
-        className,
-      )}
-      ref={dialogRef}
-    >
-      {children}
-    </dialog>,
+    <>
+      {isOpen && <div className="fixed inset-0 z-50 bg-gray/50" onClick={closeModal} />}
+      <dialog
+        {...props}
+        onCancel={handleDialogCancel}
+        onClick={handleBackdropClick}
+        className={cn(
+          "fixed top-1/2 left-1/2 z-100 m-0 min-h-50 min-w-155 max-w-215 -translate-x-1/2 -translate-y-1/2 overflow-visible bg-gray-8 px-6 py-4 shadow-2xl will-change-[opacity,transform] dark:bg-gray-2",
+          themeTextClassName,
+          "transition-[opacity,transform,display] transition-discrete duration-100 ease-out",
+          "opacity-0 scale-95",
+          "open:opacity-100 open:scale-100 open:duration-300 open:ease-out",
+          "starting:open:opacity-0 starting:open:scale-95",
+          "backdrop:bg-black backdrop:backdrop-blur-sm backdrop:transition-opacity backdrop:duration-300 backdrop:opacity-0 open:backdrop:opacity-50 starting:open:backdrop:opacity-0",
+          className,
+        )}
+        ref={dialogRef}
+      >
+        {children}
+      </dialog>
+    </>,
     document.body,
   );
 };

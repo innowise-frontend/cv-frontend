@@ -1,79 +1,104 @@
 import { act, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { VIEW_OPTIONS } from "@root/constants";
 import { UsersPage } from "./UsersPage";
 
 const useSearchMock = vi.hoisted(() => vi.fn());
-const useQueryMock = vi.hoisted(() => vi.fn());
-const getUsersMock = vi.hoisted(() => vi.fn());
-const tableMock = vi.hoisted(() => vi.fn());
 const navigateMock = vi.hoisted(() => vi.fn());
-const consoleLogMock = vi.hoisted(() => vi.fn());
+const useUsersApiMock = vi.hoisted(() => vi.fn());
+const tableMock = vi.hoisted(() => vi.fn());
+const useUserTableColumnsMock = vi.hoisted(() =>
+  vi.fn(() => ({ columns: [{ id: "mock-column" }] as const })),
+);
 
 vi.mock("@tanstack/react-router", () => ({
   useNavigate: () => navigateMock,
   useSearch: () => useSearchMock(),
-  useLocation: () => ({ pathname: "/_app/" }),
+  useLocation: () => ({ pathname: "/employees" }),
 }));
 
-vi.mock("@tanstack/react-query", () => ({
-  useQuery: (options: unknown) => useQueryMock(options),
+vi.mock("./api", () => ({
+  useUsersApi: (params: unknown) => useUsersApiMock(params),
 }));
 
-vi.mock("@services/users", () => ({
-  getUsers: (params: unknown) => getUsersMock(params),
+vi.mock("./useUserTableColumns", () => ({
+  useUserTableColumns: () => useUserTableColumnsMock(),
 }));
 
-vi.mock("@root/components/shared", () => ({
+vi.mock("./components", () => ({
+  CreateUserModal: () => <div data-testid="create-user-modal" />,
+}));
+
+const useAuthMock = vi.hoisted(() => vi.fn(() => ({ isAdmin: true })));
+
+vi.mock("@root/hooks", () => ({
+  useAuth: () => useAuthMock(),
+  useHandleSearch: () => ({
+    onSearch: vi.fn(),
+  }),
+}));
+
+vi.mock("@root/lib", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@root/lib")>();
+
+  return {
+    ...actual,
+    getBreadcrumbsLink: (pathname: string, t: (key: string) => string) => ({
+      label: t("page.sidebar.employees"),
+      href: pathname,
+    }),
+  };
+});
+
+vi.mock("@components/shared", () => ({
   Breadcrumbs: ({ items }: { items: Array<{ label: string }> }) => (
     <div data-testid="breadcrumbs">{items.map((item) => item.label).join(",")}</div>
   ),
-  TableSearch: ({ action }: { action: React.ReactNode }) => (
-    <div data-testid="table-search">{action}</div>
+  TableSearch: ({ action, searchValue }: { action: React.ReactNode; searchValue: string }) => (
+    <div data-testid="table-search" data-search={searchValue}>
+      {action}
+    </div>
   ),
-  Table: (props: unknown) => {
+  Table: (props: Record<string, unknown>) => {
     tableMock(props);
 
     return <div data-testid="users-table" />;
   },
-  ROUTES: {
-    USER_PAGE: "/users/$userId",
-  },
-}));
-
-vi.mock("./columns", () => ({
-  getUserColumns: () => [{ accessorKey: "department", header: "Department" }],
+  Modal: ({ children }: { children: React.ReactNode }) => <div data-testid="modal">{children}</div>,
 }));
 
 vi.mock("react-i18next", () => ({
   useTranslation: () => ({
-    t: (key: string) => {
-      const translations: Record<string, string> = {
-        "page.users.breadcrumbs": "Employees",
-        "page.users.actions.viewProfile": "View profile",
-        "page.users.actions.edit": "Edit",
-        "page.users.actions.delete": "Delete",
-      };
-
-      return translations[key] ?? key;
-    },
+    t: (key: string) =>
+      ({
+        "page.sidebar.employees": "Employees",
+      })[key] ?? key,
   }),
 }));
 
 describe("UsersPage", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    useAuthMock.mockReturnValue({ isAdmin: true });
     useSearchMock.mockReturnValue({ search: "" });
-    useQueryMock.mockReturnValue({ data: undefined });
-    vi.spyOn(console, "log").mockImplementation(consoleLogMock);
+    useUsersApiMock.mockReturnValue({ data: undefined });
   });
 
   afterEach(() => {
     vi.restoreAllMocks();
   });
 
+  it("does not render create user modal for non-admin", () => {
+    useAuthMock.mockReturnValue({ isAdmin: false });
+
+    render(<UsersPage />);
+
+    expect(screen.queryByTestId("modal")).not.toBeInTheDocument();
+  });
+
   it("renders layout parts and passes fetched users into Table", () => {
     useSearchMock.mockReturnValue({ search: "john" });
-    useQueryMock.mockReturnValue({
+    useUsersApiMock.mockReturnValue({
       data: {
         items: [{ id: "1", name: "John" }],
         total_pages: 7,
@@ -82,30 +107,29 @@ describe("UsersPage", () => {
 
     render(<UsersPage />);
 
-    expect(screen.getByTestId("breadcrumbs")).toBeInTheDocument();
-    expect(screen.getByTestId("table-search")).toBeInTheDocument();
+    expect(screen.getByTestId("breadcrumbs")).toHaveTextContent("Employees");
+    expect(screen.getByTestId("table-search")).toHaveAttribute("data-search", "john");
+    expect(screen.getByTestId("modal")).toContainElement(screen.getByTestId("create-user-modal"));
     expect(screen.getByTestId("users-table")).toBeInTheDocument();
+    expect(useUserTableColumnsMock).toHaveBeenCalled();
     expect(tableMock).toHaveBeenCalledWith(
       expect.objectContaining({
         data: [{ id: "1", name: "John" }],
         pagesAmount: 7,
         currentPage: 1,
         currentSort: "ASC",
+        viewOptions: VIEW_OPTIONS,
+        columns: [{ id: "mock-column" }],
       }),
     );
   });
 
   it("requests users with search params and default paging/sorting", () => {
     useSearchMock.mockReturnValue({ search: "anna" });
-    useQueryMock.mockImplementation(({ queryFn }: { queryFn: () => unknown }) => {
-      queryFn();
-
-      return { data: undefined };
-    });
 
     render(<UsersPage />);
 
-    expect(getUsersMock).toHaveBeenCalledWith({
+    expect(useUsersApiMock).toHaveBeenCalledWith({
       search: "anna",
       page: 1,
       limit: 10,
@@ -116,7 +140,7 @@ describe("UsersPage", () => {
 
   it("falls back to empty data when query result is missing", () => {
     useSearchMock.mockReturnValue({});
-    useQueryMock.mockReturnValue({ data: undefined });
+    useUsersApiMock.mockReturnValue({ data: undefined });
 
     render(<UsersPage />);
 
@@ -128,24 +152,22 @@ describe("UsersPage", () => {
     );
   });
 
-  it("toggles sort and resets page when table sort callback is triggered", () => {
+  it("toggles sort and resets page when table sort callback is triggered", async () => {
     useSearchMock.mockReturnValue({ search: "anna" });
-    useQueryMock.mockImplementation(({ queryFn }: { queryFn: () => unknown }) => {
-      queryFn();
-
-      return { data: undefined };
-    });
 
     render(<UsersPage />);
 
-    const firstCall = tableMock.mock.calls[0][0];
+    const firstCall = tableMock.mock.calls[0][0] as {
+      onChangePage: (p: number) => void;
+      onSort: () => void;
+    };
     act(() => {
       firstCall.onChangePage(5);
       firstCall.onSort();
     });
 
-    return waitFor(() => {
-      expect(getUsersMock).toHaveBeenLastCalledWith({
+    await waitFor(() => {
+      expect(useUsersApiMock).toHaveBeenLastCalledWith({
         search: "anna",
         page: 1,
         limit: 10,
@@ -155,24 +177,22 @@ describe("UsersPage", () => {
     });
   });
 
-  it("changes page size and resets page when view option callback is triggered", () => {
+  it("changes page size and resets page when view option callback is triggered", async () => {
     useSearchMock.mockReturnValue({ search: "max" });
-    useQueryMock.mockImplementation(({ queryFn }: { queryFn: () => unknown }) => {
-      queryFn();
-
-      return { data: undefined };
-    });
 
     render(<UsersPage />);
 
-    const firstCall = tableMock.mock.calls[0][0];
+    const firstCall = tableMock.mock.calls[0][0] as {
+      onChangePage: (p: number) => void;
+      onChangeViewOption: (limit: number) => void;
+    };
     act(() => {
       firstCall.onChangePage(4);
       firstCall.onChangeViewOption(25);
     });
 
-    return waitFor(() => {
-      expect(getUsersMock).toHaveBeenLastCalledWith({
+    await waitFor(() => {
+      expect(useUsersApiMock).toHaveBeenLastCalledWith({
         search: "max",
         page: 1,
         limit: 25,
@@ -182,23 +202,10 @@ describe("UsersPage", () => {
     });
   });
 
-  it("passes admin actions to table and wires action callbacks", () => {
-    useSearchMock.mockReturnValue({ search: "kate" });
-
+  it("does not pass legacy row actions to Table", () => {
     render(<UsersPage />);
 
-    const tableProps = tableMock.mock.calls[0][0];
-    expect(tableProps.actions).toHaveLength(3);
-
-    tableProps.actions[0].onClick("u-10");
-    expect(navigateMock).toHaveBeenCalledWith({
-      to: "/users/$userId",
-      params: { userId: "u-10" },
-    });
-
-    tableProps.actions[1].onClick("u-11");
-    tableProps.actions[2].onClick("u-12");
-    expect(consoleLogMock).toHaveBeenCalledWith("u-11");
-    expect(consoleLogMock).toHaveBeenCalledWith("u-12");
+    const tableProps = tableMock.mock.calls[0][0] as Record<string, unknown>;
+    expect(tableProps.actions).toBeUndefined();
   });
 });
