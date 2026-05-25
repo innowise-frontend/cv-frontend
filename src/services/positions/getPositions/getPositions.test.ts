@@ -3,11 +3,11 @@ import { getPositions } from "./getPositions";
 
 const requestWithAuthMock = vi.hoisted(() => vi.fn());
 
-vi.mock("../graphql/client", () => ({
+vi.mock("@services/graphql/client", () => ({
   requestWithAuth: (...args: unknown[]) => requestWithAuthMock(...args),
 }));
 
-vi.mock("../graphql/__generated__/graphql", () => ({
+vi.mock("@services/graphql/__generated__/graphql", () => ({
   PositionsDocument: "POSITIONS_DOCUMENT",
 }));
 

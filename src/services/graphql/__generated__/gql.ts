@@ -19,10 +19,12 @@ type Documents = {
   "mutation ChangePassword($args: ChangePasswordInput!) {\n  changePassword(args: $args) {\n    id\n    email\n  }\n}": typeof types.ChangePasswordDocument;
   "mutation CreateCv($cv: CreateCvInput!) {\n  createCv(cv: $cv) {\n    id\n    name\n    education\n    description\n    user {\n      email\n    }\n  }\n}": typeof types.CreateCvDocument;
   "mutation CreateLanguage($language: CreateLanguageInput!) {\n  createLanguage(language: $language) {\n    id\n  }\n}": typeof types.CreateLanguageDocument;
+  "mutation CreatePosition($position: CreatePositionInput!) {\n  createPosition(position: $position) {\n    id\n    name\n  }\n}": typeof types.CreatePositionDocument;
   "mutation CreateSkill($skill: CreateSkillInput!) {\n  createSkill(skill: $skill) {\n    id\n    name\n    created_at\n    category_name\n    category_parent_name\n    category {\n      id\n      name\n    }\n  }\n}": typeof types.CreateSkillDocument;
   "mutation CreateUser($user: CreateUserInput!) {\n  createUser(user: $user) {\n    id\n    email\n    role\n  }\n}": typeof types.CreateUserDocument;
   "mutation DeleteCv($cv: DeleteCvInput!) {\n  deleteCv(cv: $cv) {\n    affected\n  }\n}": typeof types.DeleteCvDocument;
   "mutation DeleteLanguage($language: DeleteLanguageInput!) {\n  deleteLanguage(language: $language) {\n    affected\n  }\n}": typeof types.DeleteLanguageDocument;
+  "mutation DeletePosition($position: DeletePositionInput!) {\n  deletePosition(position: $position) {\n    affected\n  }\n}": typeof types.DeletePositionDocument;
   "mutation DeleteProfileLanguage($language: DeleteProfileLanguageInput!) {\n  deleteProfileLanguage(language: $language) {\n    languages {\n      name\n      proficiency\n    }\n  }\n}": typeof types.DeleteProfileLanguageDocument;
   "mutation DeleteProfileSkill($skill: DeleteProfileSkillInput!) {\n  deleteProfileSkill(skill: $skill) {\n    skills {\n      name\n      mastery\n      categoryId\n    }\n  }\n}": typeof types.DeleteProfileSkillDocument;
   "mutation DeleteSkill($skill: DeleteSkillInput!) {\n  deleteSkill(skill: $skill) {\n    affected\n  }\n}": typeof types.DeleteSkillDocument;
@@ -34,6 +36,7 @@ type Documents = {
   "mutation Signup($auth: AuthInput!) {\n  signup(auth: $auth) {\n    user {\n      id\n    }\n    access_token\n    refresh_token\n  }\n}": typeof types.SignupDocument;
   "mutation UpdateCv($cv: UpdateCvInput!) {\n  updateCv(cv: $cv) {\n    id\n    name\n    education\n    description\n    user {\n      email\n    }\n  }\n}": typeof types.UpdateCvDocument;
   "mutation UpdateLanguage($language: UpdateLanguageInput!) {\n  updateLanguage(language: $language) {\n    id\n    name\n    iso2\n    native_name\n  }\n}": typeof types.UpdateLanguageDocument;
+  "mutation UpdatePosition($position: UpdatePositionInput!) {\n  updatePosition(position: $position) {\n    id\n    name\n  }\n}": typeof types.UpdatePositionDocument;
   "mutation UpdateProfile($profile: UpdateProfileInput!) {\n  updateProfile(profile: $profile) {\n    id\n    first_name\n    last_name\n    full_name\n    avatar\n  }\n}": typeof types.UpdateProfileDocument;
   "mutation UpdateProfileLanguage($language: UpdateProfileLanguageInput!) {\n  updateProfileLanguage(language: $language) {\n    languages {\n      name\n      proficiency\n    }\n  }\n}": typeof types.UpdateProfileLanguageDocument;
   "mutation UpdateProfileSkill($skill: UpdateProfileSkillInput!) {\n  updateProfileSkill(skill: $skill) {\n    skills {\n      name\n      mastery\n      categoryId\n    }\n  }\n}": typeof types.UpdateProfileSkillDocument;
@@ -64,6 +67,8 @@ const documents: Documents = {
     types.CreateCvDocument,
   "mutation CreateLanguage($language: CreateLanguageInput!) {\n  createLanguage(language: $language) {\n    id\n  }\n}":
     types.CreateLanguageDocument,
+  "mutation CreatePosition($position: CreatePositionInput!) {\n  createPosition(position: $position) {\n    id\n    name\n  }\n}":
+    types.CreatePositionDocument,
   "mutation CreateSkill($skill: CreateSkillInput!) {\n  createSkill(skill: $skill) {\n    id\n    name\n    created_at\n    category_name\n    category_parent_name\n    category {\n      id\n      name\n    }\n  }\n}":
     types.CreateSkillDocument,
   "mutation CreateUser($user: CreateUserInput!) {\n  createUser(user: $user) {\n    id\n    email\n    role\n  }\n}":
@@ -72,6 +77,8 @@ const documents: Documents = {
     types.DeleteCvDocument,
   "mutation DeleteLanguage($language: DeleteLanguageInput!) {\n  deleteLanguage(language: $language) {\n    affected\n  }\n}":
     types.DeleteLanguageDocument,
+  "mutation DeletePosition($position: DeletePositionInput!) {\n  deletePosition(position: $position) {\n    affected\n  }\n}":
+    types.DeletePositionDocument,
   "mutation DeleteProfileLanguage($language: DeleteProfileLanguageInput!) {\n  deleteProfileLanguage(language: $language) {\n    languages {\n      name\n      proficiency\n    }\n  }\n}":
     types.DeleteProfileLanguageDocument,
   "mutation DeleteProfileSkill($skill: DeleteProfileSkillInput!) {\n  deleteProfileSkill(skill: $skill) {\n    skills {\n      name\n      mastery\n      categoryId\n    }\n  }\n}":
@@ -94,6 +101,8 @@ const documents: Documents = {
     types.UpdateCvDocument,
   "mutation UpdateLanguage($language: UpdateLanguageInput!) {\n  updateLanguage(language: $language) {\n    id\n    name\n    iso2\n    native_name\n  }\n}":
     types.UpdateLanguageDocument,
+  "mutation UpdatePosition($position: UpdatePositionInput!) {\n  updatePosition(position: $position) {\n    id\n    name\n  }\n}":
+    types.UpdatePositionDocument,
   "mutation UpdateProfile($profile: UpdateProfileInput!) {\n  updateProfile(profile: $profile) {\n    id\n    first_name\n    last_name\n    full_name\n    avatar\n  }\n}":
     types.UpdateProfileDocument,
   "mutation UpdateProfileLanguage($language: UpdateProfileLanguageInput!) {\n  updateProfileLanguage(language: $language) {\n    languages {\n      name\n      proficiency\n    }\n  }\n}":
@@ -177,6 +186,12 @@ export function gql(
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
+  source: "mutation CreatePosition($position: CreatePositionInput!) {\n  createPosition(position: $position) {\n    id\n    name\n  }\n}",
+): (typeof documents)["mutation CreatePosition($position: CreatePositionInput!) {\n  createPosition(position: $position) {\n    id\n    name\n  }\n}"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
   source: "mutation CreateSkill($skill: CreateSkillInput!) {\n  createSkill(skill: $skill) {\n    id\n    name\n    created_at\n    category_name\n    category_parent_name\n    category {\n      id\n      name\n    }\n  }\n}",
 ): (typeof documents)["mutation CreateSkill($skill: CreateSkillInput!) {\n  createSkill(skill: $skill) {\n    id\n    name\n    created_at\n    category_name\n    category_parent_name\n    category {\n      id\n      name\n    }\n  }\n}"];
 /**
@@ -197,6 +212,12 @@ export function gql(
 export function gql(
   source: "mutation DeleteLanguage($language: DeleteLanguageInput!) {\n  deleteLanguage(language: $language) {\n    affected\n  }\n}",
 ): (typeof documents)["mutation DeleteLanguage($language: DeleteLanguageInput!) {\n  deleteLanguage(language: $language) {\n    affected\n  }\n}"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
+  source: "mutation DeletePosition($position: DeletePositionInput!) {\n  deletePosition(position: $position) {\n    affected\n  }\n}",
+): (typeof documents)["mutation DeletePosition($position: DeletePositionInput!) {\n  deletePosition(position: $position) {\n    affected\n  }\n}"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -263,6 +284,12 @@ export function gql(
 export function gql(
   source: "mutation UpdateLanguage($language: UpdateLanguageInput!) {\n  updateLanguage(language: $language) {\n    id\n    name\n    iso2\n    native_name\n  }\n}",
 ): (typeof documents)["mutation UpdateLanguage($language: UpdateLanguageInput!) {\n  updateLanguage(language: $language) {\n    id\n    name\n    iso2\n    native_name\n  }\n}"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
+  source: "mutation UpdatePosition($position: UpdatePositionInput!) {\n  updatePosition(position: $position) {\n    id\n    name\n  }\n}",
+): (typeof documents)["mutation UpdatePosition($position: UpdatePositionInput!) {\n  updatePosition(position: $position) {\n    id\n    name\n  }\n}"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

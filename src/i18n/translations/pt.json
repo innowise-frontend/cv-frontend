@@ -216,6 +216,21 @@
         "deleted": "Departamento eliminado com sucesso"
       }
     },
+    "positions": {
+      "createPosition": "Criar cargo",
+      "updatePosition": "Atualizar cargo",
+      "deletePosition": "Excluir cargo",
+      "name": "Nome",
+      "position": "Cargo",
+      "edit": "Editar",
+      "delete": "Excluir",
+      "confirmDeletePosition": "Tem certeza de que deseja excluir o cargo {{name}}?",
+      "cancel": "Cancelar",
+      "confirm": "Confirmar",
+      "add": "Adicionar",
+      "update": "Atualizar",
+      "noData": "Sem dados"
+    },
     "sidebar": {
       "employees": "Funcionários",
       "skills": "Habilidades",

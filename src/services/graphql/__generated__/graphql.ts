@@ -858,6 +858,15 @@ export type CreateLanguageMutation = {
   createLanguage: { __typename?: "Language"; id: string };
 };
 
+export type CreatePositionMutationVariables = Exact<{
+  position: CreatePositionInput;
+}>;
+
+export type CreatePositionMutation = {
+  __typename?: "Mutation";
+  createPosition: { __typename?: "Position"; id: string; name: string };
+};
+
 export type CreateSkillMutationVariables = Exact<{
   skill: CreateSkillInput;
 }>;
@@ -900,6 +909,15 @@ export type DeleteLanguageMutationVariables = Exact<{
 export type DeleteLanguageMutation = {
   __typename?: "Mutation";
   deleteLanguage: { __typename?: "DeleteResult"; affected: number };
+};
+
+export type DeletePositionMutationVariables = Exact<{
+  position: DeletePositionInput;
+}>;
+
+export type DeletePositionMutation = {
+  __typename?: "Mutation";
+  deletePosition: { __typename?: "DeleteResult"; affected: number };
 };
 
 export type DeleteProfileLanguageMutationVariables = Exact<{
@@ -1028,6 +1046,15 @@ export type UpdateLanguageMutation = {
     iso2: string;
     native_name?: string | null;
   };
+};
+
+export type UpdatePositionMutationVariables = Exact<{
+  position: UpdatePositionInput;
+}>;
+
+export type UpdatePositionMutation = {
+  __typename?: "Mutation";
+  updatePosition: { __typename?: "Position"; id: string; name: string };
 };
 
 export type UpdateProfileMutationVariables = Exact<{
@@ -1591,6 +1618,49 @@ export const CreateLanguageDocument = {
     },
   ],
 } as unknown as DocumentNode<CreateLanguageMutation, CreateLanguageMutationVariables>;
+export const CreatePositionDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "CreatePosition" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "position" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "CreatePositionInput" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "createPosition" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "position" },
+                value: { kind: "Variable", name: { kind: "Name", value: "position" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "id" } },
+                { kind: "Field", name: { kind: "Name", value: "name" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<CreatePositionMutation, CreatePositionMutationVariables>;
 export const CreateSkillDocument = {
   kind: "Document",
   definitions: [
@@ -1772,6 +1842,46 @@ export const DeleteLanguageDocument = {
     },
   ],
 } as unknown as DocumentNode<DeleteLanguageMutation, DeleteLanguageMutationVariables>;
+export const DeletePositionDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "DeletePosition" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "position" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "DeletePositionInput" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "deletePosition" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "position" },
+                value: { kind: "Variable", name: { kind: "Name", value: "position" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [{ kind: "Field", name: { kind: "Name", value: "affected" } }],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<DeletePositionMutation, DeletePositionMutationVariables>;
 export const DeleteProfileLanguageDocument = {
   kind: "Document",
   definitions: [
@@ -2268,6 +2378,49 @@ export const UpdateLanguageDocument = {
     },
   ],
 } as unknown as DocumentNode<UpdateLanguageMutation, UpdateLanguageMutationVariables>;
+export const UpdatePositionDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "UpdatePosition" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "position" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "UpdatePositionInput" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "updatePosition" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "position" },
+                value: { kind: "Variable", name: { kind: "Name", value: "position" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "id" } },
+                { kind: "Field", name: { kind: "Name", value: "name" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<UpdatePositionMutation, UpdatePositionMutationVariables>;
 export const UpdateProfileDocument = {
   kind: "Document",
   definitions: [
