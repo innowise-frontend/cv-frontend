@@ -2,14 +2,9 @@ import { useTranslation } from "react-i18next";
 import { Button, Modal } from "@components/shared";
 import { useModalContext } from "@components/shared/Modal/useModalContext";
 import { useDeleteDepartmentMutation } from "../../api";
+import type { DeleteDepartmentModalProps } from "./types";
 
-export const DeleteDepartmentModal = ({
-  departmentId,
-  name,
-}: {
-  departmentId: string;
-  name: string;
-}) => {
+export const DeleteDepartmentModal = ({ departmentId, name }: DeleteDepartmentModalProps) => {
   const { t } = useTranslation();
   const { closeModal } = useModalContext();
 

@@ -3,14 +3,9 @@ import { useTranslation } from "react-i18next";
 import { Button, Input, Modal } from "@components/shared";
 import { useModalContext } from "@components/shared/Modal/useModalContext";
 import { useUpdateDepartmentMutation } from "../../api";
+import type { UpdateDepartmentModalProps } from "./types";
 
-export const UpdateDepartmentModal = ({
-  departmentId,
-  name,
-}: {
-  departmentId: string;
-  name: string;
-}) => {
+export const UpdateDepartmentModal = ({ departmentId, name }: UpdateDepartmentModalProps) => {
   const { t } = useTranslation();
   const { closeModal } = useModalContext();
   const [updatedDepartmentName, setUpdatedDepartmentName] = useState(name);
@@ -21,8 +16,7 @@ export const UpdateDepartmentModal = ({
     },
   });
 
-  const disabledButton =
-    updatedDepartmentName.trim().length === 0 || updatedDepartmentName === name;
+  const disabledButton = !updatedDepartmentName.trim().length || updatedDepartmentName === name;
 
   const resetUpdatedDepartment = () => {
     setUpdatedDepartmentName(name);

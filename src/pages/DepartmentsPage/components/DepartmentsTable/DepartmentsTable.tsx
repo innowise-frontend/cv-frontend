@@ -49,7 +49,7 @@ export const DepartmentsTable = () => {
     safePage * currentLimit,
   );
 
-  const hasActiveSearch = (searchParams.search ?? "").trim().length > 0;
+  const hasActiveSearch = (searchParams.search ?? "").trim().length;
   const emptyMessage = hasActiveSearch ? t("page.table.noResults") : t("page.table.noDataResults");
 
   return (

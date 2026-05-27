@@ -14,6 +14,7 @@ import type {
   DeleteResult,
   UpdateDepartmentInput,
 } from "@services/graphql/__generated__/graphql";
+import { MutationDepartmentProps } from "./types";
 
 export const useDepartmentsTableQuery = () =>
   useQuery({
@@ -21,7 +22,7 @@ export const useDepartmentsTableQuery = () =>
     queryFn: getDepartments,
   });
 
-export const useCreateDepartmentMutation = ({ onSuccess }: { onSuccess?: () => void }) => {
+export const useCreateDepartmentMutation = ({ onSuccess }: MutationDepartmentProps) => {
   const queryClient = useQueryClient();
   const { t } = useTranslation();
 
@@ -38,7 +39,7 @@ export const useCreateDepartmentMutation = ({ onSuccess }: { onSuccess?: () => v
   });
 };
 
-export const useUpdateDepartmentMutation = ({ onSuccess }: { onSuccess?: () => void }) => {
+export const useUpdateDepartmentMutation = ({ onSuccess }: MutationDepartmentProps) => {
   const queryClient = useQueryClient();
   const { t } = useTranslation();
 
@@ -55,7 +56,7 @@ export const useUpdateDepartmentMutation = ({ onSuccess }: { onSuccess?: () => v
   });
 };
 
-export const useDeleteDepartmentMutation = ({ onSuccess }: { onSuccess?: () => void }) => {
+export const useDeleteDepartmentMutation = ({ onSuccess }: MutationDepartmentProps) => {
   const queryClient = useQueryClient();
   const { t } = useTranslation();
 
