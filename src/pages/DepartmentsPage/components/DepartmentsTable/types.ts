@@ -1,3 +1,3 @@
 import { DepartmentsQuery } from "@services/graphql/__generated__/graphql";
 
-export type DepartmentTableRow = DepartmentsQuery["departments"][number];
+export type DepartmentTableRow = DepartmentsQuery["departments"]["items"][number];

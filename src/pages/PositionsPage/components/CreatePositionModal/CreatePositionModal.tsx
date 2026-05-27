@@ -24,7 +24,8 @@ export const CreatePositionModal = () => {
 
   const { data } = usePositionsQuery();
 
-  const disabledButton = !name.trim() || (data?.some((item) => item.name === name.trim()) ?? false);
+  const disabledButton =
+    !name.trim() || (data?.items.some((item) => item.name === name.trim()) ?? false);
 
   return (
     <>

@@ -91,7 +91,7 @@ type UseGetDepartmentsApiConfig = Omit<
 export const useGetDepartmentsApi = (config: UseGetDepartmentsApiConfig) =>
   useQuery({
     queryKey: ["departments"],
-    queryFn: getDepartments,
+    queryFn: () => getDepartments({ page: 1, limit: 100 }),
     ...config,
   });
 
@@ -103,6 +103,6 @@ type UseGetPositionsApiConfig = Omit<
 export const useGetPositionsApi = (config: UseGetPositionsApiConfig) =>
   useQuery({
     queryKey: ["positions"],
-    queryFn: getPositions,
+    queryFn: () => getPositions({ page: 1, limit: 100 }),
     ...config,
   });

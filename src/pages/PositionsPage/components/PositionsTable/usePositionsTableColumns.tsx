@@ -4,7 +4,7 @@ import { Modal, TableActions, TableColumnHeader } from "@components/shared";
 import { PositionsQuery } from "@services/graphql/__generated__/graphql";
 import { DeletePositionModal, UpdatePositionModal } from "..";
 
-type PositionTableRow = PositionsQuery["positions"][number];
+type PositionTableRow = PositionsQuery["positions"]["items"][number];
 
 export const usePositionsTableColumns = () => {
   const { t } = useTranslation();

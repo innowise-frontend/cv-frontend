@@ -88,7 +88,7 @@ export const UpdateUserModal = ({
       <Modal.Content onCancel={resetToInitial}>
         <Modal.Header>{t("page.users.updateUserTitle")}</Modal.Header>
         <form onSubmit={handleSubmit(handleUpdateUser)}>
-          <Modal.Body className="grid grid-cols-2 gap-4">
+          <Modal.Body className="grid grid-cols-[400px_400px] gap-y-9 gap-x-3">
             <Input
               label={t("page.users.email")}
               disabled
@@ -121,7 +121,7 @@ export const UpdateUserModal = ({
                   sideShift="none"
                   className="[&_[data-slot=select-trigger][data-placeholder]]:text-gray-6"
                   list={
-                    departments?.map((d) => ({
+                    departments?.items.map((d) => ({
                       value: d.id,
                       label: d.name,
                     })) ?? []
@@ -142,7 +142,7 @@ export const UpdateUserModal = ({
                   sideShift="none"
                   className="[&_[data-slot=select-trigger][data-placeholder]]:text-gray-6"
                   list={
-                    positions?.map((p) => ({
+                    positions?.items.map((p) => ({
                       value: p.id,
                       label: p.name,
                     })) ?? []

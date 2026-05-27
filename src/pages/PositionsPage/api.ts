@@ -5,51 +5,14 @@ import { getErrorToastMessage } from "@root/lib";
 import {
   CreatePositionInput,
   DeletePositionInput,
-  PositionsQuery,
   UpdatePositionInput,
 } from "@services/graphql/__generated__/graphql";
 import { createPosition, deletePosition, getPositions, updatePosition } from "@services/positions";
 
-type Position = PositionsQuery["positions"][number];
-
-const paginatePositions = (
-  positions: Position[],
-  {
-    search,
-    page,
-    limit,
-    sortOrder,
-  }: {
-    search: string;
-    page: number;
-    limit: number;
-    sortOrder: SortOrder;
-  },
-) => {
-  const normalizedSearch = search.trim().toLowerCase();
-  const filtered = normalizedSearch
-    ? positions.filter((position) => position.name.toLowerCase().includes(normalizedSearch))
-    : positions;
-
-  const sorted = [...filtered].sort((a, b) => {
-    const comparison = a.name.localeCompare(b.name);
-
-    return sortOrder === SortOrder.ASC ? comparison : -comparison;
-  });
-
-  const total_pages = sorted.length === 0 ? 0 : Math.ceil(sorted.length / limit);
-  const start = (page - 1) * limit;
-
-  return {
-    items: sorted.slice(start, start + limit),
-    total_pages,
-  };
-};
-
 export const usePositionsQuery = () =>
   useQuery({
     queryKey: ["positions"],
-    queryFn: getPositions,
+    queryFn: () => getPositions({ page: 1, limit: 100 }),
   });
 
 export const usePositionsTableQuery = ({
@@ -65,8 +28,14 @@ export const usePositionsTableQuery = ({
 }) =>
   useQuery({
     queryKey: ["positions", search, page, limit, sortOrder],
-    queryFn: getPositions,
-    select: (positions) => paginatePositions(positions, { search, page, limit, sortOrder }),
+    queryFn: () =>
+      getPositions({
+        search,
+        page,
+        limit,
+        sort_order: sortOrder,
+        sort_by: "name",
+      }),
   });
 
 export const useCreatePositionMutation = ({ onSuccess }: { onSuccess?: () => void }) => {

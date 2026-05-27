@@ -100,7 +100,7 @@ export const CreateUserModal = () => {
       <Modal.Content onCancel={() => reset(defaultFormValues)}>
         <Modal.Header>{t("page.users.createUserTitle")}</Modal.Header>
         <form onSubmit={handleSubmit(handleCreateUser)}>
-          <Modal.Body className="grid grid-cols-2 gap-6">
+          <Modal.Body className="grid grid-cols-[400px_400px] gap-y-9 gap-x-3">
             <Input
               error={typeof errors.email?.message === "string" ? errors.email.message : undefined}
               label={t("page.users.email")}
@@ -148,7 +148,7 @@ export const CreateUserModal = () => {
                   disablePortal
                   className="[&_[data-slot=select-trigger][data-placeholder]]:text-gray-6"
                   list={
-                    departments?.map((department) => ({
+                    departments?.items.map((department) => ({
                       value: department.id,
                       label: department.name,
                     })) ?? []
@@ -169,7 +169,7 @@ export const CreateUserModal = () => {
                   disablePortal
                   className="[&_[data-slot=select-trigger][data-placeholder]]:text-gray-6"
                   list={
-                    positions?.map((position) => ({
+                    positions?.items.map((position) => ({
                       value: position.id,
                       label: position.name,
                     })) ?? []

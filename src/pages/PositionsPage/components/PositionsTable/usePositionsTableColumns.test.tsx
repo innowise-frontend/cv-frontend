@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
 import { type ReactNode } from "react";
 import { describe, expect, it, vi } from "vitest";
-import { useDepartmentsTableColumns } from "./useDepartmentsTableColumns";
+import { usePositionsTableColumns } from "./usePositionsTableColumns";
 
 vi.mock("react-i18next", () => ({
   useTranslation: () => ({
@@ -17,18 +17,15 @@ vi.mock("@components/shared", () => ({
   TableColumnHeader: ({ title }: { title: string }) => <div>{title}</div>,
 }));
 
-vi.mock("../UpdateDepartmentModal/UpdateDepartmentModal", () => ({
-  UpdateDepartmentModal: () => <div>update</div>,
+vi.mock("..", () => ({
+  UpdatePositionModal: () => <div>update</div>,
+  DeletePositionModal: () => <div>delete</div>,
 }));
 
-vi.mock("../DeleteDepartmentModal/DeleteDepartmentModal", () => ({
-  DeleteDepartmentModal: () => <div>delete</div>,
-}));
-
-describe("useDepartmentsTableColumns", () => {
+describe("usePositionsTableColumns", () => {
   it("returns 2 columns: name and actions", () => {
     const Harness = () => {
-      const { columns } = useDepartmentsTableColumns();
+      const { columns } = usePositionsTableColumns();
 
       return <div data-testid="count">{columns.length}</div>;
     };

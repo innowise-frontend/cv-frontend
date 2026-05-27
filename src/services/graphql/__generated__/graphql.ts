@@ -490,9 +490,36 @@ export type PaginatedCvs = {
   total_pages: Scalars["Int"]["output"];
 };
 
+export type PaginatedDepartments = {
+  __typename?: "PaginatedDepartments";
+  items: Array<Department>;
+  limit: Scalars["Int"]["output"];
+  page: Scalars["Int"]["output"];
+  total: Scalars["Int"]["output"];
+  total_pages: Scalars["Int"]["output"];
+};
+
 export type PaginatedLanguages = {
   __typename?: "PaginatedLanguages";
   items: Array<Language>;
+  limit: Scalars["Int"]["output"];
+  page: Scalars["Int"]["output"];
+  total: Scalars["Int"]["output"];
+  total_pages: Scalars["Int"]["output"];
+};
+
+export type PaginatedPositions = {
+  __typename?: "PaginatedPositions";
+  items: Array<Position>;
+  limit: Scalars["Int"]["output"];
+  page: Scalars["Int"]["output"];
+  total: Scalars["Int"]["output"];
+  total_pages: Scalars["Int"]["output"];
+};
+
+export type PaginatedProjects = {
+  __typename?: "PaginatedProjects";
+  items: Array<Project>;
   limit: Scalars["Int"]["output"];
   page: Scalars["Int"]["output"];
   total: Scalars["Int"]["output"];
@@ -567,14 +594,14 @@ export type Query = {
   cv: Cv;
   cvs: PaginatedCvs;
   cvsByUserId: PaginatedCvs;
-  departments: Array<Department>;
+  departments: PaginatedDepartments;
   languages: PaginatedLanguages;
   me: Profile;
   position: Position;
-  positions: Array<Position>;
+  positions: PaginatedPositions;
   profile: Profile;
   project: Project;
-  projects: Array<Project>;
+  projects: PaginatedProjects;
   skillCategories: Array<SkillCategory>;
   skills: PaginatedSkills;
   user: User;
@@ -594,6 +621,10 @@ export type QueryCvsByUserIdArgs = {
   userId: Scalars["ID"]["input"];
 };
 
+export type QueryDepartmentsArgs = {
+  params?: InputMaybe<SearchPaginationInput>;
+};
+
 export type QueryLanguagesArgs = {
   params?: InputMaybe<SearchPaginationInput>;
 };
@@ -602,12 +633,20 @@ export type QueryPositionArgs = {
   id: Scalars["ID"]["input"];
 };
 
+export type QueryPositionsArgs = {
+  params?: InputMaybe<SearchPaginationInput>;
+};
+
 export type QueryProfileArgs = {
   userId: Scalars["ID"]["input"];
 };
 
 export type QueryProjectArgs = {
   projectId: Scalars["ID"]["input"];
+};
+
+export type QueryProjectsArgs = {
+  params?: InputMaybe<SearchPaginationInput>;
 };
 
 export type QuerySkillsArgs = {
@@ -1194,11 +1233,20 @@ export type CvsQuery = {
   };
 };
 
-export type DepartmentsQueryVariables = Exact<{ [key: string]: never }>;
+export type DepartmentsQueryVariables = Exact<{
+  params: SearchPaginationInput;
+}>;
 
 export type DepartmentsQuery = {
   __typename?: "Query";
-  departments: Array<{ __typename?: "Department"; id: string; name: string }>;
+  departments: {
+    __typename?: "PaginatedDepartments";
+    total: number;
+    page: number;
+    limit: number;
+    total_pages: number;
+    items: Array<{ __typename?: "Department"; id: string; name: string }>;
+  };
 };
 
 export type LanguagesQueryVariables = Exact<{
@@ -1230,11 +1278,20 @@ export type MeQuery = {
   me: { __typename?: "Profile"; id: string; is_verified?: boolean | null; role?: UserRole | null };
 };
 
-export type PositionsQueryVariables = Exact<{ [key: string]: never }>;
+export type PositionsQueryVariables = Exact<{
+  params: SearchPaginationInput;
+}>;
 
 export type PositionsQuery = {
   __typename?: "Query";
-  positions: Array<{ __typename?: "Position"; id: string; name: string }>;
+  positions: {
+    __typename?: "PaginatedPositions";
+    total: number;
+    page: number;
+    limit: number;
+    total_pages: number;
+    items: Array<{ __typename?: "Position"; id: string; name: string }>;
+  };
 };
 
 export type ProfileQueryVariables = Exact<{
@@ -1343,8 +1400,14 @@ export type UserQuery = {
       created_at: string;
     };
   };
-  departments: Array<{ __typename?: "Department"; id: string; name: string }>;
-  positions: Array<{ __typename?: "Position"; id: string; name: string }>;
+  departments: {
+    __typename?: "PaginatedDepartments";
+    items: Array<{ __typename?: "Department"; id: string; name: string }>;
+  };
+  positions: {
+    __typename?: "PaginatedPositions";
+    items: Array<{ __typename?: "Position"; id: string; name: string }>;
+  };
 };
 
 export type UsersQueryVariables = Exact<{
@@ -2897,17 +2960,47 @@ export const DepartmentsDocument = {
       kind: "OperationDefinition",
       operation: "query",
       name: { kind: "Name", value: "Departments" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "params" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "SearchPaginationInput" } },
+          },
+        },
+      ],
       selectionSet: {
         kind: "SelectionSet",
         selections: [
           {
             kind: "Field",
             name: { kind: "Name", value: "departments" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "params" },
+                value: { kind: "Variable", name: { kind: "Name", value: "params" } },
+              },
+            ],
             selectionSet: {
               kind: "SelectionSet",
               selections: [
-                { kind: "Field", name: { kind: "Name", value: "id" } },
-                { kind: "Field", name: { kind: "Name", value: "name" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "items" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      { kind: "Field", name: { kind: "Name", value: "name" } },
+                    ],
+                  },
+                },
+                { kind: "Field", name: { kind: "Name", value: "total" } },
+                { kind: "Field", name: { kind: "Name", value: "page" } },
+                { kind: "Field", name: { kind: "Name", value: "limit" } },
+                { kind: "Field", name: { kind: "Name", value: "total_pages" } },
               ],
             },
           },
@@ -3009,17 +3102,47 @@ export const PositionsDocument = {
       kind: "OperationDefinition",
       operation: "query",
       name: { kind: "Name", value: "Positions" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "params" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "SearchPaginationInput" } },
+          },
+        },
+      ],
       selectionSet: {
         kind: "SelectionSet",
         selections: [
           {
             kind: "Field",
             name: { kind: "Name", value: "positions" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "params" },
+                value: { kind: "Variable", name: { kind: "Name", value: "params" } },
+              },
+            ],
             selectionSet: {
               kind: "SelectionSet",
               selections: [
-                { kind: "Field", name: { kind: "Name", value: "id" } },
-                { kind: "Field", name: { kind: "Name", value: "name" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "items" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      { kind: "Field", name: { kind: "Name", value: "name" } },
+                    ],
+                  },
+                },
+                { kind: "Field", name: { kind: "Name", value: "total" } },
+                { kind: "Field", name: { kind: "Name", value: "page" } },
+                { kind: "Field", name: { kind: "Name", value: "limit" } },
+                { kind: "Field", name: { kind: "Name", value: "total_pages" } },
               ],
             },
           },
@@ -3371,8 +3494,17 @@ export const UserDocument = {
             selectionSet: {
               kind: "SelectionSet",
               selections: [
-                { kind: "Field", name: { kind: "Name", value: "id" } },
-                { kind: "Field", name: { kind: "Name", value: "name" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "items" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      { kind: "Field", name: { kind: "Name", value: "name" } },
+                    ],
+                  },
+                },
               ],
             },
           },
@@ -3382,8 +3514,17 @@ export const UserDocument = {
             selectionSet: {
               kind: "SelectionSet",
               selections: [
-                { kind: "Field", name: { kind: "Name", value: "id" } },
-                { kind: "Field", name: { kind: "Name", value: "name" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "items" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      { kind: "Field", name: { kind: "Name", value: "name" } },
+                    ],
+                  },
+                },
               ],
             },
           },
