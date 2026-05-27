@@ -197,6 +197,25 @@
         "descriptionRequired": "A descrição é obrigatória"
       }
     },
+    "departments": {
+      "name": "Departamento",
+      "createDepartment": "Criar departamento",
+      "updateDepartment": "Atualizar departamento",
+      "deleteDepartment": "Eliminar departamento",
+      "edit": "Editar",
+      "delete": "Eliminar",
+      "cancel": "Cancelar",
+      "confirm": "Confirmar",
+      "update": "Atualizar",
+      "noData": "Ainda não há departamentos",
+      "create": "Criar",
+      "confirmDeleteDepartment": "Tem a certeza de que quer eliminar o departamento {{name}}?",
+      "toast": {
+        "created": "Departamento criado com sucesso",
+        "updated": "Departamento atualizado com sucesso",
+        "deleted": "Departamento eliminado com sucesso"
+      }
+    },
     "sidebar": {
       "employees": "Funcionários",
       "skills": "Habilidades",

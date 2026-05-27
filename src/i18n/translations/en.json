@@ -197,6 +197,25 @@
         "descriptionRequired": "Description is required"
       }
     },
+    "departments": {
+      "name": "Department",
+      "createDepartment": "Create department",
+      "updateDepartment": "Update department",
+      "deleteDepartment": "Delete department",
+      "edit": "Edit",
+      "delete": "Delete",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "update": "Update",
+      "noData": "No departments yet",
+      "create": "Create",
+      "confirmDeleteDepartment": "Are you sure you want to delete department {{name}}?",
+      "toast": {
+        "created": "Department created successfully",
+        "updated": "Department updated successfully",
+        "deleted": "Department deleted successfully"
+      }
+    },
     "sidebar": {
       "employees": "Employees",
       "skills": "Skills",
