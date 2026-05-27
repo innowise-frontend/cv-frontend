@@ -197,6 +197,25 @@
         "descriptionRequired": "Beschreibung ist erforderlich"
       }
     },
+    "departments": {
+      "name": "Abteilung",
+      "createDepartment": "Abteilung erstellen",
+      "updateDepartment": "Abteilung aktualisieren",
+      "deleteDepartment": "Abteilung löschen",
+      "edit": "Bearbeiten",
+      "delete": "Löschen",
+      "cancel": "Abbrechen",
+      "confirm": "Bestätigen",
+      "update": "Aktualisieren",
+      "noData": "Noch keine Abteilungen",
+      "create": "Erstellen",
+      "confirmDeleteDepartment": "Möchten Sie die Abteilung {{name}} wirklich löschen?",
+      "toast": {
+        "created": "Abteilung erfolgreich erstellt",
+        "updated": "Abteilung erfolgreich aktualisiert",
+        "deleted": "Abteilung erfolgreich gelöscht"
+      }
+    },
     "sidebar": {
       "employees": "Mitarbeiter",
       "skills": "Fähigkeiten",

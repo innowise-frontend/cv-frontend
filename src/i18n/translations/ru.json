@@ -197,6 +197,25 @@
         "descriptionRequired": "Описание обязательно"
       }
     },
+    "departments": {
+      "name": "Отдел",
+      "createDepartment": "Создать отдел",
+      "updateDepartment": "Обновить отдел",
+      "deleteDepartment": "Удалить отдел",
+      "edit": "Редактировать",
+      "delete": "Удалить",
+      "cancel": "Отмена",
+      "confirm": "Подтвердить",
+      "update": "Обновить",
+      "noData": "Отделов пока нет",
+      "create": "Создать",
+      "confirmDeleteDepartment": "Вы уверены, что хотите удалить отдел {{name}}?",
+      "toast": {
+        "created": "Отдел успешно создан",
+        "updated": "Отдел успешно обновлён",
+        "deleted": "Отдел успешно удалён"
+      }
+    },
     "sidebar": {
       "employees": "Сотрудники",
       "skills": "Навыки",

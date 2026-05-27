@@ -152,6 +152,25 @@ export interface TranslationTypes {
         descriptionRequired: string;
       };
     };
+    departments: {
+      name: string;
+      createDepartment: string;
+      updateDepartment: string;
+      deleteDepartment: string;
+      edit: string;
+      delete: string;
+      cancel: string;
+      confirm: string;
+      update: string;
+      noData: string;
+      create: string;
+      confirmDeleteDepartment: string;
+      toast: {
+        created: string;
+        updated: string;
+        deleted: string;
+      };
+    };
     sidebar: {
       employees: string;
       skills: string;

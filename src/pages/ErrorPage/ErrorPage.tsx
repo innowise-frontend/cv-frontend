@@ -16,7 +16,7 @@ export const ErrorPage = ({ error, deviceError }: ErrorPageProps) => {
   return (
     <div
       className={cn(
-        "fixed inset-0 z-999 bg-gray-8 dark:bg-color-gray-2 flex items-center justify-center",
+        "fixed inset-0 z-999 bg-gray-8 dark:bg-gray-2 flex items-center justify-center",
       )}
     >
       <div className="flex w-140 flex-col items-center justify-center gap-6">

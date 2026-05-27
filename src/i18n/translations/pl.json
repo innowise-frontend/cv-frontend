@@ -197,6 +197,25 @@
         "descriptionRequired": "Opis jest wymagany"
       }
     },
+    "departments": {
+      "name": "Dział",
+      "createDepartment": "Utwórz dział",
+      "updateDepartment": "Zaktualizuj dział",
+      "deleteDepartment": "Usuń dział",
+      "edit": "Edytuj",
+      "delete": "Usuń",
+      "cancel": "Anuluj",
+      "confirm": "Potwierdź",
+      "update": "Zaktualizuj",
+      "noData": "Brak działów",
+      "create": "Utwórz",
+      "confirmDeleteDepartment": "Czy na pewno chcesz usunąć dział {{name}}?",
+      "toast": {
+        "created": "Dział został pomyślnie utworzony",
+        "updated": "Dział został pomyślnie zaktualizowany",
+        "deleted": "Dział został pomyślnie usunięty"
+      }
+    },
     "sidebar": {
       "employees": "Pracownicy",
       "skills": "Umiejętności",
