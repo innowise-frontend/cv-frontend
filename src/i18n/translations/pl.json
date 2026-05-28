@@ -216,6 +216,21 @@
         "deleted": "Dział został pomyślnie usunięty"
       }
     },
+    "positions": {
+      "createPosition": "Utwórz stanowisko",
+      "updatePosition": "Aktualizuj stanowisko",
+      "deletePosition": "Usuń stanowisko",
+      "name": "Nazwa",
+      "position": "Stanowisko",
+      "edit": "Edytuj",
+      "delete": "Usuń",
+      "confirmDeletePosition": "Czy na pewno chcesz usunąć stanowisko {{name}}?",
+      "cancel": "Anuluj",
+      "confirm": "Potwierdź",
+      "add": "Dodaj",
+      "update": "Aktualizuj",
+      "noData": "Brak danych"
+    },
     "sidebar": {
       "employees": "Pracownicy",
       "skills": "Umiejętności",

@@ -1,4 +1,9 @@
 export interface TranslationTypes {
+  theme: {
+    device: string;
+    light: string;
+    dark: string;
+  };
   page: {
     home: {
       hello: string;
@@ -72,6 +77,46 @@ export interface TranslationTypes {
         passwordMinLength: string;
         passwordsDoNotMatch: string;
       };
+    };
+    users: {
+      edit: string;
+      delete: string;
+      viewProfile: string;
+      firstName: string;
+      lastName: string;
+      email: string;
+      password: string;
+      department: string;
+      position: string;
+      role: string;
+      selectDepartment: string;
+      selectPosition: string;
+      selectRole: string;
+      roleEmployee: string;
+      roleAdmin: string;
+      cancel: string;
+      create: string;
+      createUser: string;
+      createUserTitle: string;
+      update: string;
+      updateUser: string;
+      updateUserTitle: string;
+      updateUserFailed: string;
+      deleteUser: string;
+      deleteUserTitle: string;
+      deleteUserSuccess: string;
+      confirmDeleteBefore: string;
+      confirmDeleteAfter: string;
+      confirm: string;
+      emailAlreadyExists: string;
+      noData: string;
+    };
+    verifyEmail: {
+      title: string;
+      subtitle: string;
+      confirm: string;
+      later: string;
+      invalidCode: string;
     };
     languages: {
       currentLanguages: string;
@@ -171,6 +216,21 @@ export interface TranslationTypes {
         deleted: string;
       };
     };
+    positions: {
+      createPosition: string;
+      updatePosition: string;
+      deletePosition: string;
+      name: string;
+      position: string;
+      edit: string;
+      delete: string;
+      confirmDeletePosition: string;
+      cancel: string;
+      confirm: string;
+      add: string;
+      update: string;
+      noData: string;
+    };
     sidebar: {
       employees: string;
       skills: string;
@@ -211,48 +271,13 @@ export interface TranslationTypes {
       toast: {
         userUpdated: string;
         profileUpdated: string;
+        userUpdateFailed: string;
+        profileUpdateFailed: string;
         avatarUpdated: string;
+        avatarUpdateFailed: string;
         verificationSent: string;
         verificationFailed: string;
       };
     };
-    users: {
-      edit: string;
-      delete: string;
-      viewProfile: string;
-      firstName: string;
-      lastName: string;
-      email: string;
-      password: string;
-      department: string;
-      position: string;
-      role: string;
-      selectDepartment: string;
-      selectPosition: string;
-      selectRole: string;
-      roleEmployee: string;
-      roleAdmin: string;
-      cancel: string;
-      create: string;
-      createUser: string;
-      createUserTitle: string;
-      update: string;
-      updateUser: string;
-      updateUserTitle: string;
-      updateUserFailed: string;
-      deleteUser: string;
-      deleteUserTitle: string;
-      deleteUserSuccess: string;
-      confirmDeleteBefore: string;
-      confirmDeleteAfter: string;
-      confirm: string;
-      emailAlreadyExists: string;
-      noData: string;
-    };
-  };
-  theme: {
-    device: string;
-    light: string;
-    dark: string;
   };
 }

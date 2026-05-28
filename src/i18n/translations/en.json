@@ -216,6 +216,21 @@
         "deleted": "Department deleted successfully"
       }
     },
+    "positions": {
+      "createPosition": "Create position",
+      "updatePosition": "Update position",
+      "deletePosition": "Delete position",
+      "name": "Name",
+      "position": "Position",
+      "edit": "Edit",
+      "delete": "Delete",
+      "confirmDeletePosition": "Are you sure you want to delete position {{name}}?",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "add": "Add",
+      "update": "Update",
+      "noData": "No data"
+    },
     "sidebar": {
       "employees": "Employees",
       "skills": "Skills",

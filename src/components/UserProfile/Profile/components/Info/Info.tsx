@@ -38,8 +38,9 @@ export const Info = () => {
   const positionId = draft.positionId ?? initialPositionId;
 
   const departments: Option[] =
-    data?.departments.map((d) => ({ value: d.id, label: d.name })) ?? [];
-  const positions: Option[] = data?.positions.map((p) => ({ value: p.id, label: p.name })) ?? [];
+    data?.departments.items.map((d) => ({ value: d.id, label: d.name })) ?? [];
+  const positions: Option[] =
+    data?.positions.items.map((p) => ({ value: p.id, label: p.name })) ?? [];
 
   const memberSinceLine = new Date(Number(createdAt)).toDateString();
 

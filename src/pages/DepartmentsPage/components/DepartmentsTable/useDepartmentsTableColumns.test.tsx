@@ -3,6 +3,12 @@ import { type ReactNode } from "react";
 import { describe, expect, it, vi } from "vitest";
 import { useDepartmentsTableColumns } from "./useDepartmentsTableColumns";
 
+vi.mock("react-i18next", () => ({
+  useTranslation: () => ({
+    t: (key: string) => key,
+  }),
+}));
+
 vi.mock("@components/shared", () => ({
   Modal: ({ children }: { children: ReactNode }) => <div>{children}</div>,
   TableActions: ({ actions }: { actions: Array<{ label: ReactNode }> }) => (

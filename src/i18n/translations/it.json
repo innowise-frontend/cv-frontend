@@ -216,6 +216,21 @@
         "deleted": "Reparto eliminato con successo"
       }
     },
+    "positions": {
+      "createPosition": "Crea posizione",
+      "updatePosition": "Aggiorna posizione",
+      "deletePosition": "Elimina posizione",
+      "name": "Nome",
+      "position": "Posizione",
+      "edit": "Modifica",
+      "delete": "Elimina",
+      "confirmDeletePosition": "Sei sicuro di voler eliminare la posizione {{name}}?",
+      "cancel": "Annulla",
+      "confirm": "Conferma",
+      "add": "Aggiungi",
+      "update": "Aggiorna",
+      "noData": "Nessun dato"
+    },
     "sidebar": {
       "employees": "Dipendenti",
       "skills": "Competenze",

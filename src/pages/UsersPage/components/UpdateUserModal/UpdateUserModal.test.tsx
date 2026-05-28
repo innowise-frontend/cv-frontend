@@ -17,8 +17,8 @@ let originalClose: typeof HTMLDialogElement.prototype.close | undefined;
 vi.mock("../../api", () => ({
   useUpdateUserApi: () => ({ mutateAsync: vi.fn() }),
   useUpdateProfileApi: () => ({ mutateAsync: vi.fn() }),
-  useGetDepartmentsApi: () => ({ data: [] }),
-  useGetPositionsApi: () => ({ data: [] }),
+  useGetDepartmentsApi: () => ({ data: { items: [] } }),
+  useGetPositionsApi: () => ({ data: { items: [] } }),
 }));
 
 vi.mock("@root/hooks", async (importOriginal) => {

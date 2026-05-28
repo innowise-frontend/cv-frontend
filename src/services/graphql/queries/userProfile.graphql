@@ -21,11 +21,15 @@ query user($userId: ID!) {
     }
   }
   departments {
-    id
-    name
+    items {
+      id
+      name
+    }
   }
   positions {
-    id
-    name
+    items {
+      id
+      name
+    }
   }
 }
