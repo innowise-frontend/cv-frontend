@@ -148,7 +148,7 @@ export const CreateUserModal = () => {
                   disablePortal
                   className="[&_[data-slot=select-trigger][data-placeholder]]:text-gray-6"
                   list={
-                    departments?.items.map((department) => ({
+                    departments?.items?.map((department) => ({
                       value: department.id,
                       label: department.name,
                     })) ?? []
@@ -169,7 +169,7 @@ export const CreateUserModal = () => {
                   disablePortal
                   className="[&_[data-slot=select-trigger][data-placeholder]]:text-gray-6"
                   list={
-                    positions?.items.map((position) => ({
+                    positions?.items?.map((position) => ({
                       value: position.id,
                       label: position.name,
                     })) ?? []

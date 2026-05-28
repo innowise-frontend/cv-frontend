@@ -13,6 +13,10 @@ export const DeletePositionModal = ({ name, id }: DeletePositionModalProps) => {
     },
   });
 
+  const handleClick = () => {
+    mutate({ positionId: id });
+  };
+
   return (
     <>
       <Modal.Trigger className="w-full h-auto justify-start capitalize p-0">
@@ -25,13 +29,7 @@ export const DeletePositionModal = ({ name, id }: DeletePositionModalProps) => {
           <Modal.Close variant="outline" className="w-40">
             {t("page.positions.cancel")}
           </Modal.Close>
-          <Button
-            variant="filled"
-            className="w-40"
-            onClick={() => {
-              mutate({ positionId: id });
-            }}
-          >
+          <Button variant="filled" className="w-40" onClick={handleClick}>
             {t("page.positions.confirm")}
           </Button>
         </Modal.Footer>

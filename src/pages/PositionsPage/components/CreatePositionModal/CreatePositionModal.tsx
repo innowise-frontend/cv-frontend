@@ -27,6 +27,10 @@ export const CreatePositionModal = () => {
   const disabledButton =
     !name.trim() || (data?.items.some((item) => item.name === name.trim()) ?? false);
 
+  const handleClick = () => {
+    mutate({ name: name.trim() });
+  };
+
   return (
     <>
       <Modal.Trigger className="text-red font-medium dark:text-red">
@@ -47,14 +51,7 @@ export const CreatePositionModal = () => {
           <Modal.Close variant="outline" className="w-40">
             {t("page.positions.cancel")}
           </Modal.Close>
-          <Button
-            variant="filled"
-            className="w-40"
-            disabled={disabledButton}
-            onClick={() => {
-              mutate({ name: name.trim() });
-            }}
-          >
+          <Button variant="filled" className="w-40" disabled={disabledButton} onClick={handleClick}>
             {t("page.positions.add")}
           </Button>
         </Modal.Footer>

@@ -121,7 +121,7 @@ export const UpdateUserModal = ({
                   sideShift="none"
                   className="[&_[data-slot=select-trigger][data-placeholder]]:text-gray-6"
                   list={
-                    departments?.items.map((d) => ({
+                    departments?.items?.map((d) => ({
                       value: d.id,
                       label: d.name,
                     })) ?? []
@@ -142,7 +142,7 @@ export const UpdateUserModal = ({
                   sideShift="none"
                   className="[&_[data-slot=select-trigger][data-placeholder]]:text-gray-6"
                   list={
-                    positions?.items.map((p) => ({
+                    positions?.items?.map((p) => ({
                       value: p.id,
                       label: p.name,
                     })) ?? []

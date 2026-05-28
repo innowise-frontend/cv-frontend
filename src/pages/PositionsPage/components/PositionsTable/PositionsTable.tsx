@@ -40,8 +40,13 @@ export const PositionsTable = () => {
   });
 
   const tableData = data?.items ?? [];
-  const hasActiveSearch = (searchParams.search ?? "").trim().length > 0;
+  const hasActiveSearch = (searchParams.search ?? "").trim();
   const emptyMessage = hasActiveSearch ? t("page.table.noResults") : t("page.positions.noData");
+
+  const handleSort = () => {
+    setCurrentSort((prev) => (prev === SortOrder.ASC ? SortOrder.DESC : SortOrder.ASC));
+    setCurrentPage(1);
+  };
 
   return (
     <div className="flex h-full min-h-0 flex-col">
@@ -65,10 +70,7 @@ export const PositionsTable = () => {
           pagesAmount={data?.total_pages ?? 0}
           currentPage={currentPage}
           onChangePage={setCurrentPage}
-          onSort={() => {
-            setCurrentSort((prev) => (prev === SortOrder.ASC ? SortOrder.DESC : SortOrder.ASC));
-            setCurrentPage(1);
-          }}
+          onSort={handleSort}
           currentSort={currentSort}
           viewOptions={VIEW_OPTIONS}
           currentViewOption={currentLimit}

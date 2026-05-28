@@ -21,6 +21,13 @@ export const UpdatePositionModal = ({ name, positionId }: UpdatePositionModalPro
     setUpdatedName(name);
   };
 
+  const handleClick = () => {
+    mutate({
+      name: updatedName.trim(),
+      positionId,
+    });
+  };
+
   return (
     <>
       <Modal.Trigger className="w-full h-auto justify-start capitalize p-0">
@@ -45,12 +52,7 @@ export const UpdatePositionModal = ({ name, positionId }: UpdatePositionModalPro
             variant="filled"
             className="w-40"
             disabled={!updatedName.trim() || updatedName.trim() === name}
-            onClick={() => {
-              mutate({
-                name: updatedName.trim(),
-                positionId,
-              });
-            }}
+            onClick={handleClick}
           >
             {t("page.positions.update")}
           </Button>
