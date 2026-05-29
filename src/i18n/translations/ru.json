@@ -183,6 +183,7 @@
       "education": "Образование",
       "description": "Описание",
       "employee": "Сотрудник",
+      "viewCv": "Просмотр CV",
       "delete": "Удалить",
       "deleteCv": "Удалить резюме",
       "confirmDeleteCv": "Вы уверены, что хотите удалить резюме {{name}}?",
@@ -195,6 +196,12 @@
         "nameRequired": "Название обязательно",
         "educationRequired": "Образование обязательно",
         "descriptionRequired": "Описание обязательно"
+      },
+      "tabs": {
+        "details": "Детали",
+        "skills": "Навыки",
+        "projects": "Проекты",
+        "preview": "Предпросмотр"
       }
     },
     "departments": {

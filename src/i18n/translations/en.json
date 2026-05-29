@@ -183,6 +183,7 @@
       "education": "Education",
       "description": "Description",
       "employee": "Employee",
+      "viewCv": "View CV",
       "delete": "Delete",
       "deleteCv": "Delete CV",
       "confirmDeleteCv": "Are you sure you want to delete CV {{name}}?",
@@ -195,6 +196,12 @@
         "nameRequired": "Name is required",
         "educationRequired": "Education is required",
         "descriptionRequired": "Description is required"
+      },
+      "tabs": {
+        "details": "Details",
+        "skills": "Skills",
+        "projects": "Projects",
+        "preview": "Preview"
       }
     },
     "departments": {

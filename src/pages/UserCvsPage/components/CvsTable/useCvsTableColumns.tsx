@@ -1,6 +1,7 @@
+import { useNavigate } from "@tanstack/react-router";
 import { createColumnHelper } from "@tanstack/react-table";
 import { useTranslation } from "react-i18next";
-import { Modal, TableActions, TableColumnHeader } from "@components/shared";
+import { Modal, ROUTES, TableActions, TableColumnHeader } from "@components/shared";
 import { CvsByUserIdQuery } from "@services/graphql/__generated__/graphql";
 import { DeleteCvModal, UpdateCvModal } from "../../components";
 
@@ -9,6 +10,7 @@ type CvsTableRow = CvsByUserIdQuery["cvsByUserId"]["items"][number];
 export const useCvsTableColumns = () => {
   const { t } = useTranslation();
   const columnHelper = createColumnHelper<CvsTableRow>();
+  const navigate = useNavigate();
 
   const columns = [
     columnHelper.accessor("name", {
@@ -42,6 +44,12 @@ export const useCvsTableColumns = () => {
       size: 72,
       cell: ({ row }) => {
         const actions = [
+          {
+            label: <span className="p-px">{t("page.cvs.viewCv")}</span>,
+            onClick: (cvId: string) => {
+              navigate({ to: ROUTES.CV_PAGE, params: { cvId } });
+            },
+          },
           {
             label: (
               <Modal>

@@ -183,6 +183,7 @@
       "education": "Istruzione",
       "description": "Descrizione",
       "employee": "Dipendente",
+      "viewCv": "Visualizza CV",
       "delete": "Elimina",
       "deleteCv": "Elimina CV",
       "confirmDeleteCv": "Sei sicuro di voler eliminare il CV {{name}}?",
@@ -195,6 +196,12 @@
         "nameRequired": "Il nome è obbligatorio",
         "educationRequired": "L'istruzione è obbligatoria",
         "descriptionRequired": "La descrizione è obbligatoria"
+      },
+      "tabs": {
+        "details": "Dettagli",
+        "skills": "Competenze",
+        "projects": "Progetti",
+        "preview": "Anteprima"
       }
     },
     "departments": {
