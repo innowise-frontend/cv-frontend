@@ -223,6 +223,21 @@
         "deleted": "Abteilung erfolgreich gelöscht"
       }
     },
+    "positions": {
+      "createPosition": "Position erstellen",
+      "updatePosition": "Position aktualisieren",
+      "deletePosition": "Position löschen",
+      "name": "Name",
+      "position": "Position",
+      "edit": "Bearbeiten",
+      "delete": "Löschen",
+      "confirmDeletePosition": "Möchten Sie die Position {{name}} wirklich löschen?",
+      "cancel": "Abbrechen",
+      "confirm": "Bestätigen",
+      "add": "Hinzufügen",
+      "update": "Aktualisieren",
+      "noData": "Keine Daten"
+    },
     "sidebar": {
       "employees": "Mitarbeiter",
       "skills": "Fähigkeiten",

@@ -1,15 +1,23 @@
 import { createColumnHelper } from "@tanstack/react-table";
+import { useTranslation } from "react-i18next";
 import { Modal, TableActions, TableColumnHeader } from "@components/shared";
 import { DeleteDepartmentModal } from "../DeleteDepartmentModal/DeleteDepartmentModal";
 import { UpdateDepartmentModal } from "../UpdateDepartmentModal/UpdateDepartmentModal";
 import type { DepartmentTableRow } from "./types";
 
 export const useDepartmentsTableColumns = () => {
+  const { t } = useTranslation();
   const columnHelper = createColumnHelper<DepartmentTableRow>();
 
   const columns = [
     columnHelper.accessor("name", {
-      header: () => <TableColumnHeader title="Department" />,
+      header: (meta) => (
+        <TableColumnHeader
+          title={t("page.departments.name")}
+          sortOrder={meta.table.options.meta?.currentSort}
+          onChangeSorting={meta.table.options.meta?.onSort}
+        />
+      ),
       cell: ({ row }) => <span>{row.original.name}</span>,
     }),
     columnHelper.display({

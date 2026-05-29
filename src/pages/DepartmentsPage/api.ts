@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
+import { SortOrder } from "@constants/sortOptions";
 import { getErrorToastMessage } from "@root/lib";
 import {
   createDepartment,
@@ -16,10 +17,27 @@ import type {
 } from "@services/graphql/__generated__/graphql";
 import { MutationDepartmentProps } from "./types";
 
-export const useDepartmentsTableQuery = () =>
+export const useDepartmentsTableQuery = ({
+  search,
+  page,
+  limit,
+  sortOrder,
+}: {
+  search: string;
+  page: number;
+  limit: number;
+  sortOrder: SortOrder;
+}) =>
   useQuery({
-    queryKey: ["departments"],
-    queryFn: getDepartments,
+    queryKey: ["departments", search, page, limit, sortOrder],
+    queryFn: () =>
+      getDepartments({
+        search,
+        page,
+        limit,
+        sort_order: sortOrder,
+        sort_by: "name",
+      }),
   });
 
 export const useCreateDepartmentMutation = ({ onSuccess }: MutationDepartmentProps) => {

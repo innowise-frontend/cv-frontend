@@ -223,6 +223,21 @@
         "deleted": "Отдел успешно удалён"
       }
     },
+    "positions": {
+      "createPosition": "Создать должность",
+      "updatePosition": "Обновить должность",
+      "deletePosition": "Удалить должность",
+      "name": "Название",
+      "position": "Должность",
+      "edit": "Редактировать",
+      "delete": "Удалить",
+      "confirmDeletePosition": "Вы уверены, что хотите удалить должность {{name}}?",
+      "cancel": "Отмена",
+      "confirm": "Подтвердить",
+      "add": "Добавить",
+      "update": "Обновить",
+      "noData": "Нет данных"
+    },
     "sidebar": {
       "employees": "Сотрудники",
       "skills": "Навыки",

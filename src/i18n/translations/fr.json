@@ -223,6 +223,21 @@
         "deleted": "Département supprimé avec succès"
       }
     },
+    "positions": {
+      "createPosition": "Créer un poste",
+      "updatePosition": "Mettre à jour le poste",
+      "deletePosition": "Supprimer le poste",
+      "name": "Nom",
+      "position": "Poste",
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "confirmDeletePosition": "Voulez-vous vraiment supprimer le poste {{name}} ?",
+      "cancel": "Annuler",
+      "confirm": "Confirmer",
+      "add": "Ajouter",
+      "update": "Mettre à jour",
+      "noData": "Aucune donnée"
+    },
     "sidebar": {
       "employees": "Employés",
       "skills": "Compétences",
