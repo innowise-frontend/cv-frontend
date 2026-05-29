@@ -20,4 +20,3 @@ export const getCv = async (cvId: string): Promise<Cv> => {
 
   return response.cv;
 };
-
