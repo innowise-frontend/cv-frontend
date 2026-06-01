@@ -66,6 +66,11 @@
       "noDataResults": "Keine Daten vorhanden",
       "search": "Suchen"
     },
+    "calendar": {
+      "previousMonth": "Zum vorherigen Monat",
+      "nextMonth": "Zum nächsten Monat",
+      "openCalendar": "Kalender öffnen"
+    },
     "resetPassword": {
       "title": "Passwort zurücksetzen",
       "subtitle": "Geben Sie ein neues Passwort ein und bestätigen Sie es unten.",
@@ -237,6 +242,31 @@
       "add": "Hinzufügen",
       "update": "Aktualisieren",
       "noData": "Keine Daten"
+    },
+    "projects": {
+      "name": "Name",
+      "domain": "Bereich",
+      "description": "Beschreibung",
+      "startDate": "Startdatum",
+      "endDate": "Enddatum",
+      "environment": "Technologien",
+      "createProject": "Projekt erstellen",
+      "updateProject": "Projekt aktualisieren",
+      "deleteProject": "Projekt löschen",
+      "create": "Erstellen",
+      "update": "Aktualisieren",
+      "edit": "Bearbeiten",
+      "delete": "Löschen",
+      "cancel": "Abbrechen",
+      "confirm": "Bestätigen",
+      "confirmDeleteProject": "Möchten Sie das Projekt {{name}} wirklich löschen?",
+      "noData": "Noch keine Projekte",
+      "tillNow": "Bis jetzt",
+      "toast": {
+        "created": "Projekt erfolgreich erstellt",
+        "updated": "Projekt erfolgreich aktualisiert",
+        "deleted": "Projekt erfolgreich gelöscht"
+      }
     },
     "sidebar": {
       "employees": "Mitarbeiter",

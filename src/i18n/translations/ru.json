@@ -66,6 +66,11 @@
       "noDataResults": "Нет данных",
       "search": "Поиск"
     },
+    "calendar": {
+      "previousMonth": "Перейти к предыдущему месяцу",
+      "nextMonth": "Перейти к следующему месяцу",
+      "openCalendar": "Открыть календарь"
+    },
     "resetPassword": {
       "title": "Сброс пароля",
       "subtitle": "Введите новый пароль и подтвердите его ниже.",
@@ -237,6 +242,31 @@
       "add": "Добавить",
       "update": "Обновить",
       "noData": "Нет данных"
+    },
+    "projects": {
+      "name": "Название",
+      "domain": "Домен",
+      "description": "Описание",
+      "startDate": "Дата начала",
+      "endDate": "Дата окончания",
+      "environment": "Технологии",
+      "createProject": "Создать проект",
+      "updateProject": "Обновить проект",
+      "deleteProject": "Удалить проект",
+      "create": "Создать",
+      "update": "Обновить",
+      "edit": "Редактировать",
+      "delete": "Удалить",
+      "cancel": "Отмена",
+      "confirm": "Подтвердить",
+      "confirmDeleteProject": "Вы уверены, что хотите удалить проект {{name}}?",
+      "noData": "Проектов пока нет",
+      "tillNow": "До настоящего времени",
+      "toast": {
+        "created": "Проект успешно создан",
+        "updated": "Проект успешно обновлён",
+        "deleted": "Проект успешно удалён"
+      }
     },
     "sidebar": {
       "employees": "Сотрудники",

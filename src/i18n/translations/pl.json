@@ -66,6 +66,11 @@
       "noDataResults": "Brak danych",
       "search": "Szukaj"
     },
+    "calendar": {
+      "previousMonth": "Przejdź do poprzedniego miesiąca",
+      "nextMonth": "Przejdź do następnego miesiąca",
+      "openCalendar": "Otwórz kalendarz"
+    },
     "resetPassword": {
       "title": "Resetowanie hasła",
       "subtitle": "Wprowadź nowe hasło i potwierdź je poniżej.",
@@ -237,6 +242,31 @@
       "add": "Dodaj",
       "update": "Aktualizuj",
       "noData": "Brak danych"
+    },
+    "projects": {
+      "name": "Nazwa",
+      "domain": "Domena",
+      "description": "Opis",
+      "startDate": "Data rozpoczęcia",
+      "endDate": "Data zakończenia",
+      "environment": "Technologie",
+      "createProject": "Utwórz projekt",
+      "updateProject": "Zaktualizuj projekt",
+      "deleteProject": "Usuń projekt",
+      "create": "Utwórz",
+      "update": "Aktualizuj",
+      "edit": "Edytuj",
+      "delete": "Usuń",
+      "cancel": "Anuluj",
+      "confirm": "Potwierdź",
+      "confirmDeleteProject": "Czy na pewno chcesz usunąć projekt {{name}}?",
+      "noData": "Brak projektów",
+      "tillNow": "Do teraz",
+      "toast": {
+        "created": "Projekt został utworzony",
+        "updated": "Projekt został zaktualizowany",
+        "deleted": "Projekt został usunięty"
+      }
     },
     "sidebar": {
       "employees": "Pracownicy",
