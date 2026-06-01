@@ -183,6 +183,7 @@ export interface TranslationTypes {
       education: string;
       description: string;
       employee: string;
+      viewCv: string;
       delete: string;
       deleteCv: string;
       confirmDeleteCv: string;
@@ -195,6 +196,12 @@ export interface TranslationTypes {
         nameRequired: string;
         educationRequired: string;
         descriptionRequired: string;
+      };
+      tabs: {
+        details: string;
+        skills: string;
+        projects: string;
+        preview: string;
       };
     };
     departments: {

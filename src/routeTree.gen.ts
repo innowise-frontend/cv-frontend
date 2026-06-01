@@ -22,13 +22,20 @@ import { Route as AppProjectsRouteImport } from './routes/_app/projects'
 import { Route as AppPositionsRouteImport } from './routes/_app/positions'
 import { Route as AppLanguagesRouteImport } from './routes/_app/languages'
 import { Route as AppDepartmentsRouteImport } from './routes/_app/departments'
-import { Route as AppCvsRouteImport } from './routes/_app/cvs'
+import { Route as AppCvsRouteRouteImport } from './routes/_app/cvs/route'
+import { Route as AppCvsIndexRouteImport } from './routes/_app/cvs/index'
 import { Route as AppUsersUserIdRouteImport } from './routes/_app/users/$userId'
+import { Route as AppCvsCvIdRouteRouteImport } from './routes/_app/cvs/$cvId/route'
 import { Route as AppUsersUserIdIndexRouteImport } from './routes/_app/users/$userId.index'
+import { Route as AppCvsCvIdIndexRouteImport } from './routes/_app/cvs/$cvId/index'
 import { Route as AppUsersUserIdSkillsRouteImport } from './routes/_app/users/$userId.skills'
 import { Route as AppUsersUserIdProfileRouteImport } from './routes/_app/users/$userId.profile'
 import { Route as AppUsersUserIdLanguagesRouteImport } from './routes/_app/users/$userId.languages'
 import { Route as AppUsersUserIdCvsRouteImport } from './routes/_app/users/$userId.cvs'
+import { Route as AppCvsCvIdSkillsRouteImport } from './routes/_app/cvs/$cvId/skills'
+import { Route as AppCvsCvIdProjectsRouteImport } from './routes/_app/cvs/$cvId/projects'
+import { Route as AppCvsCvIdPreviewRouteImport } from './routes/_app/cvs/$cvId/preview'
+import { Route as AppCvsCvIdDetailsRouteImport } from './routes/_app/cvs/$cvId/details'
 
 const PublicRouteRoute = PublicRouteRouteImport.update({
   id: '/_public',
@@ -93,20 +100,35 @@ const AppDepartmentsRoute = AppDepartmentsRouteImport.update({
   path: '/departments',
   getParentRoute: () => AppRouteRoute,
 } as any)
-const AppCvsRoute = AppCvsRouteImport.update({
+const AppCvsRouteRoute = AppCvsRouteRouteImport.update({
   id: '/cvs',
   path: '/cvs',
   getParentRoute: () => AppRouteRoute,
+} as any)
+const AppCvsIndexRoute = AppCvsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppCvsRouteRoute,
 } as any)
 const AppUsersUserIdRoute = AppUsersUserIdRouteImport.update({
   id: '/users/$userId',
   path: '/users/$userId',
   getParentRoute: () => AppRouteRoute,
 } as any)
+const AppCvsCvIdRouteRoute = AppCvsCvIdRouteRouteImport.update({
+  id: '/$cvId',
+  path: '/$cvId',
+  getParentRoute: () => AppCvsRouteRoute,
+} as any)
 const AppUsersUserIdIndexRoute = AppUsersUserIdIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AppUsersUserIdRoute,
+} as any)
+const AppCvsCvIdIndexRoute = AppCvsCvIdIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppCvsCvIdRouteRoute,
 } as any)
 const AppUsersUserIdSkillsRoute = AppUsersUserIdSkillsRouteImport.update({
   id: '/skills',
@@ -128,10 +150,30 @@ const AppUsersUserIdCvsRoute = AppUsersUserIdCvsRouteImport.update({
   path: '/cvs',
   getParentRoute: () => AppUsersUserIdRoute,
 } as any)
+const AppCvsCvIdSkillsRoute = AppCvsCvIdSkillsRouteImport.update({
+  id: '/skills',
+  path: '/skills',
+  getParentRoute: () => AppCvsCvIdRouteRoute,
+} as any)
+const AppCvsCvIdProjectsRoute = AppCvsCvIdProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => AppCvsCvIdRouteRoute,
+} as any)
+const AppCvsCvIdPreviewRoute = AppCvsCvIdPreviewRouteImport.update({
+  id: '/preview',
+  path: '/preview',
+  getParentRoute: () => AppCvsCvIdRouteRoute,
+} as any)
+const AppCvsCvIdDetailsRoute = AppCvsCvIdDetailsRouteImport.update({
+  id: '/details',
+  path: '/details',
+  getParentRoute: () => AppCvsCvIdRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof AppIndexRoute
-  '/cvs': typeof AppCvsRoute
+  '/cvs': typeof AppCvsRouteRouteWithChildren
   '/departments': typeof AppDepartmentsRoute
   '/languages': typeof AppLanguagesRoute
   '/positions': typeof AppPositionsRoute
@@ -142,16 +184,22 @@ export interface FileRoutesByFullPath {
   '/forgot-password': typeof PublicForgotPasswordRoute
   '/reset-password': typeof PublicResetPasswordRoute
   '/verify-email': typeof PublicVerifyEmailRoute
+  '/cvs/$cvId': typeof AppCvsCvIdRouteRouteWithChildren
   '/users/$userId': typeof AppUsersUserIdRouteWithChildren
+  '/cvs/': typeof AppCvsIndexRoute
+  '/cvs/$cvId/details': typeof AppCvsCvIdDetailsRoute
+  '/cvs/$cvId/preview': typeof AppCvsCvIdPreviewRoute
+  '/cvs/$cvId/projects': typeof AppCvsCvIdProjectsRoute
+  '/cvs/$cvId/skills': typeof AppCvsCvIdSkillsRoute
   '/users/$userId/cvs': typeof AppUsersUserIdCvsRoute
   '/users/$userId/languages': typeof AppUsersUserIdLanguagesRoute
   '/users/$userId/profile': typeof AppUsersUserIdProfileRoute
   '/users/$userId/skills': typeof AppUsersUserIdSkillsRoute
+  '/cvs/$cvId/': typeof AppCvsCvIdIndexRoute
   '/users/$userId/': typeof AppUsersUserIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof AppIndexRoute
-  '/cvs': typeof AppCvsRoute
   '/departments': typeof AppDepartmentsRoute
   '/languages': typeof AppLanguagesRoute
   '/positions': typeof AppPositionsRoute
@@ -162,17 +210,23 @@ export interface FileRoutesByTo {
   '/forgot-password': typeof PublicForgotPasswordRoute
   '/reset-password': typeof PublicResetPasswordRoute
   '/verify-email': typeof PublicVerifyEmailRoute
+  '/cvs': typeof AppCvsIndexRoute
+  '/cvs/$cvId/details': typeof AppCvsCvIdDetailsRoute
+  '/cvs/$cvId/preview': typeof AppCvsCvIdPreviewRoute
+  '/cvs/$cvId/projects': typeof AppCvsCvIdProjectsRoute
+  '/cvs/$cvId/skills': typeof AppCvsCvIdSkillsRoute
   '/users/$userId/cvs': typeof AppUsersUserIdCvsRoute
   '/users/$userId/languages': typeof AppUsersUserIdLanguagesRoute
   '/users/$userId/profile': typeof AppUsersUserIdProfileRoute
   '/users/$userId/skills': typeof AppUsersUserIdSkillsRoute
+  '/cvs/$cvId': typeof AppCvsCvIdIndexRoute
   '/users/$userId': typeof AppUsersUserIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_app': typeof AppRouteRouteWithChildren
   '/_public': typeof PublicRouteRouteWithChildren
-  '/_app/cvs': typeof AppCvsRoute
+  '/_app/cvs': typeof AppCvsRouteRouteWithChildren
   '/_app/departments': typeof AppDepartmentsRoute
   '/_app/languages': typeof AppLanguagesRoute
   '/_app/positions': typeof AppPositionsRoute
@@ -184,11 +238,18 @@ export interface FileRoutesById {
   '/_public/reset-password': typeof PublicResetPasswordRoute
   '/_public/verify-email': typeof PublicVerifyEmailRoute
   '/_app/': typeof AppIndexRoute
+  '/_app/cvs/$cvId': typeof AppCvsCvIdRouteRouteWithChildren
   '/_app/users/$userId': typeof AppUsersUserIdRouteWithChildren
+  '/_app/cvs/': typeof AppCvsIndexRoute
+  '/_app/cvs/$cvId/details': typeof AppCvsCvIdDetailsRoute
+  '/_app/cvs/$cvId/preview': typeof AppCvsCvIdPreviewRoute
+  '/_app/cvs/$cvId/projects': typeof AppCvsCvIdProjectsRoute
+  '/_app/cvs/$cvId/skills': typeof AppCvsCvIdSkillsRoute
   '/_app/users/$userId/cvs': typeof AppUsersUserIdCvsRoute
   '/_app/users/$userId/languages': typeof AppUsersUserIdLanguagesRoute
   '/_app/users/$userId/profile': typeof AppUsersUserIdProfileRoute
   '/_app/users/$userId/skills': typeof AppUsersUserIdSkillsRoute
+  '/_app/cvs/$cvId/': typeof AppCvsCvIdIndexRoute
   '/_app/users/$userId/': typeof AppUsersUserIdIndexRoute
 }
 export interface FileRouteTypes {
@@ -206,16 +267,22 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/reset-password'
     | '/verify-email'
+    | '/cvs/$cvId'
     | '/users/$userId'
+    | '/cvs/'
+    | '/cvs/$cvId/details'
+    | '/cvs/$cvId/preview'
+    | '/cvs/$cvId/projects'
+    | '/cvs/$cvId/skills'
     | '/users/$userId/cvs'
     | '/users/$userId/languages'
     | '/users/$userId/profile'
     | '/users/$userId/skills'
+    | '/cvs/$cvId/'
     | '/users/$userId/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/cvs'
     | '/departments'
     | '/languages'
     | '/positions'
@@ -226,10 +293,16 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/reset-password'
     | '/verify-email'
+    | '/cvs'
+    | '/cvs/$cvId/details'
+    | '/cvs/$cvId/preview'
+    | '/cvs/$cvId/projects'
+    | '/cvs/$cvId/skills'
     | '/users/$userId/cvs'
     | '/users/$userId/languages'
     | '/users/$userId/profile'
     | '/users/$userId/skills'
+    | '/cvs/$cvId'
     | '/users/$userId'
   id:
     | '__root__'
@@ -247,11 +320,18 @@ export interface FileRouteTypes {
     | '/_public/reset-password'
     | '/_public/verify-email'
     | '/_app/'
+    | '/_app/cvs/$cvId'
     | '/_app/users/$userId'
+    | '/_app/cvs/'
+    | '/_app/cvs/$cvId/details'
+    | '/_app/cvs/$cvId/preview'
+    | '/_app/cvs/$cvId/projects'
+    | '/_app/cvs/$cvId/skills'
     | '/_app/users/$userId/cvs'
     | '/_app/users/$userId/languages'
     | '/_app/users/$userId/profile'
     | '/_app/users/$userId/skills'
+    | '/_app/cvs/$cvId/'
     | '/_app/users/$userId/'
   fileRoutesById: FileRoutesById
 }
@@ -357,8 +437,15 @@ declare module '@tanstack/react-router' {
       id: '/_app/cvs'
       path: '/cvs'
       fullPath: '/cvs'
-      preLoaderRoute: typeof AppCvsRouteImport
+      preLoaderRoute: typeof AppCvsRouteRouteImport
       parentRoute: typeof AppRouteRoute
+    }
+    '/_app/cvs/': {
+      id: '/_app/cvs/'
+      path: '/'
+      fullPath: '/cvs/'
+      preLoaderRoute: typeof AppCvsIndexRouteImport
+      parentRoute: typeof AppCvsRouteRoute
     }
     '/_app/users/$userId': {
       id: '/_app/users/$userId'
@@ -367,12 +454,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppUsersUserIdRouteImport
       parentRoute: typeof AppRouteRoute
     }
+    '/_app/cvs/$cvId': {
+      id: '/_app/cvs/$cvId'
+      path: '/$cvId'
+      fullPath: '/cvs/$cvId'
+      preLoaderRoute: typeof AppCvsCvIdRouteRouteImport
+      parentRoute: typeof AppCvsRouteRoute
+    }
     '/_app/users/$userId/': {
       id: '/_app/users/$userId/'
       path: '/'
       fullPath: '/users/$userId/'
       preLoaderRoute: typeof AppUsersUserIdIndexRouteImport
       parentRoute: typeof AppUsersUserIdRoute
+    }
+    '/_app/cvs/$cvId/': {
+      id: '/_app/cvs/$cvId/'
+      path: '/'
+      fullPath: '/cvs/$cvId/'
+      preLoaderRoute: typeof AppCvsCvIdIndexRouteImport
+      parentRoute: typeof AppCvsCvIdRouteRoute
     }
     '/_app/users/$userId/skills': {
       id: '/_app/users/$userId/skills'
@@ -402,8 +503,70 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppUsersUserIdCvsRouteImport
       parentRoute: typeof AppUsersUserIdRoute
     }
+    '/_app/cvs/$cvId/skills': {
+      id: '/_app/cvs/$cvId/skills'
+      path: '/skills'
+      fullPath: '/cvs/$cvId/skills'
+      preLoaderRoute: typeof AppCvsCvIdSkillsRouteImport
+      parentRoute: typeof AppCvsCvIdRouteRoute
+    }
+    '/_app/cvs/$cvId/projects': {
+      id: '/_app/cvs/$cvId/projects'
+      path: '/projects'
+      fullPath: '/cvs/$cvId/projects'
+      preLoaderRoute: typeof AppCvsCvIdProjectsRouteImport
+      parentRoute: typeof AppCvsCvIdRouteRoute
+    }
+    '/_app/cvs/$cvId/preview': {
+      id: '/_app/cvs/$cvId/preview'
+      path: '/preview'
+      fullPath: '/cvs/$cvId/preview'
+      preLoaderRoute: typeof AppCvsCvIdPreviewRouteImport
+      parentRoute: typeof AppCvsCvIdRouteRoute
+    }
+    '/_app/cvs/$cvId/details': {
+      id: '/_app/cvs/$cvId/details'
+      path: '/details'
+      fullPath: '/cvs/$cvId/details'
+      preLoaderRoute: typeof AppCvsCvIdDetailsRouteImport
+      parentRoute: typeof AppCvsCvIdRouteRoute
+    }
   }
 }
+
+interface AppCvsCvIdRouteRouteChildren {
+  AppCvsCvIdDetailsRoute: typeof AppCvsCvIdDetailsRoute
+  AppCvsCvIdPreviewRoute: typeof AppCvsCvIdPreviewRoute
+  AppCvsCvIdProjectsRoute: typeof AppCvsCvIdProjectsRoute
+  AppCvsCvIdSkillsRoute: typeof AppCvsCvIdSkillsRoute
+  AppCvsCvIdIndexRoute: typeof AppCvsCvIdIndexRoute
+}
+
+const AppCvsCvIdRouteRouteChildren: AppCvsCvIdRouteRouteChildren = {
+  AppCvsCvIdDetailsRoute: AppCvsCvIdDetailsRoute,
+  AppCvsCvIdPreviewRoute: AppCvsCvIdPreviewRoute,
+  AppCvsCvIdProjectsRoute: AppCvsCvIdProjectsRoute,
+  AppCvsCvIdSkillsRoute: AppCvsCvIdSkillsRoute,
+  AppCvsCvIdIndexRoute: AppCvsCvIdIndexRoute,
+}
+
+const AppCvsCvIdRouteRouteWithChildren = AppCvsCvIdRouteRoute._addFileChildren(
+  AppCvsCvIdRouteRouteChildren,
+)
+
+interface AppCvsRouteRouteChildren {
+  AppCvsCvIdRouteRoute: typeof AppCvsCvIdRouteRouteWithChildren
+  AppCvsIndexRoute: typeof AppCvsIndexRoute
+}
+
+const AppCvsRouteRouteChildren: AppCvsRouteRouteChildren = {
+  AppCvsCvIdRouteRoute: AppCvsCvIdRouteRouteWithChildren,
+  AppCvsIndexRoute: AppCvsIndexRoute,
+}
+
+const AppCvsRouteRouteWithChildren = AppCvsRouteRoute._addFileChildren(
+  AppCvsRouteRouteChildren,
+)
 
 interface AppUsersUserIdRouteChildren {
   AppUsersUserIdCvsRoute: typeof AppUsersUserIdCvsRoute
@@ -426,7 +589,7 @@ const AppUsersUserIdRouteWithChildren = AppUsersUserIdRoute._addFileChildren(
 )
 
 interface AppRouteRouteChildren {
-  AppCvsRoute: typeof AppCvsRoute
+  AppCvsRouteRoute: typeof AppCvsRouteRouteWithChildren
   AppDepartmentsRoute: typeof AppDepartmentsRoute
   AppLanguagesRoute: typeof AppLanguagesRoute
   AppPositionsRoute: typeof AppPositionsRoute
@@ -438,7 +601,7 @@ interface AppRouteRouteChildren {
 }
 
 const AppRouteRouteChildren: AppRouteRouteChildren = {
-  AppCvsRoute: AppCvsRoute,
+  AppCvsRouteRoute: AppCvsRouteRouteWithChildren,
   AppDepartmentsRoute: AppDepartmentsRoute,
   AppLanguagesRoute: AppLanguagesRoute,
   AppPositionsRoute: AppPositionsRoute,

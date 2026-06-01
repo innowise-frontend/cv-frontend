@@ -183,6 +183,7 @@
       "education": "Ausbildung",
       "description": "Beschreibung",
       "employee": "Mitarbeiter",
+      "viewCv": "CV anzeigen",
       "delete": "Löschen",
       "deleteCv": "Lebenslauf löschen",
       "confirmDeleteCv": "Möchten Sie den Lebenslauf {{name}} wirklich löschen?",
@@ -195,6 +196,12 @@
         "nameRequired": "Name ist erforderlich",
         "educationRequired": "Ausbildung ist erforderlich",
         "descriptionRequired": "Beschreibung ist erforderlich"
+      },
+      "tabs": {
+        "details": "Details",
+        "skills": "Fähigkeiten",
+        "projects": "Projekte",
+        "preview": "Vorschau"
       }
     },
     "departments": {
