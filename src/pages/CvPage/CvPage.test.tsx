@@ -5,6 +5,7 @@ import { CvPage } from "./CvPage";
 
 const navigateMock = vi.hoisted(() => vi.fn());
 const useCvQueryMock = vi.hoisted(() => vi.fn());
+const useAuthMock = vi.hoisted(() => vi.fn());
 
 const cvMock = {
   id: "cv-762",
@@ -12,6 +13,10 @@ const cvMock = {
   education: "Computer Systems Design",
   description: "Highly motivated and experienced Software Engineer",
 };
+
+vi.mock("@root/hooks", () => ({
+  useAuth: () => useAuthMock(),
+}));
 
 vi.mock("./api", () => ({
   useCvQuery: (cvId: string) => useCvQueryMock(cvId),
@@ -65,6 +70,7 @@ vi.mock("@components/shared/Tabs/Tabs", () => ({
 describe("CvPage", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    useAuthMock.mockReturnValue({ userId: "u-1", isAdmin: true });
     useCvQueryMock.mockReturnValue({
       data: cvMock,
       isLoading: false,

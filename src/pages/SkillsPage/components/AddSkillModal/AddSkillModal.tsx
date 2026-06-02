@@ -3,19 +3,23 @@ import { useTranslation } from "react-i18next";
 import PlusIcon from "@assets/icon/PlusIcon.svg?react";
 import { Modal, Select } from "@components/shared";
 import { useModalContext } from "@root/components/shared/Modal/useModalContext";
-import { AddProfileSkillInput, Mastery } from "@services/graphql/__generated__/graphql";
-import { AddSkillModalProps } from "./types";
-import { useAddProfileSkillMutation } from "../../api";
+import { Mastery } from "@services/graphql/__generated__/graphql";
+import { AddSkillDraft, AddSkillModalProps } from "./types";
 
-export const AddSkillModal = ({ userId, skills, masteryOptions }: AddSkillModalProps) => {
+export const AddSkillModal = ({
+  skills,
+  masteryOptions,
+  disabled = false,
+  onAdd,
+}: AddSkillModalProps) => {
   const { t } = useTranslation();
-  const [selectedSkill, setSelectedSkill] = useState<AddProfileSkillInput>({
-    userId: userId,
-    name: "",
-    mastery: "" as Mastery,
-  });
-
   const { closeModal } = useModalContext();
+
+  const [draft, setDraft] = useState<AddSkillDraft>({
+    name: "",
+    mastery: "",
+    categoryId: null,
+  });
 
   const skillOptions = useMemo(
     () =>
@@ -27,59 +31,55 @@ export const AddSkillModal = ({ userId, skills, masteryOptions }: AddSkillModalP
     [skills],
   );
 
-  const resetSelectedSkill = () => {
-    setSelectedSkill({ userId, name: "", mastery: "" as Mastery });
+  const reset = () => {
+    setDraft({ name: "", mastery: "", categoryId: null });
   };
-
-  const { mutateAsync } = useAddProfileSkillMutation(userId, {
-    onSuccess: () => {
-      closeModal();
-    },
-  });
 
   const handleSelectSkill = (value: string) => {
     const matched = skillOptions.find((item) => item.value === value);
 
-    setSelectedSkill({
-      ...selectedSkill,
+    setDraft((prev) => ({
+      ...prev,
       name: value,
       categoryId: matched?.categoryId ?? null,
-    });
+    }));
   };
 
-  const handleAddSkill = () => {
-    mutateAsync({ ...selectedSkill, userId });
+  const handleAdd = async () => {
+    await onAdd(draft);
+    closeModal();
   };
 
   return (
     <>
       <Modal.Trigger
         variant="ghost"
-        className="w-40 uppercase text-gray-3 p-4 flex items-center justify-center gap-2"
+        className="w-40 uppercase text-gray-3 p-4 flex items-center justify-center gap-2 dark:hover:text-gray-2"
+        disabled={disabled}
       >
         <PlusIcon />
         {t("page.skills.addSkill")}
       </Modal.Trigger>
-      <Modal.Content onCancel={resetSelectedSkill}>
+      <Modal.Content onCancel={reset}>
         <Modal.Header>{t("page.skills.addSkill")}</Modal.Header>
         <Modal.Body className="flex flex-col gap-9">
           <Select
             list={skillOptions}
             label={t("page.skills.skill")}
             placeholder={t("page.skills.skill")}
-            value={selectedSkill.name}
+            value={draft.name}
             onValueChange={handleSelectSkill}
           />
           <Select
             list={masteryOptions}
             label={t("page.skills.mastery")}
             placeholder={t("page.skills.mastery")}
-            value={selectedSkill.mastery}
+            value={draft.mastery}
             onValueChange={(value) =>
-              setSelectedSkill({
-                ...selectedSkill,
+              setDraft((prev) => ({
+                ...prev,
                 mastery: value as Mastery,
-              })
+              }))
             }
           />
         </Modal.Body>
@@ -90,8 +90,8 @@ export const AddSkillModal = ({ userId, skills, masteryOptions }: AddSkillModalP
           <Modal.Close
             variant="filled"
             className="w-40"
-            disabled={!selectedSkill.name || !selectedSkill.mastery || !userId}
-            onClick={handleAddSkill}
+            disabled={disabled || !draft.name || !draft.mastery}
+            onClick={handleAdd}
           >
             {t("page.skills.add")}
           </Modal.Close>

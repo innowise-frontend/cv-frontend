@@ -35,6 +35,7 @@
       "oops": "Ops",
       "goBack": "Voltar",
       "defaultErrorMessage": "Erro! Não foi possível alterar a senha",
+      "noAccess": "Sem acesso",
       "defaultNotFoundMessage": "Hmm… parece que esta não é a página que você estava procurando. \n Vamos colocar você de volta no caminho certo.",
       "api": {
         "forbidden": "Você não tem permissão para realizar esta ação",
@@ -142,7 +143,12 @@
       "remove": "Remover",
       "update": "Atualizar",
       "save": "Salvar",
-      "noData": "Sem dados"
+      "noData": "Sem dados",
+      "toast": {
+        "added": "Language added",
+        "updated": "Language updated",
+        "removed": "Language removed"
+      }
     },
     "skills": {
       "currentSkills": "Habilidades",
@@ -169,6 +175,11 @@
       "update": "Atualizar",
       "save": "Salvar",
       "noData": "Sem dados",
+      "toast": {
+        "added": "Skill added",
+        "updated": "Skill updated",
+        "removed": "Skills removed"
+      },
       "categoryLabel": "Categoria",
       "category": {}
     },
@@ -275,6 +286,7 @@
         "userUpdateFailed": "Falha ao atualizar o utilizador",
         "profileUpdateFailed": "Falha ao atualizar o perfil",
         "avatarUpdated": "Avatar atualizado",
+        "avatarUpdateFailed": "Failed to update avatar",
         "verificationSent": "E-mail de verificação enviado",
         "verificationFailed": "Falha ao enviar o e-mail de verificação"
       },

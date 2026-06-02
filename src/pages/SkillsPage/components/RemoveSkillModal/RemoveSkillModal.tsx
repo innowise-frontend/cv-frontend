@@ -1,34 +1,22 @@
 import { useTranslation } from "react-i18next";
 import { Modal } from "@components/shared";
+import { ONE_ITEM } from "@root/pages/SkillsPage/const";
 import { RemoveSkillModalProps } from "./types";
-import { useDeleteProfileSkillsMutation } from "../../api";
-import { ONE_ITEM } from "../../const";
 
 export const RemoveSkillModal = ({
-  userId,
-  deletedSkills,
-  onChangeDeletedSkills,
-  onChangeMode,
+  selectedNames,
+  disabled = false,
+  onRemove,
+  onCancel,
 }: RemoveSkillModalProps) => {
   const { t } = useTranslation();
 
-  const resetDeletedSkills = () => {
-    onChangeMode(false);
-    onChangeDeletedSkills({ userId, name: [] });
-  };
-
-  const { mutate } = useDeleteProfileSkillsMutation(userId);
-
-  const selectedCount = deletedSkills.name.length;
+  const selectedCount = selectedNames.length;
   const skillLabel = selectedCount === ONE_ITEM ? "page.skills.skill" : "page.skills.skills";
-
-  const handleRemoveSkills = () => {
-    mutate({ ...deletedSkills, userId }, { onSuccess: resetDeletedSkills });
-  };
 
   return (
     <Modal>
-      <Modal.Trigger variant="filled" className="w-40" disabled={selectedCount === 0}>
+      <Modal.Trigger variant="filled" className="w-40" disabled={disabled || selectedCount === 0}>
         {t("page.skills.remove")}
         {selectedCount !== 0 && (
           <span className="text-red bg-gray-8 rounded-full h-4 w-4 flex items-center justify-center">
@@ -36,7 +24,7 @@ export const RemoveSkillModal = ({
           </span>
         )}
       </Modal.Trigger>
-      <Modal.Content onCancel={resetDeletedSkills}>
+      <Modal.Content onCancel={onCancel}>
         <Modal.Header>{t("page.skills.removeSkills")}</Modal.Header>
         <Modal.Body>
           <p className="text-left">
@@ -50,7 +38,14 @@ export const RemoveSkillModal = ({
           <Modal.Close variant="outline" className="w-40">
             {t("page.skills.cancel")}
           </Modal.Close>
-          <Modal.Close variant="filled" className="w-40" onClick={handleRemoveSkills}>
+          <Modal.Close
+            variant="filled"
+            className="w-40"
+            onClick={async () => {
+              await onRemove();
+              onCancel();
+            }}
+          >
             {t("page.skills.confirm")}
           </Modal.Close>
         </Modal.Footer>

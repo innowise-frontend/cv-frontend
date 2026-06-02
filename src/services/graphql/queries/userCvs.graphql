@@ -6,6 +6,7 @@ query CvsByUserId($params: SearchPaginationInput!, $userId: ID!) {
       education
       description
       user {
+        id
         email
       }
     }

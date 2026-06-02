@@ -35,6 +35,7 @@
       "oops": "Ups",
       "goBack": "Wstecz",
       "defaultErrorMessage": "Błąd! Nie udało się zmienić hasła",
+      "noAccess": "Brak dostępu",
       "defaultNotFoundMessage": "Hmm… wygląda na to, że to nie jest strona, której szukasz. \n Pomóżmy Ci wrócić na właściwą ścieżkę.",
       "api": {
         "forbidden": "Nie masz uprawnień do wykonania tej akcji",
@@ -142,7 +143,12 @@
       "remove": "Usuń",
       "update": "Zaktualizuj",
       "save": "Zapisz",
-      "noData": "Brak danych"
+      "noData": "Brak danych",
+      "toast": {
+        "added": "Language added",
+        "updated": "Language updated",
+        "removed": "Language removed"
+      }
     },
     "skills": {
       "currentSkills": "Umiejętności",
@@ -169,6 +175,11 @@
       "update": "Zaktualizuj",
       "save": "Zapisz",
       "noData": "Brak danych",
+      "toast": {
+        "added": "Skill added",
+        "updated": "Skill updated",
+        "removed": "Skills removed"
+      },
       "categoryLabel": "Kategoria",
       "category": {}
     },
@@ -275,6 +286,7 @@
         "userUpdateFailed": "Nie udało się zaktualizować użytkownika",
         "profileUpdateFailed": "Nie udało się zaktualizować profilu",
         "avatarUpdated": "Zaktualizowano awatar",
+        "avatarUpdateFailed": "Failed to update avatar",
         "verificationSent": "Wysłano e-mail weryfikacyjny",
         "verificationFailed": "Nie udało się wysłać e-maila weryfikacyjnego"
       },

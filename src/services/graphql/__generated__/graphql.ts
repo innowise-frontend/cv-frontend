@@ -830,6 +830,23 @@ export type VerifyMailInput = {
   otp: Scalars["String"]["input"];
 };
 
+export type AddCvSkillMutationVariables = Exact<{
+  skill: AddCvSkillInput;
+}>;
+
+export type AddCvSkillMutation = {
+  __typename?: "Mutation";
+  addCvSkill: {
+    __typename?: "Cv";
+    skills: Array<{
+      __typename?: "SkillMastery";
+      name: string;
+      mastery: Mastery;
+      categoryId?: string | null;
+    }>;
+  };
+};
+
 export type AddProfileLanguageMutationVariables = Exact<{
   language: AddProfileLanguageInput;
 }>;
@@ -888,6 +905,15 @@ export type CreateCvMutation = {
   };
 };
 
+export type CreateDepartmentMutationVariables = Exact<{
+  department: CreateDepartmentInput;
+}>;
+
+export type CreateDepartmentMutation = {
+  __typename?: "Mutation";
+  createDepartment: { __typename?: "Department"; id: string; name: string };
+};
+
 export type CreateLanguageMutationVariables = Exact<{
   language: CreateLanguageInput;
 }>;
@@ -939,6 +965,32 @@ export type DeleteCvMutationVariables = Exact<{
 export type DeleteCvMutation = {
   __typename?: "Mutation";
   deleteCv: { __typename?: "DeleteResult"; affected: number };
+};
+
+export type DeleteCvSkillMutationVariables = Exact<{
+  skill: DeleteCvSkillInput;
+}>;
+
+export type DeleteCvSkillMutation = {
+  __typename?: "Mutation";
+  deleteCvSkill: {
+    __typename?: "Cv";
+    skills: Array<{
+      __typename?: "SkillMastery";
+      name: string;
+      mastery: Mastery;
+      categoryId?: string | null;
+    }>;
+  };
+};
+
+export type DeleteDepartmentMutationVariables = Exact<{
+  department: DeleteDepartmentInput;
+}>;
+
+export type DeleteDepartmentMutation = {
+  __typename?: "Mutation";
+  deleteDepartment: { __typename?: "DeleteResult"; affected: number };
 };
 
 export type DeleteLanguageMutationVariables = Exact<{
@@ -1070,6 +1122,32 @@ export type UpdateCvMutation = {
     description: string;
     user?: { __typename?: "User"; email: string } | null;
   };
+};
+
+export type UpdateCvSkillMutationVariables = Exact<{
+  skill: UpdateCvSkillInput;
+}>;
+
+export type UpdateCvSkillMutation = {
+  __typename?: "Mutation";
+  updateCvSkill: {
+    __typename?: "Cv";
+    skills: Array<{
+      __typename?: "SkillMastery";
+      name: string;
+      mastery: Mastery;
+      categoryId?: string | null;
+    }>;
+  };
+};
+
+export type UpdateDepartmentMutationVariables = Exact<{
+  department: UpdateDepartmentInput;
+}>;
+
+export type UpdateDepartmentMutation = {
+  __typename?: "Mutation";
+  updateDepartment: { __typename?: "Department"; id: string; name: string };
 };
 
 export type UpdateLanguageMutationVariables = Exact<{
@@ -1228,7 +1306,29 @@ export type CvsQuery = {
       name: string;
       education?: string | null;
       description: string;
-      user?: { __typename?: "User"; email: string } | null;
+      user?: { __typename?: "User"; id: string; email: string } | null;
+    }>;
+  };
+};
+
+export type CvQueryVariables = Exact<{
+  cvId: Scalars["ID"]["input"];
+}>;
+
+export type CvQuery = {
+  __typename?: "Query";
+  cv: {
+    __typename?: "Cv";
+    id: string;
+    name: string;
+    education?: string | null;
+    description: string;
+    user?: { __typename?: "User"; id: string; email: string } | null;
+    skills: Array<{
+      __typename?: "SkillMastery";
+      name: string;
+      mastery: Mastery;
+      categoryId?: string | null;
     }>;
   };
 };
@@ -1372,7 +1472,7 @@ export type CvsByUserIdQuery = {
       name: string;
       education?: string | null;
       description: string;
-      user?: { __typename?: "User"; email: string } | null;
+      user?: { __typename?: "User"; id: string; email: string } | null;
     }>;
   };
 };
@@ -1440,6 +1540,59 @@ export type UsersQuery = {
   };
 };
 
+export const AddCvSkillDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "AddCvSkill" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "skill" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "AddCvSkillInput" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "addCvSkill" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "skill" },
+                value: { kind: "Variable", name: { kind: "Name", value: "skill" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "skills" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "name" } },
+                      { kind: "Field", name: { kind: "Name", value: "mastery" } },
+                      { kind: "Field", name: { kind: "Name", value: "categoryId" } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<AddCvSkillMutation, AddCvSkillMutationVariables>;
 export const AddProfileLanguageDocument = {
   kind: "Document",
   definitions: [
@@ -1641,6 +1794,49 @@ export const CreateCvDocument = {
     },
   ],
 } as unknown as DocumentNode<CreateCvMutation, CreateCvMutationVariables>;
+export const CreateDepartmentDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "CreateDepartment" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "department" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "CreateDepartmentInput" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "createDepartment" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "department" },
+                value: { kind: "Variable", name: { kind: "Name", value: "department" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "id" } },
+                { kind: "Field", name: { kind: "Name", value: "name" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<CreateDepartmentMutation, CreateDepartmentMutationVariables>;
 export const CreateLanguageDocument = {
   kind: "Document",
   definitions: [
@@ -1865,6 +2061,99 @@ export const DeleteCvDocument = {
     },
   ],
 } as unknown as DocumentNode<DeleteCvMutation, DeleteCvMutationVariables>;
+export const DeleteCvSkillDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "DeleteCvSkill" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "skill" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "DeleteCvSkillInput" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "deleteCvSkill" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "skill" },
+                value: { kind: "Variable", name: { kind: "Name", value: "skill" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "skills" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "name" } },
+                      { kind: "Field", name: { kind: "Name", value: "mastery" } },
+                      { kind: "Field", name: { kind: "Name", value: "categoryId" } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<DeleteCvSkillMutation, DeleteCvSkillMutationVariables>;
+export const DeleteDepartmentDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "DeleteDepartment" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "department" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "DeleteDepartmentInput" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "deleteDepartment" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "department" },
+                value: { kind: "Variable", name: { kind: "Name", value: "department" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [{ kind: "Field", name: { kind: "Name", value: "affected" } }],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<DeleteDepartmentMutation, DeleteDepartmentMutationVariables>;
 export const DeleteLanguageDocument = {
   kind: "Document",
   definitions: [
@@ -2396,6 +2685,102 @@ export const UpdateCvDocument = {
     },
   ],
 } as unknown as DocumentNode<UpdateCvMutation, UpdateCvMutationVariables>;
+export const UpdateCvSkillDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "UpdateCvSkill" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "skill" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "UpdateCvSkillInput" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "updateCvSkill" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "skill" },
+                value: { kind: "Variable", name: { kind: "Name", value: "skill" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "skills" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "name" } },
+                      { kind: "Field", name: { kind: "Name", value: "mastery" } },
+                      { kind: "Field", name: { kind: "Name", value: "categoryId" } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<UpdateCvSkillMutation, UpdateCvSkillMutationVariables>;
+export const UpdateDepartmentDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "UpdateDepartment" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "department" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "UpdateDepartmentInput" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "updateDepartment" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "department" },
+                value: { kind: "Variable", name: { kind: "Name", value: "department" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "id" } },
+                { kind: "Field", name: { kind: "Name", value: "name" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<UpdateDepartmentMutation, UpdateDepartmentMutationVariables>;
 export const UpdateLanguageDocument = {
   kind: "Document",
   definitions: [
@@ -2935,7 +3320,10 @@ export const CvsDocument = {
                         name: { kind: "Name", value: "user" },
                         selectionSet: {
                           kind: "SelectionSet",
-                          selections: [{ kind: "Field", name: { kind: "Name", value: "email" } }],
+                          selections: [
+                            { kind: "Field", name: { kind: "Name", value: "id" } },
+                            { kind: "Field", name: { kind: "Name", value: "email" } },
+                          ],
                         },
                       },
                     ],
@@ -2953,6 +3341,74 @@ export const CvsDocument = {
     },
   ],
 } as unknown as DocumentNode<CvsQuery, CvsQueryVariables>;
+export const CvDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "Cv" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "cvId" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "ID" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "cv" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "cvId" },
+                value: { kind: "Variable", name: { kind: "Name", value: "cvId" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "id" } },
+                { kind: "Field", name: { kind: "Name", value: "name" } },
+                { kind: "Field", name: { kind: "Name", value: "education" } },
+                { kind: "Field", name: { kind: "Name", value: "description" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "user" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      { kind: "Field", name: { kind: "Name", value: "email" } },
+                    ],
+                  },
+                },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "skills" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "name" } },
+                      { kind: "Field", name: { kind: "Name", value: "mastery" } },
+                      { kind: "Field", name: { kind: "Name", value: "categoryId" } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<CvQuery, CvQueryVariables>;
 export const DepartmentsDocument = {
   kind: "Document",
   definitions: [
@@ -3394,7 +3850,10 @@ export const CvsByUserIdDocument = {
                         name: { kind: "Name", value: "user" },
                         selectionSet: {
                           kind: "SelectionSet",
-                          selections: [{ kind: "Field", name: { kind: "Name", value: "email" } }],
+                          selections: [
+                            { kind: "Field", name: { kind: "Name", value: "id" } },
+                            { kind: "Field", name: { kind: "Name", value: "email" } },
+                          ],
                         },
                       },
                     ],

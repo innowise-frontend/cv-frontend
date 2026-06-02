@@ -35,6 +35,7 @@
       "oops": "Oops",
       "goBack": "Go back",
       "defaultErrorMessage": "Error! Password wasn't changed",
+      "noAccess": "No access",
       "defaultNotFoundMessage": "Hmm… this doesn’t seem to be the page you were looking for. \n Let’s get you back on track.",
       "api": {
         "forbidden": "You have no rights to perform this action",
@@ -142,7 +143,12 @@
       "remove": "Remove",
       "update": "Update",
       "save": "Save",
-      "noData": "No data"
+      "noData": "No data",
+      "toast": {
+        "added": "Language added",
+        "updated": "Language updated",
+        "removed": "Language removed"
+      }
     },
     "skills": {
       "currentSkills": "Skills",
@@ -169,6 +175,11 @@
       "update": "Update",
       "save": "Save",
       "noData": "No data",
+      "toast": {
+        "added": "Skill added",
+        "updated": "Skill updated",
+        "removed": "Skills removed"
+      },
       "categoryLabel": "Category",
       "category": {}
     },
