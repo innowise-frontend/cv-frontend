@@ -1,10 +1,7 @@
 import { useTranslation } from "react-i18next";
-import { useSkillCategoriesQuery, useUserSkillsQuery } from "../../../../../pages/SkillsPage/api";
-import { GroupedSkillsView } from "../../../../../pages/SkillsPage/components/GroupedSkillsView/GroupedSkillsView";
-
-type ProfileSkillsViewProps = {
-  userId: string;
-};
+import { GroupedSkillsView } from "@pages/SkillsPage";
+import { useSkillCategoriesQuery, useUserSkillsQuery } from "@pages/SkillsPage/api";
+import { ProfileSkillsViewProps } from "./types";
 
 export const ProfileSkillsView = ({ userId }: ProfileSkillsViewProps) => {
   const { t } = useTranslation();

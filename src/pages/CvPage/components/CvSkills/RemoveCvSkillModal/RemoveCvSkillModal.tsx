@@ -1,6 +1,6 @@
-import { RemoveSkillModal } from "@pages/SkillsPage/components/RemoveSkillModal/RemoveSkillModal";
+import { useDeleteCvSkillsMutation } from "@pages/CvPage/api";
+import { RemoveSkillModal } from "@pages/SkillsPage";
 import { RemoveCvSkillModalProps } from "./types";
-import { useDeleteCvSkillsMutation } from "../../../api";
 
 export const RemoveCvSkillModal = ({
   cvId,

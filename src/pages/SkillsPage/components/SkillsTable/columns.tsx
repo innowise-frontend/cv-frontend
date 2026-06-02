@@ -1,8 +1,8 @@
 import { Modal, TableActions, TableColumnHeader } from "@components/shared";
+import { DeleteSkillModal, UpdateSkillModal } from "@pages/SkillsPage";
 import i18n from "@root/i18n/i18n";
 import { SkillCategoriesData } from "./types";
 import { columnHelper, getCategoryName, getCategoryTypeName } from "./utils";
-import { DeleteSkillModal, UpdateSkillModal } from "../../index";
 
 export const buildColumns = (categories: SkillCategoriesData | undefined) => {
   const categoryById = new Map((categories ?? []).map((category) => [category.id, category]));

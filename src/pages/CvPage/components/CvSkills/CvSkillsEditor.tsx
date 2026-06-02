@@ -1,13 +1,11 @@
 import { useTranslation } from "react-i18next";
 import RemoveIcon from "@assets/icon/RemoveIcon.svg?react";
 import { Button, Modal } from "@components/shared";
-import { useSkillCategoriesQuery, useSkillsSelectQuery } from "@root/pages/SkillsPage/api";
-import { SkillsEditor } from "@root/pages/SkillsPage/components/SkillsEditor/SkillsEditor";
+import { AddCvSkillModal, CvSkillProgressBar, RemoveCvSkillModal } from "@pages/CvPage";
+import { useCvQuery } from "@pages/CvPage/api";
+import { SkillsEditor } from "@pages/SkillsPage";
+import { useSkillCategoriesQuery, useSkillsSelectQuery } from "@pages/SkillsPage/api";
 import { DeleteCvSkillInput } from "@services/graphql/__generated__/graphql";
-import { useCvQuery } from "../../api";
-import { AddCvSkillModal } from "./AddCvSkillModal/AddCvSkillModal";
-import { CvSkillProgressBar } from "./CvSkillProgressBar/CvSkillProgressBar";
-import { RemoveCvSkillModal } from "./RemoveCvSkillModal/RemoveCvSkillModal";
 
 type CvSkillsEditorProps = {
   cvId: string;

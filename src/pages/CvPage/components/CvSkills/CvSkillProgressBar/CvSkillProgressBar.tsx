@@ -1,9 +1,9 @@
+import { useUpdateCvSkillMutation } from "@pages/CvPage/api";
+import { SkillProgressBar } from "@root/pages/SkillsPage";
 import { getMasteryOptions } from "@root/pages/SkillsPage/api";
-import { SkillProgressBar } from "@root/pages/SkillsPage/components/SkillProgressBar/SkillProgressBar";
 import { MASTERY_ORDER } from "@root/pages/SkillsPage/const";
 import { UpdateCvSkillInput } from "@services/graphql/__generated__/graphql";
 import { CvSkillProgressBarProps } from "./types";
-import { useUpdateCvSkillMutation } from "../../../api";
 
 export const CvSkillProgressBar = ({
   cvId,

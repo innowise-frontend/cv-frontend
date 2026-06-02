@@ -1,22 +1,21 @@
 import { useTranslation } from "react-i18next";
 import RemoveIcon from "@assets/icon/RemoveIcon.svg?react";
 import { Button, Modal } from "@components/shared";
-import { DeleteProfileSkillInput } from "@services/graphql/__generated__/graphql";
+import { SkillsEditor } from "@pages/SkillsPage";
 import {
   getMasteryOptions,
   useSkillCategoriesQuery,
   useSkillsSelectQuery,
   useUserSkillsQuery,
-} from "../../../../../pages/SkillsPage/api";
-import { SkillsEditor } from "../../../../../pages/SkillsPage/components/SkillsEditor/SkillsEditor";
-import { MASTERY_ORDER } from "../../../../../pages/SkillsPage/const";
-import { ProfileAddSkillModal } from "../ProfileAddSkillModal/AddSkillModal";
-import { ProfileRemoveSkillModal } from "../ProfileRemoveSkillModal/RemoveSkillModal";
-import { ProfileSkillProgressBar } from "../ProfileSkillProgressBar/SkillProgressBar";
-
-type ProfileSkillsEditorProps = {
-  userId: string;
-};
+} from "@pages/SkillsPage/api";
+import { MASTERY_ORDER } from "@pages/SkillsPage/const";
+import {
+  ProfileAddSkillModal,
+  ProfileRemoveSkillModal,
+  ProfileSkillProgressBar,
+} from "@root/components/UserProfile/Skills";
+import { DeleteProfileSkillInput } from "@services/graphql/__generated__/graphql";
+import { ProfileSkillsEditorProps } from "./types";
 
 export const ProfileSkillsEditor = ({ userId }: ProfileSkillsEditorProps) => {
   const { t } = useTranslation();
@@ -24,6 +23,12 @@ export const ProfileSkillsEditor = ({ userId }: ProfileSkillsEditorProps) => {
   const { data: skillsData } = useSkillsSelectQuery();
   const { data: categoriesData } = useSkillCategoriesQuery();
   const masteryOptions = getMasteryOptions(MASTERY_ORDER);
+
+  const getDeletedSkillNames = (value: DeleteProfileSkillInput) => value.name;
+
+  const cancelDeleteModeIfDisabled = (mode: boolean, onCancelDeleteMode: () => void) => {
+    if (!mode) onCancelDeleteMode();
+  };
 
   return (
     <SkillsEditor
@@ -48,9 +53,9 @@ export const ProfileSkillsEditor = ({ userId }: ProfileSkillsEditorProps) => {
         onEnableDeleteMode,
         onChangeDeletedSkillNames,
       }) => {
-        const deletedSkills: DeleteProfileSkillInput = { userId, name: deletedSkillNames };
-
         if (isDeleteMode) {
+          const deletedSkills: DeleteProfileSkillInput = { userId, name: deletedSkillNames };
+
           return (
             <>
               <Button variant="outline" className="w-40" onClick={onCancelDeleteMode}>
@@ -59,12 +64,10 @@ export const ProfileSkillsEditor = ({ userId }: ProfileSkillsEditorProps) => {
               <ProfileRemoveSkillModal
                 userId={userId}
                 deletedSkills={deletedSkills}
-                onChangeDeletedSkills={(value: DeleteProfileSkillInput) =>
-                  onChangeDeletedSkillNames(value.name)
+                onChangeDeletedSkills={(value) =>
+                  onChangeDeletedSkillNames(getDeletedSkillNames(value))
                 }
-                onChangeMode={(mode: boolean) => {
-                  if (!mode) onCancelDeleteMode();
-                }}
+                onChangeMode={(mode) => cancelDeleteModeIfDisabled(mode, onCancelDeleteMode)}
               />
             </>
           );
