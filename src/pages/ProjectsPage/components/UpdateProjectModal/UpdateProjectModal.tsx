@@ -1,3 +1,4 @@
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback, useEffect, useMemo } from "react";
 import { Controller, useForm, useWatch } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -7,32 +8,31 @@ import {
   Input,
   Modal,
   MultiSelect,
-  isDateInRange,
   parseProjectDate,
   Textarea,
   toApiProjectDate,
 } from "@components/shared";
 import { useModalContext } from "@components/shared/Modal/useModalContext";
 import { useProjectSkillsQuery, useUpdateProjectMutation } from "../../api";
-import { getEnvironmentOptions, getSkillNamesFromSkillsData, ProjectFormValues } from "../shared";
-
-interface UpdateProjectModalProps {
-  projectId: string;
-  initialValues: ProjectFormValues;
-}
+import { projectFormValidation } from "../projectFormValidation";
+import { ProjectFormValues } from "../types";
+import { getEnvironmentOptions, getSkillNamesFromSkillsData } from "../utils";
+import { UpdateProjectModalProps } from "./types";
 
 export const UpdateProjectModal = ({ projectId, initialValues }: UpdateProjectModalProps) => {
   const { t } = useTranslation();
   const { closeModal } = useModalContext();
+  const validationSchema = useMemo(() => projectFormValidation(t), [t]);
   const {
     control,
     register,
     handleSubmit,
     reset,
-    formState: { isValid },
+    formState: { isValid, isDirty },
   } = useForm<ProjectFormValues>({
     defaultValues: initialValues,
     mode: "onChange",
+    resolver: zodResolver(validationSchema),
   });
 
   const watched = useWatch<ProjectFormValues>({ control }) ?? initialValues;
@@ -42,11 +42,9 @@ export const UpdateProjectModal = ({ projectId, initialValues }: UpdateProjectMo
 
   const environmentOptions = useMemo(
     () =>
-      getEnvironmentOptions(
-        Array.from(
-          new Set([...getSkillNamesFromSkillsData(skillsData), ...(watched.environment ?? [])]),
-        ),
-      ),
+      getEnvironmentOptions([
+        ...new Set([...getSkillNamesFromSkillsData(skillsData), ...(watched.environment ?? [])]),
+      ]),
     [skillsData, watched.environment],
   );
 
@@ -72,9 +70,9 @@ export const UpdateProjectModal = ({ projectId, initialValues }: UpdateProjectMo
 
     mutate({
       projectId,
-      name: data.name.trim(),
-      domain: data.domain.trim(),
-      description: data.description.trim(),
+      name: data.name,
+      domain: data.domain,
+      description: data.description,
       start_date: startDate,
       end_date: toApiProjectDate(data.endDate) ?? null,
       environment: data.environment,
@@ -93,42 +91,25 @@ export const UpdateProjectModal = ({ projectId, initialValues }: UpdateProjectMo
             <Input
               label={t("page.projects.name")}
               placeholder={t("page.projects.name")}
-              {...register("name", {
-                required: true,
-                validate: (v) => v.trim().length > 0,
-              })}
+              {...register("name")}
               value={watched.name}
             />
             <Input
               label={t("page.projects.domain")}
               placeholder={t("page.projects.domain")}
-              {...register("domain", {
-                required: true,
-                validate: (v) => v.trim().length > 0,
-              })}
+              {...register("domain")}
               value={watched.domain}
             />
             <Textarea
               label={t("page.projects.description")}
               placeholder={t("page.projects.description")}
-              {...register("description", {
-                required: true,
-                validate: (v) => v.trim().length > 0,
-              })}
+              {...register("description")}
               value={watched.description}
             />
             <div className="grid grid-cols-2 gap-4">
               <Controller
                 name="startDate"
                 control={control}
-                rules={{
-                  required: true,
-                  validate: (v) => {
-                    const date = parseProjectDate(v);
-
-                    return Boolean(date && isDateInRange(date, undefined, endDateLimit));
-                  },
-                }}
                 render={({ field }) => (
                   <DatePicker
                     disablePortal
@@ -144,15 +125,6 @@ export const UpdateProjectModal = ({ projectId, initialValues }: UpdateProjectMo
               <Controller
                 name="endDate"
                 control={control}
-                rules={{
-                  validate: (v) => {
-                    if (!v.trim()) return true;
-
-                    const date = parseProjectDate(v);
-
-                    return Boolean(date && isDateInRange(date, startDateLimit, undefined));
-                  },
-                }}
                 render={({ field }) => (
                   <DatePicker
                     disablePortal
@@ -169,7 +141,6 @@ export const UpdateProjectModal = ({ projectId, initialValues }: UpdateProjectMo
             <Controller
               name="environment"
               control={control}
-              rules={{ required: true, validate: (value) => value.length > 0 }}
               render={({ field }) => (
                 <MultiSelect
                   disablePortal
@@ -198,7 +169,7 @@ export const UpdateProjectModal = ({ projectId, initialValues }: UpdateProjectMo
               type="submit"
               variant="filled"
               className="w-40"
-              disabled={!isValid || isPending}
+              disabled={!isValid || !isDirty || isPending}
             >
               {t("page.projects.update")}
             </Button>

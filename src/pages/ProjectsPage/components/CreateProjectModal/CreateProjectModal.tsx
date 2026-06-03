@@ -1,3 +1,4 @@
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useMemo } from "react";
 import { Controller, useForm, useWatch } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -8,23 +9,20 @@ import {
   Input,
   Modal,
   MultiSelect,
-  isDateInRange,
   parseProjectDate,
   Textarea,
   toApiProjectDate,
 } from "@components/shared";
 import { useModalContext } from "@components/shared/Modal/useModalContext";
 import { useCreateProjectMutation, useProjectSkillsQuery } from "../../api";
-import {
-  defaultProjectFormValues,
-  getEnvironmentOptions,
-  getSkillNamesFromSkillsData,
-  ProjectFormValues,
-} from "../shared";
+import { projectFormValidation } from "../projectFormValidation";
+import { ProjectFormValues, defaultProjectFormValues } from "../types";
+import { getEnvironmentOptions, getSkillNamesFromSkillsData } from "../utils";
 
 export const CreateProjectModal = () => {
   const { t } = useTranslation();
   const { closeModal } = useModalContext();
+  const validationSchema = useMemo(() => projectFormValidation(t), [t]);
   const {
     control,
     register,
@@ -34,6 +32,7 @@ export const CreateProjectModal = () => {
   } = useForm<ProjectFormValues>({
     defaultValues: defaultProjectFormValues,
     mode: "onChange",
+    resolver: zodResolver(validationSchema),
   });
 
   const watched = useWatch<ProjectFormValues>({ control }) ?? defaultProjectFormValues;
@@ -59,9 +58,9 @@ export const CreateProjectModal = () => {
     if (!startDate) return;
 
     mutate({
-      name: data.name.trim(),
-      domain: data.domain.trim(),
-      description: data.description.trim(),
+      name: data.name,
+      domain: data.domain,
+      description: data.description,
       start_date: startDate,
       end_date: toApiProjectDate(data.endDate) ?? null,
       environment: data.environment,
@@ -81,42 +80,25 @@ export const CreateProjectModal = () => {
             <Input
               label={t("page.projects.name")}
               placeholder={t("page.projects.name")}
-              {...register("name", {
-                required: true,
-                validate: (v) => v.trim().length > 0,
-              })}
+              {...register("name")}
               value={watched.name}
             />
             <Input
               label={t("page.projects.domain")}
               placeholder={t("page.projects.domain")}
-              {...register("domain", {
-                required: true,
-                validate: (v) => v.trim().length > 0,
-              })}
+              {...register("domain")}
               value={watched.domain}
             />
             <Textarea
               label={t("page.projects.description")}
               placeholder={t("page.projects.description")}
-              {...register("description", {
-                required: true,
-                validate: (v) => v.trim().length > 0,
-              })}
+              {...register("description")}
               value={watched.description}
             />
             <div className="grid grid-cols-2 gap-4">
               <Controller
                 name="startDate"
                 control={control}
-                rules={{
-                  required: true,
-                  validate: (v) => {
-                    const date = parseProjectDate(v);
-
-                    return Boolean(date && isDateInRange(date, undefined, endDateLimit));
-                  },
-                }}
                 render={({ field }) => (
                   <DatePicker
                     disablePortal
@@ -132,15 +114,6 @@ export const CreateProjectModal = () => {
               <Controller
                 name="endDate"
                 control={control}
-                rules={{
-                  validate: (v) => {
-                    if (!v.trim()) return true;
-
-                    const date = parseProjectDate(v);
-
-                    return Boolean(date && isDateInRange(date, startDateLimit, undefined));
-                  },
-                }}
                 render={({ field }) => (
                   <DatePicker
                     disablePortal
@@ -157,7 +130,6 @@ export const CreateProjectModal = () => {
             <Controller
               name="environment"
               control={control}
-              rules={{ required: true, validate: (value) => value.length > 0 }}
               render={({ field }) => (
                 <MultiSelect
                   disablePortal

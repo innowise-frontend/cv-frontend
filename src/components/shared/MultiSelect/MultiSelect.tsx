@@ -28,7 +28,7 @@ export function MultiSelect<
   const setContainerRef = useCallback((node: HTMLDivElement | null) => {
     setContainerNode(node);
   }, []);
-  const dialogContainer = containerNode?.closest("dialog") ?? undefined;
+  const dialogContainer = containerNode?.closest("dialog");
   const positionMethod = disablePortal ? "absolute" : "fixed";
   const collisionSide = disablePortal ? "flip" : "shift";
 

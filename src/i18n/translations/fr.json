@@ -262,6 +262,15 @@
       "confirmDeleteProject": "Voulez-vous vraiment supprimer le projet {{name}} ?",
       "noData": "Aucun projet pour le moment",
       "tillNow": "Jusqu'à maintenant",
+      "validation": {
+        "nameRequired": "Le nom est requis",
+        "domainRequired": "Le domaine est requis",
+        "descriptionRequired": "La description est requise",
+        "startDateRequired": "La date de début est requise",
+        "startDateInvalid": "Date de début invalide ou postérieure à la date de fin",
+        "endDateInvalid": "Date de fin invalide ou antérieure à la date de début",
+        "environmentRequired": "Sélectionnez au moins une technologie"
+      },
       "toast": {
         "created": "Projet créé avec succès",
         "updated": "Projet mis à jour avec succès",

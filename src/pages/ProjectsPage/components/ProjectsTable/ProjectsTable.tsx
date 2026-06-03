@@ -39,8 +39,18 @@ export const ProjectsTable = () => {
   });
 
   const tableData = data?.items ?? [];
-  const hasActiveSearch = (searchParams.search ?? "").trim().length > 0;
+  const hasActiveSearch = (searchParams.search ?? "").trim().length;
   const emptyMessage = hasActiveSearch ? t("page.table.noResults") : t("page.projects.noData");
+
+  const handleSort = () => {
+    setCurrentSort((prev) => (prev === SortOrder.ASC ? SortOrder.DESC : SortOrder.ASC));
+    setCurrentPage(1);
+  };
+
+  const handleChangeViewOption = (limit: number) => {
+    setCurrentLimit(limit);
+    setCurrentPage(1);
+  };
 
   return (
     <div className="flex h-full min-h-0 flex-col">
@@ -62,17 +72,11 @@ export const ProjectsTable = () => {
           pagesAmount={data?.total_pages ?? 0}
           currentPage={currentPage}
           onChangePage={setCurrentPage}
-          onSort={() => {
-            setCurrentSort((prev) => (prev === SortOrder.ASC ? SortOrder.DESC : SortOrder.ASC));
-            setCurrentPage(1);
-          }}
+          onSort={handleSort}
           currentSort={currentSort}
           viewOptions={VIEW_OPTIONS}
           currentViewOption={currentLimit}
-          onChangeViewOption={(limit) => {
-            setCurrentLimit(limit);
-            setCurrentPage(1);
-          }}
+          onChangeViewOption={handleChangeViewOption}
           renderSubRow={(row) => (
             <div className="flex flex-col gap-3">
               <p className="text-base text-gray-5">{row.original.description}</p>

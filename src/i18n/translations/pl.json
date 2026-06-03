@@ -262,6 +262,15 @@
       "confirmDeleteProject": "Czy na pewno chcesz usunąć projekt {{name}}?",
       "noData": "Brak projektów",
       "tillNow": "Do teraz",
+      "validation": {
+        "nameRequired": "Nazwa jest wymagana",
+        "domainRequired": "Domena jest wymagana",
+        "descriptionRequired": "Opis jest wymagany",
+        "startDateRequired": "Data rozpoczęcia jest wymagana",
+        "startDateInvalid": "Nieprawidłowa data rozpoczęcia lub późniejsza niż data zakończenia",
+        "endDateInvalid": "Nieprawidłowa data zakończenia lub wcześniejsza niż data rozpoczęcia",
+        "environmentRequired": "Wybierz co najmniej jedną technologię"
+      },
       "toast": {
         "created": "Projekt został utworzony",
         "updated": "Projekt został zaktualizowany",

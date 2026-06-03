@@ -1,12 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { Button, Modal } from "@components/shared";
 import { useModalContext } from "@components/shared/Modal/useModalContext";
+import { DeleteProjectModalProps } from "./types";
 import { useDeleteProjectMutation } from "../../api";
-
-interface DeleteProjectModalProps {
-  projectId: string;
-  name: string;
-}
 
 export const DeleteProjectModal = ({ projectId, name }: DeleteProjectModalProps) => {
   const { t } = useTranslation();

@@ -56,7 +56,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(function
     setContainerNode(node);
   }, []);
 
-  const dialogContainer = containerNode?.closest("dialog") ?? undefined;
+  const dialogContainer = containerNode?.closest("dialog");
   const positionMethod = disablePortal ? "absolute" : "fixed";
   const collisionSide = disablePortal ? "flip" : "shift";
 
@@ -214,13 +214,16 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(function
           </PopoverTrigger>
         </div>
 
-        {!disabled && (
-          <PopoverPrimitive.Portal
-            container={disablePortal ? (containerNode ?? undefined) : dialogContainer}
-          >
-            {popup}
-          </PopoverPrimitive.Portal>
-        )}
+        {!disabled &&
+          (disablePortal ? (
+            <PopoverPrimitive.Portal container={containerNode ?? undefined}>
+              {popup}
+            </PopoverPrimitive.Portal>
+          ) : dialogContainer ? (
+            <PopoverPrimitive.Portal container={dialogContainer}>{popup}</PopoverPrimitive.Portal>
+          ) : (
+            <PopoverPrimitive.Portal>{popup}</PopoverPrimitive.Portal>
+          ))}
       </Popover>
 
       <p

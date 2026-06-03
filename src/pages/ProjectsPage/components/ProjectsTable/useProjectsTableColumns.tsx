@@ -6,10 +6,8 @@ import {
   TableActions,
   TableColumnHeader,
 } from "@components/shared";
-import { ProjectsQuery } from "@services/graphql/__generated__/graphql";
 import { DeleteProjectModal, UpdateProjectModal } from "..";
-
-type ProjectsTableRow = ProjectsQuery["projects"]["items"][number];
+import { ProjectsTableRow } from "./types";
 
 export const useProjectsTableColumns = () => {
   const { t } = useTranslation();
