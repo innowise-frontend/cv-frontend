@@ -1,0 +1,17 @@
+query Projects($params: SearchPaginationInput!) {
+  projects(params: $params) {
+    items {
+      id
+      name
+      domain
+      description
+      start_date
+      end_date
+      environment
+    }
+    total_pages
+    total
+    limit
+    page
+  }
+}

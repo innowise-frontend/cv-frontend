@@ -35,13 +35,13 @@ export const Select = ({
   const setContainerRef = useCallback((node: HTMLDivElement | null) => {
     setContainerNode(node);
   }, []);
-  const dialogContainer = containerNode?.closest("dialog") ?? undefined;
+  const dialogContainer = containerNode?.closest("dialog");
 
   const hasValue = value !== "" && value !== undefined && value !== null;
   const isLabelFloating = hasValue || isOpen;
 
   const labelFor = (val?: string | number | null) =>
-    list.find((item) => String(item.value) === String(val))?.label ?? undefined;
+    list.find((item) => String(item.value) === String(val))?.label;
 
   const handleSelectValue = (next: string | null) => {
     if (disabled) return;
@@ -134,8 +134,10 @@ export const Select = ({
 
           {disablePortal ? (
             popup
-          ) : (
+          ) : dialogContainer ? (
             <SelectBase.Portal container={dialogContainer}>{popup}</SelectBase.Portal>
+          ) : (
+            <SelectBase.Portal>{popup}</SelectBase.Portal>
           )}
         </SelectRoot>
       </div>

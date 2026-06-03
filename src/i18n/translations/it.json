@@ -66,6 +66,11 @@
       "noDataResults": "Nessun dato disponibile",
       "search": "Cerca"
     },
+    "calendar": {
+      "previousMonth": "Vai al mese precedente",
+      "nextMonth": "Vai al mese successivo",
+      "openCalendar": "Apri calendario"
+    },
     "resetPassword": {
       "title": "Reimposta password",
       "subtitle": "Inserisci una nuova password e confermala qui sotto.",
@@ -238,6 +243,40 @@
       "update": "Aggiorna",
       "noData": "Nessun dato"
     },
+    "projects": {
+      "name": "Nome",
+      "domain": "Dominio",
+      "description": "Descrizione",
+      "startDate": "Data di inizio",
+      "endDate": "Data di fine",
+      "environment": "Tecnologie",
+      "createProject": "Crea progetto",
+      "updateProject": "Aggiorna progetto",
+      "deleteProject": "Elimina progetto",
+      "create": "Crea",
+      "update": "Aggiorna",
+      "edit": "Modifica",
+      "delete": "Elimina",
+      "cancel": "Annulla",
+      "confirm": "Conferma",
+      "confirmDeleteProject": "Sei sicuro di voler eliminare il progetto {{name}}?",
+      "noData": "Nessun progetto ancora",
+      "tillNow": "Fino a oggi",
+      "validation": {
+        "nameRequired": "Il nome è obbligatorio",
+        "domainRequired": "Il dominio è obbligatorio",
+        "descriptionRequired": "La descrizione è obbligatoria",
+        "startDateRequired": "La data di inizio è obbligatoria",
+        "startDateInvalid": "Data di inizio non valida o successiva alla data di fine",
+        "endDateInvalid": "Data di fine non valida o precedente alla data di inizio",
+        "environmentRequired": "Seleziona almeno una tecnologia"
+      },
+      "toast": {
+        "created": "Progetto creato con successo",
+        "updated": "Progetto aggiornato con successo",
+        "deleted": "Progetto eliminato con successo"
+      }
+    },
     "sidebar": {
       "employees": "Dipendenti",
       "skills": "Competenze",
@@ -275,6 +314,7 @@
         "userUpdateFailed": "Aggiornamento utente non riuscito",
         "profileUpdateFailed": "Aggiornamento profilo non riuscito",
         "avatarUpdated": "Avatar aggiornato",
+        "avatarUpdateFailed": "Aggiornamento avatar non riuscito",
         "verificationSent": "Email di verifica inviata",
         "verificationFailed": "Invio dell'email di verifica non riuscito"
       },

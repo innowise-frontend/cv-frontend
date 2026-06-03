@@ -66,6 +66,11 @@
       "noDataResults": "Brak danych",
       "search": "Szukaj"
     },
+    "calendar": {
+      "previousMonth": "Przejdź do poprzedniego miesiąca",
+      "nextMonth": "Przejdź do następnego miesiąca",
+      "openCalendar": "Otwórz kalendarz"
+    },
     "resetPassword": {
       "title": "Resetowanie hasła",
       "subtitle": "Wprowadź nowe hasło i potwierdź je poniżej.",
@@ -238,6 +243,40 @@
       "update": "Aktualizuj",
       "noData": "Brak danych"
     },
+    "projects": {
+      "name": "Nazwa",
+      "domain": "Domena",
+      "description": "Opis",
+      "startDate": "Data rozpoczęcia",
+      "endDate": "Data zakończenia",
+      "environment": "Technologie",
+      "createProject": "Utwórz projekt",
+      "updateProject": "Zaktualizuj projekt",
+      "deleteProject": "Usuń projekt",
+      "create": "Utwórz",
+      "update": "Aktualizuj",
+      "edit": "Edytuj",
+      "delete": "Usuń",
+      "cancel": "Anuluj",
+      "confirm": "Potwierdź",
+      "confirmDeleteProject": "Czy na pewno chcesz usunąć projekt {{name}}?",
+      "noData": "Brak projektów",
+      "tillNow": "Do teraz",
+      "validation": {
+        "nameRequired": "Nazwa jest wymagana",
+        "domainRequired": "Domena jest wymagana",
+        "descriptionRequired": "Opis jest wymagany",
+        "startDateRequired": "Data rozpoczęcia jest wymagana",
+        "startDateInvalid": "Nieprawidłowa data rozpoczęcia lub późniejsza niż data zakończenia",
+        "endDateInvalid": "Nieprawidłowa data zakończenia lub wcześniejsza niż data rozpoczęcia",
+        "environmentRequired": "Wybierz co najmniej jedną technologię"
+      },
+      "toast": {
+        "created": "Projekt został utworzony",
+        "updated": "Projekt został zaktualizowany",
+        "deleted": "Projekt został usunięty"
+      }
+    },
     "sidebar": {
       "employees": "Pracownicy",
       "skills": "Umiejętności",
@@ -275,6 +314,7 @@
         "userUpdateFailed": "Nie udało się zaktualizować użytkownika",
         "profileUpdateFailed": "Nie udało się zaktualizować profilu",
         "avatarUpdated": "Zaktualizowano awatar",
+        "avatarUpdateFailed": "Nie udało się zaktualizować awatara",
         "verificationSent": "Wysłano e-mail weryfikacyjny",
         "verificationFailed": "Nie udało się wysłać e-maila weryfikacyjnego"
       },
