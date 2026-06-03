@@ -314,6 +314,7 @@
         "userUpdateFailed": "Échec de la mise à jour de l'utilisateur",
         "profileUpdateFailed": "Échec de la mise à jour du profil",
         "avatarUpdated": "Avatar mis à jour",
+        "avatarUpdateFailed": "Échec de la mise à jour de l'avatar",
         "verificationSent": "E-mail de vérification envoyé",
         "verificationFailed": "Échec de l'envoi de l'e-mail de vérification"
       },

@@ -314,6 +314,7 @@
         "userUpdateFailed": "No se pudo actualizar el usuario",
         "profileUpdateFailed": "No se pudo actualizar el perfil",
         "avatarUpdated": "Avatar actualizado",
+        "avatarUpdateFailed": "No se pudo actualizar el avatar",
         "verificationSent": "Correo de verificación enviado",
         "verificationFailed": "No se pudo enviar el correo de verificación"
       },
