@@ -1,4 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { t } from "i18next";
 import { toast } from "sonner";
 import { SortOrder } from "@constants/sortOptions";
 import { getErrorToastMessage } from "@root/lib";
@@ -45,6 +46,7 @@ export const useCreatePositionMutation = ({ onSuccess }: { onSuccess?: () => voi
     mutationFn: (payload: CreatePositionInput) => createPosition(payload),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["positions"] });
+      toast.success(t("page.positions.toast.created"));
       onSuccess?.();
     },
     onError: (error) => {
@@ -60,6 +62,7 @@ export const useUpdatePositionMutation = ({ onSuccess }: { onSuccess?: () => voi
     mutationFn: (payload: UpdatePositionInput) => updatePosition(payload),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["positions"] });
+      toast.success(t("page.positions.toast.updated"));
       onSuccess?.();
     },
     onError: (error) => {
@@ -75,6 +78,7 @@ export const useDeletePositionMutation = ({ onSuccess }: { onSuccess?: () => voi
     mutationFn: (payload: DeletePositionInput) => deletePosition(payload),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["positions"] });
+      toast.success(t("page.positions.toast.deleted"));
       onSuccess?.();
     },
     onError: (error) => {

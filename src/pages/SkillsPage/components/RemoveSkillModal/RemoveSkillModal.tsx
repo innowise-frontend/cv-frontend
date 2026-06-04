@@ -14,6 +14,11 @@ export const RemoveSkillModal = ({
   const selectedCount = selectedNames.length;
   const skillLabel = selectedCount === ONE_ITEM ? "page.skills.skill" : "page.skills.skills";
 
+  const handleConfirm = async () => {
+    await onRemove();
+    onCancel();
+  };
+
   return (
     <Modal>
       <Modal.Trigger variant="filled" className="w-40" disabled={disabled || selectedCount === 0}>
@@ -38,14 +43,7 @@ export const RemoveSkillModal = ({
           <Modal.Close variant="outline" className="w-40">
             {t("page.skills.cancel")}
           </Modal.Close>
-          <Modal.Close
-            variant="filled"
-            className="w-40"
-            onClick={async () => {
-              await onRemove();
-              onCancel();
-            }}
-          >
+          <Modal.Close variant="filled" className="w-40" onClick={handleConfirm}>
             {t("page.skills.confirm")}
           </Modal.Close>
         </Modal.Footer>

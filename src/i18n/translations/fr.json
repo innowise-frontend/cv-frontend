@@ -67,6 +67,11 @@
       "noDataResults": "Aucune donnée",
       "search": "Rechercher"
     },
+    "calendar": {
+      "previousMonth": "Aller au mois précédent",
+      "nextMonth": "Aller au mois suivant",
+      "openCalendar": "Ouvrir le calendrier"
+    },
     "resetPassword": {
       "title": "Réinitialiser le mot de passe",
       "subtitle": "Saisissez un nouveau mot de passe et confirmez-le ci-dessous.",
@@ -249,6 +254,40 @@
       "update": "Mettre à jour",
       "noData": "Aucune donnée"
     },
+    "projects": {
+      "name": "Nom",
+      "domain": "Domaine",
+      "description": "Description",
+      "startDate": "Date de début",
+      "endDate": "Date de fin",
+      "environment": "Technologies",
+      "createProject": "Créer un projet",
+      "updateProject": "Mettre à jour le projet",
+      "deleteProject": "Supprimer le projet",
+      "create": "Créer",
+      "update": "Mettre à jour",
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "cancel": "Annuler",
+      "confirm": "Confirmer",
+      "confirmDeleteProject": "Voulez-vous vraiment supprimer le projet {{name}} ?",
+      "noData": "Aucun projet pour le moment",
+      "tillNow": "Jusqu'à maintenant",
+      "validation": {
+        "nameRequired": "Le nom est requis",
+        "domainRequired": "Le domaine est requis",
+        "descriptionRequired": "La description est requise",
+        "startDateRequired": "La date de début est requise",
+        "startDateInvalid": "Date de début invalide ou postérieure à la date de fin",
+        "endDateInvalid": "Date de fin invalide ou antérieure à la date de début",
+        "environmentRequired": "Sélectionnez au moins une technologie"
+      },
+      "toast": {
+        "created": "Projet créé avec succès",
+        "updated": "Projet mis à jour avec succès",
+        "deleted": "Projet supprimé avec succès"
+      }
+    },
     "sidebar": {
       "employees": "Employés",
       "skills": "Compétences",
@@ -286,7 +325,7 @@
         "userUpdateFailed": "Échec de la mise à jour de l'utilisateur",
         "profileUpdateFailed": "Échec de la mise à jour du profil",
         "avatarUpdated": "Avatar mis à jour",
-        "avatarUpdateFailed": "Failed to update avatar",
+        "avatarUpdateFailed": "Échec de la mise à jour de l'avatar",
         "verificationSent": "E-mail de vérification envoyé",
         "verificationFailed": "Échec de l'envoi de l'e-mail de vérification"
       },

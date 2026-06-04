@@ -49,7 +49,7 @@ describe("Select", () => {
 
     await user.click(combobox);
 
-    await waitFor(() => expect(combobox).toHaveAttribute("aria-expanded", "true"));
+    await waitFor(() => expect(combobox).toHaveAttribute("data-popup-open"));
     await waitFor(() => expect(placeholder).toHaveClass("opacity-0"));
     await waitFor(() => {
       expect(floatingLabel).toHaveClass("opacity-100");

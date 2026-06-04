@@ -40,6 +40,11 @@ export const SkillProgressBar = ({
     );
   }
 
+  const handleUpdate = async () => {
+    await onUpdate(draft);
+    closeModal();
+  };
+
   return (
     <>
       <Modal.Trigger className="capitalize" variant="ghost" disabled={disabled}>
@@ -58,7 +63,6 @@ export const SkillProgressBar = ({
             label={t("page.skills.skill")}
             disabled={true}
             value={name}
-            onValueChange={() => {}}
             className="[&_[data-slot=select-trigger][data-placeholder]]:text-gray-6"
           />
           <Select
@@ -79,10 +83,7 @@ export const SkillProgressBar = ({
             variant="filled"
             className="w-40"
             disabled={disabled || draft.mastery === mastery}
-            onClick={async () => {
-              await onUpdate(draft);
-              closeModal();
-            }}
+            onClick={handleUpdate}
           >
             {t("page.skills.update")}
           </Button>

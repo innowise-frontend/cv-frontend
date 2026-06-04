@@ -1,7 +1,5 @@
 import { flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table";
-import React from "react";
 import { useTranslation } from "react-i18next";
-import { cn } from "tailwind-variants";
 import { Pagination, Spinner } from "@components/shared";
 import { EmptyContent } from "@components/shared/EmptyContent/EmptyContent";
 import {
@@ -86,16 +84,16 @@ export const Table = <TData,>({
               </TableRow>
             ))}
           </TableHeader>
-          <TableBody className="font-normal">
-            {table.getRowModel().rows?.length ? (
+          {table.getRowModel().rows?.length ? (
+            renderSubRow ? (
               table.getRowModel().rows.map((row) => (
-                <React.Fragment key={row.id}>
+                <TableBody
+                  key={row.id}
+                  className="group border-b border-b-gray-5 font-normal dark:border-b-gray-3 [&_tr]:border-0"
+                >
                   <TableRow
                     data-state={row.getIsSelected() && "selected"}
-                    className={cn(
-                      "border-b-gray-5 hover:bg-gray-7/50 dark:border-b-gray-3 dark:hover:bg-gray-3/50",
-                      renderSubRow && "border-b-0",
-                    )}
+                    className="hover:bg-transparent group-hover:bg-gray-7/50 dark:group-hover:bg-gray-3/50"
                   >
                     {row.getVisibleCells().map((cell) => (
                       <TableCell
@@ -106,26 +104,45 @@ export const Table = <TData,>({
                       </TableCell>
                     ))}
                   </TableRow>
-                  {renderSubRow && (
-                    <TableRow className="border-b-gray-5 hover:bg-transparent dark:border-b-gray-3">
-                      <TableCell
-                        colSpan={row.getVisibleCells().length}
-                        className="p-4 pt-0 text-left whitespace-normal wrap-break-word"
-                      >
-                        {renderSubRow(row)}
-                      </TableCell>
-                    </TableRow>
-                  )}
-                </React.Fragment>
+                  <TableRow className="hover:bg-transparent group-hover:bg-gray-7/50 dark:group-hover:bg-gray-3/50">
+                    <TableCell
+                      colSpan={row.getVisibleCells().length}
+                      className="p-4 pt-0 text-left whitespace-normal wrap-break-word"
+                    >
+                      {renderSubRow(row)}
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
               ))
             ) : (
+              <TableBody className="font-normal">
+                {table.getRowModel().rows.map((row) => (
+                  <TableRow
+                    key={row.id}
+                    data-state={row.getIsSelected() && "selected"}
+                    className="border-b-gray-5 hover:bg-gray-7/50 dark:border-b-gray-3 dark:hover:bg-gray-3/50"
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell
+                        className="p-4 text-left whitespace-normal wrap-break-word"
+                        key={cell.id}
+                      >
+                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))}
+              </TableBody>
+            )
+          ) : (
+            <TableBody className="font-normal">
               <TableRow className="border-b! border-b-gray-5 hover:bg-transparent dark:border-b-gray-3">
                 <TableCell colSpan={columns.length}>
                   <EmptyContent message={emptyMessage ?? t("page.table.noResults")} />
                 </TableCell>
               </TableRow>
-            )}
-          </TableBody>
+            </TableBody>
+          )}
         </UITable>
       </div>
       {data.length > 0 && (

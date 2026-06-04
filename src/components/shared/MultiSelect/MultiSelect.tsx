@@ -1,10 +1,11 @@
+import { Popover as PopoverPrimitive } from "@base-ui/react/popover";
 import { ChevronDownIcon } from "lucide-react";
-import { type MouseEvent, useId, useState } from "react";
+import { type MouseEvent, useCallback, useId, useState } from "react";
 import { customPlaceholderClassName } from "@components/shared/formFieldStyles";
 import CloseIcon from "@root/assets/icon/CloseIcon.svg?react";
 import { Command, CommandGroup, CommandItem, CommandList } from "@root/components/ui/command";
 import { Label } from "@root/components/ui/label";
-import { Popover, PopoverContent, PopoverTrigger } from "@root/components/ui/popover";
+import { Popover, PopoverTrigger } from "@root/components/ui/popover";
 import { cn } from "@root/lib/utils";
 import { MultiSelectOption, MultiSelectProps } from "./types";
 
@@ -16,12 +17,20 @@ export function MultiSelect<
   data,
   options,
   disabled = false,
+  disablePortal = false,
   onChange,
   className,
   placeholder,
 }: MultiSelectProps<TValue, TOption>) {
   const [open, setOpen] = useState(false);
   const triggerId = useId();
+  const [containerNode, setContainerNode] = useState<HTMLDivElement | null>(null);
+  const setContainerRef = useCallback((node: HTMLDivElement | null) => {
+    setContainerNode(node);
+  }, []);
+  const dialogContainer = containerNode?.closest("dialog");
+  const positionMethod = disablePortal ? "absolute" : "fixed";
+  const collisionSide = disablePortal ? "flip" : "shift";
 
   const hasValue = data.length > 0;
   const isLabelFloating = hasValue || open;
@@ -72,8 +81,48 @@ export function MultiSelect<
     </div>
   );
 
+  const popup = (
+    <PopoverPrimitive.Positioner
+      side="bottom"
+      align="start"
+      sideOffset={4}
+      positionMethod={positionMethod}
+      collisionAvoidance={{ side: collisionSide, align: "none" }}
+      className="isolate z-50"
+    >
+      <PopoverPrimitive.Popup
+        data-slot="popover-content"
+        className="absolute -top-[5px] z-50 flex max-h-[min(240px,var(--available-height,240px))] w-(--anchor-width) min-w-36 flex-col overflow-hidden border border-gray-5 bg-gray-8 p-0 text-gray-2 shadow-none ring-0 dark:bg-gray-2 dark:text-gray-5"
+      >
+        <Command className="rounded-none! bg-transparent p-0">
+          <CommandList className="max-h-[min(240px,var(--available-height,240px))] overflow-y-auto">
+            <CommandGroup className="p-0">
+              {options.map((opt) => {
+                const isSelected = data.includes(opt.value);
+
+                return (
+                  <CommandItem
+                    key={opt.value}
+                    value={opt.value}
+                    onSelect={() => toggleValue(opt.value)}
+                    className={cn(
+                      "cursor-pointer pl-2.5 pr-2.5",
+                      isSelected && "bg-gray-6 text-gray-2 dark:bg-gray-4 dark:text-gray-8",
+                    )}
+                  >
+                    {opt.label}
+                  </CommandItem>
+                );
+              })}
+            </CommandGroup>
+          </CommandList>
+        </Command>
+      </PopoverPrimitive.Popup>
+    </PopoverPrimitive.Positioner>
+  );
+
   return (
-    <div className={cn("relative flex w-full flex-col", className)}>
+    <div ref={setContainerRef} className={cn("relative flex w-full flex-col", className)}>
       <div className="relative">
         <Popover
           open={open}
@@ -126,38 +175,11 @@ export function MultiSelect<
           )}
 
           {!disabled && (
-            <PopoverContent
-              side="bottom"
-              align="start"
-              sideOffset={4}
-              positionMethod="fixed"
-              collisionAvoidance={{ side: "shift", align: "none" }}
-              className="absolute -top-[5px] w-(--anchor-width) border border-gray-5 bg-gray-8 p-0 text-gray-2 shadow-none ring-0 dark:bg-gray-2 dark:text-gray-5"
+            <PopoverPrimitive.Portal
+              container={disablePortal ? (containerNode ?? undefined) : dialogContainer}
             >
-              <Command className="rounded-none! bg-transparent p-0">
-                <CommandList>
-                  <CommandGroup className="p-0">
-                    {options.map((opt) => {
-                      const isSelected = data.includes(opt.value);
-
-                      return (
-                        <CommandItem
-                          key={opt.value}
-                          value={opt.value}
-                          onSelect={() => toggleValue(opt.value)}
-                          className={cn(
-                            "cursor-pointer pl-2.5 pr-2.5",
-                            isSelected && "bg-gray-6 text-gray-2 dark:bg-gray-4 dark:text-gray-8",
-                          )}
-                        >
-                          {opt.label}
-                        </CommandItem>
-                      );
-                    })}
-                  </CommandGroup>
-                </CommandList>
-              </Command>
-            </PopoverContent>
+              {popup}
+            </PopoverPrimitive.Portal>
           )}
         </Popover>
       </div>

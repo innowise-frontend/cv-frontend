@@ -11,6 +11,7 @@ export type MultiSelectProps<
   data: TValue[];
   options: TOption[];
   disabled?: boolean;
+  disablePortal?: boolean;
   onChange: (value: TValue[]) => void;
   className?: string;
   placeholder?: string;

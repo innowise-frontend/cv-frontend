@@ -67,6 +67,11 @@
       "noDataResults": "Keine Daten vorhanden",
       "search": "Suchen"
     },
+    "calendar": {
+      "previousMonth": "Zum vorherigen Monat",
+      "nextMonth": "Zum nächsten Monat",
+      "openCalendar": "Kalender öffnen"
+    },
     "resetPassword": {
       "title": "Passwort zurücksetzen",
       "subtitle": "Geben Sie ein neues Passwort ein und bestätigen Sie es unten.",
@@ -249,6 +254,40 @@
       "update": "Aktualisieren",
       "noData": "Keine Daten"
     },
+    "projects": {
+      "name": "Name",
+      "domain": "Bereich",
+      "description": "Beschreibung",
+      "startDate": "Startdatum",
+      "endDate": "Enddatum",
+      "environment": "Technologien",
+      "createProject": "Projekt erstellen",
+      "updateProject": "Projekt aktualisieren",
+      "deleteProject": "Projekt löschen",
+      "create": "Erstellen",
+      "update": "Aktualisieren",
+      "edit": "Bearbeiten",
+      "delete": "Löschen",
+      "cancel": "Abbrechen",
+      "confirm": "Bestätigen",
+      "confirmDeleteProject": "Möchten Sie das Projekt {{name}} wirklich löschen?",
+      "noData": "Noch keine Projekte",
+      "tillNow": "Bis jetzt",
+      "validation": {
+        "nameRequired": "Name ist erforderlich",
+        "domainRequired": "Domäne ist erforderlich",
+        "descriptionRequired": "Beschreibung ist erforderlich",
+        "startDateRequired": "Startdatum ist erforderlich",
+        "startDateInvalid": "Ungültiges Startdatum oder nach dem Enddatum",
+        "endDateInvalid": "Ungültiges Enddatum oder vor dem Startdatum",
+        "environmentRequired": "Wählen Sie mindestens eine Technologie"
+      },
+      "toast": {
+        "created": "Projekt erfolgreich erstellt",
+        "updated": "Projekt erfolgreich aktualisiert",
+        "deleted": "Projekt erfolgreich gelöscht"
+      }
+    },
     "sidebar": {
       "employees": "Mitarbeiter",
       "skills": "Fähigkeiten",
@@ -286,7 +325,7 @@
         "userUpdateFailed": "Benutzer konnte nicht aktualisiert werden",
         "profileUpdateFailed": "Profil konnte nicht aktualisiert werden",
         "avatarUpdated": "Avatar aktualisiert",
-        "avatarUpdateFailed": "Failed to update avatar",
+        "avatarUpdateFailed": "Avatar konnte nicht aktualisiert werden",
         "verificationSent": "Bestätigungs-E-Mail gesendet",
         "verificationFailed": "Bestätigungs-E-Mail konnte nicht gesendet werden"
       },

@@ -1,0 +1,11 @@
+mutation UpdateProject($project: UpdateProjectInput!) {
+  updateProject(project: $project) {
+    id
+    name
+    domain
+    description
+    start_date
+    end_date
+    environment
+  }
+}

@@ -66,6 +66,11 @@ export interface TranslationTypes {
       noDataResults: string;
       search: string;
     };
+    calendar: {
+      previousMonth: string;
+      nextMonth: string;
+      openCalendar: string;
+    };
     resetPassword: {
       title: string;
       subtitle: string;
@@ -237,6 +242,31 @@ export interface TranslationTypes {
       add: string;
       update: string;
       noData: string;
+    };
+    projects: {
+      name: string;
+      domain: string;
+      description: string;
+      startDate: string;
+      endDate: string;
+      environment: string;
+      createProject: string;
+      updateProject: string;
+      deleteProject: string;
+      create: string;
+      update: string;
+      edit: string;
+      delete: string;
+      cancel: string;
+      confirm: string;
+      confirmDeleteProject: string;
+      noData: string;
+      tillNow: string;
+      toast: {
+        created: string;
+        updated: string;
+        deleted: string;
+      };
     };
     sidebar: {
       employees: string;
