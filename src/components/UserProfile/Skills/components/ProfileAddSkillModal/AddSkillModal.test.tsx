@@ -29,8 +29,22 @@ vi.mock("@components/shared", () => ({
       <button onClick={onClick}>{children}</button>
     ),
   },
-  Select: ({ label, onValueChange }: { label: string; onValueChange: (v: string) => void }) => (
-    <button onClick={() => onValueChange(label === "Skill mastery" ? Mastery.Novice : "React")}>
+  Select: ({
+    label,
+    list,
+    onValueChange,
+  }: {
+    label: string;
+    list?: { value: string }[];
+    onValueChange: (v: string) => void;
+  }) => (
+    <button
+      onClick={() =>
+        onValueChange(
+          label === "Skill mastery" ? Mastery.Novice : (list?.[0]?.value ?? "TypeScript"),
+        )
+      }
+    >
       {label}
     </button>
   ),
@@ -42,6 +56,7 @@ vi.mock("@assets/icon/PlusIcon.svg?react", () => ({
 
 const skills: SkillItem[] = [
   { id: "s1", name: "React", created_at: "", category: null } as SkillItem,
+  { id: "s2", name: "TypeScript", created_at: "", category: null } as SkillItem,
 ];
 const masteryOptions = [{ label: Mastery.Novice, value: Mastery.Novice }];
 
@@ -57,7 +72,14 @@ describe("AddSkillModal (UserProfile)", () => {
   });
 
   it("calls mutateAsync when confirmed", async () => {
-    render(<ProfileAddSkillModal userId="u1" skills={skills} masteryOptions={masteryOptions} />);
+    render(
+      <ProfileAddSkillModal
+        userId="u1"
+        skills={skills}
+        addedSkillNames={["React"]}
+        masteryOptions={masteryOptions}
+      />,
+    );
 
     fireEvent.click(screen.getByRole("button", { name: "Skill" }));
     fireEvent.click(screen.getByRole("button", { name: "Skill mastery" }));

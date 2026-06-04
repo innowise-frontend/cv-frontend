@@ -62,7 +62,11 @@ export const CvSkillsEditor = ({ cvId }: CvSkillsEditorProps) => {
 
         return (
           <Modal>
-            <AddCvSkillModal cvId={cvId} skills={skillsData?.items} />
+            <AddCvSkillModal
+              cvId={cvId}
+              skills={skillsData?.items}
+              addedSkillNames={cvData?.skills?.map((skill) => skill.name) ?? []}
+            />
             <Button
               variant="ghost"
               className="w-40 uppercase text-red p-4 flex items-center justify-center gap-2"

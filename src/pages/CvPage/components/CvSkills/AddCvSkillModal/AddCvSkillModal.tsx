@@ -5,7 +5,7 @@ import { MASTERY_ORDER } from "@root/pages/SkillsPage/const";
 import { AddCvSkillInput, Mastery } from "@services/graphql/__generated__/graphql";
 import { AddCvSkillModalProps } from "./types";
 
-export const AddCvSkillModal = ({ cvId, skills }: AddCvSkillModalProps) => {
+export const AddCvSkillModal = ({ cvId, skills, addedSkillNames }: AddCvSkillModalProps) => {
   const masteryOptions = getMasteryOptions(MASTERY_ORDER);
 
   const { mutateAsync } = useAddCvSkillMutation(cvId, {
@@ -15,6 +15,7 @@ export const AddCvSkillModal = ({ cvId, skills }: AddCvSkillModalProps) => {
   return (
     <AddSkillModal
       skills={skills}
+      addedSkillNames={addedSkillNames}
       masteryOptions={masteryOptions}
       disabled={!cvId}
       onAdd={(draft) => {

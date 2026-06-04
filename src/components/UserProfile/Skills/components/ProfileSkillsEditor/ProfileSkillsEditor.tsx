@@ -78,6 +78,7 @@ export const ProfileSkillsEditor = ({ userId }: ProfileSkillsEditorProps) => {
             <ProfileAddSkillModal
               userId={userId}
               skills={skillsData?.items}
+              addedSkillNames={profileData?.skills?.map((skill) => skill.name) ?? []}
               masteryOptions={masteryOptions}
             />
             <Button

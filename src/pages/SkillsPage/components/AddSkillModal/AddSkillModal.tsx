@@ -8,6 +8,7 @@ import { AddSkillDraft, AddSkillModalProps } from "./types";
 
 export const AddSkillModal = ({
   skills,
+  addedSkillNames = [],
   masteryOptions,
   disabled = false,
   onAdd,
@@ -21,15 +22,21 @@ export const AddSkillModal = ({
     categoryId: null,
   });
 
+  const addedSkillNameSet = useMemo(() => new Set(addedSkillNames), [addedSkillNames]);
+
   const skillOptions = useMemo(
     () =>
-      skills?.map((skill) => ({
-        label: skill.name,
-        value: skill.name,
-        categoryId: skill.category?.id ?? null,
-      })) ?? [],
-    [skills],
+      skills
+        ?.filter((skill) => !addedSkillNameSet.has(skill.name))
+        .map((skill) => ({
+          label: skill.name,
+          value: skill.name,
+          categoryId: skill.category?.id ?? null,
+        })) ?? [],
+    [skills, addedSkillNameSet],
   );
+
+  const isAddDisabled = disabled || skillOptions.length === 0;
 
   const reset = () => {
     setDraft({ name: "", mastery: "", categoryId: null });
@@ -55,7 +62,7 @@ export const AddSkillModal = ({
       <Modal.Trigger
         variant="ghost"
         className="w-40 uppercase text-gray-3 p-4 flex items-center justify-center gap-2 dark:hover:text-gray-2"
-        disabled={disabled}
+        disabled={isAddDisabled}
       >
         <PlusIcon />
         {t("page.skills.addSkill")}
@@ -90,7 +97,7 @@ export const AddSkillModal = ({
           <Modal.Close
             variant="filled"
             className="w-40"
-            disabled={disabled || !draft.name || !draft.mastery}
+            disabled={isAddDisabled || !draft.name || !draft.mastery}
             onClick={handleAdd}
           >
             {t("page.skills.add")}

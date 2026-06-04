@@ -10,6 +10,7 @@ export type AddSkillDraft = {
 
 export type AddSkillModalProps = {
   skills: SkillItem[] | undefined;
+  addedSkillNames?: readonly string[];
   masteryOptions: { value: string; label: string }[];
   disabled?: boolean;
   onAdd: (draft: AddSkillDraft) => Promise<unknown> | unknown;

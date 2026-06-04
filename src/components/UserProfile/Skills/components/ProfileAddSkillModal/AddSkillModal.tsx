@@ -4,7 +4,12 @@ import { AddSkillDraft } from "@pages/SkillsPage/components/AddSkillModal/types"
 import { AddProfileSkillInput, Mastery } from "@services/graphql/__generated__/graphql";
 import { AddSkillModalProps } from "./types";
 
-export const ProfileAddSkillModal = ({ userId, skills, masteryOptions }: AddSkillModalProps) => {
+export const ProfileAddSkillModal = ({
+  userId,
+  skills,
+  addedSkillNames,
+  masteryOptions,
+}: AddSkillModalProps) => {
   const { mutateAsync } = useAddProfileSkillMutation(userId, {
     onSuccess: () => {},
   });
@@ -23,6 +28,7 @@ export const ProfileAddSkillModal = ({ userId, skills, masteryOptions }: AddSkil
   return (
     <AddSkillModalUi
       skills={skills}
+      addedSkillNames={addedSkillNames}
       masteryOptions={masteryOptions}
       disabled={!userId}
       onAdd={handleAddSkill}
