@@ -14,6 +14,7 @@ import { TypedDocumentNode as DocumentNode } from "@graphql-typed-document-node/
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 type Documents = {
+  "mutation AddCvSkill($skill: AddCvSkillInput!) {\n  addCvSkill(skill: $skill) {\n    skills {\n      name\n      mastery\n      categoryId\n    }\n  }\n}": typeof types.AddCvSkillDocument;
   "mutation AddProfileLanguage($language: AddProfileLanguageInput!) {\n  addProfileLanguage(language: $language) {\n    languages {\n      name\n      proficiency\n    }\n  }\n}": typeof types.AddProfileLanguageDocument;
   "mutation AddProfileSkill($skill: AddProfileSkillInput!) {\n  addProfileSkill(skill: $skill) {\n    skills {\n      name\n      mastery\n      categoryId\n    }\n  }\n}": typeof types.AddProfileSkillDocument;
   "mutation ChangePassword($args: ChangePasswordInput!) {\n  changePassword(args: $args) {\n    id\n    email\n  }\n}": typeof types.ChangePasswordDocument;
@@ -25,6 +26,7 @@ type Documents = {
   "mutation CreateSkill($skill: CreateSkillInput!) {\n  createSkill(skill: $skill) {\n    id\n    name\n    created_at\n    category_name\n    category_parent_name\n    category {\n      id\n      name\n    }\n  }\n}": typeof types.CreateSkillDocument;
   "mutation CreateUser($user: CreateUserInput!) {\n  createUser(user: $user) {\n    id\n    email\n    role\n  }\n}": typeof types.CreateUserDocument;
   "mutation DeleteCv($cv: DeleteCvInput!) {\n  deleteCv(cv: $cv) {\n    affected\n  }\n}": typeof types.DeleteCvDocument;
+  "mutation DeleteCvSkill($skill: DeleteCvSkillInput!) {\n  deleteCvSkill(skill: $skill) {\n    skills {\n      name\n      mastery\n      categoryId\n    }\n  }\n}": typeof types.DeleteCvSkillDocument;
   "mutation DeleteDepartment($department: DeleteDepartmentInput!) {\n  deleteDepartment(department: $department) {\n    affected\n  }\n}": typeof types.DeleteDepartmentDocument;
   "mutation DeleteLanguage($language: DeleteLanguageInput!) {\n  deleteLanguage(language: $language) {\n    affected\n  }\n}": typeof types.DeleteLanguageDocument;
   "mutation DeletePosition($position: DeletePositionInput!) {\n  deletePosition(position: $position) {\n    affected\n  }\n}": typeof types.DeletePositionDocument;
@@ -39,6 +41,7 @@ type Documents = {
   "mutation sendVerification($email: String!) {\n  sendVerification(email: $email)\n}": typeof types.SendVerificationDocument;
   "mutation Signup($auth: AuthInput!) {\n  signup(auth: $auth) {\n    user {\n      id\n    }\n    access_token\n    refresh_token\n  }\n}": typeof types.SignupDocument;
   "mutation UpdateCv($cv: UpdateCvInput!) {\n  updateCv(cv: $cv) {\n    id\n    name\n    education\n    description\n    user {\n      email\n    }\n  }\n}": typeof types.UpdateCvDocument;
+  "mutation UpdateCvSkill($skill: UpdateCvSkillInput!) {\n  updateCvSkill(skill: $skill) {\n    skills {\n      name\n      mastery\n      categoryId\n    }\n  }\n}": typeof types.UpdateCvSkillDocument;
   "mutation UpdateDepartment($department: UpdateDepartmentInput!) {\n  updateDepartment(department: $department) {\n    id\n    name\n  }\n}": typeof types.UpdateDepartmentDocument;
   "mutation UpdateLanguage($language: UpdateLanguageInput!) {\n  updateLanguage(language: $language) {\n    id\n    name\n    iso2\n    native_name\n  }\n}": typeof types.UpdateLanguageDocument;
   "mutation UpdatePosition($position: UpdatePositionInput!) {\n  updatePosition(position: $position) {\n    id\n    name\n  }\n}": typeof types.UpdatePositionDocument;
@@ -51,7 +54,7 @@ type Documents = {
   "mutation UpdateUser($user: UpdateUserInput!) {\n  updateUser(user: $user) {\n    id\n    created_at\n    email\n    is_verified\n    role\n    department_name\n    position_name\n    profile {\n      id\n      created_at\n      first_name\n      last_name\n      full_name\n      avatar\n    }\n    department {\n      id\n      name\n    }\n    position {\n      id\n      name\n    }\n  }\n}": typeof types.UpdateUserDocument;
   "mutation UploadAvatar($avatar: UploadAvatarInput!) {\n  uploadAvatar(avatar: $avatar)\n}": typeof types.UploadAvatarDocument;
   "mutation verifyMail($otp: String!) {\n  verifyMail(mail: {otp: $otp})\n}": typeof types.VerifyMailDocument;
-  "query Cvs($params: SearchPaginationInput!) {\n  cvs(params: $params) {\n    items {\n      id\n      name\n      education\n      description\n      user {\n        email\n      }\n    }\n    total\n    page\n    limit\n    total_pages\n  }\n}": typeof types.CvsDocument;
+  "query Cvs($params: SearchPaginationInput!) {\n  cvs(params: $params) {\n    items {\n      id\n      name\n      education\n      description\n      user {\n        id\n        email\n      }\n    }\n    total\n    page\n    limit\n    total_pages\n  }\n}\n\nquery Cv($cvId: ID!) {\n  cv(cvId: $cvId) {\n    id\n    name\n    education\n    description\n    user {\n      id\n      email\n    }\n    skills {\n      name\n      mastery\n      categoryId\n    }\n  }\n}": typeof types.CvsDocument;
   "query Departments($params: SearchPaginationInput!) {\n  departments(params: $params) {\n    items {\n      id\n      name\n    }\n    total\n    page\n    limit\n    total_pages\n  }\n}": typeof types.DepartmentsDocument;
   "query Languages($params: SearchPaginationInput!) {\n  languages(params: $params) {\n    items {\n      id\n      name\n      native_name\n      iso2\n    }\n    total\n    page\n    limit\n    total_pages\n  }\n}": typeof types.LanguagesDocument;
   "query Me {\n  me {\n    id\n    is_verified\n    role\n    id\n  }\n}": typeof types.MeDocument;
@@ -59,11 +62,13 @@ type Documents = {
   "query Profile($userId: ID!) {\n  profile(userId: $userId) {\n    languages {\n      name\n      proficiency\n    }\n    skills {\n      name\n      mastery\n      categoryId\n    }\n  }\n}": typeof types.ProfileDocument;
   "query Projects($params: SearchPaginationInput!) {\n  projects(params: $params) {\n    items {\n      id\n      name\n      domain\n      description\n      start_date\n      end_date\n      environment\n    }\n    total_pages\n    total\n    limit\n    page\n  }\n}": typeof types.ProjectsDocument;
   "query Skills($params: SearchPaginationInput!) {\n  skills(params: $params) {\n    items {\n      id\n      name\n      created_at\n      category_name\n      category_parent_name\n      category {\n        id\n        name\n      }\n    }\n    total\n    page\n    limit\n    total_pages\n  }\n}\n\nquery SkillCategories {\n  skillCategories {\n    id\n    name\n    children {\n      id\n      name\n    }\n    parent {\n      id\n      name\n    }\n  }\n}": typeof types.SkillsDocument;
-  "query CvsByUserId($params: SearchPaginationInput!, $userId: ID!) {\n  cvsByUserId(params: $params, userId: $userId) {\n    items {\n      id\n      name\n      education\n      description\n      user {\n        email\n      }\n    }\n    total\n    page\n    limit\n    total_pages\n  }\n}": typeof types.CvsByUserIdDocument;
+  "query CvsByUserId($params: SearchPaginationInput!, $userId: ID!) {\n  cvsByUserId(params: $params, userId: $userId) {\n    items {\n      id\n      name\n      education\n      description\n      user {\n        id\n        email\n      }\n    }\n    total\n    page\n    limit\n    total_pages\n  }\n}": typeof types.CvsByUserIdDocument;
   "query user($userId: ID!) {\n  user(userId: $userId) {\n    id\n    email\n    created_at\n    department {\n      id\n      name\n    }\n    position {\n      id\n      name\n    }\n    profile {\n      avatar\n      email\n      first_name\n      last_name\n      full_name\n      created_at\n    }\n  }\n  departments {\n    items {\n      id\n      name\n    }\n  }\n  positions {\n    items {\n      id\n      name\n    }\n  }\n}": typeof types.UserDocument;
   "query Users($params: SearchPaginationInput!) {\n  users(params: $params) {\n    items {\n      id\n      department {\n        id\n        name\n      }\n      position {\n        id\n        name\n      }\n      email\n      role\n      is_verified\n      profile {\n        last_name\n        first_name\n        avatar\n      }\n    }\n    total\n    page\n    limit\n    total_pages\n  }\n}": typeof types.UsersDocument;
 };
 const documents: Documents = {
+  "mutation AddCvSkill($skill: AddCvSkillInput!) {\n  addCvSkill(skill: $skill) {\n    skills {\n      name\n      mastery\n      categoryId\n    }\n  }\n}":
+    types.AddCvSkillDocument,
   "mutation AddProfileLanguage($language: AddProfileLanguageInput!) {\n  addProfileLanguage(language: $language) {\n    languages {\n      name\n      proficiency\n    }\n  }\n}":
     types.AddProfileLanguageDocument,
   "mutation AddProfileSkill($skill: AddProfileSkillInput!) {\n  addProfileSkill(skill: $skill) {\n    skills {\n      name\n      mastery\n      categoryId\n    }\n  }\n}":
@@ -86,6 +91,8 @@ const documents: Documents = {
     types.CreateUserDocument,
   "mutation DeleteCv($cv: DeleteCvInput!) {\n  deleteCv(cv: $cv) {\n    affected\n  }\n}":
     types.DeleteCvDocument,
+  "mutation DeleteCvSkill($skill: DeleteCvSkillInput!) {\n  deleteCvSkill(skill: $skill) {\n    skills {\n      name\n      mastery\n      categoryId\n    }\n  }\n}":
+    types.DeleteCvSkillDocument,
   "mutation DeleteDepartment($department: DeleteDepartmentInput!) {\n  deleteDepartment(department: $department) {\n    affected\n  }\n}":
     types.DeleteDepartmentDocument,
   "mutation DeleteLanguage($language: DeleteLanguageInput!) {\n  deleteLanguage(language: $language) {\n    affected\n  }\n}":
@@ -114,6 +121,8 @@ const documents: Documents = {
     types.SignupDocument,
   "mutation UpdateCv($cv: UpdateCvInput!) {\n  updateCv(cv: $cv) {\n    id\n    name\n    education\n    description\n    user {\n      email\n    }\n  }\n}":
     types.UpdateCvDocument,
+  "mutation UpdateCvSkill($skill: UpdateCvSkillInput!) {\n  updateCvSkill(skill: $skill) {\n    skills {\n      name\n      mastery\n      categoryId\n    }\n  }\n}":
+    types.UpdateCvSkillDocument,
   "mutation UpdateDepartment($department: UpdateDepartmentInput!) {\n  updateDepartment(department: $department) {\n    id\n    name\n  }\n}":
     types.UpdateDepartmentDocument,
   "mutation UpdateLanguage($language: UpdateLanguageInput!) {\n  updateLanguage(language: $language) {\n    id\n    name\n    iso2\n    native_name\n  }\n}":
@@ -138,7 +147,7 @@ const documents: Documents = {
     types.UploadAvatarDocument,
   "mutation verifyMail($otp: String!) {\n  verifyMail(mail: {otp: $otp})\n}":
     types.VerifyMailDocument,
-  "query Cvs($params: SearchPaginationInput!) {\n  cvs(params: $params) {\n    items {\n      id\n      name\n      education\n      description\n      user {\n        email\n      }\n    }\n    total\n    page\n    limit\n    total_pages\n  }\n}":
+  "query Cvs($params: SearchPaginationInput!) {\n  cvs(params: $params) {\n    items {\n      id\n      name\n      education\n      description\n      user {\n        id\n        email\n      }\n    }\n    total\n    page\n    limit\n    total_pages\n  }\n}\n\nquery Cv($cvId: ID!) {\n  cv(cvId: $cvId) {\n    id\n    name\n    education\n    description\n    user {\n      id\n      email\n    }\n    skills {\n      name\n      mastery\n      categoryId\n    }\n  }\n}":
     types.CvsDocument,
   "query Departments($params: SearchPaginationInput!) {\n  departments(params: $params) {\n    items {\n      id\n      name\n    }\n    total\n    page\n    limit\n    total_pages\n  }\n}":
     types.DepartmentsDocument,
@@ -153,7 +162,7 @@ const documents: Documents = {
     types.ProjectsDocument,
   "query Skills($params: SearchPaginationInput!) {\n  skills(params: $params) {\n    items {\n      id\n      name\n      created_at\n      category_name\n      category_parent_name\n      category {\n        id\n        name\n      }\n    }\n    total\n    page\n    limit\n    total_pages\n  }\n}\n\nquery SkillCategories {\n  skillCategories {\n    id\n    name\n    children {\n      id\n      name\n    }\n    parent {\n      id\n      name\n    }\n  }\n}":
     types.SkillsDocument,
-  "query CvsByUserId($params: SearchPaginationInput!, $userId: ID!) {\n  cvsByUserId(params: $params, userId: $userId) {\n    items {\n      id\n      name\n      education\n      description\n      user {\n        email\n      }\n    }\n    total\n    page\n    limit\n    total_pages\n  }\n}":
+  "query CvsByUserId($params: SearchPaginationInput!, $userId: ID!) {\n  cvsByUserId(params: $params, userId: $userId) {\n    items {\n      id\n      name\n      education\n      description\n      user {\n        id\n        email\n      }\n    }\n    total\n    page\n    limit\n    total_pages\n  }\n}":
     types.CvsByUserIdDocument,
   "query user($userId: ID!) {\n  user(userId: $userId) {\n    id\n    email\n    created_at\n    department {\n      id\n      name\n    }\n    position {\n      id\n      name\n    }\n    profile {\n      avatar\n      email\n      first_name\n      last_name\n      full_name\n      created_at\n    }\n  }\n  departments {\n    items {\n      id\n      name\n    }\n  }\n  positions {\n    items {\n      id\n      name\n    }\n  }\n}":
     types.UserDocument,
@@ -175,6 +184,12 @@ const documents: Documents = {
  */
 export function gql(source: string): unknown;
 
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
+  source: "mutation AddCvSkill($skill: AddCvSkillInput!) {\n  addCvSkill(skill: $skill) {\n    skills {\n      name\n      mastery\n      categoryId\n    }\n  }\n}",
+): (typeof documents)["mutation AddCvSkill($skill: AddCvSkillInput!) {\n  addCvSkill(skill: $skill) {\n    skills {\n      name\n      mastery\n      categoryId\n    }\n  }\n}"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -241,6 +256,12 @@ export function gql(
 export function gql(
   source: "mutation DeleteCv($cv: DeleteCvInput!) {\n  deleteCv(cv: $cv) {\n    affected\n  }\n}",
 ): (typeof documents)["mutation DeleteCv($cv: DeleteCvInput!) {\n  deleteCv(cv: $cv) {\n    affected\n  }\n}"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
+  source: "mutation DeleteCvSkill($skill: DeleteCvSkillInput!) {\n  deleteCvSkill(skill: $skill) {\n    skills {\n      name\n      mastery\n      categoryId\n    }\n  }\n}",
+): (typeof documents)["mutation DeleteCvSkill($skill: DeleteCvSkillInput!) {\n  deleteCvSkill(skill: $skill) {\n    skills {\n      name\n      mastery\n      categoryId\n    }\n  }\n}"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -329,6 +350,12 @@ export function gql(
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
+  source: "mutation UpdateCvSkill($skill: UpdateCvSkillInput!) {\n  updateCvSkill(skill: $skill) {\n    skills {\n      name\n      mastery\n      categoryId\n    }\n  }\n}",
+): (typeof documents)["mutation UpdateCvSkill($skill: UpdateCvSkillInput!) {\n  updateCvSkill(skill: $skill) {\n    skills {\n      name\n      mastery\n      categoryId\n    }\n  }\n}"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
   source: "mutation UpdateDepartment($department: UpdateDepartmentInput!) {\n  updateDepartment(department: $department) {\n    id\n    name\n  }\n}",
 ): (typeof documents)["mutation UpdateDepartment($department: UpdateDepartmentInput!) {\n  updateDepartment(department: $department) {\n    id\n    name\n  }\n}"];
 /**
@@ -401,8 +428,8 @@ export function gql(
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
-  source: "query Cvs($params: SearchPaginationInput!) {\n  cvs(params: $params) {\n    items {\n      id\n      name\n      education\n      description\n      user {\n        email\n      }\n    }\n    total\n    page\n    limit\n    total_pages\n  }\n}",
-): (typeof documents)["query Cvs($params: SearchPaginationInput!) {\n  cvs(params: $params) {\n    items {\n      id\n      name\n      education\n      description\n      user {\n        email\n      }\n    }\n    total\n    page\n    limit\n    total_pages\n  }\n}"];
+  source: "query Cvs($params: SearchPaginationInput!) {\n  cvs(params: $params) {\n    items {\n      id\n      name\n      education\n      description\n      user {\n        id\n        email\n      }\n    }\n    total\n    page\n    limit\n    total_pages\n  }\n}\n\nquery Cv($cvId: ID!) {\n  cv(cvId: $cvId) {\n    id\n    name\n    education\n    description\n    user {\n      id\n      email\n    }\n    skills {\n      name\n      mastery\n      categoryId\n    }\n  }\n}",
+): (typeof documents)["query Cvs($params: SearchPaginationInput!) {\n  cvs(params: $params) {\n    items {\n      id\n      name\n      education\n      description\n      user {\n        id\n        email\n      }\n    }\n    total\n    page\n    limit\n    total_pages\n  }\n}\n\nquery Cv($cvId: ID!) {\n  cv(cvId: $cvId) {\n    id\n    name\n    education\n    description\n    user {\n      id\n      email\n    }\n    skills {\n      name\n      mastery\n      categoryId\n    }\n  }\n}"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -449,8 +476,8 @@ export function gql(
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
-  source: "query CvsByUserId($params: SearchPaginationInput!, $userId: ID!) {\n  cvsByUserId(params: $params, userId: $userId) {\n    items {\n      id\n      name\n      education\n      description\n      user {\n        email\n      }\n    }\n    total\n    page\n    limit\n    total_pages\n  }\n}",
-): (typeof documents)["query CvsByUserId($params: SearchPaginationInput!, $userId: ID!) {\n  cvsByUserId(params: $params, userId: $userId) {\n    items {\n      id\n      name\n      education\n      description\n      user {\n        email\n      }\n    }\n    total\n    page\n    limit\n    total_pages\n  }\n}"];
+  source: "query CvsByUserId($params: SearchPaginationInput!, $userId: ID!) {\n  cvsByUserId(params: $params, userId: $userId) {\n    items {\n      id\n      name\n      education\n      description\n      user {\n        id\n        email\n      }\n    }\n    total\n    page\n    limit\n    total_pages\n  }\n}",
+): (typeof documents)["query CvsByUserId($params: SearchPaginationInput!, $userId: ID!) {\n  cvsByUserId(params: $params, userId: $userId) {\n    items {\n      id\n      name\n      education\n      description\n      user {\n        id\n        email\n      }\n    }\n    total\n    page\n    limit\n    total_pages\n  }\n}"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

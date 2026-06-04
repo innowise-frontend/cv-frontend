@@ -1,0 +1,9 @@
+mutation DeleteCvSkill($skill: DeleteCvSkillInput!) {
+  deleteCvSkill(skill: $skill) {
+    skills {
+      name
+      mastery
+      categoryId
+    }
+  }
+}

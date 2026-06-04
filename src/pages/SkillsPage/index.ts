@@ -1,1 +1,10 @@
 export { SkillsPage } from "./SkillsPage";
+export { AddSkillModal } from "./components/AddSkillModal/AddSkillModal";
+export { CreateSkillModal } from "./components/CreateSkillModal/CreateSkillModal";
+export { DeleteSkillModal } from "./components/DeleteSkillModal/DeleteSkillModal";
+export { GroupedSkillsView } from "./components/GroupedSkillsView/GroupedSkillsView";
+export { RemoveSkillModal } from "./components/RemoveSkillModal/RemoveSkillModal";
+export { SkillProgressBar } from "./components/SkillProgressBar/SkillProgressBar";
+export { SkillsEditor } from "./components/SkillsEditor/SkillsEditor";
+export { SkillsTable } from "./components/SkillsTable/SkillsTable";
+export { UpdateSkillModal } from "./components/UpdateSkillModal/UpdateSkillModal";

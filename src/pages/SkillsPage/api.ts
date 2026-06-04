@@ -1,4 +1,5 @@
 import { useMutation, useQuery, useQueryClient, UseQueryOptions } from "@tanstack/react-query";
+import { t } from "i18next";
 import { toast } from "sonner";
 import { SortOrder } from "@constants/sortOptions";
 import { getErrorToastMessage } from "@root/lib";
@@ -81,6 +82,7 @@ export const useAddProfileSkillMutation = (
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["profile", userId] });
       onSuccess?.();
+      toast.success(t("page.skills.toast.added"));
     },
     onError: (error) => {
       toast.error(getErrorToastMessage(error));
@@ -99,6 +101,7 @@ export const useUpdateProfileSkillMutation = (
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["profile", userId] });
       onSuccess?.();
+      toast.success(t("page.skills.toast.updated"));
     },
     onError: (error) => {
       toast.error(getErrorToastMessage(error));
@@ -113,6 +116,7 @@ export const useDeleteProfileSkillsMutation = (userId: string) => {
     mutationFn: (payload: DeleteProfileSkillInput) => deleteProfileSkills(payload),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["profile", userId] });
+      toast.success(t("page.skills.toast.removed"));
     },
     onError: (error) => {
       toast.error(getErrorToastMessage(error));

@@ -2,7 +2,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { forwardRef } from "react";
 import { describe, expect, it, vi, beforeEach } from "vitest";
-import { CvDetails } from "./CvDetails";
+import { CvDetails } from "../CvDetails/CvDetails";
 
 const useCvQueryMock = vi.hoisted(() => vi.fn());
 const updateCvMutationMock = vi.hoisted(() => vi.fn());
@@ -15,7 +15,7 @@ const cvMock = {
   description: "Highly motivated engineer",
 };
 
-vi.mock("../api", () => ({
+vi.mock("../../api", () => ({
   useCvQuery: (cvId: string) => useCvQueryMock(cvId),
 }));
 
@@ -23,11 +23,16 @@ vi.mock("@tanstack/react-router", () => ({
   useParams: () => ({ cvId: "cv-762" }),
 }));
 
-vi.mock("@tanstack/react-query", () => ({
-  useQueryClient: () => ({
-    invalidateQueries: invalidateQueriesMock,
-  }),
-}));
+vi.mock("@tanstack/react-query", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@tanstack/react-query")>();
+
+  return {
+    ...actual,
+    useQueryClient: () => ({
+      invalidateQueries: invalidateQueriesMock,
+    }),
+  };
+});
 
 vi.mock("@root/pages/UserCvsPage/api", () => ({
   useUpdateCvMutation: ({ onSuccess }: { onSuccess?: () => Promise<void> }) => ({

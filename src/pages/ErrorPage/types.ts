@@ -1,4 +1,5 @@
 export interface ErrorPageProps {
-  error: string;
+  error?: string;
   deviceError?: boolean;
+  defaultUrlBack?: string;
 }

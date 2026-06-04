@@ -1,6 +1,6 @@
 import { Modal, TableActions, TableColumnHeader } from "@components/shared";
+import { DeleteSkillModal, UpdateSkillModal } from "@pages/SkillsPage";
 import i18n from "@root/i18n/i18n";
-import { DeleteSkillModal, UpdateSkillModal } from "../index";
 import { SkillCategoriesData } from "./types";
 import { columnHelper, getCategoryName, getCategoryTypeName } from "./utils";
 

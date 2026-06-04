@@ -1,11 +1,16 @@
-import { Mastery } from "@services/graphql/__generated__/graphql";
+import { Mastery } from "@root/services/graphql/__generated__/graphql";
 
-export interface SkillProgressBarProps {
-  userId: string;
+export type UpdateSkillDraft = {
+  mastery: Mastery;
+};
+
+export type SkillProgressBarProps = {
   name: string;
   mastery: Mastery;
-  categoryId?: string | null;
+  masteryOptions: { value: string; label: string }[];
+  disabled?: boolean;
   chosen?: boolean;
   isDeleteMode?: boolean;
   onClick?: () => void;
-}
+  onUpdate: (draft: UpdateSkillDraft) => Promise<unknown> | unknown;
+};

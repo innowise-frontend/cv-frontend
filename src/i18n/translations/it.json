@@ -35,6 +35,7 @@
       "oops": "Ops",
       "goBack": "Indietro",
       "defaultErrorMessage": "Errore! Impossibile modificare la password",
+      "noAccess": "Accesso negato",
       "defaultNotFoundMessage": "Hmm… questa non sembra essere la pagina che stavi cercando. \n Ti riportiamo sulla strada giusta.",
       "api": {
         "forbidden": "Non hai i permessi per eseguire questa azione",
@@ -147,7 +148,12 @@
       "remove": "Rimuovi",
       "update": "Aggiorna",
       "save": "Salva",
-      "noData": "Nessun dato"
+      "noData": "Nessun dato",
+      "toast": {
+        "added": "Language added",
+        "updated": "Language updated",
+        "removed": "Language removed"
+      }
     },
     "skills": {
       "currentSkills": "Competenze",
@@ -174,6 +180,11 @@
       "update": "Aggiorna",
       "save": "Salva",
       "noData": "Nessun dato",
+      "toast": {
+        "added": "Skill added",
+        "updated": "Skill updated",
+        "removed": "Skills removed"
+      },
       "categoryLabel": "Categoria",
       "category": {}
     },

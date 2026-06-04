@@ -35,6 +35,7 @@
       "oops": "Ups",
       "goBack": "Zurück",
       "defaultErrorMessage": "Fehler! Passwort wurde nicht geändert",
+      "noAccess": "Kein Zugriff",
       "defaultNotFoundMessage": "Hm… diese Seite scheint nicht die zu sein, nach der Sie gesucht haben. \n Wir bringen Sie wieder auf den richtigen Weg.",
       "api": {
         "forbidden": "Sie haben keine Rechte für diese Aktion",
@@ -147,7 +148,12 @@
       "remove": "Entfernen",
       "update": "Aktualisieren",
       "save": "Speichern",
-      "noData": "Keine Daten"
+      "noData": "Keine Daten",
+      "toast": {
+        "added": "Language added",
+        "updated": "Language updated",
+        "removed": "Language removed"
+      }
     },
     "skills": {
       "currentSkills": "Fähigkeiten",
@@ -174,6 +180,11 @@
       "update": "Aktualisieren",
       "save": "Speichern",
       "noData": "Keine Daten",
+      "toast": {
+        "added": "Skill added",
+        "updated": "Skill updated",
+        "removed": "Skills removed"
+      },
       "categoryLabel": "Kategorie",
       "category": {}
     },

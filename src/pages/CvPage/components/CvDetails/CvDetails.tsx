@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { Button, Input, Textarea } from "@components/shared";
 import { ErrorPage } from "@root/pages/ErrorPage";
 import { useUpdateCvMutation } from "@root/pages/UserCvsPage/api";
-import { useCvQuery } from "../api";
+import { useCvQuery } from "../../api";
 
 export const CvDetails = () => {
   const { t } = useTranslation();
@@ -83,7 +83,6 @@ export const CvDetails = () => {
             onChange={(e) => setDraft((prev) => ({ ...prev, description: e.target.value }))}
           />
         </div>
-
         <div className="mt-10 flex justify-end">
           <Button
             type="button"
