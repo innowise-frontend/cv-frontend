@@ -1,17 +1,37 @@
 import { useTranslation } from "react-i18next";
 import { Button, Modal } from "@components/shared";
 import { useModalContext } from "@components/shared/Modal/useModalContext";
-import { DeleteProjectModalProps } from "./types";
 import { useDeleteProjectMutation } from "../../api";
+import type { DeleteProjectModalProps } from "./types";
 
-export const DeleteProjectModal = ({ projectId, name }: DeleteProjectModalProps) => {
+export const DeleteProjectModal = ({
+  projectId,
+  name,
+  onConfirm,
+  isSubmitting: isSubmittingProp,
+  headerTitle,
+  bodyText,
+  confirmLabel,
+}: DeleteProjectModalProps) => {
   const { t } = useTranslation();
   const { closeModal } = useModalContext();
-  const { mutate, isPending } = useDeleteProjectMutation({
+  const { mutate, isPending: isDeletePending } = useDeleteProjectMutation({
     onSuccess: () => {
       closeModal();
     },
   });
+
+  const isPending = isSubmittingProp ?? isDeletePending;
+
+  const handleConfirm = () => {
+    if (onConfirm) {
+      onConfirm(projectId, { close: closeModal });
+
+      return;
+    }
+
+    mutate({ projectId });
+  };
 
   return (
     <>
@@ -19,8 +39,8 @@ export const DeleteProjectModal = ({ projectId, name }: DeleteProjectModalProps)
         {t("page.projects.delete")}
       </Modal.Trigger>
       <Modal.Content>
-        <Modal.Header>{t("page.projects.deleteProject")}</Modal.Header>
-        <Modal.Body>{t("page.projects.confirmDeleteProject", { name })}</Modal.Body>
+        <Modal.Header>{headerTitle ?? t("page.projects.deleteProject")}</Modal.Header>
+        <Modal.Body>{bodyText ?? t("page.projects.confirmDeleteProject", { name })}</Modal.Body>
         <Modal.Footer>
           <Modal.Close variant="outline" className="w-40">
             {t("page.projects.cancel")}
@@ -30,11 +50,9 @@ export const DeleteProjectModal = ({ projectId, name }: DeleteProjectModalProps)
             variant="filled"
             className="w-40"
             disabled={isPending}
-            onClick={() => {
-              mutate({ projectId });
-            }}
+            onClick={handleConfirm}
           >
-            {t("page.projects.confirm")}
+            {confirmLabel ?? t("page.projects.confirm")}
           </Button>
         </Modal.Footer>
       </Modal.Content>

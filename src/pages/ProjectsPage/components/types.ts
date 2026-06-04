@@ -5,7 +5,10 @@ export interface ProjectFormValues {
   startDate: string;
   endDate: string;
   environment: string[];
+  responsibilities?: string;
 }
+
+export type ProjectFormDisabledFields = Partial<Record<keyof ProjectFormValues, boolean>>;
 
 export const defaultProjectFormValues: ProjectFormValues = {
   name: "",
@@ -14,4 +17,5 @@ export const defaultProjectFormValues: ProjectFormValues = {
   startDate: "",
   endDate: "",
   environment: [],
+  responsibilities: "",
 };

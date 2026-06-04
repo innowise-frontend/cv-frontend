@@ -207,6 +207,25 @@
         "skills": "Навыки",
         "projects": "Проекты",
         "preview": "Предпросмотр"
+      },
+      "projects": {
+        "addProject": "Добавить проект",
+        "updateProject": "Обновить проект",
+        "removeProject": "Удалить проект из CV",
+        "responsibilities": "Обязанности",
+        "add": "Добавить",
+        "update": "Обновить",
+        "edit": "Редактировать",
+        "delete": "Удалить",
+        "cancel": "Отмена",
+        "confirm": "Подтвердить",
+        "noData": "Проектов пока нет",
+        "confirmRemoveProject": "Вы уверены, что хотите удалить проект {{name}}?",
+        "toast": {
+          "added": "Проект добавлен в CV",
+          "updated": "Проект в CV обновлён",
+          "removed": "Проект удалён из CV"
+        }
       }
     },
     "departments": {

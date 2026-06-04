@@ -208,6 +208,25 @@ export interface TranslationTypes {
         projects: string;
         preview: string;
       };
+      projects: {
+        addProject: string;
+        updateProject: string;
+        removeProject: string;
+        responsibilities: string;
+        add: string;
+        update: string;
+        edit: string;
+        delete: string;
+        cancel: string;
+        confirm: string;
+        noData: string;
+        confirmRemoveProject: string;
+        toast: {
+          added: string;
+          updated: string;
+          removed: string;
+        };
+      };
     };
     departments: {
       name: string;

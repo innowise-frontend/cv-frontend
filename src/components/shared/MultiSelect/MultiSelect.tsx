@@ -161,7 +161,7 @@ export function MultiSelect<
             <ChevronDownIcon className="pointer-events-none size-4 shrink-0 text-gray-5 dark:text-gray-5" />
           </PopoverTrigger>
 
-          {label && (
+          {label && !disabled && (
             <Label
               htmlFor={triggerId}
               className={cn(

@@ -1,0 +1,1 @@
+export { CvProjectsTable } from "./CvProjectsTable";

@@ -71,9 +71,11 @@ export const Input = forwardRef<HTMLInputElement, InputWithLabelProps>(
             )}
             {...props}
           />
-          <Label htmlFor={generatedId} className={cn("", error && "text-red")}>
-            {label}
-          </Label>
+          {label && !disabled && (
+            <Label htmlFor={generatedId} className={cn("", error && "text-red")}>
+              {label}
+            </Label>
+          )}
 
           {isPasswordField && (
             <button

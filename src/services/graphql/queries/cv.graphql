@@ -1,0 +1,26 @@
+query Cv($cvId: ID!) {
+  cv(cvId: $cvId) {
+    id
+    name
+    education
+    description
+    user {
+      id
+      email
+    }
+    projects {
+      id
+      name
+      domain
+      description
+      start_date
+      end_date
+      environment
+      responsibilities
+      roles
+      project {
+        id
+      }
+    }
+  }
+}

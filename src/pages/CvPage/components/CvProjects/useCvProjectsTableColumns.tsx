@@ -6,32 +6,52 @@ import {
   TableActions,
   TableColumnHeader,
 } from "@components/shared";
-import { DeleteProjectModal, UpdateProjectModal } from "..";
-import { ProjectsTableRow } from "./types";
+import { DeleteProjectModal, UpdateProjectModal } from "@pages/ProjectsPage/components";
+import type { ProjectsTableRow } from "@pages/ProjectsPage/components/ProjectsTable/types";
+import { SortOrder } from "@root/constants";
+import type { CvProjectsSortBy } from "./types";
 import type { ReactNode } from "react";
 
-export type ProjectsTableColumnsOptions = {
+export type CvProjectsTableColumnsOptions = {
+  currentSort: SortOrder;
+  currentSortBy: CvProjectsSortBy;
+  onSort: (sortBy: CvProjectsSortBy) => void;
   renderUpdateModal?: (row: ProjectsTableRow) => ReactNode;
   renderDeleteModal?: (row: ProjectsTableRow) => ReactNode;
 };
 
-export const useProjectsTableColumns = (options?: ProjectsTableColumnsOptions) => {
+export const useCvProjectsTableColumns = ({
+  currentSort,
+  currentSortBy,
+  onSort,
+  renderUpdateModal,
+  renderDeleteModal,
+}: CvProjectsTableColumnsOptions) => {
   const { t } = useTranslation();
   const columnHelper = createColumnHelper<ProjectsTableRow>();
 
+  const getSortOrder = (column: CvProjectsSortBy) =>
+    currentSortBy === column ? currentSort : undefined;
+
   const columns = [
     columnHelper.accessor("name", {
-      header: (meta) => (
+      header: () => (
         <TableColumnHeader
           title={t("page.projects.name")}
-          sortOrder={meta.table.options.meta?.currentSort}
-          onChangeSorting={meta.table.options.meta?.onSort}
+          sortOrder={getSortOrder("name")}
+          onChangeSorting={() => onSort("name")}
         />
       ),
       cell: ({ row }) => <span>{row.original.name}</span>,
     }),
     columnHelper.accessor("domain", {
-      header: () => <TableColumnHeader title={t("page.projects.domain")} />,
+      header: () => (
+        <TableColumnHeader
+          title={t("page.projects.domain")}
+          sortOrder={getSortOrder("domain")}
+          onChangeSorting={() => onSort("domain")}
+        />
+      ),
       cell: ({ row }) => <span>{row.original.domain}</span>,
     }),
     columnHelper.accessor("start_date", {
@@ -41,7 +61,13 @@ export const useProjectsTableColumns = (options?: ProjectsTableColumnsOptions) =
       ),
     }),
     columnHelper.accessor("end_date", {
-      header: () => <TableColumnHeader title={t("page.projects.endDate")} />,
+      header: () => (
+        <TableColumnHeader
+          title={t("page.projects.endDate")}
+          sortOrder={getSortOrder("end_date")}
+          onChangeSorting={() => onSort("end_date")}
+        />
+      ),
       cell: ({ row }) => (
         <span>
           {row.original.end_date
@@ -59,8 +85,8 @@ export const useProjectsTableColumns = (options?: ProjectsTableColumnsOptions) =
           {
             label: (
               <Modal>
-                {options?.renderUpdateModal ? (
-                  options.renderUpdateModal(row.original)
+                {renderUpdateModal ? (
+                  renderUpdateModal(row.original)
                 ) : (
                   <UpdateProjectModal
                     projectId={row.original.id}
@@ -80,8 +106,8 @@ export const useProjectsTableColumns = (options?: ProjectsTableColumnsOptions) =
           {
             label: (
               <Modal>
-                {options?.renderDeleteModal ? (
-                  options.renderDeleteModal(row.original)
+                {renderDeleteModal ? (
+                  renderDeleteModal(row.original)
                 ) : (
                   <DeleteProjectModal projectId={row.original.id} name={row.original.name ?? ""} />
                 )}

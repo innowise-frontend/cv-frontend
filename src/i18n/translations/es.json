@@ -207,6 +207,25 @@
         "skills": "Habilidades",
         "projects": "Proyectos",
         "preview": "Vista previa"
+      },
+      "projects": {
+        "addProject": "Añadir proyecto",
+        "updateProject": "Actualizar proyecto",
+        "removeProject": "Eliminar proyecto del CV",
+        "responsibilities": "Responsabilidades",
+        "add": "Añadir",
+        "update": "Actualizar",
+        "edit": "Editar",
+        "delete": "Eliminar",
+        "cancel": "Cancelar",
+        "confirm": "Confirmar",
+        "noData": "Aún no hay proyectos",
+        "confirmRemoveProject": "¿Seguro que quieres eliminar el proyecto {{name}}?",
+        "toast": {
+          "added": "Proyecto añadido al CV",
+          "updated": "Proyecto del CV actualizado",
+          "removed": "Proyecto eliminado del CV"
+        }
       }
     },
     "departments": {

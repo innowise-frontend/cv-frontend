@@ -207,6 +207,25 @@
         "skills": "Compétences",
         "projects": "Projets",
         "preview": "Aperçu"
+      },
+      "projects": {
+        "addProject": "Ajouter un projet",
+        "updateProject": "Mettre à jour le projet",
+        "removeProject": "Retirer le projet du CV",
+        "responsibilities": "Responsabilités",
+        "add": "Ajouter",
+        "update": "Mettre à jour",
+        "edit": "Modifier",
+        "delete": "Supprimer",
+        "cancel": "Annuler",
+        "confirm": "Confirmer",
+        "noData": "Aucun projet pour le moment",
+        "confirmRemoveProject": "Voulez-vous vraiment retirer le projet {{name}} ?",
+        "toast": {
+          "added": "Projet ajouté au CV",
+          "updated": "Projet CV mis à jour",
+          "removed": "Projet retiré du CV"
+        }
       }
     },
     "departments": {

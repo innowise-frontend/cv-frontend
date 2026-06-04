@@ -20,7 +20,8 @@ export interface TableProps<TData> {
   }[];
   currentViewOption?: number;
   onChangeViewOption?: (value: number) => void;
-  onSort?: () => void;
+  onSort?: (sortBy?: string) => void;
+  currentSortBy?: string;
   isLoading?: boolean;
   emptyMessage?: string;
   renderSubRow?: (row: Row<TData>) => React.ReactNode;
@@ -31,8 +32,9 @@ export type ColumnAlign = "left" | "center" | "right";
 declare module "@tanstack/react-table" {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface TableMeta<TData extends RowData> {
-    onSort?: () => void;
+    onSort?: (sortBy?: string) => void;
     currentSort?: "ASC" | "DESC";
+    currentSortBy?: string;
     actions?: {
       label: string;
       onClick: (params: string) => void;

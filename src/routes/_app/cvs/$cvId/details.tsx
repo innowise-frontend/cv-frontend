@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { TabsContent } from "@root/components/shared";
-import { CvDetails } from "@root/pages/CvPage/components/CvDetails";
+import { CvDetails } from "@root/pages/CvPage/components/CvDetails/CvDetails";
 
 export const Route = createFileRoute("/_app/cvs/$cvId/details")({
   component: function CvDetailsRoute() {

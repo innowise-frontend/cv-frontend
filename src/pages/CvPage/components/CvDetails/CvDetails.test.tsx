@@ -15,7 +15,7 @@ const cvMock = {
   description: "Highly motivated engineer",
 };
 
-vi.mock("../api", () => ({
+vi.mock("../../api", () => ({
   useCvQuery: (cvId: string) => useCvQueryMock(cvId),
 }));
 

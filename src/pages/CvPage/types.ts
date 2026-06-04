@@ -1,7 +1,9 @@
 import { UseQueryOptions } from "@tanstack/react-query";
-import { Cv } from "@services/graphql/__generated__/graphql";
+import type { CvQuery } from "@services/graphql/__generated__/graphql";
 
-export type CvQueryConfig = Omit<UseQueryOptions<Cv>, "queryKey" | "queryFn">;
+export type CvQueryData = NonNullable<CvQuery["cv"]>;
+
+export type CvQueryConfig = Omit<UseQueryOptions<CvQueryData>, "queryKey" | "queryFn">;
 
 export type CvPageProps = {
   children: React.ReactNode;

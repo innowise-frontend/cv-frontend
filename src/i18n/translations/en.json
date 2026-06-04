@@ -207,6 +207,25 @@
         "skills": "Skills",
         "projects": "Projects",
         "preview": "Preview"
+      },
+      "projects": {
+        "addProject": "Add project",
+        "updateProject": "Update project",
+        "removeProject": "Remove CV project",
+        "responsibilities": "Responsibilities",
+        "add": "Add",
+        "update": "Update",
+        "edit": "Edit",
+        "delete": "Delete",
+        "cancel": "Cancel",
+        "confirm": "Confirm",
+        "noData": "No projects yet",
+        "confirmRemoveProject": "Are you sure you want to remove project {{name}}?",
+        "toast": {
+          "added": "Project added to CV",
+          "updated": "CV project updated",
+          "removed": "CV project removed"
+        }
       }
     },
     "departments": {
