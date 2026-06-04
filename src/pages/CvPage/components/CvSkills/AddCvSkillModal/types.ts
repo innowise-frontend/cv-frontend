@@ -1,7 +1,7 @@
-import { SkillsQuery } from "@services/graphql/__generated__/graphql";
+import { ProfileQuery } from "@services/graphql/__generated__/graphql";
 
 export type AddCvSkillModalProps = {
   cvId: string;
-  skills: SkillsQuery["skills"]["items"] | undefined;
+  skills: ProfileQuery["profile"]["skills"] | undefined;
   addedSkillNames?: readonly string[];
 };

@@ -3,12 +3,17 @@ import { useTranslation } from "react-i18next";
 import PlusIcon from "@assets/icon/PlusIcon.svg?react";
 import { Modal, Select } from "@components/shared";
 import { useModalContext } from "@root/components/shared/Modal/useModalContext";
-import { Mastery } from "@services/graphql/__generated__/graphql";
+import { Mastery, ProfileQuery } from "@services/graphql/__generated__/graphql";
 import { AddSkillDraft, AddSkillModalProps } from "./types";
+
+const isProfileSkill = (
+  skill: NonNullable<AddSkillModalProps["skills"]>[number],
+): skill is ProfileQuery["profile"]["skills"][number] => "categoryId" in skill;
 
 export const AddSkillModal = ({
   skills,
   addedSkillNames = [],
+  masteryFromSkill = false,
   masteryOptions,
   disabled = false,
   onAdd,
@@ -31,7 +36,8 @@ export const AddSkillModal = ({
         .map((skill) => ({
           label: skill.name,
           value: skill.name,
-          categoryId: skill.category?.id ?? null,
+          categoryId: isProfileSkill(skill) ? (skill.categoryId ?? null) : (skill.category?.id ?? null),
+          mastery: isProfileSkill(skill) ? skill.mastery : undefined,
         })) ?? [],
     [skills, addedSkillNameSet],
   );
@@ -49,6 +55,7 @@ export const AddSkillModal = ({
       ...prev,
       name: value,
       categoryId: matched?.categoryId ?? null,
+      mastery: masteryFromSkill ? (matched?.mastery ?? "") : prev.mastery,
     }));
   };
 
@@ -77,18 +84,20 @@ export const AddSkillModal = ({
             value={draft.name}
             onValueChange={handleSelectSkill}
           />
-          <Select
-            list={masteryOptions}
-            label={t("page.skills.mastery")}
-            placeholder={t("page.skills.mastery")}
-            value={draft.mastery}
-            onValueChange={(value) =>
-              setDraft((prev) => ({
-                ...prev,
-                mastery: value as Mastery,
-              }))
-            }
-          />
+          {!masteryFromSkill && masteryOptions ? (
+            <Select
+              list={masteryOptions}
+              label={t("page.skills.mastery")}
+              placeholder={t("page.skills.mastery")}
+              value={draft.mastery}
+              onValueChange={(value) =>
+                setDraft((prev) => ({
+                  ...prev,
+                  mastery: value as Mastery,
+                }))
+              }
+            />
+          ) : null}
         </Modal.Body>
         <Modal.Footer className="flex justify-end gap-4">
           <Modal.Close variant="outline" className="w-40">
@@ -97,7 +106,7 @@ export const AddSkillModal = ({
           <Modal.Close
             variant="filled"
             className="w-40"
-            disabled={isAddDisabled || !draft.name || !draft.mastery}
+            disabled={isAddDisabled || !draft.name || (!masteryFromSkill && !draft.mastery)}
             onClick={handleAdd}
           >
             {t("page.skills.add")}

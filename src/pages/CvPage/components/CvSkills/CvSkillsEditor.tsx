@@ -4,7 +4,7 @@ import { Button, Modal } from "@components/shared";
 import { AddCvSkillModal, CvSkillProgressBar, RemoveCvSkillModal } from "@pages/CvPage";
 import { useCvQuery } from "@pages/CvPage/api";
 import { SkillsEditor } from "@pages/SkillsPage";
-import { useSkillCategoriesQuery, useSkillsSelectQuery } from "@pages/SkillsPage/api";
+import { useSkillCategoriesQuery, useUserSkillsQuery } from "@pages/SkillsPage/api";
 import { DeleteCvSkillInput } from "@services/graphql/__generated__/graphql";
 
 type CvSkillsEditorProps = {
@@ -14,7 +14,10 @@ type CvSkillsEditorProps = {
 export const CvSkillsEditor = ({ cvId }: CvSkillsEditorProps) => {
   const { t } = useTranslation();
   const { data: cvData } = useCvQuery(cvId);
-  const { data: skillsData } = useSkillsSelectQuery();
+  const cvOwnerId = cvData?.user?.id ?? "";
+  const { data: profileData } = useUserSkillsQuery(cvOwnerId, {
+    enabled: Boolean(cvOwnerId),
+  });
   const { data: categoriesData } = useSkillCategoriesQuery();
 
   return (
@@ -24,10 +27,8 @@ export const CvSkillsEditor = ({ cvId }: CvSkillsEditorProps) => {
       uncategorizedLabel={t("page.skills.uncategorized")}
       renderSkillBar={(skill, deleteContext) => (
         <CvSkillProgressBar
-          cvId={cvId}
           name={skill.name}
           mastery={skill.mastery}
-          categoryId={skill.categoryId}
           isDeleteMode={deleteContext.isDeleteMode}
           chosen={deleteContext.chosen}
           onClick={deleteContext.onClick}
@@ -64,7 +65,7 @@ export const CvSkillsEditor = ({ cvId }: CvSkillsEditorProps) => {
           <Modal>
             <AddCvSkillModal
               cvId={cvId}
-              skills={skillsData?.items}
+              skills={profileData?.skills ?? []}
               addedSkillNames={cvData?.skills?.map((skill) => skill.name) ?? []}
             />
             <Button

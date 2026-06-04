@@ -1,44 +1,30 @@
-import { useUpdateCvSkillMutation } from "@pages/CvPage/api";
-import { SkillProgressBar } from "@root/pages/SkillsPage";
-import { getMasteryOptions } from "@root/pages/SkillsPage/api";
-import { MASTERY_ORDER } from "@root/pages/SkillsPage/const";
-import { UpdateCvSkillInput } from "@services/graphql/__generated__/graphql";
+import { Button, ProgressBar } from "@components/shared";
+import { cn } from "@root/lib";
 import { CvSkillProgressBarProps } from "./types";
 
 export const CvSkillProgressBar = ({
-  cvId,
   name,
   mastery,
-  categoryId,
   chosen = false,
   isDeleteMode = false,
   onClick,
 }: CvSkillProgressBarProps) => {
-  const masteryOptions = getMasteryOptions(MASTERY_ORDER);
+  if (isDeleteMode) {
+    return (
+      <Button variant="ghost" className="capitalize" onClick={onClick}>
+        <ProgressBar
+          className={cn(
+            "px-2 cursor-pointer transition-colors duration-150 hover:bg-gray-7 dark:hover:bg-gray-5",
+            chosen && "*:text-gray *:dark:text-gray-8",
+          )}
+          key={name}
+          label={name}
+          mastery={mastery}
+          chosen={chosen}
+        />
+      </Button>
+    );
+  }
 
-  const { mutateAsync } = useUpdateCvSkillMutation(cvId, {
-    onSuccess: () => {},
-  });
-
-  return (
-    <SkillProgressBar
-      name={name}
-      mastery={mastery}
-      masteryOptions={masteryOptions}
-      disabled={!cvId}
-      chosen={chosen}
-      isDeleteMode={isDeleteMode}
-      onClick={onClick}
-      onUpdate={(draft) => {
-        const payload: UpdateCvSkillInput = {
-          cvId,
-          name,
-          mastery: draft.mastery,
-          categoryId: categoryId ?? null,
-        };
-
-        return mutateAsync(payload);
-      }}
-    />
-  );
+  return <ProgressBar className="px-2 capitalize" key={name} label={name} mastery={mastery} />;
 };

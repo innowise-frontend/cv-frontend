@@ -1,6 +1,7 @@
-import { Mastery, SkillsQuery } from "@root/services/graphql/__generated__/graphql";
+import { Mastery, ProfileQuery, SkillsQuery } from "@root/services/graphql/__generated__/graphql";
 
 type SkillItem = SkillsQuery["skills"]["items"][number];
+type ProfileSkillItem = ProfileQuery["profile"]["skills"][number];
 
 export type AddSkillDraft = {
   name: string;
@@ -8,10 +9,15 @@ export type AddSkillDraft = {
   categoryId?: string | null;
 };
 
-export type AddSkillModalProps = {
-  skills: SkillItem[] | undefined;
+type AddSkillModalPropsBase = {
+  skills: SkillItem[] | ProfileSkillItem[] | undefined;
   addedSkillNames?: readonly string[];
-  masteryOptions: { value: string; label: string }[];
   disabled?: boolean;
   onAdd: (draft: AddSkillDraft) => Promise<unknown> | unknown;
 };
+
+export type AddSkillModalProps = AddSkillModalPropsBase &
+  (
+    | { masteryFromSkill: true; masteryOptions?: never }
+    | { masteryFromSkill?: false; masteryOptions: { value: string; label: string }[] }
+  );
