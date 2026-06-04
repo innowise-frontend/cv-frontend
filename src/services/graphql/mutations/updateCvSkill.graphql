@@ -1,9 +1,0 @@
-mutation UpdateCvSkill($skill: UpdateCvSkillInput!) {
-  updateCvSkill(skill: $skill) {
-    skills {
-      name
-      mastery
-      categoryId
-    }
-  }
-}
