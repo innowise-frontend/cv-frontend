@@ -36,7 +36,9 @@ export const AddSkillModal = ({
         .map((skill) => ({
           label: skill.name,
           value: skill.name,
-          categoryId: isProfileSkill(skill) ? (skill.categoryId ?? null) : (skill.category?.id ?? null),
+          categoryId: isProfileSkill(skill)
+            ? (skill.categoryId ?? null)
+            : (skill.category?.id ?? null),
           mastery: isProfileSkill(skill) ? skill.mastery : undefined,
         })) ?? [],
     [skills, addedSkillNameSet],
