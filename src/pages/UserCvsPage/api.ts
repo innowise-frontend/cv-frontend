@@ -42,19 +42,20 @@ export const useCvsTableQuery = ({
     sort_by: "name",
   };
 
-  const queryScope = routeUserId ? "byUserId" : isAdmin ? "all" : "me";
+  const queryScope = isAdmin ? "all" : routeUserId ? "byUserId" : "me";
+  const queryOwnerId = isAdmin ? "all" : (routeUserId ?? authUserId);
 
-  const isEnabled = !!routeUserId || (!routeUserId && !isFirstLoad && (isAdmin || !!authUserId));
+  const isEnabled = isAdmin || !!routeUserId || (!routeUserId && !isFirstLoad && !!authUserId);
 
   return useQuery({
-    queryKey: ["cvs", queryScope, routeUserId ?? authUserId, search, page, limit, sortOrder],
+    queryKey: ["cvs", queryScope, queryOwnerId, search, page, limit, sortOrder],
     queryFn: () => {
-      if (routeUserId) {
-        return getUserCvs(routeUserId, params);
-      }
-
       if (isAdmin) {
         return getCvs(params);
+      }
+
+      if (routeUserId) {
+        return getUserCvs(routeUserId, params);
       }
 
       return getUserCvs(authUserId, params);

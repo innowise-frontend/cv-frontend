@@ -1,9 +1,10 @@
 import { useTranslation } from "react-i18next";
 import { Breadcrumbs } from "@components/shared";
+import { ProfileSkillsEditor } from "@components/UserProfile/Skills";
+import { SkillsTable } from "@pages/SkillsPage";
 import { ROUTES } from "@root/constants";
 import { useAuth } from "@root/hooks";
 import { getBreadcrumbsLink } from "@root/lib";
-import { SkillsEditor, SkillsTable } from "./components";
 
 export const SkillsPage = () => {
   const { t } = useTranslation();
@@ -15,7 +16,7 @@ export const SkillsPage = () => {
       {isAdmin && <SkillsTable />}
       {!isAdmin && (
         <div className="mx-auto flex flex-col w-[852px] pt-8">
-          <SkillsEditor userId={userId} />
+          <ProfileSkillsEditor userId={userId} />
         </div>
       )}
     </div>

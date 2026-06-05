@@ -227,6 +227,23 @@ export interface TranslationTypes {
           removed: string;
         };
       };
+      preview: {
+        exportPdf: string;
+        education: string;
+        languageProficiency: string;
+        domains: string;
+        projects: string;
+        projectRoles: string;
+        period: string;
+        responsibilities: string;
+        environment: string;
+        professionalSkills: string;
+        skillsColumn: string;
+        experienceColumn: string;
+        lastUsedColumn: string;
+        noProjects: string;
+        noSkills: string;
+      };
     };
     departments: {
       name: string;

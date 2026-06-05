@@ -6,6 +6,7 @@ query Cvs($params: SearchPaginationInput!) {
       education
       description
       user {
+        id
         email
       }
     }
@@ -13,5 +14,51 @@ query Cvs($params: SearchPaginationInput!) {
     page
     limit
     total_pages
+  }
+}
+
+query Cv($cvId: ID!) {
+  cv(cvId: $cvId) {
+    id
+    name
+    education
+    description
+    user {
+      id
+      email
+      position_name
+      profile {
+        first_name
+        last_name
+        full_name
+      }
+      position {
+        name
+      }
+    }
+    languages {
+      name
+      proficiency
+    }
+    skills {
+      name
+      mastery
+      categoryId
+    }
+    projects {
+      id
+      name
+      internal_name
+      description
+      domain
+      start_date
+      end_date
+      environment
+      roles
+      responsibilities
+      project {
+        id
+      }
+    }
   }
 }

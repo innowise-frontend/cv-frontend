@@ -83,7 +83,6 @@ export const CvDetails = () => {
             onChange={(e) => setDraft((prev) => ({ ...prev, description: e.target.value }))}
           />
         </div>
-
         <div className="mt-10 flex justify-end">
           <Button
             type="button"

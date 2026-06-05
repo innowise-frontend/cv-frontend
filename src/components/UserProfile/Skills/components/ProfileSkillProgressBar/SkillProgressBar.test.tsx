@@ -2,13 +2,13 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { type ReactNode } from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { Mastery } from "@services/graphql/__generated__/graphql";
-import { SkillProgressBar } from "./SkillProgressBar";
+import { ProfileSkillProgressBar } from "./SkillProgressBar";
 
 const useUpdateProfileSkillMutationMock = vi.hoisted(() => vi.fn());
 const closeModalMock = vi.hoisted(() => vi.fn());
 const mutateAsyncMock = vi.hoisted(() => vi.fn());
 
-vi.mock("../../api", () => ({
+vi.mock("@root/pages/SkillsPage/api", () => ({
   getMasteryOptions: () => [
     { label: "Novice", value: Mastery.Novice },
     { label: "Expert", value: Mastery.Expert },
@@ -55,31 +55,18 @@ const defaultProps = {
   categoryId: "c-1",
 };
 
-describe("SkillProgressBar", () => {
+describe("SkillProgressBar (UserProfile)", () => {
   beforeEach(() => {
     useUpdateProfileSkillMutationMock.mockReturnValue({ mutateAsync: mutateAsyncMock });
   });
 
   it("renders the progress bar with the skill name", () => {
-    render(<SkillProgressBar {...defaultProps} />);
+    render(<ProfileSkillProgressBar {...defaultProps} />);
     expect(screen.getByTestId("progress-bar")).toHaveTextContent("React");
   });
 
-  it("in delete mode renders a button instead of modal trigger", () => {
-    render(<SkillProgressBar {...defaultProps} isDeleteMode onClick={vi.fn()} />);
-    const buttons = screen.getAllByRole("button");
-    expect(buttons.length).toBeGreaterThan(0);
-  });
-
-  it("calls onClick when clicked in delete mode", () => {
-    const onClick = vi.fn();
-    render(<SkillProgressBar {...defaultProps} isDeleteMode onClick={onClick} />);
-    fireEvent.click(screen.getAllByRole("button")[0]);
-    expect(onClick).toHaveBeenCalled();
-  });
-
   it("calls mutateAsync when update button is clicked with changed mastery", () => {
-    render(<SkillProgressBar {...defaultProps} />);
+    render(<ProfileSkillProgressBar {...defaultProps} />);
     fireEvent.click(screen.getByRole("button", { name: "select-Skill mastery" }));
     fireEvent.click(screen.getByRole("button", { name: "Update" }));
     expect(mutateAsyncMock).toHaveBeenCalled();

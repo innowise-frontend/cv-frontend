@@ -35,6 +35,7 @@
       "oops": "Oups",
       "goBack": "Retour",
       "defaultErrorMessage": "Erreur ! Impossible de modifier le mot de passe",
+      "noAccess": "Accès refusé",
       "defaultNotFoundMessage": "Hum… il semble que ce ne soit pas la page que vous cherchiez. \n Revenons sur la bonne voie.",
       "api": {
         "forbidden": "Vous n'avez pas les droits pour effectuer cette action",
@@ -147,7 +148,12 @@
       "remove": "Supprimer",
       "update": "Mettre a jour",
       "save": "Enregistrer",
-      "noData": "Aucune donnée"
+      "noData": "Aucune donnée",
+      "toast": {
+        "added": "Language added",
+        "updated": "Language updated",
+        "removed": "Language removed"
+      }
     },
     "skills": {
       "currentSkills": "Compétences",
@@ -174,6 +180,11 @@
       "update": "Mettre a jour",
       "save": "Enregistrer",
       "noData": "Aucune donnée",
+      "toast": {
+        "added": "Skill added",
+        "updated": "Skill updated",
+        "removed": "Skills removed"
+      },
       "categoryLabel": "Catégorie",
       "category": {}
     },
@@ -226,6 +237,23 @@
           "updated": "Projet CV mis à jour",
           "removed": "Projet retiré du CV"
         }
+      },
+      "preview": {
+        "exportPdf": "Exporter PDF",
+        "education": "Formation",
+        "languageProficiency": "Maîtrise des langues",
+        "domains": "Domaines",
+        "projects": "Projets",
+        "projectRoles": "Rôles du projet",
+        "period": "Période",
+        "responsibilities": "Responsabilités",
+        "environment": "Environnement",
+        "professionalSkills": "Compétences professionnelles",
+        "skillsColumn": "COMPÉTENCES",
+        "experienceColumn": "EXPÉRIENCE EN ANNÉES",
+        "lastUsedColumn": "DERNIÈRE UTILISATION",
+        "noProjects": "Aucun projet n'a encore été ajouté à ce CV",
+        "noSkills": "Aucune compétence n'a encore été ajoutée à ce CV"
       }
     },
     "departments": {

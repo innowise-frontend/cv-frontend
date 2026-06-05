@@ -35,6 +35,7 @@
       "oops": "Ups",
       "goBack": "Wstecz",
       "defaultErrorMessage": "Błąd! Nie udało się zmienić hasła",
+      "noAccess": "Brak dostępu",
       "defaultNotFoundMessage": "Hmm… wygląda na to, że to nie jest strona, której szukasz. \n Pomóżmy Ci wrócić na właściwą ścieżkę.",
       "api": {
         "forbidden": "Nie masz uprawnień do wykonania tej akcji",
@@ -147,7 +148,12 @@
       "remove": "Usuń",
       "update": "Zaktualizuj",
       "save": "Zapisz",
-      "noData": "Brak danych"
+      "noData": "Brak danych",
+      "toast": {
+        "added": "Language added",
+        "updated": "Language updated",
+        "removed": "Language removed"
+      }
     },
     "skills": {
       "currentSkills": "Umiejętności",
@@ -174,6 +180,11 @@
       "update": "Zaktualizuj",
       "save": "Zapisz",
       "noData": "Brak danych",
+      "toast": {
+        "added": "Skill added",
+        "updated": "Skill updated",
+        "removed": "Skills removed"
+      },
       "categoryLabel": "Kategoria",
       "category": {}
     },
@@ -226,6 +237,23 @@
           "updated": "Projekt w CV zaktualizowany",
           "removed": "Projekt usunięty z CV"
         }
+      },
+      "preview": {
+        "exportPdf": "Eksportuj PDF",
+        "education": "Wykształcenie",
+        "languageProficiency": "Znajomość języków",
+        "domains": "Domeny",
+        "projects": "Projekty",
+        "projectRoles": "Role w projekcie",
+        "period": "Okres",
+        "responsibilities": "Obowiązki",
+        "environment": "Środowisko",
+        "professionalSkills": "Umiejętności zawodowe",
+        "skillsColumn": "UMIEJĘTNOŚCI",
+        "experienceColumn": "DOŚWIADCZENIE W LATACH",
+        "lastUsedColumn": "OSTATNIE UŻYCIE",
+        "noProjects": "Do tego CV nie dodano jeszcze projektów",
+        "noSkills": "Do tego CV nie dodano jeszcze umiejętności"
       }
     },
     "departments": {

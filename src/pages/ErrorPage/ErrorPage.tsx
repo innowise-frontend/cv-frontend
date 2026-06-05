@@ -5,12 +5,16 @@ import { Button } from "@components/shared";
 import { cn } from "@root/lib/utils";
 import { ErrorPageProps } from "./types";
 
-export const ErrorPage = ({ error, deviceError }: ErrorPageProps) => {
-  const { history } = useRouter();
+export const ErrorPage = ({ error, deviceError, defaultUrlBack }: ErrorPageProps) => {
+  const { history, navigate } = useRouter();
   const { t } = useTranslation();
 
   const handleGoBack = () => {
-    history.back();
+    if (defaultUrlBack) {
+      navigate({ to: defaultUrlBack });
+    } else {
+      history.back();
+    }
   };
 
   return (

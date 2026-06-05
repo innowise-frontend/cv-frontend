@@ -855,6 +855,23 @@ export type AddCvProjectMutation = {
   };
 };
 
+export type AddCvSkillMutationVariables = Exact<{
+  skill: AddCvSkillInput;
+}>;
+
+export type AddCvSkillMutation = {
+  __typename?: "Mutation";
+  addCvSkill: {
+    __typename?: "Cv";
+    skills: Array<{
+      __typename?: "SkillMastery";
+      name: string;
+      mastery: Mastery;
+      categoryId?: string | null;
+    }>;
+  };
+};
+
 export type AddProfileLanguageMutationVariables = Exact<{
   language: AddProfileLanguageInput;
 }>;
@@ -993,6 +1010,23 @@ export type DeleteCvMutation = {
   deleteCv: { __typename?: "DeleteResult"; affected: number };
 };
 
+export type DeleteCvSkillMutationVariables = Exact<{
+  skill: DeleteCvSkillInput;
+}>;
+
+export type DeleteCvSkillMutation = {
+  __typename?: "Mutation";
+  deleteCvSkill: {
+    __typename?: "Cv";
+    skills: Array<{
+      __typename?: "SkillMastery";
+      name: string;
+      mastery: Mastery;
+      categoryId?: string | null;
+    }>;
+  };
+};
+
 export type DeleteDepartmentMutationVariables = Exact<{
   department: DeleteDepartmentInput;
 }>;
@@ -1079,6 +1113,12 @@ export type DeleteUserMutation = {
   __typename?: "Mutation";
   deleteUser: { __typename?: "DeleteResult"; affected: number };
 };
+
+export type ExportPdfMutationVariables = Exact<{
+  pdf: ExportPdfInput;
+}>;
+
+export type ExportPdfMutation = { __typename?: "Mutation"; exportPdf: string };
 
 export type ForgotPasswordMutationVariables = Exact<{
   auth: ForgotPasswordInput;
@@ -1369,18 +1409,41 @@ export type CvQuery = {
     name: string;
     education?: string | null;
     description: string;
-    user?: { __typename?: "User"; id: string; email: string } | null;
+    user?: {
+      __typename?: "User";
+      id: string;
+      email: string;
+      profile: {
+        __typename?: "Profile";
+        first_name?: string | null;
+        last_name?: string | null;
+        full_name?: string | null;
+      };
+      position?: { __typename?: "Position"; name: string } | null;
+    } | null;
+    languages: Array<{
+      __typename?: "LanguageProficiency";
+      name: string;
+      proficiency: Proficiency;
+    }>;
+    skills: Array<{
+      __typename?: "SkillMastery";
+      name: string;
+      mastery: Mastery;
+      categoryId?: string | null;
+    }>;
     projects?: Array<{
       __typename?: "CvProject";
       id: string;
       name: string;
-      domain: string;
+      internal_name: string;
       description: string;
+      domain: string;
       start_date: string;
       end_date?: string | null;
       environment: Array<string>;
-      responsibilities: Array<string>;
       roles: Array<string>;
+      responsibilities: Array<string>;
       project: { __typename?: "Project"; id: string };
     }> | null;
   };
@@ -1404,7 +1467,7 @@ export type CvsQuery = {
       name: string;
       education?: string | null;
       description: string;
-      user?: { __typename?: "User"; email: string } | null;
+      user?: { __typename?: "User"; id: string; email: string } | null;
     }>;
   };
 };
@@ -1573,7 +1636,7 @@ export type CvsByUserIdQuery = {
       name: string;
       education?: string | null;
       description: string;
-      user?: { __typename?: "User"; email: string } | null;
+      user?: { __typename?: "User"; id: string; email: string } | null;
     }>;
   };
 };
@@ -1709,6 +1772,59 @@ export const AddCvProjectDocument = {
     },
   ],
 } as unknown as DocumentNode<AddCvProjectMutation, AddCvProjectMutationVariables>;
+export const AddCvSkillDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "AddCvSkill" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "skill" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "AddCvSkillInput" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "addCvSkill" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "skill" },
+                value: { kind: "Variable", name: { kind: "Name", value: "skill" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "skills" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "name" } },
+                      { kind: "Field", name: { kind: "Name", value: "mastery" } },
+                      { kind: "Field", name: { kind: "Name", value: "categoryId" } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<AddCvSkillMutation, AddCvSkillMutationVariables>;
 export const AddProfileLanguageDocument = {
   kind: "Document",
   definitions: [
@@ -2225,6 +2341,59 @@ export const DeleteCvDocument = {
     },
   ],
 } as unknown as DocumentNode<DeleteCvMutation, DeleteCvMutationVariables>;
+export const DeleteCvSkillDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "DeleteCvSkill" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "skill" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "DeleteCvSkillInput" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "deleteCvSkill" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "skill" },
+                value: { kind: "Variable", name: { kind: "Name", value: "skill" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "skills" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "name" } },
+                      { kind: "Field", name: { kind: "Name", value: "mastery" } },
+                      { kind: "Field", name: { kind: "Name", value: "categoryId" } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<DeleteCvSkillMutation, DeleteCvSkillMutationVariables>;
 export const DeleteDepartmentDocument = {
   kind: "Document",
   definitions: [
@@ -2573,6 +2742,42 @@ export const DeleteUserDocument = {
     },
   ],
 } as unknown as DocumentNode<DeleteUserMutation, DeleteUserMutationVariables>;
+export const ExportPdfDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "ExportPdf" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "pdf" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "ExportPdfInput" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "exportPdf" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "pdf" },
+                value: { kind: "Variable", name: { kind: "Name", value: "pdf" } },
+              },
+            ],
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<ExportPdfMutation, ExportPdfMutationVariables>;
 export const ForgotPasswordDocument = {
   kind: "Document",
   definitions: [
@@ -3599,6 +3804,49 @@ export const CvDocument = {
                     selections: [
                       { kind: "Field", name: { kind: "Name", value: "id" } },
                       { kind: "Field", name: { kind: "Name", value: "email" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "profile" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            { kind: "Field", name: { kind: "Name", value: "first_name" } },
+                            { kind: "Field", name: { kind: "Name", value: "last_name" } },
+                            { kind: "Field", name: { kind: "Name", value: "full_name" } },
+                          ],
+                        },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "position" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [{ kind: "Field", name: { kind: "Name", value: "name" } }],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "languages" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "name" } },
+                      { kind: "Field", name: { kind: "Name", value: "proficiency" } },
+                    ],
+                  },
+                },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "skills" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "name" } },
+                      { kind: "Field", name: { kind: "Name", value: "mastery" } },
+                      { kind: "Field", name: { kind: "Name", value: "categoryId" } },
                     ],
                   },
                 },
@@ -3610,13 +3858,14 @@ export const CvDocument = {
                     selections: [
                       { kind: "Field", name: { kind: "Name", value: "id" } },
                       { kind: "Field", name: { kind: "Name", value: "name" } },
-                      { kind: "Field", name: { kind: "Name", value: "domain" } },
+                      { kind: "Field", name: { kind: "Name", value: "internal_name" } },
                       { kind: "Field", name: { kind: "Name", value: "description" } },
+                      { kind: "Field", name: { kind: "Name", value: "domain" } },
                       { kind: "Field", name: { kind: "Name", value: "start_date" } },
                       { kind: "Field", name: { kind: "Name", value: "end_date" } },
                       { kind: "Field", name: { kind: "Name", value: "environment" } },
-                      { kind: "Field", name: { kind: "Name", value: "responsibilities" } },
                       { kind: "Field", name: { kind: "Name", value: "roles" } },
+                      { kind: "Field", name: { kind: "Name", value: "responsibilities" } },
                       {
                         kind: "Field",
                         name: { kind: "Name", value: "project" },
@@ -3684,7 +3933,10 @@ export const CvsDocument = {
                         name: { kind: "Name", value: "user" },
                         selectionSet: {
                           kind: "SelectionSet",
-                          selections: [{ kind: "Field", name: { kind: "Name", value: "email" } }],
+                          selections: [
+                            { kind: "Field", name: { kind: "Name", value: "id" } },
+                            { kind: "Field", name: { kind: "Name", value: "email" } },
+                          ],
                         },
                       },
                     ],
@@ -4204,7 +4456,10 @@ export const CvsByUserIdDocument = {
                         name: { kind: "Name", value: "user" },
                         selectionSet: {
                           kind: "SelectionSet",
-                          selections: [{ kind: "Field", name: { kind: "Name", value: "email" } }],
+                          selections: [
+                            { kind: "Field", name: { kind: "Name", value: "id" } },
+                            { kind: "Field", name: { kind: "Name", value: "email" } },
+                          ],
                         },
                       },
                     ],
