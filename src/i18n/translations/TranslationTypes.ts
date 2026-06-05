@@ -208,13 +208,32 @@ export interface TranslationTypes {
         projects: string;
         preview: string;
       };
+      projects: {
+        addProject: string;
+        updateProject: string;
+        removeProject: string;
+        responsibilities: string;
+        add: string;
+        update: string;
+        edit: string;
+        delete: string;
+        cancel: string;
+        confirm: string;
+        noData: string;
+        confirmRemoveProject: string;
+        toast: {
+          added: string;
+          updated: string;
+          removed: string;
+        };
+      };
       preview: {
         exportPdf: string;
         education: string;
         languageProficiency: string;
         domains: string;
         projects: string;
-        projectRoles: string;
+        roles: string;
         period: string;
         responsibilities: string;
         environment: string;
@@ -224,6 +243,7 @@ export interface TranslationTypes {
         lastUsedColumn: string;
         noProjects: string;
         noSkills: string;
+        tillNow: string;
       };
     };
     departments: {
@@ -267,6 +287,7 @@ export interface TranslationTypes {
       startDate: string;
       endDate: string;
       environment: string;
+      roles: string;
       createProject: string;
       updateProject: string;
       deleteProject: string;

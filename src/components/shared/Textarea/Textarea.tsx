@@ -19,6 +19,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaWithLabelProps>(
       defaultValue,
       onChange,
       placeholder,
+      disabled,
       ...props
     },
     ref,
@@ -53,7 +54,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaWithLabelProps>(
           )}
           {...props}
         />
-        {label && (
+        {label && !disabled && (
           <Label htmlFor={generatedId} className={cn("", error && "text-red dark:text-red")}>
             {label}
           </Label>

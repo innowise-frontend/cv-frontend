@@ -3,6 +3,7 @@ import { useMemo, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Spinner } from "@components/shared";
 import { useCvQuery, useExportCvPdfMutation } from "@pages/CvPage/api";
+import { useCvProjectRoleOptionsQuery } from "@pages/CvPage/components/CvProjects/api";
 import { useSkillCategoriesQuery } from "@pages/SkillsPage/api";
 import { ErrorPage } from "@root/pages/ErrorPage";
 import {
@@ -25,8 +26,14 @@ export const CvPreview = () => {
   const { cvId } = useParams({ from: "/_app/cvs/$cvId" });
   const { data: cv, isLoading, isError } = useCvQuery(cvId);
   const { data: categories } = useSkillCategoriesQuery();
+  const { data: roleOptions = [] } = useCvProjectRoleOptionsQuery();
   const documentRef = useRef<HTMLElement>(null);
   const { mutate: exportCvPdf, isPending: isExporting } = useExportCvPdfMutation();
+
+  const roleNameById = useMemo(
+    () => Object.fromEntries(roleOptions.map((role) => [role.value, role.label])),
+    [roleOptions],
+  );
 
   const skillGroups = useMemo(() => {
     if (!cv) return [];
@@ -92,11 +99,12 @@ export const CvPreview = () => {
 
             <CvPreviewProjects
               projects={projects}
-              tillNowLabel={t("page.projects.tillNow")}
+              roleNameById={roleNameById}
+              tillNowLabel={t("page.cvs.preview.tillNow")}
               emptyMessage={t("page.cvs.preview.noProjects")}
               labels={{
                 title: t("page.cvs.preview.projects"),
-                projectRoles: t("page.cvs.preview.projectRoles"),
+                roles: t("page.cvs.preview.roles"),
                 period: t("page.cvs.preview.period"),
                 responsibilities: t("page.cvs.preview.responsibilities"),
                 environment: t("page.cvs.preview.environment"),

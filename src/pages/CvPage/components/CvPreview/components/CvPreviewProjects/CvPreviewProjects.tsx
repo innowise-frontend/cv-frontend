@@ -1,8 +1,12 @@
 import { CvPreviewProjectsProps } from "./types";
-import { formatCvPreviewPeriod } from "../../utils";
+import { formatCvPreviewPeriod } from "../../utils/index";
+
+const formatProjectRoles = (roleIds: string[] | undefined, roleNameById: Record<string, string>) =>
+  roleIds?.map((roleId) => roleNameById[roleId] ?? roleId).join(", ") || "—";
 
 export const CvPreviewProjects = ({
   projects,
+  roleNameById = {},
   tillNowLabel,
   emptyMessage,
   labels,
@@ -26,8 +30,8 @@ export const CvPreviewProjects = ({
 
             <div className="flex min-w-0 flex-2 flex-col gap-3 text-sm">
               <div>
-                <p className="mb-1 font-bold">{labels.projectRoles}</p>
-                <p>{project?.roles?.join(", ") || "—"}</p>
+                <p className="mb-1 font-bold">{labels.roles}</p>
+                <p>{formatProjectRoles(project?.roles, roleNameById)}</p>
               </div>
               <div>
                 <p className="mb-1 font-bold">{labels.period}</p>

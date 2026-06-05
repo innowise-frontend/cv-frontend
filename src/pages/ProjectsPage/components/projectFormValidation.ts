@@ -22,6 +22,7 @@ export const projectFormValidation = (t: TFunction) =>
       environment: z
         .array(z.string())
         .min(1, { message: t("page.projects.validation.environmentRequired") }),
+      roles: z.array(z.string()),
     })
     .superRefine((data, ctx) => {
       const endDateLimit = data.endDate.trim() ? parseProjectDate(data.endDate) : undefined;

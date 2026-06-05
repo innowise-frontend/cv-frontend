@@ -7,3 +7,6 @@ export { getUserCvs } from "./getUserCvs/getUserCvs";
 export { addCvSkill } from "./addCvSkill/addCvSkill";
 export { deleteCvSkills } from "./deleteCvSkills/deleteCvSkills";
 export { exportPdf } from "./exportPdf/exportPdf";
+export { addCvProject } from "./addCvProject/addCvProject";
+export { updateCvProject } from "./updateCvProject/updateCvProject";
+export { removeCvProject } from "./removeCvProject/removeCvProject";

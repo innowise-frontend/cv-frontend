@@ -8,8 +8,14 @@ import {
 } from "@components/shared";
 import { DeleteProjectModal, UpdateProjectModal } from "..";
 import { ProjectsTableRow } from "./types";
+import type { ReactNode } from "react";
 
-export const useProjectsTableColumns = () => {
+export type ProjectsTableColumnsOptions = {
+  renderUpdateModal?: (row: ProjectsTableRow) => ReactNode;
+  renderDeleteModal?: (row: ProjectsTableRow) => ReactNode;
+};
+
+export const useProjectsTableColumns = (options?: ProjectsTableColumnsOptions) => {
   const { t } = useTranslation();
   const columnHelper = createColumnHelper<ProjectsTableRow>();
 
@@ -53,24 +59,34 @@ export const useProjectsTableColumns = () => {
           {
             label: (
               <Modal>
-                <UpdateProjectModal
-                  projectId={row.original.id}
-                  initialValues={{
-                    name: row.original.name ?? "",
-                    domain: row.original.domain ?? "",
-                    description: row.original.description ?? "",
-                    startDate: formatProjectDateDisplay(row.original.start_date),
-                    endDate: formatProjectDateDisplay(row.original.end_date),
-                    environment: row.original.environment ?? [],
-                  }}
-                />
+                {options?.renderUpdateModal ? (
+                  options.renderUpdateModal(row.original)
+                ) : (
+                  <UpdateProjectModal
+                    showRoles
+                    projectId={row.original.id}
+                    initialValues={{
+                      name: row.original.name ?? "",
+                      domain: row.original.domain ?? "",
+                      description: row.original.description ?? "",
+                      startDate: formatProjectDateDisplay(row.original.start_date),
+                      endDate: formatProjectDateDisplay(row.original.end_date),
+                      environment: row.original.environment ?? [],
+                      roles: [],
+                    }}
+                  />
+                )}
               </Modal>
             ),
           },
           {
             label: (
               <Modal>
-                <DeleteProjectModal projectId={row.original.id} name={row.original.name ?? ""} />
+                {options?.renderDeleteModal ? (
+                  options.renderDeleteModal(row.original)
+                ) : (
+                  <DeleteProjectModal projectId={row.original.id} name={row.original.name ?? ""} />
+                )}
               </Modal>
             ),
           },

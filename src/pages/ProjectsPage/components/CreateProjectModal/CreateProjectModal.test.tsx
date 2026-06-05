@@ -18,6 +18,7 @@ vi.mock("../../api", () => ({
   useProjectSkillsQuery: () => ({
     data: { items: [{ name: "React" }] },
   }),
+  useProjectRoleOptionsQuery: () => ({ data: [] }),
 }));
 
 vi.mock("@components/shared", async (importOriginal) => {

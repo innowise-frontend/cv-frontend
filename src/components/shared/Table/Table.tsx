@@ -21,6 +21,7 @@ export const Table = <TData,>({
   pagesAmount,
   currentPage,
   currentSort,
+  currentSortBy,
   onSort,
   onChangePage,
   onChangeViewOption,
@@ -51,6 +52,7 @@ export const Table = <TData,>({
     meta: {
       onSort: onSort,
       currentSort: currentSort,
+      currentSortBy: currentSortBy,
       actions: actions,
     },
     enableRowSelection: true,

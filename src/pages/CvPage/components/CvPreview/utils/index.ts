@@ -1,6 +1,11 @@
 export { CV_PREVIEW_DOCUMENT_ID } from "./constants";
 export { getCvOwnerName, getCvOwnerPosition, getUniqueDomains, formatLanguages } from "./cvData";
-export { formatCvPreviewMonthYear, formatCvPreviewPeriod, formatSkillMetric } from "./formatting";
+export {
+  formatCvPreviewMonthYear,
+  formatCvPreviewPeriod,
+  formatSkillMetric,
+  hasProjectEndDate,
+} from "./formatting";
 export {
   buildCvPreviewSkillGroups,
   buildTechSummaryLines,

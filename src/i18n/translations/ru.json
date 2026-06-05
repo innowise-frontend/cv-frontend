@@ -219,13 +219,32 @@
         "projects": "Проекты",
         "preview": "Предпросмотр"
       },
+      "projects": {
+        "addProject": "Добавить проект",
+        "updateProject": "Обновить проект",
+        "removeProject": "Удалить проект из CV",
+        "responsibilities": "Обязанности",
+        "add": "Добавить",
+        "update": "Обновить",
+        "edit": "Редактировать",
+        "delete": "Удалить",
+        "cancel": "Отмена",
+        "confirm": "Подтвердить",
+        "noData": "Проектов пока нет",
+        "confirmRemoveProject": "Вы уверены, что хотите удалить проект {{name}}?",
+        "toast": {
+          "added": "Проект добавлен в CV",
+          "updated": "Проект в CV обновлён",
+          "removed": "Проект удалён из CV"
+        }
+      },
       "preview": {
         "exportPdf": "Экспорт PDF",
         "education": "Образование",
         "languageProficiency": "Владение языками",
         "domains": "Домены",
         "projects": "Проекты",
-        "projectRoles": "Роли в проекте",
+        "roles": "Роли",
         "period": "Период",
         "responsibilities": "Обязанности",
         "environment": "Окружение",
@@ -234,7 +253,8 @@
         "experienceColumn": "ОПЫТ (ЛЕТ)",
         "lastUsedColumn": "ПОСЛЕДНЕЕ ИСПОЛЬЗОВАНИЕ",
         "noProjects": "В это резюме ещё не добавлены проекты",
-        "noSkills": "В это резюме ещё не добавлены навыки"
+        "noSkills": "В это резюме ещё не добавлены навыки",
+        "tillNow": "До настоящего времени"
       }
     },
     "departments": {
@@ -278,6 +298,7 @@
       "startDate": "Дата начала",
       "endDate": "Дата окончания",
       "environment": "Технологии",
+      "roles": "Роли",
       "createProject": "Создать проект",
       "updateProject": "Обновить проект",
       "deleteProject": "Удалить проект",

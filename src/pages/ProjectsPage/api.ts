@@ -3,8 +3,25 @@ import { t } from "i18next";
 import { toast } from "sonner";
 import { SortOrder } from "@constants/sortOptions";
 import { getErrorToastMessage } from "@root/lib";
+import { getPositions } from "@services/positions";
 import { createProject, deleteProject, getProjects, updateProject } from "@services/projects";
 import { getSkills } from "@services/skills";
+
+const POSITIONS_OPTIONS_LIMIT = 500;
+
+export const useProjectRoleOptionsQuery = (enabled = true) =>
+  useQuery({
+    queryKey: ["positions", "options"],
+    queryFn: () =>
+      getPositions({
+        page: 1,
+        limit: POSITIONS_OPTIONS_LIMIT,
+        sort_order: SortOrder.ASC,
+        sort_by: "name",
+      }),
+    select: (data) => data.items.map((position) => ({ value: position.id, label: position.name })),
+    enabled,
+  });
 
 export const useProjectsTableQuery = ({
   search,

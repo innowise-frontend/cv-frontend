@@ -119,7 +119,7 @@ export const Select = ({
             </SelectValue>
           </SelectTrigger>
 
-          {label && (
+          {label && !disabled && (
             <Label
               htmlFor={triggerId}
               className={cn(

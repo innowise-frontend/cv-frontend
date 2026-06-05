@@ -219,13 +219,32 @@
         "projects": "Projekte",
         "preview": "Vorschau"
       },
+      "projects": {
+        "addProject": "Projekt hinzufügen",
+        "updateProject": "Projekt aktualisieren",
+        "removeProject": "CV-Projekt entfernen",
+        "responsibilities": "Verantwortlichkeiten",
+        "add": "Hinzufügen",
+        "update": "Aktualisieren",
+        "edit": "Bearbeiten",
+        "delete": "Löschen",
+        "cancel": "Abbrechen",
+        "confirm": "Bestätigen",
+        "noData": "Noch keine Projekte",
+        "confirmRemoveProject": "Möchten Sie das Projekt {{name}} wirklich entfernen?",
+        "toast": {
+          "added": "Projekt zum CV hinzugefügt",
+          "updated": "CV-Projekt aktualisiert",
+          "removed": "CV-Projekt entfernt"
+        }
+      },
       "preview": {
         "exportPdf": "PDF exportieren",
         "education": "Ausbildung",
         "languageProficiency": "Sprachkenntnisse",
         "domains": "Domänen",
         "projects": "Projekte",
-        "projectRoles": "Projektrollen",
+        "roles": "Rollen",
         "period": "Zeitraum",
         "responsibilities": "Verantwortlichkeiten",
         "environment": "Umgebung",
@@ -234,7 +253,8 @@
         "experienceColumn": "ERFAHRUNG IN JAHREN",
         "lastUsedColumn": "ZULETZT GENUTZT",
         "noProjects": "Diesem Lebenslauf wurden noch keine Projekte hinzugefügt",
-        "noSkills": "Diesem Lebenslauf wurden noch keine Fähigkeiten hinzugefügt"
+        "noSkills": "Diesem Lebenslauf wurden noch keine Fähigkeiten hinzugefügt",
+        "tillNow": "Bis jetzt"
       }
     },
     "departments": {
@@ -278,6 +298,7 @@
       "startDate": "Startdatum",
       "endDate": "Enddatum",
       "environment": "Technologien",
+      "roles": "Rollen",
       "createProject": "Projekt erstellen",
       "updateProject": "Projekt aktualisieren",
       "deleteProject": "Projekt löschen",
