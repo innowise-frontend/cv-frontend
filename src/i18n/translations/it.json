@@ -218,6 +218,23 @@
         "skills": "Competenze",
         "projects": "Progetti",
         "preview": "Anteprima"
+      },
+      "preview": {
+        "exportPdf": "Esporta PDF",
+        "education": "Istruzione",
+        "languageProficiency": "Competenze linguistiche",
+        "domains": "Domini",
+        "projects": "Progetti",
+        "projectRoles": "Ruoli nel progetto",
+        "period": "Periodo",
+        "responsibilities": "Responsabilità",
+        "environment": "Ambiente",
+        "professionalSkills": "Competenze professionali",
+        "skillsColumn": "COMPETENZE",
+        "experienceColumn": "ESPERIENZA IN ANNI",
+        "lastUsedColumn": "ULTIMO UTILIZZO",
+        "noProjects": "Nessun progetto aggiunto a questo CV",
+        "noSkills": "Nessuna competenza aggiunta a questo CV"
       }
     },
     "departments": {

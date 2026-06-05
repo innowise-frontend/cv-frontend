@@ -218,6 +218,23 @@
         "skills": "Umiejętności",
         "projects": "Projekty",
         "preview": "Podgląd"
+      },
+      "preview": {
+        "exportPdf": "Eksportuj PDF",
+        "education": "Wykształcenie",
+        "languageProficiency": "Znajomość języków",
+        "domains": "Domeny",
+        "projects": "Projekty",
+        "projectRoles": "Role w projekcie",
+        "period": "Okres",
+        "responsibilities": "Obowiązki",
+        "environment": "Środowisko",
+        "professionalSkills": "Umiejętności zawodowe",
+        "skillsColumn": "UMIEJĘTNOŚCI",
+        "experienceColumn": "DOŚWIADCZENIE W LATACH",
+        "lastUsedColumn": "OSTATNIE UŻYCIE",
+        "noProjects": "Do tego CV nie dodano jeszcze projektów",
+        "noSkills": "Do tego CV nie dodano jeszcze umiejętności"
       }
     },
     "departments": {

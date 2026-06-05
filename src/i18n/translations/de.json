@@ -218,6 +218,23 @@
         "skills": "Fähigkeiten",
         "projects": "Projekte",
         "preview": "Vorschau"
+      },
+      "preview": {
+        "exportPdf": "PDF exportieren",
+        "education": "Ausbildung",
+        "languageProficiency": "Sprachkenntnisse",
+        "domains": "Domänen",
+        "projects": "Projekte",
+        "projectRoles": "Projektrollen",
+        "period": "Zeitraum",
+        "responsibilities": "Verantwortlichkeiten",
+        "environment": "Umgebung",
+        "professionalSkills": "Fachliche Fähigkeiten",
+        "skillsColumn": "FÄHIGKEITEN",
+        "experienceColumn": "ERFAHRUNG IN JAHREN",
+        "lastUsedColumn": "ZULETZT GENUTZT",
+        "noProjects": "Diesem Lebenslauf wurden noch keine Projekte hinzugefügt",
+        "noSkills": "Diesem Lebenslauf wurden noch keine Fähigkeiten hinzugefügt"
       }
     },
     "departments": {
