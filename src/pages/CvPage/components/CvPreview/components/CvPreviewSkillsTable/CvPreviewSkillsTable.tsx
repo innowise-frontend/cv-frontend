@@ -6,15 +6,15 @@ export const CvPreviewSkillsTable = ({
   emptyMessage,
   labels,
 }: CvPreviewSkillsTableProps) => (
-  <section className="py-8 text-left">
-    <h2 className="mb-6 text-2xl font-normal text-gray-2">{labels.title}</h2>
+  <section className="pt-12 pb-8 text-left">
+    <h2 className="mb-6 text-2xl font-normal text-gray-2 dark:text-gray-8">{labels.title}</h2>
 
     {groups.length === 0 ? (
-      <p className="text-sm text-gray-3">{emptyMessage}</p>
+      <p className="text-sm text-gray-3 dark:text-gray-6">{emptyMessage}</p>
     ) : (
       <table className="w-full border-collapse text-sm">
         <thead>
-          <tr className="border-b border-red text-xs font-semibold uppercase tracking-wide text-gray-3">
+          <tr className="border-b border-red text-xs font-semibold uppercase tracking-wide text-gray-3 dark:text-gray-6">
             <th className="w-[200px] pb-3 pr-4 text-left font-semibold" aria-hidden />
             <th className="pb-3 pr-4 text-left font-semibold">{labels.skills}</th>
             <th className="w-[160px] pb-3 pr-4 text-center font-semibold">{labels.experience}</th>
@@ -37,7 +37,7 @@ export const CvPreviewSkillsTable = ({
               return (
                 <tr
                   key={`${group.categoryId ?? "uncategorized"}-${skill.name}`}
-                  className={`align-top text-gray-2 ${showGroupBorder ? "border-b border-gray-7" : ""}`}
+                  className={`align-top text-gray-2 dark:text-gray-8 ${showGroupBorder ? "border-b border-gray-7 dark:border-gray-5" : ""}`}
                 >
                   {skillIndex === 0 ? (
                     <td

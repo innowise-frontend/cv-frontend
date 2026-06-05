@@ -1,3 +1,14 @@
+import cvPreviewExportCss from "./cvPreviewExport.css?inline";
+
+export const buildCvPreviewExportHtml = (documentHtml: string): string => `<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <style>${cvPreviewExportCss}</style>
+  </head>
+  <body>${documentHtml}</body>
+</html>`;
+
 export const downloadBase64Pdf = (base64: string, filename: string) => {
   const binary = atob(base64);
   const bytes = new Uint8Array(binary.length);
@@ -15,3 +26,9 @@ export const downloadBase64Pdf = (base64: string, filename: string) => {
   link.click();
   URL.revokeObjectURL(url);
 };
+
+export const sanitizePdfFilename = (name: string) =>
+  name
+    .replace(/[^\w\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "_") || "cv";
