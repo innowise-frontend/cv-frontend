@@ -218,6 +218,23 @@
         "skills": "Skills",
         "projects": "Projects",
         "preview": "Preview"
+      },
+      "preview": {
+        "exportPdf": "Export PDF",
+        "education": "Education",
+        "languageProficiency": "Language proficiency",
+        "domains": "Domains",
+        "projects": "Projects",
+        "projectRoles": "Project roles",
+        "period": "Period",
+        "responsibilities": "Responsibilities",
+        "environment": "Environment",
+        "professionalSkills": "Professional skills",
+        "skillsColumn": "SKILLS",
+        "experienceColumn": "EXPERIENCE IN YEARS",
+        "lastUsedColumn": "LAST USED",
+        "noProjects": "No projects added to this CV yet",
+        "noSkills": "No skills added to this CV yet"
       }
     },
     "departments": {

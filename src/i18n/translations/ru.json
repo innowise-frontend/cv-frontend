@@ -218,6 +218,23 @@
         "skills": "Навыки",
         "projects": "Проекты",
         "preview": "Предпросмотр"
+      },
+      "preview": {
+        "exportPdf": "Экспорт PDF",
+        "education": "Образование",
+        "languageProficiency": "Владение языками",
+        "domains": "Домены",
+        "projects": "Проекты",
+        "projectRoles": "Роли в проекте",
+        "period": "Период",
+        "responsibilities": "Обязанности",
+        "environment": "Окружение",
+        "professionalSkills": "Профессиональные навыки",
+        "skillsColumn": "НАВЫКИ",
+        "experienceColumn": "ОПЫТ (ЛЕТ)",
+        "lastUsedColumn": "ПОСЛЕДНЕЕ ИСПОЛЬЗОВАНИЕ",
+        "noProjects": "В это резюме ещё не добавлены проекты",
+        "noSkills": "В это резюме ещё не добавлены навыки"
       }
     },
     "departments": {
