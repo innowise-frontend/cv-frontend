@@ -7,6 +7,9 @@ export const formatCvPreviewMonthYear = (value?: string | null): string => {
   return date ? format(date, "MM.yyyy") : (value ?? "");
 };
 
+export const hasProjectEndDate = (endDate?: string | null): boolean =>
+  Boolean(endDate?.trim() && parseProjectDate(endDate));
+
 export const formatCvPreviewPeriod = (
   startDate: string,
   endDate: string | null | undefined,
@@ -14,7 +17,7 @@ export const formatCvPreviewPeriod = (
 ): string => {
   const start = formatCvPreviewMonthYear(startDate);
 
-  if (!endDate?.trim()) {
+  if (!hasProjectEndDate(endDate)) {
     return `${start} – ${tillNowLabel}`;
   }
 

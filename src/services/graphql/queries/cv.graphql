@@ -7,17 +7,35 @@ query Cv($cvId: ID!) {
     user {
       id
       email
+      profile {
+        first_name
+        last_name
+        full_name
+      }
+      position {
+        name
+      }
+    }
+    languages {
+      name
+      proficiency
+    }
+    skills {
+      name
+      mastery
+      categoryId
     }
     projects {
       id
       name
-      domain
+      internal_name
       description
+      domain
       start_date
       end_date
       environment
-      responsibilities
       roles
+      responsibilities
       project {
         id
       }

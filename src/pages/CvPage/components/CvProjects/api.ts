@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useParams } from "@tanstack/react-router";
 import { t } from "i18next";
 import { toast } from "sonner";
+import { useProjectRoleOptionsQuery } from "@pages/ProjectsPage/api";
 import { SortOrder } from "@root/constants";
 import { getErrorToastMessage } from "@root/lib";
 import { addCvProject, getCv, removeCvProject, updateCvProject } from "@services/cvs";
@@ -11,10 +12,12 @@ import {
   UpdateCvProjectInput,
 } from "@services/graphql/__generated__/graphql";
 import { getProjects } from "@services/projects";
-import { type CvProjectsSortBy, mapCvProjectToTableRow } from "./types";
-import { filterAndPaginateCvProjects } from "./utils";
+import { type CvProjectsSortBy } from "./types";
+import { filterAndPaginateCvProjects, mapCvProjectToTableRow } from "./utils";
 
 const PROJECTS_CATALOG_LIMIT = 500;
+
+export const useCvProjectRoleOptionsQuery = () => useProjectRoleOptionsQuery();
 
 export const useCvProjectsCatalogQuery = () =>
   useQuery({
@@ -50,6 +53,7 @@ export const useCvProjectsTableQuery = ({
       const rows = (cv.projects ?? []).map((project) => ({
         ...mapCvProjectToTableRow(project),
         responsibilities: project.responsibilities ?? [],
+        roles: project.roles ?? [],
       }));
 
       return filterAndPaginateCvProjects({

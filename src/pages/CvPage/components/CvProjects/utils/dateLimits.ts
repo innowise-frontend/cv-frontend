@@ -1,6 +1,6 @@
 import { isAfter, isBefore } from "date-fns";
 import { formatProjectDateDisplay, parseProjectDate } from "@components/shared";
-import type { CvProjectDateBounds } from "./cvProjectFormValidation";
+import type { CvProjectDateBounds } from "../types";
 
 const pickLaterDate = (left?: Date, right?: Date) => {
   if (!left) return right;

@@ -1,9 +1,6 @@
 import type { ProjectsTableRow } from "@pages/ProjectsPage/components/ProjectsTable/types";
+import type { CvProjectsSubRowData } from "./types";
 import type { Row } from "@tanstack/react-table";
-
-export type CvProjectsSubRowData = ProjectsTableRow & {
-  responsibilities?: string[];
-};
 
 export const Responsibilities = (row: Row<ProjectsTableRow>) => {
   const { description, responsibilities = [] } = row.original as CvProjectsSubRowData;

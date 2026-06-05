@@ -244,7 +244,7 @@
         "languageProficiency": "Proficiência linguística",
         "domains": "Domínios",
         "projects": "Projetos",
-        "projectRoles": "Funções no projeto",
+        "roles": "Funções",
         "period": "Período",
         "responsibilities": "Responsabilidades",
         "environment": "Ambiente",
@@ -253,7 +253,8 @@
         "experienceColumn": "EXPERIÊNCIA EM ANOS",
         "lastUsedColumn": "ÚLTIMO USO",
         "noProjects": "Ainda não foram adicionados projetos a este CV",
-        "noSkills": "Ainda não foram adicionadas competências a este CV"
+        "noSkills": "Ainda não foram adicionadas competências a este CV",
+        "tillNow": "Até agora"
       }
     },
     "departments": {
@@ -297,6 +298,7 @@
       "startDate": "Data de início",
       "endDate": "Data de fim",
       "environment": "Tecnologias",
+      "roles": "Funções",
       "createProject": "Criar projeto",
       "updateProject": "Atualizar projeto",
       "deleteProject": "Excluir projeto",

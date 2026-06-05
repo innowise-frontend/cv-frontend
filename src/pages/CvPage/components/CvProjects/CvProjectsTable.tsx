@@ -13,16 +13,26 @@ import { useHandleSearch } from "@root/hooks";
 import { useCvQuery } from "@root/pages/CvPage/api";
 import {
   useAddCvProjectMutation,
+  useCvProjectRoleOptionsQuery,
   useCvProjectsCatalogQuery,
   useCvProjectsTableQuery,
   useRemoveCvProjectMutation,
   useUpdateCvProjectMutation,
 } from "./api";
-import { Responsibilities } from "./components/Responibilities/Responsibilities";
-import { cvUpdateProjectFormValidation, type CvProjectDateBounds } from "./cvProjectFormValidation";
-import { type CvProjectsSortBy, type ProjectCatalogItem, toCvProjectFormValues } from "./types";
-import { useCvProjectsTableColumns } from "./useCvProjectsTableColumns";
-import { createAddCvProjectSubmitHandler, createUpdateCvProjectSubmitHandler } from "./utils";
+import { Responsibilities } from "./components/Responsibilities/Responsibilities";
+import { useCvProjectsTableColumns } from "./hooks";
+import {
+  type CvProjectDateBounds,
+  type CvProjectItem,
+  type CvProjectsSortBy,
+  type ProjectCatalogItem,
+} from "./types";
+import {
+  createAddCvProjectSubmitHandler,
+  createUpdateCvProjectSubmitHandler,
+  cvUpdateProjectFormValidation,
+  toCvProjectFormValues,
+} from "./utils";
 
 export const CvProjectsTable = () => {
   const { t } = useTranslation();
@@ -38,8 +48,9 @@ export const CvProjectsTable = () => {
 
   const { data: cv } = useCvQuery(cvId);
   const { data: catalog } = useCvProjectsCatalogQuery();
+  const { data: roleOptions = [] } = useCvProjectRoleOptionsQuery();
   const linkedProjectIds = useMemo(
-    () => new Set((cv?.projects ?? []).map((project) => project.project.id)),
+    () => new Set((cv?.projects ?? []).map((project: CvProjectItem) => project.project.id)),
     [cv?.projects],
   );
 
@@ -100,7 +111,10 @@ export const CvProjectsTable = () => {
     currentSortBy,
     onSort: handleSort,
     renderUpdateModal: (row) => {
-      const rowWithResponsibilities = row as typeof row & { responsibilities?: string[] };
+      const rowWithResponsibilities = row as typeof row & {
+        responsibilities?: string[];
+        roles?: string[];
+      };
       const catalogProject = catalog?.items?.find((item) => item.id === row.id);
       const projectDateBounds: CvProjectDateBounds = catalogProject
         ? { startDate: catalogProject.start_date, endDate: catalogProject.end_date }
@@ -112,10 +126,12 @@ export const CvProjectsTable = () => {
           initialValues={toCvProjectFormValues({
             ...row,
             responsibilities: rowWithResponsibilities.responsibilities,
+            roles: rowWithResponsibilities.roles,
           })}
           disabled={cvUpdateDisabledFields}
           nameAsSelect
           showResponsibilities
+          roleOptions={roleOptions}
           projectDateBounds={projectDateBounds}
           validationSchema={cvUpdateProjectFormValidation(projectDateBounds)}
           isSubmitting={isUpdating}
@@ -179,6 +195,7 @@ export const CvProjectsTable = () => {
               nameSelectOptions={nameSelectOptions}
               catalogItems={catalog?.items ?? []}
               showResponsibilities
+              roleOptions={roleOptions}
               isSubmitting={isAdding}
               headerTitle={t("page.cvs.projects.addProject")}
               submitLabel={t("page.cvs.projects.add")}

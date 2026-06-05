@@ -14,8 +14,12 @@ import {
   toApiProjectDate,
 } from "@components/shared";
 import { useModalContext } from "@components/shared/Modal/useModalContext";
-import { getCvProjectDatePickerLimits } from "@pages/CvPage/components/CvProjects/cvProjectDateLimits";
-import { useProjectSkillsQuery, useUpdateProjectMutation } from "../../api";
+import { getCvProjectDatePickerLimits } from "@pages/CvPage/components/CvProjects";
+import {
+  useProjectRoleOptionsQuery,
+  useProjectSkillsQuery,
+  useUpdateProjectMutation,
+} from "../../api";
 import { projectFormValidation } from "../projectFormValidation";
 import { getEnvironmentOptions, getSkillNamesFromSkillsData } from "../utils";
 import type { ProjectFormValues } from "../types";
@@ -27,6 +31,8 @@ export const UpdateProjectModal = ({
   disabled,
   nameAsSelect = false,
   showResponsibilities = false,
+  showRoles = false,
+  roleOptions = [],
   projectDateBounds,
   validationSchema: validationSchemaProp,
   onSubmit,
@@ -54,6 +60,9 @@ export const UpdateProjectModal = ({
 
   const watched = useWatch<ProjectFormValues>({ control }) ?? initialValues;
   const isCvProjectsPage = showResponsibilities;
+  const shouldShowRoles = showResponsibilities || showRoles;
+  const { data: fetchedRoleOptions = [] } = useProjectRoleOptionsQuery(shouldShowRoles);
+  const resolvedRoleOptions = roleOptions.length > 0 ? roleOptions : fetchedRoleOptions;
   const formStartDateLimit = parseProjectDate(watched.startDate);
   const formEndDateLimit = parseProjectDate(watched.endDate);
   const { startDateMin, startDateMax, endDateMin, endDateMax } = getCvProjectDatePickerLimits(
@@ -219,6 +228,23 @@ export const UpdateProjectModal = ({
                 />
               )}
             />
+            {shouldShowRoles && (
+              <Controller
+                name="roles"
+                control={control}
+                render={({ field }) => (
+                  <MultiSelect
+                    disablePortal
+                    disabled={isFieldDisabled("roles")}
+                    label={t("page.projects.roles")}
+                    placeholder={t("page.projects.roles")}
+                    data={field.value}
+                    options={resolvedRoleOptions}
+                    onChange={field.onChange}
+                  />
+                )}
+              />
+            )}
             {showResponsibilities && (
               <Input
                 disabled={isFieldDisabled("responsibilities")}

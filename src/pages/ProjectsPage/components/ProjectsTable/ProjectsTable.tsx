@@ -57,7 +57,7 @@ export const ProjectsTable = () => {
       <TableSearch
         action={
           <Modal>
-            <CreateProjectModal />
+            <CreateProjectModal showRoles />
           </Modal>
         }
         searchValue={searchParams.search ?? ""}

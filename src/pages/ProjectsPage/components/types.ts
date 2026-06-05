@@ -5,6 +5,7 @@ export interface ProjectFormValues {
   startDate: string;
   endDate: string;
   environment: string[];
+  roles: string[];
   responsibilities?: string;
 }
 
@@ -17,5 +18,6 @@ export const defaultProjectFormValues: ProjectFormValues = {
   startDate: "",
   endDate: "",
   environment: [],
+  roles: [],
   responsibilities: "",
 };

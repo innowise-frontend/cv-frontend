@@ -1,10 +1,6 @@
 import { z } from "zod";
 import { formatProjectDateDisplay, isDateInRange, parseProjectDate } from "@components/shared";
-
-export type CvProjectDateBounds = {
-  startDate?: string | null;
-  endDate?: string | null;
-};
+import type { CvProjectDateBounds } from "../types";
 
 const toProjectBoundDate = (value?: string | null) =>
   value ? parseProjectDate(formatProjectDateDisplay(value)) : undefined;
@@ -60,6 +56,7 @@ const cvProjectFormBase = () => ({
   startDate: z.string().min(1, { message: "" }),
   endDate: z.string(),
   environment: z.array(z.string()),
+  roles: z.array(z.string()),
   responsibilities: z.string().min(1, { message: "" }),
 });
 

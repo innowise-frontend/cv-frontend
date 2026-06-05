@@ -14,6 +14,7 @@ vi.mock("../../api", () => ({
   useProjectSkillsQuery: () => ({
     data: { items: [{ name: "React" }] },
   }),
+  useProjectRoleOptionsQuery: () => ({ data: [] }),
 }));
 
 vi.mock("@components/shared", async (importOriginal) => {
@@ -83,6 +84,7 @@ const initialValues = {
   startDate: "01/01/2025",
   endDate: "",
   environment: ["React"],
+  roles: [],
 };
 
 const defaultProps = { projectId: "proj-1", initialValues };

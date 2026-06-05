@@ -9,7 +9,7 @@ import {
 import { DeleteProjectModal, UpdateProjectModal } from "@pages/ProjectsPage/components";
 import type { ProjectsTableRow } from "@pages/ProjectsPage/components/ProjectsTable/types";
 import { SortOrder } from "@root/constants";
-import type { CvProjectsSortBy } from "./types";
+import type { CvProjectsSortBy } from "../types";
 import type { ReactNode } from "react";
 
 export type CvProjectsTableColumnsOptions = {
@@ -97,6 +97,7 @@ export const useCvProjectsTableColumns = ({
                       startDate: formatProjectDateDisplay(row.original.start_date),
                       endDate: formatProjectDateDisplay(row.original.end_date),
                       environment: row.original.environment ?? [],
+                      roles: [],
                     }}
                   />
                 )}

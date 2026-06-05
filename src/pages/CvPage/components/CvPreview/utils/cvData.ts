@@ -10,8 +10,7 @@ export const getCvOwnerName = (cv: CvPreviewData): string => {
   return parts?.length ? parts.join(" ") : (cv.user?.email ?? "cv");
 };
 
-export const getCvOwnerPosition = (cv: CvPreviewData): string =>
-  cv.user?.position?.name ?? cv.user?.position_name ?? "";
+export const getCvOwnerPosition = (cv: CvPreviewData): string => cv.user?.position?.name ?? "";
 
 export const getUniqueDomains = (projects: CvPreviewProject[]): string[] => {
   const domains = projects.map((project) => project.domain.trim()).filter(Boolean);

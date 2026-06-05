@@ -233,7 +233,7 @@ export interface TranslationTypes {
         languageProficiency: string;
         domains: string;
         projects: string;
-        projectRoles: string;
+        roles: string;
         period: string;
         responsibilities: string;
         environment: string;
@@ -243,6 +243,7 @@ export interface TranslationTypes {
         lastUsedColumn: string;
         noProjects: string;
         noSkills: string;
+        tillNow: string;
       };
     };
     departments: {
@@ -286,6 +287,7 @@ export interface TranslationTypes {
       startDate: string;
       endDate: string;
       environment: string;
+      roles: string;
       createProject: string;
       updateProject: string;
       deleteProject: string;

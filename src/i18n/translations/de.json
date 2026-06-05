@@ -244,7 +244,7 @@
         "languageProficiency": "Sprachkenntnisse",
         "domains": "Domänen",
         "projects": "Projekte",
-        "projectRoles": "Projektrollen",
+        "roles": "Rollen",
         "period": "Zeitraum",
         "responsibilities": "Verantwortlichkeiten",
         "environment": "Umgebung",
@@ -253,7 +253,8 @@
         "experienceColumn": "ERFAHRUNG IN JAHREN",
         "lastUsedColumn": "ZULETZT GENUTZT",
         "noProjects": "Diesem Lebenslauf wurden noch keine Projekte hinzugefügt",
-        "noSkills": "Diesem Lebenslauf wurden noch keine Fähigkeiten hinzugefügt"
+        "noSkills": "Diesem Lebenslauf wurden noch keine Fähigkeiten hinzugefügt",
+        "tillNow": "Bis jetzt"
       }
     },
     "departments": {
@@ -297,6 +298,7 @@
       "startDate": "Startdatum",
       "endDate": "Enddatum",
       "environment": "Technologien",
+      "roles": "Rollen",
       "createProject": "Projekt erstellen",
       "updateProject": "Projekt aktualisieren",
       "deleteProject": "Projekt löschen",

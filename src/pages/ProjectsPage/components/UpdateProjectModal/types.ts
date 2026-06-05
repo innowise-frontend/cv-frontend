@@ -1,7 +1,5 @@
-import type {
-  CvProjectDateBounds,
-  cvUpdateProjectFormValidation,
-} from "@pages/CvPage/components/CvProjects/cvProjectFormValidation";
+import type { CvProjectDateBounds } from "@pages/CvPage/components/CvProjects";
+import type { cvUpdateProjectFormValidation } from "@pages/CvPage/components/CvProjects/utils";
 import type { projectFormValidation } from "../projectFormValidation";
 import type { ProjectFormDisabledFields, ProjectFormValues } from "../types";
 
@@ -15,6 +13,8 @@ export interface UpdateProjectModalProps {
   disabled?: ProjectFormDisabledFields;
   nameAsSelect?: boolean;
   showResponsibilities?: boolean;
+  showRoles?: boolean;
+  roleOptions?: { value: string; label: string }[];
   projectDateBounds?: CvProjectDateBounds;
   validationSchema?: ProjectFormValidationSchema;
   onSubmit?: (data: ProjectFormValues, helpers: { close: () => void; reset: () => void }) => void;

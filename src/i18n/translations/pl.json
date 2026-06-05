@@ -244,7 +244,7 @@
         "languageProficiency": "Znajomość języków",
         "domains": "Domeny",
         "projects": "Projekty",
-        "projectRoles": "Role w projekcie",
+        "roles": "Role",
         "period": "Okres",
         "responsibilities": "Obowiązki",
         "environment": "Środowisko",
@@ -253,7 +253,8 @@
         "experienceColumn": "DOŚWIADCZENIE W LATACH",
         "lastUsedColumn": "OSTATNIE UŻYCIE",
         "noProjects": "Do tego CV nie dodano jeszcze projektów",
-        "noSkills": "Do tego CV nie dodano jeszcze umiejętności"
+        "noSkills": "Do tego CV nie dodano jeszcze umiejętności",
+        "tillNow": "Do teraz"
       }
     },
     "departments": {
@@ -297,6 +298,7 @@
       "startDate": "Data rozpoczęcia",
       "endDate": "Data zakończenia",
       "environment": "Technologie",
+      "roles": "Role",
       "createProject": "Utwórz projekt",
       "updateProject": "Zaktualizuj projekt",
       "deleteProject": "Usuń projekt",

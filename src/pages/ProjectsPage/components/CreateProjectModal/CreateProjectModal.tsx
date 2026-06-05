@@ -16,13 +16,16 @@ import {
   toApiProjectDate,
 } from "@components/shared";
 import { useModalContext } from "@components/shared/Modal/useModalContext";
-import { getCvProjectDatePickerLimits } from "@pages/CvPage/components/CvProjects/cvProjectDateLimits";
 import {
   cvAddProjectFormValidation,
-  type CvProjectDateBounds,
-} from "@pages/CvPage/components/CvProjects/cvProjectFormValidation";
-import { useDynamicZodResolver } from "@pages/CvPage/components/CvProjects/useDynamicZodResolver";
-import { useCreateProjectMutation, useProjectSkillsQuery } from "../../api";
+  getCvProjectDatePickerLimits,
+  useDynamicZodResolver,
+} from "@pages/CvPage/components/CvProjects";
+import {
+  useCreateProjectMutation,
+  useProjectRoleOptionsQuery,
+  useProjectSkillsQuery,
+} from "../../api";
 import { projectFormValidation } from "../projectFormValidation";
 import { defaultProjectFormValues, type ProjectFormValues } from "../types";
 import { getEnvironmentOptions, getSkillNamesFromSkillsData } from "../utils";
@@ -35,6 +38,8 @@ export const CreateProjectModal = ({
   nameSelectOptions = [],
   catalogItems = [],
   showResponsibilities = false,
+  showRoles = false,
+  roleOptions = [],
   validationSchema: validationSchemaProp,
   onSubmit,
   isSubmitting: isSubmittingProp,
@@ -44,8 +49,11 @@ export const CreateProjectModal = ({
 }: CreateProjectModalProps = {}) => {
   const { t } = useTranslation();
   const { closeModal } = useModalContext();
-  const isCvProjectsPage = showResponsibilities;
   const { resolver: cvResolver, setSchema } = useDynamicZodResolver(cvAddProjectFormValidation());
+  const { data: fetchedRoleOptions = [] } = useProjectRoleOptionsQuery(
+    showResponsibilities || showRoles,
+  );
+  const { data: skillsData } = useProjectSkillsQuery();
 
   const {
     control,
@@ -58,20 +66,36 @@ export const CreateProjectModal = ({
   } = useForm<ProjectFormValues>({
     defaultValues,
     mode: "onChange",
-    resolver: isCvProjectsPage
+    resolver: showResponsibilities
       ? cvResolver
       : zodResolver(validationSchemaProp ?? projectFormValidation(t)),
   });
 
+  const { mutate, isPending: isCreatePending } = useCreateProjectMutation({
+    onSuccess: () => {
+      reset(defaultValues);
+      closeModal();
+    },
+  });
+
   const watched = useWatch<ProjectFormValues>({ control }) ?? defaultValues;
+  const previousBoundsKey = useRef<string | null>(null);
+
+  const isCvProjectsPage = showResponsibilities;
+  const shouldShowRoles = showResponsibilities || showRoles;
+  const resolvedRoleOptions = roleOptions.length > 0 ? roleOptions : fetchedRoleOptions;
+  const isPending = isSubmittingProp ?? isCreatePending;
+  const resolvedHeaderTitle = headerTitle ?? t("page.projects.createProject");
+  const resolvedSubmitLabel = submitLabel ?? t("page.projects.create");
+  const resolvedTriggerLabel = triggerLabel ?? t("page.projects.createProject");
 
   const selectedCatalogProject = useMemo(
     () => catalogItems.find((item) => item.id === watched.name),
     [catalogItems, watched.name],
   );
 
-  const projectDateBounds = useMemo((): CvProjectDateBounds | undefined => {
-    if (!isCvProjectsPage || !selectedCatalogProject) return undefined;
+  const projectDateBounds = useMemo(() => {
+    if (!isCvProjectsPage || !selectedCatalogProject) return;
 
     return {
       startDate: selectedCatalogProject.start_date,
@@ -87,10 +111,23 @@ export const CreateProjectModal = ({
     return validationSchemaProp ?? projectFormValidation(t);
   }, [isCvProjectsPage, projectDateBounds, t, validationSchemaProp]);
 
-  const previousBoundsKey = useRef<string | null>(null);
   const boundsKey = projectDateBounds
     ? `${projectDateBounds.startDate ?? ""}-${projectDateBounds.endDate ?? ""}`
     : null;
+
+  const { startDateMin, startDateMax, endDateMin, endDateMax } = getCvProjectDatePickerLimits(
+    isCvProjectsPage ? projectDateBounds : undefined,
+    watched.startDate,
+    watched.endDate,
+  );
+
+  const environmentOptions = useMemo(() => {
+    if (nameAsSelect) {
+      return (watched.environment ?? []).map((item) => ({ value: item, label: item }));
+    }
+
+    return getEnvironmentOptions(getSkillNamesFromSkillsData(skillsData));
+  }, [nameAsSelect, skillsData, watched.environment]);
 
   useEffect(() => {
     if (!isCvProjectsPage) return;
@@ -103,31 +140,6 @@ export const CreateProjectModal = ({
     void trigger(["startDate", "endDate"]);
   }, [boundsKey, isCvProjectsPage, setSchema, trigger, validationSchema]);
 
-  const { startDateMin, startDateMax, endDateMin, endDateMax } = getCvProjectDatePickerLimits(
-    isCvProjectsPage ? projectDateBounds : undefined,
-    watched.startDate,
-    watched.endDate,
-  );
-  const isFieldDisabled = (field: keyof ProjectFormValues) => disabled?.[field] ?? false;
-
-  const { mutate, isPending: isCreatePending } = useCreateProjectMutation({
-    onSuccess: () => {
-      reset(defaultValues);
-      closeModal();
-    },
-  });
-
-  const isPending = isSubmittingProp ?? isCreatePending;
-
-  const { data: skillsData } = useProjectSkillsQuery();
-  const environmentOptions = useMemo(() => {
-    if (nameAsSelect) {
-      return (watched.environment ?? []).map((item) => ({ value: item, label: item }));
-    }
-
-    return getEnvironmentOptions(getSkillNamesFromSkillsData(skillsData));
-  }, [nameAsSelect, skillsData, watched.environment]);
-
   useEffect(() => {
     if (!nameAsSelect) return;
 
@@ -137,6 +149,7 @@ export const CreateProjectModal = ({
       setValue("domain", "");
       setValue("description", "");
       setValue("environment", []);
+      setValue("roles", []);
       setValue("startDate", "");
       setValue("endDate", "");
 
@@ -149,6 +162,12 @@ export const CreateProjectModal = ({
     setValue("startDate", formatProjectDateDisplay(selected.start_date));
     setValue("endDate", formatProjectDateDisplay(selected.end_date));
   }, [catalogItems, nameAsSelect, setValue, watched.name]);
+
+  const isFieldDisabled = (field: keyof ProjectFormValues) => disabled?.[field] ?? false;
+
+  const handleCancel = () => {
+    reset(defaultValues);
+  };
 
   const handleCreateProject = (data: ProjectFormValues) => {
     if (onSubmit) {
@@ -174,20 +193,13 @@ export const CreateProjectModal = ({
     });
   };
 
-  const resolvedHeaderTitle = headerTitle ?? t("page.projects.createProject");
-  const resolvedSubmitLabel = submitLabel ?? t("page.projects.create");
-  const resolvedTriggerLabel = triggerLabel ?? t("page.projects.createProject");
-
   return (
     <>
       <Modal.Trigger className="text-red font-medium dark:text-red">
         <PlusIcon height={16} width={16} />
         {resolvedTriggerLabel}
       </Modal.Trigger>
-      <Modal.Content
-        className="w-[860px] min-w-[860px] max-w-[860px]"
-        onCancel={() => reset(defaultValues)}
-      >
+      <Modal.Content className="w-[860px] min-w-[860px] max-w-[860px]" onCancel={handleCancel}>
         <Modal.Header>{resolvedHeaderTitle}</Modal.Header>
         <form onSubmit={handleSubmit(handleCreateProject)}>
           <Modal.Body className="flex flex-col gap-6">
@@ -283,6 +295,23 @@ export const CreateProjectModal = ({
                 />
               )}
             />
+            {shouldShowRoles && (
+              <Controller
+                name="roles"
+                control={control}
+                render={({ field }) => (
+                  <MultiSelect
+                    disablePortal
+                    disabled={isFieldDisabled("roles")}
+                    label={t("page.projects.roles")}
+                    placeholder={t("page.projects.roles")}
+                    data={field.value}
+                    options={resolvedRoleOptions}
+                    onChange={field.onChange}
+                  />
+                )}
+              />
+            )}
             {showResponsibilities && (
               <Input
                 disabled={isFieldDisabled("responsibilities")}

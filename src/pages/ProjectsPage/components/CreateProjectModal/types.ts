@@ -1,4 +1,4 @@
-import type { cvAddProjectFormValidation } from "@pages/CvPage/components/CvProjects/cvProjectFormValidation";
+import type { cvAddProjectFormValidation } from "@pages/CvPage/components/CvProjects/utils";
 import type { ProjectsQuery } from "@services/graphql/__generated__/graphql";
 import type { projectFormValidation } from "../projectFormValidation";
 import type { ProjectFormDisabledFields, ProjectFormValues } from "../types";
@@ -16,6 +16,8 @@ export interface CreateProjectModalProps {
   nameSelectOptions?: { value: string; label: string }[];
   catalogItems?: ProjectCatalogItem[];
   showResponsibilities?: boolean;
+  showRoles?: boolean;
+  roleOptions?: { value: string; label: string }[];
   validationSchema?: ProjectFormValidationSchema;
   onSubmit?: (data: ProjectFormValues, helpers: { close: () => void; reset: () => void }) => void;
   isSubmitting?: boolean;

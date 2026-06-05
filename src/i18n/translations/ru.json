@@ -244,7 +244,7 @@
         "languageProficiency": "Владение языками",
         "domains": "Домены",
         "projects": "Проекты",
-        "projectRoles": "Роли в проекте",
+        "roles": "Роли",
         "period": "Период",
         "responsibilities": "Обязанности",
         "environment": "Окружение",
@@ -253,7 +253,8 @@
         "experienceColumn": "ОПЫТ (ЛЕТ)",
         "lastUsedColumn": "ПОСЛЕДНЕЕ ИСПОЛЬЗОВАНИЕ",
         "noProjects": "В это резюме ещё не добавлены проекты",
-        "noSkills": "В это резюме ещё не добавлены навыки"
+        "noSkills": "В это резюме ещё не добавлены навыки",
+        "tillNow": "До настоящего времени"
       }
     },
     "departments": {
@@ -297,6 +298,7 @@
       "startDate": "Дата начала",
       "endDate": "Дата окончания",
       "environment": "Технологии",
+      "roles": "Роли",
       "createProject": "Создать проект",
       "updateProject": "Обновить проект",
       "deleteProject": "Удалить проект",

@@ -63,6 +63,7 @@ export const useProjectsTableColumns = (options?: ProjectsTableColumnsOptions) =
                   options.renderUpdateModal(row.original)
                 ) : (
                   <UpdateProjectModal
+                    showRoles
                     projectId={row.original.id}
                     initialValues={{
                       name: row.original.name ?? "",
@@ -71,6 +72,7 @@ export const useProjectsTableColumns = (options?: ProjectsTableColumnsOptions) =
                       startDate: formatProjectDateDisplay(row.original.start_date),
                       endDate: formatProjectDateDisplay(row.original.end_date),
                       environment: row.original.environment ?? [],
+                      roles: [],
                     }}
                   />
                 )}
