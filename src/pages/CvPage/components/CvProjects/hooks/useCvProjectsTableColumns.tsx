@@ -8,17 +8,7 @@ import {
 } from "@components/shared";
 import { DeleteProjectModal, UpdateProjectModal } from "@pages/ProjectsPage/components";
 import type { ProjectsTableRow } from "@pages/ProjectsPage/components/ProjectsTable/types";
-import { SortOrder } from "@root/constants";
-import type { CvProjectsSortBy } from "../types";
-import type { ReactNode } from "react";
-
-export type CvProjectsTableColumnsOptions = {
-  currentSort: SortOrder;
-  currentSortBy: CvProjectsSortBy;
-  onSort: (sortBy: CvProjectsSortBy) => void;
-  renderUpdateModal?: (row: ProjectsTableRow) => ReactNode;
-  renderDeleteModal?: (row: ProjectsTableRow) => ReactNode;
-};
+import type { CvProjectsSortBy, CvProjectsTableColumnsOptions } from "../types";
 
 export const useCvProjectsTableColumns = ({
   currentSort,

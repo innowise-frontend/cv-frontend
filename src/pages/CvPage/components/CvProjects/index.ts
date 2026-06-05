@@ -1,4 +1,4 @@
-export { CvProjectsTable } from "./CvProjectsTable";
+export { CvProjectsTable } from "./CvProjects";
 export { useCvProjectRoleOptionsQuery } from "./api";
 export { useDynamicZodResolver } from "./hooks";
 export {
