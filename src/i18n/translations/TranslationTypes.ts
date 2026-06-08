@@ -1,4 +1,9 @@
 export interface TranslationTypes {
+  theme: {
+    device: string;
+    light: string;
+    dark: string;
+  };
   page: {
     home: {
       hello: string;
@@ -61,6 +66,11 @@ export interface TranslationTypes {
       noDataResults: string;
       search: string;
     };
+    calendar: {
+      previousMonth: string;
+      nextMonth: string;
+      openCalendar: string;
+    };
     resetPassword: {
       title: string;
       subtitle: string;
@@ -72,6 +82,46 @@ export interface TranslationTypes {
         passwordMinLength: string;
         passwordsDoNotMatch: string;
       };
+    };
+    users: {
+      edit: string;
+      delete: string;
+      viewProfile: string;
+      firstName: string;
+      lastName: string;
+      email: string;
+      password: string;
+      department: string;
+      position: string;
+      role: string;
+      selectDepartment: string;
+      selectPosition: string;
+      selectRole: string;
+      roleEmployee: string;
+      roleAdmin: string;
+      cancel: string;
+      create: string;
+      createUser: string;
+      createUserTitle: string;
+      update: string;
+      updateUser: string;
+      updateUserTitle: string;
+      updateUserFailed: string;
+      deleteUser: string;
+      deleteUserTitle: string;
+      deleteUserSuccess: string;
+      confirmDeleteBefore: string;
+      confirmDeleteAfter: string;
+      confirm: string;
+      emailAlreadyExists: string;
+      noData: string;
+    };
+    verifyEmail: {
+      title: string;
+      subtitle: string;
+      confirm: string;
+      later: string;
+      invalidCode: string;
     };
     languages: {
       currentLanguages: string;
@@ -138,6 +188,7 @@ export interface TranslationTypes {
       education: string;
       description: string;
       employee: string;
+      viewCv: string;
       delete: string;
       deleteCv: string;
       confirmDeleteCv: string;
@@ -150,6 +201,109 @@ export interface TranslationTypes {
         nameRequired: string;
         educationRequired: string;
         descriptionRequired: string;
+      };
+      tabs: {
+        details: string;
+        skills: string;
+        projects: string;
+        preview: string;
+      };
+      projects: {
+        addProject: string;
+        updateProject: string;
+        removeProject: string;
+        responsibilities: string;
+        add: string;
+        update: string;
+        edit: string;
+        delete: string;
+        cancel: string;
+        confirm: string;
+        noData: string;
+        confirmRemoveProject: string;
+        toast: {
+          added: string;
+          updated: string;
+          removed: string;
+        };
+      };
+      preview: {
+        exportPdf: string;
+        education: string;
+        languageProficiency: string;
+        domains: string;
+        projects: string;
+        roles: string;
+        period: string;
+        responsibilities: string;
+        environment: string;
+        professionalSkills: string;
+        skillsColumn: string;
+        experienceColumn: string;
+        lastUsedColumn: string;
+        noProjects: string;
+        noSkills: string;
+        tillNow: string;
+      };
+    };
+    departments: {
+      name: string;
+      createDepartment: string;
+      updateDepartment: string;
+      deleteDepartment: string;
+      edit: string;
+      delete: string;
+      cancel: string;
+      confirm: string;
+      update: string;
+      noData: string;
+      create: string;
+      confirmDeleteDepartment: string;
+      toast: {
+        created: string;
+        updated: string;
+        deleted: string;
+      };
+    };
+    positions: {
+      createPosition: string;
+      updatePosition: string;
+      deletePosition: string;
+      name: string;
+      position: string;
+      edit: string;
+      delete: string;
+      confirmDeletePosition: string;
+      cancel: string;
+      confirm: string;
+      add: string;
+      update: string;
+      noData: string;
+    };
+    projects: {
+      name: string;
+      domain: string;
+      description: string;
+      startDate: string;
+      endDate: string;
+      environment: string;
+      roles: string;
+      createProject: string;
+      updateProject: string;
+      deleteProject: string;
+      create: string;
+      update: string;
+      edit: string;
+      delete: string;
+      cancel: string;
+      confirm: string;
+      confirmDeleteProject: string;
+      noData: string;
+      tillNow: string;
+      toast: {
+        created: string;
+        updated: string;
+        deleted: string;
       };
     };
     sidebar: {
@@ -192,48 +346,13 @@ export interface TranslationTypes {
       toast: {
         userUpdated: string;
         profileUpdated: string;
+        userUpdateFailed: string;
+        profileUpdateFailed: string;
         avatarUpdated: string;
+        avatarUpdateFailed: string;
         verificationSent: string;
         verificationFailed: string;
       };
     };
-    users: {
-      edit: string;
-      delete: string;
-      viewProfile: string;
-      firstName: string;
-      lastName: string;
-      email: string;
-      password: string;
-      department: string;
-      position: string;
-      role: string;
-      selectDepartment: string;
-      selectPosition: string;
-      selectRole: string;
-      roleEmployee: string;
-      roleAdmin: string;
-      cancel: string;
-      create: string;
-      createUser: string;
-      createUserTitle: string;
-      update: string;
-      updateUser: string;
-      updateUserTitle: string;
-      updateUserFailed: string;
-      deleteUser: string;
-      deleteUserTitle: string;
-      deleteUserSuccess: string;
-      confirmDeleteBefore: string;
-      confirmDeleteAfter: string;
-      confirm: string;
-      emailAlreadyExists: string;
-      noData: string;
-    };
-  };
-  theme: {
-    device: string;
-    light: string;
-    dark: string;
   };
 }

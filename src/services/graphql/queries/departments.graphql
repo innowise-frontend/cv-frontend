@@ -1,6 +1,12 @@
-query Departments {
-  departments {
-    id
-    name
+query Departments($params: SearchPaginationInput!) {
+  departments(params: $params) {
+    items {
+      id
+      name
+    }
+    total
+    page
+    limit
+    total_pages
   }
 }

@@ -1,4 +1,5 @@
 import { useMutation, useQuery, useQueryClient, UseQueryOptions } from "@tanstack/react-query";
+import { t } from "i18next";
 import { toast } from "sonner";
 import { SortOrder } from "@constants/sortOptions";
 import { getErrorToastMessage } from "@root/lib";
@@ -79,6 +80,7 @@ export const useAddProfileLanguageMutation = (
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["profile", userId] });
       onSuccess?.();
+      toast.success(t("page.languages.toast.added"));
     },
     onError: (error) => {
       toast.error(getErrorToastMessage(error));
@@ -139,6 +141,7 @@ export const useDeleteProfileLanguagesMutation = (userId: string) => {
     mutationFn: (payload: DeleteProfileLanguageInput) => deleteProfileLanguages(payload),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["profile", userId] });
+      toast.success(t("page.languages.toast.removed"));
     },
     onError: (error) => {
       toast.error(getErrorToastMessage(error));
@@ -157,6 +160,7 @@ export const useUpdateProfileLanguageMutation = (
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["profile", userId] });
       onSuccess?.();
+      toast.success(t("page.languages.toast.updated"));
     },
     onError: (error) => {
       toast.error(getErrorToastMessage(error));

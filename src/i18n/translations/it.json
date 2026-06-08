@@ -35,6 +35,7 @@
       "oops": "Ops",
       "goBack": "Indietro",
       "defaultErrorMessage": "Errore! Impossibile modificare la password",
+      "noAccess": "Accesso negato",
       "defaultNotFoundMessage": "Hmm… questa non sembra essere la pagina che stavi cercando. \n Ti riportiamo sulla strada giusta.",
       "api": {
         "forbidden": "Non hai i permessi per eseguire questa azione",
@@ -65,6 +66,11 @@
       "noResults": "Nessun risultato",
       "noDataResults": "Nessun dato disponibile",
       "search": "Cerca"
+    },
+    "calendar": {
+      "previousMonth": "Vai al mese precedente",
+      "nextMonth": "Vai al mese successivo",
+      "openCalendar": "Apri calendario"
     },
     "resetPassword": {
       "title": "Reimposta password",
@@ -142,7 +148,12 @@
       "remove": "Rimuovi",
       "update": "Aggiorna",
       "save": "Salva",
-      "noData": "Nessun dato"
+      "noData": "Nessun dato",
+      "toast": {
+        "added": "Language added",
+        "updated": "Language updated",
+        "removed": "Language removed"
+      }
     },
     "skills": {
       "currentSkills": "Competenze",
@@ -169,6 +180,11 @@
       "update": "Aggiorna",
       "save": "Salva",
       "noData": "Nessun dato",
+      "toast": {
+        "added": "Skill added",
+        "updated": "Skill updated",
+        "removed": "Skills removed"
+      },
       "categoryLabel": "Categoria",
       "category": {}
     },
@@ -183,6 +199,7 @@
       "education": "Istruzione",
       "description": "Descrizione",
       "employee": "Dipendente",
+      "viewCv": "Visualizza CV",
       "delete": "Elimina",
       "deleteCv": "Elimina CV",
       "confirmDeleteCv": "Sei sicuro di voler eliminare il CV {{name}}?",
@@ -195,6 +212,118 @@
         "nameRequired": "Il nome è obbligatorio",
         "educationRequired": "L'istruzione è obbligatoria",
         "descriptionRequired": "La descrizione è obbligatoria"
+      },
+      "tabs": {
+        "details": "Dettagli",
+        "skills": "Competenze",
+        "projects": "Progetti",
+        "preview": "Anteprima"
+      },
+      "projects": {
+        "addProject": "Aggiungi progetto",
+        "updateProject": "Aggiorna progetto",
+        "removeProject": "Rimuovi progetto dal CV",
+        "responsibilities": "Responsabilità",
+        "add": "Aggiungi",
+        "update": "Aggiorna",
+        "edit": "Modifica",
+        "delete": "Elimina",
+        "cancel": "Annulla",
+        "confirm": "Conferma",
+        "noData": "Nessun progetto",
+        "confirmRemoveProject": "Sei sicuro di voler rimuovere il progetto {{name}}?",
+        "toast": {
+          "added": "Progetto aggiunto al CV",
+          "updated": "Progetto CV aggiornato",
+          "removed": "Progetto rimosso dal CV"
+        }
+      },
+      "preview": {
+        "exportPdf": "Esporta PDF",
+        "education": "Istruzione",
+        "languageProficiency": "Competenze linguistiche",
+        "domains": "Domini",
+        "projects": "Progetti",
+        "roles": "Ruoli",
+        "period": "Periodo",
+        "responsibilities": "Responsabilità",
+        "environment": "Ambiente",
+        "professionalSkills": "Competenze professionali",
+        "skillsColumn": "COMPETENZE",
+        "experienceColumn": "ESPERIENZA IN ANNI",
+        "lastUsedColumn": "ULTIMO UTILIZZO",
+        "noProjects": "Nessun progetto aggiunto a questo CV",
+        "noSkills": "Nessuna competenza aggiunta a questo CV",
+        "tillNow": "Fino a oggi"
+      }
+    },
+    "departments": {
+      "name": "Reparto",
+      "createDepartment": "Crea reparto",
+      "updateDepartment": "Aggiorna reparto",
+      "deleteDepartment": "Elimina reparto",
+      "edit": "Modifica",
+      "delete": "Elimina",
+      "cancel": "Annulla",
+      "confirm": "Conferma",
+      "update": "Aggiorna",
+      "noData": "Nessun reparto ancora",
+      "create": "Crea",
+      "confirmDeleteDepartment": "Sei sicuro di voler eliminare il reparto {{name}}?",
+      "toast": {
+        "created": "Reparto creato con successo",
+        "updated": "Reparto aggiornato con successo",
+        "deleted": "Reparto eliminato con successo"
+      }
+    },
+    "positions": {
+      "createPosition": "Crea posizione",
+      "updatePosition": "Aggiorna posizione",
+      "deletePosition": "Elimina posizione",
+      "name": "Nome",
+      "position": "Posizione",
+      "edit": "Modifica",
+      "delete": "Elimina",
+      "confirmDeletePosition": "Sei sicuro di voler eliminare la posizione {{name}}?",
+      "cancel": "Annulla",
+      "confirm": "Conferma",
+      "add": "Aggiungi",
+      "update": "Aggiorna",
+      "noData": "Nessun dato"
+    },
+    "projects": {
+      "name": "Nome",
+      "domain": "Dominio",
+      "description": "Descrizione",
+      "startDate": "Data di inizio",
+      "endDate": "Data di fine",
+      "environment": "Tecnologie",
+      "roles": "Ruoli",
+      "createProject": "Crea progetto",
+      "updateProject": "Aggiorna progetto",
+      "deleteProject": "Elimina progetto",
+      "create": "Crea",
+      "update": "Aggiorna",
+      "edit": "Modifica",
+      "delete": "Elimina",
+      "cancel": "Annulla",
+      "confirm": "Conferma",
+      "confirmDeleteProject": "Sei sicuro di voler eliminare il progetto {{name}}?",
+      "noData": "Nessun progetto ancora",
+      "tillNow": "Fino a oggi",
+      "validation": {
+        "nameRequired": "Il nome è obbligatorio",
+        "domainRequired": "Il dominio è obbligatorio",
+        "descriptionRequired": "La descrizione è obbligatoria",
+        "startDateRequired": "La data di inizio è obbligatoria",
+        "startDateInvalid": "Data di inizio non valida o successiva alla data di fine",
+        "endDateInvalid": "Data di fine non valida o precedente alla data di inizio",
+        "environmentRequired": "Seleziona almeno una tecnologia"
+      },
+      "toast": {
+        "created": "Progetto creato con successo",
+        "updated": "Progetto aggiornato con successo",
+        "deleted": "Progetto eliminato con successo"
       }
     },
     "sidebar": {
@@ -234,6 +363,7 @@
         "userUpdateFailed": "Aggiornamento utente non riuscito",
         "profileUpdateFailed": "Aggiornamento profilo non riuscito",
         "avatarUpdated": "Avatar aggiornato",
+        "avatarUpdateFailed": "Aggiornamento avatar non riuscito",
         "verificationSent": "Email di verifica inviata",
         "verificationFailed": "Invio dell'email di verifica non riuscito"
       },

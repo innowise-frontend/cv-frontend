@@ -17,9 +17,12 @@ vi.mock("@root/lib", async () => {
   };
 });
 
-vi.mock("./components", () => ({
+vi.mock("@pages/SkillsPage", () => ({
   SkillsTable: () => <div>skills-table</div>,
-  SkillsEditor: () => <div>skills-editor</div>,
+}));
+
+vi.mock("@components/UserProfile/Skills", () => ({
+  ProfileSkillsEditor: () => <div>skills-editor</div>,
 }));
 
 vi.mock("@components/shared", () => ({

@@ -3,45 +3,29 @@ import { useTranslation } from "react-i18next";
 import { Button, Modal, ProgressBar, Select } from "@root/components/shared";
 import { useModalContext } from "@root/components/shared/Modal/useModalContext";
 import { cn } from "@root/lib";
-import { Mastery, UpdateProfileSkillInput } from "@services/graphql/__generated__/graphql";
-import { SkillProgressBarProps } from "./types";
-import { getMasteryOptions, useUpdateProfileSkillMutation } from "../../api";
-import { MASTERY_ORDER } from "../../const";
+import { Mastery } from "@services/graphql/__generated__/graphql";
+import { SkillProgressBarProps, UpdateSkillDraft } from "./types";
 
 export const SkillProgressBar = ({
-  userId,
   name,
   mastery,
-  categoryId,
+  masteryOptions,
+  disabled = false,
   chosen = false,
   isDeleteMode = false,
   onClick,
+  onUpdate,
 }: SkillProgressBarProps) => {
   const { t } = useTranslation();
   const { closeModal } = useModalContext();
 
-  const [updateSkill, setUpdateSkill] = useState<UpdateProfileSkillInput>({
-    userId,
-    name,
-    mastery,
-    categoryId,
-  });
+  const [draft, setDraft] = useState<UpdateSkillDraft>({ mastery });
 
-  const masteryOptions = getMasteryOptions(MASTERY_ORDER);
-
-  const { mutateAsync } = useUpdateProfileSkillMutation(userId, {
-    onSuccess: () => {
-      closeModal();
-    },
-  });
-
-  const resetUpdateSkill = () => {
-    setUpdateSkill({ userId, name: name, mastery: mastery, categoryId: categoryId });
-  };
+  const reset = () => setDraft({ mastery });
 
   if (isDeleteMode) {
     return (
-      <Button variant="ghost" className="capitalize" onClick={onClick}>
+      <Button variant="ghost" className="capitalize" onClick={onClick} disabled={disabled}>
         <ProgressBar
           className={cn(
             "px-2 cursor-pointer transition-colors duration-150 hover:bg-gray-7 dark:hover:bg-gray-5",
@@ -56,9 +40,14 @@ export const SkillProgressBar = ({
     );
   }
 
+  const handleUpdate = async () => {
+    await onUpdate(draft);
+    closeModal();
+  };
+
   return (
     <>
-      <Modal.Trigger className="capitalize" variant="ghost">
+      <Modal.Trigger className="capitalize" variant="ghost" disabled={disabled}>
         <ProgressBar
           className="px-2 cursor-pointer transition-colors duration-150 hover:bg-gray-7 dark:hover:bg-gray-5"
           key={name}
@@ -66,7 +55,7 @@ export const SkillProgressBar = ({
           mastery={mastery}
         />
       </Modal.Trigger>
-      <Modal.Content onCancel={resetUpdateSkill}>
+      <Modal.Content onCancel={reset}>
         <Modal.Header>{t("page.skills.updateSkill")}</Modal.Header>
         <Modal.Body className="flex flex-col gap-9">
           <Select
@@ -74,16 +63,15 @@ export const SkillProgressBar = ({
             label={t("page.skills.skill")}
             disabled={true}
             value={name}
-            onValueChange={(value) => setUpdateSkill({ ...updateSkill, name: value })}
             className="[&_[data-slot=select-trigger][data-placeholder]]:text-gray-6"
           />
           <Select
             list={masteryOptions}
             label={t("page.skills.mastery")}
             placeholder={t("page.skills.mastery")}
-            value={updateSkill.mastery}
+            value={draft.mastery}
             disablePortal
-            onValueChange={(value) => setUpdateSkill({ ...updateSkill, mastery: value as Mastery })}
+            onValueChange={(value) => setDraft({ mastery: value as Mastery })}
             className="[&_[data-slot=select-trigger][data-placeholder]]:text-gray-6"
           />
         </Modal.Body>
@@ -94,10 +82,8 @@ export const SkillProgressBar = ({
           <Button
             variant="filled"
             className="w-40"
-            disabled={updateSkill.mastery === mastery || !userId}
-            onClick={() => {
-              mutateAsync({ ...updateSkill, userId });
-            }}
+            disabled={disabled || draft.mastery === mastery}
+            onClick={handleUpdate}
           >
             {t("page.skills.update")}
           </Button>

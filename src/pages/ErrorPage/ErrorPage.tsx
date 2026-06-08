@@ -5,18 +5,22 @@ import { Button } from "@components/shared";
 import { cn } from "@root/lib/utils";
 import { ErrorPageProps } from "./types";
 
-export const ErrorPage = ({ error, deviceError }: ErrorPageProps) => {
-  const { history } = useRouter();
+export const ErrorPage = ({ error, deviceError, defaultUrlBack }: ErrorPageProps) => {
+  const { history, navigate } = useRouter();
   const { t } = useTranslation();
 
   const handleGoBack = () => {
-    history.back();
+    if (defaultUrlBack) {
+      navigate({ to: defaultUrlBack });
+    } else {
+      history.back();
+    }
   };
 
   return (
     <div
       className={cn(
-        "fixed inset-0 z-999 bg-gray-8 dark:bg-color-gray-2 flex items-center justify-center",
+        "fixed inset-0 z-999 bg-gray-8 dark:bg-gray-2 flex items-center justify-center",
       )}
     >
       <div className="flex w-140 flex-col items-center justify-center gap-6">

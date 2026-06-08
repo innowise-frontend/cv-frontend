@@ -35,6 +35,7 @@
       "oops": "Ups",
       "goBack": "Zurück",
       "defaultErrorMessage": "Fehler! Passwort wurde nicht geändert",
+      "noAccess": "Kein Zugriff",
       "defaultNotFoundMessage": "Hm… diese Seite scheint nicht die zu sein, nach der Sie gesucht haben. \n Wir bringen Sie wieder auf den richtigen Weg.",
       "api": {
         "forbidden": "Sie haben keine Rechte für diese Aktion",
@@ -65,6 +66,11 @@
       "noResults": "Keine Ergebnisse",
       "noDataResults": "Keine Daten vorhanden",
       "search": "Suchen"
+    },
+    "calendar": {
+      "previousMonth": "Zum vorherigen Monat",
+      "nextMonth": "Zum nächsten Monat",
+      "openCalendar": "Kalender öffnen"
     },
     "resetPassword": {
       "title": "Passwort zurücksetzen",
@@ -142,7 +148,12 @@
       "remove": "Entfernen",
       "update": "Aktualisieren",
       "save": "Speichern",
-      "noData": "Keine Daten"
+      "noData": "Keine Daten",
+      "toast": {
+        "added": "Language added",
+        "updated": "Language updated",
+        "removed": "Language removed"
+      }
     },
     "skills": {
       "currentSkills": "Fähigkeiten",
@@ -169,6 +180,11 @@
       "update": "Aktualisieren",
       "save": "Speichern",
       "noData": "Keine Daten",
+      "toast": {
+        "added": "Skill added",
+        "updated": "Skill updated",
+        "removed": "Skills removed"
+      },
       "categoryLabel": "Kategorie",
       "category": {}
     },
@@ -183,6 +199,7 @@
       "education": "Ausbildung",
       "description": "Beschreibung",
       "employee": "Mitarbeiter",
+      "viewCv": "CV anzeigen",
       "delete": "Löschen",
       "deleteCv": "Lebenslauf löschen",
       "confirmDeleteCv": "Möchten Sie den Lebenslauf {{name}} wirklich löschen?",
@@ -195,6 +212,118 @@
         "nameRequired": "Name ist erforderlich",
         "educationRequired": "Ausbildung ist erforderlich",
         "descriptionRequired": "Beschreibung ist erforderlich"
+      },
+      "tabs": {
+        "details": "Details",
+        "skills": "Fähigkeiten",
+        "projects": "Projekte",
+        "preview": "Vorschau"
+      },
+      "projects": {
+        "addProject": "Projekt hinzufügen",
+        "updateProject": "Projekt aktualisieren",
+        "removeProject": "CV-Projekt entfernen",
+        "responsibilities": "Verantwortlichkeiten",
+        "add": "Hinzufügen",
+        "update": "Aktualisieren",
+        "edit": "Bearbeiten",
+        "delete": "Löschen",
+        "cancel": "Abbrechen",
+        "confirm": "Bestätigen",
+        "noData": "Noch keine Projekte",
+        "confirmRemoveProject": "Möchten Sie das Projekt {{name}} wirklich entfernen?",
+        "toast": {
+          "added": "Projekt zum CV hinzugefügt",
+          "updated": "CV-Projekt aktualisiert",
+          "removed": "CV-Projekt entfernt"
+        }
+      },
+      "preview": {
+        "exportPdf": "PDF exportieren",
+        "education": "Ausbildung",
+        "languageProficiency": "Sprachkenntnisse",
+        "domains": "Domänen",
+        "projects": "Projekte",
+        "roles": "Rollen",
+        "period": "Zeitraum",
+        "responsibilities": "Verantwortlichkeiten",
+        "environment": "Umgebung",
+        "professionalSkills": "Fachliche Fähigkeiten",
+        "skillsColumn": "FÄHIGKEITEN",
+        "experienceColumn": "ERFAHRUNG IN JAHREN",
+        "lastUsedColumn": "ZULETZT GENUTZT",
+        "noProjects": "Diesem Lebenslauf wurden noch keine Projekte hinzugefügt",
+        "noSkills": "Diesem Lebenslauf wurden noch keine Fähigkeiten hinzugefügt",
+        "tillNow": "Bis jetzt"
+      }
+    },
+    "departments": {
+      "name": "Abteilung",
+      "createDepartment": "Abteilung erstellen",
+      "updateDepartment": "Abteilung aktualisieren",
+      "deleteDepartment": "Abteilung löschen",
+      "edit": "Bearbeiten",
+      "delete": "Löschen",
+      "cancel": "Abbrechen",
+      "confirm": "Bestätigen",
+      "update": "Aktualisieren",
+      "noData": "Noch keine Abteilungen",
+      "create": "Erstellen",
+      "confirmDeleteDepartment": "Möchten Sie die Abteilung {{name}} wirklich löschen?",
+      "toast": {
+        "created": "Abteilung erfolgreich erstellt",
+        "updated": "Abteilung erfolgreich aktualisiert",
+        "deleted": "Abteilung erfolgreich gelöscht"
+      }
+    },
+    "positions": {
+      "createPosition": "Position erstellen",
+      "updatePosition": "Position aktualisieren",
+      "deletePosition": "Position löschen",
+      "name": "Name",
+      "position": "Position",
+      "edit": "Bearbeiten",
+      "delete": "Löschen",
+      "confirmDeletePosition": "Möchten Sie die Position {{name}} wirklich löschen?",
+      "cancel": "Abbrechen",
+      "confirm": "Bestätigen",
+      "add": "Hinzufügen",
+      "update": "Aktualisieren",
+      "noData": "Keine Daten"
+    },
+    "projects": {
+      "name": "Name",
+      "domain": "Bereich",
+      "description": "Beschreibung",
+      "startDate": "Startdatum",
+      "endDate": "Enddatum",
+      "environment": "Technologien",
+      "roles": "Rollen",
+      "createProject": "Projekt erstellen",
+      "updateProject": "Projekt aktualisieren",
+      "deleteProject": "Projekt löschen",
+      "create": "Erstellen",
+      "update": "Aktualisieren",
+      "edit": "Bearbeiten",
+      "delete": "Löschen",
+      "cancel": "Abbrechen",
+      "confirm": "Bestätigen",
+      "confirmDeleteProject": "Möchten Sie das Projekt {{name}} wirklich löschen?",
+      "noData": "Noch keine Projekte",
+      "tillNow": "Bis jetzt",
+      "validation": {
+        "nameRequired": "Name ist erforderlich",
+        "domainRequired": "Domäne ist erforderlich",
+        "descriptionRequired": "Beschreibung ist erforderlich",
+        "startDateRequired": "Startdatum ist erforderlich",
+        "startDateInvalid": "Ungültiges Startdatum oder nach dem Enddatum",
+        "endDateInvalid": "Ungültiges Enddatum oder vor dem Startdatum",
+        "environmentRequired": "Wählen Sie mindestens eine Technologie"
+      },
+      "toast": {
+        "created": "Projekt erfolgreich erstellt",
+        "updated": "Projekt erfolgreich aktualisiert",
+        "deleted": "Projekt erfolgreich gelöscht"
       }
     },
     "sidebar": {
@@ -234,6 +363,7 @@
         "userUpdateFailed": "Benutzer konnte nicht aktualisiert werden",
         "profileUpdateFailed": "Profil konnte nicht aktualisiert werden",
         "avatarUpdated": "Avatar aktualisiert",
+        "avatarUpdateFailed": "Avatar konnte nicht aktualisiert werden",
         "verificationSent": "Bestätigungs-E-Mail gesendet",
         "verificationFailed": "Bestätigungs-E-Mail konnte nicht gesendet werden"
       },

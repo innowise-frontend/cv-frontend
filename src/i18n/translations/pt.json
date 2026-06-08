@@ -35,6 +35,7 @@
       "oops": "Ops",
       "goBack": "Voltar",
       "defaultErrorMessage": "Erro! Não foi possível alterar a senha",
+      "noAccess": "Sem acesso",
       "defaultNotFoundMessage": "Hmm… parece que esta não é a página que você estava procurando. \n Vamos colocar você de volta no caminho certo.",
       "api": {
         "forbidden": "Você não tem permissão para realizar esta ação",
@@ -65,6 +66,11 @@
       "noResults": "Sem resultados",
       "noDataResults": "Sem dados",
       "search": "Pesquisar"
+    },
+    "calendar": {
+      "previousMonth": "Ir para o mês anterior",
+      "nextMonth": "Ir para o mês seguinte",
+      "openCalendar": "Abrir calendário"
     },
     "resetPassword": {
       "title": "Redefinir senha",
@@ -142,7 +148,12 @@
       "remove": "Remover",
       "update": "Atualizar",
       "save": "Salvar",
-      "noData": "Sem dados"
+      "noData": "Sem dados",
+      "toast": {
+        "added": "Language added",
+        "updated": "Language updated",
+        "removed": "Language removed"
+      }
     },
     "skills": {
       "currentSkills": "Habilidades",
@@ -169,6 +180,11 @@
       "update": "Atualizar",
       "save": "Salvar",
       "noData": "Sem dados",
+      "toast": {
+        "added": "Skill added",
+        "updated": "Skill updated",
+        "removed": "Skills removed"
+      },
       "categoryLabel": "Categoria",
       "category": {}
     },
@@ -183,6 +199,7 @@
       "education": "Educação",
       "description": "Descrição",
       "employee": "Funcionário",
+      "viewCv": "Ver CV",
       "delete": "Excluir",
       "deleteCv": "Excluir CV",
       "confirmDeleteCv": "Tem certeza de que deseja excluir o CV {{name}}?",
@@ -195,6 +212,118 @@
         "nameRequired": "O nome é obrigatório",
         "educationRequired": "A educação é obrigatória",
         "descriptionRequired": "A descrição é obrigatória"
+      },
+      "tabs": {
+        "details": "Detalhes",
+        "skills": "Competências",
+        "projects": "Projetos",
+        "preview": "Pré-visualização"
+      },
+      "projects": {
+        "addProject": "Adicionar projeto",
+        "updateProject": "Atualizar projeto",
+        "removeProject": "Remover projeto do CV",
+        "responsibilities": "Responsabilidades",
+        "add": "Adicionar",
+        "update": "Atualizar",
+        "edit": "Editar",
+        "delete": "Excluir",
+        "cancel": "Cancelar",
+        "confirm": "Confirmar",
+        "noData": "Ainda não há projetos",
+        "confirmRemoveProject": "Tem certeza de que deseja remover o projeto {{name}}?",
+        "toast": {
+          "added": "Projeto adicionado ao CV",
+          "updated": "Projeto do CV atualizado",
+          "removed": "Projeto removido do CV"
+        }
+      },
+      "preview": {
+        "exportPdf": "Exportar PDF",
+        "education": "Educação",
+        "languageProficiency": "Proficiência linguística",
+        "domains": "Domínios",
+        "projects": "Projetos",
+        "roles": "Funções",
+        "period": "Período",
+        "responsibilities": "Responsabilidades",
+        "environment": "Ambiente",
+        "professionalSkills": "Competências profissionais",
+        "skillsColumn": "COMPETÊNCIAS",
+        "experienceColumn": "EXPERIÊNCIA EM ANOS",
+        "lastUsedColumn": "ÚLTIMO USO",
+        "noProjects": "Ainda não foram adicionados projetos a este CV",
+        "noSkills": "Ainda não foram adicionadas competências a este CV",
+        "tillNow": "Até agora"
+      }
+    },
+    "departments": {
+      "name": "Departamento",
+      "createDepartment": "Criar departamento",
+      "updateDepartment": "Atualizar departamento",
+      "deleteDepartment": "Eliminar departamento",
+      "edit": "Editar",
+      "delete": "Eliminar",
+      "cancel": "Cancelar",
+      "confirm": "Confirmar",
+      "update": "Atualizar",
+      "noData": "Ainda não há departamentos",
+      "create": "Criar",
+      "confirmDeleteDepartment": "Tem a certeza de que quer eliminar o departamento {{name}}?",
+      "toast": {
+        "created": "Departamento criado com sucesso",
+        "updated": "Departamento atualizado com sucesso",
+        "deleted": "Departamento eliminado com sucesso"
+      }
+    },
+    "positions": {
+      "createPosition": "Criar cargo",
+      "updatePosition": "Atualizar cargo",
+      "deletePosition": "Excluir cargo",
+      "name": "Nome",
+      "position": "Cargo",
+      "edit": "Editar",
+      "delete": "Excluir",
+      "confirmDeletePosition": "Tem certeza de que deseja excluir o cargo {{name}}?",
+      "cancel": "Cancelar",
+      "confirm": "Confirmar",
+      "add": "Adicionar",
+      "update": "Atualizar",
+      "noData": "Sem dados"
+    },
+    "projects": {
+      "name": "Nome",
+      "domain": "Domínio",
+      "description": "Descrição",
+      "startDate": "Data de início",
+      "endDate": "Data de fim",
+      "environment": "Tecnologias",
+      "roles": "Funções",
+      "createProject": "Criar projeto",
+      "updateProject": "Atualizar projeto",
+      "deleteProject": "Excluir projeto",
+      "create": "Criar",
+      "update": "Atualizar",
+      "edit": "Editar",
+      "delete": "Excluir",
+      "cancel": "Cancelar",
+      "confirm": "Confirmar",
+      "confirmDeleteProject": "Tem certeza de que deseja excluir o projeto {{name}}?",
+      "noData": "Ainda não há projetos",
+      "tillNow": "Até agora",
+      "validation": {
+        "nameRequired": "O nome é obrigatório",
+        "domainRequired": "O domínio é obrigatório",
+        "descriptionRequired": "A descrição é obrigatória",
+        "startDateRequired": "A data de início é obrigatória",
+        "startDateInvalid": "Data de início inválida ou posterior à data de fim",
+        "endDateInvalid": "Data de fim inválida ou anterior à data de início",
+        "environmentRequired": "Selecione pelo menos uma tecnologia"
+      },
+      "toast": {
+        "created": "Projeto criado com sucesso",
+        "updated": "Projeto atualizado com sucesso",
+        "deleted": "Projeto excluído com sucesso"
       }
     },
     "sidebar": {
@@ -234,6 +363,7 @@
         "userUpdateFailed": "Falha ao atualizar o utilizador",
         "profileUpdateFailed": "Falha ao atualizar o perfil",
         "avatarUpdated": "Avatar atualizado",
+        "avatarUpdateFailed": "Falha ao atualizar o avatar",
         "verificationSent": "E-mail de verificação enviado",
         "verificationFailed": "Falha ao enviar o e-mail de verificação"
       },

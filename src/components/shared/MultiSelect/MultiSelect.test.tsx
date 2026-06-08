@@ -6,6 +6,7 @@ import {
   customPlaceholderClassName,
   getFormFieldClassList,
 } from "@components/shared/formFieldStyles";
+import { MultiSelect } from "./MultiSelect";
 
 vi.mock("@root/components/ui/command", async () => {
   const React = await import("react");
@@ -30,9 +31,22 @@ const languageOptions = [
 
 type LanguageValue = (typeof languageOptions)[number]["value"];
 
+const defaultProps = {
+  label: "Programming languages",
+  placeholder: "Choose languages",
+  options: [...languageOptions],
+  disablePortal: true,
+};
+
+const getTriggerButton = () => {
+  const trigger = screen.getByText(defaultProps.placeholder).closest("button");
+  expect(trigger).toBeTruthy();
+
+  return trigger!;
+};
+
 describe("MultiSelect", () => {
   it("base case: can add and remove selected programming languages", async () => {
-    const { MultiSelect } = await import("./MultiSelect");
     const user = userEvent.setup();
     const onChange = vi.fn();
 
@@ -41,10 +55,8 @@ describe("MultiSelect", () => {
 
       return (
         <MultiSelect
-          label="Programming languages"
-          placeholder="Choose languages"
+          {...defaultProps}
           data={data}
-          options={[...languageOptions]}
           onChange={(next) => {
             onChange(next);
             setData(next);
@@ -55,22 +67,19 @@ describe("MultiSelect", () => {
 
     render(<Controlled />);
 
-    const floatingLabel = screen.getByText("Programming languages", { selector: "label" });
+    const floatingLabel = screen.getByText(defaultProps.label, { selector: "label" });
     expect(floatingLabel).toHaveClass("opacity-0");
 
-    const placeholder = screen.getByText("Choose languages");
+    const placeholder = screen.getByText(defaultProps.placeholder);
     getFormFieldClassList(customPlaceholderClassName).forEach((className) => {
       expect(placeholder).toHaveClass(className);
     });
 
-    const trigger = placeholder.closest("button");
-    expect(trigger).toBeTruthy();
-
-    const triggerButton = trigger!;
+    const triggerButton = getTriggerButton();
 
     await user.click(triggerButton);
     expect(floatingLabel).toHaveClass("opacity-100");
-    await user.click(await screen.findByText("TypeScript"));
+    await user.click(await screen.findByRole("option", { name: "TypeScript" }));
 
     expect(onChange).toHaveBeenCalledTimes(1);
     expect(floatingLabel).toHaveClass("-translate-y-4");
@@ -85,12 +94,11 @@ describe("MultiSelect", () => {
 
     expect(onChange).toHaveBeenCalledTimes(2);
     expect(onChange).toHaveBeenLastCalledWith([]);
-    expect(screen.getByText("Choose languages")).toBeInTheDocument();
+    expect(screen.getByText(defaultProps.placeholder)).toBeInTheDocument();
     expect(triggerButton.querySelector('span[role="button"]')).toBeNull();
   });
 
   it("should allow selecting two or more values", async () => {
-    const { MultiSelect } = await import("./MultiSelect");
     const user = userEvent.setup();
     const onChange = vi.fn();
 
@@ -99,10 +107,8 @@ describe("MultiSelect", () => {
 
       return (
         <MultiSelect
-          label="Programming languages"
-          placeholder="Choose languages"
+          {...defaultProps}
           data={data}
-          options={[...languageOptions]}
           onChange={(next) => {
             onChange(next);
             setData(next);
@@ -113,9 +119,7 @@ describe("MultiSelect", () => {
 
     render(<Controlled />);
 
-    const trigger = screen.getByText("Choose languages").closest("button");
-    expect(trigger).toBeTruthy();
-    const triggerButton = trigger!;
+    const triggerButton = getTriggerButton();
 
     await user.click(triggerButton);
     await user.click(await screen.findByRole("option", { name: "TypeScript" }));
@@ -130,16 +134,13 @@ describe("MultiSelect", () => {
   });
 
   it("should not allow changes when disabled", async () => {
-    const { MultiSelect } = await import("./MultiSelect");
     const user = userEvent.setup();
     const onChange = vi.fn();
 
     render(
       <MultiSelect
-        label="Programming languages"
-        placeholder="Choose languages"
+        {...defaultProps}
         data={["ts"] as LanguageValue[]}
-        options={[...languageOptions]}
         disabled
         onChange={onChange}
       />,

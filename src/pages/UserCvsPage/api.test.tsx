@@ -47,18 +47,17 @@ describe("useCvsTableQuery", () => {
     vi.clearAllMocks();
   });
 
-  it("fetches cvs by route user id when userId param is present", async () => {
+  it("fetches all cvs for admin even when route user id is present", async () => {
     useParamsMock.mockReturnValue({ userId: "route-user" });
     useAuthMock.mockReturnValue({ isAdmin: true, userId: "auth-user", isFirstLoad: false });
-    getUserCvsMock.mockResolvedValue({ items: [] });
+    getCvsMock.mockResolvedValue({ items: [] });
 
     renderHook(() => useCvsTableQuery(queryParams), { wrapper });
 
-    await waitFor(() => expect(getUserCvsMock).toHaveBeenCalled());
+    await waitFor(() => expect(getCvsMock).toHaveBeenCalled());
 
-    expect(getCvsMock).not.toHaveBeenCalled();
-    expect(getUserCvsMock).toHaveBeenCalledWith(
-      "route-user",
+    expect(getUserCvsMock).not.toHaveBeenCalled();
+    expect(getCvsMock).toHaveBeenCalledWith(
       expect.objectContaining({ page: 1, limit: 10, sort_order: SortOrder.ASC }),
     );
   });

@@ -35,6 +35,7 @@
       "oops": "Oops",
       "goBack": "Go back",
       "defaultErrorMessage": "Error! Password wasn't changed",
+      "noAccess": "No access",
       "defaultNotFoundMessage": "Hmm… this doesn’t seem to be the page you were looking for. \n Let’s get you back on track.",
       "api": {
         "forbidden": "You have no rights to perform this action",
@@ -65,6 +66,11 @@
       "noResults": "No results",
       "noDataResults": "No data results",
       "search": "Search"
+    },
+    "calendar": {
+      "previousMonth": "Go to the previous month",
+      "nextMonth": "Go to the next month",
+      "openCalendar": "Open calendar"
     },
     "resetPassword": {
       "title": "Reset password",
@@ -142,7 +148,12 @@
       "remove": "Remove",
       "update": "Update",
       "save": "Save",
-      "noData": "No data"
+      "noData": "No data",
+      "toast": {
+        "added": "Language added",
+        "updated": "Language updated",
+        "removed": "Language removed"
+      }
     },
     "skills": {
       "currentSkills": "Skills",
@@ -169,6 +180,11 @@
       "update": "Update",
       "save": "Save",
       "noData": "No data",
+      "toast": {
+        "added": "Skill added",
+        "updated": "Skill updated",
+        "removed": "Skills removed"
+      },
       "categoryLabel": "Category",
       "category": {}
     },
@@ -183,6 +199,7 @@
       "education": "Education",
       "description": "Description",
       "employee": "Employee",
+      "viewCv": "View CV",
       "delete": "Delete",
       "deleteCv": "Delete CV",
       "confirmDeleteCv": "Are you sure you want to delete CV {{name}}?",
@@ -195,6 +212,118 @@
         "nameRequired": "Name is required",
         "educationRequired": "Education is required",
         "descriptionRequired": "Description is required"
+      },
+      "tabs": {
+        "details": "Details",
+        "skills": "Skills",
+        "projects": "Projects",
+        "preview": "Preview"
+      },
+      "projects": {
+        "addProject": "Add project",
+        "updateProject": "Update project",
+        "removeProject": "Remove CV project",
+        "responsibilities": "Responsibilities",
+        "add": "Add",
+        "update": "Update",
+        "edit": "Edit",
+        "delete": "Delete",
+        "cancel": "Cancel",
+        "confirm": "Confirm",
+        "noData": "No projects yet",
+        "confirmRemoveProject": "Are you sure you want to remove project {{name}}?",
+        "toast": {
+          "added": "Project added to CV",
+          "updated": "CV project updated",
+          "removed": "CV project removed"
+        }
+      },
+      "preview": {
+        "exportPdf": "Export PDF",
+        "education": "Education",
+        "languageProficiency": "Language proficiency",
+        "domains": "Domains",
+        "projects": "Projects",
+        "roles": "Roles",
+        "period": "Period",
+        "responsibilities": "Responsibilities",
+        "environment": "Environment",
+        "professionalSkills": "Professional skills",
+        "skillsColumn": "SKILLS",
+        "experienceColumn": "EXPERIENCE IN YEARS",
+        "lastUsedColumn": "LAST USED",
+        "noProjects": "No projects added to this CV yet",
+        "noSkills": "No skills added to this CV yet",
+        "tillNow": "Till now"
+      }
+    },
+    "departments": {
+      "name": "Department",
+      "createDepartment": "Create department",
+      "updateDepartment": "Update department",
+      "deleteDepartment": "Delete department",
+      "edit": "Edit",
+      "delete": "Delete",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "update": "Update",
+      "noData": "No departments yet",
+      "create": "Create",
+      "confirmDeleteDepartment": "Are you sure you want to delete department {{name}}?",
+      "toast": {
+        "created": "Department created successfully",
+        "updated": "Department updated successfully",
+        "deleted": "Department deleted successfully"
+      }
+    },
+    "positions": {
+      "createPosition": "Create position",
+      "updatePosition": "Update position",
+      "deletePosition": "Delete position",
+      "name": "Name",
+      "position": "Position",
+      "edit": "Edit",
+      "delete": "Delete",
+      "confirmDeletePosition": "Are you sure you want to delete position {{name}}?",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "add": "Add",
+      "update": "Update",
+      "noData": "No data"
+    },
+    "projects": {
+      "name": "Name",
+      "domain": "Domain",
+      "description": "Description",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "environment": "Technologies",
+      "roles": "Roles",
+      "createProject": "Create project",
+      "updateProject": "Update project",
+      "deleteProject": "Delete project",
+      "create": "Create",
+      "update": "Update",
+      "edit": "Edit",
+      "delete": "Delete",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "confirmDeleteProject": "Are you sure you want to delete project {{name}}?",
+      "noData": "No projects yet",
+      "tillNow": "Till now",
+      "validation": {
+        "nameRequired": "Name is required",
+        "domainRequired": "Domain is required",
+        "descriptionRequired": "Description is required",
+        "startDateRequired": "Start date is required",
+        "startDateInvalid": "Start date is invalid or after end date",
+        "endDateInvalid": "End date is invalid or before start date",
+        "environmentRequired": "Select at least one technology"
+      },
+      "toast": {
+        "created": "Project created successfully",
+        "updated": "Project updated successfully",
+        "deleted": "Project deleted successfully"
       }
     },
     "sidebar": {

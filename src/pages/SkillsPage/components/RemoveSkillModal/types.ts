@@ -1,8 +1,6 @@
-import { DeleteProfileSkillInput } from "@root/services/graphql/__generated__/graphql";
-
-export interface RemoveSkillModalProps {
-  userId: string;
-  deletedSkills: DeleteProfileSkillInput;
-  onChangeDeletedSkills: (value: DeleteProfileSkillInput) => void;
-  onChangeMode: (mode: boolean) => void;
-}
+export type RemoveSkillModalProps = {
+  selectedNames: string[];
+  disabled?: boolean;
+  onRemove: () => Promise<unknown> | unknown;
+  onCancel: () => void;
+};

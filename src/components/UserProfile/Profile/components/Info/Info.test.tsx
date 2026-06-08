@@ -118,8 +118,8 @@ describe("UserProfile Info", () => {
             created_at: "0",
           },
         },
-        departments: [{ id: "d1", name: "Dep 1" }],
-        positions: [{ id: "p1", name: "Pos 1" }],
+        departments: { items: [{ id: "d1", name: "Dep 1" }] },
+        positions: { items: [{ id: "p1", name: "Pos 1" }] },
       },
     });
 
@@ -151,8 +151,8 @@ describe("UserProfile Info", () => {
             created_at: "0",
           },
         },
-        departments: [{ id: "d1", name: "Dep 1" }],
-        positions: [{ id: "p1", name: "Pos 1" }],
+        departments: { items: [{ id: "d1", name: "Dep 1" }] },
+        positions: { items: [{ id: "p1", name: "Pos 1" }] },
       },
     });
 
@@ -186,14 +186,18 @@ describe("UserProfile Info", () => {
             created_at: "0",
           },
         },
-        departments: [
-          { id: "d1", name: "Dep 1" },
-          { id: "d2", name: "Dep 2" },
-        ],
-        positions: [
-          { id: "p1", name: "Pos 1" },
-          { id: "p2", name: "Pos 2" },
-        ],
+        departments: {
+          items: [
+            { id: "d1", name: "Dep 1" },
+            { id: "d2", name: "Dep 2" },
+          ],
+        },
+        positions: {
+          items: [
+            { id: "p1", name: "Pos 1" },
+            { id: "p2", name: "Pos 2" },
+          ],
+        },
       },
     });
 
@@ -240,8 +244,8 @@ describe("UserProfile Info", () => {
             created_at: "0",
           },
         },
-        departments: [{ id: "d1", name: "Dep 1" }],
-        positions: [{ id: "p1", name: "Pos 1" }],
+        departments: { items: [{ id: "d1", name: "Dep 1" }] },
+        positions: { items: [{ id: "p1", name: "Pos 1" }] },
       },
     });
 

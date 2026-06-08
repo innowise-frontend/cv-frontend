@@ -58,4 +58,18 @@ describe("TableColumnHeader", () => {
 
     expect(screen.getByTestId("sort-icon")).toHaveClass("rotate-180");
   });
+
+  it("renders sortable button without icon when sortOrder is undefined", async () => {
+    const user = userEvent.setup();
+    const onChangeSorting = vi.fn();
+
+    render(<TableColumnHeader title="Domain" onChangeSorting={onChangeSorting} />);
+
+    const button = screen.getByRole("button", { name: "Domain" });
+    expect(screen.queryByTestId("sort-icon")).not.toBeInTheDocument();
+
+    await user.click(button);
+
+    expect(onChangeSorting).toHaveBeenCalledTimes(1);
+  });
 });
