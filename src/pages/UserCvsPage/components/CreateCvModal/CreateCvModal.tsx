@@ -58,7 +58,7 @@ export const CreateCvModal = () => {
         <PlusIcon height={16} width={16} />
         {t("page.cvs.createCv")}
       </Modal.Trigger>
-      <Modal.Content onCancel={resetCreatedCv}>
+      <Modal.Content className="w-[620px]" onCancel={resetCreatedCv}>
         <Modal.Header>{t("page.cvs.createCv")}</Modal.Header>
         <form onSubmit={handleSubmit(handleCreateCv)}>
           <Modal.Body className="flex flex-col gap-9">
@@ -76,6 +76,7 @@ export const CreateCvModal = () => {
             />
             <Textarea
               placeholder={t("page.cvs.description")}
+              className="h-43"
               label={t("page.cvs.description")}
               {...register("description")}
               error={errors.description?.message}
