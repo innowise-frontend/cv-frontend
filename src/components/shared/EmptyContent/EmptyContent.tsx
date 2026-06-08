@@ -1,9 +1,10 @@
+import { cn } from "@root/lib/utils";
 import type { EmptyContentProps } from "./types";
 
-export const EmptyContent = ({ message }: EmptyContentProps) => {
+export const EmptyContent = ({ message, className }: EmptyContentProps) => {
   return (
-    <div className="flex flex-col items-center justify-center my-24">
-      <p className="text-sm">{message}</p>
+    <div className={cn("flex flex-col items-center justify-center", className)}>
+      <p className="text-base leading-6">{message}</p>
     </div>
   );
 };

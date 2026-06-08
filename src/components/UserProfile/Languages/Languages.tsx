@@ -24,7 +24,7 @@ export const Languages = () => {
           {languages.length > 0 ? (
             <>
               <h2 className="text-left pb-4">{t("page.languages.currentLanguages")}</h2>
-              <div className="grid grid-cols-3">
+              <div className="grid grid-cols-3 mb-8">
                 {languages.map((language) => (
                   <ProgressBar
                     key={language.name}
@@ -36,7 +36,7 @@ export const Languages = () => {
               </div>
             </>
           ) : (
-            <EmptyContent message={t("page.languages.emptyState")} />
+            <EmptyContent message={t("page.languages.noData")} className="mt-18 mb-8" />
           )}
         </>
       )}

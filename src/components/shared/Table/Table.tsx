@@ -140,7 +140,10 @@ export const Table = <TData,>({
             <TableBody className="font-normal">
               <TableRow className="border-b! border-b-gray-5 hover:bg-transparent dark:border-b-gray-3">
                 <TableCell colSpan={columns.length}>
-                  <EmptyContent message={emptyMessage ?? t("page.table.noResults")} />
+                  <EmptyContent
+                    message={emptyMessage ?? t("page.table.noResults")}
+                    className="my-25"
+                  />
                 </TableCell>
               </TableRow>
             </TableBody>

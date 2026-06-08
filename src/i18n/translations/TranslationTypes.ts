@@ -125,7 +125,6 @@ export interface TranslationTypes {
     };
     languages: {
       currentLanguages: string;
-      emptyState: string;
       addLanguage: string;
       createLanguage: string;
       deleteLanguage: string;
@@ -151,7 +150,6 @@ export interface TranslationTypes {
     };
     skills: {
       currentSkills: string;
-      emptyState: string;
       addSkill: string;
       createSkill: string;
       updateSkill: string;

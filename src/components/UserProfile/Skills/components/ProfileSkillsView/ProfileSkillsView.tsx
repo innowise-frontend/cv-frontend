@@ -13,7 +13,7 @@ export const ProfileSkillsView = ({ userId }: ProfileSkillsViewProps) => {
       skills={profileData?.skills}
       categories={categoriesData}
       uncategorizedLabel={t("page.skills.uncategorized")}
-      emptyMessage={t("page.skills.emptyState")}
+      emptyMessage={t("page.skills.noData")}
     />
   );
 };

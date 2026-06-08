@@ -57,7 +57,7 @@ export const LanguagesEditor = ({ userId }: LanguagesEditorProps) => {
       {hasLanguages ? (
         <>
           <h2 className="text-left pb-4">{t("page.languages.currentLanguages")}</h2>
-          <div className="grid grid-cols-3">
+          <div className="grid grid-cols-3 mb-8">
             {languages.map((language) => (
               <Modal key={language.name}>
                 <LanguageProgressBar
@@ -73,10 +73,10 @@ export const LanguagesEditor = ({ userId }: LanguagesEditorProps) => {
           </div>
         </>
       ) : (
-        <EmptyContent message={t("page.languages.emptyState")} />
+        <EmptyContent message={t("page.languages.noData")} className="mt-18 mb-8" />
       )}
 
-      <div className="min-h-14 flex gap-8 justify-end pt-8">
+      <div className="min-h-14 flex gap-8 justify-end pt-4">
         {isDeleteMode && (
           <>
             <Button variant="outline" className="w-40" onClick={resetDeletedLanguages}>
