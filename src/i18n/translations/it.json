@@ -33,10 +33,12 @@
     },
     "error": {
       "oops": "Ops",
+      "hm": "Hmm…",
+      "retry": "Riprova",
       "goBack": "Indietro",
-      "defaultErrorMessage": "Errore! Impossibile modificare la password",
+      "defaultErrorMessage": "Qualcosa è andato storto. Stiamo già lavorando per risolvere il problema. \n Riprova o torna indietro.",
       "noAccess": "Accesso negato",
-      "defaultNotFoundMessage": "Hmm… questa non sembra essere la pagina che stavi cercando. \n Ti riportiamo sulla strada giusta.",
+      "defaultNotFoundMessage": "Questa non sembra essere la pagina che stavi cercando. \n Ti riportiamo sulla strada giusta.",
       "api": {
         "forbidden": "Non hai i permessi per eseguire questa azione",
         "unauthorized": "Devi effettuare nuovamente l'accesso",

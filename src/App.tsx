@@ -15,8 +15,12 @@ const router = createRouter({
   },
   routeTree,
   notFoundMode: "root",
-  defaultErrorComponent: () => <ErrorPage error={t("page.error.defaultErrorMessage")} />,
-  defaultNotFoundComponent: () => <ErrorPage error={t("page.error.defaultNotFoundMessage")} />,
+  defaultErrorComponent: () => (
+    <ErrorPage errorTitle={t("page.error.oops")} error={t("page.error.defaultErrorMessage")} />
+  ),
+  defaultNotFoundComponent: () => (
+    <ErrorPage errorTitle={t("page.error.hm")} error={t("page.error.defaultNotFoundMessage")} />
+  ),
 });
 
 declare module "@tanstack/react-router" {

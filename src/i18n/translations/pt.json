@@ -33,10 +33,12 @@
     },
     "error": {
       "oops": "Ops",
+      "hm": "Hmm…",
+      "retry": "Tentar novamente",
       "goBack": "Voltar",
-      "defaultErrorMessage": "Erro! Não foi possível alterar a senha",
+      "defaultErrorMessage": "Algo deu errado. Já estamos trabalhando para corrigir. \n Tente novamente ou volte.",
       "noAccess": "Sem acesso",
-      "defaultNotFoundMessage": "Hmm… parece que esta não é a página que você estava procurando. \n Vamos colocar você de volta no caminho certo.",
+      "defaultNotFoundMessage": "Parece que esta não é a página que você estava procurando. \n Vamos colocar você de volta no caminho certo.",
       "api": {
         "forbidden": "Você não tem permissão para realizar esta ação",
         "unauthorized": "Você precisa entrar novamente",

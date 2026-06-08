@@ -33,6 +33,8 @@ export interface TranslationTypes {
     };
     error: {
       oops: string;
+      hm: string;
+      retry: string;
       goBack: string;
       defaultErrorMessage: string;
       defaultNotFoundMessage: string;
