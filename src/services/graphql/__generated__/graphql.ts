@@ -105,7 +105,7 @@ export type CreateProjectInput = {
 };
 
 export type CreateSkillInput = {
-  categoryId?: InputMaybe<Scalars["ID"]["input"]>;
+  categoryId: Scalars["ID"]["input"];
   name: Scalars["String"]["input"];
 };
 
@@ -422,7 +422,7 @@ export type MutationSendVerificationArgs = {
 };
 
 export type MutationSignupArgs = {
-  auth: AuthInput;
+  auth: SignupInput;
 };
 
 export type MutationUpdateCvArgs = {
@@ -679,9 +679,15 @@ export type SearchPaginationInput = {
   sort_order?: InputMaybe<Scalars["String"]["input"]>;
 };
 
+export type SignupInput = {
+  confirmPassword: Scalars["String"]["input"];
+  email: Scalars["String"]["input"];
+  password: Scalars["String"]["input"];
+};
+
 export type Skill = {
   __typename?: "Skill";
-  category?: Maybe<SkillCategory>;
+  category: SkillCategory;
   category_name?: Maybe<Scalars["String"]["output"]>;
   category_parent_name?: Maybe<Scalars["String"]["output"]>;
   created_at: Scalars["String"]["output"];
@@ -781,7 +787,7 @@ export type UpdateProjectInput = {
 };
 
 export type UpdateSkillInput = {
-  categoryId?: InputMaybe<Scalars["ID"]["input"]>;
+  categoryId: Scalars["ID"]["input"];
   name: Scalars["String"]["input"];
   skillId: Scalars["ID"]["input"];
 };
@@ -816,7 +822,6 @@ export type User = {
   id: Scalars["ID"]["output"];
   is_verified: Scalars["Boolean"]["output"];
   position?: Maybe<Position>;
-  position_name?: Maybe<Scalars["String"]["output"]>;
   profile: Profile;
   role: UserRole;
 };
@@ -988,7 +993,7 @@ export type CreateSkillMutation = {
     created_at: string;
     category_name?: string | null;
     category_parent_name?: string | null;
-    category?: { __typename?: "SkillCategory"; id: string; name: string } | null;
+    category: { __typename?: "SkillCategory"; id: string; name: string };
   };
 };
 
@@ -1178,7 +1183,7 @@ export type SendVerificationMutationVariables = Exact<{
 export type SendVerificationMutation = { __typename?: "Mutation"; sendVerification?: any | null };
 
 export type SignupMutationVariables = Exact<{
-  auth: AuthInput;
+  auth: SignupInput;
 }>;
 
 export type SignupMutation = {
@@ -1345,7 +1350,7 @@ export type UpdateSkillMutation = {
     created_at: string;
     category_name?: string | null;
     category_parent_name?: string | null;
-    category?: { __typename?: "SkillCategory"; id: string; name: string } | null;
+    category: { __typename?: "SkillCategory"; id: string; name: string };
   };
 };
 
@@ -1370,7 +1375,6 @@ export type UpdateUserMutation = {
     is_verified: boolean;
     role: UserRole;
     department_name?: string | null;
-    position_name?: string | null;
     profile: {
       __typename?: "Profile";
       id: string;
@@ -1599,7 +1603,7 @@ export type SkillsQuery = {
       created_at: string;
       category_name?: string | null;
       category_parent_name?: string | null;
-      category?: { __typename?: "SkillCategory"; id: string; name: string } | null;
+      category: { __typename?: "SkillCategory"; id: string; name: string };
     }>;
   };
 };
@@ -3018,7 +3022,7 @@ export const SignupDocument = {
           variable: { kind: "Variable", name: { kind: "Name", value: "auth" } },
           type: {
             kind: "NonNullType",
-            type: { kind: "NamedType", name: { kind: "Name", value: "AuthInput" } },
+            type: { kind: "NamedType", name: { kind: "Name", value: "SignupInput" } },
           },
         },
       ],
@@ -3632,7 +3636,6 @@ export const UpdateUserDocument = {
                 { kind: "Field", name: { kind: "Name", value: "is_verified" } },
                 { kind: "Field", name: { kind: "Name", value: "role" } },
                 { kind: "Field", name: { kind: "Name", value: "department_name" } },
-                { kind: "Field", name: { kind: "Name", value: "position_name" } },
                 {
                   kind: "Field",
                   name: { kind: "Name", value: "profile" },

@@ -19,10 +19,18 @@ describe("signup service", () => {
       signup: { access_token: "access", refresh_token: "refresh", user: { role: "user" } },
     });
 
-    const result = await signup({ email: "new@example.com", password: "secret12" });
+    const result = await signup({
+      email: "new@example.com",
+      password: "secret12",
+      confirmPassword: "secret12",
+    });
 
     expect(requestMock).toHaveBeenCalledWith("SIGNUP_DOCUMENT", {
-      auth: { email: "new@example.com", password: "secret12" },
+      auth: {
+        email: "new@example.com",
+        password: "secret12",
+        confirmPassword: "secret12",
+      },
     });
     expect(result).toEqual({
       access_token: "access",

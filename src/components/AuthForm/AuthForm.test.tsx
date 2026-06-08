@@ -93,7 +93,7 @@ describe("AuthForm", () => {
     expect(await screen.findByText("Passwords don't match")).toBeInTheDocument();
   });
 
-  it("should call onSubmit without confirmPassword in signup mode", async () => {
+  it("should call onSubmit with confirmPassword in signup mode", async () => {
     const user = userEvent.setup();
     const onSubmit = vi.fn();
     render(<AuthForm onSubmit={onSubmit} label="Create account" isSignup />);
@@ -110,6 +110,7 @@ describe("AuthForm", () => {
     expect(onSubmit).toHaveBeenCalledWith({
       email: "user@example.com",
       password: "secret12",
+      confirmPassword: "secret12",
     });
   });
 });

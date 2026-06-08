@@ -7,6 +7,7 @@ import { useLocalStorage } from "@hooks/index";
 import { LOCAL_STORAGE_KEYS } from "@root/constants";
 import { getErrorToastMessage } from "@root/lib";
 import { getMe, signup } from "@services/auth";
+import type { SignupInput } from "@services/graphql/__generated__/graphql";
 
 export const Signup = () => {
   const navigate = useNavigate();
@@ -16,12 +17,7 @@ export const Signup = () => {
   const [, setRefreshToken] = useLocalStorage(LOCAL_STORAGE_KEYS.REFRESH_TOKEN, "");
 
   const { mutate } = useMutation({
-    mutationFn: (data: { email: string; password: string }) => {
-      return signup({
-        email: data.email,
-        password: data.password,
-      });
-    },
+    mutationFn: (data: SignupInput) => signup(data),
     onSuccess: async (response) => {
       setAccessToken(() => response.access_token);
       setRefreshToken(() => response.refresh_token);

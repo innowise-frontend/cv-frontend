@@ -1,7 +1,16 @@
+import type { SignupInput } from "@services/graphql/__generated__/graphql";
 import { FormSchema } from "./validation";
 
-export interface AuthFormProps {
-  onSubmit: (data: FormSchema) => void;
+type AuthFormPropsBase = {
   label: string;
-  isSignup?: boolean;
-}
+};
+
+export type AuthFormProps =
+  | (AuthFormPropsBase & {
+      isSignup?: false;
+      onSubmit: (data: FormSchema) => void;
+    })
+  | (AuthFormPropsBase & {
+      isSignup: true;
+      onSubmit: (data: SignupInput) => void;
+    });

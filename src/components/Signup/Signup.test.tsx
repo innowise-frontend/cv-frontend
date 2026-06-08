@@ -93,6 +93,7 @@ describe("Signup", () => {
         expect(signupMock).toHaveBeenCalledWith({
           email: "new@example.com",
           password: "secret12",
+          confirmPassword: "secret12",
         });
       });
 
