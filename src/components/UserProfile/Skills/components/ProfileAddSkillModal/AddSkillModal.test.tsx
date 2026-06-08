@@ -55,8 +55,8 @@ vi.mock("@assets/icon/PlusIcon.svg?react", () => ({
 }));
 
 const skills: SkillItem[] = [
-  { id: "s1", name: "React", created_at: "", category: null } as SkillItem,
-  { id: "s2", name: "TypeScript", created_at: "", category: null } as SkillItem,
+  { id: "s1", name: "React", created_at: "", category: { id: "c1", name: "Frontend" } },
+  { id: "s2", name: "TypeScript", created_at: "", category: { id: "c1", name: "Frontend" } },
 ];
 const masteryOptions = [{ label: Mastery.Novice, value: Mastery.Novice }];
 

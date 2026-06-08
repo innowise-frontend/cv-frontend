@@ -71,7 +71,7 @@ export const UpdateSkillModal = ({ name, categoryId, skillId }: UpdateSkillModal
               mutateAsync({
                 name: updatedSkill.name,
                 skillId: updatedSkill.skillId,
-                categoryId: updatedSkill.categoryId || undefined,
+                categoryId: updatedSkill.categoryId,
               });
             }}
           >
