@@ -50,7 +50,7 @@ export const UpdateCvModal = ({ cvId, name, education, description }: UpdateCvMo
       <Modal.Trigger className="w-full h-auto justify-start capitalize p-0">
         {t("page.cvs.edit")}
       </Modal.Trigger>
-      <Modal.Content onCancel={resetUpdatedCv}>
+      <Modal.Content className="w-[620px]" onCancel={resetUpdatedCv}>
         <Modal.Header>{t("page.cvs.editCv")}</Modal.Header>
         <form onSubmit={handleSubmit(handleUpdateCv)}>
           <Modal.Body className="flex flex-col gap-9">
@@ -69,6 +69,7 @@ export const UpdateCvModal = ({ cvId, name, education, description }: UpdateCvMo
             <Textarea
               placeholder={t("page.cvs.description")}
               label={t("page.cvs.description")}
+              className="h-43"
               {...register("description")}
               error={errors.description?.message}
             />
