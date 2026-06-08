@@ -58,10 +58,10 @@ describe("AuthForm", () => {
       expect(onSubmit).toHaveBeenCalledTimes(1);
     });
 
-    expect(onSubmit).toHaveBeenCalledWith(
-      { email: "user@example.com", password: "secret12" },
-      expect.anything(),
-    );
+    expect(onSubmit).toHaveBeenCalledWith({
+      email: "user@example.com",
+      password: "secret12",
+    });
   });
 
   it("should not call onSubmit when validation fails", async () => {
@@ -107,9 +107,9 @@ describe("AuthForm", () => {
       expect(onSubmit).toHaveBeenCalledTimes(1);
     });
 
-    expect(onSubmit).toHaveBeenCalledWith(
-      { email: "user@example.com", password: "secret12" },
-      expect.anything(),
-    );
+    expect(onSubmit).toHaveBeenCalledWith({
+      email: "user@example.com",
+      password: "secret12",
+    });
   });
 });

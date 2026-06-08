@@ -41,6 +41,7 @@ async function submitSignupForm() {
   const user = userEvent.setup();
   await user.type(screen.getByPlaceholderText("Email"), "new@example.com");
   await user.type(screen.getByPlaceholderText("Password"), "secret12");
+  await user.type(screen.getByPlaceholderText("Confirm Password"), "secret12");
   await user.click(screen.getByRole("button", { name: "Create account" }));
 }
 
@@ -127,6 +128,7 @@ describe("Signup", () => {
 
     await user.type(screen.getByPlaceholderText("Email"), "new@example.com");
     await user.type(screen.getByPlaceholderText("Password"), "secret12");
+    await user.type(screen.getByPlaceholderText("Confirm Password"), "secret12");
     await user.click(screen.getByRole("button", { name: "Create account" }));
 
     await waitFor(() => {
