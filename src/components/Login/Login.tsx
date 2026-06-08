@@ -35,7 +35,7 @@ export const Login = () => {
   });
 
   return (
-    <div className="flex items-center h-screen justify-center">
+    <div className="flex items-center h-full justify-center">
       <div className="flex flex-col w-full">
         <h2 className="text-34 mb-6">Welcome back</h2>
         <p className="mb-10">Hello again! Sign in to continue</p>

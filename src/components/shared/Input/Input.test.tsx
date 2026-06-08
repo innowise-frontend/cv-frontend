@@ -99,10 +99,11 @@ describe("InputWithLabel", () => {
     expect(screen.getByText("Label", { selector: "label" })).toHaveClass("text-red");
   });
 
-  it("should reserve error space with opacity-0 when error is absent", () => {
+  it("should reserve error space when error is absent", () => {
     const { container } = render(<Input />);
 
-    expect(container.querySelector("p[id$='-error']")).toHaveClass("opacity-0");
+    expect(container.querySelector("p[id$='-error']")).toHaveClass("invisible");
+    expect(container.querySelector("p[id$='-error']")).toHaveClass("h-3");
   });
 
   it("should forward ref to the native input", () => {

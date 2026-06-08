@@ -91,7 +91,8 @@ export const Input = forwardRef<HTMLInputElement, InputWithLabelProps>(
         </div>
         <p
           id={`${generatedId}-error`}
-          className={cn("pl-2 text-left text-xs text-red", !error && "opacity-0")}
+          className={cn("h-3 pl-2 text-left text-xs text-red", !error && "invisible")}
+          aria-live="polite"
         >
           {error || " "}
         </p>

@@ -21,9 +21,9 @@ export const AuthPage = () => {
   });
 
   return (
-    <div className="mx-auto">
+    <div className="flex flex-1 mx-auto">
       <PageTabs
-        className="w-[560px]"
+        className="w-[560px] flex-1"
         isCentered
         tabs={tabs}
         value={mode}
@@ -35,7 +35,7 @@ export const AuthPage = () => {
           });
         }}
       >
-        <div className="w-[560px]">
+        <div className="w-[560px] flex items-center">
           <TabsContent value={AUTH_TAB_CONFIG[0].value}>
             <Login />
           </TabsContent>

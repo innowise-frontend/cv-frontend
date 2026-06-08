@@ -63,7 +63,7 @@ export const ChangePassword = ({ className }: ChangePasswordProps) => {
   return (
     <div className={cn("flex flex-col gap-6", className)}>
       <p className="text-left leading-6">{t("page.setting.changePassword")}</p>
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-9">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
         <Input
           type="password"
           label={t("page.setting.oldPassword")}
