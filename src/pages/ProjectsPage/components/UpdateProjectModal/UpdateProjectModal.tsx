@@ -210,6 +210,7 @@ export const UpdateProjectModal = ({
               disabled={isFieldDisabled("description")}
               label={t("page.projects.description")}
               placeholder={t("page.projects.description")}
+              className="h-30"
               {...register("description")}
               value={watched.description}
             />

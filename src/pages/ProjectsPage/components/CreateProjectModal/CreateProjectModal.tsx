@@ -276,6 +276,7 @@ export const CreateProjectModal = ({
             <Textarea
               disabled={isFieldDisabled("description")}
               label={t("page.projects.description")}
+              className="h-30"
               placeholder={t("page.projects.description")}
               {...register("description")}
               value={watched.description}
