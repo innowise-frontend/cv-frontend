@@ -126,7 +126,6 @@
     },
     "languages": {
       "currentLanguages": "Langues actuelles",
-      "emptyState": "L'utilisateur actuel n'a encore aucune langue",
       "addLanguage": "Ajouter une langue",
       "createLanguage": "Créer une langue",
       "deleteLanguage": "Supprimer une langue",
@@ -148,7 +147,7 @@
       "remove": "Supprimer",
       "update": "Mettre a jour",
       "save": "Enregistrer",
-      "noData": "Aucune donnée",
+      "noData": "Aucune langue ici",
       "toast": {
         "added": "Language added",
         "updated": "Language updated",
@@ -157,7 +156,6 @@
     },
     "skills": {
       "currentSkills": "Compétences",
-      "emptyState": "L'utilisateur actuel n'a encore aucune compétence",
       "addSkill": "Ajouter une compétence",
       "createSkill": "Créer une compétence",
       "updateSkill": "Mettre à jour la compétence",
@@ -179,7 +177,7 @@
       "remove": "Supprimer",
       "update": "Mettre a jour",
       "save": "Enregistrer",
-      "noData": "Aucune donnée",
+      "noData": "Aucune compétence ici",
       "toast": {
         "added": "Skill added",
         "updated": "Skill updated",

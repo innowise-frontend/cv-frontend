@@ -49,7 +49,7 @@ export const SkillsEditor = ({
               <h3 className="text-left text-base text-gray-3 dark:text-gray-6">
                 {group.categoryName}
               </h3>
-              <div className="grid grid-cols-3">
+              <div className="grid grid-cols-3 mb-8">
                 {group.skills.map((skill) => (
                   <Modal key={skill.name}>
                     {renderSkillBar(skill, {
@@ -64,10 +64,10 @@ export const SkillsEditor = ({
           ))}
         </div>
       ) : (
-        <EmptyContent message={t("page.skills.emptyState")} />
+        <EmptyContent message={t("page.skills.noData")} className="mt-18 mb-8" />
       )}
 
-      <div className="min-h-14 flex gap-8 justify-end pt-8">
+      <div className="min-h-14 flex gap-8 justify-end pt-4">
         {renderToolbar({
           isDeleteMode,
           deletedSkillNames,

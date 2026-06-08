@@ -16,8 +16,8 @@ export const GroupedSkillsView = ({
     return groupSkillsByCategory(skills, categoryNameById, uncategorizedLabel);
   }, [categories, skills, uncategorizedLabel]);
 
-  if (groupedSkills.length === 0) {
-    return <EmptyContent message={emptyMessage} />;
+  if (!groupedSkills.length) {
+    return <EmptyContent message={emptyMessage} className="mt-18 mb-8" />;
   }
 
   return (
@@ -25,7 +25,7 @@ export const GroupedSkillsView = ({
       {groupedSkills.map((group) => (
         <div key={group.categoryId ?? "uncategorized"} className="flex flex-col gap-2">
           <h3 className="text-left text-base text-gray-3">{group.categoryName}</h3>
-          <div className="grid grid-cols-3">
+          <div className="grid grid-cols-3 mb-8">
             {group.skills.map((skill) => (
               <ProgressBar
                 key={skill.name}

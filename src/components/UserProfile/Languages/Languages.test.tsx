@@ -73,7 +73,7 @@ describe("UserProfile Languages", () => {
 
     render(<Languages />);
 
-    expect(screen.getByText("Current user doesn't have any languages yet")).toBeInTheDocument();
+    expect(screen.getByText("No languages here")).toBeInTheDocument();
     expect(screen.queryByText("editor")).not.toBeInTheDocument();
   });
 });

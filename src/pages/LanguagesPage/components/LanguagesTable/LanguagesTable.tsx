@@ -40,8 +40,6 @@ export const LanguagesTable = () => {
   });
 
   const tableData = data?.items ?? [];
-  const hasActiveSearch = (searchParams.search ?? "").trim().length > 0;
-  const emptyMessage = hasActiveSearch ? t("page.table.noResults") : t("page.languages.noData");
 
   return (
     <div className="flex h-full min-h-0 flex-col">
@@ -61,7 +59,7 @@ export const LanguagesTable = () => {
           data={tableData}
           columns={columns}
           isLoading={isLoading}
-          emptyMessage={emptyMessage}
+          emptyMessage={t("page.table.noResults")}
           pagesAmount={data?.total_pages ?? 0}
           currentPage={currentPage}
           onChangePage={setCurrentPage}
