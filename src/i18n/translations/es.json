@@ -33,10 +33,12 @@
     },
     "error": {
       "oops": "Ups",
+      "hm": "Hmm…",
+      "retry": "Reintentar",
       "goBack": "Volver",
-      "defaultErrorMessage": "¡Error! No se pudo cambiar la contraseña",
+      "defaultErrorMessage": "Algo salió mal. Ya estamos trabajando para solucionarlo. \n Inténtalo de nuevo o vuelve atrás.",
       "noAccess": "Sin acceso",
-      "defaultNotFoundMessage": "Hmm… parece que esta no es la página que buscabas. \n Vamos a devolverte al camino correcto.",
+      "defaultNotFoundMessage": "Parece que esta no es la página que buscabas. \n Vamos a devolverte al camino correcto.",
       "api": {
         "forbidden": "No tienes permisos para realizar esta acción",
         "unauthorized": "Necesitas iniciar sesión de nuevo",

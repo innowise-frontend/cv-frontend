@@ -33,10 +33,12 @@
     },
     "error": {
       "oops": "Ups",
+      "hm": "Hmm…",
+      "retry": "Erneut versuchen",
       "goBack": "Zurück",
-      "defaultErrorMessage": "Fehler! Passwort wurde nicht geändert",
+      "defaultErrorMessage": "Etwas ist schiefgelaufen. Wir arbeiten bereits an einer Lösung. \n Bitte versuchen Sie es erneut oder gehen Sie zurück.",
       "noAccess": "Kein Zugriff",
-      "defaultNotFoundMessage": "Hm… diese Seite scheint nicht die zu sein, nach der Sie gesucht haben. \n Wir bringen Sie wieder auf den richtigen Weg.",
+      "defaultNotFoundMessage": "Diese Seite scheint nicht die zu sein, nach der Sie gesucht haben. \n Wir bringen Sie wieder auf den richtigen Weg.",
       "api": {
         "forbidden": "Sie haben keine Rechte für diese Aktion",
         "unauthorized": "Bitte melden Sie sich erneut an",

@@ -19,7 +19,7 @@ describe("ErrorPage", () => {
     const user = userEvent.setup();
     render(<ErrorPage error="test error" />);
 
-    const button = screen.getByRole("button", { name: i18n.t("page.error.goBack") });
+    const button = screen.getByRole("button", { name: i18n.t("page.error.retry") });
     await user.click(button);
 
     expect(mockHistoryBack).toHaveBeenCalledOnce();

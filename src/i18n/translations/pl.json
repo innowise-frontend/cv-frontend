@@ -33,10 +33,12 @@
     },
     "error": {
       "oops": "Ups",
+      "hm": "Hmm…",
+      "retry": "Spróbuj ponownie",
       "goBack": "Wstecz",
-      "defaultErrorMessage": "Błąd! Nie udało się zmienić hasła",
+      "defaultErrorMessage": "Coś poszło nie tak. Już pracujemy nad naprawą. \n Spróbuj ponownie lub wróć.",
       "noAccess": "Brak dostępu",
-      "defaultNotFoundMessage": "Hmm… wygląda na to, że to nie jest strona, której szukasz. \n Pomóżmy Ci wrócić na właściwą ścieżkę.",
+      "defaultNotFoundMessage": "Wygląda na to, że to nie jest strona, której szukasz. \n Pomóżmy Ci wrócić na właściwą ścieżkę.",
       "api": {
         "forbidden": "Nie masz uprawnień do wykonania tej akcji",
         "unauthorized": "Musisz zalogować się ponownie",
