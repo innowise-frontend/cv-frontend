@@ -8,6 +8,7 @@ import { getBreadcrumbsLink } from "@root/lib";
 import { useUsersApi } from "./api";
 import { CreateUserModal } from "./components";
 import { useUserTableColumns } from "./useUserTableColumns";
+import type { UsersSortBy } from "./types";
 
 export const UsersPage = () => {
   const { isAdmin } = useAuth();
@@ -17,6 +18,7 @@ export const UsersPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [currentLimit, setCurrentLimit] = useState(10);
   const [currentSort, setCurrentSort] = useState<SortOrder>(SortOrder.ASC);
+  const [currentSortBy, setCurrentSortBy] = useState<UsersSortBy>("department");
 
   const location = useLocation();
   const { onSearch } = useHandleSearch({
@@ -30,14 +32,30 @@ export const UsersPage = () => {
       setCurrentPage(1);
     },
   });
-  const { columns } = useUserTableColumns();
+
+  const handleSort = (sortBy: UsersSortBy) => {
+    if (currentSortBy === sortBy) {
+      setCurrentSort((prev) => (prev === SortOrder.ASC ? SortOrder.DESC : SortOrder.ASC));
+    } else {
+      setCurrentSortBy(sortBy);
+      setCurrentSort(SortOrder.ASC);
+    }
+
+    setCurrentPage(1);
+  };
+
+  const { columns } = useUserTableColumns({
+    currentSort,
+    currentSortBy,
+    onSort: handleSort,
+  });
 
   const { data, isLoading } = useUsersApi({
     search: searchParams.search ?? "",
     page: currentPage,
     limit: currentLimit,
     sort_order: currentSort,
-    sort_by: "department",
+    sort_by: currentSortBy,
   });
 
   const tableData = data?.items ?? [];
@@ -70,11 +88,8 @@ export const UsersPage = () => {
           pagesAmount={data?.total_pages ?? 0}
           currentPage={currentPage}
           onChangePage={setCurrentPage}
-          onSort={() => {
-            setCurrentSort((prev) => (prev === SortOrder.ASC ? SortOrder.DESC : SortOrder.ASC));
-            setCurrentPage(1);
-          }}
           currentSort={currentSort}
+          currentSortBy={currentSortBy}
           viewOptions={VIEW_OPTIONS}
           currentViewOption={currentLimit}
           onChangeViewOption={(limit) => {

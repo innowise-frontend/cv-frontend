@@ -15,17 +15,15 @@ export const TableColumnHeader = ({
   return (
     <Button
       variant="ghost"
-      className="flex items-center justify-center gap-1 px-2"
+      className="flex items-center justify-center gap-1 px-2 hover:dark:bg-gray-2 hover:bg-gray-8"
       onClick={onChangeSorting}
     >
       <span className="font-bold">{title}</span>
-      {sortOrder && (
-        <ArrowUpIcon
-          width={18}
-          height={18}
-          className={cn(sortOrder === "ASC" ? "rotate-180" : "")}
-        />
-      )}
+      <ArrowUpIcon
+        width={18}
+        height={18}
+        className={cn(sortOrder === "ASC" && "rotate-180", !sortOrder && "opacity-40")}
+      />
     </Button>
   );
 };

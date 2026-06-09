@@ -12,7 +12,7 @@ interface UseUsersApiParams {
   page: number;
   limit: number;
   sort_order: string;
-  sort_by: string;
+  sort_by: "first_name" | "last_name" | "department";
 }
 
 export const useUsersApi = ({ search, page, limit, sort_order, sort_by }: UseUsersApiParams) =>

@@ -59,17 +59,24 @@ describe("TableColumnHeader", () => {
     expect(screen.getByTestId("sort-icon")).toHaveClass("rotate-180");
   });
 
-  it("renders sortable button without icon when sortOrder is undefined", async () => {
+  it("renders sortable button with muted icon when column is not actively sorted", async () => {
     const user = userEvent.setup();
     const onChangeSorting = vi.fn();
 
     render(<TableColumnHeader title="Domain" onChangeSorting={onChangeSorting} />);
 
     const button = screen.getByRole("button", { name: "Domain" });
-    expect(screen.queryByTestId("sort-icon")).not.toBeInTheDocument();
+    expect(screen.getByTestId("sort-icon")).toHaveClass("opacity-40");
+    expect(screen.getByTestId("sort-icon")).not.toHaveClass("rotate-180");
 
     await user.click(button);
 
     expect(onChangeSorting).toHaveBeenCalledTimes(1);
+  });
+
+  it("renders active sort icon without muted style", () => {
+    render(<TableColumnHeader title="Domain" sortOrder="DESC" onChangeSorting={vi.fn()} />);
+
+    expect(screen.getByTestId("sort-icon")).not.toHaveClass("opacity-40");
   });
 });

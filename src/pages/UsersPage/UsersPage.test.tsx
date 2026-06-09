@@ -8,7 +8,7 @@ const navigateMock = vi.hoisted(() => vi.fn());
 const useUsersApiMock = vi.hoisted(() => vi.fn());
 const tableMock = vi.hoisted(() => vi.fn());
 const useUserTableColumnsMock = vi.hoisted(() =>
-  vi.fn(() => ({ columns: [{ id: "mock-column" }] as const })),
+  vi.fn().mockReturnValue({ columns: [{ id: "mock-column" }] as const }),
 );
 
 vi.mock("@tanstack/react-router", () => ({
@@ -22,7 +22,7 @@ vi.mock("./api", () => ({
 }));
 
 vi.mock("./useUserTableColumns", () => ({
-  useUserTableColumns: () => useUserTableColumnsMock(),
+  useUserTableColumns: (options: unknown) => useUserTableColumnsMock(options),
 }));
 
 vi.mock("./components", () => ({
@@ -118,6 +118,7 @@ describe("UsersPage", () => {
         pagesAmount: 7,
         currentPage: 1,
         currentSort: "ASC",
+        currentSortBy: "department",
         viewOptions: VIEW_OPTIONS,
         columns: [{ id: "mock-column" }],
       }),
@@ -138,6 +139,18 @@ describe("UsersPage", () => {
     });
   });
 
+  it("passes sort state into useUserTableColumns", () => {
+    render(<UsersPage />);
+
+    expect(useUserTableColumnsMock).toHaveBeenCalledWith(
+      expect.objectContaining({
+        currentSort: "ASC",
+        currentSortBy: "department",
+        onSort: expect.any(Function),
+      }),
+    );
+  });
+
   it("falls back to empty data when query result is missing", () => {
     useSearchMock.mockReturnValue({});
     useUsersApiMock.mockReturnValue({ data: undefined });
@@ -152,18 +165,21 @@ describe("UsersPage", () => {
     );
   });
 
-  it("toggles sort and resets page when table sort callback is triggered", async () => {
+  it("toggles sort order and resets page when sorting the same column", async () => {
     useSearchMock.mockReturnValue({ search: "anna" });
 
     render(<UsersPage />);
 
-    const firstCall = tableMock.mock.calls[0][0] as {
+    const tableProps = tableMock.mock.calls[0][0] as {
       onChangePage: (p: number) => void;
-      onSort: () => void;
     };
+    const columnsOptions = useUserTableColumnsMock.mock.calls[0][0] as {
+      onSort: (sortBy: "first_name" | "last_name" | "department") => void;
+    };
+
     act(() => {
-      firstCall.onChangePage(5);
-      firstCall.onSort();
+      tableProps.onChangePage(5);
+      columnsOptions.onSort("department");
     });
 
     await waitFor(() => {
@@ -173,6 +189,30 @@ describe("UsersPage", () => {
         limit: 10,
         sort_order: "DESC",
         sort_by: "department",
+      });
+    });
+  });
+
+  it("switches sort column and resets order to ASC", async () => {
+    useSearchMock.mockReturnValue({ search: "anna" });
+
+    render(<UsersPage />);
+
+    const columnsOptions = useUserTableColumnsMock.mock.calls[0][0] as {
+      onSort: (sortBy: "first_name" | "last_name" | "department") => void;
+    };
+
+    act(() => {
+      columnsOptions.onSort("first_name");
+    });
+
+    await waitFor(() => {
+      expect(useUsersApiMock).toHaveBeenLastCalledWith({
+        search: "anna",
+        page: 1,
+        limit: 10,
+        sort_order: "ASC",
+        sort_by: "first_name",
       });
     });
   });

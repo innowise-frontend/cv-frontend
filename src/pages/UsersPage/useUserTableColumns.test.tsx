@@ -1,5 +1,6 @@
 import { renderHook } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
+import { SortOrder } from "@root/constants";
 import { useUserTableColumns } from "./useUserTableColumns";
 
 const navigateMock = vi.hoisted(() => vi.fn());
@@ -34,9 +35,15 @@ vi.mock("./components/UpdateUserModal/UpdateUserModal", () => ({
   UpdateUserModal: () => <div data-testid="update-user-modal" />,
 }));
 
+const defaultOptions = {
+  currentSort: SortOrder.ASC,
+  currentSortBy: "first_name" as const,
+  onSort: vi.fn(),
+};
+
 describe("useUserTableColumns", () => {
   it("returns columns including an actions column last", () => {
-    const { result } = renderHook(() => useUserTableColumns());
+    const { result } = renderHook(() => useUserTableColumns(defaultOptions));
 
     const { columns } = result.current;
 
