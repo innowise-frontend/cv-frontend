@@ -175,7 +175,6 @@ export interface TranslationTypes {
       remove: string;
       update: string;
       save: string;
-      noData: string;
     };
     cvs: {
       createCv: string;

@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Modal } from "@components/shared";
+import { Modal, Spinner } from "@components/shared";
 import { EmptyContent } from "@components/shared/EmptyContent/EmptyContent";
 import { SkillsEditorProps } from "./types";
 import { buildCategoryNameById, groupSkillsByCategory } from "../../const";
@@ -9,6 +9,7 @@ export const SkillsEditor = ({
   skills,
   categories,
   uncategorizedLabel,
+  isLoading = false,
   renderSkillBar,
   renderToolbar,
 }: SkillsEditorProps) => {
@@ -42,7 +43,9 @@ export const SkillsEditor = ({
 
   return (
     <div className="mx-auto flex flex-col px-6 w-full">
-      {hasGroupedSkills ? (
+      {isLoading ? (
+        <Spinner />
+      ) : hasGroupedSkills ? (
         <div className="flex flex-col gap-6">
           {groupedSkills.map((group) => (
             <div key={group.categoryId ?? "uncategorized"} className="flex flex-col gap-2">

@@ -179,7 +179,6 @@
       "remove": "Remove",
       "update": "Update",
       "save": "Save",
-      "noData": "No skills here",
       "toast": {
         "added": "Skill added",
         "updated": "Skill updated",
