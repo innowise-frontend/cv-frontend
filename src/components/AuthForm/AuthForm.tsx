@@ -5,9 +5,7 @@ import { Button, Input } from "@components/shared";
 import { AuthFormProps } from "./types";
 import { createAuthFormSchema, type AuthFormValues } from "./validation";
 
-export const AuthForm = (props: AuthFormProps) => {
-  const { label } = props;
-  const isSignup = props.isSignup === true;
+export const AuthForm = ({ label, isSignup, onSubmit }: AuthFormProps<AuthFormValues>) => {
   const { t } = useTranslation();
   const validationSchema = createAuthFormSchema(isSignup);
 
@@ -21,17 +19,7 @@ export const AuthForm = (props: AuthFormProps) => {
   });
 
   const handleFormSubmit = ({ email, password, confirmPassword }: AuthFormValues) => {
-    if (props.isSignup) {
-      if (!confirmPassword) {
-        return;
-      }
-
-      props.onSubmit({ email, password, confirmPassword });
-
-      return;
-    }
-
-    props.onSubmit({ email, password });
+    onSubmit({ email, password, confirmPassword });
   };
 
   return (

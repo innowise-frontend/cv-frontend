@@ -15,13 +15,10 @@ const passwordField = z
 export const authFormSchema = z.object({
   email: emailField,
   password: passwordField,
-  confirmPassword: z
-    .string()
-    .transform((val) => val.trim())
-    .optional(),
+  confirmPassword: z.string().transform((val) => val.trim()),
 });
 
-export const createAuthFormSchema = (isSignup: boolean) =>
+export const createAuthFormSchema = (isSignup?: boolean) =>
   authFormSchema.superRefine((data, ctx) => {
     if (!isSignup) return;
 
@@ -29,7 +26,7 @@ export const createAuthFormSchema = (isSignup: boolean) =>
 
     if (!confirmPassword) {
       ctx.addIssue({
-        code: z.ZodIssueCode.custom,
+        code: "custom",
         path: ["confirmPassword"],
         message: "Please confirm your password",
       });
@@ -39,7 +36,7 @@ export const createAuthFormSchema = (isSignup: boolean) =>
 
     if (confirmPassword.length < 6) {
       ctx.addIssue({
-        code: z.ZodIssueCode.custom,
+        code: "custom",
         path: ["confirmPassword"],
         message: "Password must be at least 6 characters long",
       });
@@ -49,7 +46,7 @@ export const createAuthFormSchema = (isSignup: boolean) =>
 
     if (data.password !== confirmPassword) {
       ctx.addIssue({
-        code: z.ZodIssueCode.custom,
+        code: "custom",
         path: ["confirmPassword"],
         message: "Passwords don't match",
       });
