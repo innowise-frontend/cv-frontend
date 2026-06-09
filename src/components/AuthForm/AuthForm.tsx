@@ -22,7 +22,11 @@ export const AuthForm = (props: AuthFormProps) => {
 
   const handleFormSubmit = ({ email, password, confirmPassword }: AuthFormValues) => {
     if (props.isSignup) {
-      props.onSubmit({ email, password, confirmPassword: confirmPassword! });
+      if (!confirmPassword) {
+        return;
+      }
+
+      props.onSubmit({ email, password, confirmPassword });
 
       return;
     }
