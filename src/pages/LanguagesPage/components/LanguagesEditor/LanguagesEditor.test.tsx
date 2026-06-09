@@ -1,15 +1,16 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { type ReactNode } from "react";
-import { describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { Proficiency } from "@services/graphql/__generated__/graphql";
 import { LanguagesEditor } from "./LanguagesEditor";
 
+const useUserLanguagesQueryMock = vi.hoisted(() => vi.fn());
+const useLanguagesQueryMock = vi.hoisted(() => vi.fn());
+
 vi.mock("../../api", () => ({
   getProficiencyOptions: () => [{ label: "B2", value: "B2" }],
-  useUserLanguagesQuery: () => ({
-    data: { languages: [{ name: "English", proficiency: Proficiency.B2 }] },
-  }),
-  useLanguagesQuery: () => ({ data: { items: [{ name: "English" }] } }),
+  useUserLanguagesQuery: (...args: unknown[]) => useUserLanguagesQueryMock(...args),
+  useLanguagesQuery: (...args: unknown[]) => useLanguagesQueryMock(...args),
 }));
 
 vi.mock("../AddLanguageModal/AddLanguageModal", () => ({
@@ -31,9 +32,37 @@ vi.mock("@components/shared", () => ({
   Button: ({ children, onClick }: { children: ReactNode; onClick?: () => void }) => (
     <button onClick={onClick}>{children}</button>
   ),
+  Spinner: () => <div data-testid="spinner" />,
 }));
 
 describe("LanguagesEditor", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    useUserLanguagesQueryMock.mockReturnValue({
+      data: { languages: [{ name: "English", proficiency: Proficiency.B2 }] },
+      isLoading: false,
+    });
+    useLanguagesQueryMock.mockReturnValue({ data: { items: [{ name: "English" }] } });
+  });
+
+  it("shows spinner while profile languages are loading", () => {
+    useUserLanguagesQueryMock.mockReturnValue({ data: undefined, isLoading: true });
+
+    render(<LanguagesEditor userId="u-1" />);
+
+    expect(screen.getByTestId("spinner")).toBeInTheDocument();
+    expect(screen.queryByText("No data results")).not.toBeInTheDocument();
+  });
+
+  it("shows empty state only after loading when user has no languages", () => {
+    useUserLanguagesQueryMock.mockReturnValue({ data: { languages: [] }, isLoading: false });
+
+    render(<LanguagesEditor userId="u-1" />);
+
+    expect(screen.queryByTestId("spinner")).not.toBeInTheDocument();
+    expect(screen.getByText("No data results")).toBeInTheDocument();
+  });
+
   it("renders user's languages and the add affordance by default", () => {
     render(<LanguagesEditor userId="u-1" />);
 

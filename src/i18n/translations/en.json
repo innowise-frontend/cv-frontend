@@ -149,7 +149,6 @@
       "remove": "Remove",
       "update": "Update",
       "save": "Save",
-      "noData": "No languages here",
       "toast": {
         "added": "Language added",
         "updated": "Language updated",

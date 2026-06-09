@@ -36,7 +36,7 @@ export const Languages = () => {
               </div>
             </>
           ) : (
-            <EmptyContent message={t("page.languages.noData")} className="mt-18 mb-8" />
+            <EmptyContent message={t("page.table.noDataResults")} className="mt-18 mb-8" />
           )}
         </>
       )}
