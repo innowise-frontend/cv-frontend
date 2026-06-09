@@ -29,6 +29,28 @@ vi.mock("@services/auth", () => ({
   getMe: (...args: unknown[]) => getMeMock(...args),
 }));
 
+vi.mock("../AuthForm", () => ({
+  AuthForm: ({
+    onSubmit,
+    label,
+  }: {
+    onSubmit: (data: { email: string; password: string }) => void;
+    label: string;
+  }) => (
+    <button
+      type="button"
+      onClick={() =>
+        onSubmit({
+          email: "user@example.com",
+          password: "secret12",
+        })
+      }
+    >
+      {label}
+    </button>
+  ),
+}));
+
 function renderLogin() {
   return render(
     <RenderWithQueryClient>
@@ -39,8 +61,6 @@ function renderLogin() {
 
 async function submitLoginForm() {
   const user = userEvent.setup();
-  await user.type(screen.getByPlaceholderText("Email"), "user@example.com");
-  await user.type(screen.getByPlaceholderText("Password"), "secret12");
   await user.click(screen.getByRole("button", { name: "Sign in" }));
 }
 

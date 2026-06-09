@@ -48,10 +48,11 @@ describe("AuthForm", () => {
   it("should call onSubmit with trimmed values when valid", async () => {
     const user = userEvent.setup();
     const onSubmit = vi.fn();
-    render(<AuthForm onSubmit={onSubmit} label="Go" />);
+    render(<AuthForm onSubmit={onSubmit} label="Go" isSignup />);
 
     await user.type(screen.getByPlaceholderText("Email"), "  user@example.com  ");
     await user.type(screen.getByPlaceholderText("Password"), "  secret12  ");
+    await user.type(screen.getByPlaceholderText("Confirm Password"), "  secret12  ");
     await user.click(screen.getByRole("button", { name: "Go" }));
 
     await waitFor(() => {
@@ -61,6 +62,7 @@ describe("AuthForm", () => {
     expect(onSubmit).toHaveBeenCalledWith({
       email: "user@example.com",
       password: "secret12",
+      confirmPassword: "secret12",
     });
   });
 
