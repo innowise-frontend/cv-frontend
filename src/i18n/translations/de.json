@@ -87,7 +87,7 @@
     "users": {
       "edit": "Bearbeiten",
       "delete": "Löschen",
-      "viewProfile": "Profil anzeigen",
+      "view": "Anzeigen",
       "firstName": "Vorname",
       "lastName": "Nachname",
       "email": "E-Mail",
@@ -197,7 +197,7 @@
       "education": "Ausbildung",
       "description": "Beschreibung",
       "employee": "Mitarbeiter",
-      "viewCv": "CV anzeigen",
+      "view": "Anzeigen",
       "delete": "Löschen",
       "deleteCv": "Lebenslauf löschen",
       "confirmDeleteCv": "Möchten Sie den Lebenslauf {{name}} wirklich löschen?",
