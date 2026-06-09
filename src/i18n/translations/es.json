@@ -87,7 +87,7 @@
     "users": {
       "edit": "Editar",
       "delete": "Eliminar",
-      "viewProfile": "Ver perfil",
+      "view": "Ver",
       "firstName": "Nombre",
       "lastName": "Apellidos",
       "email": "Correo electrónico",
@@ -197,7 +197,7 @@
       "education": "Educación",
       "description": "Descripción",
       "employee": "Empleado",
-      "viewCv": "Ver CV",
+      "view": "Ver",
       "delete": "Eliminar",
       "deleteCv": "Eliminar CV",
       "confirmDeleteCv": "¿Seguro que desea eliminar el CV {{name}}?",
