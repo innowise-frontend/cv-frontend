@@ -33,7 +33,7 @@ describe("LinkButton", () => {
     );
   });
 
-  it("should hide title when collapsed", () => {
+  it("should visually hide title when collapsed", () => {
     const iconMock = vi.fn(() => <svg data-testid="link-icon" />);
     linkMock.mockImplementation(({ to, children }) => <a href={to}>{children}</a>);
 
@@ -41,7 +41,7 @@ describe("LinkButton", () => {
 
     expect(screen.getByRole("link")).toHaveAttribute("href", "/settings");
     expect(screen.getByTestId("link-icon")).toBeInTheDocument();
-    expect(screen.queryByText("Settings")).not.toBeInTheDocument();
+    expect(screen.getByText("Settings")).toHaveClass("opacity-0");
   });
 
   it("should pass active and inactive classes to router Link", () => {

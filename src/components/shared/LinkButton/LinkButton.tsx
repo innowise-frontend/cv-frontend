@@ -29,8 +29,10 @@ export const LinkButton = ({
         inactiveProps: { className: inactiveClassName },
       })}
     >
-      <Icon alt={title} width={24} height={24} />
-      {!collapsed && title}
+      <Icon alt={title} width={24} height={24} className="shrink-0" />
+      <span className={cn("shrink-0 transition-opacity durations-300", collapsed && "opacity-0")}>
+        {title}
+      </span>
     </Link>
   );
 };
