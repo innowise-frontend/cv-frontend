@@ -73,7 +73,7 @@ export const useUserTableColumns = () => {
       cell: ({ row }) => {
         const actions = [
           {
-            label: <span className="p-px">{t("page.users.viewProfile")}</span>,
+            label: <span className="p-px">{t("page.users.view")}</span>,
             onClick: (userId: string) => {
               navigate({ to: ROUTES.USER_PAGE, params: { userId } });
             },

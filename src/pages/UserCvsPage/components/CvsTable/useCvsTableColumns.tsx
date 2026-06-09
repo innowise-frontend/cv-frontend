@@ -45,7 +45,7 @@ export const useCvsTableColumns = () => {
       cell: ({ row }) => {
         const actions = [
           {
-            label: <span className="p-px">{t("page.cvs.viewCv")}</span>,
+            label: <span className="p-px">{t("page.cvs.view")}</span>,
             onClick: (cvId: string) => {
               navigate({ to: ROUTES.CV_PAGE, params: { cvId } });
             },
