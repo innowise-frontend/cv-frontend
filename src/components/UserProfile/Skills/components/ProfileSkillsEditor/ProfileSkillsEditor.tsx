@@ -19,7 +19,7 @@ import { ProfileSkillsEditorProps } from "./types";
 
 export const ProfileSkillsEditor = ({ userId }: ProfileSkillsEditorProps) => {
   const { t } = useTranslation();
-  const { data: profileData } = useUserSkillsQuery(userId);
+  const { data: profileData, isLoading } = useUserSkillsQuery(userId);
   const { data: skillsData } = useSkillsSelectQuery();
   const { data: categoriesData } = useSkillCategoriesQuery();
   const masteryOptions = getMasteryOptions(MASTERY_ORDER);
@@ -35,6 +35,7 @@ export const ProfileSkillsEditor = ({ userId }: ProfileSkillsEditorProps) => {
       skills={profileData?.skills}
       categories={categoriesData}
       uncategorizedLabel={t("page.skills.uncategorized")}
+      isLoading={isLoading}
       renderSkillBar={(skill, deleteContext) => (
         <ProfileSkillProgressBar
           userId={userId}

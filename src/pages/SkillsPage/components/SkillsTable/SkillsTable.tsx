@@ -42,6 +42,8 @@ export const SkillsTable = () => {
 
   const columns = useMemo(() => buildColumns(categoriesData), [categoriesData]);
   const tableData = data?.items ?? [];
+  const hasActiveSearch = (searchParams.search ?? "").trim().length > 0;
+  const emptyMessage = hasActiveSearch ? t("page.table.noResults") : t("page.table.noDataResults");
 
   return (
     <>
@@ -61,7 +63,7 @@ export const SkillsTable = () => {
           data={tableData}
           columns={columns}
           isLoading={isLoading}
-          emptyMessage={t("page.table.noResults")}
+          emptyMessage={emptyMessage}
           pagesAmount={data?.total_pages ?? 0}
           currentPage={currentPage}
           onChangePage={setCurrentPage}
