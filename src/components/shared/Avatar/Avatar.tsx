@@ -5,7 +5,7 @@ export const Avatar = ({ name, imageSrc, className }: AvatarProps) => {
   return imageSrc ? (
     <img
       src={imageSrc}
-      alt={name}
+      alt={name ?? ""}
       className={cn("w-10 h-10 rounded-full object-cover", className)}
     />
   ) : (
@@ -15,7 +15,7 @@ export const Avatar = ({ name, imageSrc, className }: AvatarProps) => {
         className,
       )}
     >
-      <span className="text-gray-8 dark:text-gray capitalize">{name.charAt(0)}</span>
+      <span className="text-gray-8 dark:text-gray capitalize">{name?.charAt(0) ?? ""}</span>
     </div>
   );
 };

@@ -11,7 +11,7 @@ export const ProfileBlock = ({ collapsed = false }: ProfileBlockProps) => {
   if (!userId) return null;
 
   const profile = data?.user?.profile;
-  const fullName = profile?.full_name ?? "";
+  const name = data?.user?.profile?.full_name ?? data?.user?.email ?? "";
 
   return (
     <Link
@@ -19,10 +19,10 @@ export const ProfileBlock = ({ collapsed = false }: ProfileBlockProps) => {
       params={{ userId }}
       className="flex px-4 items-center gap-2 overflow-hidden"
     >
-      <Avatar name={fullName} imageSrc={profile?.avatar ?? ""} className="shrink-0" />
-      {!collapsed && fullName && (
-        <span className="truncate" title={fullName}>
-          {fullName}
+      <Avatar name={name} imageSrc={profile?.avatar ?? ""} className="shrink-0" />
+      {!collapsed && name && (
+        <span className="truncate" title={name}>
+          {name}
         </span>
       )}
     </Link>
