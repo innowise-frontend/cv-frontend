@@ -19,16 +19,6 @@ export const AuthForm = ({ label, isSignup, onSubmit }: AuthFormProps<AuthFormVa
   });
 
   const handleFormSubmit = ({ email, password, confirmPassword }: AuthFormValues) => {
-    if (isSignup) {
-      if (!confirmPassword) {
-        return;
-      }
-
-      onSubmit({ email, password });
-
-      return;
-    }
-
     onSubmit({ email, password, confirmPassword });
   };
 

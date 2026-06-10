@@ -62,6 +62,7 @@ describe("AuthForm", () => {
     expect(onSubmit.mock.calls[0]?.[0]).toEqual({
       email: "user@example.com",
       password: "secret12",
+      confirmPassword: "secret12",
     });
   });
 
@@ -111,6 +112,7 @@ describe("AuthForm", () => {
     expect(onSubmit.mock.calls[0]?.[0]).toEqual({
       email: "user@example.com",
       password: "secret12",
+      confirmPassword: "secret12",
     });
   });
 });
