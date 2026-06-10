@@ -17,7 +17,7 @@ export const ProfileBlock = ({ collapsed = false }: ProfileBlockProps) => {
     <Link
       to="/users/$userId/profile"
       params={{ userId }}
-      className="flex px-4 items-center gap-2 overflow-hidden"
+      className="flex h-14 items-center gap-2 overflow-hidden pl-2"
     >
       <Avatar name={name} imageSrc={profile?.avatar ?? ""} className="shrink-0" />
       {!collapsed && name && (
