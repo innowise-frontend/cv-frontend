@@ -15,7 +15,10 @@ const passwordField = z
 export const authFormSchema = z.object({
   email: emailField,
   password: passwordField,
-  confirmPassword: z.string().transform((val) => val.trim()),
+  confirmPassword: z
+    .string()
+    .transform((val) => val.trim())
+    .optional(),
 });
 
 export const createAuthFormSchema = (isSignup?: boolean) =>
@@ -29,16 +32,6 @@ export const createAuthFormSchema = (isSignup?: boolean) =>
         code: "custom",
         path: ["confirmPassword"],
         message: "Please confirm your password",
-      });
-
-      return;
-    }
-
-    if (confirmPassword.length < 6) {
-      ctx.addIssue({
-        code: "custom",
-        path: ["confirmPassword"],
-        message: "Password must be at least 6 characters long",
       });
 
       return;
