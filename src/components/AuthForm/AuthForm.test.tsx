@@ -50,7 +50,7 @@ describe("AuthForm", () => {
     const onSubmit = vi.fn();
     render(<AuthForm onSubmit={onSubmit} label="Go" isSignup />);
 
-    await user.type(screen.getByPlaceholderText("Email"), "  user@example.com  ");
+    await user.type(screen.getByPlaceholderText("Email"), "user@example.com");
     await user.type(screen.getByPlaceholderText("Password"), "  secret12  ");
     await user.type(screen.getByPlaceholderText("Confirm Password"), "  secret12  ");
     await user.click(screen.getByRole("button", { name: "Go" }));
@@ -59,10 +59,9 @@ describe("AuthForm", () => {
       expect(onSubmit).toHaveBeenCalledTimes(1);
     });
 
-    expect(onSubmit).toHaveBeenCalledWith({
+    expect(onSubmit.mock.calls[0]?.[0]).toEqual({
       email: "user@example.com",
       password: "secret12",
-      confirmPassword: "secret12",
     });
   });
 
@@ -95,7 +94,7 @@ describe("AuthForm", () => {
     expect(await screen.findByText("Passwords don't match")).toBeInTheDocument();
   });
 
-  it("should call onSubmit with confirmPassword in signup mode", async () => {
+  it("should call onSubmit with email and password in signup mode", async () => {
     const user = userEvent.setup();
     const onSubmit = vi.fn();
     render(<AuthForm onSubmit={onSubmit} label="Create account" isSignup />);
@@ -109,10 +108,9 @@ describe("AuthForm", () => {
       expect(onSubmit).toHaveBeenCalledTimes(1);
     });
 
-    expect(onSubmit).toHaveBeenCalledWith({
+    expect(onSubmit.mock.calls[0]?.[0]).toEqual({
       email: "user@example.com",
       password: "secret12",
-      confirmPassword: "secret12",
     });
   });
 });

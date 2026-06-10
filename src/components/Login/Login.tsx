@@ -35,12 +35,16 @@ export const Login = () => {
     },
   });
 
+  const handleFormSubmit = ({ email, password }: FormSchema) => {
+    mutate({ email, password });
+  };
+
   return (
     <div className="flex items-center h-full justify-center">
       <div className="flex flex-col w-full">
         <h2 className="text-34 mb-6">Welcome back</h2>
         <p className="mb-10">Hello again! Sign in to continue</p>
-        <AuthForm onSubmit={mutate} label="Sign in" />
+        <AuthForm onSubmit={handleFormSubmit} label="Sign in" />
         <Button type="button" variant="default" className="w-40 mx-auto">
           <Link to={"/forgot-password"}>Forgot password</Link>
         </Button>

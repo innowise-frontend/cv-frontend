@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
-import { AuthForm } from "@components/AuthForm";
+import { AuthForm, AuthFormValues } from "@components/AuthForm";
 import { Button } from "@components/shared";
 import { useLocalStorage } from "@hooks/index";
 import { LOCAL_STORAGE_KEYS } from "@root/constants";
@@ -34,12 +34,20 @@ export const Signup = () => {
     },
   });
 
+  const handleFormSubmit = ({ email, password, confirmPassword }: AuthFormValues) => {
+    if (!confirmPassword) {
+      return;
+    }
+
+    mutate({ email, password, confirmPassword });
+  };
+
   return (
     <div className="flex items-center justify-center">
       <div className="flex flex-col w-full">
         <h2 className="text-34 mb-6">Sign up now</h2>
         <p className="mb-10">Welcome! Sign up to continue</p>
-        <AuthForm onSubmit={mutate} label="Create account" isSignup />
+        <AuthForm isSignup label="Create account" onSubmit={handleFormSubmit} />
         <Button
           type="button"
           variant="default"
