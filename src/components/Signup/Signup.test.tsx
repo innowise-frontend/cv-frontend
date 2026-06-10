@@ -29,6 +29,30 @@ vi.mock("@services/auth", () => ({
   getMe: (...args: unknown[]) => getMeMock(...args),
 }));
 
+vi.mock("@components/AuthForm", () => ({
+  AuthForm: ({
+    onSubmit,
+    label,
+  }: {
+    onSubmit: (data: { email: string; password: string; confirmPassword?: string }) => void;
+    label: string;
+  }) => (
+    <button
+      type="button"
+      onClick={() =>
+        onSubmit({
+          email: "new@example.com",
+          password: "secret12",
+          confirmPassword: "secret12",
+        })
+      }
+    >
+      {label}
+    </button>
+  ),
+  AuthFormValues: {},
+}));
+
 function renderSignup() {
   return render(
     <RenderWithQueryClient>
@@ -39,8 +63,6 @@ function renderSignup() {
 
 async function submitSignupForm() {
   const user = userEvent.setup();
-  await user.type(screen.getByPlaceholderText("Email"), "new@example.com");
-  await user.type(screen.getByPlaceholderText("Password"), "secret12");
   await user.click(screen.getByRole("button", { name: "Create account" }));
 }
 
@@ -92,6 +114,7 @@ describe("Signup", () => {
         expect(signupMock).toHaveBeenCalledWith({
           email: "new@example.com",
           password: "secret12",
+          confirmPassword: "secret12",
         });
       });
 
@@ -125,8 +148,6 @@ describe("Signup", () => {
 
     renderSignup();
 
-    await user.type(screen.getByPlaceholderText("Email"), "new@example.com");
-    await user.type(screen.getByPlaceholderText("Password"), "secret12");
     await user.click(screen.getByRole("button", { name: "Create account" }));
 
     await waitFor(() => {

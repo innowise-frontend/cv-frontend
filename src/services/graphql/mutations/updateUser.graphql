@@ -6,7 +6,6 @@ mutation UpdateUser($user: UpdateUserInput!) {
     is_verified
     role
     department_name
-    position_name
     profile {
       id
       created_at

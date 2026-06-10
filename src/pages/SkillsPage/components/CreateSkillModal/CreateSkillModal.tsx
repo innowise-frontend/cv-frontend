@@ -67,7 +67,7 @@ export const CreateSkillModal = () => {
             onClick={() => {
               mutateAsync({
                 name: createdSkill.name,
-                categoryId: createdSkill.categoryId || undefined,
+                categoryId: createdSkill.categoryId,
               });
             }}
           >

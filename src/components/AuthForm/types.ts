@@ -1,6 +1,7 @@
-import { FormSchema } from "./validation";
+import type { AuthFormValues } from "./validation";
 
-export interface AuthFormProps {
-  onSubmit: (data: FormSchema) => void;
+export type AuthFormProps = {
   label: string;
-}
+  isSignup?: boolean;
+  onSubmit: (data: AuthFormValues) => void;
+};

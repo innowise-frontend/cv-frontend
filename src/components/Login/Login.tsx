@@ -7,6 +7,7 @@ import { LOCAL_STORAGE_KEYS } from "@root/constants";
 import { getErrorToastMessage } from "@root/lib";
 import { login, getMe } from "@services/auth";
 import { AuthForm } from "../AuthForm";
+import type { AuthFormValues } from "../AuthForm/validation";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ export const Login = () => {
   const [, setRefreshToken] = useLocalStorage(LOCAL_STORAGE_KEYS.REFRESH_TOKEN, "");
 
   const { mutate } = useMutation({
-    mutationFn: (data: { email: string; password: string }) => {
+    mutationFn: (data: AuthFormValues) => {
       return login({ email: data.email, password: data.password });
     },
     onSuccess: async (response) => {
@@ -34,12 +35,16 @@ export const Login = () => {
     },
   });
 
+  const handleFormSubmit = ({ email, password }: AuthFormValues) => {
+    mutate({ email, password });
+  };
+
   return (
-    <div className="flex items-center h-screen justify-center">
+    <div className="flex items-center h-full justify-center">
       <div className="flex flex-col w-full">
         <h2 className="text-34 mb-6">Welcome back</h2>
         <p className="mb-10">Hello again! Sign in to continue</p>
-        <AuthForm onSubmit={mutate} label="Sign in" />
+        <AuthForm onSubmit={handleFormSubmit} label="Sign in" />
         <Button type="button" variant="default" className="w-40 mx-auto">
           <Link to={"/forgot-password"}>Forgot password</Link>
         </Button>

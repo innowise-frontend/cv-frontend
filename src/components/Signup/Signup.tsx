@@ -1,12 +1,13 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
-import { AuthForm } from "@components/AuthForm";
+import { AuthForm, AuthFormValues } from "@components/AuthForm";
 import { Button } from "@components/shared";
 import { useLocalStorage } from "@hooks/index";
 import { LOCAL_STORAGE_KEYS } from "@root/constants";
 import { getErrorToastMessage } from "@root/lib";
 import { getMe, signup } from "@services/auth";
+import type { SignupInput } from "@services/graphql/__generated__/graphql";
 
 export const Signup = () => {
   const navigate = useNavigate();
@@ -16,12 +17,7 @@ export const Signup = () => {
   const [, setRefreshToken] = useLocalStorage(LOCAL_STORAGE_KEYS.REFRESH_TOKEN, "");
 
   const { mutate } = useMutation({
-    mutationFn: (data: { email: string; password: string }) => {
-      return signup({
-        email: data.email,
-        password: data.password,
-      });
-    },
+    mutationFn: (data: AuthFormValues) => signup(data as SignupInput),
     onSuccess: async (response) => {
       setAccessToken(() => response.access_token);
       setRefreshToken(() => response.refresh_token);
@@ -38,12 +34,16 @@ export const Signup = () => {
     },
   });
 
+  const handleFormSubmit = ({ email, password, confirmPassword }: AuthFormValues) => {
+    mutate({ email, password, confirmPassword });
+  };
+
   return (
-    <div className="flex items-center h-screen justify-center">
+    <div className="flex items-center justify-center">
       <div className="flex flex-col w-full">
         <h2 className="text-34 mb-6">Sign up now</h2>
         <p className="mb-10">Welcome! Sign up to continue</p>
-        <AuthForm onSubmit={mutate} label="Create account" />
+        <AuthForm isSignup label="Create account" onSubmit={handleFormSubmit} />
         <Button
           type="button"
           variant="default"

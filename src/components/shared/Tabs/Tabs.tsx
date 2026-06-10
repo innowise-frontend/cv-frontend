@@ -12,7 +12,7 @@ export const PageTabs: React.FC<PageTabsProps> = ({
   isCentered = false,
 }) => {
   return (
-    <div className={`w-full flex flex-col h-full ${className || ""}`}>
+    <div className={`w-full flex flex-col ${className || ""}`}>
       <TabsRoot
         defaultValue={defaultValue}
         value={value}

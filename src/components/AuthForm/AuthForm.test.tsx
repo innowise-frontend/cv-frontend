@@ -48,20 +48,22 @@ describe("AuthForm", () => {
   it("should call onSubmit with trimmed values when valid", async () => {
     const user = userEvent.setup();
     const onSubmit = vi.fn();
-    render(<AuthForm onSubmit={onSubmit} label="Go" />);
+    render(<AuthForm onSubmit={onSubmit} label="Go" isSignup />);
 
-    await user.type(screen.getByPlaceholderText("Email"), "  user@example.com  ");
+    await user.type(screen.getByPlaceholderText("Email"), "user@example.com");
     await user.type(screen.getByPlaceholderText("Password"), "  secret12  ");
+    await user.type(screen.getByPlaceholderText("Confirm Password"), "  secret12  ");
     await user.click(screen.getByRole("button", { name: "Go" }));
 
     await waitFor(() => {
       expect(onSubmit).toHaveBeenCalledTimes(1);
     });
 
-    expect(onSubmit).toHaveBeenCalledWith(
-      { email: "user@example.com", password: "secret12" },
-      expect.anything(),
-    );
+    expect(onSubmit.mock.calls[0]?.[0]).toEqual({
+      email: "user@example.com",
+      password: "secret12",
+      confirmPassword: "secret12",
+    });
   });
 
   it("should not call onSubmit when validation fails", async () => {
@@ -73,5 +75,44 @@ describe("AuthForm", () => {
 
     await screen.findByText("Please enter an email address");
     expect(onSubmit).not.toHaveBeenCalled();
+  });
+
+  it("should render confirm password field in signup mode", () => {
+    render(<AuthForm onSubmit={vi.fn()} label="Create account" isSignup />);
+
+    expect(screen.getByPlaceholderText("Confirm Password")).toBeInTheDocument();
+  });
+
+  it("should show an error when passwords do not match in signup mode", async () => {
+    const user = userEvent.setup();
+    render(<AuthForm onSubmit={vi.fn()} label="Create account" isSignup />);
+
+    await user.type(screen.getByPlaceholderText("Email"), "user@example.com");
+    await user.type(screen.getByPlaceholderText("Password"), "secret12");
+    await user.type(screen.getByPlaceholderText("Confirm Password"), "different");
+    await user.click(screen.getByRole("button", { name: "Create account" }));
+
+    expect(await screen.findByText("Passwords don't match")).toBeInTheDocument();
+  });
+
+  it("should call onSubmit with email and password in signup mode", async () => {
+    const user = userEvent.setup();
+    const onSubmit = vi.fn();
+    render(<AuthForm onSubmit={onSubmit} label="Create account" isSignup />);
+
+    await user.type(screen.getByPlaceholderText("Email"), "user@example.com");
+    await user.type(screen.getByPlaceholderText("Password"), "secret12");
+    await user.type(screen.getByPlaceholderText("Confirm Password"), "secret12");
+    await user.click(screen.getByRole("button", { name: "Create account" }));
+
+    await waitFor(() => {
+      expect(onSubmit).toHaveBeenCalledTimes(1);
+    });
+
+    expect(onSubmit.mock.calls[0]?.[0]).toEqual({
+      email: "user@example.com",
+      password: "secret12",
+      confirmPassword: "secret12",
+    });
   });
 });

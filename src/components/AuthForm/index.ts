@@ -1,2 +1,7 @@
 export { AuthForm } from "./AuthForm";
-export { formSchema, type FormSchema } from "./validation";
+export {
+  authFormSchema,
+  createAuthFormSchema,
+  formSchema,
+  type AuthFormValues,
+} from "./validation";
