@@ -1,5 +1,7 @@
-export type AuthFormProps<T> = {
+import type { AuthFormValues } from "./validation";
+
+export type AuthFormProps = {
   label: string;
   isSignup?: boolean;
-  onSubmit: (data: T) => void;
+  onSubmit: (data: AuthFormValues) => void;
 };

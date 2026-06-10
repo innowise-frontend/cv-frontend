@@ -21,6 +21,8 @@ export const authFormSchema = z.object({
     .optional(),
 });
 
+export type AuthFormValues = z.infer<typeof authFormSchema>;
+
 export const createAuthFormSchema = (isSignup?: boolean) =>
   authFormSchema.superRefine((data, ctx) => {
     if (!isSignup) return;
@@ -45,8 +47,5 @@ export const createAuthFormSchema = (isSignup?: boolean) =>
       });
     }
   });
-
-export type AuthFormValues = z.infer<typeof authFormSchema>;
-export type FormSchema = Pick<AuthFormValues, "email" | "password">;
 
 export const formSchema = createAuthFormSchema(false);

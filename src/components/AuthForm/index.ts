@@ -4,5 +4,4 @@ export {
   createAuthFormSchema,
   formSchema,
   type AuthFormValues,
-  type FormSchema,
 } from "./validation";

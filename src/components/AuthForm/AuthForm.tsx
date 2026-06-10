@@ -3,9 +3,9 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Button, Input } from "@components/shared";
 import { AuthFormProps } from "./types";
-import { createAuthFormSchema, type AuthFormValues } from "./validation";
+import { AuthFormValues, createAuthFormSchema } from "./validation";
 
-export const AuthForm = ({ label, isSignup, onSubmit }: AuthFormProps<AuthFormValues>) => {
+export const AuthForm = ({ label, isSignup, onSubmit }: AuthFormProps) => {
   const { t } = useTranslation();
   const validationSchema = createAuthFormSchema(isSignup);
 
@@ -18,14 +18,10 @@ export const AuthForm = ({ label, isSignup, onSubmit }: AuthFormProps<AuthFormVa
     mode: "onChange",
   });
 
-  const handleFormSubmit = ({ email, password, confirmPassword }: AuthFormValues) => {
-    onSubmit({ email, password, confirmPassword });
-  };
-
   return (
     <form
       className="flex flex-col justify-center items-center gap-5.5"
-      onSubmit={handleSubmit(handleFormSubmit)}
+      onSubmit={handleSubmit(onSubmit)}
     >
       <Input
         type="email"

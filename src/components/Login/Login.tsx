@@ -7,7 +7,7 @@ import { LOCAL_STORAGE_KEYS } from "@root/constants";
 import { getErrorToastMessage } from "@root/lib";
 import { login, getMe } from "@services/auth";
 import { AuthForm } from "../AuthForm";
-import type { FormSchema } from "../AuthForm/validation";
+import type { AuthFormValues } from "../AuthForm/validation";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ export const Login = () => {
   const [, setRefreshToken] = useLocalStorage(LOCAL_STORAGE_KEYS.REFRESH_TOKEN, "");
 
   const { mutate } = useMutation({
-    mutationFn: (data: FormSchema) => {
+    mutationFn: (data: AuthFormValues) => {
       return login({ email: data.email, password: data.password });
     },
     onSuccess: async (response) => {
@@ -35,7 +35,7 @@ export const Login = () => {
     },
   });
 
-  const handleFormSubmit = ({ email, password }: FormSchema) => {
+  const handleFormSubmit = ({ email, password }: AuthFormValues) => {
     mutate({ email, password });
   };
 

@@ -17,7 +17,7 @@ export const Signup = () => {
   const [, setRefreshToken] = useLocalStorage(LOCAL_STORAGE_KEYS.REFRESH_TOKEN, "");
 
   const { mutate } = useMutation({
-    mutationFn: (data: SignupInput) => signup(data),
+    mutationFn: (data: AuthFormValues) => signup(data as SignupInput),
     onSuccess: async (response) => {
       setAccessToken(() => response.access_token);
       setRefreshToken(() => response.refresh_token);
@@ -35,10 +35,6 @@ export const Signup = () => {
   });
 
   const handleFormSubmit = ({ email, password, confirmPassword }: AuthFormValues) => {
-    if (!confirmPassword) {
-      return;
-    }
-
     mutate({ email, password, confirmPassword });
   };
 
