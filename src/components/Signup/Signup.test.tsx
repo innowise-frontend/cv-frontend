@@ -34,11 +34,7 @@ vi.mock("@components/AuthForm", () => ({
     onSubmit,
     label,
   }: {
-    onSubmit: (data: {
-      email: string;
-      password: string;
-      confirmPassword?: string;
-    }) => void;
+    onSubmit: (data: { email: string; password: string; confirmPassword?: string }) => void;
     label: string;
   }) => (
     <button
