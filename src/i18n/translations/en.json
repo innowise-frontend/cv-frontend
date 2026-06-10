@@ -33,10 +33,12 @@
     },
     "error": {
       "oops": "Oops",
+      "hm": "Hmm…",
+      "retry": "Retry",
       "goBack": "Go back",
-      "defaultErrorMessage": "Error! Password wasn't changed",
+      "defaultErrorMessage": "Something went wrong. We're already working on fixing it. \n Please try again or go back.",
       "noAccess": "No access",
-      "defaultNotFoundMessage": "Hmm… this doesn’t seem to be the page you were looking for. \n Let’s get you back on track.",
+      "defaultNotFoundMessage": "This doesn’t seem to be the page you were looking for. \n Let’s get you back on track.",
       "api": {
         "forbidden": "You have no rights to perform this action",
         "unauthorized": "You need to sign in again",
@@ -87,7 +89,7 @@
     "users": {
       "edit": "Edit",
       "delete": "Delete",
-      "viewProfile": "View profile",
+      "view": "View",
       "firstName": "First Name",
       "lastName": "Last Name",
       "email": "Email",
@@ -147,7 +149,6 @@
       "remove": "Remove",
       "update": "Update",
       "save": "Save",
-      "noData": "No languages here",
       "toast": {
         "added": "Language added",
         "updated": "Language updated",
@@ -177,7 +178,6 @@
       "remove": "Remove",
       "update": "Update",
       "save": "Save",
-      "noData": "No skills here",
       "toast": {
         "added": "Skill added",
         "updated": "Skill updated",
@@ -197,7 +197,7 @@
       "education": "Education",
       "description": "Description",
       "employee": "Employee",
-      "viewCv": "View CV",
+      "view": "View",
       "delete": "Delete",
       "deleteCv": "Delete CV",
       "confirmDeleteCv": "Are you sure you want to delete CV {{name}}?",

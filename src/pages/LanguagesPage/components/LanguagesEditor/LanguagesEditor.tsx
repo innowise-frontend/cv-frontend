@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import RemoveIcon from "@assets/icon/RemoveIcon.svg?react";
-import { Button, Modal } from "@components/shared";
+import { Button, Modal, Spinner } from "@components/shared";
 import { EmptyContent } from "@components/shared/EmptyContent/EmptyContent";
 import { DeleteProfileLanguageInput } from "@services/graphql/__generated__/graphql";
 import { LanguagesEditorProps } from "./types";
@@ -19,7 +19,7 @@ export const LanguagesEditor = ({ userId }: LanguagesEditorProps) => {
     name: [],
   });
 
-  const { data: profileData } = useUserLanguagesQuery(userId);
+  const { data: profileData, isLoading } = useUserLanguagesQuery(userId);
   const { data: languagesData } = useLanguagesQuery();
 
   const proficiencyOptions = getProficiencyOptions(PROFICIENCY_ORDER);
@@ -54,7 +54,9 @@ export const LanguagesEditor = ({ userId }: LanguagesEditorProps) => {
 
   return (
     <div className="mx-auto flex flex-col px-6 w-full">
-      {hasLanguages ? (
+      {isLoading ? (
+        <Spinner />
+      ) : hasLanguages ? (
         <>
           <h2 className="text-left pb-4">{t("page.languages.currentLanguages")}</h2>
           <div className="grid grid-cols-3 mb-8">
@@ -73,7 +75,7 @@ export const LanguagesEditor = ({ userId }: LanguagesEditorProps) => {
           </div>
         </>
       ) : (
-        <EmptyContent message={t("page.languages.noData")} className="mt-18 mb-8" />
+        <EmptyContent message={t("page.table.noDataResults")} className="mt-18 mb-8" />
       )}
 
       <div className="min-h-14 flex gap-8 justify-end pt-4">

@@ -5,7 +5,7 @@ import { Button } from "@components/shared";
 import { cn } from "@root/lib/utils";
 import { ErrorPageProps } from "./types";
 
-export const ErrorPage = ({ error, deviceError, defaultUrlBack }: ErrorPageProps) => {
+export const ErrorPage = ({ errorTitle, error, deviceError, defaultUrlBack }: ErrorPageProps) => {
   const { history, navigate } = useRouter();
   const { t } = useTranslation();
 
@@ -25,11 +25,11 @@ export const ErrorPage = ({ error, deviceError, defaultUrlBack }: ErrorPageProps
     >
       <div className="flex w-140 flex-col items-center justify-center gap-6">
         <ErrorIcon />
-        <p className="text-4xl">{t("page.error.oops")}</p>
+        <p className="text-4xl">{errorTitle}</p>
         <p className="whitespace-pre-line">{error}</p>
         {!deviceError && (
           <Button variant="filled" className="w-55" onClick={handleGoBack}>
-            {t("page.error.goBack")}
+            {t("page.error.retry")}
           </Button>
         )}
       </div>

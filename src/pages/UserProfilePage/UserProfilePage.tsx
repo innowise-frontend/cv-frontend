@@ -20,7 +20,7 @@ export const UserProfilePage = ({ children }: { children: React.ReactNode }) => 
   const { data, isLoading, isError } = useUserProfile(userId);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const activeTab = pathname.split("/").at(-1) ?? "profile";
-  const fullName = data?.user.profile.full_name ?? "";
+  const fullName = data?.user.profile.full_name ?? data?.user.email ?? "";
   const tabs = useMemo(
     () =>
       getTabs(

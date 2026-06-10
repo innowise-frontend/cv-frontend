@@ -33,10 +33,12 @@
     },
     "error": {
       "oops": "Ops",
+      "hm": "Hmm…",
+      "retry": "Riprova",
       "goBack": "Indietro",
-      "defaultErrorMessage": "Errore! Impossibile modificare la password",
+      "defaultErrorMessage": "Qualcosa è andato storto. Stiamo già lavorando per risolvere il problema. \n Riprova o torna indietro.",
       "noAccess": "Accesso negato",
-      "defaultNotFoundMessage": "Hmm… questa non sembra essere la pagina che stavi cercando. \n Ti riportiamo sulla strada giusta.",
+      "defaultNotFoundMessage": "Questa non sembra essere la pagina che stavi cercando. \n Ti riportiamo sulla strada giusta.",
       "api": {
         "forbidden": "Non hai i permessi per eseguire questa azione",
         "unauthorized": "Devi effettuare nuovamente l'accesso",
@@ -87,7 +89,7 @@
     "users": {
       "edit": "Modifica",
       "delete": "Elimina",
-      "viewProfile": "Vedi profilo",
+      "view": "Visualizza",
       "firstName": "Nome",
       "lastName": "Cognome",
       "email": "Email",
@@ -147,7 +149,6 @@
       "remove": "Rimuovi",
       "update": "Aggiorna",
       "save": "Salva",
-      "noData": "Nessuna lingua qui",
       "toast": {
         "added": "Language added",
         "updated": "Language updated",
@@ -177,7 +178,6 @@
       "remove": "Rimuovi",
       "update": "Aggiorna",
       "save": "Salva",
-      "noData": "Nessuna competenza qui",
       "toast": {
         "added": "Skill added",
         "updated": "Skill updated",
@@ -197,7 +197,7 @@
       "education": "Istruzione",
       "description": "Descrizione",
       "employee": "Dipendente",
-      "viewCv": "Visualizza CV",
+      "view": "Visualizza",
       "delete": "Elimina",
       "deleteCv": "Elimina CV",
       "confirmDeleteCv": "Sei sicuro di voler eliminare il CV {{name}}?",

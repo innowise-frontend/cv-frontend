@@ -33,10 +33,12 @@
     },
     "error": {
       "oops": "Ups",
+      "hm": "Hmm…",
+      "retry": "Spróbuj ponownie",
       "goBack": "Wstecz",
-      "defaultErrorMessage": "Błąd! Nie udało się zmienić hasła",
+      "defaultErrorMessage": "Coś poszło nie tak. Już pracujemy nad naprawą. \n Spróbuj ponownie lub wróć.",
       "noAccess": "Brak dostępu",
-      "defaultNotFoundMessage": "Hmm… wygląda na to, że to nie jest strona, której szukasz. \n Pomóżmy Ci wrócić na właściwą ścieżkę.",
+      "defaultNotFoundMessage": "Wygląda na to, że to nie jest strona, której szukasz. \n Pomóżmy Ci wrócić na właściwą ścieżkę.",
       "api": {
         "forbidden": "Nie masz uprawnień do wykonania tej akcji",
         "unauthorized": "Musisz zalogować się ponownie",
@@ -87,7 +89,7 @@
     "users": {
       "edit": "Edytuj",
       "delete": "Usuń",
-      "viewProfile": "Zobacz profil",
+      "view": "Wyświetl",
       "firstName": "Imię",
       "lastName": "Nazwisko",
       "email": "E-mail",
@@ -147,7 +149,6 @@
       "remove": "Usuń",
       "update": "Zaktualizuj",
       "save": "Zapisz",
-      "noData": "Nie ma tutaj języków",
       "toast": {
         "added": "Language added",
         "updated": "Language updated",
@@ -177,7 +178,6 @@
       "remove": "Usuń",
       "update": "Zaktualizuj",
       "save": "Zapisz",
-      "noData": "Nie ma tutaj umiejętności",
       "toast": {
         "added": "Skill added",
         "updated": "Skill updated",
@@ -197,7 +197,7 @@
       "education": "Wykształcenie",
       "description": "Opis",
       "employee": "Pracownik",
-      "viewCv": "Wyświetl CV",
+      "view": "Wyświetl",
       "delete": "Usuń",
       "deleteCv": "Usuń CV",
       "confirmDeleteCv": "Czy na pewno chcesz usunąć CV {{name}}?",

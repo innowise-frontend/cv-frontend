@@ -20,6 +20,7 @@ export type SkillsEditorProps = {
   skills: readonly SkillMastery[] | null | undefined;
   categories: SkillCategory[] | null | undefined;
   uncategorizedLabel: string;
+  isLoading?: boolean;
   renderSkillBar: (skill: SkillMastery, deleteContext: SkillsEditorDeleteContext) => ReactNode;
   renderToolbar: (context: SkillsEditorToolbarContext) => ReactNode;
 };

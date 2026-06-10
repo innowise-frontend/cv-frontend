@@ -33,6 +33,8 @@ export interface TranslationTypes {
     };
     error: {
       oops: string;
+      hm: string;
+      retry: string;
       goBack: string;
       defaultErrorMessage: string;
       defaultNotFoundMessage: string;
@@ -86,7 +88,7 @@ export interface TranslationTypes {
     users: {
       edit: string;
       delete: string;
-      viewProfile: string;
+      view: string;
       firstName: string;
       lastName: string;
       email: string;
@@ -146,7 +148,6 @@ export interface TranslationTypes {
       remove: string;
       update: string;
       save: string;
-      noData: string;
     };
     skills: {
       currentSkills: string;
@@ -173,7 +174,6 @@ export interface TranslationTypes {
       remove: string;
       update: string;
       save: string;
-      noData: string;
     };
     cvs: {
       createCv: string;
@@ -186,7 +186,7 @@ export interface TranslationTypes {
       education: string;
       description: string;
       employee: string;
-      viewCv: string;
+      view: string;
       delete: string;
       deleteCv: string;
       confirmDeleteCv: string;

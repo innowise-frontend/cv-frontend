@@ -21,9 +21,12 @@ export const useUserTableColumns = () => {
       header: () => null,
       size: 80,
       cell: ({ row }) => {
+        const firstName = row.original.profile.first_name?.trim();
+        const displayName = firstName || row.original.email;
+
         return (
           <Avatar
-            name={row.original.profile.first_name ?? ""}
+            name={displayName}
             imageSrc={row.original.profile.avatar ?? ""}
             className="bg-gray-5 dark:bg-gray-4"
           />
@@ -73,7 +76,7 @@ export const useUserTableColumns = () => {
       cell: ({ row }) => {
         const actions = [
           {
-            label: <span className="p-px">{t("page.users.viewProfile")}</span>,
+            label: <span className="p-px">{t("page.users.view")}</span>,
             onClick: (userId: string) => {
               navigate({ to: ROUTES.USER_PAGE, params: { userId } });
             },

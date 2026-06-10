@@ -33,10 +33,12 @@
     },
     "error": {
       "oops": "Oups",
+      "hm": "Hmm…",
+      "retry": "Réessayer",
       "goBack": "Retour",
-      "defaultErrorMessage": "Erreur ! Impossible de modifier le mot de passe",
+      "defaultErrorMessage": "Une erreur s'est produite. Nous travaillons déjà à la résoudre. \n Veuillez réessayer ou revenir en arrière.",
       "noAccess": "Accès refusé",
-      "defaultNotFoundMessage": "Hum… il semble que ce ne soit pas la page que vous cherchiez. \n Revenons sur la bonne voie.",
+      "defaultNotFoundMessage": "Il semble que ce ne soit pas la page que vous cherchiez. \n Revenons sur la bonne voie.",
       "api": {
         "forbidden": "Vous n'avez pas les droits pour effectuer cette action",
         "unauthorized": "Vous devez vous reconnecter",
@@ -87,7 +89,7 @@
     "users": {
       "edit": "Modifier",
       "delete": "Supprimer",
-      "viewProfile": "Voir le profil",
+      "view": "Voir",
       "firstName": "Prénom",
       "lastName": "Nom",
       "email": "E-mail",
@@ -147,7 +149,6 @@
       "remove": "Supprimer",
       "update": "Mettre a jour",
       "save": "Enregistrer",
-      "noData": "Aucune langue ici",
       "toast": {
         "added": "Language added",
         "updated": "Language updated",
@@ -197,7 +198,7 @@
       "education": "Formation",
       "description": "Description",
       "employee": "Employé",
-      "viewCv": "Voir le CV",
+      "view": "Voir",
       "delete": "Supprimer",
       "deleteCv": "Supprimer le CV",
       "confirmDeleteCv": "Voulez-vous vraiment supprimer le CV {{name}} ?",

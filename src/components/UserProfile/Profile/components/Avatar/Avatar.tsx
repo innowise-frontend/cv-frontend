@@ -2,9 +2,9 @@ import { useParams } from "@tanstack/react-router";
 import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
-import DownloadIcon from "@root/assets/icon/DownloadIcon.svg?react";
-import { Avatar as AvatarComponent } from "@root/components/shared/Avatar/Avatar";
-import { useAuth } from "@root/hooks/useAuth/useAuth";
+import DownloadIcon from "@assets/icon/DownloadIcon.svg?react";
+import { Avatar as AvatarComponent } from "@components/shared";
+import { useAuth } from "@root/hooks";
 import { cn, getErrorToastMessage } from "@root/lib";
 import { useUserProfile, useUserProfileMutations } from "../../api";
 import { AVATAR_ACCEPT, MAX_AVATAR_BYTES } from "../../constants";
@@ -18,7 +18,7 @@ export const Avatar = () => {
   const { uploadAvatar } = useUserProfileMutations(userId);
   const avatarInputRef = useRef<HTMLInputElement>(null);
 
-  const fullName = data?.user.profile.full_name ?? "";
+  const name = data?.user.profile.full_name ?? data?.user.email ?? "";
 
   const avatar = data?.user.profile.avatar ?? null;
 
@@ -43,7 +43,7 @@ export const Avatar = () => {
   return (
     <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-16">
       <AvatarComponent
-        name={fullName}
+        name={name}
         imageSrc={avatar ?? ""}
         className="size-30 rounded-full text-4xl"
       />

@@ -12,13 +12,13 @@ export const Sidebar = () => {
   const { t } = useTranslation();
 
   return (
-    <div
-      className={`relative flex h-full flex-col justify-between pb-14 transition-[min-width] duration-300 ease-in-out ${isCollapsed ? "w-14" : "w-50"}`}
+    <nav
+      className={`relative flex h-full flex-col justify-between pb-14 will-change-[width] transition-[width] whitespace-nowrap duration-300 ease-in-out ${isCollapsed ? "w-14" : "w-50"}`}
     >
       <button
         type="button"
         onClick={() => setIsCollapsed((item) => !item)}
-        className={`absolute -right-2.5 top-13 z-20 flex size-5 cursor-pointer items-center justify-center rounded-full p-1 text-gray-3 transition-transform duration-300 hover:bg-gray-7 dark:text-gray-5 dark:hover:bg-gray-3 ${isCollapsed ? "rotate-180" : ""}`}
+        className={`absolute  shrink-0 -right-2.5 top-13 z-20 flex size-5 cursor-pointer items-center justify-center rounded-full p-1 text-gray-3 transition-transform duration-300 hover:bg-gray-7 dark:text-gray-5 dark:hover:bg-gray-3 ${isCollapsed ? "rotate-180" : ""}`}
       >
         <LeftArrowIcon />
       </button>
@@ -43,6 +43,6 @@ export const Sidebar = () => {
       </div>
 
       <ProfileBlock collapsed={isCollapsed} />
-    </div>
+    </nav>
   );
 };
