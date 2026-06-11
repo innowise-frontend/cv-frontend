@@ -63,7 +63,6 @@ export const useProjectsTableColumns = (options?: ProjectsTableColumnsOptions) =
                   options.renderUpdateModal(row.original)
                 ) : (
                   <UpdateProjectModal
-                    showRoles
                     projectId={row.original.id}
                     initialValues={{
                       name: row.original.name ?? "",
