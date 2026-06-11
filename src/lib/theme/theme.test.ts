@@ -10,8 +10,8 @@ describe("theme utils", () => {
     document.documentElement.classList.remove("dark");
   });
 
-  it("returns light as default when theme is not in storage", () => {
-    expect(getDefaultTheme()).toBe("light");
+  it("returns device as default when theme is not in storage", () => {
+    expect(getDefaultTheme()).toBe("device");
   });
 
   it("returns theme from storage", () => {
