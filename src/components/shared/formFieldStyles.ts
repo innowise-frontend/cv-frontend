@@ -16,4 +16,27 @@ export const selectPlaceholderClassName =
 /** Custom placeholder element (MultiSelect trigger span) */
 export const customPlaceholderClassName = "text-base text-gray-6 dark:text-gray-3";
 
+export const formFieldErrorBorderClassName =
+  "border-red focus-visible:border-red dark:border-red dark:focus-visible:border-red";
+
+/** Reserved placeholder so the error slot keeps height when empty */
+export const formFieldErrorPlaceholder = "\u00A0";
+
+export const formFieldErrorHiddenClassName = "opacity-0";
+
+/** Fixed-height error slot: prevents layout shift when validation messages appear */
+export const formFieldErrorMessageClassName =
+  "h-4 shrink-0 overflow-hidden pl-2 pt-[2px] text-left text-[12px] leading-4 text-red truncate";
+
+export const getFormFieldErrorClassName = (error?: string) =>
+  `${formFieldErrorMessageClassName}${error ? "" : ` ${formFieldErrorHiddenClassName}`}`;
+
 export const getFormFieldClassList = (classNames: string) => classNames.split(" ").filter(Boolean);
+
+export const modalFormBodyClassName = "flex flex-col gap-y-5";
+
+export const modalFormRowGridClassName = "grid grid-cols-2 gap-x-3";
+
+export const modalFormTwoColumnGridClassName = "grid grid-cols-2 gap-x-3 gap-y-5";
+
+export const modalFormWideTwoColumnGridClassName = "grid grid-cols-[400px_400px] gap-y-5 gap-x-3";

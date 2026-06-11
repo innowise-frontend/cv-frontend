@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 import PlusIcon from "@assets/icon/PlusIcon.svg?react";
 import { Button, Input, Modal, Select } from "@components/shared";
+import { modalFormWideTwoColumnGridClassName } from "@components/shared/formFieldStyles";
 import { useModalContext } from "@components/shared/Modal/useModalContext";
 import { SortOrder } from "@root/constants";
 import { useAuth } from "@root/hooks";
@@ -100,7 +101,7 @@ export const CreateUserModal = () => {
       <Modal.Content onCancel={() => reset(defaultFormValues)}>
         <Modal.Header>{t("page.users.createUserTitle")}</Modal.Header>
         <form onSubmit={handleSubmit(handleCreateUser)}>
-          <Modal.Body className="grid grid-cols-[400px_400px] gap-y-9 gap-x-3">
+          <Modal.Body className={modalFormWideTwoColumnGridClassName}>
             <Input
               error={typeof errors.email?.message === "string" ? errors.email.message : undefined}
               label={t("page.users.email")}

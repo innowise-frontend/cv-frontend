@@ -15,4 +15,5 @@ export type MultiSelectProps<
   onChange: (value: TValue[]) => void;
   className?: string;
   placeholder?: string;
+  error?: string;
 };

@@ -2,13 +2,17 @@ import { Popover as PopoverPrimitive } from "@base-ui/react/popover";
 import { forwardRef, useCallback, useId, useState, type ChangeEvent, type FocusEvent } from "react";
 import { useTranslation } from "react-i18next";
 import CalendarIcon from "@assets/icon/CalendarIcon.svg?react";
-import { Input } from "@components/shared";
 import {
+  formFieldErrorBorderClassName,
+  formFieldErrorHiddenClassName,
+  formFieldErrorMessageClassName,
+  formFieldErrorPlaceholder,
   nativeAutofillClassName,
   nativePlaceholderClassName,
   themeTextClassName,
 } from "@components/shared/formFieldStyles";
 import { Calendar } from "@components/ui/calendar";
+import { Input as UiInput } from "@components/ui/input";
 import { Label } from "@components/ui/label";
 import { Popover, PopoverTrigger } from "@components/ui/popover";
 import { useCalendarConfig } from "@root/i18n/useCalendarConfig";
@@ -154,7 +158,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(function
         }}
       >
         <div className="relative">
-          <Input
+          <UiInput
             ref={ref}
             id={inputId}
             name={name}
@@ -180,8 +184,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(function
               "transition-opacity duration-300",
               open && "placeholder:opacity-0",
               nativeAutofillClassName,
-              error &&
-                "border-red focus-visible:border-red dark:border-red dark:focus-visible:border-red",
+              error && formFieldErrorBorderClassName,
             )}
           />
 
@@ -228,9 +231,10 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(function
 
       <p
         id={`${inputId}-error`}
-        className={cn("pl-2 text-left text-xs text-red", !error && "opacity-0")}
+        className={cn(formFieldErrorMessageClassName, !error && formFieldErrorHiddenClassName)}
+        title={error}
       >
-        {error || " "}
+        {error || formFieldErrorPlaceholder}
       </p>
     </div>
   );

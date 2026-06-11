@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { modalFormBodyClassName } from "@components/shared/formFieldStyles";
 import { Button, Modal, ProgressBar, Select } from "@root/components/shared";
 import { useModalContext } from "@root/components/shared/Modal/useModalContext";
 import { cn } from "@root/lib";
@@ -70,7 +71,7 @@ export const LanguageProgressBar = ({
       </Modal.Trigger>
       <Modal.Content onCancel={resetUpdateLanguage}>
         <Modal.Header>{t("page.languages.updateLanguage")}</Modal.Header>
-        <Modal.Body className="flex flex-col gap-9">
+        <Modal.Body className={modalFormBodyClassName}>
           <Select
             list={[{ label: name, value: name }]}
             label={t("page.languages.language")}

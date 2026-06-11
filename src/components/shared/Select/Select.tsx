@@ -1,6 +1,12 @@
 import { Select as SelectBase } from "@base-ui/react/select";
 import { useCallback, useId, useState } from "react";
-import { selectPlaceholderClassName } from "@components/shared/formFieldStyles";
+import {
+  selectPlaceholderClassName,
+  formFieldErrorBorderClassName,
+  formFieldErrorHiddenClassName,
+  formFieldErrorMessageClassName,
+  formFieldErrorPlaceholder,
+} from "@components/shared/formFieldStyles";
 import { Label } from "@root/components/ui/label";
 import {
   Select as SelectRoot,
@@ -18,6 +24,7 @@ export const Select = ({
   list,
   label,
   placeholder,
+  error,
   className,
   popupClassName,
   itemClassName,
@@ -109,6 +116,7 @@ export const Select = ({
               "h-12! px-3 py-3 text-base leading-6 dark:text-gray-5 disabled:bg-gray-6 dark:disabled:bg-gray-3",
               selectPlaceholderClassName,
               "focus:outline-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:shadow-none",
+              error && formFieldErrorBorderClassName,
             )}
           >
             <SelectValue
@@ -123,6 +131,7 @@ export const Select = ({
             <Label
               htmlFor={triggerId}
               className={cn(
+                error && "text-red",
                 isLabelFloating
                   ? "-top-0.5 translate-x-2.5 -translate-y-4 text-xs text-gray-3 opacity-100 dark:text-gray-5"
                   : "top-1/2 -translate-y-1/2 translate-x-2.5 text-sm text-gray-6 opacity-0 dark:text-gray-3",
@@ -141,6 +150,12 @@ export const Select = ({
           )}
         </SelectRoot>
       </div>
+      <p
+        className={cn(formFieldErrorMessageClassName, !error && formFieldErrorHiddenClassName)}
+        title={error}
+      >
+        {error || formFieldErrorPlaceholder}
+      </p>
     </div>
   );
 };

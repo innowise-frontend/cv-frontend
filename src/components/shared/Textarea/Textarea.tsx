@@ -1,5 +1,9 @@
 import React, { useState, useId, forwardRef } from "react";
 import {
+  formFieldErrorBorderClassName,
+  formFieldErrorHiddenClassName,
+  formFieldErrorMessageClassName,
+  formFieldErrorPlaceholder,
   nativeAutofillClassName,
   nativePlaceholderClassName,
   themeTextClassName,
@@ -49,8 +53,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaWithLabelProps>(
             nativePlaceholderClassName,
             nativeAutofillClassName,
             className,
-            error &&
-              "border-red focus-visible:border-red dark:border-red dark:focus-visible:border-red",
+            error && formFieldErrorBorderClassName,
           )}
           {...props}
         />
@@ -61,9 +64,10 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaWithLabelProps>(
         )}
         <p
           id={`${generatedId}-error`}
-          className={cn("pl-2 mt-1 text-left text-xs text-red h-3", !error && "invisible")}
+          className={cn(formFieldErrorMessageClassName, !error && formFieldErrorHiddenClassName)}
+          title={error}
         >
-          {error || " "}
+          {error || formFieldErrorPlaceholder}
         </p>
       </div>
     );

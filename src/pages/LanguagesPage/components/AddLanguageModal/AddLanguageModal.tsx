@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import PlusIcon from "@assets/icon/PlusIcon.svg?react";
 import { Button, Modal, Select } from "@components/shared";
+import { modalFormBodyClassName } from "@components/shared/formFieldStyles";
 import { useModalContext } from "@components/shared/Modal/useModalContext";
 import { AddProfileLanguageInput, Proficiency } from "@services/graphql/__generated__/graphql";
 import { AddLanguageModalProps } from "./types";
@@ -54,7 +55,7 @@ export const AddLanguageModal = ({
       </Modal.Trigger>
       <Modal.Content onCancel={resetSelectedLanguage}>
         <Modal.Header className="">{t("page.languages.addLanguage")}</Modal.Header>
-        <Modal.Body className="flex flex-col gap-9">
+        <Modal.Body className={modalFormBodyClassName}>
           <Select
             list={languageOptions}
             label={t("page.languages.language")}
