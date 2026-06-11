@@ -135,14 +135,14 @@ export function MultiSelect<
             id={triggerId}
             disabled={disabled}
             className={cn(
-              "flex w-full cursor-pointer items-center gap-1.5 border-gray-5 shadow-none outline-none transition-all duration-300",
-              "min-h-12! h-auto px-3 py-3 text-base leading-6 dark:text-gray-5",
+              "relative flex w-full cursor-pointer border-gray-5 shadow-none outline-none transition-all duration-300",
+              "min-h-12! max-h-30 overflow-y-auto py-3 pl-3 pr-0 text-base leading-6 dark:text-gray-5",
               "disabled:bg-gray-6 dark:disabled:bg-gray-3",
               "focus:outline-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:shadow-none",
               "rounded-md border bg-gray-8 dark:border-gray-5 dark:bg-gray-2",
             )}
           >
-            <div className="flex min-h-6 flex-1 flex-wrap items-center gap-2 text-left">
+            <div className="flex min-h-6 flex-1 flex-wrap items-center gap-2 pr-8 text-left">
               {data.length === 0 ? (
                 <span
                   className={cn(
@@ -158,7 +158,7 @@ export function MultiSelect<
                 data.map(renderSelectedChip)
               )}
             </div>
-            <ChevronDownIcon className="pointer-events-none size-4 shrink-0 text-gray-5 dark:text-gray-5" />
+            <ChevronDownIcon className="pointer-events-none absolute top-1/2 right-2 size-4 shrink-0 -translate-y-1/2 text-gray-5 dark:text-gray-5" />
           </PopoverTrigger>
 
           {label && !disabled && (
