@@ -35,7 +35,7 @@ export const CreateSkillModal = () => {
 
   return (
     <>
-      <Modal.Trigger className="text-red font-medium">
+      <Modal.Trigger className="text-red font-medium dark:text-red">
         <PlusIcon height={16} width={16} />
         {t("page.skills.createSkill")}
       </Modal.Trigger>
