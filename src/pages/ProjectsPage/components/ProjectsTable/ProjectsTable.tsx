@@ -57,7 +57,7 @@ export const ProjectsTable = () => {
       <TableSearch
         action={
           <Modal>
-            <CreateProjectModal showRoles />
+            <CreateProjectModal />
           </Modal>
         }
         searchValue={searchParams.search ?? ""}
@@ -80,7 +80,7 @@ export const ProjectsTable = () => {
           renderSubRow={(row) => (
             <div className="flex flex-col gap-3">
               <p className="text-base text-gray-5">{row.original.description}</p>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex max-h-[7rem] flex-wrap gap-2 overflow-hidden">
                 {row.original.environment.map((item) => (
                   <span
                     key={item}
