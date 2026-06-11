@@ -99,7 +99,7 @@ export const Table = <TData,>({
                   >
                     {row.getVisibleCells().map((cell) => (
                       <TableCell
-                        className="p-4 text-left whitespace-normal wrap-break-word"
+                        className={`p-4 text-left whitespace-normal wrap-break-word ${cell.column.id === "name" && "[&>*]:line-clamp-3 [&>*]:wrap-break-word"}`}
                         key={cell.id}
                       >
                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -109,7 +109,7 @@ export const Table = <TData,>({
                   <TableRow className="hover:bg-transparent group-hover:bg-gray-7/50 dark:group-hover:bg-gray-3/50">
                     <TableCell
                       colSpan={row.getVisibleCells().length}
-                      className="p-4 pt-0 text-left whitespace-normal wrap-break-word"
+                      className="p-4 pt-0 text-left whitespace-normal wrap-break-word [&_p]:line-clamp-4 [&_p]:break-words"
                     >
                       {renderSubRow(row)}
                     </TableCell>
