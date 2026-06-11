@@ -7,8 +7,12 @@ export const TableColumnHeader = ({
   title,
   sortOrder,
   onChangeSorting,
+  table,
 }: TableColumnHeaderProps) => {
-  if (!onChangeSorting) {
+  const hasData = table ? table.getRowModel().rows.length > 0 : true;
+  const canSort = Boolean(onChangeSorting) && hasData;
+
+  if (!canSort) {
     return <span className="font-bold">{title}</span>;
   }
 

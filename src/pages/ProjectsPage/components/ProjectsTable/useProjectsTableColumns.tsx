@@ -26,6 +26,7 @@ export const useProjectsTableColumns = (options?: ProjectsTableColumnsOptions) =
           title={t("page.projects.name")}
           sortOrder={meta.table.options.meta?.currentSort}
           onChangeSorting={meta.table.options.meta?.onSort}
+          table={meta.table}
         />
       ),
       cell: ({ row }) => <span>{row.original.name}</span>,

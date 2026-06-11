@@ -118,7 +118,9 @@ describe("UsersPage", () => {
         pagesAmount: 7,
         currentPage: 1,
         currentSort: "ASC",
-        currentSortBy: "department",
+        currentSortBy: undefined,
+        currentViewOption: 10,
+        emptyMessage: "page.table.noResults",
         viewOptions: VIEW_OPTIONS,
         columns: [{ id: "mock-column" }],
       }),
@@ -135,7 +137,7 @@ describe("UsersPage", () => {
       page: 1,
       limit: 10,
       sort_order: "ASC",
-      sort_by: "department",
+      sort_by: undefined,
     });
   });
 
@@ -145,7 +147,7 @@ describe("UsersPage", () => {
     expect(useUserTableColumnsMock).toHaveBeenCalledWith(
       expect.objectContaining({
         currentSort: "ASC",
-        currentSortBy: "department",
+        currentSortBy: undefined,
         onSort: expect.any(Function),
       }),
     );
@@ -170,16 +172,31 @@ describe("UsersPage", () => {
 
     render(<UsersPage />);
 
-    const tableProps = tableMock.mock.calls[0][0] as {
+    const getLatestColumnsOptions = () =>
+      useUserTableColumnsMock.mock.calls.at(-1)?.[0] as {
+        onSort: (sortBy: "first_name" | "last_name" | "department") => void;
+      };
+
+    act(() => {
+      getLatestColumnsOptions().onSort("department");
+    });
+
+    await waitFor(() => {
+      expect(useUsersApiMock).toHaveBeenLastCalledWith(
+        expect.objectContaining({
+          sort_order: "ASC",
+          sort_by: "department",
+        }),
+      );
+    });
+
+    const latestTableProps = tableMock.mock.calls.at(-1)?.[0] as {
       onChangePage: (p: number) => void;
-    };
-    const columnsOptions = useUserTableColumnsMock.mock.calls[0][0] as {
-      onSort: (sortBy: "first_name" | "last_name" | "department") => void;
     };
 
     act(() => {
-      tableProps.onChangePage(5);
-      columnsOptions.onSort("department");
+      latestTableProps.onChangePage(5);
+      getLatestColumnsOptions().onSort("department");
     });
 
     await waitFor(() => {
@@ -237,7 +254,7 @@ describe("UsersPage", () => {
         page: 1,
         limit: 25,
         sort_order: "ASC",
-        sort_by: "department",
+        sort_by: undefined,
       });
     });
   });

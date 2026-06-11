@@ -18,7 +18,7 @@ export const UsersPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [currentLimit, setCurrentLimit] = useState(10);
   const [currentSort, setCurrentSort] = useState<SortOrder>(SortOrder.ASC);
-  const [currentSortBy, setCurrentSortBy] = useState<UsersSortBy>("department");
+  const [currentSortBy, setCurrentSortBy] = useState<UsersSortBy>();
 
   const location = useLocation();
   const { onSearch } = useHandleSearch({

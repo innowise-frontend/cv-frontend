@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import { TableColumnHeader } from "./TableColumnHeader";
+import type { TableColumnHeaderProps } from "./types";
 
 vi.mock("@assets/icon/ArrowUpIcon.svg?react", () => ({
   default: ({ className }: { className?: string }) => (
@@ -78,5 +79,24 @@ describe("TableColumnHeader", () => {
     render(<TableColumnHeader title="Domain" sortOrder="DESC" onChangeSorting={vi.fn()} />);
 
     expect(screen.getByTestId("sort-icon")).not.toHaveClass("opacity-40");
+  });
+
+  it("renders plain title when table has no rows", () => {
+    const table = {
+      getRowModel: () => ({ rows: [] }),
+    } satisfies TableColumnHeaderProps["table"];
+
+    render(
+      <TableColumnHeader
+        title="Department"
+        sortOrder="DESC"
+        onChangeSorting={vi.fn()}
+        table={table}
+      />,
+    );
+
+    expect(screen.getByText("Department")).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Department" })).not.toBeInTheDocument();
+    expect(screen.queryByTestId("sort-icon")).not.toBeInTheDocument();
   });
 });

@@ -19,6 +19,7 @@ export const useCvsTableColumns = () => {
           title={t("page.cvs.name")}
           sortOrder={meta.table.options.meta?.currentSort}
           onChangeSorting={meta.table.options.meta?.onSort}
+          table={meta.table}
         />
       ),
       cell: ({ row }) => {

@@ -1,6 +1,6 @@
 import type { SortOrder } from "@root/constants";
 
-export type UsersSortBy = "first_name" | "last_name" | "department";
+export type UsersSortBy = "first_name" | "last_name" | "department" | undefined;
 
 export interface UsersTableColumnsOptions {
   currentSort: SortOrder;

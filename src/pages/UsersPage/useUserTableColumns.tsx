@@ -42,11 +42,12 @@ export const useUserTableColumns = ({
       },
     }),
     columnHelper.accessor("profile.first_name", {
-      header: () => (
+      header: ({ table }) => (
         <TableColumnHeader
           title={t("page.users.firstName")}
           sortOrder={getSortOrder("first_name")}
           onChangeSorting={() => onSort("first_name")}
+          table={table}
         />
       ),
       cell: ({ row }) => {
@@ -54,11 +55,12 @@ export const useUserTableColumns = ({
       },
     }),
     columnHelper.accessor("profile.last_name", {
-      header: () => (
+      header: ({ table }) => (
         <TableColumnHeader
           title={t("page.users.lastName")}
           sortOrder={getSortOrder("last_name")}
           onChangeSorting={() => onSort("last_name")}
+          table={table}
         />
       ),
       cell: ({ row }) => {
@@ -72,11 +74,12 @@ export const useUserTableColumns = ({
       },
     }),
     columnHelper.accessor("department.name", {
-      header: () => (
+      header: ({ table }) => (
         <TableColumnHeader
           title={t("page.users.department")}
           sortOrder={getSortOrder("department")}
           onChangeSorting={() => onSort("department")}
+          table={table}
         />
       ),
       cell: ({ row }) => {

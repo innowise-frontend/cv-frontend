@@ -17,6 +17,7 @@ export const usePositionsTableColumns = () => {
           title={t("page.positions.name")}
           sortOrder={meta.table.options.meta?.currentSort}
           onChangeSorting={meta.table.options.meta?.onSort}
+          table={meta.table}
         />
       ),
       cell: ({ row }) => <span>{row.original.name}</span>,
