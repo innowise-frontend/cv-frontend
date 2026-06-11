@@ -41,8 +41,8 @@ export const CvPreviewProjects = ({
                 <p className="mb-1 font-bold">{labels.responsibilities}</p>
                 {project?.responsibilities?.length ? (
                   <ul className="list-none space-y-1">
-                    {project?.responsibilities?.map((item) => (
-                      <li key={item} className="flex gap-2">
+                    {project?.responsibilities?.map((item, index) => (
+                      <li key={`${item}-${index}`} className="flex gap-2">
                         <span aria-hidden>●</span>
                         <span>{item}</span>
                       </li>

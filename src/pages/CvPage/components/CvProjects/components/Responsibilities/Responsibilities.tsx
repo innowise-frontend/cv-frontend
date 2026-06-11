@@ -7,13 +7,13 @@ export const Responsibilities = (row: Row<ProjectsTableRow>) => {
 
   return (
     <div className="flex flex-col gap-3">
-      <p className="text-base text-gray-5">{description}</p>
+      <p className="line-clamp-4 wrap-break-word text-base text-gray-5">{description}</p>
       {responsibilities.length > 0 && (
-        <div className="flex flex-wrap gap-2">
-          {responsibilities.map((item) => (
+        <div className="flex max-h-[6rem] flex-wrap gap-2 overflow-hidden">
+          {responsibilities.map((item, index) => (
             <span
-              key={item}
-              className="inline-flex h-6 items-center rounded-[16px] bg-gray-7 px-4 text-sm text-gray-2 hover:underline dark:bg-gray-3 dark:text-gray-8"
+              key={`${item}-${index}`}
+              className="inline-flex h-6 items-center rounded-[16px] bg-gray-7 px-4 text-sm text-gray-2 dark:bg-gray-3 dark:text-gray-8"
             >
               {item}
             </span>
