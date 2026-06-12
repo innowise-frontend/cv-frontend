@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import PlusIcon from "@assets/icon/PlusIcon.svg?react";
 import { Button, Input, Modal } from "@components/shared";
+import { modalFormBodyClassName } from "@components/shared/formFieldStyles";
 import { useModalContext } from "@components/shared/Modal/useModalContext";
 import { useCreateDepartmentMutation } from "../../api";
 
@@ -27,7 +28,7 @@ export const CreateDepartmentModal = () => {
 
       <Modal.Content onCancel={() => setDepartmentName("")}>
         <Modal.Header>{t("page.departments.createDepartment")}</Modal.Header>
-        <Modal.Body className="flex flex-col gap-9">
+        <Modal.Body className={modalFormBodyClassName}>
           <Input
             placeholder={t("page.departments.name")}
             label={t("page.departments.name")}

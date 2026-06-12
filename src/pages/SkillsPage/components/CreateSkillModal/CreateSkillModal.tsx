@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import PlusIcon from "@assets/icon/PlusIcon.svg?react";
 import { Input, Modal, Select } from "@components/shared";
+import { modalFormBodyClassName } from "@components/shared/formFieldStyles";
 import { useModalContext } from "@root/components/shared/Modal/useModalContext";
 import { useCreateSkillMutation, useSkillCategoriesQuery } from "../../api";
 import { buildCategoryNameById } from "../../const";
@@ -35,13 +36,13 @@ export const CreateSkillModal = () => {
 
   return (
     <>
-      <Modal.Trigger className="text-red font-medium">
+      <Modal.Trigger className="font-medium !text-red">
         <PlusIcon height={16} width={16} />
         {t("page.skills.createSkill")}
       </Modal.Trigger>
       <Modal.Content onCancel={resetCreatedSkill}>
         <Modal.Header>{t("page.skills.createSkill")}</Modal.Header>
-        <Modal.Body className="flex flex-col gap-9">
+        <Modal.Body className={modalFormBodyClassName}>
           <Input
             placeholder={t("page.skills.name")}
             label={t("page.skills.name")}

@@ -3,6 +3,10 @@ import { useTranslation } from "react-i18next";
 import CloseEyeIcon from "@assets/icon/CloseEyeIcon.svg?react";
 import OpenEyeIcon from "@assets/icon/OpenEyeIcon.svg?react";
 import {
+  formFieldErrorBorderClassName,
+  formFieldErrorHiddenClassName,
+  formFieldErrorMessageClassName,
+  formFieldErrorPlaceholder,
   nativeAutofillClassName,
   nativePlaceholderClassName,
   themeTextClassName,
@@ -66,8 +70,7 @@ export const Input = forwardRef<HTMLInputElement, InputWithLabelProps>(
               nativePlaceholderClassName,
               nativeAutofillClassName,
               className,
-              error &&
-                "border-red focus-visible:border-red dark:border-red dark:focus-visible:border-red",
+              error && formFieldErrorBorderClassName,
             )}
             {...props}
           />
@@ -91,10 +94,10 @@ export const Input = forwardRef<HTMLInputElement, InputWithLabelProps>(
         </div>
         <p
           id={`${generatedId}-error`}
-          className={cn("h-3 pl-2 text-left text-xs text-red", !error && "invisible")}
-          aria-live="polite"
+          className={cn(formFieldErrorMessageClassName, !error && formFieldErrorHiddenClassName)}
+          title={error}
         >
-          {error || " "}
+          {error || formFieldErrorPlaceholder}
         </p>
       </div>
     );

@@ -3,6 +3,7 @@ import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 import { Button, Input, Modal, Select } from "@components/shared";
+import { modalFormWideTwoColumnGridClassName } from "@components/shared/formFieldStyles";
 import { useModalContext } from "@components/shared/Modal/useModalContext";
 import { useAuth } from "@root/hooks";
 import { UserRole } from "@root/services/graphql/__generated__/graphql";
@@ -88,7 +89,7 @@ export const UpdateUserModal = ({
       <Modal.Content onCancel={resetToInitial}>
         <Modal.Header>{t("page.users.updateUserTitle")}</Modal.Header>
         <form onSubmit={handleSubmit(handleUpdateUser)}>
-          <Modal.Body className="grid grid-cols-[400px_400px] gap-y-9 gap-x-3">
+          <Modal.Body className={modalFormWideTwoColumnGridClassName}>
             <Input
               label={t("page.users.email")}
               disabled

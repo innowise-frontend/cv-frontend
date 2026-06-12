@@ -13,6 +13,10 @@ import {
   Textarea,
   toApiProjectDate,
 } from "@components/shared";
+import {
+  modalFormBodyClassName,
+  modalFormRowGridClassName,
+} from "@components/shared/formFieldStyles";
 import { useModalContext } from "@components/shared/Modal/useModalContext";
 import { getCvProjectDatePickerLimits } from "@pages/CvPage/components/CvProjects";
 import {
@@ -141,8 +145,8 @@ export const UpdateProjectModal = ({
       <Modal.Content className="w-[860px] min-w-[860px] max-w-[860px]" onCancel={resetToInitial}>
         <Modal.Header>{resolvedHeaderTitle}</Modal.Header>
         <form onSubmit={handleSubmit(handleUpdateProject)}>
-          <Modal.Body className="flex flex-col gap-6">
-            <div className="grid grid-cols-2 gap-4">
+          <Modal.Body className={modalFormBodyClassName}>
+            <div className={modalFormRowGridClassName}>
               {nameAsSelect ? (
                 <Select
                   disablePortal
@@ -170,7 +174,7 @@ export const UpdateProjectModal = ({
                 value={watched.domain}
               />
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className={modalFormRowGridClassName}>
               <Controller
                 name="startDate"
                 control={control}

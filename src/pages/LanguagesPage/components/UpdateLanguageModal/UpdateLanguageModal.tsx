@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Input, Modal } from "@components/shared";
+import { modalFormBodyClassName } from "@components/shared/formFieldStyles";
 import { useModalContext } from "@root/components/shared/Modal/useModalContext";
 import { UpdateLanguageModalProps } from "./types";
 import { useUpdateLanguageMutation } from "../../api";
@@ -43,7 +44,7 @@ export const UpdateLanguageModal = ({
       </Modal.Trigger>
       <Modal.Content onCancel={resetUpdatedLanguage}>
         <Modal.Header>{t("page.languages.updateLanguage")}</Modal.Header>
-        <Modal.Body className="flex flex-col gap-9">
+        <Modal.Body className={modalFormBodyClassName}>
           <Input
             placeholder={t("page.languages.name")}
             label={t("page.languages.name")}

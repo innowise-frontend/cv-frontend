@@ -2,7 +2,7 @@ import { LOCAL_STORAGE_KEYS } from "@constants/localStorage";
 import type { Theme } from "@pages/SettingPage/types";
 
 export function getDefaultTheme(): Theme {
-  const theme = (localStorage.getItem(LOCAL_STORAGE_KEYS.THEME) as Theme) ?? "light";
+  const theme = (localStorage.getItem(LOCAL_STORAGE_KEYS.THEME) as Theme) ?? "device";
 
   return theme as Theme;
 }

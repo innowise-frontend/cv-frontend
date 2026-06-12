@@ -3,6 +3,7 @@ import { useCallback, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Button, Input, Modal, Textarea } from "@components/shared";
+import { modalFormBodyClassName } from "@components/shared/formFieldStyles";
 import { useModalContext } from "@components/shared/Modal/useModalContext";
 import { UpdateCvModalProps } from "./types";
 import { updateCvValidation, UpdateCvFormValues } from "./validation";
@@ -53,7 +54,7 @@ export const UpdateCvModal = ({ cvId, name, education, description }: UpdateCvMo
       <Modal.Content className="w-[620px]" onCancel={resetUpdatedCv}>
         <Modal.Header>{t("page.cvs.editCv")}</Modal.Header>
         <form onSubmit={handleSubmit(handleUpdateCv)}>
-          <Modal.Body className="flex flex-col gap-9">
+          <Modal.Body className={modalFormBodyClassName}>
             <Input
               placeholder={t("page.cvs.name")}
               label={t("page.cvs.name")}
