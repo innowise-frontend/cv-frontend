@@ -1,7 +1,13 @@
 import { Popover as PopoverPrimitive } from "@base-ui/react/popover";
 import { ChevronDownIcon } from "lucide-react";
 import { type MouseEvent, useCallback, useId, useState } from "react";
-import { customPlaceholderClassName } from "@components/shared/formFieldStyles";
+import {
+  customPlaceholderClassName,
+  formFieldErrorBorderClassName,
+  formFieldErrorHiddenClassName,
+  formFieldErrorMessageClassName,
+  formFieldErrorPlaceholder,
+} from "@components/shared/formFieldStyles";
 import CloseIcon from "@root/assets/icon/CloseIcon.svg?react";
 import { Command, CommandGroup, CommandItem, CommandList } from "@root/components/ui/command";
 import { Label } from "@root/components/ui/label";
@@ -21,6 +27,7 @@ export function MultiSelect<
   onChange,
   className,
   placeholder,
+  error,
 }: MultiSelectProps<TValue, TOption>) {
   const [open, setOpen] = useState(false);
   const triggerId = useId();
@@ -140,6 +147,7 @@ export function MultiSelect<
               "disabled:bg-gray-6 dark:disabled:bg-gray-3",
               "focus:outline-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:shadow-none",
               "rounded-md border bg-gray-8 dark:border-gray-5 dark:bg-gray-2",
+              error && formFieldErrorBorderClassName,
             )}
           >
             <div className="flex min-h-6 flex-1 flex-wrap items-center gap-2 pr-8 text-left">
@@ -165,6 +173,7 @@ export function MultiSelect<
             <Label
               htmlFor={triggerId}
               className={cn(
+                error && "text-red",
                 isLabelFloating
                   ? "-top-0.5 translate-x-2.5 -translate-y-4 text-xs text-gray-3 opacity-100 dark:text-gray-5"
                   : "top-1/2 -translate-y-1/2 translate-x-2.5 text-sm text-gray-6 opacity-0 dark:text-gray-3",
@@ -183,6 +192,12 @@ export function MultiSelect<
           )}
         </Popover>
       </div>
+      <p
+        className={cn(formFieldErrorMessageClassName, !error && formFieldErrorHiddenClassName)}
+        title={error}
+      >
+        {error || formFieldErrorPlaceholder}
+      </p>
     </div>
   );
 }

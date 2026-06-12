@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import PlusIcon from "@assets/icon/PlusIcon.svg?react";
 import { Modal, Select } from "@components/shared";
+import { modalFormBodyClassName } from "@components/shared/formFieldStyles";
 import { useModalContext } from "@root/components/shared/Modal/useModalContext";
 import { Mastery, ProfileQuery } from "@services/graphql/__generated__/graphql";
 import { AddSkillDraft, AddSkillModalProps } from "./types";
@@ -78,7 +79,7 @@ export const AddSkillModal = ({
       </Modal.Trigger>
       <Modal.Content onCancel={reset}>
         <Modal.Header>{t("page.skills.addSkill")}</Modal.Header>
-        <Modal.Body className="flex flex-col gap-9">
+        <Modal.Body className={modalFormBodyClassName}>
           <Select
             list={skillOptions}
             label={t("page.skills.skill")}

@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import PlusIcon from "@assets/icon/PlusIcon.svg?react";
 import { Button, Input, Modal, Textarea } from "@components/shared";
+import { modalFormBodyClassName } from "@components/shared/formFieldStyles";
 import { useModalContext } from "@components/shared/Modal/useModalContext";
 import { useAuth } from "@root/hooks";
 import { CreateCvFormValues, createCvValidation } from "./validation";
@@ -61,7 +62,7 @@ export const CreateCvModal = () => {
       <Modal.Content className="w-[620px]" onCancel={resetCreatedCv}>
         <Modal.Header>{t("page.cvs.createCv")}</Modal.Header>
         <form onSubmit={handleSubmit(handleCreateCv)}>
-          <Modal.Body className="flex flex-col gap-9">
+          <Modal.Body className={modalFormBodyClassName}>
             <Input
               placeholder={t("page.cvs.name")}
               label={t("page.cvs.name")}

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Input, Modal } from "@components/shared";
+import { modalFormBodyClassName } from "@components/shared/formFieldStyles";
 import { useModalContext } from "@components/shared/Modal/useModalContext";
 import { useUpdateDepartmentMutation } from "../../api";
 import type { UpdateDepartmentModalProps } from "./types";
@@ -29,7 +30,7 @@ export const UpdateDepartmentModal = ({ departmentId, name }: UpdateDepartmentMo
       </Modal.Trigger>
       <Modal.Content onCancel={resetUpdatedDepartment}>
         <Modal.Header>{t("page.departments.updateDepartment")}</Modal.Header>
-        <Modal.Body className="flex flex-col gap-9">
+        <Modal.Body className={modalFormBodyClassName}>
           <Input
             placeholder={t("page.departments.name")}
             label={t("page.departments.name")}

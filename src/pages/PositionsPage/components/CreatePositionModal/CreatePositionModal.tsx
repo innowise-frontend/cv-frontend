@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import PlusIcon from "@assets/icon/PlusIcon.svg?react";
 import { Button, Input, Modal } from "@components/shared";
+import { modalFormBodyClassName } from "@components/shared/formFieldStyles";
 import { useModalContext } from "@components/shared/Modal/useModalContext";
 import { useCreatePositionMutation, usePositionsQuery } from "../../api";
 
@@ -39,7 +40,7 @@ export const CreatePositionModal = () => {
       </Modal.Trigger>
       <Modal.Content onCancel={resetName}>
         <Modal.Header>{t("page.positions.createPosition")}</Modal.Header>
-        <Modal.Body className="flex flex-col gap-9">
+        <Modal.Body className={modalFormBodyClassName}>
           <Input
             placeholder={t("page.positions.position")}
             label={t("page.positions.position")}

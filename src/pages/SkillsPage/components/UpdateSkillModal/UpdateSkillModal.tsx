@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Input, Modal, Select } from "@components/shared";
+import { modalFormBodyClassName } from "@components/shared/formFieldStyles";
 import { useModalContext } from "@root/components/shared/Modal/useModalContext";
 import { UpdateSkillModalProps } from "./types";
 import { useSkillCategoriesQuery, useUpdateSkillMutation } from "../../api";
@@ -43,7 +44,7 @@ export const UpdateSkillModal = ({ name, categoryId, skillId }: UpdateSkillModal
       </Modal.Trigger>
       <Modal.Content>
         <Modal.Header>{t("page.skills.updateSkill")}</Modal.Header>
-        <Modal.Body className="flex flex-col gap-9">
+        <Modal.Body className={modalFormBodyClassName}>
           <Input
             placeholder={t("page.skills.name")}
             label={t("page.skills.name")}

@@ -2,6 +2,8 @@ import { render, screen } from "@testing-library/react";
 import UserEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import {
+  formFieldErrorHiddenClassName,
+  formFieldErrorMessageClassName,
   getFormFieldClassList,
   nativeAutofillClassName,
   nativePlaceholderClassName,
@@ -101,9 +103,12 @@ describe("InputWithLabel", () => {
 
   it("should reserve error space when error is absent", () => {
     const { container } = render(<Input />);
+    const errorSlot = container.querySelector("p[id$='-error']");
 
-    expect(container.querySelector("p[id$='-error']")).toHaveClass("invisible");
-    expect(container.querySelector("p[id$='-error']")).toHaveClass("h-3");
+    expect(errorSlot).toHaveClass(formFieldErrorHiddenClassName);
+    getFormFieldClassList(formFieldErrorMessageClassName).forEach((className) => {
+      expect(errorSlot).toHaveClass(className);
+    });
   });
 
   it("should forward ref to the native input", () => {

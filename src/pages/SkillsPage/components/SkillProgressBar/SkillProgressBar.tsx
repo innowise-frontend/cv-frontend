@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { modalFormBodyClassName } from "@components/shared/formFieldStyles";
+import { useModalContext } from "@components/shared/Modal/useModalContext";
 import { Button, Modal, ProgressBar, Select } from "@root/components/shared";
-import { useModalContext } from "@root/components/shared/Modal/useModalContext";
 import { cn } from "@root/lib";
 import { Mastery } from "@services/graphql/__generated__/graphql";
 import { SkillProgressBarProps, UpdateSkillDraft } from "./types";
@@ -57,7 +58,7 @@ export const SkillProgressBar = ({
       </Modal.Trigger>
       <Modal.Content onCancel={reset}>
         <Modal.Header>{t("page.skills.updateSkill")}</Modal.Header>
-        <Modal.Body className="flex flex-col gap-9">
+        <Modal.Body className={modalFormBodyClassName}>
           <Select
             list={[{ label: name, value: name }]}
             label={t("page.skills.skill")}
