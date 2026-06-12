@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z, type ZodError } from "zod";
 
 const emailField = z
   .string()
@@ -49,3 +49,19 @@ export const createAuthFormSchema = (isSignup?: boolean) =>
   });
 
 export const formSchema = createAuthFormSchema(false);
+
+export const getAuthFormFieldErrors = (
+  error: ZodError,
+): Partial<Record<keyof AuthFormValues, string>> => {
+  const fieldErrors: Partial<Record<keyof AuthFormValues, string>> = {};
+
+  for (const issue of error.issues) {
+    const key = issue.path[0] as keyof AuthFormValues | undefined;
+
+    if (key && !fieldErrors[key]) {
+      fieldErrors[key] = issue.message;
+    }
+  }
+
+  return fieldErrors;
+};
