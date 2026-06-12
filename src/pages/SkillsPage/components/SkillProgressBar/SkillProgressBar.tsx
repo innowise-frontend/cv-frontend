@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import { modalFormBodyClassName } from "@components/shared/formFieldStyles";
 import { useModalContext } from "@components/shared/Modal/useModalContext";
 import { Button, Modal, ProgressBar, Select } from "@root/components/shared";
-import { cn } from "@root/lib";
 import { Mastery } from "@services/graphql/__generated__/graphql";
 import { SkillProgressBarProps, UpdateSkillDraft } from "./types";
 
@@ -26,12 +25,15 @@ export const SkillProgressBar = ({
 
   if (isDeleteMode) {
     return (
-      <Button variant="ghost" className="capitalize" onClick={onClick} disabled={disabled}>
+      <Button
+        variant="ghost"
+        className="capitalize hover:bg-transparent!"
+        onClick={onClick}
+        disabled={disabled}
+      >
         <ProgressBar
-          className={cn(
-            "px-2 cursor-pointer transition-colors duration-150 hover:bg-gray-7 dark:hover:bg-gray-5",
-            chosen && "*:text-gray *:dark:text-gray-8",
-          )}
+          interactive
+          className="px-2"
           key={name}
           label={name}
           mastery={mastery}
@@ -48,13 +50,12 @@ export const SkillProgressBar = ({
 
   return (
     <>
-      <Modal.Trigger className="capitalize" variant="ghost" disabled={disabled}>
-        <ProgressBar
-          className="px-2 cursor-pointer transition-colors duration-150 hover:bg-gray-7 dark:hover:bg-gray-5"
-          key={name}
-          label={name}
-          mastery={mastery}
-        />
+      <Modal.Trigger
+        variant="ghost"
+        disabled={disabled}
+        className="capitalize hover:bg-transparent!"
+      >
+        <ProgressBar interactive className="px-2" key={name} label={name} mastery={mastery} />
       </Modal.Trigger>
       <Modal.Content onCancel={reset}>
         <Modal.Header>{t("page.skills.updateSkill")}</Modal.Header>

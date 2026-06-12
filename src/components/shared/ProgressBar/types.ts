@@ -13,6 +13,7 @@ export type ProgressBarProps =
       proficiency?: undefined;
       className?: string;
       chosen?: boolean;
+      interactive?: boolean;
     }
   | {
       label: string;
@@ -20,4 +21,5 @@ export type ProgressBarProps =
       mastery?: undefined;
       className?: string;
       chosen?: boolean;
+      interactive?: boolean;
     };

@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import { modalFormBodyClassName } from "@components/shared/formFieldStyles";
 import { Button, Modal, ProgressBar, Select } from "@root/components/shared";
 import { useModalContext } from "@root/components/shared/Modal/useModalContext";
-import { cn } from "@root/lib";
 import { Proficiency, UpdateProfileLanguageInput } from "@services/graphql/__generated__/graphql";
 import { LanguageProps } from "./types";
 import { useUpdateProfileLanguageMutation } from "../../api";
@@ -47,14 +46,13 @@ export const LanguageProgressBar = ({
 
   if (isDeleteMode) {
     return (
-      <Button variant="ghost" className="capitalize" onClick={onClick}>
+      <Button variant="ghost" className="capitalize hover:bg-transparent!" onClick={onClick}>
         <ProgressBar
-          className={cn(
-            "px-2 cursor-pointer hover:bg-gray-7 dark:hover:bg-gray-5",
-            chosen && "*:text-gray *:dark:text-gray-8",
-          )}
+          interactive
+          className="px-2"
           label={name || ""}
-          proficiency={chosen ? Proficiency.A1 : (proficiency as Proficiency)}
+          proficiency={proficiency as Proficiency}
+          chosen={chosen}
         />
       </Button>
     );
@@ -62,12 +60,8 @@ export const LanguageProgressBar = ({
 
   return (
     <>
-      <Modal.Trigger className="capitalize" variant="ghost">
-        <ProgressBar
-          className="px-2 cursor-pointer hover:bg-gray-7 dark:hover:bg-gray-5"
-          label={name || ""}
-          proficiency={proficiency}
-        />
+      <Modal.Trigger className="capitalize hover:bg-transparent!" variant="ghost">
+        <ProgressBar interactive className="px-2" label={name || ""} proficiency={proficiency} />
       </Modal.Trigger>
       <Modal.Content onCancel={resetUpdateLanguage}>
         <Modal.Header>{t("page.languages.updateLanguage")}</Modal.Header>
