@@ -55,6 +55,14 @@ describe("LanguagesTable", () => {
       search: "",
       page: 1,
       limit: 10,
+      sortOrder: undefined,
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "sort" }));
+    expect(useLanguagesTableQueryMock).toHaveBeenLastCalledWith({
+      search: "",
+      page: 1,
+      limit: 10,
       sortOrder: SortOrder.ASC,
     });
 
@@ -64,6 +72,14 @@ describe("LanguagesTable", () => {
       page: 1,
       limit: 10,
       sortOrder: SortOrder.DESC,
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "sort" }));
+    expect(useLanguagesTableQueryMock).toHaveBeenLastCalledWith({
+      search: "",
+      page: 1,
+      limit: 10,
+      sortOrder: undefined,
     });
   });
 });

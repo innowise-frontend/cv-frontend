@@ -8,7 +8,7 @@ export interface TableProps<TData> {
   columns: ColumnDef<TData, any>[];
   pagesAmount: number;
   currentPage: number;
-  currentSort: "ASC" | "DESC";
+  currentSort?: "ASC" | "DESC";
   onChangePage: (page: number) => void;
   actions?: {
     label: string;

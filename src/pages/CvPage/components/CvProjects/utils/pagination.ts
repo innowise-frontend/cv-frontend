@@ -20,8 +20,8 @@ export const filterAndPaginateCvProjects = ({
   search: string;
   page: number;
   limit: number;
-  sortOrder: SortOrder;
-  sortBy: CvProjectsSortBy;
+  sortOrder?: SortOrder;
+  sortBy?: CvProjectsSortBy;
 }) => {
   const normalizedSearch = search.trim().toLowerCase();
 
@@ -36,26 +36,29 @@ export const filterAndPaginateCvProjects = ({
     );
   }
 
-  const sorted = [...filtered].sort((left, right) => {
-    if (sortBy === "name") {
-      return compareStrings(left.name, right.name, sortOrder);
-    }
+  const sorted =
+    sortOrder && sortBy
+      ? [...filtered].sort((left, right) => {
+          if (sortBy === "name") {
+            return compareStrings(left.name, right.name, sortOrder);
+          }
 
-    if (sortBy === "domain") {
-      return compareStrings(left.domain, right.domain, sortOrder);
-    }
+          if (sortBy === "domain") {
+            return compareStrings(left.domain, right.domain, sortOrder);
+          }
 
-    const leftDate = left.end_date ?? "";
-    const rightDate = right.end_date ?? "";
+          const leftDate = left.end_date ?? "";
+          const rightDate = right.end_date ?? "";
 
-    if (leftDate === rightDate) return 0;
+          if (leftDate === rightDate) return 0;
 
-    if (sortOrder === SortOrder.ASC) {
-      return leftDate.localeCompare(rightDate);
-    }
+          if (sortOrder === SortOrder.ASC) {
+            return leftDate.localeCompare(rightDate);
+          }
 
-    return rightDate.localeCompare(leftDate);
-  });
+          return rightDate.localeCompare(leftDate);
+        })
+      : filtered;
 
   const total = sorted.length;
   const total_pages = Math.max(1, Math.ceil(total / limit));

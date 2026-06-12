@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 import { SortOrder } from "@constants/sortOptions";
 import { getErrorToastMessage } from "@root/lib";
+import { buildSortParams } from "@root/lib/sorting/toggleTableSort";
 import {
   createDepartment,
   deleteDepartment,
@@ -26,7 +27,7 @@ export const useDepartmentsTableQuery = ({
   search: string;
   page: number;
   limit: number;
-  sortOrder: SortOrder;
+  sortOrder?: SortOrder;
 }) =>
   useQuery({
     queryKey: ["departments", search, page, limit, sortOrder],
@@ -35,8 +36,7 @@ export const useDepartmentsTableQuery = ({
         search,
         page,
         limit,
-        sort_order: sortOrder,
-        sort_by: "name",
+        ...buildSortParams(sortOrder, "name"),
       }),
   });
 

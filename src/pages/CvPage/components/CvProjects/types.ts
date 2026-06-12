@@ -20,8 +20,8 @@ export type CvProjectDateBounds = {
 };
 
 export type CvProjectsTableColumnsOptions = {
-  currentSort: SortOrder;
-  currentSortBy: CvProjectsSortBy;
+  currentSort?: SortOrder;
+  currentSortBy?: CvProjectsSortBy;
   onSort: (sortBy: CvProjectsSortBy) => void;
   renderUpdateModal?: (row: ProjectsTableRow) => ReactNode;
   renderDeleteModal?: (row: ProjectsTableRow) => ReactNode;

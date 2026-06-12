@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import { TableColumnHeader } from "./TableColumnHeader";
+import type { TableColumnHeaderProps } from "./types";
 
 vi.mock("@assets/icon/ArrowUpIcon.svg?react", () => ({
   default: ({ className }: { className?: string }) => (
@@ -59,17 +60,43 @@ describe("TableColumnHeader", () => {
     expect(screen.getByTestId("sort-icon")).toHaveClass("rotate-180");
   });
 
-  it("renders sortable button without icon when sortOrder is undefined", async () => {
+  it("renders sortable button with muted icon when column is not actively sorted", async () => {
     const user = userEvent.setup();
     const onChangeSorting = vi.fn();
 
     render(<TableColumnHeader title="Domain" onChangeSorting={onChangeSorting} />);
 
     const button = screen.getByRole("button", { name: "Domain" });
-    expect(screen.queryByTestId("sort-icon")).not.toBeInTheDocument();
+    expect(screen.getByTestId("sort-icon")).toHaveClass("opacity-40");
+    expect(screen.getByTestId("sort-icon")).not.toHaveClass("rotate-180");
 
     await user.click(button);
 
     expect(onChangeSorting).toHaveBeenCalledTimes(1);
+  });
+
+  it("renders active sort icon without muted style", () => {
+    render(<TableColumnHeader title="Domain" sortOrder="DESC" onChangeSorting={vi.fn()} />);
+
+    expect(screen.getByTestId("sort-icon")).not.toHaveClass("opacity-40");
+  });
+
+  it("renders plain title when table has no rows", () => {
+    const table = {
+      getRowModel: () => ({ rows: [] }),
+    } satisfies TableColumnHeaderProps["table"];
+
+    render(
+      <TableColumnHeader
+        title="Department"
+        sortOrder="DESC"
+        onChangeSorting={vi.fn()}
+        table={table}
+      />,
+    );
+
+    expect(screen.getByText("Department")).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Department" })).not.toBeInTheDocument();
+    expect(screen.queryByTestId("sort-icon")).not.toBeInTheDocument();
   });
 });

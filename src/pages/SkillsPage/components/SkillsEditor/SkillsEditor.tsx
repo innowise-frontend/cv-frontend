@@ -67,7 +67,7 @@ export const SkillsEditor = ({
           ))}
         </div>
       ) : (
-        <EmptyContent message={t("page.skills.noData")} className="mt-18 mb-8" />
+        <EmptyContent message={t("page.table.noDataResults")} className="mt-18 mb-8" />
       )}
 
       <div className="min-h-14 flex gap-8 justify-end pt-4">

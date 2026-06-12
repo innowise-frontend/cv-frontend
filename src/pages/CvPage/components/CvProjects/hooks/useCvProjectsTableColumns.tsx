@@ -25,21 +25,23 @@ export const useCvProjectsTableColumns = ({
 
   const columns = [
     columnHelper.accessor("name", {
-      header: () => (
+      header: ({ table }) => (
         <TableColumnHeader
           title={t("page.projects.name")}
           sortOrder={getSortOrder("name")}
           onChangeSorting={() => onSort("name")}
+          table={table}
         />
       ),
       cell: ({ row }) => <span>{row.original.name}</span>,
     }),
     columnHelper.accessor("domain", {
-      header: () => (
+      header: ({ table }) => (
         <TableColumnHeader
           title={t("page.projects.domain")}
           sortOrder={getSortOrder("domain")}
           onChangeSorting={() => onSort("domain")}
+          table={table}
         />
       ),
       cell: ({ row }) => <span>{row.original.domain}</span>,
@@ -51,11 +53,12 @@ export const useCvProjectsTableColumns = ({
       ),
     }),
     columnHelper.accessor("end_date", {
-      header: () => (
+      header: ({ table }) => (
         <TableColumnHeader
           title={t("page.projects.endDate")}
           sortOrder={getSortOrder("end_date")}
           onChangeSorting={() => onSort("end_date")}
+          table={table}
         />
       ),
       cell: ({ row }) => (

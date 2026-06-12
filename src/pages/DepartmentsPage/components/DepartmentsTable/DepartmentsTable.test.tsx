@@ -68,6 +68,14 @@ describe("DepartmentsTable", () => {
       search: "",
       page: 1,
       limit: 10,
+      sortOrder: undefined,
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "sort" }));
+    expect(useDepartmentsTableQueryMock).toHaveBeenLastCalledWith({
+      search: "",
+      page: 1,
+      limit: 10,
       sortOrder: SortOrder.ASC,
     });
 
@@ -77,6 +85,14 @@ describe("DepartmentsTable", () => {
       page: 1,
       limit: 10,
       sortOrder: SortOrder.DESC,
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "sort" }));
+    expect(useDepartmentsTableQueryMock).toHaveBeenLastCalledWith({
+      search: "",
+      page: 1,
+      limit: 10,
+      sortOrder: undefined,
     });
   });
 
@@ -92,7 +108,7 @@ describe("DepartmentsTable", () => {
       search: "",
       page: 1,
       limit: 20,
-      sortOrder: SortOrder.ASC,
+      sortOrder: undefined,
     });
   });
 });

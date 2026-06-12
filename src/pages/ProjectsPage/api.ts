@@ -3,6 +3,7 @@ import { t } from "i18next";
 import { toast } from "sonner";
 import { SortOrder } from "@constants/sortOptions";
 import { getErrorToastMessage } from "@root/lib";
+import { buildSortParams } from "@root/lib/sorting/toggleTableSort";
 import { getPositions } from "@services/positions";
 import { createProject, deleteProject, getProjects, updateProject } from "@services/projects";
 import { getSkills } from "@services/skills";
@@ -32,7 +33,7 @@ export const useProjectsTableQuery = ({
   search: string;
   page: number;
   limit: number;
-  sortOrder: SortOrder;
+  sortOrder?: SortOrder;
 }) =>
   useQuery({
     queryKey: ["projects", search, page, limit, sortOrder],
@@ -41,8 +42,7 @@ export const useProjectsTableQuery = ({
         search,
         page,
         limit,
-        sort_order: sortOrder,
-        sort_by: "name",
+        ...buildSortParams(sortOrder, "name"),
       }),
   });
 

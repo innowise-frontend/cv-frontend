@@ -6,3 +6,4 @@ export * from "./getMobileDevice/getMobileDevice";
 export * from "./getBreadcrumbsLink/getBreadcrumbsLink";
 export * from "./getErrorToastMessage/getErrorToastMessage";
 export * from "./getTabs/getTabs";
+export * from "./sorting/toggleTableSort";

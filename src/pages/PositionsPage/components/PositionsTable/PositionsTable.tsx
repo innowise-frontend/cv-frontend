@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Modal, Table, TableSearch } from "@components/shared";
 import { VIEW_OPTIONS, SortOrder } from "@root/constants";
 import { useAuth, useHandleSearch } from "@root/hooks";
+import { toggleSingleColumnSort } from "@root/lib";
 import { usePositionsTableColumns } from "./usePositionsTableColumns";
 import { usePositionsTableQuery } from "../../api";
 import { CreatePositionModal } from "../CreatePositionModal/CreatePositionModal";
@@ -17,7 +18,7 @@ export const PositionsTable = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [currentLimit, setCurrentLimit] = useState(10);
-  const [currentSort, setCurrentSort] = useState<SortOrder>(SortOrder.ASC);
+  const [currentSort, setCurrentSort] = useState<SortOrder>();
   const { onSearch } = useHandleSearch({
     searchValue: searchParams.search ?? "",
     onSearchChange: (value) => {
@@ -40,11 +41,10 @@ export const PositionsTable = () => {
   });
 
   const tableData = data?.items ?? [];
-  const hasActiveSearch = (searchParams.search ?? "").trim();
-  const emptyMessage = hasActiveSearch ? t("page.table.noResults") : t("page.positions.noData");
+  const emptyMessage = t("page.table.noResults");
 
   const handleSort = () => {
-    setCurrentSort((prev) => (prev === SortOrder.ASC ? SortOrder.DESC : SortOrder.ASC));
+    setCurrentSort((prev) => toggleSingleColumnSort(prev));
     setCurrentPage(1);
   };
 

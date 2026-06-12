@@ -49,14 +49,14 @@ describe("SkillsEditor", () => {
     renderEditor({ skills: undefined, isLoading: true });
 
     expect(screen.getByTestId("spinner")).toBeInTheDocument();
-    expect(screen.queryByText("page.skills.noData")).not.toBeInTheDocument();
+    expect(screen.queryByText("page.table.noDataResults")).not.toBeInTheDocument();
   });
 
   it("shows empty state only after loading when there are no skills", () => {
     renderEditor({ skills: [], isLoading: false });
 
     expect(screen.queryByTestId("spinner")).not.toBeInTheDocument();
-    expect(screen.getByText("page.skills.noData")).toBeInTheDocument();
+    expect(screen.getByText("page.table.noDataResults")).toBeInTheDocument();
   });
 
   it("renders grouped skills and toolbar from render props", () => {

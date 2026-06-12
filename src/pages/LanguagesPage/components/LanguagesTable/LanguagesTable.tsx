@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Modal, Table, TableSearch } from "@components/shared";
 import { VIEW_OPTIONS, SortOrder } from "@root/constants";
 import { useAuth, useHandleSearch } from "@root/hooks";
+import { toggleSingleColumnSort } from "@root/lib";
 import { useLanguagesTableColumns } from "./useLanguagesTableColumns";
 import { useLanguagesTableQuery } from "../../api";
 import { CreateLanguageModal } from "../CreateLanguageModal/CreateLanguageModal";
@@ -17,7 +18,7 @@ export const LanguagesTable = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [currentLimit, setCurrentLimit] = useState(10);
-  const [currentSort, setCurrentSort] = useState<SortOrder>(SortOrder.ASC);
+  const [currentSort, setCurrentSort] = useState<SortOrder>();
   const { onSearch } = useHandleSearch({
     searchValue: searchParams.search ?? "",
     onSearchChange: (value) => {
@@ -40,8 +41,7 @@ export const LanguagesTable = () => {
   });
 
   const tableData = data?.items ?? [];
-  const hasActiveSearch = (searchParams.search ?? "").trim().length > 0;
-  const emptyMessage = hasActiveSearch ? t("page.table.noResults") : t("page.table.noDataResults");
+  const emptyMessage = t("page.table.noResults");
 
   return (
     <div className="flex h-full min-h-0 flex-col">
@@ -66,7 +66,7 @@ export const LanguagesTable = () => {
           currentPage={currentPage}
           onChangePage={setCurrentPage}
           onSort={() => {
-            setCurrentSort((prev) => (prev === SortOrder.ASC ? SortOrder.DESC : SortOrder.ASC));
+            setCurrentSort((prev) => toggleSingleColumnSort(prev));
             setCurrentPage(1);
           }}
           currentSort={currentSort}

@@ -8,7 +8,7 @@ const navigateMock = vi.hoisted(() => vi.fn());
 const useUsersApiMock = vi.hoisted(() => vi.fn());
 const tableMock = vi.hoisted(() => vi.fn());
 const useUserTableColumnsMock = vi.hoisted(() =>
-  vi.fn(() => ({ columns: [{ id: "mock-column" }] as const })),
+  vi.fn().mockReturnValue({ columns: [{ id: "mock-column" }] as const }),
 );
 
 vi.mock("@tanstack/react-router", () => ({
@@ -22,7 +22,7 @@ vi.mock("./api", () => ({
 }));
 
 vi.mock("./useUserTableColumns", () => ({
-  useUserTableColumns: () => useUserTableColumnsMock(),
+  useUserTableColumns: (options: unknown) => useUserTableColumnsMock(options),
 }));
 
 vi.mock("./components", () => ({
@@ -117,7 +117,10 @@ describe("UsersPage", () => {
         data: [{ id: "1", name: "John" }],
         pagesAmount: 7,
         currentPage: 1,
-        currentSort: "ASC",
+        currentSort: undefined,
+        currentSortBy: undefined,
+        currentViewOption: 10,
+        emptyMessage: "page.table.noResults",
         viewOptions: VIEW_OPTIONS,
         columns: [{ id: "mock-column" }],
       }),
@@ -133,9 +136,21 @@ describe("UsersPage", () => {
       search: "anna",
       page: 1,
       limit: 10,
-      sort_order: "ASC",
-      sort_by: "department",
+      sort_order: undefined,
+      sort_by: undefined,
     });
+  });
+
+  it("passes sort state into useUserTableColumns", () => {
+    render(<UsersPage />);
+
+    expect(useUserTableColumnsMock).toHaveBeenCalledWith(
+      expect.objectContaining({
+        currentSort: undefined,
+        currentSortBy: undefined,
+        onSort: expect.any(Function),
+      }),
+    );
   });
 
   it("falls back to empty data when query result is missing", () => {
@@ -152,18 +167,36 @@ describe("UsersPage", () => {
     );
   });
 
-  it("toggles sort and resets page when table sort callback is triggered", async () => {
+  it("toggles sort order and resets page when sorting the same column", async () => {
     useSearchMock.mockReturnValue({ search: "anna" });
 
     render(<UsersPage />);
 
-    const firstCall = tableMock.mock.calls[0][0] as {
-      onChangePage: (p: number) => void;
-      onSort: () => void;
-    };
+    const getLatestColumnsOptions = () =>
+      useUserTableColumnsMock.mock.calls.at(-1)?.[0] as {
+        onSort: (sortBy: "first_name" | "last_name" | "department") => void;
+      };
+
     act(() => {
-      firstCall.onChangePage(5);
-      firstCall.onSort();
+      getLatestColumnsOptions().onSort("department");
+    });
+
+    await waitFor(() => {
+      expect(useUsersApiMock).toHaveBeenLastCalledWith(
+        expect.objectContaining({
+          sort_order: "ASC",
+          sort_by: "department",
+        }),
+      );
+    });
+
+    const latestTableProps = tableMock.mock.calls.at(-1)?.[0] as {
+      onChangePage: (p: number) => void;
+    };
+
+    act(() => {
+      latestTableProps.onChangePage(5);
+      getLatestColumnsOptions().onSort("department");
     });
 
     await waitFor(() => {
@@ -173,6 +206,44 @@ describe("UsersPage", () => {
         limit: 10,
         sort_order: "DESC",
         sort_by: "department",
+      });
+    });
+
+    act(() => {
+      getLatestColumnsOptions().onSort("department");
+    });
+
+    await waitFor(() => {
+      expect(useUsersApiMock).toHaveBeenLastCalledWith({
+        search: "anna",
+        page: 1,
+        limit: 10,
+        sort_order: undefined,
+        sort_by: undefined,
+      });
+    });
+  });
+
+  it("switches sort column and resets order to ASC", async () => {
+    useSearchMock.mockReturnValue({ search: "anna" });
+
+    render(<UsersPage />);
+
+    const columnsOptions = useUserTableColumnsMock.mock.calls[0][0] as {
+      onSort: (sortBy: "first_name" | "last_name" | "department") => void;
+    };
+
+    act(() => {
+      columnsOptions.onSort("first_name");
+    });
+
+    await waitFor(() => {
+      expect(useUsersApiMock).toHaveBeenLastCalledWith({
+        search: "anna",
+        page: 1,
+        limit: 10,
+        sort_order: "ASC",
+        sort_by: "first_name",
       });
     });
   });
@@ -196,8 +267,8 @@ describe("UsersPage", () => {
         search: "max",
         page: 1,
         limit: 25,
-        sort_order: "ASC",
-        sort_by: "department",
+        sort_order: undefined,
+        sort_by: undefined,
       });
     });
   });

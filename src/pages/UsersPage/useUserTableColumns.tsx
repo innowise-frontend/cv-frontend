@@ -6,15 +6,23 @@ import { useAuth } from "@root/hooks";
 import { UsersQuery } from "@services/graphql/__generated__/graphql";
 import { DeleteUserModal } from "./components/DeleteUserModal/DeleteUserModal";
 import { UpdateUserModal } from "./components/UpdateUserModal/UpdateUserModal";
+import type { UsersSortBy, UsersTableColumnsOptions } from "./types";
 
 type UserTableRow = UsersQuery["users"]["items"][number];
 
-export const useUserTableColumns = () => {
+export const useUserTableColumns = ({
+  currentSort,
+  currentSortBy,
+  onSort,
+}: UsersTableColumnsOptions) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { isAdmin } = useAuth();
 
   const columnHelper = createColumnHelper<UserTableRow>();
+
+  const getSortOrder = (column: UsersSortBy) =>
+    currentSortBy === column ? currentSort : undefined;
 
   const columns = [
     columnHelper.accessor("profile.avatar", {
@@ -34,13 +42,27 @@ export const useUserTableColumns = () => {
       },
     }),
     columnHelper.accessor("profile.first_name", {
-      header: () => <TableColumnHeader title={t("page.users.firstName")} />,
+      header: ({ table }) => (
+        <TableColumnHeader
+          title={t("page.users.firstName")}
+          sortOrder={getSortOrder("first_name")}
+          onChangeSorting={() => onSort("first_name")}
+          table={table}
+        />
+      ),
       cell: ({ row }) => {
         return <span>{row.original.profile.first_name}</span>;
       },
     }),
     columnHelper.accessor("profile.last_name", {
-      header: () => <TableColumnHeader title={t("page.users.lastName")} />,
+      header: ({ table }) => (
+        <TableColumnHeader
+          title={t("page.users.lastName")}
+          sortOrder={getSortOrder("last_name")}
+          onChangeSorting={() => onSort("last_name")}
+          table={table}
+        />
+      ),
       cell: ({ row }) => {
         return <span>{row.original.profile.last_name}</span>;
       },
@@ -52,11 +74,12 @@ export const useUserTableColumns = () => {
       },
     }),
     columnHelper.accessor("department.name", {
-      header: (meta) => (
+      header: ({ table }) => (
         <TableColumnHeader
           title={t("page.users.department")}
-          sortOrder={meta.table.options.meta?.currentSort}
-          onChangeSorting={meta.table.options.meta?.onSort}
+          sortOrder={getSortOrder("department")}
+          onChangeSorting={() => onSort("department")}
+          table={table}
         />
       ),
       cell: ({ row }) => {

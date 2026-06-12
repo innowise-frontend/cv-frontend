@@ -58,6 +58,15 @@ describe("CvsTable", () => {
       search: "",
       page: 1,
       limit: 10,
+      sortOrder: undefined,
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "sort" }));
+
+    expect(useCvsTableQueryMock).toHaveBeenLastCalledWith({
+      search: "",
+      page: 1,
+      limit: 10,
       sortOrder: SortOrder.ASC,
     });
 
@@ -69,6 +78,15 @@ describe("CvsTable", () => {
       limit: 10,
       sortOrder: SortOrder.DESC,
     });
+
+    fireEvent.click(screen.getByRole("button", { name: "sort" }));
+
+    expect(useCvsTableQueryMock).toHaveBeenLastCalledWith({
+      search: "",
+      page: 1,
+      limit: 10,
+      sortOrder: undefined,
+    });
   });
 
   it("shows no data message when search is empty", () => {
@@ -76,6 +94,6 @@ describe("CvsTable", () => {
 
     render(<CvsTable />);
 
-    expect(screen.getByText("No CVs yet")).toBeInTheDocument();
+    expect(screen.getByText("No results")).toBeInTheDocument();
   });
 });

@@ -116,8 +116,7 @@
       "confirmDeleteBefore": "Czy na pewno chcesz usunąć ",
       "confirmDeleteAfter": "?",
       "emailAlreadyExists": "Użytkownik z tym adresem e-mail już istnieje.",
-      "confirm": "Potwierdź",
-      "noData": "Brak danych"
+      "confirm": "Potwierdź"
     },
     "verifyEmail": {
       "title": "Weryfikacja e-mail",
@@ -205,7 +204,6 @@
       "confirm": "Potwierdź",
       "create": "Utwórz",
       "update": "Aktualizuj",
-      "noData": "Brak CV",
       "validation": {
         "nameRequired": "Nazwa jest wymagana",
         "educationRequired": "Wykształcenie jest wymagane",
@@ -228,7 +226,6 @@
         "delete": "Usuń",
         "cancel": "Anuluj",
         "confirm": "Potwierdź",
-        "noData": "Brak projektów",
         "confirmRemoveProject": "Czy na pewno chcesz usunąć projekt {{name}}?",
         "toast": {
           "added": "Projekt dodany do CV",
@@ -265,7 +262,6 @@
       "cancel": "Anuluj",
       "confirm": "Potwierdź",
       "update": "Zaktualizuj",
-      "noData": "Brak działów",
       "create": "Utwórz",
       "confirmDeleteDepartment": "Czy na pewno chcesz usunąć dział {{name}}?",
       "toast": {
@@ -286,8 +282,7 @@
       "cancel": "Anuluj",
       "confirm": "Potwierdź",
       "add": "Dodaj",
-      "update": "Aktualizuj",
-      "noData": "Brak danych"
+      "update": "Aktualizuj"
     },
     "projects": {
       "name": "Nazwa",
@@ -307,7 +302,6 @@
       "cancel": "Anuluj",
       "confirm": "Potwierdź",
       "confirmDeleteProject": "Czy na pewno chcesz usunąć projekt {{name}}?",
-      "noData": "Brak projektów",
       "tillNow": "Do teraz",
       "validation": {
         "nameRequired": "Nazwa jest wymagana",

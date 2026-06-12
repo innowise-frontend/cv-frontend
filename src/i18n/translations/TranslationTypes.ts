@@ -116,7 +116,6 @@ export interface TranslationTypes {
       confirmDeleteAfter: string;
       confirm: string;
       emailAlreadyExists: string;
-      noData: string;
     };
     verifyEmail: {
       title: string;
@@ -194,7 +193,6 @@ export interface TranslationTypes {
       confirm: string;
       create: string;
       update: string;
-      noData: string;
       validation: {
         nameRequired: string;
         educationRequired: string;
@@ -217,7 +215,6 @@ export interface TranslationTypes {
         delete: string;
         cancel: string;
         confirm: string;
-        noData: string;
         confirmRemoveProject: string;
         toast: {
           added: string;
@@ -254,7 +251,6 @@ export interface TranslationTypes {
       cancel: string;
       confirm: string;
       update: string;
-      noData: string;
       create: string;
       confirmDeleteDepartment: string;
       toast: {
@@ -276,7 +272,6 @@ export interface TranslationTypes {
       confirm: string;
       add: string;
       update: string;
-      noData: string;
     };
     projects: {
       name: string;
@@ -296,7 +291,6 @@ export interface TranslationTypes {
       cancel: string;
       confirm: string;
       confirmDeleteProject: string;
-      noData: string;
       tillNow: string;
       toast: {
         created: string;
