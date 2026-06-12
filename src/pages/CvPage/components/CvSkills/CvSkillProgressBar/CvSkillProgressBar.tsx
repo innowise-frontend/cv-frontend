@@ -1,5 +1,4 @@
 import { Button, ProgressBar } from "@components/shared";
-import { cn } from "@root/lib";
 import { CvSkillProgressBarProps } from "./types";
 
 export const CvSkillProgressBar = ({
@@ -11,12 +10,10 @@ export const CvSkillProgressBar = ({
 }: CvSkillProgressBarProps) => {
   if (isDeleteMode) {
     return (
-      <Button variant="ghost" className="capitalize" onClick={onClick}>
+      <Button variant="ghost" className="capitalize hover:bg-transparent!" onClick={onClick}>
         <ProgressBar
-          className={cn(
-            "px-2 cursor-pointer transition-colors duration-150 hover:bg-gray-7 dark:hover:bg-gray-5",
-            chosen && "*:text-gray *:dark:text-gray-8",
-          )}
+          interactive
+          className="px-2"
           key={name}
           label={name}
           mastery={mastery}
