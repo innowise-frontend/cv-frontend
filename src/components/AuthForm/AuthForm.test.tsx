@@ -22,6 +22,33 @@ describe("AuthForm", () => {
     expect(screen.getByText("Please enter a password")).toBeInTheDocument();
   });
 
+  it("should not show validation errors while typing before submit", async () => {
+    const user = userEvent.setup();
+    render(<AuthForm onSubmit={vi.fn()} label="Submit" />);
+
+    await user.type(screen.getByPlaceholderText("Email"), "bad");
+    await user.type(screen.getByPlaceholderText("Password"), "1");
+
+    expect(screen.queryByText("Please enter an email address")).not.toBeInTheDocument();
+    expect(screen.queryByText("Invalid email address")).not.toBeInTheDocument();
+    expect(screen.queryByText("Please enter a password")).not.toBeInTheDocument();
+    expect(
+      screen.queryByText("Password must be at least 6 characters long"),
+    ).not.toBeInTheDocument();
+  });
+
+  it("should keep validation errors until the next submit attempt", async () => {
+    const user = userEvent.setup();
+    render(<AuthForm onSubmit={vi.fn()} label="Submit" />);
+
+    await user.click(screen.getByRole("button", { name: "Submit" }));
+    expect(await screen.findByText("Please enter an email address")).toBeInTheDocument();
+
+    await user.type(screen.getByPlaceholderText("Email"), "user@example.com");
+
+    expect(screen.getByText("Please enter an email address")).toBeInTheDocument();
+  });
+
   it("should show an error for an invalid email", async () => {
     const user = userEvent.setup();
     render(<AuthForm onSubmit={vi.fn()} label="Submit" />);

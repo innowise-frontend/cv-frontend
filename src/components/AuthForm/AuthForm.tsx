@@ -1,35 +1,50 @@
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Button, Input } from "@components/shared";
 import { AuthFormProps } from "./types";
-import { AuthFormValues, createAuthFormSchema } from "./validation";
+import { AuthFormValues, createAuthFormSchema, getAuthFormFieldErrors } from "./validation";
+
+const defaultValues: AuthFormValues = {
+  email: "",
+  password: "",
+  confirmPassword: "",
+};
 
 export const AuthForm = ({ label, isSignup, onSubmit }: AuthFormProps) => {
   const { t } = useTranslation();
   const validationSchema = createAuthFormSchema(isSignup);
+  const [fieldErrors, setFieldErrors] = useState<Partial<Record<keyof AuthFormValues, string>>>({});
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<AuthFormValues>({
-    resolver: zodResolver(validationSchema),
-    mode: "onChange",
+  const { register, handleSubmit } = useForm<AuthFormValues>({
+    defaultValues,
   });
 
   return (
     <form
       className="flex flex-col justify-center items-center gap-5.5"
-      onSubmit={handleSubmit(onSubmit)}
+      noValidate
+      onSubmit={handleSubmit((data) => {
+        const result = validationSchema.safeParse(data);
+
+        if (!result.success) {
+          setFieldErrors(getAuthFormFieldErrors(result.error));
+
+          return;
+        }
+
+        setFieldErrors({});
+        onSubmit(result.data);
+      })}
     >
       <Input
-        type="email"
+        type="text"
+        inputMode="email"
         label={t("page.users.email")}
         placeholder={t("page.users.email")}
         {...register("email")}
         autoComplete="email"
-        error={errors.email?.message}
+        error={fieldErrors.email}
         className="rounded-none"
       />
       <Input
@@ -38,7 +53,7 @@ export const AuthForm = ({ label, isSignup, onSubmit }: AuthFormProps) => {
         placeholder={t("page.users.password")}
         autoComplete={isSignup ? "new-password" : "current-password"}
         {...register("password")}
-        error={errors.password?.message}
+        error={fieldErrors.password}
         className="rounded-none"
       />
       {isSignup && (
@@ -48,7 +63,7 @@ export const AuthForm = ({ label, isSignup, onSubmit }: AuthFormProps) => {
           placeholder={t("page.setting.confirmPassword")}
           autoComplete="new-password"
           {...register("confirmPassword")}
-          error={errors.confirmPassword?.message}
+          error={fieldErrors.confirmPassword}
           className="rounded-none"
         />
       )}
