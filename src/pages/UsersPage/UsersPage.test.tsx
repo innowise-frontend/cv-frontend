@@ -117,7 +117,7 @@ describe("UsersPage", () => {
         data: [{ id: "1", name: "John" }],
         pagesAmount: 7,
         currentPage: 1,
-        currentSort: "ASC",
+        currentSort: undefined,
         currentSortBy: undefined,
         currentViewOption: 10,
         emptyMessage: "page.table.noResults",
@@ -136,7 +136,7 @@ describe("UsersPage", () => {
       search: "anna",
       page: 1,
       limit: 10,
-      sort_order: "ASC",
+      sort_order: undefined,
       sort_by: undefined,
     });
   });
@@ -146,7 +146,7 @@ describe("UsersPage", () => {
 
     expect(useUserTableColumnsMock).toHaveBeenCalledWith(
       expect.objectContaining({
-        currentSort: "ASC",
+        currentSort: undefined,
         currentSortBy: undefined,
         onSort: expect.any(Function),
       }),
@@ -208,6 +208,20 @@ describe("UsersPage", () => {
         sort_by: "department",
       });
     });
+
+    act(() => {
+      getLatestColumnsOptions().onSort("department");
+    });
+
+    await waitFor(() => {
+      expect(useUsersApiMock).toHaveBeenLastCalledWith({
+        search: "anna",
+        page: 1,
+        limit: 10,
+        sort_order: undefined,
+        sort_by: undefined,
+      });
+    });
   });
 
   it("switches sort column and resets order to ASC", async () => {
@@ -253,7 +267,7 @@ describe("UsersPage", () => {
         search: "max",
         page: 1,
         limit: 25,
-        sort_order: "ASC",
+        sort_order: undefined,
         sort_by: undefined,
       });
     });

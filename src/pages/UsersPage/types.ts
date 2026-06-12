@@ -1,9 +1,9 @@
 import type { SortOrder } from "@root/constants";
 
-export type UsersSortBy = "first_name" | "last_name" | "department" | undefined;
+export type UsersSortBy = "first_name" | "last_name" | "department";
 
 export interface UsersTableColumnsOptions {
-  currentSort: SortOrder;
-  currentSortBy: UsersSortBy;
+  currentSort?: SortOrder;
+  currentSortBy?: UsersSortBy;
   onSort: (sortBy: UsersSortBy) => void;
 }

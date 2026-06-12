@@ -41,8 +41,8 @@ export const useCvProjectsTableQuery = ({
   search: string;
   page: number;
   limit: number;
-  sortOrder: SortOrder;
-  sortBy: CvProjectsSortBy;
+  sortOrder?: SortOrder;
+  sortBy?: CvProjectsSortBy;
 }) => {
   const { cvId } = useParams({ from: "/_app/cvs/$cvId" });
 

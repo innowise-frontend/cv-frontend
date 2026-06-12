@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Modal, Table, TableSearch } from "@components/shared";
 import { SortOrder, VIEW_OPTIONS } from "@root/constants";
 import { useHandleSearch } from "@root/hooks";
+import { toggleSingleColumnSort } from "@root/lib";
 import { useProjectsTableColumns } from "./useProjectsTableColumns";
 import { useProjectsTableQuery } from "../../api";
 import { CreateProjectModal } from "../CreateProjectModal/CreateProjectModal";
@@ -16,7 +17,7 @@ export const ProjectsTable = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [currentLimit, setCurrentLimit] = useState(10);
-  const [currentSort, setCurrentSort] = useState<SortOrder>(SortOrder.ASC);
+  const [currentSort, setCurrentSort] = useState<SortOrder>();
 
   const { onSearch } = useHandleSearch({
     searchValue: searchParams.search ?? "",
@@ -43,7 +44,7 @@ export const ProjectsTable = () => {
   const emptyMessage = hasActiveSearch ? t("page.table.noResults") : t("page.projects.noData");
 
   const handleSort = () => {
-    setCurrentSort((prev) => (prev === SortOrder.ASC ? SortOrder.DESC : SortOrder.ASC));
+    setCurrentSort((prev) => toggleSingleColumnSort(prev));
     setCurrentPage(1);
   };
 

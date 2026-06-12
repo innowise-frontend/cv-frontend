@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Modal, Table, TableSearch } from "@components/shared";
 import { SortOrder, VIEW_OPTIONS } from "@root/constants";
 import { useAuth, useHandleSearch } from "@root/hooks";
+import { toggleSingleColumnSort } from "@root/lib";
 import { buildColumns } from "./columns";
 import { useSkillCategoriesQuery, useSkillsTableQuery } from "../../api";
 import { CreateSkillModal } from "../CreateSkillModal/CreateSkillModal";
@@ -17,7 +18,7 @@ export const SkillsTable = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [currentLimit, setCurrentLimit] = useState(10);
-  const [currentSort, setCurrentSort] = useState<SortOrder>(SortOrder.ASC);
+  const [currentSort, setCurrentSort] = useState<SortOrder>();
 
   const { onSearch } = useHandleSearch({
     searchValue: searchParams.search ?? "",
@@ -68,7 +69,7 @@ export const SkillsTable = () => {
           currentPage={currentPage}
           onChangePage={setCurrentPage}
           onSort={() => {
-            setCurrentSort((prev) => (prev === SortOrder.ASC ? SortOrder.DESC : SortOrder.ASC));
+            setCurrentSort((prev) => toggleSingleColumnSort(prev));
             setCurrentPage(1);
           }}
           currentSort={currentSort}

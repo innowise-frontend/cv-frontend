@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Modal, Table, TableSearch } from "@components/shared";
 import { VIEW_OPTIONS, SortOrder } from "@root/constants";
 import { useAuth, useHandleSearch } from "@root/hooks";
+import { toggleSingleColumnSort } from "@root/lib";
 import { useDepartmentsTableColumns } from "./useDepartmentsTableColumns";
 import { useDepartmentsTableQuery } from "../../api";
 import { CreateDepartmentModal } from "../CreateDepartmentModal/CreateDepartmentModal";
@@ -17,7 +18,7 @@ export const DepartmentsTable = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [currentLimit, setCurrentLimit] = useState(10);
-  const [currentSort, setCurrentSort] = useState<SortOrder>(SortOrder.ASC);
+  const [currentSort, setCurrentSort] = useState<SortOrder>();
   const { onSearch } = useHandleSearch({
     searchValue: searchParams.search ?? "",
     onSearchChange: (value) => {
@@ -44,7 +45,7 @@ export const DepartmentsTable = () => {
   const emptyMessage = hasActiveSearch ? t("page.table.noResults") : t("page.departments.noData");
 
   const handleSort = () => {
-    setCurrentSort((prev) => (prev === SortOrder.ASC ? SortOrder.DESC : SortOrder.ASC));
+    setCurrentSort((prev) => toggleSingleColumnSort(prev));
     setCurrentPage(1);
   };
 

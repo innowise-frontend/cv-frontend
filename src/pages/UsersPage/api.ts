@@ -1,6 +1,8 @@
 import { useMutation, useQuery, useQueryClient, UseQueryOptions } from "@tanstack/react-query";
 import { toast } from "sonner";
+import { SortOrder } from "@root/constants";
 import { getErrorToastMessage } from "@root/lib";
+import { buildSortParams } from "@root/lib/sorting/toggleTableSort";
 import { submitUpdateProfile } from "@services/auth/updateUserProfile/updateUserProfile";
 import { getDepartments } from "@services/departments";
 import type { UpdateProfileInput } from "@services/graphql/__generated__/graphql";
@@ -11,14 +13,20 @@ interface UseUsersApiParams {
   search: string;
   page: number;
   limit: number;
-  sort_order: string;
-  sort_by: "first_name" | "last_name" | "department" | undefined;
+  sort_order?: string;
+  sort_by?: "first_name" | "last_name" | "department";
 }
 
 export const useUsersApi = ({ search, page, limit, sort_order, sort_by }: UseUsersApiParams) =>
   useQuery({
     queryKey: ["users", search, page, limit, sort_order, sort_by],
-    queryFn: () => getUsers({ search, page, limit, sort_order, sort_by }),
+    queryFn: () =>
+      getUsers({
+        search,
+        page,
+        limit,
+        ...(sort_order && sort_by ? buildSortParams(sort_order as SortOrder, sort_by) : {}),
+      }),
   });
 
 export const useCreateUserApi = ({ onSuccess }: { onSuccess?: () => void }) => {

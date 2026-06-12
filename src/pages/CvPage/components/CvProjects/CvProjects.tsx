@@ -10,7 +10,7 @@ import {
 import { defaultProjectFormValues } from "@pages/ProjectsPage/components/types";
 import { SortOrder, VIEW_OPTIONS } from "@root/constants";
 import { useHandleSearch } from "@root/hooks";
-import { useCvQuery } from "@root/pages/CvPage/api";
+import { toggleMultiColumnSort } from "@root/lib";
 import {
   useAddCvProjectMutation,
   useCvProjectRoleOptionsQuery,
@@ -33,6 +33,7 @@ import {
   cvUpdateProjectFormValidation,
   toCvProjectFormValues,
 } from "./utils";
+import { useCvQuery } from "../../api";
 
 export const CvProjectsTable = () => {
   const { t } = useTranslation();
@@ -43,8 +44,8 @@ export const CvProjectsTable = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [currentLimit, setCurrentLimit] = useState(10);
-  const [currentSort, setCurrentSort] = useState<SortOrder>(SortOrder.ASC);
-  const [currentSortBy, setCurrentSortBy] = useState<CvProjectsSortBy>("name");
+  const [currentSort, setCurrentSort] = useState<SortOrder>();
+  const [currentSortBy, setCurrentSortBy] = useState<CvProjectsSortBy>();
 
   const { data: cv } = useCvQuery(cvId);
   const { data: catalog } = useCvProjectsCatalogQuery();
@@ -85,13 +86,10 @@ export const CvProjectsTable = () => {
   } as const;
 
   const handleSort = (sortBy: CvProjectsSortBy) => {
-    if (currentSortBy === sortBy) {
-      setCurrentSort((prev) => (prev === SortOrder.ASC ? SortOrder.DESC : SortOrder.ASC));
-    } else {
-      setCurrentSortBy(sortBy);
-      setCurrentSort(SortOrder.ASC);
-    }
+    const next = toggleMultiColumnSort(sortBy, currentSortBy, currentSort);
 
+    setCurrentSortBy(next.sortBy);
+    setCurrentSort(next.sortOrder);
     setCurrentPage(1);
   };
 

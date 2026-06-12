@@ -58,6 +58,15 @@ describe("CvsTable", () => {
       search: "",
       page: 1,
       limit: 10,
+      sortOrder: undefined,
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "sort" }));
+
+    expect(useCvsTableQueryMock).toHaveBeenLastCalledWith({
+      search: "",
+      page: 1,
+      limit: 10,
       sortOrder: SortOrder.ASC,
     });
 
@@ -68,6 +77,15 @@ describe("CvsTable", () => {
       page: 1,
       limit: 10,
       sortOrder: SortOrder.DESC,
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "sort" }));
+
+    expect(useCvsTableQueryMock).toHaveBeenLastCalledWith({
+      search: "",
+      page: 1,
+      limit: 10,
+      sortOrder: undefined,
     });
   });
 

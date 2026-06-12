@@ -89,6 +89,14 @@ describe("ProjectsTable", () => {
       search: "",
       page: 1,
       limit: 10,
+      sortOrder: undefined,
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "sort" }));
+    expect(useProjectsTableQueryMock).toHaveBeenLastCalledWith({
+      search: "",
+      page: 1,
+      limit: 10,
       sortOrder: SortOrder.ASC,
     });
 
@@ -98,6 +106,14 @@ describe("ProjectsTable", () => {
       page: 1,
       limit: 10,
       sortOrder: SortOrder.DESC,
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "sort" }));
+    expect(useProjectsTableQueryMock).toHaveBeenLastCalledWith({
+      search: "",
+      page: 1,
+      limit: 10,
+      sortOrder: undefined,
     });
   });
 
@@ -113,7 +129,7 @@ describe("ProjectsTable", () => {
       search: "",
       page: 1,
       limit: 20,
-      sortOrder: SortOrder.ASC,
+      sortOrder: undefined,
     });
   });
 

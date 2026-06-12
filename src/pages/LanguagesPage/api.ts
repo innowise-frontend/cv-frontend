@@ -3,6 +3,7 @@ import { t } from "i18next";
 import { toast } from "sonner";
 import { SortOrder } from "@constants/sortOptions";
 import { getErrorToastMessage } from "@root/lib";
+import { buildSortParams } from "@root/lib/sorting/toggleTableSort";
 import {
   AddProfileLanguageInput,
   DeleteLanguageInput,
@@ -55,7 +56,7 @@ export const useLanguagesTableQuery = ({
   search: string;
   page: number;
   limit: number;
-  sortOrder: SortOrder;
+  sortOrder?: SortOrder;
 }) =>
   useQuery({
     queryKey: ["languages", search, page, limit, sortOrder],
@@ -64,8 +65,7 @@ export const useLanguagesTableQuery = ({
         search,
         page,
         limit,
-        sort_order: sortOrder,
-        sort_by: "name",
+        ...buildSortParams(sortOrder, "name"),
       }),
   });
 

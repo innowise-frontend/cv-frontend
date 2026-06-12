@@ -4,7 +4,7 @@ import { t } from "i18next";
 import { toast } from "sonner";
 import { SortOrder } from "@root/constants";
 import { useAuth } from "@root/hooks";
-import { getErrorToastMessage } from "@root/lib";
+import { buildSortParams, getErrorToastMessage } from "@root/lib";
 import { createCv, deleteCv, getCvs, getUserCvs, updateCv } from "@services/cvs";
 import {
   CreateCvInput,
@@ -20,7 +20,7 @@ interface UseCvsTableQueryParams {
   search: string;
   page: number;
   limit: number;
-  sortOrder: SortOrder;
+  sortOrder?: SortOrder;
   config?: CvsQueryConfig;
 }
 
@@ -38,8 +38,7 @@ export const useCvsTableQuery = ({
     search,
     page,
     limit,
-    sort_order: sortOrder,
-    sort_by: "name",
+    ...buildSortParams(sortOrder, "name"),
   };
 
   const queryScope = isAdmin ? "all" : routeUserId ? "byUserId" : "me";

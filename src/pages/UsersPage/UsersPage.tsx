@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Breadcrumbs, Modal, Spinner, Table, TableSearch } from "@components/shared";
 import { SortOrder, VIEW_OPTIONS, ROUTES } from "@root/constants";
 import { useAuth, useHandleSearch } from "@root/hooks";
-import { getBreadcrumbsLink } from "@root/lib";
+import { getBreadcrumbsLink, toggleMultiColumnSort } from "@root/lib";
 import { useUsersApi } from "./api";
 import { CreateUserModal } from "./components";
 import { useUserTableColumns } from "./useUserTableColumns";
@@ -17,7 +17,7 @@ export const UsersPage = () => {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const [currentLimit, setCurrentLimit] = useState(10);
-  const [currentSort, setCurrentSort] = useState<SortOrder>(SortOrder.ASC);
+  const [currentSort, setCurrentSort] = useState<SortOrder>();
   const [currentSortBy, setCurrentSortBy] = useState<UsersSortBy>();
 
   const location = useLocation();
@@ -34,13 +34,10 @@ export const UsersPage = () => {
   });
 
   const handleSort = (sortBy: UsersSortBy) => {
-    if (currentSortBy === sortBy) {
-      setCurrentSort((prev) => (prev === SortOrder.ASC ? SortOrder.DESC : SortOrder.ASC));
-    } else {
-      setCurrentSortBy(sortBy);
-      setCurrentSort(SortOrder.ASC);
-    }
+    const next = toggleMultiColumnSort(sortBy, currentSortBy, currentSort);
 
+    setCurrentSortBy(next.sortBy);
+    setCurrentSort(next.sortOrder);
     setCurrentPage(1);
   };
 
