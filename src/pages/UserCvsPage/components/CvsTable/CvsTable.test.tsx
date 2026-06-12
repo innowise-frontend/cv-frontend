@@ -94,6 +94,6 @@ describe("CvsTable", () => {
 
     render(<CvsTable />);
 
-    expect(screen.getByText("No CVs yet")).toBeInTheDocument();
+    expect(screen.getByText("No results")).toBeInTheDocument();
   });
 });

@@ -116,8 +116,7 @@
       "confirmDeleteBefore": "Êtes-vous sûr de vouloir supprimer ",
       "confirmDeleteAfter": " ?",
       "emailAlreadyExists": "Un utilisateur avec cet e-mail existe déjà.",
-      "confirm": "Confirmer",
-      "noData": "Aucune donnée"
+      "confirm": "Confirmer"
     },
     "verifyEmail": {
       "title": "Vérification de l'e-mail",
@@ -178,7 +177,6 @@
       "remove": "Supprimer",
       "update": "Mettre a jour",
       "save": "Enregistrer",
-      "noData": "Aucune compétence ici",
       "toast": {
         "added": "Skill added",
         "updated": "Skill updated",
@@ -206,7 +204,6 @@
       "confirm": "Confirmer",
       "create": "Créer",
       "update": "Mettre à jour",
-      "noData": "Aucun CV pour le moment",
       "validation": {
         "nameRequired": "Le nom est requis",
         "educationRequired": "La formation est requise",
@@ -229,7 +226,6 @@
         "delete": "Supprimer",
         "cancel": "Annuler",
         "confirm": "Confirmer",
-        "noData": "Aucun projet pour le moment",
         "confirmRemoveProject": "Voulez-vous vraiment retirer le projet {{name}} ?",
         "toast": {
           "added": "Projet ajouté au CV",
@@ -266,7 +262,6 @@
       "cancel": "Annuler",
       "confirm": "Confirmer",
       "update": "Mettre à jour",
-      "noData": "Aucun département pour le moment",
       "create": "Créer",
       "confirmDeleteDepartment": "Êtes-vous sûr de vouloir supprimer le département {{name}} ?",
       "toast": {
@@ -287,8 +282,7 @@
       "cancel": "Annuler",
       "confirm": "Confirmer",
       "add": "Ajouter",
-      "update": "Mettre à jour",
-      "noData": "Aucune donnée"
+      "update": "Mettre à jour"
     },
     "projects": {
       "name": "Nom",
@@ -308,7 +302,6 @@
       "cancel": "Annuler",
       "confirm": "Confirmer",
       "confirmDeleteProject": "Voulez-vous vraiment supprimer le projet {{name}} ?",
-      "noData": "Aucun projet pour le moment",
       "tillNow": "Jusqu'à maintenant",
       "validation": {
         "nameRequired": "Le nom est requis",

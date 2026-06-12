@@ -41,8 +41,7 @@ export const DepartmentsTable = () => {
   });
 
   const tableData = data?.items ?? [];
-  const hasActiveSearch = (searchParams.search ?? "").trim();
-  const emptyMessage = hasActiveSearch ? t("page.table.noResults") : t("page.departments.noData");
+  const emptyMessage = t("page.table.noResults");
 
   const handleSort = () => {
     setCurrentSort((prev) => toggleSingleColumnSort(prev));

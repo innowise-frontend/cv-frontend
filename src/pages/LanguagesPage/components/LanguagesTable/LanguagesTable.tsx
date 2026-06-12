@@ -41,8 +41,7 @@ export const LanguagesTable = () => {
   });
 
   const tableData = data?.items ?? [];
-  const hasActiveSearch = (searchParams.search ?? "").trim().length > 0;
-  const emptyMessage = hasActiveSearch ? t("page.table.noResults") : t("page.table.noDataResults");
+  const emptyMessage = t("page.table.noResults");
 
   return (
     <div className="flex h-full min-h-0 flex-col">

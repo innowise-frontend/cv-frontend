@@ -41,8 +41,7 @@ export const PositionsTable = () => {
   });
 
   const tableData = data?.items ?? [];
-  const hasActiveSearch = (searchParams.search ?? "").trim();
-  const emptyMessage = hasActiveSearch ? t("page.table.noResults") : t("page.positions.noData");
+  const emptyMessage = t("page.table.noResults");
 
   const handleSort = () => {
     setCurrentSort((prev) => toggleSingleColumnSort(prev));

@@ -173,8 +173,7 @@ export const CvProjectsTable = () => {
   });
 
   const tableData = data?.items ?? [];
-  const hasActiveSearch = (searchParams.search ?? "").trim().length > 0;
-  const emptyMessage = hasActiveSearch ? t("page.table.noResults") : t("page.cvs.projects.noData");
+  const emptyMessage = t("page.table.noResults");
 
   const handleChangeViewOption = (limit: number) => {
     setCurrentLimit(limit);

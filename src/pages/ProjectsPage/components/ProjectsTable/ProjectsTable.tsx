@@ -40,8 +40,7 @@ export const ProjectsTable = () => {
   });
 
   const tableData = data?.items ?? [];
-  const hasActiveSearch = (searchParams.search ?? "").trim().length;
-  const emptyMessage = hasActiveSearch ? t("page.table.noResults") : t("page.projects.noData");
+  const emptyMessage = t("page.table.noResults");
 
   const handleSort = () => {
     setCurrentSort((prev) => toggleSingleColumnSort(prev));

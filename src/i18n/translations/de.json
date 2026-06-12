@@ -116,8 +116,7 @@
       "confirmDeleteBefore": "Sind Sie sicher, dass Sie löschen möchten ",
       "confirmDeleteAfter": "?",
       "emailAlreadyExists": "Ein Benutzer mit dieser E-Mail existiert bereits.",
-      "confirm": "Bestätigen",
-      "noData": "Keine Daten"
+      "confirm": "Bestätigen"
     },
     "verifyEmail": {
       "title": "E-Mail-Bestätigung",
@@ -205,7 +204,6 @@
       "confirm": "Bestätigen",
       "create": "Erstellen",
       "update": "Aktualisieren",
-      "noData": "Noch keine Lebensläufe",
       "validation": {
         "nameRequired": "Name ist erforderlich",
         "educationRequired": "Ausbildung ist erforderlich",
@@ -228,7 +226,6 @@
         "delete": "Löschen",
         "cancel": "Abbrechen",
         "confirm": "Bestätigen",
-        "noData": "Noch keine Projekte",
         "confirmRemoveProject": "Möchten Sie das Projekt {{name}} wirklich entfernen?",
         "toast": {
           "added": "Projekt zum CV hinzugefügt",
@@ -265,7 +262,6 @@
       "cancel": "Abbrechen",
       "confirm": "Bestätigen",
       "update": "Aktualisieren",
-      "noData": "Noch keine Abteilungen",
       "create": "Erstellen",
       "confirmDeleteDepartment": "Möchten Sie die Abteilung {{name}} wirklich löschen?",
       "toast": {
@@ -286,8 +282,7 @@
       "cancel": "Abbrechen",
       "confirm": "Bestätigen",
       "add": "Hinzufügen",
-      "update": "Aktualisieren",
-      "noData": "Keine Daten"
+      "update": "Aktualisieren"
     },
     "projects": {
       "name": "Name",
@@ -307,7 +302,6 @@
       "cancel": "Abbrechen",
       "confirm": "Bestätigen",
       "confirmDeleteProject": "Möchten Sie das Projekt {{name}} wirklich löschen?",
-      "noData": "Noch keine Projekte",
       "tillNow": "Bis jetzt",
       "validation": {
         "nameRequired": "Name ist erforderlich",

@@ -2,8 +2,8 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 import { SortOrder } from "@constants/sortOptions";
-import { buildSortParams } from "@root/lib/sorting/toggleTableSort";
 import { getErrorToastMessage } from "@root/lib";
+import { buildSortParams } from "@root/lib/sorting/toggleTableSort";
 import {
   createDepartment,
   deleteDepartment,

@@ -43,8 +43,7 @@ export const SkillsTable = () => {
 
   const columns = useMemo(() => buildColumns(categoriesData), [categoriesData]);
   const tableData = data?.items ?? [];
-  const hasActiveSearch = (searchParams.search ?? "").trim().length > 0;
-  const emptyMessage = hasActiveSearch ? t("page.table.noResults") : t("page.table.noDataResults");
+  const emptyMessage = t("page.table.noResults");
 
   return (
     <>

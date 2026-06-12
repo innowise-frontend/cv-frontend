@@ -140,7 +140,7 @@ describe("ProjectsTable", () => {
     });
     render(<ProjectsTable />);
 
-    expect(screen.getByText("No projects yet")).toBeInTheDocument();
+    expect(screen.getByText("No results")).toBeInTheDocument();
   });
 
   it("navigates with search and resets page", () => {
